@@ -147,7 +147,7 @@ class Referee (kxg.Referee):
             self.send_message(message)
 
     def defeat_player(self, player):
-        is len(world.players) == 1:
+        if len(world.players) == 1:
             winner = self.world.players[0]
             message = GameOver(winner)
             self.send_message(message)
