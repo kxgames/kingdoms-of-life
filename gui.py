@@ -49,9 +49,8 @@ class Hotkeys:
                 e2s[MOUSEBUTTONUP]    : 'fMOUSEUP',
                 e2s[MOUSEBUTTONDOWN]  : 'fMOUSEDOWN' }
 
-        alt = {
-
-                k2s[ K_BACKSPACE ] : k2s[ K_BACKSPACE ] }
+        #alt = { k2s[ K_BACKSPACE ] : k2s[ K_BACKSPACE ] }
+        alt = { }
         
         self.keychain.register_lens (k2s[ K_LALT ], alt)
         self.keychain.register_lens (k2s[ K_d ], d_lens)
@@ -71,14 +70,16 @@ class Hotkeys:
         ## Register mouse hotkeys
         left = kxg.gui.mouse_to_string[1]
 
-        d_sequence = ['dMOUSEBUTTONDOWN', left]
-        register_chain (d_sequence, self.develop_init, None)
+        develop_init = ['dMOUSEBUTTONDOWN', left]
+        register_chain (develop_init, self.develop_init, None)
 
-        d_sequence += ['dMOUSEMOTION']
-        register_chain (d_sequence, self.develop_motion, None)
+        develop_motion = ['dMOUSEBUTTONDOWN', left, 'dMOUSEMOTION']
+        register_chain (develop_motion, self.develop_motion, None)
 
-        d_sequence += ['dMOUSEBUTTONUP', left]
-        register_chain (d_sequence, self.develop, None)
+        develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEBUTTONUP', left]
+        register_chain (develop, self.develop, None)
+        develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEMOTION', 'dMOUSEBUTTONUP', left]
+        register_chain (develop, self.develop, None)
 
         register_chain (['fMOUSEDOWN', left], self.fuck, None)
 
@@ -91,7 +92,9 @@ class Hotkeys:
         elif event.type == KEYUP:
             self.keychain.handle_key (event.key, True)
 
-        elif event.type == MOUSEBUTTONDOWN:
+        elif event.type == MOUSEMOTION:
+            self.keychain.handle_event(event.type)
+        elif event.type in (MOUSEBUTTONDOWN, MOUSEBUTTONUP):
             self.keychain.handle_event(event.type)
             self.keychain.handle_mouse(event.button)
 
@@ -100,20 +103,6 @@ class Hotkeys:
 
 
     # Callbacks
-
-    def develop_init(self, args):
-        pass
-
-    def develop_motion(self, args):
-        pass
-
-    def develop(self, args):
-        pass
-
-    def fuck(self, args):
-        pass
-    
-
     def exit (self, args):
         #self.gui.postgame_finished = True
         raise SystemExit
@@ -122,6 +111,7 @@ class Hotkeys:
         self.click_drag = False
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
         self.start_click = position
+        print 'start position = %s', position
 
     def develop_motion (self, args):
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
@@ -165,7 +155,7 @@ class Hotkeys:
                 self.gui.send_message(message)
         else:
             # Build city
-            message = messages.CreateCity(player, position)
+            message = messages.CreateCity(player, end_click)
             self.gui.send_message(message)
 
     def fuck (self, args):
@@ -245,10 +235,10 @@ class Gui (kxg.Actor):
         self.soft_refresh = True
         self.hard_refresh = True
 
-    def place_city(self, city):
+    def create_city(self, city, is_mine):
         self.refresh()
 
-    def place_road(self, road):
+    def create_road(self, road, is_mine):
         self.refresh()
 
     def teardown(self):
@@ -294,6 +284,7 @@ class Gui (kxg.Actor):
                 pygame.draw.aaline(screen, player.color, start, end)
 
     def draw_cities (self, screen):
+        radius = self.city_radius
         text_color = Color(self.text_color)
         fill_color = Color(self.background)
         rect_from_surface = kxg.geometry.Rectangle.from_surface
@@ -307,7 +298,7 @@ class Gui (kxg.Actor):
                 pygame.draw.circle(
                         screen, fill_color, position.pygame, radius)
                 pygame.draw.circle(
-                        screen, outline_color, position.pygame, radius, 1)
+                        screen, player_color, position.pygame, radius, 1)
 
                 text_surface = self.city_font.render(
                         city_level, True, text_color)

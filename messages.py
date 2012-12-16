@@ -64,7 +64,7 @@ class CreateCity (kxg.Message):
 
     def check(self, world, sender):
         player = self.player
-        road = self.road
+        city = self.city
 
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -75,7 +75,7 @@ class CreateCity (kxg.Message):
             return False
 
         # Make sure this city can be placed here.
-        if not player.can_place_city(city, world):
+        if not player.can_place_city(city):
             return False
 
         return True
@@ -88,10 +88,10 @@ class CreateCity (kxg.Message):
         self.city.level = tokens.City.next_level()
 
     def execute(self, world):
-        world.place_city(self.player, self.city)
+        world.create_city(self.player, self.city)
 
     def notify(self, actor, is_mine):
-        actor.place_city(self.city, is_mine)
+        actor.create_city(self.city, is_mine)
 
 
 class CreateRoad (kxg.Message):

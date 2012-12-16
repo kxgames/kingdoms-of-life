@@ -2,6 +2,7 @@ from __future__ import division
 
 import kxg
 import messages
+import random
 
 class World (kxg.World):
 
@@ -215,8 +216,8 @@ class Player (kxg.Token):
 class City (kxg.Token):
 
     # Settings (fold)
-    price = lambda cities: 100 + 50 * cities
-    next_level = lambda: min(20, int(random.paretovariate(1)))
+    price = staticmethod (lambda cities: 100 + 50 * cities)
+    next_level = staticmethod (lambda: min(20, int(random.paretovariate(1))))
     radius = 25
     border = 50
 
