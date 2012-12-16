@@ -8,7 +8,7 @@ class SandboxLoop (kxg.MainLoop):
     def __init__(self):
         world, referee = tokens.World(), tokens.Referee()
         actors_to_greetings = {
-                gui.Gui(): messages.CreatePlayer("Sandbox")}
+                gui.Gui(): messages.CreatePlayer("Sandbox", 'orange')}
 
         self.stage = kxg.SinglePlayerGameStage(
                 world, referee, actors_to_greetings)

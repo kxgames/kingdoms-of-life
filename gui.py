@@ -6,6 +6,12 @@ from pygame.locals import *
 import kxg
 import messages
 
+Color = pygame.color.Color
+Font = pygame.font.Font
+Image = pygame.image.load
+
+pygame.font.init()
+
 class Hotkeys:
 
     def __init__ (self, gui):
@@ -18,10 +24,7 @@ class Hotkeys:
         self.end_click = None
 
     def __str__ (self):
-        return 'Keychain Manager'
-
-    def __repr__ (self):
-        return self.__str__()
+        return "Keychain Manager"
 
     def setup (self):
         self.keychain.verbose = False
@@ -36,17 +39,15 @@ class Hotkeys:
         k2s = kxg.gui.key_to_string
         e2s = kxg.gui.event_to_string
 
-        # Make the "d" lens
+        # Make the 'd' lens
         d_lens = {
-                e2s[ MOUSEMOTION ]      : "dMOUSEMOTION",
-                e2s[ MOUSEBUTTONUP ]    : "dMOUSEBUTTONUP",
-                e2s[ MOUSEBUTTONDOWN ]  : "dMOUSEBUTTONDOWN"
-                }
+                e2s[MOUSEMOTION]      : 'dMOUSEMOTION',
+                e2s[MOUSEBUTTONUP]    : 'dMOUSEBUTTONUP',
+                e2s[MOUSEBUTTONDOWN ] : 'dMOUSEBUTTONDOWN' }
 
         f_lens = {
-                e2s[ MOUSEBUTTONUP ]    : "fMOUSEUP",
-                e2s[ MOUSEBUTTONDOWN ]  : "fMOUSEDOWN"
-                }
+                e2s[MOUSEBUTTONUP]    : 'fMOUSEUP',
+                e2s[MOUSEBUTTONDOWN]  : 'fMOUSEDOWN' }
         
         self.keychain.register_lens (k2s[ K_d ], d_lens)
         self.keychain.register_lens (k2s[ K_f ], f_lens)
@@ -55,6 +56,7 @@ class Hotkeys:
 
         ## Register keyboard hotkeys
         register_keys = self.keychain.register_chain_key
+        register_chain = self.keychain.register_chain
 
         # Special sequences.
         register_keys ([K_q], self.exit, None)
@@ -63,16 +65,16 @@ class Hotkeys:
         ## Register mouse hotkeys
         left = kxg.gui.mouse_to_string[1]
 
-        d_sequence = ["dMOUSEBUTTONDOWN", left]
+        d_sequence = ['dMOUSEBUTTONDOWN', left]
         register_chain (d_sequence, self.develop_init, None)
 
-        d_sequence += ["dMOUSEMOTION"]
+        d_sequence += ['dMOUSEMOTION']
         register_chain (d_sequence, self.develop_motion, None)
 
-        d_sequence += ["dMOUSEBUTTONUP", left]
+        d_sequence += ['dMOUSEBUTTONUP', left]
         register_chain (d_sequence, self.develop, None)
 
-        register_chain (["fMOUSEDOWN", left], self.fuck, None)
+        register_chain (['fMOUSEDOWN', left], self.fuck, None)
 
     def handle (self, event):
         self.event = event
@@ -92,6 +94,19 @@ class Hotkeys:
 
 
     # Callbacks
+
+    def develop_init(self, args):
+        pass
+
+    def develop_motion(self, args):
+        pass
+
+    def develop(self, args):
+        pass
+
+    def fuck(self, args):
+        pass
+    
 
     def exit (self, args):
         #self.gui.postgame_finished = True
@@ -156,11 +171,12 @@ class Hotkeys:
 
 class Gui (kxg.Actor):
 
-    background = "Black"
-    city_outline = "Black"
-    city_color = "White"
-    city_text = "Black"
+    background = 'white'
+    text_color = 'black'
     city_radius = 30
+    city_font = Font(None, 20)
+    status_font = Font(None, 16)
+    refresh_rate = 0.2
 
     minimum_drag_distance = 7
 
@@ -214,16 +230,11 @@ class Gui (kxg.Actor):
     def start_game(self):
         pygame.init()
 
-        self.size = self.world.map.size.pygame
-
+        self.size = self.world.map.size
         self.screen = pygame.display.set_mode(self.size)
-        self.screen.fill(gui.background_color)
-
-        self.big_font = pygame.font.Font(None, 50)
-        self.status_font = pygame.font.Font(None, 20)
 
         self.timer = 0
-        self.timeout = gui.gui_refresh_rate
+        self.timeout = self.refresh_rate
 
         self.soft_refresh = True
         self.hard_refresh = True
@@ -242,81 +253,63 @@ class Gui (kxg.Actor):
 
 
     def draw(self, time):
-
         if self.hard_refresh:
-            self.screen.fill(Gui.background)
+            self.hard_refresh = False
+            self.clear()
             self.draw_roads(self.screen)
             self.draw_cities(self.screen)
 
-            self.hard_refresh = False
-
         self.draw_player(self.screen)
-        #self.draw_hotkey_bar(self.screen)
 
         pygame.display.flip()
 
+    def clear(self):
+        color = Color(self.background)
+        self.screen.fill(color)
+
     def draw_player(self, screen):
-
-        status = "Wealth: %d" % (self.player.wealth)
-
-        color = gui.text_color
+        status = "Wealth: %d" % self.player.wealth
+        color = Color(self.text_color)
+        background = Color(self.background)
         text = self.status_font.render(status, True, color)
 
-        dimensions = text.get_size()
+        rect = kxg.geometry.Rectangle.from_surface(text).pygame
+        pygame.draw.rect(screen, background, rect)
 
-        map_size = self.world.get_map_size()
-        text_position = 5, map_size.get_y() - dimensions[1]
-
-        screen.blit(text, text_position)
+        position = 5, 5
+        screen.blit(text, position)
 
     def draw_roads (self, screen):
-        roads = self.world.roads
+        for player in self.world.players:
+            for road in player.roads:
+                start = road.start.position.pygame
+                end = road.end.position.pygame
 
-        color = self.player.color
-
-        for road in roads:
-            start = road.start.position
-            end = road.end.position
-
-            pygame.draw.aaline(screen, color, start.pygame, end.pygame)
+                pygame.draw.aaline(screen, player.color, start, end)
 
     def draw_cities (self, screen):
-        cities = self.world.cities
+        text_color = Color(self.text_color)
+        fill_color = Color(self.background)
+        rect_from_surface = kxg.geometry.Rectangle.from_surface
 
-        color = Gui.city_color
-        outline = self.player.color
+        for player in self.world.players:
+            for city in player.cities:
+                position = city.position
+                city_level = "%d" % city.level
+                player_color = Color(player.color)
 
-        text_color = Gui.city_text
-        from_tuple = kxg.geometry.Vector.from_tuple
+                pygame.draw.circle(
+                        screen, fill_color, position.pygame, radius)
+                pygame.draw.circle(
+                        screen, outline_color, position.pygame, radius, 1)
 
-        for city in cities:
-            position = city.position
+                text_surface = self.city_font.render(
+                        city_level, True, text_color)
+                text_rect = rect_from_surface(text_surface)
+                text_position = position - text_rect.center
 
-            pygame.draw.circle(screen, color, position.pygame, radius, outline)
+                screen.blit(text_surface, text_position.pygame)
 
-            level = "%d" %city.level
-            text_surface = self.status_font.render(level, True, text_color)
-
-            text_size = from_tuple (text_surface.get_size())
-            text_position = position - text_size / 2
-
-            screen.blit(text_surface, text_position.pygame)
-
-    def draw_hotkey_bar(self, screen):
-
-        width, height = self.size[0], gui.hotkey_height
-        top, left = self.size[1] - height, 0
-
-        color = gui.hotkey_background_color
-        padding = gui.hotkey_padding
-
-        rectangle = Rect(left, top, width, height)
-        pygame.draw.rect(screen, color, rectangle)
-
-        text_surface = gui.hotkey_message
-        text_height = text_surface.get_height()
-
-        screen.blit(text_surface, (left + padding, top + padding))
 
     def refresh(self):
         self.hard_refresh = True

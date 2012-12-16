@@ -9,19 +9,11 @@ class WelcomeClient (object):
 
 class StartGame (kxg.Message):
 
-    def __init__(self):
-        self.map = None
-
     def check(self, world, sender):
         return not world.has_game_started()
 
-    def setup(self, world, sender, id):
-        self.map = tokens.Map(id)
-        self.request = tokens.TradeRequest(id, "Kale", "Grain")
-
     def execute(self, world):
         world.start_game()
-        world.create_map(self.map, self.request)
 
     def notify(self, actor, sent_from_here):
         actor.start_game()
@@ -214,9 +206,6 @@ class CaptureCity:
 
     def reject(self, actor):
         actor.reject_capture_city(self.siege)
-
-    def setup(self):
-        pass
 
     def execute(self, world):
         world.capture_city(self.siege)
