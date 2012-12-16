@@ -201,6 +201,7 @@ class Hotkeys:
 
 class Gui (kxg.Actor):
 
+    # Settings (fold)
     background = 'white'
     text_color = 'black'
     city_radius = 20
@@ -318,7 +319,7 @@ class Gui (kxg.Actor):
     def draw(self, time):
         if self.hard_refresh:
             self.hard_refresh = False
-            self.clear()
+            self.draw_background(self.screen)
             self.draw_roads(self.screen)
             self.draw_cities(self.screen)
 
@@ -332,6 +333,46 @@ class Gui (kxg.Actor):
 
     def refresh(self):
         self.hard_refresh = True
+
+    def draw_background(self, screen):
+        self.clear()
+
+        def interpolate(start, end, extent):
+            return start + extent * (end - start)
+
+        def FadedColor(source, extent):
+            source_color = Color(source)
+
+            r = interpolate(source_color.r, 255, extent)
+            g = interpolate(source_color.g, 255, extent)
+            b = interpolate(source_color.b, 255, extent)
+            a = source_color.a
+
+            return (r, g, b)
+
+        # Draw the border push made by each city.
+        #for city in self.world.yield_cities():
+        #    color = Color(city.player.color)
+        #    position = city.position.pygame
+        #    radius = city.border
+
+        #    pygame.draw.circle(screen, color, position, radius, 1)
+
+        # Fill in the border with solid circles to remove internal lines.
+        #for city in self.world.yield_cities():
+        #    color = FadedColor(city.player.color, 0.95)
+        #    position = city.position.pygame
+        #    radius = city.border
+
+        #    pygame.draw.circle(screen, color, position, radius)
+
+        # Draw the area in which new cities cannot be built.
+        for city in self.world.yield_cities():
+            color = FadedColor(city.player.color, 0.90)
+            position = city.position.pygame
+            radius = city.radius
+
+            pygame.draw.circle(screen, color, position, radius)
 
     def draw_player(self, screen):
         status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
@@ -355,9 +396,8 @@ class Gui (kxg.Actor):
                 pygame.draw.aaline(screen, color, start, end)
 
     def draw_cities (self, screen):
-        for player in self.world.players:
-            for city in player.cities:
-                self.draw_city(screen, city)
+        for city in self.world.yield_cities():
+            self.draw_city(screen, city)
 
     def draw_city(self, screen, city):
         position = city.position
@@ -368,6 +408,7 @@ class Gui (kxg.Actor):
         fill_color = Color(self.background)
         rect_from_surface = kxg.geometry.Rectangle.from_surface
 
+        # Draw the outline of the city itself.
         if city.is_under_siege():
             vertices = []
             iterations = 30
@@ -392,6 +433,7 @@ class Gui (kxg.Actor):
             pygame.draw.circle(
                     screen, player_color, position.pygame, radius, 1)
 
+        # Draw the city level.
         text_surface = self.city_font.render(
                 city_level, True, text_color)
         text_rect = rect_from_surface(text_surface)

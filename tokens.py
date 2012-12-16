@@ -98,7 +98,7 @@ class World (kxg.World):
         self.remove_token(siege)
 
         # Remove all the existing roads into this city.
-        for road in defender.roads:
+        for road in defender.roads[:]:
             if road.has_terminus(city):
                 defender.roads.remove(road)
                 road.teardown()
@@ -240,6 +240,16 @@ class Player (kxg.Token):
         return price <= self.wealth
 
     def can_place_city(self, city):
+        if not self.cities:
+            return True
+
+        for other in self.world.yield_cities():
+            offset = city.position - other.position
+            distance = offset.magnitude
+
+            if distance <= 2 * other.radius:
+                return False
+
         return True
 
     def can_place_road(self, road):
@@ -248,11 +258,12 @@ class Player (kxg.Token):
     def was_defeated(self):
         return not self.cities
 
+
 class City (kxg.Token):
 
     # Settings (fold)
-    radius = 25
-    border = 50
+    radius = 40
+    border = 150
 
     @staticmethod
     def get_next_price(player):
@@ -352,7 +363,7 @@ class Road (kxg.Token):
 class Siege (kxg.Token):
 
     # Settings (fold)
-    time_until_capture = 25
+    time_until_capture = 5
 
     def __init__(self):
         kxg.Token.__init__(self)
