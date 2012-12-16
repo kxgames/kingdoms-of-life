@@ -101,19 +101,6 @@ class Hotkeys:
 
     # Callbacks
 
-    def develop_init(self, args):
-        pass
-
-    def develop_motion(self, args):
-        pass
-
-    def develop(self, args):
-        pass
-
-    def fuck(self, args):
-        pass
-    
-
     def exit (self, args):
         #self.gui.postgame_finished = True
         raise SystemExit
@@ -172,7 +159,8 @@ class Hotkeys:
         pass 
 
     def info (self, args):
-        pass
+        self.gui.display_info = not self.gui.display_info
+
 
 
 class Gui (kxg.Actor):
@@ -191,10 +179,10 @@ class Gui (kxg.Actor):
 
         self.world = None
         self.player = None
-
         self.size = None
         self.hotkeys = Hotkeys(self)
 
+        self.display_info = False
         self.postgame_finished = False
 
     def get_name(self):
@@ -315,6 +303,12 @@ class Gui (kxg.Actor):
                 text_position = position - text_rect.center
 
                 screen.blit(text_surface, text_position.pygame)
+
+                # Draw extra information regarding the price of sieging or 
+                # relieving each individual city.
+
+                if self.display_info:
+                    pass
 
 
     def refresh(self):
