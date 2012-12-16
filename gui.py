@@ -49,9 +49,8 @@ class Hotkeys:
                 e2s[MOUSEBUTTONUP]    : 'fMOUSEUP',
                 e2s[MOUSEBUTTONDOWN]  : 'fMOUSEDOWN' }
 
-        alt = {
-
-                k2s[ K_BACKSPACE ] : k2s[ K_BACKSPACE ] }
+        #alt = { k2s[ K_BACKSPACE ] : k2s[ K_BACKSPACE ] }
+        alt = { }
         
         self.keychain.register_lens (k2s[ K_LALT ], alt)
         self.keychain.register_lens (k2s[ K_d ], d_lens)
@@ -71,14 +70,16 @@ class Hotkeys:
         ## Register mouse hotkeys
         left = kxg.gui.mouse_to_string[1]
 
-        d_sequence = ['dMOUSEBUTTONDOWN', left]
-        register_chain (d_sequence, self.develop_init, None)
+        develop_init = ['dMOUSEBUTTONDOWN', left]
+        register_chain (develop_init, self.develop_init, None)
 
-        d_sequence += ['dMOUSEMOTION']
-        register_chain (d_sequence, self.develop_motion, None)
+        develop_motion = ['dMOUSEBUTTONDOWN', left, 'dMOUSEMOTION']
+        register_chain (develop_motion, self.develop_motion, None)
 
-        d_sequence += ['dMOUSEBUTTONUP', left]
-        register_chain (d_sequence, self.develop, None)
+        develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEBUTTONUP', left]
+        register_chain (develop, self.develop, None)
+        develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEMOTION', 'dMOUSEBUTTONUP', left]
+        register_chain (develop, self.develop, None)
 
         register_chain (['fMOUSEDOWN', left], self.fuck, None)
 
@@ -91,7 +92,10 @@ class Hotkeys:
         elif event.type == KEYUP:
             self.keychain.handle_key (event.key, True)
 
-        elif event.type == MOUSEBUTTONDOWN:
+        #elif event.type == MOUSEMOTION:
+        #    self.keychain.handle_event(event.type)
+
+        elif event.type in (MOUSEBUTTONDOWN, MOUSEBUTTONUP):
             self.keychain.handle_event(event.type)
             self.keychain.handle_mouse(event.button)
 
@@ -109,6 +113,7 @@ class Hotkeys:
         self.click_drag = False
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
         self.start_click = position
+        print 'start position = %s', position
 
     def develop_motion (self, args):
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
@@ -120,17 +125,20 @@ class Hotkeys:
 
     def develop (self, args):
         player = self.gui.player
+
         start_click = self.start_click
         end_click = kxg.geometry.Vector.from_tuple(self.event.pos)
         self.end_click = end_click
 
-        if self.click_drag:
+        min = Gui.minimum_drag_distance
+        click_dist = (end_click - self.start_click).magnitude_squared
+        if click_dist >= min**2:
             # Build road
             self.click_drag = False
 
             start_city = (kxg.geometry.infinity, None)
             end_city = (kxg.geometry.infinity, None)
-            cities = self.gui.world.cities
+            cities = self.gui.player.cities
             for city in cities:
                 city_position = city.position
                 dist = (start_click - city_position).magnitude_squared
@@ -152,7 +160,7 @@ class Hotkeys:
                 self.gui.send_message(message)
         else:
             # Build city
-            message = messages.CreateCity(player, position)
+            message = messages.CreateCity(player, end_click)
             self.gui.send_message(message)
 
     def fuck (self, args):
@@ -233,10 +241,10 @@ class Gui (kxg.Actor):
         self.soft_refresh = True
         self.hard_refresh = True
 
-    def place_city(self, city):
+    def create_city(self, city, is_mine):
         self.refresh()
 
-    def place_road(self, road):
+    def create_road(self, road, is_mine):
         self.refresh()
 
     def teardown(self):
@@ -278,10 +286,12 @@ class Gui (kxg.Actor):
             for road in player.roads:
                 start = road.start.position.pygame
                 end = road.end.position.pygame
+                color = Color(player.color)
 
-                pygame.draw.aaline(screen, player.color, start, end)
+                pygame.draw.aaline(screen, color, start, end)
 
     def draw_cities (self, screen):
+        radius = self.city_radius
         text_color = Color(self.text_color)
         fill_color = Color(self.background)
         rect_from_surface = kxg.geometry.Rectangle.from_surface
@@ -295,7 +305,7 @@ class Gui (kxg.Actor):
                 pygame.draw.circle(
                         screen, fill_color, position.pygame, radius)
                 pygame.draw.circle(
-                        screen, outline_color, position.pygame, radius, 1)
+                        screen, player_color, position.pygame, radius, 1)
 
                 text_surface = self.city_font.render(
                         city_level, True, text_color)
