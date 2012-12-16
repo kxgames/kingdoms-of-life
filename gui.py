@@ -28,7 +28,7 @@ class Hotkeys:
         return "Keychain Manager"
 
     def setup (self):
-        self.keychain.verbose = True
+        self.keychain.verbose = False
         self.keychain.setup()
 
         self.setup_hotkeys()
@@ -272,6 +272,14 @@ class Gui (kxg.Actor):
         self.soft_refresh = True
         self.hard_refresh = True
 
+    def game_over(self, winner):
+        if self.player is winner:
+            print "You won!"
+        else:
+            print "You lost!"
+
+        self.postgame_finished = True
+
     def create_player(self, player, is_mine):
         if is_mine: self.player = player
 
@@ -362,25 +370,27 @@ class Gui (kxg.Actor):
 
         if city.is_under_siege():
             vertices = []
+            iterations = 30
 
-            for x in range(22):
+            for x in range(iterations):
                 if x % 2:
-                    magnitude = radius * random.uniform(0.5, 1)
+                    magnitude = radius * random.uniform(0.4, 0.8)
                 else:
-                    magnitude = radius * random.uniform(0.1, 0.2)
+                    magnitude = radius * random.uniform(0.0, 0.1)
 
-                offset = kxg.geometry.Vector.from_degrees(x * 360 / 22)
+                offset = kxg.geometry.Vector.from_degrees(x * 360 / iterations)
                 vector = position + (magnitude + radius) * offset 
 
                 vertices.append(vector.pygame)
 
-            #pygame.draw.aalines(screen, player_color, True, vertices)
-            pygame.draw.polygon(screen, player_color, vertices)
+            pygame.draw.polygon(screen, fill_color, vertices)
+            pygame.draw.polygon(screen, player_color, vertices, 1)
 
-        pygame.draw.circle(
-                screen, fill_color, position.pygame, radius)
-        pygame.draw.circle(
-                screen, player_color, position.pygame, radius, 1)
+        else:
+            pygame.draw.circle(
+                    screen, fill_color, position.pygame, radius)
+            pygame.draw.circle(
+                    screen, player_color, position.pygame, radius, 1)
 
         text_surface = self.city_font.render(
                 city_level, True, text_color)

@@ -27,11 +27,11 @@ class GameOver (kxg.Message):
     def check(self, world, sender):
         return sender == 'referee'
 
-    def execute(self, status):
-        pass
+    def execute(self, world):
+        world.game_over(self.winner)
 
     def notify(self, actor, sent_from_here):
-        pass
+        actor.game_over(self.winner)
 
 
 
@@ -134,6 +134,10 @@ class CreateRoad (kxg.Message):
             if road.has_same_route(other):
                 return False
 
+        # Make sure neither end of the road is under siege.
+        if self.start.is_under_siege() or self.end.is_under_siege():
+            return False
+
         # Make sure this road doesn't cross through enemy territory.
         if not player.can_place_road(road):
             return False
@@ -170,17 +174,14 @@ class AttackCity (kxg.Message):
 
         # Make sure the right player is sending this message.
         if sender is not attacker:
-            print "Sender is not attacker."
             return False
 
         # Make sure this city is not already under siege.
         if city.is_under_siege():
-            print "City is already under siege."
             return False
 
         # Make sure the player can afford this attack.
         if not attacker.can_afford_price(price):
-            print "Can't afford attack."
             return False
 
         return True

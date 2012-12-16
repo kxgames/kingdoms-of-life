@@ -159,6 +159,9 @@ class Referee (kxg.Referee):
     def start_game(self):
         pass
 
+    def game_over(self, winner):
+        pass
+
     def create_player(self, player, is_mine):
         assert not is_mine
 
@@ -181,9 +184,9 @@ class Referee (kxg.Referee):
             self.send_message(message)
 
     def defeat_player(self, player):
-        if len(world.players) == 1:
+        if len(self.world.players) == 1:
             winner = self.world.players[0]
-            message = GameOver(winner)
+            message = messages.GameOver(winner)
             self.send_message(message)
 
 
@@ -227,7 +230,7 @@ class Player (kxg.Token):
 
     @kxg.check_for_safety
     def teardown(self):
-        raise AssertionError
+        pass
 
 
     def spend_wealth(self, price):
