@@ -10,6 +10,7 @@ class World (kxg.World):
 
         self.players = []
         self.map = kxg.geometry.Rectangle.from_size(500, 500)
+        self.winner = None
 
         self.game_started = False
         self.game_ended = False
@@ -33,11 +34,17 @@ class World (kxg.World):
     def start_game(self):
         self.game_started = True
 
+    @kxg.check_for_safety
+    def game_over(self, winner):
+        self.game_ended = True
+        self.winner = winner
+
     def has_game_started (self):
         return self.game_started
 
     def has_game_ended (self):
         return self.game_ended
+
 
     @kxg.check_for_safety
     def create_player(self, player):
@@ -65,6 +72,8 @@ class World (kxg.World):
 
     @kxg.check_for_safety
     def relieve_siege(self, defender, siege):
+        self.remove_token(siege)
+        siege.attacker.sieges.remove(siege)
         siege.teardown()
 
     @kxg.check_for_safety
@@ -73,6 +82,16 @@ class World (kxg.World):
         siege.defender.cities.remove(city)
         siege.attacker.cities.append(city)
 
+        self.remove_token(siege)
+        siege.attacker.sieges.remove(siege)
+        siege.teardown()
+
+    @kxg.check_for_safety
+    def defeat_player(self, player):
+        self.remove_token(player)
+        self.players.remove(player)
+        player.teardown()
+    
 
 class Referee (kxg.Referee):
 
@@ -92,6 +111,7 @@ class Referee (kxg.Referee):
         self.send_message(messages.StartGame())
 
     def update(self, time):
+        # Check to see if any players have successfully captured a city.
         for player in self.world.players:
             for siege in player.sieges:
                 if siege.was_successful():
@@ -121,8 +141,16 @@ class Referee (kxg.Referee):
         assert not is_mine
 
     def capture_city(self, siege):
-        pass
+        # Check to see if the defender has lost.
+        if siege.defender.was_defeated():
+            message = DefeatPlayer(player)
+            self.send_message(message)
 
+    def defeat_player(self, player):
+        if len(world.players) == 1:
+            winner = self.world.players[0]
+            message = GameOver(winner)
+            self.send_message(message)
 
 
 class Player (kxg.Token):

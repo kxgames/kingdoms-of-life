@@ -132,7 +132,7 @@ class CreateRoad (kxg.Message):
 
 
 
-class EnactSiege:
+class EnactSiege (kxg.Message):
 
     def __init__(self, attacker, city):
         self.siege = tokens.Siege(attacker, city)
@@ -164,7 +164,7 @@ class EnactSiege:
         actor.enact_siege(self.siege, is_mine)
 
 
-class RelieveSiege:
+class RelieveSiege (kxg.Message):
 
     def __init__(self, siege):
         self.siege = siege
@@ -196,7 +196,7 @@ class RelieveSiege:
         actor.lift_siege(self.siege, is_mine)
 
 
-class CaptureCity:
+class CaptureCity (kxg.Message):
 
     def __init__(self, siege):
         self.siege = siege
@@ -204,11 +204,24 @@ class CaptureCity:
     def check(self, world, sender):
         return siege.was_successful()
 
-    def reject(self, actor):
-        actor.reject_capture_city(self.siege)
-
     def execute(self, world):
         world.capture_city(self.siege)
 
     def notify(self, actor, sent_from_here):
         actor.capture_city(self.siege)
+
+
+class DefeatPlayer (kxg.Message):
+
+    def __init__(self, player):
+        self.player = player
+
+    def check(self, world, sender):
+        return self.player.was_defeated()
+
+    def execute(self, world):
+        world.defeat_player(self.player)
+
+    def notify(self, actor, sent_from_here):
+        actor.defeat_player(self.player)
+
