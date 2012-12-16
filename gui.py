@@ -5,6 +5,7 @@ from pygame.locals import *
 
 import kxg
 import messages
+import random
 
 Color = pygame.color.Color
 Font = pygame.font.Font
@@ -78,6 +79,7 @@ class Hotkeys:
 
         develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEBUTTONUP', left]
         register_chain (develop, self.develop, None)
+
         develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEMOTION', 'dMOUSEBUTTONUP', left]
         register_chain (develop, self.develop, None)
 
@@ -106,14 +108,12 @@ class Hotkeys:
     # Callbacks
 
     def exit (self, args):
-        #self.gui.postgame_finished = True
         raise SystemExit
 
     def develop_init (self, args):
         self.click_drag = False
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
         self.start_click = position
-        print 'start position = %s', position
 
     def develop_motion (self, args):
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
@@ -130,45 +130,73 @@ class Hotkeys:
         end_click = kxg.geometry.Vector.from_tuple(self.event.pos)
         self.end_click = end_click
 
-        min = Gui.minimum_drag_distance
-        click_dist = (end_click - self.start_click).magnitude_squared
-        if click_dist >= min**2:
-            # Build road
+        drag_vector = end_click - self.start_click
+        drag_distance = drag_vector.magnitude
+
+        # If the actual drag distance exceeds the minimum drag threshold, then 
+        # build a road.  This requires finding the two cities nearest the 
+        # end-points of the drag event.
+
+        if drag_distance >= self.gui.minimum_drag_distance:
             self.click_drag = False
 
-            start_city = (kxg.geometry.infinity, None)
-            end_city = (kxg.geometry.infinity, None)
-            cities = self.gui.player.cities
-            for city in cities:
-                city_position = city.position
-                dist = (start_click - city_position).magnitude_squared
+            start_city = self.find_closest_city(start_click, 'mine')
+            end_city = self.find_closest_city(end_click, 'mine')
 
-                if dist < start_city[0]:
-                    start_city = (dist, city)
-
-            for city in cities:
-                city_position = city.position
-                dist = (end_click - city_position).magnitude_squared
-
-                if dist < end_city[0] and not city == start_city[1]:
-                    end_city = (dist, city)
-
-            if not start_city[1] == None and not end_city[1] == None:
-                start = start_city[1]
-                end = end_city[1]
-                message = messages.CreateRoad(player, start, end)
+            if start_city is not None and end_city is not None:
+                message = messages.CreateRoad(player, start_city, end_city)
                 self.gui.send_message(message)
+
+        # If the drag threshold wasn't exceeded, just build a city instead.
+
         else:
-            # Build city
             message = messages.CreateCity(player, end_click)
             self.gui.send_message(message)
 
     def fuck (self, args):
-        pass 
+        player = self.gui.player
+        position = kxg.geometry.Vector.from_tuple(self.event.pos)
+        city = self.find_closest_city(position, 'all')
+
+        # If this is one of the cities controlled by me, attempt to defend an 
+        # attack.  Otherwise attempt to initiate an attack.
+
+        if city in self.gui.player.cities:
+            message = messages.DefendCity(city)
+            self.gui.send_message(message)
+
+        else:
+            message = messages.AttackCity(player, city)
+            self.gui.send_message(message)
 
     def info (self, args):
         self.gui.display_info = not self.gui.display_info
         self.gui.refresh()
+
+
+    # Geometry Helpers
+
+    def find_closest_city(self, target, city_subset='mine'):
+        closest_distance = kxg.geometry.infinity
+        closest_city = None
+
+        if city_subset == 'mine':
+            cities = self.gui.player.cities
+        elif city_subset == 'all':
+            cities = self.gui.world.yield_cities()
+        else:
+            message = "The second argument must be either 'mine' or 'all'."
+            raise ValueError(message)
+
+        for city in cities:
+            offset = target - city.position
+            distance = offset.magnitude_squared
+
+            if distance < closest_distance:
+                closest_distance = distance
+                closest_city = city
+
+        return closest_city
 
 
 class Gui (kxg.Actor):
@@ -319,38 +347,60 @@ class Gui (kxg.Actor):
                 pygame.draw.aaline(screen, color, start, end)
 
     def draw_cities (self, screen):
+        for player in self.world.players:
+            for city in player.cities:
+                self.draw_city(screen, city)
+
+    def draw_city(self, screen, city):
+        position = city.position
         radius = self.city_radius
+        city_level = "%d" % city.level
+        player_color = Color(city.player.color)
         text_color = Color(self.text_color)
         fill_color = Color(self.background)
         rect_from_surface = kxg.geometry.Rectangle.from_surface
 
-        for player in self.world.players:
-            for city in player.cities:
-                position = city.position
-                city_level = "%d" % city.level
-                player_color = Color(player.color)
+        if city.is_under_siege():
+            vertices = []
 
-                pygame.draw.circle(
-                        screen, fill_color, position.pygame, radius)
-                pygame.draw.circle(
-                        screen, player_color, position.pygame, radius, 1)
+            for x in range(22):
+                if x % 2:
+                    magnitude = radius * random.uniform(0.5, 1)
+                else:
+                    magnitude = radius * random.uniform(0.1, 0.2)
 
-                text_surface = self.city_font.render(
-                        city_level, True, text_color)
-                text_rect = rect_from_surface(text_surface)
-                text_position = position - text_rect.center
+                offset = kxg.geometry.Vector.from_degrees(x * 360 / 22)
+                vector = position + (magnitude + radius) * offset 
 
-                screen.blit(text_surface, text_position.pygame)
+                vertices.append(vector.pygame)
 
-                # Draw extra information regarding the price of sieging or 
-                # relieving each individual city.
+            #pygame.draw.aalines(screen, player_color, True, vertices)
+            pygame.draw.polygon(screen, player_color, vertices)
 
-                if self.display_info:
-                    pass
+        pygame.draw.circle(
+                screen, fill_color, position.pygame, radius)
+        pygame.draw.circle(
+                screen, player_color, position.pygame, radius, 1)
+
+        text_surface = self.city_font.render(
+                city_level, True, text_color)
+        text_rect = rect_from_surface(text_surface)
+        text_position = position - text_rect.center
+
+        screen.blit(text_surface, text_position.pygame)
+
+        # Draw extra information regarding the price of sieging or 
+        # relieving each individual city.
+
+        if self.display_info:
+            pass
+
 
     def react(self, time):
         for event in pygame.event.get():
             if event.type == QUIT:
                 self.postgame_finished = True
             self.hotkeys.handle(event)
+
+
 
