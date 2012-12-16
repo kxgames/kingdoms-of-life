@@ -68,7 +68,7 @@ class CreateCity (kxg.Message):
 
     def __init__(self, player, position):
         self.player = player
-        self.city = tokens.City(position)
+        self.city = tokens.City(player, position)
 
     def check(self, world, sender):
         player = self.player
@@ -83,7 +83,7 @@ class CreateCity (kxg.Message):
             return False
 
         # Make sure this city can be placed here.
-        if not player.can_place_city(city):
+        if not player.can_place_city(city, world):
             return False
 
         return True
@@ -106,7 +106,7 @@ class CreateRoad (kxg.Message):
 
     def __init__(self, player, start, end):
         self.player = player
-        self.road = tokens.Road(start, end)
+        self.road = tokens.Road(player, start, end)
 
     def check(self, world, sender):
         player = self.player
@@ -117,7 +117,7 @@ class CreateRoad (kxg.Message):
             return False
 
         # Make sure the player can afford this road.
-        if not player.can_afford_road(road, world):
+        if not player.can_afford_road(road):
             return False
 
         # Make sure this road doesn't cross through enemy territory.
@@ -141,8 +141,85 @@ class CreateRoad (kxg.Message):
 
 
 class EnactSiege:
-    pass
 
-class LiftSiege:
-    pass
+    def __init__(self, attacker, city):
+        self.siege = tokens.Siege(attacker, city)
 
+    def check(self, world, sender):
+        attacker = self.attacker
+        siege = self.siege
+
+        # Make sure the right attacker is sending this message.
+        if sender is not attacker:
+            return False
+
+        # Make sure the attacker can afford this siege.
+        if not attacker.can_afford_siege(siege):
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.reject_enact_siege(self.siege)
+
+    def setup(self, world, sender, id):
+        self.siege.register(id)
+
+    def execute(self, world):
+        world.enact_siege(self.attacker, self.siege)
+
+    def notify(self, actor, is_mine):
+        actor.enact_siege(self.siege, is_mine)
+
+
+class RelieveSiege:
+
+    def __init__(self, siege):
+        self.siege = siege
+
+    def check(self, world, sender):
+        siege = self.siege
+        defender = self.siege.city.player
+
+        # Make sure the right attacker is sending this message.
+        if sender is not defender:
+            return False
+
+        # Make sure the attacker can afford this siege.
+        if not defender.can_afford_relief(siege):
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.reject_enact_siege(self.siege)
+
+    def setup(self, world, sender, id):
+        self.siege.register(id)
+
+    def execute(self, world):
+        world.lift_siege(self.attacker, self.siege)
+
+    def notify(self, actor, is_mine):
+        actor.lift_siege(self.siege, is_mine)
+
+
+class CaptureCity:
+
+    def __init__(self, siege):
+        self.siege = siege
+
+    def check(self, world, sender):
+        return siege.was_successful()
+
+    def reject(self, actor):
+        actor.reject_capture_city(self.siege)
+
+    def setup(self):
+        pass
+
+    def execute(self, world):
+        world.capture_city(self.siege)
+
+    def notify(self, actor, sent_from_here):
+        actor.capture_city(self.siege)
