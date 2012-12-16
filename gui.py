@@ -48,7 +48,12 @@ class Hotkeys:
         f_lens = {
                 e2s[MOUSEBUTTONUP]    : 'fMOUSEUP',
                 e2s[MOUSEBUTTONDOWN]  : 'fMOUSEDOWN' }
+
+        alt = {
+
+                k2s[ K_BACKSPACE ] : k2s[ K_BACKSPACE ] }
         
+        self.keychain.register_lens (k2s[ K_LALT ], alt)
         self.keychain.register_lens (k2s[ K_d ], d_lens)
         self.keychain.register_lens (k2s[ K_f ], f_lens)
 
@@ -60,6 +65,7 @@ class Hotkeys:
 
         # Special sequences.
         register_keys ([K_q], self.exit, None)
+        register_keys ([K_BACKSPACE], self.exit, None)
         register_keys ([K_SPACE],  self.info, None)
 
         ## Register mouse hotkeys
