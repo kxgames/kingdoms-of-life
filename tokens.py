@@ -9,27 +9,38 @@ class World (kxg.World):
         kxg.World.__init__(self)
 
         self.players = []
+        self.map = kxg.geometry.Rectangle.from_size(500, 500)
+
         self.game_started = False
         self.game_ended = False
 
+
     @kxg.check_for_safety
-    def start_game(self, settings):
+    def setup(self):
+        pass
 
-        # Because the nations are created by greeting messages, they are
-        # created before the settings are sent out.  For convenience, their
-        # setup methods are not called until the settings have been received.
+    @kxg.check_for_safety
+    def update(self, time):
+        for player in self.players:
+            player.update(time)
 
-        self.settings = settings
+    @kxg.check_for_safety
+    def teardown(self):
+        pass
+
+
+    @kxg.check_for_safety
+    def start_game(self):
         self.game_started = True
-
-        for nation in self.nations:
-            nation.setup(self)
 
     def has_game_started (self):
         return self.game_started
 
+    def has_game_ended (self):
+        return self.game_ended
+
     @kxg.check_for_safety
-    def create_player(self, player)
+    def create_player(self, player):
         self.players.append(player)
         self.add_token(player)
         player.setup(self)
@@ -81,7 +92,7 @@ class Referee (kxg.Referee):
         self.send_message(messages.StartGame())
 
     def update(self, time):
-        for player in self.players:
+        for player in self.world.players:
             for siege in player.sieges:
                 if siege.was_successful():
                     message = messages.CaptureCity(siege)
@@ -120,7 +131,7 @@ class Player (kxg.Token):
     base_revenue = 25
 
     def __init__(self, name, color):
-        kxg.Token.__init__(self, id)
+        kxg.Token.__init__(self)
 
         self.name = name
         self.color = color
@@ -236,7 +247,7 @@ class Road (kxg.Token):
         raise AssertionError
 
 
-class Siege (kxg.Tokens):
+class Siege (kxg.Token):
 
     # Settings (fold)
     price = lambda city: 50 * city.level
