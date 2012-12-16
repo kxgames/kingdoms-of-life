@@ -25,37 +25,81 @@ class World (kxg.World):
         for nation in self.nations:
             nation.setup(self)
 
+    def has_game_started (self):
+        return self.game_started
+
     @kxg.check_for_safety
-    def create_player (self, player)
+    def create_player(self, player)
         self.players.append(player)
         self.add_token(player)
 
-    def has_game_started (self):
-        return self.game_started
+    @kxg.check_for_safety
+    def create_city(self, player, city):
+        player.cities.append(city)
+        self.add_token(city)
+
+    @kxg.check_for_safety
+    def create_road(self, player, road):
+        player.roads.append(road)
+        self.add_token(road)
 
 
 class Player (kxg.Token):
 
-    def __init__ (self, id):
+    def __init__(self, name, color):
         kxg.Token.__init__(self, id)
 
-        self.name = ""
-        self.color = ""
+        self.name = name
+        self.color = color
         self.money = 0
         self.cities = []
         self.roads = []
+        self.sieges = []
 
-    def setup (self, name, color):
-        self.name = name
-        self.color = color
+    def can_build_city(self, city):
+        return True
 
-    def build_city (self, position):
-        ##self.cities.append( City(position))
+    def can_place_city(self, city):
+        return True
 
-    def build_road (self, start_city, end_city):
-        ##self.append( Road (start_city, end_city))
+    def can_build_road(self, road):
+        return True
 
-class  City (kxg.Token):
+    def can_place_road(self, road):
+        return True
 
-    def __init__ (self, id, position):
-        kxg.Token.__init__ (self, id)
+
+class City (kxg.Token):
+
+    price = lambda cities: 100 + 50 * cities
+    next_level = lambda: min(20, int(random.paretovariate(1)))
+    radius = 25
+    border = 50
+
+    def __init__(self, player, position):
+        kxg.Token.__init__(self)
+        self.position = position
+
+        self.level = 0
+        self.under_seige = False
+
+
+class Road (kxg.Token):
+
+    price = lambda distance: 100 + 2 * distance
+
+    def __init__(self, start, end):
+        kxg.Token.__init__(self)
+        self.start = start
+        self.end = end
+
+
+class Siege (kxg.Tokens):
+
+    time_until_capture = 25
+
+    def __init__(self, city):
+        kxg.Token.__init__()
+        self.city = city
+        self.elapsed_time = 0
+
