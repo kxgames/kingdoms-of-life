@@ -27,7 +27,7 @@ class Hotkeys:
         return "Keychain Manager"
 
     def setup (self):
-        self.keychain.verbose = False
+        self.keychain.verbose = True
         self.keychain.setup()
 
         self.setup_hotkeys()
@@ -123,7 +123,7 @@ class Hotkeys:
 
         min = Gui.minimum_drag_distance
         click_dist = (position - self.start_click).magnitude_squared
-        self.click_drag = (click_dist >= min**2)? True : False
+        self.click_drag = click_dist >= min**2
 
     def develop (self, args):
         player = self.gui.player
