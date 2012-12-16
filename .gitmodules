@@ -1,0 +1,3 @@
+[submodule "kxg"]
+	path = kxg
+	url = ./kxg
