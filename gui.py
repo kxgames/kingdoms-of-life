@@ -12,6 +12,10 @@ class Hotkeys:
         self.keychain = kxg.gui.Keychain()
         self.event = None
         self.gui = gui
+        
+        self.click_drag = False
+        self.start_click = None
+        self.end_click = None
 
     def __str__ (self):
         return 'Keychain Manager'
@@ -93,64 +97,61 @@ class Hotkeys:
         #self.gui.postgame_finished = True
         raise SystemExit
 
-    def build (self, args):
-        gui = self.gui
-        city = gui.selected_city
+    def develop_init (self, args):
+        self.click_drag = False
+        position = kxg.geometry.Vector.from_tuple(self.event.pos)
+        self.start_click = position
 
-        if city is not None:
-            type, subtype = args[0], args[1]
-            message = messages.PlaceBuilding(city, type, subtype)
-            gui.send_message(message)
+    def develop_motion (self, args):
+        position = kxg.geometry.Vector.from_tuple(self.event.pos)
+        self.end_click = position
 
+        min = Gui.minimum_drag_distance
+        click_dist = (position - self.start_click).magnitude_squared
+        self.click_drag = (click_dist >= min**2)? True : False
+
+    def develop (self, args):
+        player = self.gui.player
+        start_click = self.start_click
+        end_click = kxg.geometry.Vector.from_tuple(self.event.pos)
+        self.end_click = end_click
+
+        if self.click_drag:
+            # Build road
+            self.click_drag = False
+
+            start_city = (kxg.geometry.infinity, None)
+            end_city = (kxg.geometry.infinity, None)
+            cities = self.gui.world.cities
+            for city in cities:
+                city_position = city.position
+                dist = (start_click - city_position).magnitude_squared
+
+                if dist < start_city[0]:
+                    start_city = (dist, city)
+
+            for city in cities:
+                city_position = city.position
+                dist = (end_click - city_position).magnitude_squared
+
+                if dist < end_city[0] and not city == start_city[1]:
+                    end_city = (dist, city)
+
+            if not start_city[1] == None and not end_city[1] == None:
+                start = start_city[1]
+                end = end_city[1]
+                message = messages.CreateRoad(player, start, end)
+                self.gui.send_message(message)
         else:
-            print "No city selected."
+            # Build city
+            message = messages.CreateCity(player, position)
+            self.gui.send_message(message)
 
-    def cycle (self, args):
-        self.gui.hard_refresh = True
-        cities = self.gui.get_world().get_cities()
-
-        for city in cities:
-            small_menu = city.get_small_menu()
-            small_menu.toggle()
+    def fuck (self, args):
+        pass 
 
     def info (self, args):
-        gui = self.gui
-        world = gui.get_world()
-
-        print '\nInfo'
-
-        # Display info in the terminal.
-        if gui.selected_city == None:
-            cities = world.get_cities()
-            for city in cities:
-                gui.print_city_data(city)
-        else:
-            gui.print_city_data(gui.selected_city)
-
-    def left_click (self, args):
-        gui = self.gui
-        world = gui.get_world()
-        position = kxg.geometry.Vector.from_tuple(self.event.pos)
-
-        if gui.active_menu and                         \
-                gui.active_menu.under_mouse(position):
-            gui.selected_resource =                    \
-                    gui.active_menu.select_resource(position)
-            gui.refresh()
-
-        else:
-            gui.selected_city = world.find_city(position)
-            if gui.selected_city:
-                gui.active_menu = gui.selected_city.get_large_menu()
-            gui.refresh()
-
-    def middle_click (self, args):
         pass
-
-    def right_click (self, args):
-        position = kxg.geometry.Vector.from_tuple(self.event.pos)
-        message = messages.PlaceCity(position)
-        self.gui.send_message(message)
 
 
 class Gui (kxg.Actor):
@@ -160,6 +161,8 @@ class Gui (kxg.Actor):
     city_color = "White"
     city_text = "Black"
     city_radius = 30
+
+    minimum_drag_distance = 7
 
     def __init__(self):
         kxg.Actor.__init__(self)
