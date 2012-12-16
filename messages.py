@@ -113,7 +113,7 @@ class CreateRoad (kxg.Message):
             return False
 
         # Make sure this road doesn't cross through enemy territory.
-        if not player.can_place_road(road, world):
+        if not player.can_place_road(road):
             return False
 
         return True

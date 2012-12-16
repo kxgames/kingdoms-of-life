@@ -92,8 +92,9 @@ class Hotkeys:
         elif event.type == KEYUP:
             self.keychain.handle_key (event.key, True)
 
-        elif event.type == MOUSEMOTION:
-            self.keychain.handle_event(event.type)
+        #elif event.type == MOUSEMOTION:
+        #    self.keychain.handle_event(event.type)
+
         elif event.type in (MOUSEBUTTONDOWN, MOUSEBUTTONUP):
             self.keychain.handle_event(event.type)
             self.keychain.handle_mouse(event.button)
@@ -123,17 +124,20 @@ class Hotkeys:
 
     def develop (self, args):
         player = self.gui.player
+
         start_click = self.start_click
         end_click = kxg.geometry.Vector.from_tuple(self.event.pos)
         self.end_click = end_click
 
-        if self.click_drag:
+        min = Gui.minimum_drag_distance
+        click_dist = (end_click - self.start_click).magnitude_squared
+        if click_dist >= min**2:
             # Build road
             self.click_drag = False
 
             start_city = (kxg.geometry.infinity, None)
             end_city = (kxg.geometry.infinity, None)
-            cities = self.gui.world.cities
+            cities = self.gui.player.cities
             for city in cities:
                 city_position = city.position
                 dist = (start_click - city_position).magnitude_squared
@@ -280,8 +284,9 @@ class Gui (kxg.Actor):
             for road in player.roads:
                 start = road.start.position.pygame
                 end = road.end.position.pygame
+                color = Color(player.color)
 
-                pygame.draw.aaline(screen, player.color, start, end)
+                pygame.draw.aaline(screen, color, start, end)
 
     def draw_cities (self, screen):
         radius = self.city_radius
