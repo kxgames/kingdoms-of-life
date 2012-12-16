@@ -168,18 +168,17 @@ class Hotkeys:
 
     def info (self, args):
         self.gui.display_info = not self.gui.display_info
-
+        self.gui.refresh()
 
 
 class Gui (kxg.Actor):
 
     background = 'white'
     text_color = 'black'
-    city_radius = 30
-    city_font = Font(None, 20)
-    status_font = Font(None, 16)
+    city_radius = 20
+    city_font = Font('fonts/FreeSans.ttf', 20)
+    status_font = Font('fonts/FreeSans.ttf', 14)
     refresh_rate = 0.2
-
     minimum_drag_distance = 7
 
     def __init__(self):
@@ -226,8 +225,12 @@ class Gui (kxg.Actor):
                 if event.type == QUIT:
                     self.postgame_finished = True
 
-    def create_player(self, player, is_mine):
-        if is_mine: self.player = player
+    def teardown(self):
+        pass
+
+    def is_finished(self):
+        return self.postgame_finished
+
 
     def start_game(self):
         pygame.init()
@@ -241,17 +244,39 @@ class Gui (kxg.Actor):
         self.soft_refresh = True
         self.hard_refresh = True
 
+    def create_player(self, player, is_mine):
+        if is_mine: self.player = player
+
     def create_city(self, city, is_mine):
         self.refresh()
 
     def create_road(self, road, is_mine):
         self.refresh()
 
-    def teardown(self):
-        pass
+    def attack_city(self, siege, was_me):
+        self.refresh()
 
-    def is_finished(self):
-        return self.postgame_finished
+    def defend_city(self, siege, was_me):
+        self.refresh()
+
+    def capture_city(self, siege):
+        self.refresh()
+
+    def defeat_player(self, player):
+        self.refresh()
+
+
+    def reject_create_city(self, message):
+        print "Failed to create a city.  Can you afford $%d?" % message.price
+
+    def reject_create_road(self, message):
+        print "Failed to create a road.  Can you afford $%d?" % message.price
+
+    def reject_attack_city(self, message):
+        print "Failed to attack a city.  Can you afford $%d?" % message.price
+
+    def reject_defend_city(self, message):
+        print "Failed to defend a city.  Can you afford $%d?" % message.price
 
 
     def draw(self, time):
@@ -269,17 +294,20 @@ class Gui (kxg.Actor):
         color = Color(self.background)
         self.screen.fill(color)
 
+    def refresh(self):
+        self.hard_refresh = True
+
     def draw_player(self, screen):
-        status = "Wealth: %d" % self.player.wealth
+        status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
         color = Color(self.text_color)
         background = Color(self.background)
         text = self.status_font.render(status, True, color)
 
-        rect = kxg.geometry.Rectangle.from_surface(text).pygame
-        pygame.draw.rect(screen, background, rect)
+        offset = 5, 5
+        rect = kxg.geometry.Rectangle.from_surface(text) + offset
 
-        position = 5, 5
-        screen.blit(text, position)
+        pygame.draw.rect(screen, background, rect.pygame)
+        screen.blit(text, offset)
 
     def draw_roads (self, screen):
         for player in self.world.players:
@@ -319,10 +347,6 @@ class Gui (kxg.Actor):
 
                 if self.display_info:
                     pass
-
-
-    def refresh(self):
-        self.hard_refresh = True
 
     def react(self, time):
         for event in pygame.event.get():

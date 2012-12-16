@@ -61,17 +61,19 @@ class CreateCity (kxg.Message):
     def __init__(self, player, position):
         self.player = player
         self.city = tokens.City(player, position)
+        self.price = tokens.City.get_next_price(player)
 
     def check(self, world, sender):
         player = self.player
         city = self.city
+        price = self.price
 
         # Make sure the right player is sending this message.
         if sender is not player:
             return False
 
         # Make sure the player can afford this city.
-        if not player.can_afford_city(city):
+        if not player.can_afford_price(price):
             return False
 
         # Make sure this city can be placed here.
@@ -81,14 +83,14 @@ class CreateCity (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_create_city(self.city)
+        actor.reject_create_city(self)
 
     def setup(self, world, sender, id):
         self.city.register(id)
-        self.city.level = tokens.City.next_level()
+        self.city.level = tokens.City.get_next_level()
 
     def execute(self, world):
-        world.create_city(self.player, self.city)
+        world.create_city(self.player, self.city, self.price)
 
     def notify(self, actor, is_mine):
         actor.create_city(self.city, is_mine)
@@ -99,17 +101,19 @@ class CreateRoad (kxg.Message):
     def __init__(self, player, start, end):
         self.player = player
         self.road = tokens.Road(player, start, end)
+        self.price = self.road.get_price()
 
     def check(self, world, sender):
         player = self.player
         road = self.road
+        price = self.price
 
         # Make sure the right player is sending this message.
         if sender is not player:
             return False
 
         # Make sure the player can afford this road.
-        if not player.can_afford_road(road):
+        if not player.can_afford_price(price):
             return False
 
         # Make sure this road doesn't cross through enemy territory.
@@ -119,81 +123,85 @@ class CreateRoad (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_create_road(self.road)
+        actor.reject_create_road(self)
 
     def setup(self, world, sender, id):
         self.road.register(id)
 
     def execute(self, world):
-        world.create_road(self.player, self.road)
+        world.create_road(self.player, self.road, self.price)
 
     def notify(self, actor, is_mine):
         actor.create_road(self.road, is_mine)
 
 
 
-class EnactSiege (kxg.Message):
+class AttackCity (kxg.Message):
 
     def __init__(self, attacker, city):
         self.siege = tokens.Siege(attacker, city)
+        self.price = self.siege.get_attack_price()
 
     def check(self, world, sender):
         attacker = self.attacker
         siege = self.siege
+        price = self.price
 
         # Make sure the right attacker is sending this message.
         if sender is not attacker:
             return False
 
         # Make sure the attacker can afford this siege.
-        if not attacker.can_afford_siege(siege):
+        if not attacker.can_afford_price(price):
             return False
 
         return True
 
     def reject(self, actor):
-        actor.reject_enact_siege(self.siege)
+        actor.reject_attack_city(self)
 
     def setup(self, world, sender, id):
         self.siege.register(id)
 
     def execute(self, world):
-        world.enact_siege(self.attacker, self.siege)
+        world.attack_city(self.attacker, self.siege, self.price)
 
-    def notify(self, actor, is_mine):
-        actor.enact_siege(self.siege, is_mine)
+    def notify(self, actor, was_me):
+        actor.attack_city(self.siege, was_me)
 
 
-class RelieveSiege (kxg.Message):
+class DefendCity (kxg.Message):
 
     def __init__(self, siege):
         self.siege = siege
+        self.price = siege.get_defense_price()
 
     def check(self, world, sender):
         siege = self.siege
         defender = self.siege.city.player
+        price = self.price
 
         # Make sure the right attacker is sending this message.
         if sender is not defender:
             return False
 
         # Make sure the attacker can afford this siege.
-        if not defender.can_afford_relief(siege):
+        if not defender.can_afford_price(price):
             return False
 
         return True
 
     def reject(self, actor):
-        actor.reject_enact_siege(self.siege)
+        actor.reject_enact_siege(self)
 
     def setup(self, world, sender, id):
         self.siege.register(id)
 
     def execute(self, world):
-        world.lift_siege(self.attacker, self.siege)
+        world.defend_city(self.attacker, self.siege, self.price)
 
-    def notify(self, actor, is_mine):
-        actor.lift_siege(self.siege, is_mine)
+    def notify(self, actor, was_me):
+        actor.lift_siege(self.siege, was_me)
 
 
 class CaptureCity (kxg.Message):

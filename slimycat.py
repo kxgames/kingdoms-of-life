@@ -19,8 +19,8 @@ class SandboxLoop (kxg.MainLoop):
 
 class ClientLoop (kxg.MainLoop):
 
-    def __init__(self, name, nation, host, port):
-        self.stage = ClientConnectionStage(name, nation, host, port)
+    def __init__(self, name, host, port):
+        self.stage = ClientConnectionStage(name, host, port)
 
     def get_initial_stage(self):
         return self.stage
