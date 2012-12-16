@@ -304,16 +304,16 @@ class Gui (kxg.Actor):
 
 
     def reject_create_city(self, message):
-        print "Failed to create a city.  Can you afford $%d?" % message.price
+        pass
 
     def reject_create_road(self, message):
-        print "Failed to create a road.  Can you afford $%d?" % message.price
+        pass
 
     def reject_attack_city(self, message):
-        print "Failed to attack a city.  Can you afford $%d?" % message.price
+        pass
 
     def reject_defend_city(self, message):
-        print "Failed to defend a city.  Can you afford $%d?" % message.price
+        pass
 
 
     def draw(self, time):
@@ -351,23 +351,23 @@ class Gui (kxg.Actor):
             return (r, g, b)
 
         # Draw the border push made by each city.
-        #for city in self.world.yield_cities():
-        #    color = Color(city.player.color)
-        #    position = city.position.pygame
-        #    radius = city.border
+        for city in self.world.yield_cities():
+            color = Color(city.player.color)
+            position = city.position.pygame
+            radius = city.border + 1
 
-        #    pygame.draw.circle(screen, color, position, radius, 1)
+            pygame.draw.circle(screen, color, position, radius, 1)
 
         # Fill in the border with solid circles to remove internal lines.
-        #for city in self.world.yield_cities():
-        #    color = FadedColor(city.player.color, 0.95)
-        #    position = city.position.pygame
-        #    radius = city.border
+        for city in self.world.yield_cities():
+            color = Color(self.background)
+            position = city.position.pygame
+            radius = city.border
 
-        #    pygame.draw.circle(screen, color, position, radius)
+            pygame.draw.circle(screen, color, position, radius)
 
         # Draw the area in which new cities cannot be built.
-        for city in self.world.yield_cities():
+        for city in self.player.cities:
             color = FadedColor(city.player.color, 0.90)
             position = city.position.pygame
             radius = city.radius

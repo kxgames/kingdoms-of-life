@@ -243,12 +243,29 @@ class Player (kxg.Token):
         if not self.cities:
             return True
 
+        inside_radius = False
+        inside_border = False
+        inside_opponent = False
+
         for other in self.world.yield_cities():
             offset = city.position - other.position
             distance = offset.magnitude
 
-            if distance <= 2 * other.radius:
-                return False
+            inside_radius = (distance <= other.radius) or inside_radius
+
+            if other.player is self:
+                inside_border = (distance <= other.border) or inside_border
+            else:
+                inside_opponent = (distance <= other.border) or inside_opponent 
+
+        if inside_radius:
+            return False
+
+        if not inside_border:
+            return False
+
+        if inside_opponent:
+            return False
 
         return True
 
@@ -262,8 +279,8 @@ class Player (kxg.Token):
 class City (kxg.Token):
 
     # Settings (fold)
-    radius = 40
-    border = 150
+    radius = 60
+    border = 100
 
     @staticmethod
     def get_next_price(player):
@@ -289,7 +306,7 @@ class City (kxg.Token):
         return 50 * self.level
 
     def get_defense_price(self):
-        return 50 * self.roads + 50
+        return 100 * self.roads + 50
 
     def is_under_siege(self):
         return self.siege is not None
