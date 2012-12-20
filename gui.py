@@ -228,8 +228,7 @@ class Gui (kxg.Actor):
         return self.world
 
 
-    def setup(self, world):
-        self.world = world
+    def setup(self):
         self.hotkeys.setup()
 
     def update(self, time):

@@ -136,13 +136,10 @@ class Referee (kxg.Referee):
     def get_name(self):
         return 'referee'
 
-    def is_finished(self):
-        return self.world.has_game_ended()
 
-
-    def setup(self, world):
-        self.world = world
-        self.send_message(messages.StartGame())
+    def setup(self):
+        message = messages.StartGame()
+        self.send_message(message)
 
     def update(self, time):
         # Check to see if any players have successfully captured a city.
