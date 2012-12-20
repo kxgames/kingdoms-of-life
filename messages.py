@@ -47,7 +47,7 @@ class CreatePlayer (kxg.Greeting):
         return not world.has_game_started()
 
     def setup(self, world, sender, id):
-        self.player.register(id)
+        self.player.give_id(id)
 
     def execute(self, world):
         world.create_player(self.player)
@@ -59,14 +59,13 @@ class CreatePlayer (kxg.Greeting):
 class CreateCity (kxg.Message):
 
     def __init__(self, player, position):
-        self.player = player
-        self.city = tokens.City(position)
+        self.city = tokens.City(player, position)
         self.price = tokens.City.get_next_price(player)
 
     def check(self, world, sender):
-        player = self.player
         city = self.city
         price = self.price
+        player = city.player
 
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -89,11 +88,11 @@ class CreateCity (kxg.Message):
         actor.reject_create_city(self)
 
     def setup(self, world, sender, id):
-        self.city.register(id)
+        self.city.give_id(id)
         self.city.level = tokens.City.get_next_level()
 
     def execute(self, world):
-        world.create_city(self.player, self.city, self.price)
+        world.create_city(self.city, self.price)
 
     def notify(self, actor, is_mine):
         actor.create_city(self.city, is_mine)
@@ -102,31 +101,21 @@ class CreateCity (kxg.Message):
 class CreateRoad (kxg.Message):
 
     def __init__(self, player, start, end):
-        self.player = player
-        self.start = start
-        self.end = end
-
-        # The way the road object is created is really gross.  Due to a 
-        # limitation in the game engine, the city objects that get passed into 
-        # the road constructor here will not get properly copied across the 
-        # network.  However, I still need to construct the road object in order 
-        # to calculate the price.  To accommodate these two concerns, I wipe 
-        # the start and end attribute immediately after calculating the price.
-
-        self.road = tokens.Road(start, end)
+        self.road = tokens.Road(player, start, end)
         self.price = self.road.get_price()
 
-        self.road.start = None
-        self.road.end = None
-
     def check(self, world, sender):
-        player = self.player
-        road = self.road
-        price = self.price
+        road = self.road; price = self.price
+        player = road.player; start = road.start; end = road.end
 
         # Make sure the right player is sending this message.
         if sender is not player:
             print "Road requested by wrong player."
+            return False
+
+        # Make sure the right player owns the cities being connected.
+        if (player is not start.player) or (player is not end.player):
+            print "Can't build roads to enemy cities."
             return False
 
         # Make sure the player can afford this road.
@@ -141,7 +130,7 @@ class CreateRoad (kxg.Message):
                 return False
 
         # Make sure neither end of the road is under siege.
-        if self.start.is_under_siege() or self.end.is_under_siege():
+        if start.is_under_siege() or end.is_under_siege():
             print "Can't build a road to a city under siege."
             return False
 
@@ -156,11 +145,10 @@ class CreateRoad (kxg.Message):
         actor.reject_create_road(self)
 
     def setup(self, world, sender, id):
-        self.road.register(id)
+        self.road.give_id(id)
 
     def execute(self, world):
-        world.create_road(
-                self.player, self.road, self.start, self.end, self.price)
+        world.create_road(self.road, self.price)
 
     def notify(self, actor, is_mine):
         actor.create_road(self.road, is_mine)
@@ -170,14 +158,12 @@ class CreateRoad (kxg.Message):
 class AttackCity (kxg.Message):
 
     def __init__(self, attacker, city):
-        self.attacker = attacker
-        self.city = city
+        self.siege = tokens.Siege(attacker, city)
         self.price = city.get_attack_price()
-        self.siege = None
 
     def check(self, world, sender):
-        attacker = self.attacker
-        city = self.city
+        attacker = self.siege.attacker
+        city = self.siege.city
         price = self.price
 
         # Make sure the right player is sending this message.
@@ -201,11 +187,10 @@ class AttackCity (kxg.Message):
         actor.reject_attack_city(self)
 
     def setup(self, world, sender, id):
-        self.siege = tokens.Siege()
-        self.siege.register(id)
+        self.siege.give_id(id)
 
     def execute(self, world):
-        world.attack_city(self.siege, self.attacker, self.city, self.price)
+        world.attack_city(self.siege, self.price)
 
     def notify(self, actor, was_me):
         actor.attack_city(self.siege, was_me)
@@ -243,7 +228,7 @@ class DefendCity (kxg.Message):
         actor.reject_defend_city(self)
 
     def execute(self, world):
-        world.defend_city(self.city.player, self.city.siege, self.price)
+        world.defend_city(self.city.siege, self.price)
 
     def notify(self, actor, was_me):
         actor.defend_city(self.city, was_me)

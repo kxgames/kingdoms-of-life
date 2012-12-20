@@ -54,29 +54,29 @@ class World (kxg.World):
         player.setup(self)
 
     @kxg.check_for_safety
-    def create_city(self, player, city, price):
-        player.cities.append(city)
-        player.spend_wealth(price)
+    def create_city(self, city, price):
         self.add_token(city)
-        city.setup(player)
+        city.player.cities.append(city)
+        city.player.spend_wealth(price)
+        city.setup()
 
     @kxg.check_for_safety
-    def create_road(self, player, road, start, end, price):
-        player.roads.append(road)
-        player.spend_wealth(price)
+    def create_road(self, road, price):
         self.add_token(road)
-        road.setup(player, start, end)
+        road.player.roads.append(road)
+        road.player.spend_wealth(price)
+        road.setup()
 
     @kxg.check_for_safety
-    def attack_city(self, siege, attacker, city, price):
-        attacker.sieges.append(siege)
-        attacker.spend_wealth(price)
+    def attack_city(self, siege, price):
         self.add_token(siege)
-        siege.setup(attacker, city)
+        siege.attacker.sieges.append(siege)
+        siege.attacker.spend_wealth(price)
+        siege.setup()
 
     @kxg.check_for_safety
-    def defend_city(self, defender, siege, price):
-        defender.spend_wealth(price)
+    def defend_city(self, siege, price):
+        siege.defender.spend_wealth(price)
         siege.attacker.sieges.remove(siege)
         siege.teardown()
         self.remove_token(siege)
@@ -292,10 +292,10 @@ class City (kxg.Token):
         return min(20, int(level))
 
 
-    def __init__(self, position):
+    def __init__(self, player, position):
         kxg.Token.__init__(self)
 
-        self.player = None
+        self.player = player
         self.position = position
 
         self.level = 0
@@ -313,8 +313,8 @@ class City (kxg.Token):
 
 
     @kxg.check_for_safety
-    def setup(self, player):
-        self.player = player
+    def setup(self):
+        pass
 
     @kxg.check_for_safety
     def update(self, time):
@@ -330,10 +330,9 @@ class Road (kxg.Token):
     # Settings (fold)
     tax_rate = 1.00
 
-    def __init__(self, start, end):
+    def __init__(self, player, start, end):
         kxg.Token.__init__(self)
-
-        self.player = None
+        self.player = player
         self.start = start
         self.end = end
 
@@ -359,11 +358,7 @@ class Road (kxg.Token):
 
 
     @kxg.check_for_safety
-    def setup(self, player, start, end):
-        self.player = player
-        self.start = start
-        self.end = end
-
+    def setup(self):
         self.start.roads += 1
         self.end.roads += 1
 
@@ -380,13 +375,13 @@ class Road (kxg.Token):
 class Siege (kxg.Token):
 
     # Settings (fold)
-    time_until_capture = 5
+    time_until_capture = 25
 
-    def __init__(self):
+    def __init__(self, attacker, city):
         kxg.Token.__init__(self)
-        self.city = None
-        self.attacker = None
-        self.defender = None
+        self.city = city
+        self.attacker = attacker
+        self.defender = city.player
         self.elapsed_time = 0
 
     def was_successful(self):
@@ -394,12 +389,8 @@ class Siege (kxg.Token):
 
 
     @kxg.check_for_safety
-    def setup(self, attacker, city):
-        self.city = city
+    def setup(self):
         self.city.siege = self
-
-        self.attacker = attacker
-        self.defender = city.player
 
     @kxg.check_for_safety
     def update(self, time):

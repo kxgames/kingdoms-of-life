@@ -43,7 +43,7 @@ class ClientConnectionStage (kxg.Stage):
 
         self.name = name
         self.update = self.update_connection
-        self.client = kxg.network.PickleClient(
+        self.client = kxg.network.Client(
                 host, port, callback=self.connection_established)
 
         self.pipe = None
@@ -87,7 +87,7 @@ class ServerConnectionStage (kxg.Stage):
         self.colors = 'orange', 'purple'
         self.successor = None
 
-        self.server = kxg.network.PickleServer(
+        self.server = kxg.network.Server(
                 host, port, 2, self.clients_connected)
 
     def setup(self):
