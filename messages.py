@@ -171,6 +171,11 @@ class AttackCity (kxg.Message):
             print "Attack requested by wrong player."
             return False
 
+        # Make sure the attacker has at least one city themselves.
+        if not attacker.cities:
+            print "You must build a city before attacking your opponent."
+            return False
+
         # Make sure this city is not already under siege.
         if city.is_under_siege():
             print "Can't attack a city that is already under siege."

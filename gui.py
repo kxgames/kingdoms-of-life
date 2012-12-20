@@ -271,7 +271,7 @@ class Gui (kxg.Actor):
         self.refresh()
 
         if self.player is winner:
-            self.splash_message = "You win!"
+            self.splash_message = "You won!"
         else:
             self.splash_message = "You lost!"
 

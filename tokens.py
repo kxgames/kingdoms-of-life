@@ -323,11 +323,13 @@ class City (kxg.Token):
         self.siege = None
 
     def get_attack_price(self, attacker):
-        supply_city = attacker.find_closest_city(self)
-        supply_roads = supply_city.roads + 1
+        supply_city = attacker.find_closest_city(self.position)
+        if supply_city is None:
+            return kxg.geometry.infinity
 
         fixed_price = 50
         ramping_price = 250
+        supply_roads = supply_city.roads + 1
 
         return fixed_price + ramping_price / supply_roads
 
@@ -405,7 +407,7 @@ class Road (kxg.Token):
 class Siege (kxg.Token):
 
     # Settings (fold)
-    time_until_capture = 5
+    time_until_capture = 25
 
     def __init__(self, attacker, city):
         kxg.Token.__init__(self)
