@@ -5,6 +5,7 @@ from pygame.locals import *
 
 import kxg
 import messages
+import tokens
 import random
 
 Color = pygame.color.Color
@@ -169,31 +170,6 @@ class Hotkeys:
     def info (self, args):
         self.gui.display_info = not self.gui.display_info
         self.gui.refresh()
-
-
-    # Geometry Helpers
-
-    def find_closest_city(self, target, city_subset='mine'):
-        closest_distance = kxg.geometry.infinity
-        closest_city = None
-
-        if city_subset == 'mine':
-            cities = self.gui.player.cities
-        elif city_subset == 'all':
-            cities = self.gui.world.yield_cities()
-        else:
-            message = "The second argument must be either 'mine' or 'all'."
-            raise ValueError(message)
-
-        for city in cities:
-            offset = target - city.position
-            distance = offset.magnitude_squared
-
-            if distance < closest_distance:
-                closest_distance = distance
-                closest_city = city
-
-        return closest_city
 
 
 class Gui (kxg.Actor):
@@ -379,16 +355,26 @@ class Gui (kxg.Actor):
                 pygame.draw.circle(screen, color, position, radius)
 
     def draw_player(self, screen):
-        status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
         color = Color(self.text_color)
         background = Color(self.background)
-        text = self.status_font.render(status, True, color)
 
-        offset = 5, 5
-        rect = kxg.geometry.Rectangle.from_surface(text) + offset
+        wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
+        city_status = "Next City: %d" % tokens.City.get_next_price(self.player)
 
-        pygame.draw.rect(screen, background, rect.pygame)
-        screen.blit(text, offset)
+        wealth_text = self.status_font.render(wealth_status, True, color)
+        city_text = self.status_font.render(city_status, True, color)
+
+        wealth_offset = 5, 5
+        city_offset = 5, 5 + wealth_text.get_height()
+
+        wealth_rect = kxg.geometry.Rectangle.from_surface(wealth_text) + wealth_offset
+        city_rect = kxg.geometry.Rectangle.from_surface(city_text) + city_offset
+
+        pygame.draw.rect(screen, background, wealth_rect.pygame)
+        pygame.draw.rect(screen, background, city_rect.pygame)
+
+        screen.blit(wealth_text, wealth_offset)
+        screen.blit(city_text, city_offset)
 
     def draw_roads (self, screen):
         for player in self.world.players:
