@@ -111,6 +111,26 @@ class World (kxg.World):
         self.remove_token(player)
     
 
+    def find_closest_city(self, target, player=None):
+        closest_distance = kxg.geometry.infinity
+        closest_city = None
+
+        if player is None:
+            cities = self.yield_cities()
+        else:
+            cities = player.cities
+
+        for city in cities:
+            offset = target - city.position
+            distance = offset.magnitude_squared
+
+            if distance < closest_distance:
+                closest_distance = distance
+                closest_city = city
+
+        return closest_city
+
+
     def yield_cities(self):
         for player in self.players:
             for city in player.cities:
@@ -269,6 +289,9 @@ class Player (kxg.Token):
     def can_place_road(self, road):
         return True
 
+    def find_closest_city(self, target):
+        return self.world.find_closest_city(target, self)
+
     def was_defeated(self):
         return not self.cities
 
@@ -299,11 +322,21 @@ class City (kxg.Token):
         self.roads = 0
         self.siege = None
 
-    def get_attack_price(self):
-        return 50 * self.level
+    def get_attack_price(self, attacker):
+        supply_city = attacker.find_closest_city(self)
+        supply_roads = supply_city.roads + 1
+
+        fixed_price = 50
+        ramping_price = 250
+
+        return fixed_price + ramping_price / supply_roads
 
     def get_defense_price(self):
-        return 100 * self.roads + 50
+        fixed_price = 100
+        ramping_price = 100
+        supply_roads = self.roads + 1
+
+        return fixed_price + ramping_price / supply_roads
 
     def is_under_siege(self):
         return self.siege is not None

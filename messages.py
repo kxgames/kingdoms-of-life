@@ -159,7 +159,7 @@ class AttackCity (kxg.Message):
 
     def __init__(self, attacker, city):
         self.siege = tokens.Siege(attacker, city)
-        self.price = city.get_attack_price()
+        self.price = city.get_attack_price(attacker)
 
     def check(self, world, sender):
         attacker = self.siege.attacker

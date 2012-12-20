@@ -119,6 +119,7 @@ class Hotkeys:
         self.click_drag = click_dist >= min**2
 
     def develop (self, args):
+        world = self.gui.world
         player = self.gui.player
 
         start_click = self.start_click
@@ -135,8 +136,8 @@ class Hotkeys:
         if drag_distance >= self.gui.minimum_drag_distance:
             self.click_drag = False
 
-            start_city = self.find_closest_city(start_click, 'mine')
-            end_city = self.find_closest_city(end_click, 'mine')
+            start_city = world.find_closest_city(start_click, player)
+            end_city = world.find_closest_city(end_click, player)
 
             if start_city is not None and end_city is not None:
                 message = messages.CreateRoad(player, start_city, end_city)
@@ -149,9 +150,10 @@ class Hotkeys:
             self.gui.send_message(message)
 
     def fuck (self, args):
+        world = self.gui.world
         player = self.gui.player
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
-        city = self.find_closest_city(position, 'all')
+        city = world.find_closest_city(position)
 
         # If this is one of the cities controlled by me, attempt to defend an 
         # attack.  Otherwise attempt to initiate an attack.
