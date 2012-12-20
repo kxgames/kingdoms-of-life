@@ -6,13 +6,17 @@ import tokens, gui, messages
 class SandboxLoop (kxg.MainLoop):
 
     def __init__(self):
-        world, referee = tokens.World(), tokens.Referee()
+        world, referee, gui = tokens.World(), tokens.Referee(), gui.Gui()
         actors_to_greetings = {
-                gui.Gui(): messages.CreatePlayer("Sandbox", 'orange')}
+                gui: messages.CreatePlayer("Sandbox", 'orange')}
 
-        self.stage = kxg.SinglePlayerGameStage(
+        game_stage = kxg.SinglePlayerGameStage(
                 world, referee, actors_to_greetings)
+        postgame_stage = PostgameSplashStage(world, gui)
         
+        self.stage = game_stage
+        self.stage.successor = postgame_stage
+
     def get_initial_stage(self):
         return self.stage
 
@@ -71,7 +75,12 @@ class ClientConnectionStage (kxg.Stage):
 
     def teardown(self):
         world, actor, pipe = tokens.World(), gui.Gui(), self.pipe
-        self.successor = kxg.MultiplayerClientGameStage(world, actor, pipe)
+
+        game_stage = kxg.MultiplayerClientGameStage(world, actor, pipe)
+        postgame_stage = PostgameSplashStage(world, actor)
+
+        self.successor = game_stage
+        game_stage.successor = postgame_stage
 
     def get_successor(self):
         return self.successor
@@ -132,3 +141,26 @@ class ServerConnectionStage (kxg.Stage):
         return self.successor
 
 
+
+class PostgameSplashStage (kxg.Stage):
+
+    def __init__(self, world, gui):
+        kxg.Stage.__init__(self)
+
+        self.world = world
+        self.gui = gui
+
+    def setup(self):
+        pass
+
+    def update(self, time):
+        self.gui.update(time)
+
+    def teardown(self):
+        pass
+
+    def is_finished(self):
+        # The GUI code will simply execute sys.exit() once the user decides to 
+        # quit.  For some reason, pygame responds to this much faster than it 
+        # does to the standard quit mechanism.
+        return False

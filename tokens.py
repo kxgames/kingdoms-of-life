@@ -372,7 +372,7 @@ class Road (kxg.Token):
 class Siege (kxg.Token):
 
     # Settings (fold)
-    time_until_capture = 25
+    time_until_capture = 5
 
     def __init__(self, attacker, city):
         kxg.Token.__init__(self)

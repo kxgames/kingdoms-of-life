@@ -64,8 +64,6 @@ class Hotkeys:
         register_chain = self.keychain.register_chain
 
         # Special sequences.
-        register_keys ([K_q], self.exit, None)
-        register_keys ([K_BACKSPACE], self.exit, None)
         register_keys ([K_SPACE],  self.info, None)
 
         ## Register mouse hotkeys
@@ -106,9 +104,6 @@ class Hotkeys:
 
 
     # Callbacks
-
-    def exit (self, args):
-        raise SystemExit
 
     def develop_init (self, args):
         self.click_drag = False
@@ -204,9 +199,16 @@ class Gui (kxg.Actor):
     # Settings (fold)
     background = 'white'
     text_color = 'black'
+    status_font = Font('fonts/FreeSans.ttf', 14)
+
     city_radius = 20
     city_font = Font('fonts/FreeSans.ttf', 20)
-    status_font = Font('fonts/FreeSans.ttf', 14)
+
+    splash_color = 'white'
+    banner_color = 'black'
+    splash_font = Font('fonts/FreeSans.ttf', 54)
+    banner_alpha = 0.75
+
     refresh_rate = 0.2
     minimum_drag_distance = 7
 
@@ -219,6 +221,7 @@ class Gui (kxg.Actor):
         self.hotkeys = Hotkeys(self)
 
         self.display_info = False
+        self.splash_message = ""
         self.postgame_finished = False
 
     def get_name(self):
@@ -232,32 +235,22 @@ class Gui (kxg.Actor):
         self.hotkeys.setup()
 
     def update(self, time):
-        if not self.world.has_game_started():
-            return
+        game_started = self.world.has_game_started()
+        game_ended = self.world.has_game_ended()
 
-        elif not self.world.has_game_ended():
-            self.timer += time
-
-            if self.timer > self.timeout:
-                self.timer -= self.timeout
-                self.soft_refresh = True
-
-            if self.soft_refresh or self.hard_refresh:
-                self.draw(time)
-                self.soft_refresh = False
-
+        if game_started and not game_ended:
+            self.draw(time)
             self.react(time)
 
+        elif game_ended:
+            self.draw(time)
+            self.react_postgame(time)
+
         else:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    self.postgame_finished = True
+            pass
 
     def teardown(self):
         pass
-
-    def is_finished(self):
-        return self.postgame_finished
 
 
     def start_game(self):
@@ -273,12 +266,12 @@ class Gui (kxg.Actor):
         self.hard_refresh = True
 
     def game_over(self, winner):
-        if self.player is winner:
-            print "You won!"
-        else:
-            print "You lost!"
+        self.refresh()
 
-        self.postgame_finished = True
+        if self.player is winner:
+            self.splash_message = "You win!"
+        else:
+            self.splash_message = "You lost!"
 
     def create_player(self, player, is_mine):
         if is_mine: self.player = player
@@ -316,11 +309,19 @@ class Gui (kxg.Actor):
 
 
     def draw(self, time):
+        self.timer += time
+
+        if self.timer < self.timeout:
+            return
+
+        self.timer = 0
+
         if self.hard_refresh:
             self.hard_refresh = False
             self.draw_background(self.screen)
             self.draw_roads(self.screen)
             self.draw_cities(self.screen)
+            self.draw_splash(self.screen)
 
         self.draw_player(self.screen)
 
@@ -446,6 +447,31 @@ class Gui (kxg.Actor):
         if self.display_info:
             pass
 
+    def draw_splash(self, screen):
+        font = self.splash_font
+        message = self.splash_message
+        splash_color = Color(self.splash_color)
+        banner_color = Color(self.banner_color)
+        banner_alpha = int(255 * self.banner_alpha)
+        rect_from_size = kxg.geometry.Rectangle.from_size
+        rect_from_surface = kxg.geometry.Rectangle.from_surface
+        
+        if not self.splash_message:
+            return
+
+        splash_surface = font.render(message, True, splash_color)
+        splash_rect = rect_from_surface(splash_surface)
+        splash_rect.center = self.world.map.center
+
+        banner_rect = rect_from_size(self.world.map.width, splash_rect.height)
+        banner_rect.center = splash_rect.center
+        banner_surface = pygame.Surface(banner_rect.size)
+        banner_surface.fill(banner_color)
+        banner_surface.set_alpha(banner_alpha)
+
+        screen.blit(banner_surface, banner_rect.top_left.pygame)
+        screen.blit(splash_surface, splash_rect.top_left.pygame)
+
 
     def react(self, time):
         for event in pygame.event.get():
@@ -453,5 +479,9 @@ class Gui (kxg.Actor):
                 self.postgame_finished = True
             self.hotkeys.handle(event)
 
+    def react_postgame(self, time):
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                raise SystemExit
 
 
