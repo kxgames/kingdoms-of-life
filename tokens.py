@@ -237,9 +237,6 @@ class Player (kxg.Token):
         return price <= self.wealth
 
     def can_place_city(self, city):
-        if not self.cities:
-            return True
-
         inside_radius = False
         inside_border = False
         inside_opponent = False
@@ -255,13 +252,16 @@ class Player (kxg.Token):
             else:
                 inside_opponent = (distance <= other.border) or inside_opponent 
 
+        if inside_opponent:
+            return False
+
+        if not self.cities:
+            return True
+
         if inside_radius:
             return False
 
         if not inside_border:
-            return False
-
-        if inside_opponent:
             return False
 
         return True
@@ -276,8 +276,8 @@ class Player (kxg.Token):
 class City (kxg.Token):
 
     # Settings (fold)
-    radius = 60
-    border = 100
+    radius = 50
+    border = 80
 
     @staticmethod
     def get_next_price(player):

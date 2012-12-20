@@ -6,13 +6,13 @@ import tokens, gui, messages
 class SandboxLoop (kxg.MainLoop):
 
     def __init__(self):
-        world, referee, gui = tokens.World(), tokens.Referee(), gui.Gui()
+        world, referee, actor = tokens.World(), tokens.Referee(), gui.Gui()
         actors_to_greetings = {
-                gui: messages.CreatePlayer("Sandbox", 'orange')}
+                actor: messages.CreatePlayer("Sandbox", 'orange')}
 
         game_stage = kxg.SinglePlayerGameStage(
                 world, referee, actors_to_greetings)
-        postgame_stage = PostgameSplashStage(world, gui)
+        postgame_stage = PostgameSplashStage(world, actor)
         
         self.stage = game_stage
         self.stage.successor = postgame_stage

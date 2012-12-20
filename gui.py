@@ -207,7 +207,7 @@ class Gui (kxg.Actor):
     splash_color = 'white'
     banner_color = 'black'
     splash_font = Font('fonts/FreeSans.ttf', 54)
-    banner_alpha = 0.75
+    banner_alpha = 0.85
 
     refresh_rate = 0.2
     minimum_drag_distance = 7
@@ -350,29 +350,31 @@ class Gui (kxg.Actor):
 
             return (r, g, b)
 
-        # Draw the border push made by each city.
-        for city in self.world.yield_cities():
-            color = Color(city.player.color)
-            position = city.position.pygame
-            radius = city.border + 1
-
-            pygame.draw.circle(screen, color, position, radius, 1)
-
-        # Fill in the border with solid circles to remove internal lines.
-        for city in self.world.yield_cities():
-            color = Color(self.background)
+        # Fill in the complete extent of your territory.
+        for city in self.player.cities:
+            color = FadedColor(city.player.color, 0.90)
             position = city.position.pygame
             radius = city.border
 
             pygame.draw.circle(screen, color, position, radius)
 
-        # Draw the area in which new cities cannot be built.
+        # Hide the regions that are too close to your other cities to build in.
         for city in self.player.cities:
-            color = FadedColor(city.player.color, 0.90)
+            color = Color(self.background)
             position = city.position.pygame
             radius = city.radius
 
             pygame.draw.circle(screen, color, position, radius)
+
+        # Hide the regions that are too close to your enemy's territory to 
+        # build in.
+        for city in self.world.yield_cities():
+            if city.player is not self.player:
+                color = Color(self.background)
+                position = city.position.pygame
+                radius = city.border
+
+                pygame.draw.circle(screen, color, position, radius)
 
     def draw_player(self, screen):
         status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
@@ -476,8 +478,9 @@ class Gui (kxg.Actor):
     def react(self, time):
         for event in pygame.event.get():
             if event.type == QUIT:
-                self.postgame_finished = True
-            self.hotkeys.handle(event)
+                raise SystemExit
+            else:
+                self.hotkeys.handle(event)
 
     def react_postgame(self, time):
         for event in pygame.event.get():
