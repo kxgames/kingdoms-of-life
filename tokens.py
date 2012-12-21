@@ -308,8 +308,7 @@ class City (kxg.Token):
 
     @staticmethod 
     def get_next_level():
-        level = random.paretovariate(1)
-        return min(20, int(level))
+        return int(random.triangular(10)) + 1
 
 
     def __init__(self, player, position):
@@ -323,19 +322,21 @@ class City (kxg.Token):
         self.siege = None
 
     def get_attack_price(self, attacker):
-        supply_city = attacker.find_closest_city(self.position)
-        if supply_city is None: return kxg.geometry.infinity
-
-        fixed_price = 50
+        prices = [kxg.geometry.infinity]
         clamp = kxg.geometry.clamp
+        fixed_price = 50
 
-        supply_level = supply_city.get_supply_level()
-        supply_price = clamp(10 * (30 - supply_level), 0, 300)
+        for city in attacker.cities:
+            supply_level = city.get_supply_level()
+            supply_price = clamp(10 * (30 - supply_level), 0, 300)
 
-        distance = supply_city.get_distance_to(self)
-        distance_price = clamp(2 * (distance - self.border), 0, 300)
+            distance = city.get_distance_to(self)
+            distance_price = clamp(2 * (distance - self.border), 0, 300)
 
-        return fixed_price + supply_price + distance_price
+            price = fixed_price + supply_price + distance_price
+            prices.append(price)
+
+        return min(prices)
 
     def get_defense_price(self):
         fixed_price = 50
