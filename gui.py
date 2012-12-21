@@ -217,7 +217,6 @@ class StatusMessage (object):
         return self.timer.has_expired()
 
 
-
 class Gui (kxg.Actor):
 
     # Settings (fold)
@@ -324,7 +323,7 @@ class Gui (kxg.Actor):
     def defeat_player(self, player):
         self.refresh()
 
-    def add_message(self, string, duration=3):
+    def add_message(self, string, duration=5):
         message = StatusMessage(string, duration)
         self.status_messages.append(message)
 
