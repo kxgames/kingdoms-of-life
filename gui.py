@@ -141,6 +141,9 @@ class Hotkeys:
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
         city = world.find_closest_city(position, cutoff=cutoff)
 
+        if city is None:
+            return
+
         # If this is one of the cities controlled by me, attempt to defend an 
         # attack.  Otherwise attempt to initiate an attack.
 
