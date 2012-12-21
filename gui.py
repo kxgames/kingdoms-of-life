@@ -21,9 +21,7 @@ class Hotkeys:
         self.event = None
         self.gui = gui
         
-        self.click_drag = False
         self.start_click = None
-        self.end_click = None
 
     def __str__ (self):
         return "Keychain Manager"
@@ -41,9 +39,7 @@ class Hotkeys:
         k2s = kxg.gui.key_to_string
         e2s = kxg.gui.event_to_string
 
-        # Make the 'd' lens
         d_lens = {
-                e2s[MOUSEMOTION]      : 'dMOUSEMOTION',
                 e2s[MOUSEBUTTONUP]    : 'dMOUSEBUTTONUP',
                 e2s[MOUSEBUTTONDOWN ] : 'dMOUSEBUTTONDOWN' }
 
@@ -51,23 +47,21 @@ class Hotkeys:
                 e2s[MOUSEBUTTONUP]    : 'fMOUSEUP',
                 e2s[MOUSEBUTTONDOWN]  : 'fMOUSEDOWN' }
 
-        #alt = { k2s[ K_BACKSPACE ] : k2s[ K_BACKSPACE ] }
-        alt = { }
-        
-        self.keychain.register_lens (k2s[ K_LALT ], alt)
+        space_lens = {
+                e2s[MOUSEBUTTONUP]    : 'iMOUSEUP',
+                e2s[MOUSEBUTTONDOWN]  : 'iMOUSEDOWN' }
+
         self.keychain.register_lens (k2s[ K_d ], d_lens)
         self.keychain.register_lens (k2s[ K_f ], f_lens)
+        self.keychain.register_lens (k2s[ K_SPACE ], space_lens)
 
     def setup_hotkeys (self):
 
         ## Register keyboard hotkeys
         register_keys = self.keychain.register_chain_key
         register_chain = self.keychain.register_chain
+        register_mouse = self.keychain.register_chain_mouse
 
-        # Special sequences.
-        register_keys ([K_SPACE],  self.info, None)
-
-        ## Register mouse hotkeys
         left = kxg.gui.mouse_to_string[1]
 
         develop_init = ['dMOUSEBUTTONDOWN', left]
@@ -77,6 +71,15 @@ class Hotkeys:
         register_chain (develop, self.develop, None)
 
         register_chain (['fMOUSEDOWN', left], self.fuck, None)
+
+        #info_init = ['iMOUSEDOWN', left]
+        #register_chain (info_init, self.info_init, None)
+
+        #info = ['iMOUSEDOWN', left, 'iMOUSEUP', left]
+        #register_chain (info, self.info, None)
+
+        register_mouse([MOUSEBUTTONDOWN, 1], self.info_init)
+        register_mouse([MOUSEBUTTONUP, 1], self.info)
 
     def handle (self, event):
         self.event = event
@@ -97,26 +100,17 @@ class Hotkeys:
 
     # Callbacks
 
-    def develop_init (self, args):
-        self.click_drag = False
+    def develop_init(self, args):
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
         self.start_click = position
 
-    def develop_motion (self, args):
-        position = kxg.geometry.Vector.from_tuple(self.event.pos)
-        self.end_click = position
-
-        min = Gui.minimum_drag_distance
-        click_dist = (position - self.start_click).magnitude_squared
-        self.click_drag = click_dist >= min**2
-
-    def develop (self, args):
+    def develop(self, args):
         world = self.gui.world
         player = self.gui.player
+        cutoff = self.gui.city_radius
 
         start_click = self.start_click
         end_click = kxg.geometry.Vector.from_tuple(self.event.pos)
-        self.end_click = end_click
 
         drag_vector = end_click - self.start_click
         drag_distance = drag_vector.magnitude
@@ -126,10 +120,8 @@ class Hotkeys:
         # end-points of the drag event.
 
         if drag_distance >= self.gui.minimum_drag_distance:
-            self.click_drag = False
-
-            start_city = world.find_closest_city(start_click, player)
-            end_city = world.find_closest_city(end_click, player)
+            start_city = world.find_closest_city(start_click, player, cutoff)
+            end_city = world.find_closest_city(end_click, player, cutoff)
 
             if start_city is not None and end_city is not None:
                 message = messages.CreateRoad(player, start_city, end_city)
@@ -141,11 +133,13 @@ class Hotkeys:
             message = messages.CreateCity(player, end_click)
             self.gui.send_message(message)
 
-    def fuck (self, args):
+    def fuck(self, args):
         world = self.gui.world
         player = self.gui.player
+        cutoff = self.gui.city_radius
+
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
-        city = world.find_closest_city(position)
+        city = world.find_closest_city(position, cutoff=cutoff)
 
         # If this is one of the cities controlled by me, attempt to defend an 
         # attack.  Otherwise attempt to initiate an attack.
@@ -158,9 +152,49 @@ class Hotkeys:
             message = messages.AttackCity(player, city)
             self.gui.send_message(message)
 
-    def info (self, args):
-        self.gui.display_info = not self.gui.display_info
+    def info_init(self):
+        position = kxg.geometry.Vector.from_tuple(self.event.pos)
+        self.start_click = position
+
+    def info(self):
+        world = self.gui.world
+        player = self.gui.player
+        cutoff = self.gui.city_radius
+
+        start_click = self.start_click
+        end_click = kxg.geometry.Vector.from_tuple(self.event.pos)
+
+        drag_vector = end_click - start_click
+        drag_distance = drag_vector.magnitude
+
         self.gui.refresh()
+
+        # If the actual drag distance exceeds the minimum drag threshold, then 
+        # show the price of a road between those two cities.
+
+        if drag_distance >= self.gui.minimum_drag_distance:
+            start_city = world.find_closest_city(start_click, player, cutoff)
+            end_city = world.find_closest_city(end_click, player, cutoff)
+
+            if start_city is not None and end_city is not None:
+                message = messages.CreateRoad(player, start_city, end_city)
+                print "Build road: %d" % message.price
+
+        # If the drag threshold wasn't exceeded, show how much it would cost to 
+        # attack or defend the selected city.
+
+        else:
+            city = world.find_closest_city(end_click, cutoff=cutoff)
+
+            if city is None:
+                return
+
+            if city in player.cities:
+                defense_price = city.get_defense_price()
+                print "Defend city: %d" % defense_price
+            else:
+                attack_price = city.get_attack_price(player)
+                print "Attack city: %d" % attack_price
 
 
 class Gui (kxg.Actor):
@@ -189,7 +223,6 @@ class Gui (kxg.Actor):
         self.size = None
         self.hotkeys = Hotkeys(self)
 
-        self.display_info = False
         self.splash_message = ""
         self.postgame_finished = False
 
@@ -435,12 +468,6 @@ class Gui (kxg.Actor):
         text_position = position - text_rect.center
 
         screen.blit(text_surface, text_position.pygame)
-
-        # Draw extra information regarding the price of sieging or 
-        # relieving each individual city.
-
-        if self.display_info:
-            pass
 
     def draw_splash(self, screen):
         font = self.splash_font

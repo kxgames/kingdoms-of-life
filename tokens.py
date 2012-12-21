@@ -111,7 +111,7 @@ class World (kxg.World):
         self.remove_token(player)
     
 
-    def find_closest_city(self, target, player=None):
+    def find_closest_city(self, target, player=None, cutoff=None):
         closest_distance = kxg.geometry.infinity
         closest_city = None
 
@@ -122,11 +122,14 @@ class World (kxg.World):
 
         for city in cities:
             offset = target - city.position
-            distance = offset.magnitude_squared
+            distance = offset.magnitude
 
             if distance < closest_distance:
                 closest_distance = distance
                 closest_city = city
+
+        if (cutoff is not None) and (closest_distance > cutoff):
+            return None
 
         return closest_city
 
@@ -289,8 +292,8 @@ class Player (kxg.Token):
     def can_place_road(self, road):
         return True
 
-    def find_closest_city(self, target):
-        return self.world.find_closest_city(target, self)
+    def find_closest_city(self, target, cutoff=None):
+        return self.world.find_closest_city(target, self, cutoff)
 
     def was_defeated(self):
         return not self.cities
