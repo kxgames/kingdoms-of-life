@@ -73,13 +73,7 @@ class Hotkeys:
         develop_init = ['dMOUSEBUTTONDOWN', left]
         register_chain (develop_init, self.develop_init, None)
 
-        develop_motion = ['dMOUSEBUTTONDOWN', left, 'dMOUSEMOTION']
-        register_chain (develop_motion, self.develop_motion, None)
-
         develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEBUTTONUP', left]
-        register_chain (develop, self.develop, None)
-
-        develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEMOTION', 'dMOUSEBUTTONUP', left]
         register_chain (develop, self.develop, None)
 
         register_chain (['fMOUSEDOWN', left], self.fuck, None)
@@ -92,9 +86,6 @@ class Hotkeys:
 
         elif event.type == KEYUP:
             self.keychain.handle_key (event.key, True)
-
-        #elif event.type == MOUSEMOTION:
-        #    self.keychain.handle_event(event.type)
 
         elif event.type in (MOUSEBUTTONDOWN, MOUSEBUTTONUP):
             self.keychain.handle_event(event.type)
@@ -327,6 +318,20 @@ class Gui (kxg.Actor):
             a = source_color.a
 
             return (r, g, b)
+
+        # If the player has no cities, show where the first city can be built.
+        if not self.player.cities and not self.world.has_game_ended():
+            color = FadedColor(self.player.color, 0.90)
+            self.screen.fill(color)
+
+            for city in self.world.yield_cities():
+                color = Color(self.background)
+                position = city.position.pygame
+                radius = city.border
+
+                pygame.draw.circle(screen, color, position, radius)
+
+            return
 
         # Fill in the complete extent of your territory.
         for city in self.player.cities:
