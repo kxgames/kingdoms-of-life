@@ -160,6 +160,7 @@ class Hotkeys:
         world = self.gui.world
         player = self.gui.player
         cutoff = self.gui.city_radius
+        show = self.gui.add_message
 
         start_click = self.start_click
         end_click = kxg.geometry.Vector.from_tuple(self.event.pos)
@@ -178,7 +179,7 @@ class Hotkeys:
 
             if start_city is not None and end_city is not None:
                 message = messages.CreateRoad(player, start_city, end_city)
-                print "Build road: %d" % message.price
+                show("Build road: %d" % message.price)
 
         # If the drag threshold wasn't exceeded, show how much it would cost to 
         # attack or defend the selected city.
@@ -191,10 +192,27 @@ class Hotkeys:
 
             if city in player.cities:
                 defense_price = city.get_defense_price()
-                print "Defend city: %d" % defense_price
+                show("Defend city: %d" % defense_price)
             else:
                 attack_price = city.get_attack_price(player)
-                print "Attack city: %d" % attack_price
+                show("Attack city: %d" % attack_price)
+
+
+class StatusMessage (object):
+
+    def __init__(self, message, duration):
+        self.message = message
+        self.timer = kxg.tools.Timer(duration)
+
+    def __str__(self):
+        return self.message
+
+    def update(self, time):
+        self.timer.update(time)
+
+    def has_expired(self):
+        return self.timer.has_expired()
+
 
 
 class Gui (kxg.Actor):
@@ -224,6 +242,7 @@ class Gui (kxg.Actor):
         self.hotkeys = Hotkeys(self)
 
         self.splash_message = ""
+        self.status_messages = []
         self.postgame_finished = False
 
     def get_name(self):
@@ -239,6 +258,12 @@ class Gui (kxg.Actor):
     def update(self, time):
         game_started = self.world.has_game_started()
         game_ended = self.world.has_game_ended()
+
+        for message in self.status_messages[:]:
+            message.update(time)
+            if message.has_expired():
+                self.status_messages.remove(message)
+                self.refresh()
 
         if game_started and not game_ended:
             self.draw(time)
@@ -296,18 +321,22 @@ class Gui (kxg.Actor):
     def defeat_player(self, player):
         self.refresh()
 
+    def add_message(self, string, duration=3):
+        message = StatusMessage(string, duration)
+        self.status_messages.append(message)
+
 
     def reject_create_city(self, message):
-        pass
+        self.add_message(message.error)
 
     def reject_create_road(self, message):
-        pass
+        self.add_message(message.error)
 
     def reject_attack_city(self, message):
-        pass
+        self.add_message(message.error)
 
     def reject_defend_city(self, message):
-        pass
+        self.add_message(message.error)
 
 
     def draw(self, time):
@@ -326,6 +355,7 @@ class Gui (kxg.Actor):
             self.draw_splash(self.screen)
 
         self.draw_player(self.screen)
+        self.draw_messages(self.screen)
 
         pygame.display.flip()
 
@@ -397,7 +427,7 @@ class Gui (kxg.Actor):
         background = Color(self.background)
 
         wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
-        city_status = "Next City: %d" % tokens.City.get_next_price(self.player)
+        city_status = "Build City: %d" % tokens.City.get_next_price(self.player)
 
         wealth_text = self.status_font.render(wealth_status, True, color)
         city_text = self.status_font.render(city_status, True, color)
@@ -413,6 +443,24 @@ class Gui (kxg.Actor):
 
         screen.blit(wealth_text, wealth_offset)
         screen.blit(city_text, city_offset)
+
+    def draw_messages(self, screen):
+        color = Color(self.text_color)
+        background = Color(self.background)
+        last_offset = self.world.map.bottom - 5
+
+        for message in self.status_messages:
+            status = str(message)
+            text = self.status_font.render(status, True, color)
+
+            rectangle = kxg.geometry.Rectangle.from_surface(text)
+            rectangle.center_x = self.world.map.center_x
+            rectangle.bottom = last_offset
+
+            last_offset = rectangle.top
+
+            pygame.draw.rect(screen, background, rectangle.pygame)
+            screen.blit(text, rectangle.top_left.pygame)
 
     def draw_roads (self, screen):
         for player in self.world.players:

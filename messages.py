@@ -69,17 +69,17 @@ class CreateCity (kxg.Message):
 
         # Make sure the right player is sending this message.
         if sender is not player:
-            print "City requested by wrong player."
+            self.error = "City requested by wrong player."
             return False
 
         # Make sure the player can afford this city.
         if not player.can_afford_price(price):
-            print "Can't afford $%d for a new city." % price
+            self.error = "Can't afford $%d for a new city." % price
             return False
 
         # Make sure this city can be placed here.
         if not player.can_place_city(city):
-            print "Can't place a city in that location."
+            self.error = "Can't place a city in that location."
             return False
 
         return True
@@ -110,33 +110,33 @@ class CreateRoad (kxg.Message):
 
         # Make sure the right player is sending this message.
         if sender is not player:
-            print "Road requested by wrong player."
+            self.error = "Road requested by wrong player."
             return False
 
         # Make sure the right player owns the cities being connected.
         if (player is not start.player) or (player is not end.player):
-            print "Can't build roads to enemy cities."
+            self.error = "Can't build roads to enemy cities."
             return False
 
         # Make sure the player can afford this road.
         if not player.can_afford_price(price):
-            print "Can't afford $%d for a new road." % price
+            self.error = "Can't afford $%d for a new road." % price
             return False
 
         # Make sure this road doesn't already exist.
         for other in player.roads:
             if road.has_same_route(other):
-                print "Can't make two roads between the same cities."
+                self.error = "Can't make two roads between the same cities."
                 return False
 
         # Make sure neither end of the road is under siege.
         if start.is_under_siege() or end.is_under_siege():
-            print "Can't build a road to a city under siege."
+            self.error = "Can't build a road to a city under siege."
             return False
 
         # Make sure this road doesn't cross through enemy territory.
         if not player.can_place_road(road):
-            print "Can't place a road in enemy territory."
+            self.error = "Can't place a road in enemy territory."
             return False
 
         return True
@@ -168,22 +168,22 @@ class AttackCity (kxg.Message):
 
         # Make sure the right player is sending this message.
         if sender is not attacker:
-            print "Attack requested by wrong player."
+            self.error = "Attack requested by wrong player."
             return False
 
         # Make sure the attacker has at least one city themselves.
         if not attacker.cities:
-            print "You must build a city before attacking your opponent."
+            self.error = "You must build a city before attacking your opponent."
             return False
 
         # Make sure this city is not already under siege.
         if city.is_under_siege():
-            print "Can't attack a city that is already under siege."
+            self.error = "Can't attack a city that is already under siege."
             return False
 
         # Make sure the player can afford this attack.
         if not attacker.can_afford_price(price):
-            print "Can't afford $%d to attack this city." % price
+            self.error = "Can't afford $%d to attack this city." % price
             return False
 
         return True
@@ -214,17 +214,17 @@ class DefendCity (kxg.Message):
 
         # Make sure the right player is sending this message.
         if sender is not defender:
-            print "Defense requested by wrong player."
+            self.error = "Defense requested by wrong player."
             return False
 
         # Make sure the city in question is actually under siege.
         if not city.is_under_siege():
-            print "Can't defend a city that isn't under siege."
+            self.error = "Can't defend a city that isn't under siege."
             return False
 
         # Make sure the player can afford this defense.
         if not defender.can_afford_price(price):
-            print "Can't afford $%d to defend this city." % price
+            self.error = "Can't afford $%d to defend this city." % price
             return False
 
         return True
