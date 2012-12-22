@@ -134,9 +134,9 @@ class CreateRoad (kxg.Message):
             self.error = "Can't build a road to a city under siege."
             return False
 
-        # Make sure this road doesn't cross through enemy territory.
+        # Make sure there are no obstacles in the way of this road.
         if not player.can_place_road(road):
-            self.error = "Can't place a road in enemy territory."
+            self.error = "Can't build a road through an existing city."
             return False
 
         return True

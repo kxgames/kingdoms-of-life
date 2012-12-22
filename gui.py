@@ -107,7 +107,7 @@ class Hotkeys:
     def develop(self, args):
         world = self.gui.world
         player = self.gui.player
-        cutoff = self.gui.city_radius
+        cutoff = tokens.City.radius
 
         start_click = self.start_click
         end_click = kxg.geometry.Vector.from_tuple(self.event.pos)
@@ -136,7 +136,7 @@ class Hotkeys:
     def fuck(self, args):
         world = self.gui.world
         player = self.gui.player
-        cutoff = self.gui.city_radius
+        cutoff = tokens.City.radius
 
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
         city = world.find_closest_city(position, cutoff=cutoff)
@@ -162,7 +162,7 @@ class Hotkeys:
     def info(self):
         world = self.gui.world
         player = self.gui.player
-        cutoff = self.gui.city_radius
+        cutoff = tokens.City.radius
         show = self.gui.add_message
 
         start_click = self.start_click
@@ -222,15 +222,13 @@ class Gui (kxg.Actor):
     # Settings (fold)
     background = 'white'
     text_color = 'black'
-    status_font = Font('fonts/FreeSans.ttf', 14)
-
-    city_radius = 20
-    city_font = Font('fonts/FreeSans.ttf', 20)
-
     splash_color = 'white'
     banner_color = 'black'
-    splash_font = Font('fonts/FreeSans.ttf', 54)
     banner_alpha = 0.85
+
+    status_font = Font('fonts/FreeSans.ttf', 14)
+    city_font = Font('fonts/FreeSans.ttf', 20)
+    splash_font = Font('fonts/FreeSans.ttf', 54)
 
     refresh_rate = 0.2
     minimum_drag_distance = 7
@@ -410,12 +408,11 @@ class Gui (kxg.Actor):
         for city in self.player.cities:
             color = Color(self.background)
             position = city.position.pygame
-            radius = city.radius
+            radius = city.buffer
 
             pygame.draw.circle(screen, color, position, radius)
 
-        # Hide the regions that are too close to your enemy's territory to 
-        # build in.
+        # Hide the regions that are within your enemy's border.
         for city in self.world.yield_cities():
             if city.player is not self.player:
                 color = Color(self.background)
@@ -479,7 +476,7 @@ class Gui (kxg.Actor):
 
     def draw_city(self, screen, city):
         position = city.position
-        radius = self.city_radius
+        radius = city.radius
         city_level = "%d" % city.level
         player_color = Color(city.player.color)
         text_color = Color(self.text_color)

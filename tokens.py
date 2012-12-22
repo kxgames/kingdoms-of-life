@@ -260,7 +260,7 @@ class Player (kxg.Token):
         return price <= self.wealth
 
     def can_place_city(self, city):
-        inside_radius = False
+        inside_buffer = False
         inside_border = False
         inside_opponent = False
 
@@ -268,7 +268,7 @@ class Player (kxg.Token):
             offset = city.position - other.position
             distance = offset.magnitude
 
-            inside_radius = (distance <= other.radius) or inside_radius
+            inside_buffer = (distance <= other.buffer) or inside_buffer
 
             if other.player is self:
                 inside_border = (distance <= other.border) or inside_border
@@ -281,7 +281,7 @@ class Player (kxg.Token):
         if not self.cities:
             return True
 
-        if inside_radius:
+        if inside_buffer:
             return False
 
         if not inside_border:
@@ -290,6 +290,19 @@ class Player (kxg.Token):
         return True
 
     def can_place_road(self, road):
+
+        def road_inside_city(road, city, padding):
+            return kxg.geometry.circle_touching_line(
+                    city.position, city.radius + padding,
+                    road.start.position, road.end.position)
+
+        for city in self.world.yield_cities():
+            if city in road:
+                continue
+
+            if road_inside_city(road, city, padding=2):
+                return False
+
         return True
 
     def find_closest_city(self, target, cutoff=None):
@@ -302,7 +315,8 @@ class Player (kxg.Token):
 class City (kxg.Token):
 
     # Settings (fold)
-    radius = 50
+    radius = 20
+    buffer = 50
     border = 80
 
     @staticmethod
@@ -380,6 +394,10 @@ class Road (kxg.Token):
         self.player = player
         self.start = start
         self.end = end
+
+    def __iter__(self):
+        yield self.start
+        yield self.end
 
     def get_price(self):
         displacement = self.start.position - self.end.position
