@@ -428,8 +428,21 @@ class Gui (kxg.Actor):
         wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
         city_status = "Build City: %d" % tokens.City.get_next_price(self.player)
 
-        wealth_text = self.status_font.render(wealth_status, True, color)
-        city_text = self.status_font.render(city_status, True, color)
+        # The game seems to crash intermittently on the following two lines, 
+        # usually with an error suggesting that either wealth_text or city_text 
+        # is an empty string.  Since that doesn't make any sense, I've put this 
+        # try/except block here to hopefully provide some more useful debugging 
+        # information the next time the game crashes.
+        
+        try:
+            wealth_text = self.status_font.render(wealth_status, True, color)
+            city_text = self.status_font.render(city_status, True, color)
+        except:
+            print 'self.status_font =', self.status_font
+            print 'wealth_status = "%s"' % wealth_status
+            print 'city_status = "%s"' % city_status
+            print 'color =', color
+            raise
 
         wealth_offset = 5, 5
         city_offset = 5, 5 + wealth_text.get_height()
