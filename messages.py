@@ -154,11 +154,47 @@ class CreateRoad (kxg.Message):
         actor.create_road(self.road, is_mine)
 
 
+class UpgradeCity (kxg.Message):
+
+    def __init__(self, city):
+        self.city = city
+        self.price = city.get_upgrade_price()
+
+    def check(self, world, sender):
+        city = self.city
+        owner = city.player
+        price = self.price
+        
+        # Make sure the right player is sending this message.
+        if sender is not ownder:
+            self.error = "Upgrade requested by wrong player."
+            return False
+
+        # Make sure the city in question is actually under siege.
+        if city.is_under_siege():
+            self.error = "Can't upgrade a city that is under siege."
+            return False
+
+        # Make sure the player can afford this defense.
+        if not owner.can_afford_price(price):
+            self.error = "Can't afford $%d to upgrade this city." % price
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.reject_upgrade_city(self)
+
+    def execute(self, world):
+        world.upgrade_city(self.city, self.price)
+
+    def notify(self, actor, is_mine):
+        actor.upgrade_city(self.city, is_mine)
 
 class AttackCity (kxg.Message):
 
     def __init__(self, attacker, city):
-        self.siege = tokens.Siege(attacker, city)
+        self.siege = tokens.Battle(attacker, city)
         self.price = city.get_attack_price(attacker)
 
     def check(self, world, sender):
@@ -268,3 +304,44 @@ class DefeatPlayer (kxg.Message):
     def notify(self, actor, sent_from_here):
         actor.defeat_player(self.player)
 
+
+
+#city: get_upgrade_price()
+#actor: reject_upgrade_city(self)
+#world: upgrade_city(city, price)
+#actor: upgrade_city(city, is_mine)
+
+# Build army: <F-click>, within territory.
+# Upgrade army: <F-click>, on existing army.
+# Move army: <F-drag>, start on army.
+# Attack army: <F-drag>, drag onto enemy army.
+# Join Battle: <F-drag>, drag onto enemy city/army in existing battle.
+# Retreat army: <F-drag>, drag out of existing battle.
+# Destroy army: N/A
+
+
+
+# Build city: <D-click>, within territory but not on existing city.
+# Upgrade city: <D-click>, on existing city.
+# Build road: <D-drag>, between cities.
+
+# Build army: <F-click>, within territory.
+# Upgrade army: <F-click>, on existing army.
+# Move army: <F-drag>, start on army.
+# Attack city: <F-drag>, drag onto enemy city.
+# Attack army: <F-drag>, drag onto enemy army.
+# Join Battle: <F-drag>, drag onto enemy city/army in existing battle.
+# Retreat army: <F-drag>, drag out of existing battle.
+# Destroy army: N/A
+
+# Hotkey   Mnemonic
+# ======   ========
+# D        Develop
+# F        Fight
+
+# GUI
+# ===
+# 1. Show city/army HP?  Yes.
+# 2. Show battles?  No.
+# 3. Show battle request?  Dotted line between army and target.
+# 3. Suck armies into battles? Must close to within some radius.

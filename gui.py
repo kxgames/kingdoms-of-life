@@ -442,7 +442,6 @@ class Gui (kxg.Actor):
             print 'wealth_status = "%s"' % wealth_status
             print 'city_status = "%s"' % city_status
             print 'color =', color
-            raise
 
         wealth_offset = 5, 5
         city_offset = 5, 5 + wealth_text.get_height()

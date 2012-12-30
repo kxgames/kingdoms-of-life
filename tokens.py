@@ -446,7 +446,7 @@ class Road (kxg.Token):
         self.end.roads.remove(self)
 
 
-class Siege (kxg.Token):
+class Battle (kxg.Token):
 
     # Settings (fold)
     time_until_capture = 25
@@ -474,3 +474,16 @@ class Siege (kxg.Token):
     def teardown(self):
         self.city.siege = None
 
+
+
+# class Community:
+#     pass
+#
+# class City (Community):
+#     pass
+#
+# class Army (Community):
+#     pass
+
+# class Battle:
+#     pass

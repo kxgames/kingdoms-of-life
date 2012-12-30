@@ -1,5 +1,5 @@
 #!/usr/bin/env python
 
-import slimycat
-game = slimycat.SandboxLoop()
+import armedcat
+game = armedcat.SandboxLoop()
 game.play()
