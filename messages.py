@@ -89,7 +89,6 @@ class CreateCity (kxg.Message):
 
     def setup(self, world, sender, id):
         self.city.give_id(id)
-        self.city.level = tokens.City.get_next_level()
 
     def execute(self, world):
         world.create_city(self.city, self.price)
@@ -154,6 +153,48 @@ class CreateRoad (kxg.Message):
         actor.create_road(self.road, is_mine)
 
 
+class CreateArmy (kxg.Message):
+
+    def __init__(self, player, position):
+        self.army = tokens.Army(player, position)
+        self.price = tokens.Army.get_next_price(player)
+
+    def check(self, world, sender):
+        army = self.army
+        price = self.price
+        player = army.player
+
+        # Make sure the right player is sending this message.
+        if sender is not player:
+            self.error = "Army requested by wrong player."
+            return False
+
+        # Make sure the player can afford this army.
+        if not player.can_afford_price(price):
+            self.error = "Can't afford $%d for a new army." % price
+            return False
+
+        # Make sure this army can be placed here.
+        if not player.can_place_army(army):
+            self.error = "Can't place an army in that location."
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.reject_create_army(self)
+
+    def setup(self, world, sender, id):
+        self.army.give_id(id)
+
+    def execute(self, world):
+        world.create_army(self.army, self.price)
+
+    def notify(self, actor, is_mine):
+        actor.create_army(self.army, is_mine)
+
+
+
 class UpgradeCity (kxg.Message):
 
     def __init__(self, city):
@@ -162,11 +203,11 @@ class UpgradeCity (kxg.Message):
 
     def check(self, world, sender):
         city = self.city
-        owner = city.player
+        player = city.player
         price = self.price
         
         # Make sure the right player is sending this message.
-        if sender is not ownder:
+        if sender is not player:
             self.error = "Upgrade requested by wrong player."
             return False
 
@@ -176,7 +217,7 @@ class UpgradeCity (kxg.Message):
             return False
 
         # Make sure the player can afford this defense.
-        if not owner.can_afford_price(price):
+        if not player.can_afford_price(price):
             self.error = "Can't afford $%d to upgrade this city." % price
             return False
 
@@ -190,6 +231,46 @@ class UpgradeCity (kxg.Message):
 
     def notify(self, actor, is_mine):
         actor.upgrade_city(self.city, is_mine)
+
+
+class UpgradeArmy (kxg.Message):
+
+    def __init__(self, army):
+        self.army = army
+        self.price = army.get_upgrade_price()
+
+    def check(self, world, sender):
+        army = self.army
+        player = army.player
+        price = self.price
+        
+        # Make sure the right player is sending this message.
+        if sender is not player:
+            self.error = "Upgrade requested by wrong player."
+            return False
+
+        # Make sure the army in question is actually under siege.
+        if army.is_under_siege():
+            self.error = "Can't upgrade a army that is under attack."
+            return False
+
+        # Make sure the player can afford this defense.
+        if not player.can_afford_price(price):
+            self.error = "Can't afford $%d to upgrade this army." % price
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.reject_upgrade_army(self)
+
+    def execute(self, world):
+        world.upgrade_army(self.army, self.price)
+
+    def notify(self, actor, is_mine):
+        actor.upgrade_army(self.army, is_mine)
+
+
 
 class AttackCity (kxg.Message):
 
@@ -306,13 +387,27 @@ class DefeatPlayer (kxg.Message):
 
 
 
-#city: get_upgrade_price()
-#actor: reject_upgrade_city(self)
-#world: upgrade_city(city, price)
-#actor: upgrade_city(city, is_mine)
+# undefined functions:
+# city: get_upgrade_price()
+# actor: reject_upgrade_city(self)
+# world: upgrade_city(city, price)
+# actor: upgrade_city(city, is_mine)
+# 
+# army: get_upgrade_price()
+# actor: reject_upgrade_army(self)
+# world: upgrade_army(army, price)
+# actor: upgrade_army(army, is_mine)
+# 
+# Army: init(player, position)
+# Army: get_next_price(player)
+# player: can_place_army(army)
+# actor: reject_create_army(self)
+# army: give_id(id)
+# world: create_army(army, price)
+# actor: create_army(army, is_mine)
 
-# Build army: <F-click>, within territory.
-# Upgrade army: <F-click>, on existing army.
+
+# Messages to create:
 # Move army: <F-drag>, start on army.
 # Attack army: <F-drag>, drag onto enemy army.
 # Join Battle: <F-drag>, drag onto enemy city/army in existing battle.
