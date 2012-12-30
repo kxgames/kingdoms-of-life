@@ -224,8 +224,9 @@ class Player (kxg.Token):
         self.color = color
         self.world = None
         self.cities = []
+        self.armies = []
         self.roads = []
-        self.sieges = []
+        self.battles = []
 
         self.wealth = self.starting_wealth
         self.revenue = self.starting_revenue
@@ -247,6 +248,9 @@ class Player (kxg.Token):
             self.revenue += road.get_revenue()
 
         self.wealth += time * self.revenue / 30
+
+    def signal(self, referee):
+        pass
 
     @kxg.check_for_safety
     def teardown(self):
@@ -312,66 +316,55 @@ class Player (kxg.Token):
         return not self.cities
 
 
-class City (kxg.Token):
+class Community (kxg.Token):
 
-    # Settings (fold)
-    radius = 20
-    buffer = 50
-    border = 80
-
-    @staticmethod
-    def get_next_price(player):
-        return 20 + 10 * len(player.cities)
-
-    @staticmethod 
-    def get_next_level():
-        return int(random.triangular(10)) + 1
+    def __init__(self):
+        self.level = 1
+        self.health = self.get_max_health()
+        self.battle = None
 
 
-    def __init__(self, player, position):
-        kxg.Token.__init__(self)
+    def upgrade(self):
+        health_percent = self.health / self.get_max_health()
+        self.level += 1
+        self.health = health_percent * self.get_max_health()
 
-        self.player = player
-        self.position = position
 
-        self.level = 0
-        self.roads = []
-        self.siege = None
+    def get_level(self):
+        return self.level
 
-    def get_attack_price(self, attacker):
-        prices = [kxg.geometry.infinity]
-        clamp = kxg.geometry.clamp
-        fixed_price = 50
+    def get_health(self):
+        return self.health
 
-        for city in attacker.cities:
-            supply_level = city.get_supply_level()
-            supply_price = clamp(10 * (30 - supply_level), 0, 300)
+    def get_max_health(self):
+        raise NotImplementedError
 
-            distance = city.get_distance_to(self)
-            distance_price = clamp(2 * (distance - self.border), 0, 300)
+    def get_attack(self):
+        raise NotImplementedError
 
-            price = fixed_price + supply_price + distance_price
-            prices.append(price)
-
-        return min(prices)
-
-    def get_defense_price(self):
-        fixed_price = 50
-        clamp = kxg.geometry.clamp
-
-        supply_level = self.get_supply_level()
-        supply_price = clamp(10 * (30 - supply_level), 0, 300)
-
-        return fixed_price + supply_price
+    def get_supply(self):
+        raise NotImplementedError
 
     def get_distance_to(self, other):
         return self.position.get_distance(other.position)
 
-    def get_supply_level(self):
-        return sum([road.get_supply_to(self) for road in self.roads], 1)
+    def is_in_battle(self):
+        return self.battle is not None
 
-    def is_under_siege(self):
-        return self.siege is not None
+
+class City (Community):
+
+    # Settings (fold)
+    radius = 27
+    buffer = 90
+    border = 130
+
+    def __init__(self, player, position):
+        Community.__init__(self)
+
+        self.player = player
+        self.position = position
+        self.roads = []
 
 
     @kxg.check_for_safety
@@ -382,9 +375,69 @@ class City (kxg.Token):
     def update(self, time):
         pass
 
+    def signal(self, referee):
+        pass
+
     @kxg.check_for_safety
     def teardown(self):
         raise AssertionError
+
+
+    def get_price(self):
+        return 20 + 10 * len(self.player.cities)
+
+    def get_max_health(self):
+        return 20 + 5 * self.level
+
+    def get_attack(self, time):
+        return 2 + self.level // 2
+
+    def get_supply(self):
+        return sum([road.get_supply_to(self) for road in self.roads], 1)
+    
+
+class Army (Community):
+
+    def __init__(self, player, position):
+        Community.__init__(self)
+
+        self.player = player
+        self.position = position
+
+
+     @kxg.check_for_safety
+    def setup(self):
+        pass
+
+    @kxg.check_for_safety
+    def update(self, time):
+        pass
+
+    def signal(self, referee):
+        pass
+
+    @kxg.check_for_safety
+    def teardown(self):
+        raise AssertionError
+
+
+    def get_price(self):
+        return 30 + 10 * len(self.player.cities)
+
+    def get_max_health(self):
+        return 15 * 4 * self.level
+
+    def get_attack(self):
+        return 10 + 2 * self.level
+
+    def get_supply(self):
+        city_supplies = []
+
+        for city in self.player.cities:
+            city_supply = city.get_supply()
+            city_supplies.append(city_supply)
+
+        return max(city_supplies)
 
 
 class Road (kxg.Token):
@@ -399,11 +452,26 @@ class Road (kxg.Token):
         yield self.start
         yield self.end
 
-    def get_price(self):
-        #displacement = self.start.position - self.end.position
-        #distance = displacement.magnitude
-        #return 30 + distance / 10
 
+    @kxg.check_for_safety
+    def setup(self):
+        self.start.roads.append(self)
+        self.end.roads.append(self)
+
+    @kxg.check_for_safety
+    def update(self, time):
+        pass
+
+    def signal(self, referee):
+        pass
+
+    @kxg.check_for_safety
+    def teardown(self):
+        self.start.roads.remove(self)
+        self.end.roads.remove(self)
+
+
+    def get_price(self):
         return 20 + 10 * len(self.player.roads)
 
     def get_revenue(self):
@@ -431,21 +499,6 @@ class Road (kxg.Token):
         return (self.start is city) or (self.end is city)
 
 
-    @kxg.check_for_safety
-    def setup(self):
-        self.start.roads.append(self)
-        self.end.roads.append(self)
-
-    @kxg.check_for_safety
-    def update(self, time):
-        pass
-
-    @kxg.check_for_safety
-    def teardown(self):
-        self.start.roads.remove(self)
-        self.end.roads.remove(self)
-
-
 class Battle (kxg.Token):
 
     # Settings (fold)
@@ -458,9 +511,6 @@ class Battle (kxg.Token):
         self.defender = city.player
         self.elapsed_time = 0
 
-    def was_successful(self):
-        return self.elapsed_time >= self.time_until_capture
-
 
     @kxg.check_for_safety
     def setup(self):
@@ -470,20 +520,22 @@ class Battle (kxg.Token):
     def update(self, time):
         self.elapsed_time += time
 
+    def signal(self, referee):
+        pass
+
     @kxg.check_for_safety
     def teardown(self):
         self.city.siege = None
 
 
+    def get_initiation_price(self):
+        pass
 
-# class Community:
-#     pass
-#
-# class City (Community):
-#     pass
-#
-# class Army (Community):
-#     pass
+    def get_retreat_cost(self):
+        pass
 
-# class Battle:
-#     pass
+    def was_successful(self):
+        return self.elapsed_time >= self.time_until_capture
+
+
+
