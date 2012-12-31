@@ -1,6 +1,9 @@
 from __future__ import division
 
 import pygame
+import pygame.gfxdraw
+
+from math import *
 from pygame.locals import *
 
 import kxg
@@ -8,6 +11,7 @@ import messages
 import tokens
 import random
 
+Surface = pygame.Surface
 Color = pygame.color.Color
 Font = pygame.font.Font
 Image = pygame.image.load
@@ -215,6 +219,158 @@ class StatusMessage (object):
 
     def has_expired(self):
         return self.timer.has_expired()
+
+
+class ClippingMask:
+
+    def __init__(self, path):
+        self.mask = pygame.image.load(path)
+        self.size = self.mask.get_size()
+
+        width, height = self.mask.get_size()
+        array = pygame.PixelArray(self.mask)
+
+        for x in range(width):
+            for y in range(height):
+                intensity = self.mask.unmap_rgb(array[x][y]).r
+                array[x][y] = 255, 255, 255, intensity
+
+    def apply(self, surface):
+        origin = 0, 0
+        blend_mode = pygame.BLEND_RGBA_MULT
+        per_pixel_alpha = pygame.SRCALPHA
+
+        assert surface.get_flags() & per_pixel_alpha
+        surface.blit(self.mask, origin, special_flags=blend_mode)
+
+        return surface
+
+    def apply_color(self, color):
+        size = self.mask.get_size()
+        per_pixel_alpha = pygame.SRCALPHA
+
+        surface = Surface(size, flags=per_pixel_alpha)
+        surface.fill(color)
+
+        return self.apply(surface)
+
+
+class CommunitySymbol:
+
+    # Data (fold)
+    white = 255, 255, 255
+    transparent = 0, 0, 0, 0
+    origin = 0, 0
+
+    masks = {
+            'normal shape': ClippingMask('images/normal-shape.png'),
+            'battle shape': ClippingMask('images/battle-shape.png'),
+            'city icon':    ClippingMask('images/city-icon.png'),
+            'army icon':    ClippingMask('images/army-icon.png'),
+            'full health':  ClippingMask('images/full-health.png'),
+            'empty health': ClippingMask('images/empty-health.png') }
+
+    layers = {
+            'city icon':    masks['city icon'].apply_color(white),
+            'army icon':    masks['army icon'].apply_color(white),
+            'empty health': masks['empty health'].apply_color(white) }
+
+    font = pygame.font.Font('fonts/DejaVuSans-Bold.ttf', 16)
+
+    def __init__(self, type, community):
+        self.community = community
+        self.player = community.player
+
+        self.level = None
+        self.health = None
+        self.is_in_battle = None
+
+        normal_shape = self.masks['normal shape']
+        battle_shape = self.masks['battle shape']
+        color = Color(self.player.color)
+
+        self.normal_shape = normal_shape.apply_color(color)
+        self.battle_shape = battle_shape.apply_color(color)
+
+        rectangle_from_surface = kxg.geometry.Rectangle.from_surface
+        self.rectangle = rectangle_from_surface(normal_shape.mask)
+
+        self.surface = Surface(self.rectangle.size, flags=pygame.SRCALPHA)
+        self.icon = self.layers['%s icon' % type]
+
+        self.redraw_surface()
+
+    def draw(self, screen):
+
+        if self.level != self.community.get_level():
+            self.redraw_surface()
+        elif self.health != self.community.get_health():
+            self.redraw_surface()
+        elif self.is_in_battle != self.community.is_in_battle():
+            self.redraw_surface()
+        else:
+            pass
+
+        self.rectangle.center = self.community.position
+        screen.blit(self.surface, self.rectangle.top_left.pygame)
+
+    def redraw_surface(self):
+        self.surface.fill(self.transparent)
+
+        self.redraw_shape()
+        self.redraw_icon()
+        self.redraw_level()
+        self.redraw_health()
+
+    def redraw_shape(self):
+        self.is_in_battle = self.community.is_in_battle()
+
+        if self.is_in_battle:
+            self.surface.blit(self.battle_shape, self.origin)
+        else:
+            self.surface.blit(self.normal_shape, self.origin)
+
+    def redraw_icon(self):
+        self.surface.blit(self.icon, self.origin)
+
+    def redraw_level(self):
+        self.level = self.community.get_level()
+        self.level = str(self.level)
+
+        text = self.font.render(self.level, True, self.white);
+        position = ( 
+                40.000 - text.get_width() / 2,
+                32.015 - text.get_height() / 2 )
+
+        self.surface.blit(text, position)
+
+    def redraw_health(self):
+        self.health = self.community.get_health()
+
+        full_health = self.masks['full health']
+        empty_health = self.layers['empty health']
+
+        health_wedge = Surface(self.rectangle.size, flags=pygame.SRCALPHA)
+        health_wedge.fill(self.transparent)
+
+        iterations = 50
+        cx, cy = health_wedge.get_size()
+        cx /= 2; cy /= 2
+        points = [(cx, cy)]
+        health = self.community.get_health() / self.community.get_max_health()
+
+        for i in range(iterations + 1):
+            x = cx * (1 - cos(health * pi * i / iterations))
+            y = cy * (1 - sin(health * pi * i / iterations))
+            points.append((int(x), int(y)))
+
+        pygame.draw.polygon(health_wedge, self.white, points)
+
+        full_health.apply(health_wedge)
+
+        self.surface.blit(health_wedge, self.origin)
+        self.surface.blit(empty_health, self.origin)
+
 
 
 class Gui (kxg.Actor):
@@ -426,7 +582,8 @@ class Gui (kxg.Actor):
         background = Color(self.background)
 
         wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
-        city_status = "Build City: %d" % tokens.City.get_next_price(self.player)
+        #city_status = "Build City: %d" % tokens.City.get_next_price(self.player)
+        city_status = "Build City: ???"
 
         # The game seems to crash intermittently on the following two lines, 
         # usually with an error suggesting that either wealth_text or city_text 
@@ -438,10 +595,7 @@ class Gui (kxg.Actor):
             wealth_text = self.status_font.render(wealth_status, True, color)
             city_text = self.status_font.render(city_status, True, color)
         except:
-            print 'self.status_font =', self.status_font
-            print 'wealth_status = "%s"' % wealth_status
-            print 'city_status = "%s"' % city_status
-            print 'color =', color
+            pass
 
         wealth_offset = 5, 5
         city_offset = 5, 5 + wealth_text.get_height()
@@ -487,46 +641,7 @@ class Gui (kxg.Actor):
             self.draw_city(screen, city)
 
     def draw_city(self, screen, city):
-        position = city.position
-        radius = city.radius
-        city_level = "%d" % city.level
-        player_color = Color(city.player.color)
-        text_color = Color(self.text_color)
-        fill_color = Color(self.background)
-        rect_from_surface = kxg.geometry.Rectangle.from_surface
-
-        # Draw the outline of the city itself.
-        if city.is_under_siege():
-            vertices = []
-            iterations = 30
-
-            for x in range(iterations):
-                if x % 2:
-                    magnitude = radius * random.uniform(0.4, 0.8)
-                else:
-                    magnitude = radius * random.uniform(0.0, 0.1)
-
-                offset = kxg.geometry.Vector.from_degrees(x * 360 / iterations)
-                vector = position + (magnitude + radius) * offset 
-
-                vertices.append(vector.pygame)
-
-            pygame.draw.polygon(screen, fill_color, vertices)
-            pygame.draw.polygon(screen, player_color, vertices, 1)
-
-        else:
-            pygame.draw.circle(
-                    screen, fill_color, position.pygame, radius)
-            pygame.draw.circle(
-                    screen, player_color, position.pygame, radius, 1)
-
-        # Draw the city level.
-        text_surface = self.city_font.render(
-                city_level, True, text_color)
-        text_rect = rect_from_surface(text_surface)
-        text_position = position - text_rect.center
-
-        screen.blit(text_surface, text_position.pygame)
+        city.draw(screen)
 
     def draw_splash(self, screen):
         font = self.splash_font
@@ -546,7 +661,7 @@ class Gui (kxg.Actor):
 
         banner_rect = rect_from_size(self.world.map.width, splash_rect.height)
         banner_rect.center = splash_rect.center
-        banner_surface = pygame.Surface(banner_rect.size)
+        banner_surface = Surface(banner_rect.size)
         banner_surface.fill(banner_color)
         banner_surface.set_alpha(banner_alpha)
 
@@ -566,4 +681,13 @@ class Gui (kxg.Actor):
             if event.type == QUIT:
                 raise SystemExit
 
+
+
+class CityExtension (CommunitySymbol):
+    def __init__(self, city):
+        CommunitySymbol.__init__(self, 'city', city)
+
+class ArmyExtension (CommunitySymbol):
+    def __init__(self, army):
+        CommunitySymbol.__init__(self, 'army', army)
 

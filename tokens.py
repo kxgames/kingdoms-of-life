@@ -2,6 +2,7 @@ from __future__ import division
 
 import kxg
 import messages
+import gui
 import random
 
 class World (kxg.World):
@@ -68,34 +69,34 @@ class World (kxg.World):
         road.setup()
 
     @kxg.check_for_safety
-    def attack_city(self, siege, price):
-        self.add_token(siege)
-        siege.attacker.sieges.append(siege)
-        siege.attacker.spend_wealth(price)
-        siege.setup()
+    def attack_city(self, battle, price):
+        self.add_token(battle)
+        battle.attacker.battles.append(battle)
+        battle.attacker.spend_wealth(price)
+        battle.setup()
 
     @kxg.check_for_safety
-    def defend_city(self, siege, price):
-        siege.defender.spend_wealth(price)
-        siege.attacker.sieges.remove(siege)
-        siege.teardown()
-        self.remove_token(siege)
+    def defend_city(self, battle, price):
+        battle.defender.spend_wealth(price)
+        battle.attacker.battles.remove(battle)
+        battle.teardown()
+        self.remove_token(battle)
 
     @kxg.check_for_safety
-    def capture_city(self, siege):
-        city = siege.city
-        attacker = siege.attacker
-        defender = siege.defender
+    def capture_city(self, battle):
+        city = battle.city
+        attacker = battle.attacker
+        defender = battle.defender
 
         # Give control of the city to the attacker.
         city.player = attacker
         defender.cities.remove(city)
         attacker.cities.append(city)
 
-        # Remove the siege object.
-        attacker.sieges.remove(siege)
-        siege.teardown()
-        self.remove_token(siege)
+        # Remove the battle object.
+        attacker.battles.remove(battle)
+        battle.teardown()
+        self.remove_token(battle)
 
         # Remove all the existing roads into this city.
         for road in defender.roads[:]:
@@ -144,10 +145,10 @@ class World (kxg.World):
             for road in player.roads:
                 yield road
 
-    def yield_sieges(self):
+    def yield_battles(self):
         for player in self.players:
-            for siege in player.siege:
-                yield siege
+            for battle in player.battle:
+                yield battle
 
 
 class Referee (kxg.Referee):
@@ -167,9 +168,9 @@ class Referee (kxg.Referee):
     def update(self, time):
         # Check to see if any players have successfully captured a city.
         for player in self.world.players:
-            for siege in player.sieges:
-                if siege.was_successful():
-                    message = messages.CaptureCity(siege)
+            for battle in player.battles:
+                if battle.was_successful():
+                    message = messages.CaptureCity(battle)
                     self.send_message(message)
 
     def teardown(self):
@@ -191,16 +192,16 @@ class Referee (kxg.Referee):
     def create_road(self, road, is_mine):
         assert not is_mine
 
-    def attack_city(self, siege, is_mine):
+    def attack_city(self, battle, is_mine):
         assert not is_mine
 
-    def defend_city(self, siege, is_mine):
+    def defend_city(self, battle, is_mine):
         assert not is_mine
 
-    def capture_city(self, siege):
+    def capture_city(self, battle):
         # Check to see if the defender has lost.
-        if siege.defender.was_defeated():
-            message = messages.DefeatPlayer(siege.defender)
+        if battle.defender.was_defeated():
+            message = messages.DefeatPlayer(battle.defender)
             self.send_message(message)
 
     def defeat_player(self, player):
@@ -240,7 +241,7 @@ class Player (kxg.Token):
     def update(self, time):
         for city in self.cities: city.update(time)
         for road in self.roads: road.update(time)
-        for siege in self.sieges: siege.update(time)
+        for battle in self.battles: battle.update(time)
 
         self.revenue = self.starting_revenue
 
@@ -323,6 +324,8 @@ class Community (kxg.Token):
         self.health = self.get_max_health()
         self.battle = None
 
+        kxg.Token.__init__(self)
+
 
     def upgrade(self):
         health_percent = self.health / self.get_max_health()
@@ -360,11 +363,14 @@ class City (Community):
     border = 130
 
     def __init__(self, player, position):
-        Community.__init__(self)
-
         self.player = player
         self.position = position
         self.roads = []
+
+        Community.__init__(self)
+
+    def __extend__(self):
+        return {'gui': gui.CityExtension}
 
 
     @kxg.check_for_safety
@@ -399,13 +405,16 @@ class City (Community):
 class Army (Community):
 
     def __init__(self, player, position):
-        Community.__init__(self)
-
         self.player = player
         self.position = position
 
+        Community.__init__(self)
 
-     @kxg.check_for_safety
+    def __extend__(self):
+        return {'gui': gui.ArmyExtension}
+
+
+    @kxg.check_for_safety
     def setup(self):
         pass
 
@@ -476,7 +485,7 @@ class Road (kxg.Token):
 
     def get_revenue(self):
         """ Return the revenue generated by this road in 30 seconds. """
-        if self.start.is_under_siege() or self.end.is_under_siege():
+        if self.start.is_in_battle() or self.end.is_in_battle():
             return 0
         else:
             return self.start.level + self.end.level
@@ -514,7 +523,7 @@ class Battle (kxg.Token):
 
     @kxg.check_for_safety
     def setup(self):
-        self.city.siege = self
+        self.city.battle = self
 
     @kxg.check_for_safety
     def update(self, time):
@@ -525,7 +534,7 @@ class Battle (kxg.Token):
 
     @kxg.check_for_safety
     def teardown(self):
-        self.city.siege = None
+        self.city.battle = None
 
 
     def get_initiation_price(self):

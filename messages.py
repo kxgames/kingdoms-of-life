@@ -60,7 +60,7 @@ class CreateCity (kxg.Message):
 
     def __init__(self, player, position):
         self.city = tokens.City(player, position)
-        self.price = tokens.City.get_next_price(player)
+        self.price = self.city.get_price()
 
     def check(self, world, sender):
         city = self.city
@@ -128,9 +128,9 @@ class CreateRoad (kxg.Message):
                 self.error = "Can't make two roads between the same cities."
                 return False
 
-        # Make sure neither end of the road is under siege.
-        if start.is_under_siege() or end.is_under_siege():
-            self.error = "Can't build a road to a city under siege."
+        # Make sure neither end of the road is under battle.
+        if start.is_in_battle() or end.is_in_battle():
+            self.error = "Can't build a road to a city under battle."
             return False
 
         # Make sure there are no obstacles in the way of this road.
@@ -211,9 +211,9 @@ class UpgradeCity (kxg.Message):
             self.error = "Upgrade requested by wrong player."
             return False
 
-        # Make sure the city in question is actually under siege.
-        if city.is_under_siege():
-            self.error = "Can't upgrade a city that is under siege."
+        # Make sure the city in question is actually under battle.
+        if city.is_in_battle():
+            self.error = "Can't upgrade a city that is under battle."
             return False
 
         # Make sure the player can afford this defense.
@@ -249,8 +249,8 @@ class UpgradeArmy (kxg.Message):
             self.error = "Upgrade requested by wrong player."
             return False
 
-        # Make sure the army in question is actually under siege.
-        if army.is_under_siege():
+        # Make sure the army in question is actually under battle.
+        if army.is_in_battle():
             self.error = "Can't upgrade a army that is under attack."
             return False
 
@@ -275,12 +275,12 @@ class UpgradeArmy (kxg.Message):
 class AttackCity (kxg.Message):
 
     def __init__(self, attacker, city):
-        self.siege = tokens.Battle(attacker, city)
+        self.battle = tokens.Battle(attacker, city)
         self.price = city.get_attack_price(attacker)
 
     def check(self, world, sender):
-        attacker = self.siege.attacker
-        city = self.siege.city
+        attacker = self.battle.attacker
+        city = self.battle.city
         price = self.price
 
         # Make sure the right player is sending this message.
@@ -293,9 +293,9 @@ class AttackCity (kxg.Message):
             self.error = "You must build a city before attacking your opponent."
             return False
 
-        # Make sure this city is not already under siege.
-        if city.is_under_siege():
-            self.error = "Can't attack a city that is already under siege."
+        # Make sure this city is not already under battle.
+        if city.is_in_battle():
+            self.error = "Can't attack a city that is already under battle."
             return False
 
         # Make sure the player can afford this attack.
@@ -309,13 +309,13 @@ class AttackCity (kxg.Message):
         actor.reject_attack_city(self)
 
     def setup(self, world, sender, id):
-        self.siege.give_id(id)
+        self.battle.give_id(id)
 
     def execute(self, world):
-        world.attack_city(self.siege, self.price)
+        world.attack_city(self.battle, self.price)
 
     def notify(self, actor, was_me):
-        actor.attack_city(self.siege, was_me)
+        actor.attack_city(self.battle, was_me)
 
 
 class DefendCity (kxg.Message):
@@ -334,9 +334,9 @@ class DefendCity (kxg.Message):
             self.error = "Defense requested by wrong player."
             return False
 
-        # Make sure the city in question is actually under siege.
-        if not city.is_under_siege():
-            self.error = "Can't defend a city that isn't under siege."
+        # Make sure the city in question is actually under battle.
+        if not city.is_in_battle():
+            self.error = "Can't defend a city that isn't under battle."
             return False
 
         # Make sure the player can afford this defense.
@@ -350,7 +350,7 @@ class DefendCity (kxg.Message):
         actor.reject_defend_city(self)
 
     def execute(self, world):
-        world.defend_city(self.city.siege, self.price)
+        world.defend_city(self.city.battle, self.price)
 
     def notify(self, actor, was_me):
         actor.defend_city(self.city, was_me)
@@ -358,17 +358,17 @@ class DefendCity (kxg.Message):
 
 class CaptureCity (kxg.Message):
 
-    def __init__(self, siege):
-        self.siege = siege
+    def __init__(self, battle):
+        self.battle = battle
 
     def check(self, world, sender):
-        return self.siege.was_successful()
+        return self.battle.was_successful()
 
     def execute(self, world):
-        world.capture_city(self.siege)
+        world.capture_city(self.battle)
 
     def notify(self, actor, sent_from_here):
-        actor.capture_city(self.siege)
+        actor.capture_city(self.battle)
 
 
 class DefeatPlayer (kxg.Message):
