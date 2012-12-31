@@ -60,7 +60,7 @@ class CreateCity (kxg.Message):
 
     def __init__(self, player, position):
         self.city = tokens.City(player, position)
-        self.price = tokens.City.get_next_price(player)
+        self.price = self.city.get_price()
 
     def check(self, world, sender):
         city = self.city
@@ -128,9 +128,9 @@ class CreateRoad (kxg.Message):
                 self.error = "Can't make two roads between the same cities."
                 return False
 
-        # Make sure neither end of the road is under siege.
-        if start.is_under_siege() or end.is_under_siege():
-            self.error = "Can't build a road to a city under siege."
+        # Make sure neither end of the road is under battle.
+        if start.is_in_battle() or end.is_in_battle():
+            self.error = "Can't build a road to a city under battle."
             return False
 
         # Make sure there are no obstacles in the way of this road.
@@ -211,9 +211,9 @@ class UpgradeCity (kxg.Message):
             self.error = "Upgrade requested by wrong player."
             return False
 
-        # Make sure the city in question is not under attack
-        if city.is_under_siege():
-            self.error = "Can't upgrade a city that is under siege."
+        # Make sure the city in question is not in a battle.
+        if city.is_in_battle():
+            self.error = "Can't upgrade a city that is in a battle."
             return False
 
         # Make sure the player can afford to upgrade the city.
@@ -249,9 +249,9 @@ class UpgradeArmy (kxg.Message):
             self.error = "Upgrade requested by wrong player."
             return False
 
-        # Make sure the army in question is not under attack.
-        if army.is_under_siege():
-            self.error = "Can't upgrade a army that is under attack."
+        # Make sure the army in question is in a battle.
+        if army.is_in_battle():
+            self.error = "Can't upgrade a army that is in a battle."
             return False
 
         # Make sure the player can afford to upgrade army.
@@ -277,13 +277,12 @@ class RequestBattle (kxg.Message):
     def __init__(self, army, target):
         self.army = army
         self.target = target
-        self.price = target.get_battle_price()
 
     def check(self, world, sender):
         army = self.army
         target = self.target
         player = army.player
-        price = self.price
+        price = target.get_battle_price()
 
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -301,9 +300,9 @@ class RequestBattle (kxg.Message):
             return False
 
         # Make sure the army can move to the end point.
-        #if not army.can_move_to_target(army, target):
-        #    self.error = "Army can't move there."
-        #    return False
+        if not army.can_move_to_target(army, target):
+            self.error = "Army can't move there."
+            return False
         
         # Make sure the player can afford to battle target.
         if not player.can_afford_price(price):
@@ -453,20 +452,19 @@ class RetreatBattle (kxg.Message):
 
 
 
-
 class CaptureCity (kxg.Message):
 
-    def __init__(self, siege):
-        self.siege = siege
+    def __init__(self, battle):
+        self.battle = battle
 
     def check(self, world, sender):
-        return self.siege.was_successful()
+        return self.battle.was_successful()
 
     def execute(self, world):
-        world.capture_city(self.siege)
+        world.capture_city(self.battle)
 
     def notify(self, actor, sent_from_here):
-        actor.capture_city(self.siege)
+        actor.capture_city(self.battle)
 
 
 class DefeatPlayer (kxg.Message):
