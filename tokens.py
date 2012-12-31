@@ -19,20 +19,6 @@ class World (kxg.World):
 
 
     @kxg.check_for_safety
-    def setup(self):
-        pass
-
-    @kxg.check_for_safety
-    def update(self, time):
-        for player in self.players:
-            player.update(time)
-
-    @kxg.check_for_safety
-    def teardown(self):
-        pass
-
-
-    @kxg.check_for_safety
     def start_game(self):
         self.game_started = True
 
@@ -210,12 +196,7 @@ class Referee (kxg.Referee):
         self.send_message(message)
 
     def update(self, time):
-        # Check to see if any players have successfully captured a city.
-        for player in self.world.players:
-            for battle in player.battles:
-                if battle.was_successful():
-                    message = messages.CaptureCity(battle)
-                    self.send_message(message)
+        kxg.Referee.update(self, time)
 
     def teardown(self):
         pass
@@ -292,10 +273,6 @@ class Player (kxg.Token):
 
     @kxg.check_for_safety
     def update(self, time):
-        for city in self.cities: city.update(time)
-        for road in self.roads: road.update(time)
-        for battle in self.battles: battle.update(time)
-
         self.revenue = self.starting_revenue
 
         for road in self.roads:
@@ -303,7 +280,7 @@ class Player (kxg.Token):
 
         self.wealth += time * self.revenue / 30
 
-    def signal(self, referee):
+    def report(self, messenger):
         pass
 
     @kxg.check_for_safety
@@ -379,17 +356,26 @@ class Player (kxg.Token):
 class Community (kxg.Token):
 
     def __init__(self):
+        kxg.Token.__init__(self)
+
         self.level = 1
         self.health = self.get_max_health()
         self.battle = None
-
-        kxg.Token.__init__(self)
 
 
     def upgrade(self):
         health_percent = self.health / self.get_max_health()
         self.level += 1
         self.health = health_percent * self.get_max_health()
+
+        for extension in self.get_extensions():
+            extension.update_level()
+
+    def damage(self, delta):
+        self.health -= delta
+
+        for extension in self.get_extensions():
+            extension.update_health()
 
 
     def get_level(self):
@@ -422,11 +408,11 @@ class City (Community):
     border = 130
 
     def __init__(self, player, position):
+        Community.__init__(self)
+
         self.player = player
         self.position = position
         self.roads = []
-
-        Community.__init__(self)
 
     def __extend__(self):
         return {'gui': gui.CityExtension}
@@ -440,7 +426,7 @@ class City (Community):
     def update(self, time):
         pass
 
-    def signal(self, referee):
+    def report(self, messenger):
         pass
 
     @kxg.check_for_safety
@@ -467,10 +453,10 @@ class City (Community):
 class Army (Community):
 
     def __init__(self, player, position):
+        Community.__init__(self)
+
         self.player = player
         self.position = position
-
-        Community.__init__(self)
 
     def __extend__(self):
         return {'gui': gui.ArmyExtension}
@@ -484,7 +470,7 @@ class Army (Community):
     def update(self, time):
         pass
 
-    def signal(self, referee):
+    def report(self, messenger):
         pass
 
     @kxg.check_for_safety
@@ -536,7 +522,7 @@ class Road (kxg.Token):
     def update(self, time):
         pass
 
-    def signal(self, referee):
+    def report(self, messenger):
         pass
 
     @kxg.check_for_safety
@@ -594,8 +580,10 @@ class Battle (kxg.Token):
     def update(self, time):
         self.elapsed_time += time
 
-    def signal(self, referee):
-        pass
+    def report(self, messenger):
+        if self.was_successful():
+            message = messages.CaptureCity(self)
+            self.send_message(message)
 
     @kxg.check_for_safety
     def teardown(self):

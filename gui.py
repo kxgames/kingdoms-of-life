@@ -299,11 +299,11 @@ class Gui (kxg.Actor):
 
     def draw_cities (self, screen):
         for city in self.world.yield_cities():
-            city.draw(screen)
+            city.get_extension().draw(screen)
 
     def draw_armies (self, screen):
         for army in self.world.yield_armies():
-            army.draw(screen)
+            army.get_extension().draw(screen)
 
     def draw_splash(self, screen):
         font = self.splash_font
@@ -344,7 +344,7 @@ class Gui (kxg.Actor):
                 raise SystemExit
 
 
-class Hotkeys:
+class Hotkeys (object):
 
     def __init__ (self, gui):
         self.keychain = kxg.gui.Keychain()
@@ -551,7 +551,7 @@ class StatusMessage (object):
         return self.timer.has_expired()
 
 
-class ClippingMask:
+class ClippingMask (object):
 
     def __init__(self, path):
         self.mask = pygame.image.load(path)
@@ -585,7 +585,7 @@ class ClippingMask:
         return self.apply(surface)
 
 
-class CommunitySymbol:
+class CommunitySymbol (object):
 
     # Data (fold)
     white = 255, 255, 255
@@ -609,40 +609,31 @@ class CommunitySymbol:
 
     def __init__(self, type, community):
         self.community = community
-        self.player = community.player
 
-        self.level = None
-        self.health = None
-        self.is_in_battle = None
-
-        normal_shape = self.masks['normal shape']
-        battle_shape = self.masks['battle shape']
-        color = Color(self.player.color)
-
-        self.normal_shape = normal_shape.apply_color(color)
-        self.battle_shape = battle_shape.apply_color(color)
-
-        rectangle_from_surface = kxg.geometry.Rectangle.from_surface
-        self.rectangle = rectangle_from_surface(normal_shape.mask)
-
+        rect_from_surface = kxg.geometry.Rectangle.from_surface
+        self.rectangle = rect_from_surface(self.masks['normal shape'].mask)
         self.surface = Surface(self.rectangle.size, flags=pygame.SRCALPHA)
         self.icon = self.layers['%s icon' % type]
 
-        self.redraw_surface()
+        self.update_owner()
+
 
     def draw(self, screen):
-
-        if self.level != self.community.get_level():
-            self.redraw_surface()
-        elif self.health != self.community.get_health():
-            self.redraw_surface()
-        elif self.is_in_battle != self.community.is_in_battle():
-            self.redraw_surface()
-        else:
-            pass
-
         self.rectangle.center = self.community.position
         screen.blit(self.surface, self.rectangle.top_left.pygame)
+
+    def update_level(self):
+        self.redraw_surface()
+
+    def update_health(self):
+        self.redraw_surface()
+
+    def update_owner(self):
+        color = Color(self.community.player.color)
+        self.normal_shape = self.masks['normal shape'].apply_color(color)
+        self.battle_shape = self.masks['battle shape'].apply_color(color)
+        self.redraw_surface()
+
 
     def redraw_surface(self):
         self.surface.fill(self.transparent)
