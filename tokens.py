@@ -62,11 +62,28 @@ class World (kxg.World):
         city.setup()
 
     @kxg.check_for_safety
+    def create_army(self, army, price):
+        self.add_token(army)
+        army.player.armies.append(army)
+        army.player.spend_wealth(price)
+        army.setup()
+
+    @kxg.check_for_safety
     def create_road(self, road, price):
         self.add_token(road)
         road.player.roads.append(road)
         road.player.spend_wealth(price)
         road.setup()
+
+    @kxg.check_for_safety
+    def upgrade_city(self, city, price):
+        city.upgrade()
+        city.player.spend_wealth(price)
+
+    @kxg.check_for_safety
+    def upgrade_army(self, army, price):
+        army.upgrade()
+        army.player.spend_wealth(price)
 
     @kxg.check_for_safety
     def attack_city(self, battle, price):
@@ -134,11 +151,38 @@ class World (kxg.World):
 
         return closest_city
 
+    def find_closest_army(self, target, player=None, cutoff=None):
+        closest_distance = kxg.geometry.infinity
+        closest_army = None
+
+        if player is None:
+            armies = self.yield_armies()
+        else:
+            armies = player.armies
+
+        for army in armies:
+            offset = target - army.position
+            distance = offset.magnitude
+
+            if distance < closest_distance:
+                closest_distance = distance
+                closest_army = army
+
+        if (cutoff is not None) and (closest_distance > cutoff):
+            return None
+
+        return closest_army
+
 
     def yield_cities(self):
         for player in self.players:
             for city in player.cities:
                 yield city
+
+    def yield_armies(self):
+        for player in self.players:
+            for army in player.armies:
+                yield army
 
     def yield_roads(self):
         for player in self.players:
@@ -189,7 +233,16 @@ class Referee (kxg.Referee):
     def create_city(self, city, is_mine):
         assert not is_mine
 
+    def create_army(self, army, is_mine):
+        assert not is_mine
+
     def create_road(self, road, is_mine):
+        assert not is_mine
+
+    def upgrade_city(self, city, is_mine):
+        assert not is_mine
+
+    def upgrade_army(self, army, is_mine):
         assert not is_mine
 
     def attack_city(self, battle, is_mine):
@@ -294,6 +347,9 @@ class Player (kxg.Token):
 
         return True
 
+    def can_place_army(self, city):
+        return True
+
     def can_place_road(self, road):
 
         def road_inside_city(road, city, padding):
@@ -312,6 +368,9 @@ class Player (kxg.Token):
 
     def find_closest_city(self, target, cutoff=None):
         return self.world.find_closest_city(target, self, cutoff)
+
+    def find_closest_army(self, target, cutoff=None):
+        return self.world.find_closest_army(target, self, cutoff)
 
     def was_defeated(self):
         return not self.cities
@@ -392,6 +451,9 @@ class City (Community):
     def get_price(self):
         return 20 + 10 * len(self.player.cities)
 
+    def get_upgrade_price(self):
+        return 10 * self.level
+
     def get_max_health(self):
         return 20 + 5 * self.level
 
@@ -432,6 +494,9 @@ class Army (Community):
 
     def get_price(self):
         return 30 + 10 * len(self.player.cities)
+
+    def get_upgrade_price(self):
+        return 10 * self.level
 
     def get_max_health(self):
         return 15 * 4 * self.level
