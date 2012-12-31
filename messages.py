@@ -157,7 +157,7 @@ class CreateArmy (kxg.Message):
 
     def __init__(self, player, position):
         self.army = tokens.Army(player, position)
-        self.price = tokens.Army.get_next_price(player)
+        self.price = self.army.get_price()
 
     def check(self, world, sender):
         army = self.army
@@ -199,12 +199,11 @@ class UpgradeCity (kxg.Message):
 
     def __init__(self, city):
         self.city = city
-        self.price = city.get_upgrade_price()
 
     def check(self, world, sender):
         city = self.city
         player = city.player
-        price = self.price
+        price = self.city.get_upgrade_price()
         
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -213,7 +212,7 @@ class UpgradeCity (kxg.Message):
 
         # Make sure the city in question is actually under battle.
         if city.is_in_battle():
-            self.error = "Can't upgrade a city that is under battle."
+            self.error = "Can't upgrade a city that's engaged in a battle."
             return False
 
         # Make sure the player can afford this defense.
@@ -227,7 +226,7 @@ class UpgradeCity (kxg.Message):
         actor.reject_upgrade_city(self)
 
     def execute(self, world):
-        world.upgrade_city(self.city, self.price)
+        world.upgrade_city(self.city, self.city.get_upgrade_price())
 
     def notify(self, actor, is_mine):
         actor.upgrade_city(self.city, is_mine)
@@ -388,16 +387,6 @@ class DefeatPlayer (kxg.Message):
 
 
 # undefined functions:
-# city: get_upgrade_price()
-# actor: reject_upgrade_city(self)
-# world: upgrade_city(city, price)
-# actor: upgrade_city(city, is_mine)
-# 
-# army: get_upgrade_price()
-# actor: reject_upgrade_army(self)
-# world: upgrade_army(army, price)
-# actor: upgrade_army(army, is_mine)
-# 
 # Army: init(player, position)
 # Army: get_next_price(player)
 # player: can_place_army(army)

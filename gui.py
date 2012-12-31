@@ -18,6 +18,332 @@ Image = pygame.image.load
 
 pygame.font.init()
 
+class Gui (kxg.Actor):
+
+    # Settings (fold)
+    background = 'white'
+    text_color = 'black'
+    splash_color = 'white'
+    banner_color = 'black'
+    banner_alpha = 0.85
+
+    status_font = Font('fonts/FreeSans.ttf', 14)
+    city_font = Font('fonts/FreeSans.ttf', 20)
+    splash_font = Font('fonts/FreeSans.ttf', 54)
+
+    refresh_rate = 0.2
+    minimum_drag_distance = 7
+
+    def __init__(self):
+        kxg.Actor.__init__(self)
+
+        self.world = None
+        self.player = None
+        self.size = None
+        self.hotkeys = Hotkeys(self)
+
+        self.splash_message = ""
+        self.status_messages = []
+        self.postgame_finished = False
+
+    def get_name(self):
+        return 'gui'
+
+    def get_world(self):
+        return self.world
+
+
+    def setup(self):
+        self.hotkeys.setup()
+
+    def update(self, time):
+        game_started = self.world.has_game_started()
+        game_ended = self.world.has_game_ended()
+
+        for message in self.status_messages[:]:
+            message.update(time)
+            if message.has_expired():
+                self.status_messages.remove(message)
+                self.refresh()
+
+        if game_started and not game_ended:
+            self.draw(time)
+            self.react(time)
+
+        elif game_ended:
+            self.draw(time)
+            self.react_postgame(time)
+
+        else:
+            pass
+
+    def teardown(self):
+        pass
+
+
+    def start_game(self):
+        pygame.init()
+
+        self.size = self.world.map.size
+        self.screen = pygame.display.set_mode(self.size)
+
+        self.timer = 0
+        self.timeout = self.refresh_rate
+
+        self.soft_refresh = True
+        self.hard_refresh = True
+
+    def game_over(self, winner):
+        self.refresh()
+
+        if self.player is winner:
+            self.splash_message = "You won!"
+        else:
+            self.splash_message = "You lost!"
+
+    def create_player(self, player, is_mine):
+        if is_mine: self.player = player
+
+    def create_city(self, city, is_mine):
+        self.refresh()
+
+    def create_army(self, army, is_mine):
+        self.refresh()
+
+    def create_road(self, road, is_mine):
+        self.refresh()
+
+    def upgrade_city(self, city, is_mine):
+        self.refresh()
+
+    def upgrade_army(self, city, is_mine):
+        self.refresh()
+
+    def attack_city(self, siege, was_me):
+        self.refresh()
+
+    def defend_city(self, siege, was_me):
+        self.refresh()
+
+    def capture_city(self, siege):
+        self.refresh()
+
+    def defeat_player(self, player):
+        self.refresh()
+
+    def add_message(self, string, duration=5):
+        message = StatusMessage(string, duration)
+        self.status_messages.append(message)
+
+
+    def reject_create_city(self, message):
+        self.add_message(message.error)
+
+    def reject_create_road(self, message):
+        self.add_message(message.error)
+
+    def reject_upgrade_city(self, message):
+        self.add_message(message.error)
+
+    def reject_upgrade_army(self, message):
+        self.add_message(message.error)
+
+    def reject_attack_city(self, message):
+        self.add_message(message.error)
+
+    def reject_defend_city(self, message):
+        self.add_message(message.error)
+
+
+    def draw(self, time):
+        self.timer += time
+
+        if self.timer < self.timeout:
+            return
+
+        self.timer = 0
+
+        if self.hard_refresh:
+            self.hard_refresh = False
+            self.draw_background(self.screen)
+            self.draw_roads(self.screen)
+            self.draw_cities(self.screen)
+            self.draw_armies(self.screen)
+            self.draw_splash(self.screen)
+
+        self.draw_player(self.screen)
+        self.draw_messages(self.screen)
+
+        pygame.display.flip()
+
+    def clear(self):
+        color = Color(self.background)
+        self.screen.fill(color)
+
+    def refresh(self):
+        self.hard_refresh = True
+
+    def draw_background(self, screen):
+        self.clear()
+
+        def interpolate(start, end, extent):
+            return start + extent * (end - start)
+
+        def FadedColor(source, extent):
+            source_color = Color(source)
+
+            r = interpolate(source_color.r, 255, extent)
+            g = interpolate(source_color.g, 255, extent)
+            b = interpolate(source_color.b, 255, extent)
+            a = source_color.a
+
+            return (r, g, b)
+
+        # If the player has no cities, show where the first city can be built.
+        if not self.player.cities and not self.world.has_game_ended():
+            color = FadedColor(self.player.color, 0.90)
+            self.screen.fill(color)
+
+            for city in self.world.yield_cities():
+                color = Color(self.background)
+                position = city.position.pygame
+                radius = city.border
+
+                pygame.draw.circle(screen, color, position, radius)
+
+            return
+
+        # Fill in the complete extent of your territory.
+        for city in self.player.cities:
+            color = FadedColor(city.player.color, 0.90)
+            position = city.position.pygame
+            radius = city.border
+
+            pygame.draw.circle(screen, color, position, radius)
+
+        # Hide the regions that are too close to your other cities to build in.
+        for city in self.player.cities:
+            color = Color(self.background)
+            position = city.position.pygame
+            radius = city.buffer
+
+            pygame.draw.circle(screen, color, position, radius)
+
+        # Hide the regions that are within your enemy's border.
+        for city in self.world.yield_cities():
+            if city.player is not self.player:
+                color = Color(self.background)
+                position = city.position.pygame
+                radius = city.border
+
+                pygame.draw.circle(screen, color, position, radius)
+
+    def draw_player(self, screen):
+        color = Color(self.text_color)
+        background = Color(self.background)
+
+        wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
+        #city_status = "Build City: %d" % tokens.City.get_next_price(self.player)
+        city_status = "Build City: ???"
+
+        # The game seems to crash intermittently on the following two lines, 
+        # usually with an error suggesting that either wealth_text or city_text 
+        # is an empty string.  Since that doesn't make any sense, I've put this 
+        # try/except block here to hopefully provide some more useful debugging 
+        # information the next time the game crashes.
+        
+        try:
+            wealth_text = self.status_font.render(wealth_status, True, color)
+            city_text = self.status_font.render(city_status, True, color)
+        except:
+            pass
+
+        wealth_offset = 5, 5
+        city_offset = 5, 5 + wealth_text.get_height()
+
+        wealth_rect = kxg.geometry.Rectangle.from_surface(wealth_text) + wealth_offset
+        city_rect = kxg.geometry.Rectangle.from_surface(city_text) + city_offset
+
+        pygame.draw.rect(screen, background, wealth_rect.pygame)
+        pygame.draw.rect(screen, background, city_rect.pygame)
+
+        screen.blit(wealth_text, wealth_offset)
+        screen.blit(city_text, city_offset)
+
+    def draw_messages(self, screen):
+        color = Color(self.text_color)
+        background = Color(self.background)
+        last_offset = self.world.map.bottom - 5
+
+        for message in self.status_messages:
+            status = str(message)
+            text = self.status_font.render(status, True, color)
+
+            rectangle = kxg.geometry.Rectangle.from_surface(text)
+            rectangle.center_x = self.world.map.center_x
+            rectangle.bottom = last_offset
+
+            last_offset = rectangle.top
+
+            pygame.draw.rect(screen, background, rectangle.pygame)
+            screen.blit(text, rectangle.top_left.pygame)
+
+    def draw_roads (self, screen):
+        for player in self.world.players:
+            for road in player.roads:
+                start = road.start.position.pygame
+                end = road.end.position.pygame
+                color = Color(player.color)
+
+                pygame.draw.aaline(screen, color, start, end)
+
+    def draw_cities (self, screen):
+        for city in self.world.yield_cities():
+            city.draw(screen)
+
+    def draw_armies (self, screen):
+        for army in self.world.yield_armies():
+            army.draw(screen)
+
+    def draw_splash(self, screen):
+        font = self.splash_font
+        message = self.splash_message
+        splash_color = Color(self.splash_color)
+        banner_color = Color(self.banner_color)
+        banner_alpha = int(255 * self.banner_alpha)
+        rect_from_size = kxg.geometry.Rectangle.from_size
+        rect_from_surface = kxg.geometry.Rectangle.from_surface
+        
+        if not self.splash_message:
+            return
+
+        splash_surface = font.render(message, True, splash_color)
+        splash_rect = rect_from_surface(splash_surface)
+        splash_rect.center = self.world.map.center
+
+        banner_rect = rect_from_size(self.world.map.width, splash_rect.height)
+        banner_rect.center = splash_rect.center
+        banner_surface = Surface(banner_rect.size)
+        banner_surface.fill(banner_color)
+        banner_surface.set_alpha(banner_alpha)
+
+        screen.blit(banner_surface, banner_rect.top_left.pygame)
+        screen.blit(splash_surface, splash_rect.top_left.pygame)
+
+
+    def react(self, time):
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                raise SystemExit
+            else:
+                self.hotkeys.handle(event)
+
+    def react_postgame(self, time):
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                raise SystemExit
+
+
 class Hotkeys:
 
     def __init__ (self, gui):
@@ -74,7 +400,7 @@ class Hotkeys:
         develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEBUTTONUP', left]
         register_chain (develop, self.develop, None)
 
-        register_chain (['fMOUSEDOWN', left], self.fuck, None)
+        register_chain (['fMOUSEDOWN', left], self.fight, None)
 
         #info_init = ['iMOUSEDOWN', left]
         #register_chain (info_init, self.info_init, None)
@@ -131,32 +457,35 @@ class Hotkeys:
                 message = messages.CreateRoad(player, start_city, end_city)
                 self.gui.send_message(message)
 
-        # If the drag threshold wasn't exceeded, just build a city instead.
+        # If the drag threshold wasn't exceeded, either build or upgrade a 
+        # city.  An upgrade is requested if an existing city was clicked on and 
+        # a build is requested otherwise.
 
         else:
-            message = messages.CreateCity(player, end_click)
-            self.gui.send_message(message)
+            city = world.find_closest_city(end_click, player, cutoff)
 
-    def fuck(self, args):
+            if city is not None:
+                message = messages.UpgradeCity(city)
+                self.gui.send_message(message)
+
+            else:
+                message = messages.CreateCity(player, end_click)
+                self.gui.send_message(message)
+
+    def fight(self, args):
         world = self.gui.world
         player = self.gui.player
         cutoff = tokens.City.radius
 
         position = kxg.geometry.Vector.from_tuple(self.event.pos)
-        city = world.find_closest_city(position, cutoff=cutoff)
+        army = world.find_closest_army(position, player, cutoff)
 
-        if city is None:
-            return
-
-        # If this is one of the cities controlled by me, attempt to defend an 
-        # attack.  Otherwise attempt to initiate an attack.
-
-        if city in self.gui.player.cities:
-            message = messages.DefendCity(city)
+        if army is not None:
+            message = messages.UpgradeArmy(army)
             self.gui.send_message(message)
 
         else:
-            message = messages.AttackCity(player, city)
+            message = messages.CreateArmy(player, position)
             self.gui.send_message(message)
 
     def info_init(self):
@@ -203,6 +532,7 @@ class Hotkeys:
             else:
                 attack_price = city.get_attack_price(player)
                 show("Attack city: %d" % attack_price)
+
 
 
 class StatusMessage (object):
@@ -370,316 +700,6 @@ class CommunitySymbol:
 
         self.surface.blit(health_wedge, self.origin)
         self.surface.blit(empty_health, self.origin)
-
-
-
-class Gui (kxg.Actor):
-
-    # Settings (fold)
-    background = 'white'
-    text_color = 'black'
-    splash_color = 'white'
-    banner_color = 'black'
-    banner_alpha = 0.85
-
-    status_font = Font('fonts/FreeSans.ttf', 14)
-    city_font = Font('fonts/FreeSans.ttf', 20)
-    splash_font = Font('fonts/FreeSans.ttf', 54)
-
-    refresh_rate = 0.2
-    minimum_drag_distance = 7
-
-    def __init__(self):
-        kxg.Actor.__init__(self)
-
-        self.world = None
-        self.player = None
-        self.size = None
-        self.hotkeys = Hotkeys(self)
-
-        self.splash_message = ""
-        self.status_messages = []
-        self.postgame_finished = False
-
-    def get_name(self):
-        return 'gui'
-
-    def get_world(self):
-        return self.world
-
-
-    def setup(self):
-        self.hotkeys.setup()
-
-    def update(self, time):
-        game_started = self.world.has_game_started()
-        game_ended = self.world.has_game_ended()
-
-        for message in self.status_messages[:]:
-            message.update(time)
-            if message.has_expired():
-                self.status_messages.remove(message)
-                self.refresh()
-
-        if game_started and not game_ended:
-            self.draw(time)
-            self.react(time)
-
-        elif game_ended:
-            self.draw(time)
-            self.react_postgame(time)
-
-        else:
-            pass
-
-    def teardown(self):
-        pass
-
-
-    def start_game(self):
-        pygame.init()
-
-        self.size = self.world.map.size
-        self.screen = pygame.display.set_mode(self.size)
-
-        self.timer = 0
-        self.timeout = self.refresh_rate
-
-        self.soft_refresh = True
-        self.hard_refresh = True
-
-    def game_over(self, winner):
-        self.refresh()
-
-        if self.player is winner:
-            self.splash_message = "You won!"
-        else:
-            self.splash_message = "You lost!"
-
-    def create_player(self, player, is_mine):
-        if is_mine: self.player = player
-
-    def create_city(self, city, is_mine):
-        self.refresh()
-
-    def create_road(self, road, is_mine):
-        self.refresh()
-
-    def attack_city(self, siege, was_me):
-        self.refresh()
-
-    def defend_city(self, siege, was_me):
-        self.refresh()
-
-    def capture_city(self, siege):
-        self.refresh()
-
-    def defeat_player(self, player):
-        self.refresh()
-
-    def add_message(self, string, duration=5):
-        message = StatusMessage(string, duration)
-        self.status_messages.append(message)
-
-
-    def reject_create_city(self, message):
-        self.add_message(message.error)
-
-    def reject_create_road(self, message):
-        self.add_message(message.error)
-
-    def reject_attack_city(self, message):
-        self.add_message(message.error)
-
-    def reject_defend_city(self, message):
-        self.add_message(message.error)
-
-
-    def draw(self, time):
-        self.timer += time
-
-        if self.timer < self.timeout:
-            return
-
-        self.timer = 0
-
-        if self.hard_refresh:
-            self.hard_refresh = False
-            self.draw_background(self.screen)
-            self.draw_roads(self.screen)
-            self.draw_cities(self.screen)
-            self.draw_splash(self.screen)
-
-        self.draw_player(self.screen)
-        self.draw_messages(self.screen)
-
-        pygame.display.flip()
-
-    def clear(self):
-        color = Color(self.background)
-        self.screen.fill(color)
-
-    def refresh(self):
-        self.hard_refresh = True
-
-    def draw_background(self, screen):
-        self.clear()
-
-        def interpolate(start, end, extent):
-            return start + extent * (end - start)
-
-        def FadedColor(source, extent):
-            source_color = Color(source)
-
-            r = interpolate(source_color.r, 255, extent)
-            g = interpolate(source_color.g, 255, extent)
-            b = interpolate(source_color.b, 255, extent)
-            a = source_color.a
-
-            return (r, g, b)
-
-        # If the player has no cities, show where the first city can be built.
-        if not self.player.cities and not self.world.has_game_ended():
-            color = FadedColor(self.player.color, 0.90)
-            self.screen.fill(color)
-
-            for city in self.world.yield_cities():
-                color = Color(self.background)
-                position = city.position.pygame
-                radius = city.border
-
-                pygame.draw.circle(screen, color, position, radius)
-
-            return
-
-        # Fill in the complete extent of your territory.
-        for city in self.player.cities:
-            color = FadedColor(city.player.color, 0.90)
-            position = city.position.pygame
-            radius = city.border
-
-            pygame.draw.circle(screen, color, position, radius)
-
-        # Hide the regions that are too close to your other cities to build in.
-        for city in self.player.cities:
-            color = Color(self.background)
-            position = city.position.pygame
-            radius = city.buffer
-
-            pygame.draw.circle(screen, color, position, radius)
-
-        # Hide the regions that are within your enemy's border.
-        for city in self.world.yield_cities():
-            if city.player is not self.player:
-                color = Color(self.background)
-                position = city.position.pygame
-                radius = city.border
-
-                pygame.draw.circle(screen, color, position, radius)
-
-    def draw_player(self, screen):
-        color = Color(self.text_color)
-        background = Color(self.background)
-
-        wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
-        #city_status = "Build City: %d" % tokens.City.get_next_price(self.player)
-        city_status = "Build City: ???"
-
-        # The game seems to crash intermittently on the following two lines, 
-        # usually with an error suggesting that either wealth_text or city_text 
-        # is an empty string.  Since that doesn't make any sense, I've put this 
-        # try/except block here to hopefully provide some more useful debugging 
-        # information the next time the game crashes.
-        
-        try:
-            wealth_text = self.status_font.render(wealth_status, True, color)
-            city_text = self.status_font.render(city_status, True, color)
-        except:
-            pass
-
-        wealth_offset = 5, 5
-        city_offset = 5, 5 + wealth_text.get_height()
-
-        wealth_rect = kxg.geometry.Rectangle.from_surface(wealth_text) + wealth_offset
-        city_rect = kxg.geometry.Rectangle.from_surface(city_text) + city_offset
-
-        pygame.draw.rect(screen, background, wealth_rect.pygame)
-        pygame.draw.rect(screen, background, city_rect.pygame)
-
-        screen.blit(wealth_text, wealth_offset)
-        screen.blit(city_text, city_offset)
-
-    def draw_messages(self, screen):
-        color = Color(self.text_color)
-        background = Color(self.background)
-        last_offset = self.world.map.bottom - 5
-
-        for message in self.status_messages:
-            status = str(message)
-            text = self.status_font.render(status, True, color)
-
-            rectangle = kxg.geometry.Rectangle.from_surface(text)
-            rectangle.center_x = self.world.map.center_x
-            rectangle.bottom = last_offset
-
-            last_offset = rectangle.top
-
-            pygame.draw.rect(screen, background, rectangle.pygame)
-            screen.blit(text, rectangle.top_left.pygame)
-
-    def draw_roads (self, screen):
-        for player in self.world.players:
-            for road in player.roads:
-                start = road.start.position.pygame
-                end = road.end.position.pygame
-                color = Color(player.color)
-
-                pygame.draw.aaline(screen, color, start, end)
-
-    def draw_cities (self, screen):
-        for city in self.world.yield_cities():
-            self.draw_city(screen, city)
-
-    def draw_city(self, screen, city):
-        city.draw(screen)
-
-    def draw_splash(self, screen):
-        font = self.splash_font
-        message = self.splash_message
-        splash_color = Color(self.splash_color)
-        banner_color = Color(self.banner_color)
-        banner_alpha = int(255 * self.banner_alpha)
-        rect_from_size = kxg.geometry.Rectangle.from_size
-        rect_from_surface = kxg.geometry.Rectangle.from_surface
-        
-        if not self.splash_message:
-            return
-
-        splash_surface = font.render(message, True, splash_color)
-        splash_rect = rect_from_surface(splash_surface)
-        splash_rect.center = self.world.map.center
-
-        banner_rect = rect_from_size(self.world.map.width, splash_rect.height)
-        banner_rect.center = splash_rect.center
-        banner_surface = Surface(banner_rect.size)
-        banner_surface.fill(banner_color)
-        banner_surface.set_alpha(banner_alpha)
-
-        screen.blit(banner_surface, banner_rect.top_left.pygame)
-        screen.blit(splash_surface, splash_rect.top_left.pygame)
-
-
-    def react(self, time):
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                raise SystemExit
-            else:
-                self.hotkeys.handle(event)
-
-    def react_postgame(self, time):
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                raise SystemExit
 
 
 
