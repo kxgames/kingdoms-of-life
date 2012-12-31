@@ -211,12 +211,12 @@ class UpgradeCity (kxg.Message):
             self.error = "Upgrade requested by wrong player."
             return False
 
-        # Make sure the city in question is actually under siege.
+        # Make sure the city in question is not under attack
         if city.is_under_siege():
             self.error = "Can't upgrade a city that is under siege."
             return False
 
-        # Make sure the player can afford this defense.
+        # Make sure the player can afford to upgrade the city.
         if not player.can_afford_price(price):
             self.error = "Can't afford $%d to upgrade this city." % price
             return False
@@ -249,12 +249,12 @@ class UpgradeArmy (kxg.Message):
             self.error = "Upgrade requested by wrong player."
             return False
 
-        # Make sure the army in question is actually under siege.
+        # Make sure the army in question is not under attack.
         if army.is_under_siege():
             self.error = "Can't upgrade a army that is under attack."
             return False
 
-        # Make sure the player can afford this defense.
+        # Make sure the player can afford to upgrade army.
         if not player.can_afford_price(price):
             self.error = "Can't afford $%d to upgrade this army." % price
             return False
@@ -272,88 +272,186 @@ class UpgradeArmy (kxg.Message):
 
 
 
-class AttackCity (kxg.Message):
+class RequestBattle (kxg.Message):
 
-    def __init__(self, attacker, city):
-        self.siege = tokens.Battle(attacker, city)
-        self.price = city.get_attack_price(attacker)
+    def __init__(self, army, target):
+        self.army = army
+        self.target = target
+        self.price = target.get_battle_price()
 
     def check(self, world, sender):
-        attacker = self.siege.attacker
-        city = self.siege.city
+        army = self.army
+        target = self.target
+        player = army.player
         price = self.price
 
         # Make sure the right player is sending this message.
-        if sender is not attacker:
-            self.error = "Attack requested by wrong player."
+        if sender is not player:
+            self.error = "Battle requested by wrong player."
             return False
 
-        # Make sure the attacker has at least one city themselves.
-        if not attacker.cities:
-            self.error = "You must build a city before attacking your opponent."
+        # Make sure the army is not attacking one of its own.
+        if target.player is player:
+            self.error = "Army can't attack friendly targets."
+            return False
+        
+        # Make sure the army is not already in a battle.
+        if army.is_battling:
+            self.error = "Army can't start a new battle while it is already in one."
             return False
 
-        # Make sure this city is not already under siege.
-        if city.is_under_siege():
-            self.error = "Can't attack a city that is already under siege."
-            return False
-
-        # Make sure the player can afford this attack.
-        if not attacker.can_afford_price(price):
-            self.error = "Can't afford $%d to attack this city." % price
+        # Make sure the army can move to the end point.
+        #if not army.can_move_to_target(army, target):
+        #    self.error = "Army can't move there."
+        #    return False
+        
+        # Make sure the player can afford to battle target.
+        if not player.can_afford_price(price):
+            self.error = "Can't afford $%d to battle this target." % price
             return False
 
         return True
 
     def reject(self, actor):
-        actor.reject_attack_city(self)
+        actor.reject_request_battle(self)
+
+    def execute(self, world):
+        world.request_battle(self.army, self.target)
+
+    def notify(self, actor, is_mine):
+        actor.request_battle(self.army, self.target, is_mine)
+
+
+class StartBattle (kxg.Message):
+
+    def __init__(self, army, target):
+        self.army = army
+        self.target = self.target
+        self.battle = None
+
+    def check(self, world, sender):
+        army = self.army
+        target = self.target
+        
+        # Make sure the army is not attacking one of its own.
+        if target.player is army.player:
+            self.error = "Army can't attack friendly targets."
+            return False
+        
+        # Make sure the army is not already in a battle.
+        if army.is_battling:
+            self.error = "Army can't start a new battle while it is already in one."
+            return False
+        
+        # Make sure the target is not already in a battle.
+        # Use JoinBattle if they are.
+        if target.is_battling:
+            self.error = "Army can't start a new battle with the target."
+            return False
+
+        # Check proximity to the target.
+        if army.check_battle_proximity(army, target):
+            self.error = "Army must be close to the target to start battle."
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.reject_start_battle(self)
 
     def setup(self, world, sender, id):
-        self.siege.give_id(id)
+        self.battle = tokens.Battle(army, target)
+        self.battle.give_id(id)
 
     def execute(self, world):
-        world.attack_city(self.siege, self.price)
+        world.start_battle(self.battle)
 
-    def notify(self, actor, was_me):
-        actor.attack_city(self.siege, was_me)
+    def notify(self, actor, sent_from_here):
+        actor.start_battle(self.battle)
 
 
-class DefendCity (kxg.Message):
+class JoinBattle (kxg.Message):
 
-    def __init__(self, city):
-        self.city = city
-        self.price = city.get_defense_price()
+    def __init__(self, army, target):
+        self.army = army
+        self.target = self.target
+        self.battle = None
 
     def check(self, world, sender):
-        city = self.city
-        defender = self.city.player
-        price = self.price
-
-        # Make sure the right player is sending this message.
-        if sender is not defender:
-            self.error = "Defense requested by wrong player."
+        army = self.army
+        target = self.target
+        
+        # If the target is friendly, then the army is coming to it's aid. 
+        # No need to check ownership.
+        
+        # Make sure the army is not already in a battle.
+        if army.is_battling:
+            self.error = "Army can't start a new battle while it is already in one."
+            return False
+        
+        # Make sure the target is in a battle.
+        # Use StartBattle if they aren't.
+        if target.is_battling:
+            self.error = "Target must be in a battle for the army to join."
             return False
 
-        # Make sure the city in question is actually under siege.
-        if not city.is_under_siege():
-            self.error = "Can't defend a city that isn't under siege."
-            return False
-
-        # Make sure the player can afford this defense.
-        if not defender.can_afford_price(price):
-            self.error = "Can't afford $%d to defend this city." % price
+        # Check proximity to the target.
+        if army.check_battle_proximity(army, target):
+            self.error = "Army must be close to the target to join battle."
             return False
 
         return True
 
     def reject(self, actor):
-        actor.reject_defend_city(self)
+        actor.reject_join_battle(self)
+
+    def setup(self, world, sender, id):
+        self.battle = self.target.battle
+        self.battle.add_army(self.army)
 
     def execute(self, world):
-        world.defend_city(self.city.siege, self.price)
+        world.join_battle(self.battle)
 
-    def notify(self, actor, was_me):
-        actor.defend_city(self.city, was_me)
+    def notify(self, actor, sent_from_here):
+        actor.join_battle(self.battle)
+
+
+class RetreatBattle (kxg.Message):
+    
+    def __init__(self, army):
+        self.army = army
+
+    def check(self, world, sender):
+        army = self.army
+        
+        # Make sure the army is in a battle.
+        if not army.battle:
+            self.error = "Army is not in a battle."
+            return False
+
+        self.price = army.battle.get_retreat_battle_price()
+        
+        # Make sure the player can afford to retreat.
+        if not player.can_afford_price(price):
+            self.error = "Can't afford $%d to retreat from battle." % price
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.reject_retreat_battle(self)
+
+    def setup(self, world, sender, id):
+        battle = self.army.battle
+        battle.remove(army)
+
+    def execute(self, world):
+        world.retreat_battle(self.army, self.battle)
+
+    def notify(self, actor, sent_from_here):
+        actor.retreat_battle(self.battle)
+
+
 
 
 class CaptureCity (kxg.Message):
@@ -387,17 +485,79 @@ class DefeatPlayer (kxg.Message):
 
 
 
-# undefined functions:
-# city: get_upgrade_price()
-# actor: reject_upgrade_city(self)
-# world: upgrade_city(city, price)
-# actor: upgrade_city(city, is_mine)
+class MoveArmy (kxg.Message):
+
+    def __init__(self, army, end_point):
+        self.army = army
+        self.end = end_point
+
+    def check(self, world, sender):
+        army = self.army
+        end = self.end
+        player = army.player
+
+        # Make sure the right player is sending this message.
+        if sender is not player:
+            self.error = "Army motion requested by wrong player."
+            return False
+
+        # Make sure the army can move to the end point.
+        #if not army.can_move_to_position(army, end):
+        #    self.error = "Army can't move there."
+        #    return False
+
+        return True
+
+    def reject(self, actor):
+        actor.reject_move_army(self)
+
+    def execute(self, world):
+        world.move_army(self.army, self.end)
+
+    def notify(self, actor, is_mine):
+        actor.move_army(self.army, self.end, is_mine)
+
+
+
+## undefined helper functions:
+#
+## RetreatBattle
+# army: get_retreat_battle_price()
+# actor: reject_retreat_battle(self)
+# world: retreat_battle(battle)
+# actor: retreat_battle(battle)
+#
+## JoinBattle
+# battle: add_army(army)
+# world: join_battle(battle)
+# actor: join_battle(battle)
+#
+## StartBattle
+# - city: get_attack_price(attacker)
+# - actor: reject_attack_city(self)
+# - world: attack_city(battle, price)
+# - actor: attack_city(battle, was_me)
+# target: is_battling
+# army: check_battle_proximity(army, target)
+# tokens: Battle(army, target) ## instead of Battle(attacker, city)
+# actor: reject_start_battle(self)
+# world: start_battle(battle)
+# actor: start_battle(battle)
+#
+## RequestBattle
+# target: get_battle_price()
+# army: can_move_to_target(army, target)
+# actor: reject_request_battle(self)
+# world: request_battle(army, target)
+# actor: request_battle(army, target, is_mine)
+#
+## MoveArmy
+# army: can_move_to_position(army, end)
+# actor: reject_move_army(self)
+# world: move_army(army, end)
+# actor: move_army(army, end, is_mine)
 # 
-# army: get_upgrade_price()
-# actor: reject_upgrade_army(self)
-# world: upgrade_army(army, price)
-# actor: upgrade_army(army, is_mine)
-# 
+## CreateArmy
 # Army: init(player, position)
 # Army: get_next_price(player)
 # player: can_place_army(army)
@@ -405,11 +565,23 @@ class DefeatPlayer (kxg.Message):
 # army: give_id(id)
 # world: create_army(army, price)
 # actor: create_army(army, is_mine)
+# 
+## UpgradeArmy
+# army: get_upgrade_price()
+# actor: reject_upgrade_army(self)
+# world: upgrade_army(army, price)
+# actor: upgrade_army(army, is_mine)
+#
+## UpgradeCity
+# city: get_upgrade_price()
+# actor: reject_upgrade_city(self)
+# world: upgrade_city(city, price)
+# actor: upgrade_city(city, is_mine)
+
+
 
 
 # Messages to create:
-# Move army: <F-drag>, start on army.
-# Attack army: <F-drag>, drag onto enemy army.
 # Join Battle: <F-drag>, drag onto enemy city/army in existing battle.
 # Retreat army: <F-drag>, drag out of existing battle.
 # Destroy army: N/A
