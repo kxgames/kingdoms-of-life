@@ -21,8 +21,8 @@ pygame.font.init()
 class Gui (kxg.Actor):
 
     # Settings (fold)
-    background = 'white'
     text_color = 'black'
+    background_color = 'white'
     splash_color = 'white'
     banner_color = 'black'
     banner_alpha = 0.85
@@ -31,7 +31,7 @@ class Gui (kxg.Actor):
     city_font = Font('fonts/FreeSans.ttf', 20)
     splash_font = Font('fonts/FreeSans.ttf', 54)
 
-    refresh_rate = 0.2
+    refresh_rate = 1 / 20
     minimum_drag_distance = 7
 
     def __init__(self):
@@ -86,6 +86,7 @@ class Gui (kxg.Actor):
 
         self.size = self.world.map.size
         self.screen = pygame.display.set_mode(self.size)
+        self.background = pygame.Surface(self.size)
 
         self.timer = 0
         self.timeout = self.refresh_rate
@@ -119,6 +120,9 @@ class Gui (kxg.Actor):
     def upgrade_army(self, city, is_mine):
         self.refresh()
 
+    def move_army(self, army, target, is_mine):
+        pass
+
     def attack_city(self, siege, was_me):
         self.refresh()
 
@@ -131,54 +135,39 @@ class Gui (kxg.Actor):
     def defeat_player(self, player):
         self.refresh()
 
+
+    def show_error(self, message):
+        self.add_message(message.error)
+
     def add_message(self, string, duration=5):
         message = StatusMessage(string, duration)
         self.status_messages.append(message)
 
 
-    def reject_create_city(self, message):
-        self.add_message(message.error)
-
-    def reject_create_road(self, message):
-        self.add_message(message.error)
-
-    def reject_upgrade_city(self, message):
-        self.add_message(message.error)
-
-    def reject_upgrade_army(self, message):
-        self.add_message(message.error)
-
-    def reject_attack_city(self, message):
-        self.add_message(message.error)
-
-    def reject_defend_city(self, message):
-        self.add_message(message.error)
-
-
     def draw(self, time):
         self.timer += time
-
         if self.timer < self.timeout:
             return
-
         self.timer = 0
 
         if self.hard_refresh:
-            self.hard_refresh = False
-            self.draw_background(self.screen)
-            self.draw_roads(self.screen)
-            self.draw_cities(self.screen)
-            self.draw_armies(self.screen)
-            self.draw_splash(self.screen)
+            self.draw_background(self.background)
+            self.draw_roads(self.background)
+            self.draw_splash(self.background)
+            self.screen.blit(self.background, (0, 0))
 
         self.draw_player(self.screen)
         self.draw_messages(self.screen)
+        self.draw_armies(self.screen)
+        self.draw_cities(self.screen)
 
         pygame.display.flip()
+        self.hard_refresh = False
+
 
     def clear(self):
-        color = Color(self.background)
-        self.screen.fill(color)
+        color = Color(self.background_color)
+        self.background.fill(color)
 
     def refresh(self):
         self.hard_refresh = True
@@ -205,7 +194,7 @@ class Gui (kxg.Actor):
             self.screen.fill(color)
 
             for city in self.world.yield_cities():
-                color = Color(self.background)
+                color = Color(self.background_color)
                 position = city.position.pygame
                 radius = city.border
 
@@ -223,7 +212,7 @@ class Gui (kxg.Actor):
 
         # Hide the regions that are too close to your other cities to build in.
         for city in self.player.cities:
-            color = Color(self.background)
+            color = Color(self.background_color)
             position = city.position.pygame
             radius = city.buffer
 
@@ -232,7 +221,7 @@ class Gui (kxg.Actor):
         # Hide the regions that are within your enemy's border.
         for city in self.world.yield_cities():
             if city.player is not self.player:
-                color = Color(self.background)
+                color = Color(self.background_color)
                 position = city.position.pygame
                 radius = city.border
 
@@ -240,7 +229,7 @@ class Gui (kxg.Actor):
 
     def draw_player(self, screen):
         color = Color(self.text_color)
-        background = Color(self.background)
+        background = Color(self.background_color)
 
         wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
         #city_status = "Build City: %d" % tokens.City.get_next_price(self.player)
@@ -272,7 +261,7 @@ class Gui (kxg.Actor):
 
     def draw_messages(self, screen):
         color = Color(self.text_color)
-        background = Color(self.background)
+        background = Color(self.background_color)
         last_offset = self.world.map.bottom - 5
 
         for message in self.status_messages:
@@ -299,11 +288,13 @@ class Gui (kxg.Actor):
 
     def draw_cities (self, screen):
         for city in self.world.yield_cities():
-            city.get_extension().draw(screen)
+            city.get_extension().draw(
+                    screen, self.background, self.hard_refresh)
 
     def draw_armies (self, screen):
         for army in self.world.yield_armies():
-            army.get_extension().draw(screen)
+            army.get_extension().draw(
+                    screen, self.background, self.hard_refresh)
 
     def draw_splash(self, screen):
         font = self.splash_font
@@ -614,13 +605,31 @@ class CommunitySymbol (object):
         self.rectangle = rect_from_surface(self.masks['normal shape'].mask)
         self.surface = Surface(self.rectangle.size, flags=pygame.SRCALPHA)
         self.icon = self.layers['%s icon' % type]
+        self.force_draw = True
+
+        self.decoy = pygame.Surface((500, 500))
+        self.decoy.fill((0, 0, 0))
 
         self.update_owner()
 
 
-    def draw(self, screen):
-        self.rectangle.center = self.community.position
-        screen.blit(self.surface, self.rectangle.top_left.pygame)
+    def draw(self, screen, background, hard_refresh):
+
+        new_position = self.community.position
+        old_position = self.rectangle.center
+        
+        get_distance = kxg.geometry.Vector.get_distance
+        displacement = get_distance(new_position, old_position)
+
+        if displacement < 1 and not hard_refresh:
+            return
+
+        self.rectangle.center = new_position
+        top_left = self.rectangle.top_left.pygame
+        area = self.rectangle.pygame
+
+        screen.blit(background, top_left, area=area)
+        screen.blit(self.surface, top_left)
 
     def update_level(self):
         self.redraw_surface()
