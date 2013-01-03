@@ -77,7 +77,7 @@ class World (kxg.World):
         print "world executing campaign"
         self.add_token(campaign)
         campaign.setup()
-        army.chase(community)
+        campaign.army.chase(campaign.community)
 
     @kxg.check_for_safety
     def attack_city(self, battle, price):
@@ -377,7 +377,7 @@ class Community (kxg.Token):
         self.level = 1
         self.health = self.get_max_health()
         self.battle = None
-        self.campains = []
+        self.campaigns = []
 
 
     def upgrade(self):
@@ -704,10 +704,10 @@ class Campaign (kxg.Token):
 
             if community.battle:
                 message = messages.JoinBattle(army, community)
-                self.send_message(message)
+                messenger.send_message(message)
             else:
                 message = messages.StartBattle(army, community)
-                self.send_message(message)
+                messenger.send_message(message)
 
     @kxg.check_for_safety
     def teardown(self):

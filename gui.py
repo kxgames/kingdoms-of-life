@@ -398,11 +398,11 @@ class Hotkeys (object):
         register_chain (develop, self.develop, None)
 
         # Start fight click
-        fight_init ['fMOUSEDOWN', left]
+        fight_init = ['fMOUSEDOWN', left]
         register_chain (fight_init, self.fight_init, None)
 
         # Complete fight click
-        fight ['fMOUSEDOWN', left, 'fMOUSEUP', left]
+        fight = ['fMOUSEDOWN', left, 'fMOUSEUP', left]
         register_chain (fight, self.fight, None)
 
         #info_init = ['iMOUSEDOWN', left]
@@ -488,16 +488,30 @@ class Hotkeys (object):
         end = kxg.geometry.Vector.from_tuple(self.event.pos)
 
         start_army = world.find_closest_army(start, player, cutoff)
+
         end_army = world.find_closest_army(end, None, cutoff)
         end_city = world.find_closest_city(end, None, cutoff)
 
-        end_army_distance = (end - end_army.position).magnitude_squared
-        end_city_distance = (end - end_city.position).magnitude_squared
+        # Find closest end community
+        if not end_army and not end_city:
+            end_community = None
 
-        end_army_closer = end_army_distance <= end_city_distance
-        end_community = end_army if end_army_closer else end_city
+        elif end_army and not end_city:
+            end_community = end_army
 
+        elif not end_army and end_city:
+            end_community = end_city
+
+        else:
+            end_army_distance = (end - end_army.position).magnitude_squared
+            end_city_distance = (end - end_city.position).magnitude_squared
+
+            end_army_closer = end_army_distance <= end_city_distance
+            end_community = end_army if end_army_closer else end_city
+
+        # Figure out which message to send
         if start_army is None:
+            print "Creating army at %s" %start
             message = messages.CreateArmy(player, start)
             self.gui.send_message(message)
 

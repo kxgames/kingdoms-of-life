@@ -274,12 +274,11 @@ class UpgradeArmy (kxg.Message):
 class RequestBattle (kxg.Message):
 
     def __init__(self, army, community):
-        self.army = army
-        self.community = community
+        self.campaign = tokens.Campaign(army, community)
 
     def check(self, world, sender):
-        army = self.army
-        community = self.community
+        army = self.campaign.army
+        community = self.campaign.community
         player = army.player
         price = community.get_battle_price()
 
@@ -314,11 +313,9 @@ class RequestBattle (kxg.Message):
         actor.show_error(self)
 
     def setup (self, world, sender, id):
-        # Do pathfinding stuff?
-        pass
+        self.campaign.give_id(id)
 
     def execute(self, world):
-        self.campaign = Campaign(self.army, community)
         world.request_battle(self.campaign)
 
     def notify(self, actor, is_mine):
@@ -329,7 +326,7 @@ class StartBattle (kxg.Message):
 
     def __init__(self, army, target):
         self.army = army
-        self.target = self.target
+        self.target = target
         self.battle = None
 
     def check(self, world, sender):
@@ -353,7 +350,7 @@ class StartBattle (kxg.Message):
             return False
 
         # Check proximity to the target.
-        if army.check_battle_proximity(army, target):
+        if army.check_battle_proximity(target):
             self.error = "Army must be close to the target to start battle."
             return False
 
