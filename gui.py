@@ -156,10 +156,10 @@ class Gui (kxg.Actor):
             self.draw_splash(self.background)
             self.screen.blit(self.background, (0, 0))
 
-        self.draw_player(self.screen)
-        self.draw_messages(self.screen)
         self.draw_armies(self.screen)
         self.draw_cities(self.screen)
+        self.draw_player(self.screen)
+        self.draw_messages(self.screen)
 
         pygame.display.flip()
         self.hard_refresh = False
@@ -621,8 +621,8 @@ class CommunitySymbol (object):
         get_distance = kxg.geometry.Vector.get_distance
         displacement = get_distance(new_position, old_position)
 
-        if displacement < 1 and not hard_refresh:
-            return
+        #if displacement < 1 and not hard_refresh:
+            #return
 
         self.rectangle.center = new_position
         top_left = self.rectangle.top_left.pygame
