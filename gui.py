@@ -526,57 +526,195 @@ class Hotkeys (object):
 
 
 
-class StatusMessage (object):
-
-    def __init__(self, message, duration):
-        self.message = message
-        self.timer = kxg.tools.Timer(duration)
-
-    def __str__(self):
-        return self.message
+class Artist (object):
 
     def update(self, time):
-        self.timer.update(time)
+        raise NotImplementedError
 
-    def has_expired(self):
-        return self.timer.has_expired()
+    def draw(self, regions):
+        raise NotImplementedError
+
+class BackgroundArtist (Artist):
+
+    # Settings (fold)
+    background_color = 'white'
+
+    def __init__(self, world, player, size):
+        self.world = world
+        self.player = player
+        self.surface = pygame.Surface(size)
+        self.stale_cities = []
+        self.stale_everything = True
+
+    def update(self, time):
+        if not self.stale_cities and not self.stale_everything:
+            return []
+
+        background_color = Color(self.background_color)
+        player_color = fade_color(self.player.color)
+
+        surface = self.surface
+        surface.fill(background_color)
+
+        # If the player has no cities, show where the first city can be built.
+        if not self.player.cities and not self.world.has_game_ended():
+            surface.fill(player_color)
+
+        # Fill in the complete extent of your territory.
+        for city in self.player.cities:
+            position = city.position.pygame; radius = city.border
+            pygame.draw.circle(surface, player_color, position, radius)
+
+        # Hide the regions that are too close to your other cities to build in.
+        for city in self.player.cities:
+            position = city.position.pygame; radius = city.buffer
+            pygame.draw.circle(surface, background_color, position, radius)
+
+        # Hide the regions that are within your enemy's border.
+        for city in self.world.yield_cities():
+            if city.player is not self.player:
+                position = city.position.pygame; radius = city.border
+                pygame.draw.circle(surface, background_color, position, radius)
+
+        # Indicate that the entire background changed.
+        if self.stale_everything:
+            self.stale_everything = False
+            self.stale_cities = []
+
+            return [self.surface.get_rect()]
+
+        # Indicate exactly which cities need to be redrawn.
+        if self.stale_cities:
+            stale_regions = []
+            self.stale_cities = []
+            rect_from_center = kxg.geometry.Rectangle.from_center
+
+            for city in self.stale_cities:
+                position = city.position; size = 2 * city.border
+                region = rect_from_center(position, size, size)
+                stale_regions.append(region.pygame)
+
+            return stale_regions
+
+    def draw(self, region):
+        screen.blit(self.surface, region.topleft, area=region)
+
+    def redraw(self, city):
+        self.stale_cities.append(city)
 
 
-class ClippingMask (object):
+class PlayerArtist (Artist):
 
-    def __init__(self, path):
-        self.mask = pygame.image.load(path)
-        self.size = self.mask.get_size()
+    text_color = 'black'
+    text_font = Font('fonts/FreeSans.ttf', 14)
+    line_spacing = 5
+    background_color = 'white'
 
-        width, height = self.mask.get_size()
-        array = pygame.PixelArray(self.mask)
+    def __init__(self, player):
+        self.player = player
+        self.previous_stockpile = 0
+        self.previous_city_price = 0
 
-        for x in range(width):
-            for y in range(height):
-                intensity = self.mask.unmap_rgb(array[x][y]).r
-                array[x][y] = 255, 255, 255, intensity
+        self.size = 200, 2 * self.text_font.get_height() + self.line_spacing
+        self.surface = pygame.Surface(self.size)
 
-    def apply(self, surface):
-        origin = 0, 0
-        blend_mode = pygame.BLEND_RGBA_MULT
-        per_pixel_alpha = pygame.SRCALPHA
+    def update(self, time):
+        stockpile = self.player.wealth
+        city_price = tokens.City.get_price(self.player)
 
-        assert surface.get_flags() & per_pixel_alpha
-        surface.blit(self.mask, origin, special_flags=blend_mode)
+        # Return immediately if nothing has changed.
+        if stockpile == self.previous_stockpile:
+            if city_price == self.previous_city_price:
+                return []
 
-        return surface
+        # Otherwise draw the updated status message.
+        self.previous_stockpile = stockpile
+        self.previous_city_price = city_price
 
-    def apply_color(self, color):
-        size = self.mask.get_size()
-        per_pixel_alpha = pygame.SRCALPHA
+        color = Color(self.text_color)
+        background = Color(self.background_color)
+        surface = self.surface
 
-        surface = Surface(size, flags=per_pixel_alpha)
-        surface.fill(color)
+        wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
+        city_status = "Build City: %d" % tokens.City.get_price(self.player)
 
-        return self.apply(surface)
+        wealth_text = self.status_font.render(wealth_status, True, color)
+        city_text = self.status_font.render(city_status, True, color)
+
+        wealth_rect = kxg.geometry.Rectangle.from_surface(wealth_text)
+        city_rect = kxg.geometry.Rectangle.from_surface(city_text) + city_offset
+        city_rect += (0, self.line_spacing)
+
+        pygame.draw.rect(surface, background, wealth_rect.pygame)
+        pygame.draw.rect(surface, background, city_rect.pygame)
+
+        surface.blit(wealth_text, wealth_offset)
+        surface.blit(city_text, city_offset)
+
+        return [self.surface.get_rect()]
+
+    def draw(self, region):
+        screen.blit(self.surface, region.topleft, area=region)
 
 
-class CommunitySymbol (object):
+
+    def draw_player(self, screen):
+        color = Color(self.text_color)
+        background = Color(self.background_color)
+
+        wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
+        city_status = "Build City: %d" % tokens.City.get_price(self.player)
+
+        wealth_text = self.status_font.render(wealth_status, True, color)
+        city_text = self.status_font.render(city_status, True, color)
+
+        wealth_offset = 5, 5
+        city_offset = 5, 5 + wealth_text.get_height()
+
+        wealth_rect = kxg.geometry.Rectangle.from_surface(wealth_text) + wealth_offset
+        city_rect = kxg.geometry.Rectangle.from_surface(city_text) + city_offset
+
+        pygame.draw.rect(screen, background, wealth_rect.pygame)
+        pygame.draw.rect(screen, background, city_rect.pygame)
+
+        screen.blit(wealth_text, wealth_offset)
+        screen.blit(city_text, city_offset)
+
+
+class MessageArtist (Artist):
+
+    def draw_messages(self, screen):
+        color = Color(self.text_color)
+        background = Color(self.background_color)
+        last_offset = self.world.map.bottom - 5
+
+        for message in self.status_messages:
+            status = str(message)
+            text = self.status_font.render(status, True, color)
+
+            rectangle = kxg.geometry.Rectangle.from_surface(text)
+            rectangle.center_x = self.world.map.center_x
+            rectangle.bottom = last_offset
+
+            last_offset = rectangle.top
+
+            pygame.draw.rect(screen, background, rectangle.pygame)
+            screen.blit(text, rectangle.top_left.pygame)
+
+
+class RoadArtist (Artist):
+
+    def draw_roads (self, screen):
+    for player in self.world.players:
+        for road in player.roads:
+            start = road.start.position.pygame
+            end = road.end.position.pygame
+            color = Color(player.color)
+
+            pygame.draw.aaline(screen, color, start, end)
+
+
+class CommunityArtist (Artist):
 
     # Data (fold)
     white = 255, 255, 255
@@ -702,12 +840,105 @@ class CommunitySymbol (object):
         self.surface.blit(empty_health, self.origin)
 
 
+class GameOverArtist (Artist):
 
-class CityExtension (CommunitySymbol):
+    def draw_splash(self, screen):
+        font = self.splash_font
+        message = self.splash_message
+        splash_color = Color(self.splash_color)
+        banner_color = Color(self.banner_color)
+        banner_alpha = int(255 * self.banner_alpha)
+        rect_from_size = kxg.geometry.Rectangle.from_size
+        rect_from_surface = kxg.geometry.Rectangle.from_surface
+        
+        if not self.splash_message:
+            return
+
+        splash_surface = font.render(message, True, splash_color)
+        splash_rect = rect_from_surface(splash_surface)
+        splash_rect.center = self.world.map.center
+
+        banner_rect = rect_from_size(self.world.map.width, splash_rect.height)
+        banner_rect.center = splash_rect.center
+        banner_surface = Surface(banner_rect.size)
+        banner_surface.fill(banner_color)
+        banner_surface.set_alpha(banner_alpha)
+
+        screen.blit(banner_surface, banner_rect.top_left.pygame)
+        screen.blit(splash_surface, splash_rect.top_left.pygame)
+
+
+
+class CityExtension (CommunityArtist):
     def __init__(self, city):
-        CommunitySymbol.__init__(self, 'city', city)
+        CommunityArtist.__init__(self, 'city', city)
 
-class ArmyExtension (CommunitySymbol):
+class ArmyExtension (CommunityArtist):
     def __init__(self, army):
-        CommunitySymbol.__init__(self, 'army', army)
+        CommunityArtist.__init__(self, 'army', army)
+
+
+class StatusMessage (object):
+
+    def __init__(self, message, duration):
+        self.message = message
+        self.timer = kxg.tools.Timer(duration)
+
+    def __str__(self):
+        return self.message
+
+    def update(self, time):
+        self.timer.update(time)
+
+    def has_expired(self):
+        return self.timer.has_expired()
+
+
+class ClippingMask (object):
+
+    def __init__(self, path):
+        self.mask = pygame.image.load(path)
+        self.size = self.mask.get_size()
+
+        width, height = self.mask.get_size()
+        array = pygame.PixelArray(self.mask)
+
+        for x in range(width):
+            for y in range(height):
+                intensity = self.mask.unmap_rgb(array[x][y]).r
+                array[x][y] = 255, 255, 255, intensity
+
+    def apply(self, surface):
+        origin = 0, 0
+        blend_mode = pygame.BLEND_RGBA_MULT
+        per_pixel_alpha = pygame.SRCALPHA
+
+        assert surface.get_flags() & per_pixel_alpha
+        surface.blit(self.mask, origin, special_flags=blend_mode)
+
+        return surface
+
+    def apply_color(self, color):
+        size = self.mask.get_size()
+        per_pixel_alpha = pygame.SRCALPHA
+
+        surface = Surface(size, flags=per_pixel_alpha)
+        surface.fill(color)
+
+        return self.apply(surface)
+
+
+
+def fade_color(source, extent):
+    source_color = Color(source)
+
+    r = interpolate(source_color.r, 255, extent)
+    g = interpolate(source_color.g, 255, extent)
+    b = interpolate(source_color.b, 255, extent)
+
+    return (r, g, b)
+
+def interpolate_color(start, end, extent):
+    return start + extent * (end - start)
+
 
