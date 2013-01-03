@@ -11,6 +11,8 @@ import messages
 import tokens
 import random
 
+# Composite Artist?
+
 Surface = pygame.Surface
 Color = pygame.color.Color
 Font = pygame.font.Font
@@ -87,12 +89,12 @@ class Gui (kxg.Actor):
         for artist in self.artists:
             stale_regions += artist.update(time)
 
+        if stale_regions:
+            print stale_regions
+
         for artist in self.artists:
             for region in stale_regions:
                 artist.draw(self.screen, region)
-
-        if stale_regions:
-            print stale_regions
 
         pygame.display.update(stale_regions)
         self.hard_refresh = False
@@ -101,15 +103,18 @@ class Gui (kxg.Actor):
         pass
 
 
-
     def start_game(self):
         pygame.init()
 
         self.size = self.world.map.size
         self.screen = pygame.display.set_mode(self.size)
 
+        self.background_artist = \
+                BackgroundArtist(self.world, self.player, self.size)
+
         self.artists = [
-                BackgroundArtist(self.world, self.player, self.size),
+                self.background_artist,
+                CommunityArtist(self.world),
                 #RoadArtist(),
                 PlayerArtist(self.player),
                 #MessageArtist(),
@@ -133,7 +138,7 @@ class Gui (kxg.Actor):
         if is_mine: self.player = player
 
     def create_city(self, city, is_mine):
-        self.artists[0].redraw(city)
+        self.background_artist.redraw(city)
         self.refresh()
 
     def create_army(self, army, is_mine):
@@ -166,6 +171,7 @@ class Gui (kxg.Actor):
 
     def show_error(self, message):
         self.add_message(message.error)
+        print message.error
 
     def add_message(self, string, duration=5):
         message = StatusMessage(string, duration)
@@ -605,6 +611,22 @@ class Artist (object):
     def draw(self, screen, region):
         pass
 
+    def blit(self, destination, source, position, region):
+        # To understand how this method works, you have to understand the 
+        # precise meanings of the position and area arguments to the blit 
+        # function.  The position argument is relative to the destination 
+        # surface, and indicates where the blitted image will appear.  
+        #
+        # The area argument is relative to the source surface.  This mean that, 
+        # in order to capture the entire community symbol, the area rectangle 
+        # must go from (0, 0) to (80, 80).  However, the given region rectangle 
+        # is relative to the screen and not the source surface.  The hideous 
+        # operations shown below correct for this difference in perspective.
+
+        region = region.move(-position[0], -position[1])
+        offset = (position[0] + region.left, position[1] + region.top)
+        destination.blit(source, offset, area=region)
+
 
 class BackgroundArtist (Artist):
 
@@ -658,7 +680,6 @@ class BackgroundArtist (Artist):
         # Indicate exactly which cities need to be redrawn.
         if self.stale_cities:
             stale_regions = []
-            self.stale_cities = []
             rect_from_center = kxg.geometry.Rectangle.from_center
 
             for city in self.stale_cities:
@@ -666,6 +687,7 @@ class BackgroundArtist (Artist):
                 region = rect_from_center(position, size, size)
                 stale_regions.append(region.pygame)
 
+            self.stale_cities = []
             return stale_regions
 
     def draw(self, screen, region):
@@ -673,6 +695,7 @@ class BackgroundArtist (Artist):
 
     def redraw(self, city):
         self.stale_cities.append(city)
+        self.stale_everything = (len(city.player.cities) == 1)
 
 
 class RoadArtist (Artist):
@@ -709,38 +732,204 @@ class CommunityArtist (Artist):
 
     font = pygame.font.Font('fonts/DejaVuSans-Bold.ttf', 16)
 
-    def __init__(self, type, community):
-        self.community = community
+    def __init__(self, world):
+        self.world = world
 
+    def update(self, time):
+        stale_regions = []
+
+        for city in self.world.yield_cities():
+            extension = city.get_extension()
+            stale_regions += extension.update(time)
+
+        for army in self.world.yield_armies():
+            extension = army.get_extension()
+            stale_regions += extension.update(time)
+
+        return stale_regions
+
+    def draw(self, screen, region):
+        for city in self.world.yield_cities():
+            city.get_extension().draw(screen, region)
+
+        for army in self.world.yield_armies():
+            army.get_extension().draw(screen, region)
+
+
+class PlayerArtist (Artist):
+
+    # Settings (fold)
+    text_color = 'black'
+    text_font = Font('fonts/FreeSans.ttf', 14)
+    background_color = 'white'
+
+    top_left = kxg.geometry.Vector(5, 5)
+    line_spacing = 5
+
+    def __init__(self, player):
+        self.player = player
+        self.previous_stockpile = 0
+        self.previous_city_price = 0
+
+        self.size = 200, 2 * self.text_font.get_height() + self.line_spacing
+        self.surface = pygame.Surface(self.size, flags=pygame.SRCALPHA)
+
+        rect_from_size = kxg.geometry.Rectangle.from_size
+        self.rectangle = rect_from_size(*self.size)
+        self.rectangle.top_left = self.top_left
+        self.rectangle = self.rectangle.pygame
+
+
+    def update(self, time):
+        stockpile = int(self.player.wealth)
+        #city_price = tokens.City.get_price(self.player)
+        city_price = 0
+
+        # Return immediately if nothing has changed.
+        if stockpile == self.previous_stockpile:
+            if city_price == self.previous_city_price:
+                return []
+
+        # Otherwise draw the updated status message.
+        self.previous_stockpile = stockpile
+        self.previous_city_price = city_price
+
+        color = Color(self.text_color)
+        background = Color(self.background_color)
+        transparent = 0, 0, 0, 0
+
+        surface = self.surface
+        surface.fill(transparent)
+
+        wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
+        #city_status = "Build City: %d" % tokens.City.get_price(self.player)
+        city_status = "Build City: ???"
+
+        wealth_text = self.text_font.render(wealth_status, True, color)
+        city_text = self.text_font.render(city_status, True, color)
+
+        wealth_rect = kxg.geometry.Rectangle.from_surface(wealth_text)
+        city_rect = kxg.geometry.Rectangle.from_surface(city_text)
+
+        wealth_offset = 0, 0
+        city_offset = 0, self.line_spacing + self.text_font.get_height()
+        city_rect += city_offset
+
+        pygame.draw.rect(surface, background, wealth_rect.pygame)
+        pygame.draw.rect(surface, background, city_rect.pygame)
+
+        surface.blit(wealth_text, wealth_offset)
+        surface.blit(city_text, city_offset)
+
+        return [self.rectangle]
+
+    def draw(self, screen, region):
+        self.blit(screen, self.surface, self.top_left, region)
+        #screen.blit(self.surface, self.top_left, area=region)
+
+
+class MessageArtist (Artist):
+
+    def draw_messages(self, screen):
+        color = Color(self.text_color)
+        background = Color(self.background_color)
+        last_offset = self.world.map.bottom - 5
+
+        for message in self.status_messages:
+            status = str(message)
+            text = self.status_font.render(status, True, color)
+
+            rectangle = kxg.geometry.Rectangle.from_surface(text)
+            rectangle.center_x = self.world.map.center_x
+            rectangle.bottom = last_offset
+
+            last_offset = rectangle.top
+
+            pygame.draw.rect(screen, background, rectangle.pygame)
+            screen.blit(text, rectangle.top_left.pygame)
+
+
+class GameOverArtist (Artist):
+
+    def draw_splash(self, screen):
+        font = self.splash_font
+        message = self.splash_message
+        splash_color = Color(self.splash_color)
+        banner_color = Color(self.banner_color)
+        banner_alpha = int(255 * self.banner_alpha)
+        rect_from_size = kxg.geometry.Rectangle.from_size
         rect_from_surface = kxg.geometry.Rectangle.from_surface
+        
+        if not self.splash_message:
+            return
+
+        splash_surface = font.render(message, True, splash_color)
+        splash_rect = rect_from_surface(splash_surface)
+        splash_rect.center = self.world.map.center
+
+        banner_rect = rect_from_size(self.world.map.width, splash_rect.height)
+        banner_rect.center = splash_rect.center
+        banner_surface = Surface(banner_rect.size)
+        banner_surface.fill(banner_color)
+        banner_surface.set_alpha(banner_alpha)
+
+        screen.blit(banner_surface, banner_rect.top_left.pygame)
+        screen.blit(splash_surface, splash_rect.top_left.pygame)
+
+
+
+class CommunityExtension (Artist):
+
+    # Data (fold)
+    white = 255, 255, 255
+    transparent = 0, 0, 0, 0
+    origin = 0, 0
+
+    masks = {
+            'normal shape': ClippingMask('images/normal-shape.png'),
+            'battle shape': ClippingMask('images/battle-shape.png'),
+            'city icon':    ClippingMask('images/city-icon.png'),
+            'army icon':    ClippingMask('images/army-icon.png'),
+            'full health':  ClippingMask('images/full-health.png'),
+            'empty health': ClippingMask('images/empty-health.png') }
+
+    layers = {
+            'city icon':    masks['city icon'].apply_color(white),
+            'army icon':    masks['army icon'].apply_color(white),
+            'empty health': masks['empty health'].apply_color(white) }
+
+    font = pygame.font.Font('fonts/DejaVuSans-Bold.ttf', 16)
+
+    def __init__(self, type, community):
+        rect_from_surface = kxg.geometry.Rectangle.from_surface
+
+        self.community = community
         self.rectangle = rect_from_surface(self.masks['normal shape'].mask)
+        self.rectangle.center = community.position
         self.surface = Surface(self.rectangle.size, flags=pygame.SRCALPHA)
         self.icon = self.layers['%s icon' % type]
-        self.force_draw = True
 
-        self.decoy = pygame.Surface((500, 500))
-        self.decoy.fill((0, 0, 0))
+        self.is_stale = True
+        self.has_moved = False
 
         self.update_owner()
 
 
-    def _draw(self, screen, background, hard_refresh):
-
-        new_position = self.community.position
-        old_position = self.rectangle.center
+    def update(self, time):
+        if self.has_moved:
+            from_union = kxg.geometry.Rectangle.from_union
+            old_rectangle = self.rectangle.copy()
+            self.rectangle.center = self.community.position
+            stale_rectangle = from_union(old_rectangle, self.rectangle)
+            self.has_moved = False
+            return [stale_rectangle.pygame]
         
-        get_distance = kxg.geometry.Vector.get_distance
-        displacement = get_distance(new_position, old_position)
+        elif self.is_stale:
+            self.is_stale = False
+            return [self.rectangle.pygame]
 
-        if displacement < 1 and not hard_refresh:
-            return
-
-        self.rectangle.center = new_position
-        top_left = self.rectangle.top_left.pygame
-        area = self.rectangle.pygame
-
-        screen.blit(background, top_left, area=area)
-        screen.blit(self.surface, top_left)
+        else:
+            return []
 
     def update_level(self):
         self.redraw_surface()
@@ -754,9 +943,16 @@ class CommunityArtist (Artist):
         self.battle_shape = self.masks['battle shape'].apply_color(color)
         self.redraw_surface()
 
+    def update_position(self):
+        self.has_moved = True
+
+
+    def draw(self, screen, region):
+        self.blit(screen, self.surface, self.rectangle.top_left, region)
 
     def redraw_surface(self):
         self.surface.fill(self.transparent)
+        self.is_stale = True
 
         self.redraw_shape()
         self.redraw_icon()
@@ -813,124 +1009,12 @@ class CommunityArtist (Artist):
         self.surface.blit(empty_health, self.origin)
 
 
-class PlayerArtist (Artist):
-
-    text_color = 'black'
-    text_font = Font('fonts/FreeSans.ttf', 14)
-    line_spacing = 5
-    background_color = 'white'
-
-    def __init__(self, player):
-        self.player = player
-        self.previous_stockpile = 0
-        self.previous_city_price = 0
-
-        self.size = 200, 2 * self.text_font.get_height() + self.line_spacing
-        self.surface = pygame.Surface(self.size, flags=pygame.SRCALPHA)
-
-    def update(self, time):
-        stockpile = self.player.wealth
-        #city_price = tokens.City.get_price(self.player)
-        city_price = 0
-
-        # Return immediately if nothing has changed.
-        if stockpile == self.previous_stockpile:
-            if city_price == self.previous_city_price:
-                return []
-
-        # Otherwise draw the updated status message.
-        self.previous_stockpile = stockpile
-        self.previous_city_price = city_price
-
-        color = Color(self.text_color)
-        background = Color(self.background_color)
-        transparent = 0, 0, 0, 0
-
-        surface = self.surface
-        surface.fill(transparent)
-
-        wealth_status = "Wealth: %d, %+d" % (self.player.wealth, self.player.revenue)
-        #city_status = "Build City: %d" % tokens.City.get_price(self.player)
-        city_status = "Build City: ???"
-
-        wealth_text = self.text_font.render(wealth_status, True, color)
-        city_text = self.text_font.render(city_status, True, color)
-
-        wealth_rect = kxg.geometry.Rectangle.from_surface(wealth_text)
-        city_rect = kxg.geometry.Rectangle.from_surface(city_text)
-
-        wealth_offset = 0, 0
-        city_offset = 0, self.line_spacing + self.text_font.get_height()
-        city_rect += city_offset
-
-        pygame.draw.rect(surface, background, wealth_rect.pygame)
-        pygame.draw.rect(surface, background, city_rect.pygame)
-
-        surface.blit(wealth_text, wealth_offset)
-        surface.blit(city_text, city_offset)
-
-        return [self.surface.get_rect()]
-
-    def draw(self, screen, region):
-        screen.blit(self.surface, region.topleft, area=region)
-
-
-class MessageArtist (Artist):
-
-    def draw_messages(self, screen):
-        color = Color(self.text_color)
-        background = Color(self.background_color)
-        last_offset = self.world.map.bottom - 5
-
-        for message in self.status_messages:
-            status = str(message)
-            text = self.status_font.render(status, True, color)
-
-            rectangle = kxg.geometry.Rectangle.from_surface(text)
-            rectangle.center_x = self.world.map.center_x
-            rectangle.bottom = last_offset
-
-            last_offset = rectangle.top
-
-            pygame.draw.rect(screen, background, rectangle.pygame)
-            screen.blit(text, rectangle.top_left.pygame)
-
-
-class GameOverArtist (Artist):
-
-    def draw_splash(self, screen):
-        font = self.splash_font
-        message = self.splash_message
-        splash_color = Color(self.splash_color)
-        banner_color = Color(self.banner_color)
-        banner_alpha = int(255 * self.banner_alpha)
-        rect_from_size = kxg.geometry.Rectangle.from_size
-        rect_from_surface = kxg.geometry.Rectangle.from_surface
-        
-        if not self.splash_message:
-            return
-
-        splash_surface = font.render(message, True, splash_color)
-        splash_rect = rect_from_surface(splash_surface)
-        splash_rect.center = self.world.map.center
-
-        banner_rect = rect_from_size(self.world.map.width, splash_rect.height)
-        banner_rect.center = splash_rect.center
-        banner_surface = Surface(banner_rect.size)
-        banner_surface.fill(banner_color)
-        banner_surface.set_alpha(banner_alpha)
-
-        screen.blit(banner_surface, banner_rect.top_left.pygame)
-        screen.blit(splash_surface, splash_rect.top_left.pygame)
-
-
-
-class CityExtension (CommunityArtist):
+class CityExtension (CommunityExtension):
     def __init__(self, city):
-        CommunityArtist.__init__(self, 'city', city)
+        CommunityExtension.__init__(self, 'city', city)
 
-class ArmyExtension (CommunityArtist):
+class ArmyExtension (CommunityExtension):
     def __init__(self, army):
-        CommunityArtist.__init__(self, 'army', army)
+        CommunityExtension.__init__(self, 'army', army)
 
 
