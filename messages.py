@@ -85,7 +85,7 @@ class CreateCity (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_create_city(self)
+        actor.show_error(self)
 
     def setup(self, world, sender, id):
         self.city.give_id(id)
@@ -95,6 +95,47 @@ class CreateCity (kxg.Message):
 
     def notify(self, actor, is_mine):
         actor.create_city(self.city, is_mine)
+
+
+class CreateArmy (kxg.Message):
+
+    def __init__(self, player, position):
+        self.army = tokens.Army(player, position)
+        self.price = self.army.get_price()
+
+    def check(self, world, sender):
+        army = self.army
+        price = self.price
+        player = army.player
+
+        # Make sure the right player is sending this message.
+        if sender is not player:
+            self.error = "Army requested by wrong player."
+            return False
+
+        # Make sure the player can afford this army.
+        if not player.can_afford_price(price):
+            self.error = "Can't afford $%d for a new army." % price
+            return False
+
+        # Make sure this army can be placed here.
+        if not player.can_place_army(army):
+            self.error = "Can't place an army in that location."
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.show_error(self)
+
+    def setup(self, world, sender, id):
+        self.army.give_id(id)
+
+    def execute(self, world):
+        world.create_army(self.army, self.price)
+
+    def notify(self, actor, is_mine):
+        actor.create_army(self.army, is_mine)
 
 
 class CreateRoad (kxg.Message):
@@ -141,7 +182,7 @@ class CreateRoad (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_create_road(self)
+        actor.show_error(self)
 
     def setup(self, world, sender, id):
         self.road.give_id(id)
@@ -151,47 +192,6 @@ class CreateRoad (kxg.Message):
 
     def notify(self, actor, is_mine):
         actor.create_road(self.road, is_mine)
-
-
-class CreateArmy (kxg.Message):
-
-    def __init__(self, player, position):
-        self.army = tokens.Army(player, position)
-        self.price = self.army.get_price()
-
-    def check(self, world, sender):
-        army = self.army
-        price = self.price
-        player = army.player
-
-        # Make sure the right player is sending this message.
-        if sender is not player:
-            self.error = "Army requested by wrong player."
-            return False
-
-        # Make sure the player can afford this army.
-        if not player.can_afford_price(price):
-            self.error = "Can't afford $%d for a new army." % price
-            return False
-
-        # Make sure this army can be placed here.
-        if not player.can_place_army(army):
-            self.error = "Can't place an army in that location."
-            return False
-
-        return True
-
-    def reject(self, actor):
-        actor.reject_create_army(self)
-
-    def setup(self, world, sender, id):
-        self.army.give_id(id)
-
-    def execute(self, world):
-        world.create_army(self.army, self.price)
-
-    def notify(self, actor, is_mine):
-        actor.create_army(self.army, is_mine)
 
 
 
@@ -223,7 +223,7 @@ class UpgradeCity (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_upgrade_city(self)
+        actor.show_error(self)
 
     def execute(self, world):
         world.upgrade_city(self.city, self.city.get_upgrade_price())
@@ -261,7 +261,7 @@ class UpgradeArmy (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_upgrade_army(self)
+        actor.show_error(self)
 
     def execute(self, world):
         world.upgrade_army(self.army, self.price)
@@ -311,7 +311,7 @@ class RequestBattle (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_request_battle(self)
+        actor.show_error(self)
 
     def setup (self, world, sender, id):
         # Do pathfinding stuff?
@@ -360,7 +360,7 @@ class StartBattle (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_start_battle(self)
+        actor.show_error(self)
 
     def setup(self, world, sender, id):
         self.battle = tokens.Battle(army, target)
@@ -406,7 +406,7 @@ class JoinBattle (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_join_battle(self)
+        actor.show_error(self)
 
     def setup(self, world, sender, id):
         self.battle.add_army(self.army)
@@ -441,7 +441,7 @@ class RetreatBattle (kxg.Message):
         return True
 
     def reject(self, actor):
-        actor.reject_retreat_battle(self)
+        actor.show_error(self)
 
     def setup(self, world, sender, id):
         battle = self.army.battle
@@ -490,11 +490,11 @@ class MoveArmy (kxg.Message):
 
     def __init__(self, army, end_point):
         self.army = army
-        self.end = end_point
+        self.target = end_point
 
     def check(self, world, sender):
         army = self.army
-        end = self.end
+        target = self.target
         player = army.player
 
         # Make sure the right player is sending this message.
@@ -503,20 +503,20 @@ class MoveArmy (kxg.Message):
             return False
 
         # Make sure the army can move to the end point.
-        #if not army.can_move_to_position(army, end):
-        #    self.error = "Army can't move there."
-        #    return False
+        if not army.can_move_to(target):
+            self.error = "Army can't move there."
+            return False
 
         return True
 
     def reject(self, actor):
-        actor.reject_move_army(self)
+        actor.show_error(self)
 
     def execute(self, world):
-        world.move_army(self.army, self.end)
+        army.move_to(self.target)
 
     def notify(self, actor, is_mine):
-        actor.move_army(self.army, self.end, is_mine)
+        actor.move_army(self.army, self.target, is_mine)
 
 
 
@@ -524,7 +524,6 @@ class MoveArmy (kxg.Message):
 #
 ## RetreatBattle
 # army: get_retreat_battle_price()
-# actor: reject_retreat_battle(self)
 # world: retreat_battle(battle)
 # actor: retreat_battle(battle)
 #
@@ -535,17 +534,19 @@ class MoveArmy (kxg.Message):
 #
 ## StartBattle
 # - city: get_attack_price(attacker)
-# - actor: reject_attack_city(self)
+# - actor: show_error(self)
 # - world: attack_city(battle, price)
 # - actor: attack_city(battle, was_me)
+# target: is_battling
 # army: check_battle_proximity(community)
 # tokens: Battle(army, community) ## instead of Battle(attacker, city)
-# actor: reject_start_battle(self)
 # world: start_battle(battle)
 # actor: start_battle(battle)
 #
 
 ## RequestBattle
+# target: get_battle_price()
+# army: can_request_battle(target)
 # world: request_battle(army, target)
 # actor: reject_request_battle(self)
 # actor: request_battle(army, target, is_mine)
@@ -553,10 +554,28 @@ class MoveArmy (kxg.Message):
 
 ## MoveArmy
 # army: can_move_to_position(army, end)
-# actor: reject_move_army(self)
 # world: move_army(army, end)
 # actor: move_army(army, end, is_mine)
 # 
+
+## CreateArmy
+# Army: init(player, position)
+# Army: get_next_price(player)
+# player: can_place_army(army)
+# actor: show_error(self)
+# army: give_id(id)
+# world: create_army(army, price)
+# actor: create_army(army, is_mine)
+# 
+## UpgradeArmy
+# army: get_upgrade_price()
+# world: upgrade_army(army, price)
+# actor: upgrade_army(army, is_mine)
+#
+## UpgradeCity
+# city: get_upgrade_price()
+# world: upgrade_city(city, price)
+# actor: upgrade_city(city, is_mine)
 
 
 

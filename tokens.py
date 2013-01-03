@@ -489,12 +489,17 @@ class City (Community):
 
 class Army (Community):
 
+    # Settings (fold)
+    speed = 25
+
     def __init__(self, player, position):
         Community.__init__(self)
 
         self.player = player
         self.position = position
+
         self.target_community = None
+        self.target = kxg.geometry.Vector.null()
 
     def __extend__(self):
         return {'gui': gui.ArmyExtension}
@@ -518,6 +523,13 @@ class Army (Community):
 
             self.target = start + path
 
+        if self.target:
+            heading = self.target - self.position
+            if heading.magnitude < 1:
+                self.target = None
+            else:
+                self.position += heading.get_scaled(self.speed * time)
+
     def report(self, messenger):
         pass
 
@@ -531,6 +543,10 @@ class Army (Community):
 
     def can_request_battle(self, community):
         return True
+
+    def move_to(self, target):
+        self.target = target
+
 
     def get_price(self):
         return 30 + 10 * len(self.player.cities)
@@ -555,6 +571,10 @@ class Army (Community):
 
     def get_battle_price(self):
         return 0
+
+    def can_move_to(self, position):
+        return True
+
 
 class Road (kxg.Token):
 
