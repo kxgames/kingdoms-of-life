@@ -71,6 +71,14 @@ class World (kxg.World):
         army.upgrade()
         army.player.spend_wealth(price)
 
+
+    @kxg.check_for_safety
+    def request_battle(self, campaign):
+        print "world executing campaign"
+        self.add_token(campaign)
+        campaign.setup()
+        army.chase(community)
+
     @kxg.check_for_safety
     def attack_city(self, battle, price):
         self.add_token(battle)
@@ -226,6 +234,10 @@ class Referee (kxg.Referee):
     def upgrade_army(self, army, is_mine):
         assert not is_mine
 
+    def request_battle(self, campaign, is_mine):
+        assert not is_mine
+        print "Referee notified of campaign"
+
     def attack_city(self, battle, is_mine):
         assert not is_mine
 
@@ -355,12 +367,17 @@ class Player (kxg.Token):
 
 class Community (kxg.Token):
 
+    # Settings (fold)
+    radius = 27
+    engagement_range = 3
+
     def __init__(self):
         kxg.Token.__init__(self)
 
         self.level = 1
         self.health = self.get_max_health()
         self.battle = None
+        self.campains = []
 
 
     def upgrade(self):
@@ -376,6 +393,15 @@ class Community (kxg.Token):
 
         for extension in self.get_extensions():
             extension.update_health()
+
+    def add_campaign(self, campaign):
+        self.campaigns.append(campaign)
+
+    def remove_campaign(self, campaign):
+        try:
+            self.campaigns.remove(campaign)
+        except ValueError:
+            pass
 
 
     def get_level(self):
@@ -396,6 +422,15 @@ class Community (kxg.Token):
     def get_distance_to(self, other):
         return self.position.get_distance(other.position)
 
+    def get_battle_price(self):
+        raise NotImplementedError
+
+    def check_battle_proximity(self, community):
+        radius = self.radius + community.radius + self.engagement_range
+        distance = community.position - self.position
+        
+        return radius >= distance.magnitude
+
     def is_in_battle(self):
         return self.battle is not None
 
@@ -403,7 +438,6 @@ class Community (kxg.Token):
 class City (Community):
 
     # Settings (fold)
-    radius = 27
     buffer = 90
     border = 130
 
@@ -449,6 +483,9 @@ class City (Community):
     def get_supply(self):
         return sum([road.get_supply_to(self) for road in self.roads], 1)
     
+    def get_battle_price(self):
+        return 100
+
 
 class Army (Community):
 
@@ -457,6 +494,7 @@ class Army (Community):
 
         self.player = player
         self.position = position
+        self.target_community = None
 
     def __extend__(self):
         return {'gui': gui.ArmyExtension}
@@ -468,7 +506,17 @@ class Army (Community):
 
     @kxg.check_for_safety
     def update(self, time):
-        pass
+        if self.target_community:
+            start = self.position
+            end = self.target_community.position
+            radius = self.radius + self.target_community.radius
+            
+            # Do pathfinding stuff
+
+            direction = end - start
+            path = direction * (1 - radius / direction.magnitude)
+
+            self.target = start + path
 
     def report(self, messenger):
         pass
@@ -477,6 +525,12 @@ class Army (Community):
     def teardown(self):
         raise AssertionError
 
+
+    def chase (self, community):
+        self.target_community = community
+
+    def can_request_battle(self, community):
+        return True
 
     def get_price(self):
         return 30 + 10 * len(self.player.cities)
@@ -499,6 +553,8 @@ class Army (Community):
 
         return max(city_supplies)
 
+    def get_battle_price(self):
+        return 0
 
 class Road (kxg.Token):
 
@@ -564,17 +620,17 @@ class Battle (kxg.Token):
     # Settings (fold)
     time_until_capture = 25
 
-    def __init__(self, attacker, city):
+    def __init__(self, army, community):
         kxg.Token.__init__(self)
-        self.city = city
-        self.attacker = attacker
-        self.defender = city.player
+
+        self.communities = [army, community]
         self.elapsed_time = 0
 
 
     @kxg.check_for_safety
     def setup(self):
-        self.city.battle = self
+        for community in self.communities:
+            community.battle = self
 
     @kxg.check_for_safety
     def update(self, time):
@@ -600,4 +656,45 @@ class Battle (kxg.Token):
         return self.elapsed_time >= self.time_until_capture
 
 
+
+class Campaign (kxg.Token):
+
+    def __init__(self, army, community):
+        kxg.Token.__init__(self)
+
+        print "Initializing campaign"
+        self.army = army
+        self.community = community
+
+    @kxg.check_for_safety
+    def setup(self):
+        self.army.add_campaign(self)
+        self.community.add_campaign(self)
+
+    @kxg.check_for_safety
+    def update(self, time):
+        pass
+
+    def report(self, messenger):
+        if self.was_successful():
+            army = self.army
+            community = self.community
+
+            assert not army.battle
+
+            if community.battle:
+                message = messages.JoinBattle(army, community)
+                self.send_message(message)
+            else:
+                message = messages.StartBattle(army, community)
+                self.send_message(message)
+
+    @kxg.check_for_safety
+    def teardown(self):
+        self.army.remove_campaign(self)
+        self.community.remove_campaign(self)
+
+
+    def was_successful(self):
+        return self.army.check_battle_proximity(self.community)
 

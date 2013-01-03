@@ -119,6 +119,10 @@ class Gui (kxg.Actor):
     def upgrade_army(self, city, is_mine):
         self.refresh()
 
+    def request_battle(self, campaign, is_mine):
+        # print dotted lines?
+        print "Gui notified of campaign"
+
     def attack_city(self, siege, was_me):
         self.refresh()
 
@@ -255,20 +259,20 @@ class Gui (kxg.Actor):
         try:
             wealth_text = self.status_font.render(wealth_status, True, color)
             city_text = self.status_font.render(city_status, True, color)
+
+            wealth_offset = 5, 5
+            city_offset = 5, 5 + wealth_text.get_height()
+
+            wealth_rect = kxg.geometry.Rectangle.from_surface(wealth_text) + wealth_offset
+            city_rect = kxg.geometry.Rectangle.from_surface(city_text) + city_offset
+
+            pygame.draw.rect(screen, background, wealth_rect.pygame)
+            pygame.draw.rect(screen, background, city_rect.pygame)
+
+            screen.blit(wealth_text, wealth_offset)
+            screen.blit(city_text, city_offset)
         except:
             pass
-
-        wealth_offset = 5, 5
-        city_offset = 5, 5 + wealth_text.get_height()
-
-        wealth_rect = kxg.geometry.Rectangle.from_surface(wealth_text) + wealth_offset
-        city_rect = kxg.geometry.Rectangle.from_surface(city_text) + city_offset
-
-        pygame.draw.rect(screen, background, wealth_rect.pygame)
-        pygame.draw.rect(screen, background, city_rect.pygame)
-
-        screen.blit(wealth_text, wealth_offset)
-        screen.blit(city_text, city_offset)
 
     def draw_messages(self, screen):
         color = Color(self.text_color)
@@ -394,13 +398,21 @@ class Hotkeys (object):
 
         left = kxg.gui.mouse_to_string[1]
 
+        # Start develop click
         develop_init = ['dMOUSEBUTTONDOWN', left]
         register_chain (develop_init, self.develop_init, None)
 
+        # Complete develop click
         develop = ['dMOUSEBUTTONDOWN', left, 'dMOUSEBUTTONUP', left]
         register_chain (develop, self.develop, None)
 
-        register_chain (['fMOUSEDOWN', left], self.fight, None)
+        # Start fight click
+        fight_init ['fMOUSEDOWN', left]
+        register_chain (fight_init, self.fight_init, None)
+
+        # Complete fight click
+        fight ['fMOUSEDOWN', left, 'fMOUSEUP', left]
+        register_chain (fight, self.fight, None)
 
         #info_init = ['iMOUSEDOWN', left]
         #register_chain (info_init, self.info_init, None)
@@ -472,21 +484,40 @@ class Hotkeys (object):
                 message = messages.CreateCity(player, end_click)
                 self.gui.send_message(message)
 
+    def fight_init(self, args):
+        position = kxg.geometry.Vector.from_tuple(self.event.pos)
+        self.start_click = position
+
     def fight(self, args):
         world = self.gui.world
         player = self.gui.player
-        cutoff = tokens.City.radius
+        cutoff = tokens.Community.radius
 
-        position = kxg.geometry.Vector.from_tuple(self.event.pos)
-        army = world.find_closest_army(position, player, cutoff)
+        start = self.start_click
+        end = kxg.geometry.Vector.from_tuple(self.event.pos)
 
-        if army is not None:
-            message = messages.UpgradeArmy(army)
+        start_army = world.find_closest_army(start, player, cutoff)
+        end_army = world.find_closest_army(end, None, cutoff)
+        end_city = world.find_closest_city(end, None, cutoff)
+
+        end_army_distance = (end - end_army.position).magnitude_squared
+        end_city_distance = (end - end_city.position).magnitude_squared
+
+        end_army_closer = end_army_distance <= end_city_distance
+        end_community = end_army if end_army_closer else end_city
+
+        if start_army is None:
+            message = messages.CreateArmy(player, start)
+            self.gui.send_message(message)
+
+        elif end_community is None:
+            message = messages.UpgradeArmy(start_army)
             self.gui.send_message(message)
 
         else:
-            message = messages.CreateArmy(player, position)
+            message = messages.RequestBattle(start_army, end_community)
             self.gui.send_message(message)
+
 
     def info_init(self):
         position = kxg.geometry.Vector.from_tuple(self.event.pos)

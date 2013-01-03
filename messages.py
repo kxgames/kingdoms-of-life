@@ -273,15 +273,15 @@ class UpgradeArmy (kxg.Message):
 
 class RequestBattle (kxg.Message):
 
-    def __init__(self, army, target):
+    def __init__(self, army, community):
         self.army = army
-        self.target = target
+        self.community = community
 
     def check(self, world, sender):
         army = self.army
-        target = self.target
+        community = self.community
         player = army.player
-        price = target.get_battle_price()
+        price = community.get_battle_price()
 
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -289,23 +289,23 @@ class RequestBattle (kxg.Message):
             return False
 
         # Make sure the army is not attacking one of its own.
-        if target.player is player:
-            self.error = "Army can't attack friendly targets."
+        if community.player is player:
+            self.error = "Army can't attack friendly community."
             return False
         
         # Make sure the army is not already in a battle.
-        if army.is_battling:
+        if army.battle:
             self.error = "Army can't start a new battle while it is already in one."
             return False
 
         # Make sure the army can move to the end point.
-        if not army.can_move_to_target(army, target):
+        if not army.can_request_battle(community):
             self.error = "Army can't move there."
             return False
         
-        # Make sure the player can afford to battle target.
+        # Make sure the player can afford to battle community.
         if not player.can_afford_price(price):
-            self.error = "Can't afford $%d to battle this target." % price
+            self.error = "Can't afford $%d to battle this community." % price
             return False
 
         return True
@@ -313,11 +313,16 @@ class RequestBattle (kxg.Message):
     def reject(self, actor):
         actor.reject_request_battle(self)
 
+    def setup (self, world, sender, id):
+        # Do pathfinding stuff?
+        pass
+
     def execute(self, world):
-        world.request_battle(self.army, self.target)
+        self.campaign = Campaign(self.army, community)
+        world.request_battle(self.campaign)
 
     def notify(self, actor, is_mine):
-        actor.request_battle(self.army, self.target, is_mine)
+        actor.request_battle(self.campaign, is_mine)
 
 
 class StartBattle (kxg.Message):
@@ -337,13 +342,13 @@ class StartBattle (kxg.Message):
             return False
         
         # Make sure the army is not already in a battle.
-        if army.is_battling:
+        if army.battle:
             self.error = "Army can't start a new battle while it is already in one."
             return False
         
         # Make sure the target is not already in a battle.
         # Use JoinBattle if they are.
-        if target.is_battling:
+        if target.battle:
             self.error = "Army can't start a new battle with the target."
             return False
 
@@ -370,31 +375,31 @@ class StartBattle (kxg.Message):
 
 class JoinBattle (kxg.Message):
 
-    def __init__(self, army, target):
+    def __init__(self, army, community):
         self.army = army
-        self.target = self.target
+        self.community = community
         self.battle = None
 
     def check(self, world, sender):
         army = self.army
-        target = self.target
+        community = self.community
         
-        # If the target is friendly, then the army is coming to it's aid. 
+        # If the community is friendly, then the army is coming to it's aid.  
         # No need to check ownership.
         
         # Make sure the army is not already in a battle.
-        if army.is_battling:
+        if army.battle:
             self.error = "Army can't start a new battle while it is already in one."
             return False
         
-        # Make sure the target is in a battle.
+        # Make sure the community is in a battle.
         # Use StartBattle if they aren't.
-        if target.is_battling:
+        if community.battle:
             self.error = "Target must be in a battle for the army to join."
             return False
 
-        # Check proximity to the target.
-        if army.check_battle_proximity(army, target):
+        # Check proximity to the community.
+        if army.check_battle_proximity(community):
             self.error = "Army must be close to the target to join battle."
             return False
 
@@ -404,7 +409,6 @@ class JoinBattle (kxg.Message):
         actor.reject_join_battle(self)
 
     def setup(self, world, sender, id):
-        self.battle = self.target.battle
         self.battle.add_army(self.army)
 
     def execute(self, world):
@@ -534,53 +538,30 @@ class MoveArmy (kxg.Message):
 # - actor: reject_attack_city(self)
 # - world: attack_city(battle, price)
 # - actor: attack_city(battle, was_me)
-# target: is_battling
-# army: check_battle_proximity(army, target)
-# tokens: Battle(army, target) ## instead of Battle(attacker, city)
+# army: check_battle_proximity(community)
+# tokens: Battle(army, community) ## instead of Battle(attacker, city)
 # actor: reject_start_battle(self)
 # world: start_battle(battle)
 # actor: start_battle(battle)
 #
+
 ## RequestBattle
-# target: get_battle_price()
-# army: can_move_to_target(army, target)
-# actor: reject_request_battle(self)
 # world: request_battle(army, target)
+# actor: reject_request_battle(self)
 # actor: request_battle(army, target, is_mine)
 #
+
 ## MoveArmy
 # army: can_move_to_position(army, end)
 # actor: reject_move_army(self)
 # world: move_army(army, end)
 # actor: move_army(army, end, is_mine)
 # 
-## CreateArmy
-# Army: init(player, position)
-# Army: get_next_price(player)
-# player: can_place_army(army)
-# actor: reject_create_army(self)
-# army: give_id(id)
-# world: create_army(army, price)
-# actor: create_army(army, is_mine)
-# 
-## UpgradeArmy
-# army: get_upgrade_price()
-# actor: reject_upgrade_army(self)
-# world: upgrade_army(army, price)
-# actor: upgrade_army(army, is_mine)
-#
-## UpgradeCity
-# city: get_upgrade_price()
-# actor: reject_upgrade_city(self)
-# world: upgrade_city(city, price)
-# actor: upgrade_city(city, is_mine)
 
 
 
 
 # Messages to create:
-# Join Battle: <F-drag>, drag onto enemy city/army in existing battle.
-# Retreat army: <F-drag>, drag out of existing battle.
 # Destroy army: N/A
 
 
