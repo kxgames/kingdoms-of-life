@@ -76,10 +76,17 @@ class World (kxg.World):
     def request_battle(self, campaign):
         self.add_token(campaign)
         campaign.setup()
-        campaign.army.chase(campaign.community)
+        campaign.army.chase(campaign)
 
     @kxg.check_for_safety
     def start_battle(self, campaign, battle):
+
+        if isinstance(campaign.community, Army):
+            cancelled_campaign = campaign.community.my_campaign
+            if cancelled_campaign:
+                cancelled_campaign.teardown()
+                self.remove_token(cancelled_campaign)
+
         self.add_token(battle)
         battle.setup()
 
@@ -88,7 +95,6 @@ class World (kxg.World):
 
     @kxg.check_for_safety
     def join_battle(self, campaign, battle):
-        print "%s joining battle" %campaign.army
         battle.add_community(campaign.army)
 
         campaign.teardown()
@@ -258,6 +264,9 @@ class Referee (kxg.Referee):
     def join_battle(self, battle):
         pass
 
+    def move_army(self, army, target, is_mine):
+        assert not is_mine
+
     def attack_city(self, battle, is_mine):
         assert not is_mine
 
@@ -420,11 +429,11 @@ class Community (kxg.Token):
     def add_campaign(self, campaign):
         self.campaigns.append(campaign)
 
-    def remove_campaign(self, campaign):
-        try:
-            self.campaigns.remove(campaign)
-        except ValueError:
-            pass
+    def forget_campaign(self, campaign):
+        raise NotImplementedError
+
+    def engage_battle(self, battle):
+        raise NotImplementedError
 
 
     def get_level(self):
@@ -498,6 +507,16 @@ class City (Community):
         raise AssertionError
 
 
+    def forget_campaign(self, campaign):
+        try:
+            self.campaigns.remove(campaign)
+        except ValueError:
+            pass
+
+    def engage_battle(self, battle):
+        self.battle = battle
+
+
     def get_price(self):
         return 20 + 10 * len(self.player.cities)
 
@@ -525,8 +544,8 @@ class Army (Community):
     def __init__(self, player, position):
         Community.__init__(self, player, position)
 
-        self.target_community = None
-        self.target = kxg.geometry.Vector.null()
+        self.my_campaign = None
+        self.target = None
 
     def __extend__(self):
         return {'gui': gui.ArmyExtension}
@@ -538,10 +557,11 @@ class Army (Community):
 
     @kxg.check_for_safety
     def update(self, time):
-        if self.target_community:
+        if self.my_campaign:
+            target_community = self.my_campaign.community
             start = self.position
-            end = self.target_community.position
-            radius = self.radius + self.target_community.radius
+            end = target_community.position
+            radius = self.radius + target_community.radius
             
             # Do pathfinding stuff
 
@@ -565,11 +585,28 @@ class Army (Community):
         raise AssertionError
 
 
-    def chase (self, community):
-        self.target_community = community
+    def chase (self, campaign):
+        self.my_campaign = campaign
 
     def can_request_battle(self, community):
         return True
+
+
+    def forget_campaign(self, campaign):
+        if campaign:
+            try:
+                self.campaigns.remove(campaign)
+            except ValueError:
+                pass
+
+            if self.my_campaign is campaign:
+                self.my_campaign = None
+                self.target = None
+        
+    def engage_battle(self, battle):
+        self.battle = battle
+        self.target = None
+        self.forget_campaign(self.my_campaign)
 
     def move_to(self, target):
         self.target = target
@@ -696,8 +733,8 @@ class Campaign (kxg.Token):
 
     @kxg.check_for_safety
     def teardown(self):
-        self.army.remove_campaign(self)
-        self.community.remove_campaign(self)
+        self.army.forget_campaign(self)
+        self.community.forget_campaign(self)
 
 
     def was_successful(self):
@@ -711,9 +748,6 @@ class Battle (kxg.Token):
     def __init__(self, campaign):
         kxg.Token.__init__(self)
 
-        print "New battle %s" % self
-        print "    army %s" % campaign.army
-        print "    community %s" % campaign.community
         self.init_campaign = campaign  # Will be deleted in setup
         self.communities = {}
 
@@ -752,7 +786,7 @@ class Battle (kxg.Token):
         if player not in self.communities:
             self.communities[player] = []
         self.communities[player].append(community)
-        community.battle = self
+        community.engage_battle(self)
 
     def get_initiation_price(self):
         pass

@@ -521,8 +521,16 @@ class Hotkeys (object):
             message = messages.CreateArmy(player, start)
             self.gui.send_message(message)
 
-        elif end_community is None:
+        elif end_community is start_army:
             message = messages.UpgradeArmy(start_army)
+            self.gui.send_message(message)
+
+        elif end_community is None:
+            #if start_army.battle:
+            #    message = messages.RetreatBattle(start_army)
+            #    self.gui.send_message(message)
+            #else:
+            message = messages.MoveArmy(start_army, end)
             self.gui.send_message(message)
 
         else:
@@ -569,7 +577,7 @@ class Hotkeys (object):
                 return
 
             if city in player.cities:
-                defense_price = city.get_defense_price()
+                defense_price = city.get_battle_price()
                 show("Defend city: %d" % defense_price)
             else:
                 attack_price = city.get_attack_price(player)

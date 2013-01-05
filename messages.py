@@ -314,6 +314,8 @@ class RequestBattle (kxg.Message):
 
     def setup (self, world, sender, id):
         self.campaign.give_id(id)
+        print "RequestBattle: Campaign %s" %self.campaign.get_id()
+        print "    Army %s chasing Community %s" %(self.campaign.army.get_id(), self.campaign.community.get_id())
 
     def execute(self, world):
         world.request_battle(self.campaign)
@@ -360,6 +362,8 @@ class StartBattle (kxg.Message):
 
     def setup(self, world, sender, id):
         self.battle.give_id(id)
+        print "StartBattle  %s (Campaign %s completed!)" %(self.battle.get_id(), self.campaign.get_id())
+        print "    Battle %s communities: %s, %s" %(self.battle.get_id(), self.campaign.army.get_id(), self.campaign.community.get_id())
 
     def execute(self, world):
         world.start_battle(self.campaign, self.battle)
@@ -383,20 +387,17 @@ class JoinBattle (kxg.Message):
         
         # Make sure the army is not already in a battle.
         if army.battle:
-            print "Army can't start a new battle while it is already in one."
             self.error = "Army can't start a new battle while it is already in one."
             return False
         
         # Make sure the target is in a battle.
         # Use StartBattle if they aren't.
         if not community.battle:
-            print "Target must be in a battle for the army to join."
             self.error = "Target must be in a battle for the army to join."
             return False
 
         # Check proximity to the battle.
         if not army.check_battle_proximity(community.battle):
-            print "Army must be close to an enemy target to join a battle."
             self.error = "Army must be close to an enemy target to join a battle."
             return False
 
@@ -406,7 +407,12 @@ class JoinBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        pass
+        print "JoinBattle %s (Campaign %s completed!)" %(self.battle.get_id(), self.campaign.get_id())
+        msg = ""
+        for coms in self.battle.communities.values():
+            for com in coms:
+                msg += "%d, " % com.get_id()
+        print "    Battle %s communities: %s%s" %(self.battle.get_id(), msg, self.campaign.army.get_id())
 
     def execute(self, world):
         world.join_battle(self.campaign, self.battle)
@@ -419,6 +425,7 @@ class RetreatBattle (kxg.Message):
     
     def __init__(self, army):
         self.army = army
+        self.battle = army.battle
 
     def check(self, world, sender):
         army = self.army
@@ -498,6 +505,11 @@ class MoveArmy (kxg.Message):
         if sender is not player:
             self.error = "Army motion requested by wrong player."
             return False
+        #
+        # Make sure the army is not already in a battle.
+        if army.battle:
+            self.error = "Army can't move when it is in a battle."
+            return False
 
         # Make sure the army can move to the end point.
         if not army.can_move_to(target):
@@ -510,7 +522,7 @@ class MoveArmy (kxg.Message):
         actor.show_error(self)
 
     def execute(self, world):
-        army.move_to(self.target)
+        self.army.move_to(self.target)
 
     def notify(self, actor, is_mine):
         actor.move_army(self.army, self.target, is_mine)
