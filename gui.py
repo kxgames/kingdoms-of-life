@@ -121,8 +121,14 @@ class Gui (kxg.Actor):
         self.refresh()
 
     def request_battle(self, campaign, is_mine):
-        # print dotted lines?
-        print "Gui notified of campaign"
+        # display dotted lines?
+        pass
+
+    def start_battle(self, battle):
+        self.refresh()
+
+    def join_battle(self, battle):
+        self.refresh()
 
     def move_army(self, army, target, is_mine):
         pass

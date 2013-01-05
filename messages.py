@@ -324,14 +324,13 @@ class RequestBattle (kxg.Message):
 
 class StartBattle (kxg.Message):
 
-    def __init__(self, army, target):
-        self.army = army
-        self.target = target
-        self.battle = None
+    def __init__(self, campaign):
+        self.campaign = campaign
+        self.battle = tokens.Battle(campaign)
 
     def check(self, world, sender):
-        army = self.army
-        target = self.target
+        army = self.campaign.army
+        target = self.campaign.community
         
         # Make sure the army is not attacking one of its own.
         if target.player is army.player:
@@ -350,7 +349,7 @@ class StartBattle (kxg.Message):
             return False
 
         # Check proximity to the target.
-        if army.check_battle_proximity(target):
+        if not army.check_engagement_proximity(target):
             self.error = "Army must be close to the target to start battle."
             return False
 
@@ -360,11 +359,10 @@ class StartBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        self.battle = tokens.Battle(army, target)
         self.battle.give_id(id)
 
     def execute(self, world):
-        world.start_battle(self.battle)
+        world.start_battle(self.campaign, self.battle)
 
     def notify(self, actor, sent_from_here):
         actor.start_battle(self.battle)
@@ -372,32 +370,34 @@ class StartBattle (kxg.Message):
 
 class JoinBattle (kxg.Message):
 
-    def __init__(self, army, community):
-        self.army = army
-        self.community = community
-        self.battle = None
+    def __init__(self, campaign, battle):
+        self.campaign = campaign
+        self.battle = battle
 
     def check(self, world, sender):
-        army = self.army
-        community = self.community
+        army = self.campaign.army
+        community = self.campaign.community
         
-        # If the community is friendly, then the army is coming to it's aid.  
-        # No need to check ownership.
+        ## If the community is friendly, then the army is coming to it's aid.  
+        ## No need to check ownership.
         
         # Make sure the army is not already in a battle.
         if army.battle:
+            print "Army can't start a new battle while it is already in one."
             self.error = "Army can't start a new battle while it is already in one."
             return False
         
-        # Make sure the community is in a battle.
+        # Make sure the target is in a battle.
         # Use StartBattle if they aren't.
-        if community.battle:
+        if not community.battle:
+            print "Target must be in a battle for the army to join."
             self.error = "Target must be in a battle for the army to join."
             return False
 
-        # Check proximity to the community.
-        if army.check_battle_proximity(community):
-            self.error = "Army must be close to the target to join battle."
+        # Check proximity to the battle.
+        if not army.check_battle_proximity(community.battle):
+            print "Army must be close to an enemy target to join a battle."
+            self.error = "Army must be close to an enemy target to join a battle."
             return False
 
         return True
@@ -406,10 +406,10 @@ class JoinBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        self.battle.add_army(self.army)
+        pass
 
     def execute(self, world):
-        world.join_battle(self.battle)
+        world.join_battle(self.campaign, self.battle)
 
     def notify(self, actor, sent_from_here):
         actor.join_battle(self.battle)
@@ -529,13 +529,13 @@ class MoveArmy (kxg.Message):
 # world: join_battle(battle)
 # actor: join_battle(battle)
 #
+
 ## StartBattle
 # - city: get_attack_price(attacker)
 # - actor: show_error(self)
 # - world: attack_city(battle, price)
 # - actor: attack_city(battle, was_me)
-# target: is_battling
-# army: check_battle_proximity(community)
+# army: check_engagement_proximity(community)
 # tokens: Battle(army, community) ## instead of Battle(attacker, city)
 # world: start_battle(battle)
 # actor: start_battle(battle)

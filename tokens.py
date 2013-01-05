@@ -74,10 +74,25 @@ class World (kxg.World):
 
     @kxg.check_for_safety
     def request_battle(self, campaign):
-        print "world executing campaign"
         self.add_token(campaign)
         campaign.setup()
         campaign.army.chase(campaign.community)
+
+    @kxg.check_for_safety
+    def start_battle(self, campaign, battle):
+        self.add_token(battle)
+        battle.setup()
+
+        campaign.teardown()
+        self.remove_token(campaign)
+
+    @kxg.check_for_safety
+    def join_battle(self, campaign, battle):
+        print "%s joining battle" %campaign.army
+        battle.add_community(campaign.army)
+
+        campaign.teardown()
+        self.remove_token(campaign)
 
     @kxg.check_for_safety
     def attack_city(self, battle, price):
@@ -236,7 +251,12 @@ class Referee (kxg.Referee):
 
     def request_battle(self, campaign, is_mine):
         assert not is_mine
-        print "Referee notified of campaign"
+
+    def start_battle(self, battle):
+        pass
+
+    def join_battle(self, battle):
+        pass
 
     def attack_city(self, battle, is_mine):
         assert not is_mine
@@ -371,8 +391,11 @@ class Community (kxg.Token):
     radius = 27
     engagement_range = 3
 
-    def __init__(self):
+    def __init__(self, player, position):
         kxg.Token.__init__(self)
+
+        self.player = player
+        self.position = position
 
         self.level = 1
         self.health = self.get_max_health()
@@ -425,7 +448,16 @@ class Community (kxg.Token):
     def get_battle_price(self):
         raise NotImplementedError
 
-    def check_battle_proximity(self, community):
+    def check_battle_proximity(self, battle):
+        communities = battle.communities
+        for player in battle.communities.keys():
+            if self.player is not player:
+                for community in communities[player]:
+                    if self.check_engagement_proximity(community):
+                        return True
+        return False
+
+    def check_engagement_proximity(self, community):
         radius = self.radius + community.radius + self.engagement_range
         distance = community.position - self.position
         
@@ -442,10 +474,8 @@ class City (Community):
     border = 130
 
     def __init__(self, player, position):
-        Community.__init__(self)
+        Community.__init__(self, player, position)
 
-        self.player = player
-        self.position = position
         self.roads = []
 
     def __extend__(self):
@@ -493,10 +523,7 @@ class Army (Community):
     speed = 25
 
     def __init__(self, player, position):
-        Community.__init__(self)
-
-        self.player = player
-        self.position = position
+        Community.__init__(self, player, position)
 
         self.target_community = None
         self.target = kxg.geometry.Vector.null()
@@ -635,54 +662,12 @@ class Road (kxg.Token):
         return (self.start is city) or (self.end is city)
 
 
-class Battle (kxg.Token):
-
-    # Settings (fold)
-    time_until_capture = 25
-
-    def __init__(self, army, community):
-        kxg.Token.__init__(self)
-
-        self.communities = [army, community]
-        self.elapsed_time = 0
-
-
-    @kxg.check_for_safety
-    def setup(self):
-        for community in self.communities:
-            community.battle = self
-
-    @kxg.check_for_safety
-    def update(self, time):
-        self.elapsed_time += time
-
-    def report(self, messenger):
-        if self.was_successful():
-            message = messages.CaptureCity(self)
-            self.send_message(message)
-
-    @kxg.check_for_safety
-    def teardown(self):
-        self.city.battle = None
-
-
-    def get_initiation_price(self):
-        pass
-
-    def get_retreat_cost(self):
-        pass
-
-    def was_successful(self):
-        return self.elapsed_time >= self.time_until_capture
-
-
 
 class Campaign (kxg.Token):
 
     def __init__(self, army, community):
         kxg.Token.__init__(self)
 
-        print "Initializing campaign"
         self.army = army
         self.community = community
 
@@ -703,10 +688,10 @@ class Campaign (kxg.Token):
             assert not army.battle
 
             if community.battle:
-                message = messages.JoinBattle(army, community)
+                message = messages.JoinBattle(self, community.battle)
                 messenger.send_message(message)
             else:
-                message = messages.StartBattle(army, community)
+                message = messages.StartBattle(self)
                 messenger.send_message(message)
 
     @kxg.check_for_safety
@@ -716,5 +701,66 @@ class Campaign (kxg.Token):
 
 
     def was_successful(self):
-        return self.army.check_battle_proximity(self.community)
+        return self.army.check_engagement_proximity(self.community)
+
+class Battle (kxg.Token):
+
+    # Settings (fold)
+    time_until_capture = 25
+
+    def __init__(self, campaign):
+        kxg.Token.__init__(self)
+
+        print "New battle %s" % self
+        print "    army %s" % campaign.army
+        print "    community %s" % campaign.community
+        self.init_campaign = campaign  # Will be deleted in setup
+        self.communities = {}
+
+
+    @kxg.check_for_safety
+    def setup(self):
+        campaign = self.init_campaign
+        self.add_community(campaign.army)
+        self.add_community(campaign.community)
+
+        del self.init_campaign
+
+    @kxg.check_for_safety
+    def update(self, time):
+        pass
+
+    def report(self, messenger):
+        pass
+        #for player in self.communities.keys:
+        #    if len(self.communities[player]) == 0:
+        #        # remove player ??
+        #if self.was_successful():
+        #    message = messages.CaptureCity(self)
+        #    self.send_message(message)
+
+    @kxg.check_for_safety
+    def teardown(self):
+        for communities in self.communities.values():
+            for community in communities:
+                community.battle = None
+
+
+    @kxg.check_for_safety
+    def add_community(self, community):
+        player = community.player
+        if player not in self.communities:
+            self.communities[player] = []
+        self.communities[player].append(community)
+        community.battle = self
+
+    def get_initiation_price(self):
+        pass
+
+    def get_retreat_cost(self):
+        pass
+
+    def was_successful(self):
+        return len(self.communities.keys) == 1
+
 
