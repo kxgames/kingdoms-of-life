@@ -60,7 +60,6 @@ class CreateCity (kxg.Message):
 
     def __init__(self, player, position):
         self.city = tokens.City(player, position)
-        self.price = self.city.get_price()
 
     def check(self, world, sender):
         city = self.city
@@ -72,6 +71,7 @@ class CreateCity (kxg.Message):
             self.error = "City requested by wrong player."
             return False
 
+        self.price = self.city.get_price()
         # Make sure the player can afford this city.
         if not player.can_afford_price(price):
             self.error = "Can't afford $%d for a new city." % price
@@ -423,23 +423,40 @@ class JoinBattle (kxg.Message):
 
 class RetreatBattle (kxg.Message):
     
-    def __init__(self, army):
+    def __init__(self, army, target):
         self.army = army
-        self.battle = army.battle
+        self.target = target
 
     def check(self, world, sender):
         army = self.army
+        target = self.target
+        player = army.player
         
-        # Make sure the army is in a battle.
-        if not army.battle:
-            self.error = "Army is not in a battle."
+        # Make sure the right player is sending this message.
+        if sender is not player:
+            self.error = "Retreat requested by wrong player."
             return False
 
+        # Make sure the army is actually an army.
+        if not isinstance(army, tokens.Army):
+            self.error = "Only armies can retreat."
+            return False
+
+        # Make sure the army is in a battle or campaign.
+        if not army.battle and not army.my_campaign:
+            self.error = "Army must be in a battle or campaign to retreat."
+            return False
+
+        # Make sure the army can move to the end point.
+        if not army.can_move_to(target):
+            self.error = "Army can't move there."
+            return False
+        
         self.price = army.battle.get_retreat_battle_price()
         
         # Make sure the player can afford to retreat.
-        if not player.can_afford_price(price):
-            self.error = "Can't afford $%d to retreat from battle." % price
+        if not player.can_afford_price(self.price):
+            self.error = "Can't afford $%d to retreat from battle." % self.price
             return False
 
         return True
@@ -448,14 +465,101 @@ class RetreatBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        battle = self.army.battle
-        battle.remove(army)
+        pass
 
     def execute(self, world):
-        world.retreat_battle(self.army, self.battle)
+        world.retreat_battle(self.army, self.target)
 
-    def notify(self, actor, sent_from_here):
-        actor.retreat_battle(self.battle)
+    def notify(self, actor, is_mine):
+        actor.retreat_battle(self.army, self.target, is_mine)
+
+
+class ZombifyCity (kxg.Message):
+    
+    def __init__(self, city):
+        self.city = city
+
+    def check(self, world, sender):
+        city = self.city
+        
+        # Make sure the city is actually an city.
+        if not isinstance(city, tokens.City):
+            self.error = "Only cities can be zombified."
+            return False
+
+        # Make sure the city is in a battle.
+        if not city.battle:
+            self.error = "City must be in a battle to be zombified."
+            return False
+        
+        # Make sure the city is at 0 health.
+        if not city.get_health() == 0:
+            self.error = "City must be at zero health to be zombified."
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.show_error(self)
+
+    def setup(self, world, sender, id):
+        pass
+
+    def execute(self, world):
+        raise NotImplementedError
+
+    def notify(self, actor, is_mine):
+        raise NotImplementedError
+
+
+class EndBattle (kxg.Message):
+    
+    def __init__(self, battle):
+        self.battle = battle
+
+        print "Battle ended"
+        raise NotImplementedError
+        # keep working here
+
+    def check(self, world, sender):
+        army = self.army
+        player = army.player
+        
+        # Make sure the right player is sending this message.
+        if sender is not player:
+            self.error = "Retreat requested by wrong player."
+            return False
+
+        # Make sure the army is in a battle or campaign.
+        if not army.battle and not army.my_campaign:
+            self.error = "Army must be in a battle or campaign to retreat."
+            return False
+
+        # Make sure the army can move to the end point.
+        if not army.can_move_to(target):
+            self.error = "Army can't move there."
+            return False
+        
+        self.price = army.battle.get_retreat_battle_price()
+        
+        # Make sure the player can afford to retreat.
+        if not player.can_afford_price(self.price):
+            self.error = "Can't afford $%d to retreat from battle." % self.price
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.show_error(self)
+
+    def setup(self, world, sender, id):
+        pass
+
+    def execute(self, world):
+        world.retreat_battle(self.army, self.target)
+
+    def notify(self, actor, is_mine):
+        actor.retreat_battle(self.army, self.target, is_mine)
 
 
 

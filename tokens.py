@@ -100,6 +100,18 @@ class World (kxg.World):
         campaign.teardown()
         self.remove_token(campaign)
 
+    def retreat_battle(self, army, target):
+
+        battle = army.battle
+
+        battle.retreat(army)
+        if battle.was_successful():
+            battle.teardown()
+            self.remove_token(battle)
+
+        army.move_to(target)
+
+
     @kxg.check_for_safety
     def attack_city(self, battle, price):
         self.add_token(battle)
@@ -263,6 +275,9 @@ class Referee (kxg.Referee):
 
     def join_battle(self, battle):
         pass
+
+    def retreat_battle(self, army, target, is_mine):
+        assert not is_mine
 
     def move_army(self, army, target, is_mine):
         assert not is_mine
@@ -750,6 +765,7 @@ class Battle (kxg.Token):
 
         self.init_campaign = campaign  # Will be deleted in setup
         self.communities = {}
+        self.zombie_city = None
 
 
     @kxg.check_for_safety
@@ -765,20 +781,39 @@ class Battle (kxg.Token):
         pass
 
     def report(self, messenger):
-        pass
-        #for player in self.communities.keys:
-        #    if len(self.communities[player]) == 0:
-        #        # remove player ??
-        #if self.was_successful():
-        #    message = messages.CaptureCity(self)
-        #    self.send_message(message)
+        if self.was_successful():
+            message = messages.EndBattle(self)
+            self.send_message(message)
 
     @kxg.check_for_safety
     def teardown(self):
+        if self.zombie_city:
+            self.zombie_city.battle = None
+
         for communities in self.communities.values():
             for community in communities:
                 community.battle = None
 
+
+    @kxg.check_for_safety
+    def zombify_city(self, city):
+        player = city.player
+
+        self.zombie_city = city
+
+        self.communities[player].remove(city)
+        if len(self.city[player]) < 1:
+            del self.city[player]
+
+    @kxg.check_for_safety
+    def remove_community(self, community):
+        player = community.player
+
+        community.battle = None
+
+        self.communities[player].remove(community)
+        if len(self.communities[player]) < 1:
+            del self.communities[player]
 
     @kxg.check_for_safety
     def add_community(self, community):
@@ -791,10 +826,10 @@ class Battle (kxg.Token):
     def get_initiation_price(self):
         pass
 
-    def get_retreat_cost(self):
-        pass
+    def get_retreat_battle_price(self):
+        return 50
 
     def was_successful(self):
-        return len(self.communities.keys) == 1
+        return len(self.communities.keys) <= 1
 
 

@@ -130,6 +130,9 @@ class Gui (kxg.Actor):
     def join_battle(self, battle):
         self.refresh()
 
+    def retreat_battle(self, army, target, is_mine):
+        self.refresh()
+
     def move_army(self, army, target, is_mine):
         pass
 
@@ -526,14 +529,19 @@ class Hotkeys (object):
             self.gui.send_message(message)
 
         elif end_community is None:
-            #if start_army.battle:
-            #    message = messages.RetreatBattle(start_army)
-            #    self.gui.send_message(message)
-            #else:
-            message = messages.MoveArmy(start_army, end)
-            self.gui.send_message(message)
+            if start_army.battle:
+                message = messages.RetreatBattle(start_army, end)
+                self.gui.send_message(message)
+            else:
+                message = messages.MoveArmy(start_army, end)
+                self.gui.send_message(message)
 
         else:
+
+            #if start_army.battle:
+            #    Retreat from a battle and request a different one?
+            #else:
+            
             message = messages.RequestBattle(start_army, end_community)
             self.gui.send_message(message)
 
