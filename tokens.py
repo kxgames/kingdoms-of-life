@@ -531,6 +531,9 @@ class Road (kxg.Token):
         yield self.start
         yield self.end
 
+    def __extend__(self):
+        return {'gui': gui.RoadExtension}
+
 
     @kxg.check_for_safety
     def setup(self):

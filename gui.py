@@ -18,6 +18,9 @@ Color = pygame.color.Color
 Font = pygame.font.Font
 Image = pygame.image.load
 
+Vector = kxg.geometry.Vector
+Rectangle = kxg.geometry.Rectangle
+
 pygame.font.init()
 
 class Gui (kxg.Actor):
@@ -88,9 +91,6 @@ class Gui (kxg.Actor):
         stale_regions = []
         for artist in self.artists:
             stale_regions += artist.update(time)
-
-        if stale_regions:
-            print stale_regions
 
         for artist in self.artists:
             for region in stale_regions:
@@ -738,6 +738,10 @@ class CommunityArtist (Artist):
     def update(self, time):
         stale_regions = []
 
+        for road in self.world.yield_roads():
+            extension = road.get_extension()
+            stale_regions += extension.update(time)
+
         for city in self.world.yield_cities():
             extension = city.get_extension()
             stale_regions += extension.update(time)
@@ -749,6 +753,9 @@ class CommunityArtist (Artist):
         return stale_regions
 
     def draw(self, screen, region):
+        for road in self.world.yield_roads():
+            road.get_extension().draw(screen, region)
+
         for city in self.world.yield_cities():
             city.get_extension().draw(screen, region)
 
@@ -900,7 +907,7 @@ class CommunityExtension (Artist):
 
     font = pygame.font.Font('fonts/DejaVuSans-Bold.ttf', 16)
 
-    def __init__(self, type, community):
+    def __init__(self, actor, community, type):
         rect_from_surface = kxg.geometry.Rectangle.from_surface
 
         self.community = community
@@ -1010,11 +1017,39 @@ class CommunityExtension (Artist):
 
 
 class CityExtension (CommunityExtension):
-    def __init__(self, city):
-        CommunityExtension.__init__(self, 'city', city)
+    def __init__(self, actor, city):
+        CommunityExtension.__init__(self, actor, city, 'city')
 
 class ArmyExtension (CommunityExtension):
-    def __init__(self, army):
-        CommunityExtension.__init__(self, 'army', army)
+    def __init__(self, actor, army):
+        CommunityExtension.__init__(self, actor, army, 'army')
 
+class RoadExtension (Artist):
+
+    def __init__(self, actor, road):
+        self.actor = actor
+        self.road = road
+        self.surface = None
+        self.area = None
+
+    def update(self, time):
+        if self.surface:
+            return []
+
+        color = Color(self.road.player.color)
+        corners = self.road.start.position, self.road.end.position
+
+        self.area = Rectangle.from_corners(*corners)
+        self.area.grow(1)
+        self.surface = Surface(self.area.size, flags=pygame.SRCALPHA)
+        self.surface.fill((255, 255, 255, 0))
+
+        start = self.road.start.position - self.area.top_left
+        end = self.road.end.position - self.area.top_left
+        pygame.draw.aaline(self.surface, color, start.pygame, end.pygame)
+
+        return [self.area.pygame]
+
+    def draw(self, screen, region):
+        self.blit(screen, self.surface, self.area.top_left, region)
 
