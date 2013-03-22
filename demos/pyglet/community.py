@@ -39,6 +39,9 @@ class Manager:
         self.normal_shape = self.load_team_icon('images/normal-shape.png')
         self.battle_shape = self.load_team_icon('images/battle-shape.png')
 
+        self.normal_outline = self.load_team_icon('images/normal-selection.png')
+        self.battle_outline = self.load_team_icon('images/battle-selection.png')
+
         self.health_bar = self.load_health_icon('images/full-health.png', 25)
         self.health_outline = self.load_icon('images/empty-health.png')
 
@@ -128,6 +131,9 @@ class CommunityIcon:
                 self.get_icon(), x=x, y=y, batch=batch, group=front)
         self.shape = pyglet.sprite.Sprite(
                 manager.normal_shape[color], x=x, y=y, batch=batch, group=back)
+        self.outline = pyglet.sprite.Sprite(
+                manager.normal_outline[color],
+                x=x, y=y, batch=batch, group=back)
         self.health_bar = pyglet.sprite.Sprite(
                 manager.health_bar[-1], x=x, y=y, batch=batch, group=front)
         self.health_outline = pyglet.sprite.Sprite(
@@ -140,12 +146,17 @@ class CommunityIcon:
                 y=(y + 50.25),
                 group=front, batch=batch)
 
+        self.outline.visible = False
+
 
     def update(self, time):
         pass
 
     def select(self):
-        pass
+        self.outline.visible = True
+
+    def unselect(self):
+        self.outline.visible = False
 
     def move(self, dx, dy):
         x, y = self.position
@@ -155,6 +166,7 @@ class CommunityIcon:
         self.shape.position = self.position
         self.health_bar.position = self.position
         self.health_outline.position = self.position
+        self.outline.position = self.position
 
         self.level_label.x = self.position[0] + 40
         self.level_label.y = self.position[1] + 50.25
@@ -174,10 +186,12 @@ class CommunityIcon:
     def enter_battle(self):
         self.fighting = True
         self.shape.image = self.manager.battle_shape[self.color]
+        self.outline.image = self.manager.battle_outline[self.color]
 
     def exit_battle(self):
         self.fighting = False
         self.shape.image = self.manager.normal_shape[self.color]
+        self.outline.image = self.manager.normal_outline[self.color]
 
 
     def _update_health(self):
@@ -230,15 +244,15 @@ fps_display = pyglet.clock.ClockDisplay()
 
 manager = Manager()
 selection = None
-cities = []
+communities = []
 
 colors = 'purple', 'orange'
 color = colors[0]
 
 
 def update(time):
-    for city in cities:
-        city.update(time)
+    for community in communities:
+        community.update(time)
 
 @window.event
 def on_draw():
@@ -247,39 +261,46 @@ def on_draw():
 
 @window.event
 def on_mouse_release(x, y, button, modifiers):
-    x -= 40
-    y -= 40
+    x -= 40; y -= 40
+    closest_distance = float('inf')
 
-    global selection
+    for community in communities:
+        rx, ry = community.position
+        distance_squared = (x - rx)**2 + (y - ry)**2
+        distance = math.sqrt(distance_squared)
 
-    if selection and button == pyglet.window.mouse.MIDDLE:
-        selection.target = x, y
+        if distance < closest_distance:
+            closest_distance = distance
+            closest_community = community
 
+    # Community placement
+    if modifiers & pyglet.window.key.MOD_CTRL:
+        if closest_distance < 100:
+            return
+
+        if button == pyglet.window.mouse.LEFT:
+            city = CityIcon(manager, x, y, color)
+            communities.append(city)
+
+        if button == pyglet.window.mouse.RIGHT:
+            army = ArmyIcon(manager, x, y, color)
+            communities.append(army)
+
+    # Selection and movement
     else:
-        selection = None
-        closest_distance = float('inf')
-
-        for city in cities:
-            rx, ry = city.position
-            distance_squared = (x - rx)**2 + (y - ry)**2
-            distance = math.sqrt(distance_squared)
-
-            if distance < closest_distance:
-                closest_distance = distance
-                closest_city = city
+        global selection
 
         if button == pyglet.window.mouse.LEFT:
             if closest_distance < 40:
-                selection = closest_city
+                if selection: selection.unselect()
+                selection = closest_community
+                selection.select()
+            else:
+                if selection: selection.unselect()
+                selection = None
 
-            if closest_distance > 100:
-                selection = CityIcon(manager, x, y, color)
-                cities.append(selection)
-
-        if button == pyglet.window.mouse.RIGHT:
-            if closest_distance > 100:
-                selection = ArmyIcon(manager, x, y, color)
-                cities.append(selection)
+        if selection and button == pyglet.window.mouse.RIGHT:
+            selection.target = x, y
 
 @window.event
 def on_mouse_scroll(x, y, scroll_x, scroll_y):
