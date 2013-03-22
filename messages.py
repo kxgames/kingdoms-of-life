@@ -60,10 +60,11 @@ class CreateCity (kxg.Message):
 
     def __init__(self, player, position):
         self.city = tokens.City(player, position)
+        self.price = self.city.get_price()
 
     def check(self, world, sender):
         city = self.city
-        price = self.price
+        self.price = self.city.get_price()
         player = city.player
 
         # Make sure the right player is sending this message.
@@ -71,9 +72,8 @@ class CreateCity (kxg.Message):
             self.error = "City requested by wrong player."
             return False
 
-        self.price = self.city.get_price()
         # Make sure the player can afford this city.
-        if not player.can_afford_price(price):
+        if not player.can_afford_price(self.price):
             self.error = "Can't afford $%d for a new city." % price
             return False
 
@@ -426,6 +426,7 @@ class RetreatBattle (kxg.Message):
     def __init__(self, army, target):
         self.army = army
         self.target = target
+        self.battle = army.battle
 
     def check(self, world, sender):
         army = self.army
@@ -465,7 +466,7 @@ class RetreatBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        pass
+        print "RetreatBattle  %s" %(self.battle.get_id())
 
     def execute(self, world):
         world.retreat_battle(self.army, self.target)

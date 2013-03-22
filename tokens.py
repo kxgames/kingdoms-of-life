@@ -796,14 +796,18 @@ class Battle (kxg.Token):
 
 
     @kxg.check_for_safety
+    def retreat(self, army):
+        self.remove_community (army)
+
+    @kxg.check_for_safety
     def zombify_city(self, city):
         player = city.player
 
         self.zombie_city = city
 
         self.communities[player].remove(city)
-        if len(self.city[player]) < 1:
-            del self.city[player]
+        if not self.communities[player]:
+            del self.communities[player]
 
     @kxg.check_for_safety
     def remove_community(self, community):
@@ -812,7 +816,7 @@ class Battle (kxg.Token):
         community.battle = None
 
         self.communities[player].remove(community)
-        if len(self.communities[player]) < 1:
+        if not self.communities[player]:
             del self.communities[player]
 
     @kxg.check_for_safety
@@ -830,6 +834,6 @@ class Battle (kxg.Token):
         return 50
 
     def was_successful(self):
-        return len(self.communities.keys) <= 1
+        return len(self.communities.keys()) <= 1
 
 
