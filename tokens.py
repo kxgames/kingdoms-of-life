@@ -479,8 +479,8 @@ class Army (Community):
             else:
                 self.position += heading.get_scaled(self.speed * time)
 
-                #for extension in self.get_extensions():
-                    #extension.update_position()
+                for extension in self.get_extensions():
+                    extension.update_position()
 
     def report(self, messenger):
         pass

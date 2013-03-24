@@ -6,7 +6,10 @@ import tokens, gui, messages
 class SandboxLoop (kxg.MainLoop):
 
     def __init__(self):
-        world, referee, actor = tokens.World(), tokens.Referee(), gui.Gui()
+        kxg.PygletLoop.__init__(self)
+
+        world, referee, actor = \
+                tokens.World(), tokens.Referee(), gui.Gui(self.window)
         actors_to_greetings = {
                 actor: messages.CreatePlayer("Sandbox", 'orange')}
 
@@ -74,7 +77,8 @@ class ClientConnectionStage (kxg.Stage):
             self.exit_stage()
 
     def teardown(self):
-        world, actor, pipe = tokens.World(), gui.Gui(), self.pipe
+        window = self.get_master().get_window()
+        world, actor, pipe = tokens.World(), gui.Gui(window), self.pipe
 
         game_stage = kxg.MultiplayerClientGameStage(world, actor, pipe)
         postgame_stage = PostgameSplashStage(world, actor)
