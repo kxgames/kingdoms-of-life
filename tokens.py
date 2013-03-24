@@ -141,6 +141,9 @@ class World (kxg.World):
                 road.teardown()
                 self.remove_token(road)
 
+        # Make the health at least 1
+        city.set_health_to_min()
+
 
     @kxg.check_for_safety
     def old_attack_city(self, battle, price):
@@ -574,6 +577,10 @@ class City (Community):
     def engage_battle(self, battle):
         self.battle = battle
 
+    def set_health_to_min(self):
+        if self.health <= 1:
+            self.health = 1
+
 
     def get_price(self):
         return 20 + 10 * len(self.player.cities)
@@ -849,9 +856,13 @@ class Battle (kxg.Token):
 
     @kxg.check_for_safety
     def teardown(self):
+        if self.zombie_city:
+            self.zombie_city.battle = None
+            self.zombie_city = None
         for communities in self.communities.values():
             for community in communities:
                 community.battle = None
+        self.communities = {}
 
 
     @kxg.check_for_safety
@@ -864,20 +875,7 @@ class Battle (kxg.Token):
 
         self.zombie_city = city
 
-        print self
-        print self.communities
-        print player
-        print city
-        try: 
-            self.communities[player].remove(city)
-            print "removal success"
-        except KeyError:
-            print "removal failure:"
-            print self
-            print self.communities
-            print player
-            print city
-            assert False
+        self.communities[player].remove(city)
         if not self.communities[player]:
             del self.communities[player]
 
