@@ -100,34 +100,64 @@ class World (kxg.World):
         campaign.teardown()
         self.remove_token(campaign)
 
+    @kxg.check_for_safety
     def retreat_battle(self, army, target):
 
         battle = army.battle
 
         battle.retreat(army)
-        if battle.was_successful():
-            battle.teardown()
-            self.remove_token(battle)
 
         army.move_to(target)
 
+    @kxg.check_for_safety
+    def zombify_city(self, battle, city):
+        battle.zombify_city(city)
 
     @kxg.check_for_safety
-    def attack_city(self, battle, price):
+    def end_battle(self, battle):
+        city = battle.zombie_city
+        if city:
+            if battle.communities.keys():
+                winner = battle.communities.keys()[0]
+                if winner != city.player:
+                    self.capture_city(city, winner)
+        battle.teardown()
+        self.remove_token(battle)
+
+
+    @kxg.check_for_safety
+    def capture_city(self, city, attacker):
+        defender = city.player
+        
+        # Give control of the city to the attacker.
+        city.player = attacker
+        defender.cities.remove(city)
+        attacker.cities.append(city)
+
+        # Remove all the existing roads into this city.
+        for road in defender.roads[:]:
+            if road.has_terminus(city):
+                defender.roads.remove(road)
+                road.teardown()
+                self.remove_token(road)
+
+
+    @kxg.check_for_safety
+    def old_attack_city(self, battle, price):
         self.add_token(battle)
         battle.attacker.battles.append(battle)
         battle.attacker.spend_wealth(price)
         battle.setup()
 
     @kxg.check_for_safety
-    def defend_city(self, battle, price):
+    def old_defend_city(self, battle, price):
         battle.defender.spend_wealth(price)
         battle.attacker.battles.remove(battle)
         battle.teardown()
         self.remove_token(battle)
 
     @kxg.check_for_safety
-    def capture_city(self, battle):
+    def old_capture_city(self, battle):
         city = battle.city
         attacker = battle.attacker
         defender = battle.defender
@@ -278,6 +308,12 @@ class Referee (kxg.Referee):
 
     def retreat_battle(self, army, target, is_mine):
         assert not is_mine
+
+    def zombify_city(self, battle, city, is_mine):
+        pass
+
+    def end_battle(self, is_mine):
+        pass
 
     def move_army(self, army, target, is_mine):
         assert not is_mine
@@ -515,7 +551,14 @@ class City (Community):
         pass
 
     def report(self, messenger):
-        pass
+        if self.health <= 0:
+            if self.battle:
+                if self.battle.zombie_city != self:
+                    message = messages.ZombifyCity(self)
+                    messenger.send_message(message)
+            else:
+                raise NotImplementedError
+
 
     @kxg.check_for_safety
     def teardown(self):
@@ -541,7 +584,7 @@ class City (Community):
     def get_max_health(self):
         return 20 + 5 * self.level
 
-    def get_attack(self, time):
+    def get_attack(self):
         return 2 + self.level // 2
 
     def get_supply(self):
@@ -634,7 +677,7 @@ class Army (Community):
         return 10 * self.level
 
     def get_max_health(self):
-        return 15 * 4 * self.level
+        return 15 + 4 * self.level
 
     def get_attack(self):
         return 10 + 2 * self.level
@@ -778,18 +821,34 @@ class Battle (kxg.Token):
 
     @kxg.check_for_safety
     def update(self, time):
-        pass
+        cats = self.communities
+
+        cat_count = 0
+        for player in cats:
+            cat_count += len(cats[player])
+
+        for player in cats:
+            enemy_count = cat_count - len(cats[player])
+            player_attack_total = 0
+            for cat in cats[player]:
+                player_attack_total += cat.get_attack()
+
+            per_cat_damage = player_attack_total * time / cat_count
+
+            for enemy in cats:
+                if enemy is player:
+                    continue
+                for cat in cats[enemy]:
+                    cat.damage(per_cat_damage)
+            
 
     def report(self, messenger):
         if self.was_successful():
             message = messages.EndBattle(self)
-            self.send_message(message)
+            messenger.send_message(message)
 
     @kxg.check_for_safety
     def teardown(self):
-        if self.zombie_city:
-            self.zombie_city.battle = None
-
         for communities in self.communities.values():
             for community in communities:
                 community.battle = None
@@ -805,7 +864,20 @@ class Battle (kxg.Token):
 
         self.zombie_city = city
 
-        self.communities[player].remove(city)
+        print self
+        print self.communities
+        print player
+        print city
+        try: 
+            self.communities[player].remove(city)
+            print "removal success"
+        except KeyError:
+            print "removal failure:"
+            print self
+            print self.communities
+            print player
+            print city
+            assert False
         if not self.communities[player]:
             del self.communities[player]
 

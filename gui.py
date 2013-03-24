@@ -133,6 +133,12 @@ class Gui (kxg.Actor):
     def retreat_battle(self, army, target, is_mine):
         self.refresh()
 
+    def zombify_city(self, battle, city, is_mine):
+        self.refresh()
+
+    def end_battle(self, is_mine):
+        self.refresh()
+
     def move_army(self, army, target, is_mine):
         pass
 

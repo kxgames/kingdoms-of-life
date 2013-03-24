@@ -404,6 +404,7 @@ class JoinBattle (kxg.Message):
         return True
 
     def reject(self, actor):
+        print self.error
         actor.show_error(self)
 
     def setup(self, world, sender, id):
@@ -466,7 +467,7 @@ class RetreatBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "RetreatBattle  %s" %(self.battle.get_id())
+        print "RetreatBattle  %s  Army %s" %(self.battle.get_id(), self.army.get_id())
 
     def execute(self, world):
         world.retreat_battle(self.army, self.target)
@@ -479,6 +480,7 @@ class ZombifyCity (kxg.Message):
     
     def __init__(self, city):
         self.city = city
+        self.battle = city.battle
 
     def check(self, world, sender):
         city = self.city
@@ -494,7 +496,7 @@ class ZombifyCity (kxg.Message):
             return False
         
         # Make sure the city is at 0 health.
-        if not city.get_health() == 0:
+        if not city.get_health() <= 0:
             self.error = "City must be at zero health to be zombified."
             return False
 
@@ -504,13 +506,13 @@ class ZombifyCity (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        pass
+        print "zombifying city %s  in battle %s" %(self.city.get_id(), self.battle.get_id())
 
     def execute(self, world):
-        raise NotImplementedError
+        world.zombify_city(self.city.battle, self.city)
 
     def notify(self, actor, is_mine):
-        raise NotImplementedError
+        actor.zombify_city(self.city.battle, self.city, is_mine)
 
 
 class EndBattle (kxg.Message):
@@ -518,34 +520,11 @@ class EndBattle (kxg.Message):
     def __init__(self, battle):
         self.battle = battle
 
-        print "Battle ended"
-        raise NotImplementedError
-        # keep working here
-
     def check(self, world, sender):
-        army = self.army
-        player = army.player
         
-        # Make sure the right player is sending this message.
-        if sender is not player:
-            self.error = "Retreat requested by wrong player."
-            return False
-
-        # Make sure the army is in a battle or campaign.
-        if not army.battle and not army.my_campaign:
-            self.error = "Army must be in a battle or campaign to retreat."
-            return False
-
-        # Make sure the army can move to the end point.
-        if not army.can_move_to(target):
-            self.error = "Army can't move there."
-            return False
-        
-        self.price = army.battle.get_retreat_battle_price()
-        
-        # Make sure the player can afford to retreat.
-        if not player.can_afford_price(self.price):
-            self.error = "Can't afford $%d to retreat from battle." % self.price
+        # Make sure the battle is actually over.
+        if not self.battle.was_successful():
+            self.error = "Can't end the battle, battle is still in progress."
             return False
 
         return True
@@ -554,17 +533,17 @@ class EndBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        pass
+        print "Battle %s ended" %self.battle.get_id()
 
     def execute(self, world):
-        world.retreat_battle(self.army, self.target)
+        world.end_battle(self.battle)
 
     def notify(self, actor, is_mine):
-        actor.retreat_battle(self.army, self.target, is_mine)
+        actor.end_battle(is_mine)
 
 
 
-class CaptureCity (kxg.Message):
+class old_CaptureCity (kxg.Message):
 
     def __init__(self, battle):
         self.battle = battle
