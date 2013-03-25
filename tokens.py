@@ -460,7 +460,7 @@ class Army (Community):
 
         self.player = player
         self.position = position
-        self.target = kxg.geometry.Vector(250, 250)
+        self.target = None
 
     def __extend__(self):
         return {'gui': gui.ArmyExtension}

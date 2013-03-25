@@ -3,7 +3,7 @@
 import os, kxg
 import tokens, gui, messages
 
-class SandboxLoop (kxg.MainLoop):
+class SandboxLoop (kxg.PygletLoop):
 
     def __init__(self):
         kxg.PygletLoop.__init__(self)
@@ -24,7 +24,7 @@ class SandboxLoop (kxg.MainLoop):
         return self.stage
 
 
-class ClientLoop (kxg.MainLoop):
+class ClientLoop (kxg.PygletLoop):
 
     def __init__(self, name, host, port):
         self.stage = ClientConnectionStage(name, host, port)
@@ -33,7 +33,7 @@ class ClientLoop (kxg.MainLoop):
         return self.stage
 
 
-class ServerLoop (kxg.MainLoop):
+class ServerLoop (kxg.PygameLoop):
 
     def __init__(self, host, port):
         self.stage = ServerConnectionStage(host, port)

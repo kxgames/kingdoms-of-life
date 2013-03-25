@@ -2,6 +2,9 @@
 
 from __future__ import division
 
+import kxg
+import messages
+
 import math
 import numpy
 import pyglet
@@ -23,15 +26,19 @@ class Gui (kxg.Actor):
     def __init__(self, window):
         kxg.Actor.__init__(self)
 
+        self.player = None
         self.window = window
-        self.window.set_handler(self)
+        self.window.set_handlers(self)
+
         self.batch = pyglet.graphics.Batch()
         self.bin = pyglet.image.atlas.TextureBin()
-    
-        self.map_layer = pyglet.graphics.OrderedGroup(0)
-        self.road_layer = pyglet.graphics.OrderedGroup(1)
-        self.city_layer = pyglet.graphics.OrderedGroup(2)
-        self.army_layer = pyglet.graphics.OrderedGroup(3)
+        self.frame_rate = pyglet.clock.ClockDisplay()
+
+        self.community_layers = {
+                'map': pyglet.graphics.OrderedGroup(0),
+                'road': pyglet.graphics.OrderedGroup(1),
+                'city': pyglet.graphics.OrderedGroup(2),
+                'army': pyglet.graphics.OrderedGroup(3) }
     
         self.community_icons = {
                 'city': self.load_icon('images/city-icon.png'),
@@ -64,46 +71,27 @@ class Gui (kxg.Actor):
 
 
     def on_draw(self):
+        self.window.clear()
         pyglet.gl.glClearColor(255, 250, 240, 255)
         self.batch.draw()
 
     def on_mouse_release(self, x, y, button, modifiers):
-
-    # Community placement
-    if modifiers & pyglet.window.key.MOD_CTRL:
-        if closest_distance < 100:
-            return
+        position = kxg.geometry.Vector(x, y)
 
         if button == pyglet.window.mouse.LEFT:
-            city = CityIcon(manager, x, y, color)
-            communities.append(city)
+            message = messages.CreateCity(self.player, position)
+            self.send_message(message)
 
         if button == pyglet.window.mouse.RIGHT:
-            army = ArmyIcon(manager, x, y, color)
-            communities.append(army)
-
-    # Selection and movement
-    else:
-        global selection
-
-        if button == pyglet.window.mouse.LEFT:
-            if closest_distance < 40:
-                if selection: selection.unselect()
-                selection = closest_community
-                selection.select()
-            else:
-                if selection: selection.unselect()
-                selection = None
-
-        if selection and button == pyglet.window.mouse.RIGHT:
-            selection.target = x, y
-
+            message = messages.CreateArmy(self.player, position)
+            self.send_message(message)
 
     def on_key_release(self, symbol, modifiers):
         pass
 
 
     def path_to_array(self, path):
+        from matplotlib.pyplot import imread
         buffer = 255 * imread(path)
         buffer = buffer.astype('uint8')
         return buffer
@@ -111,6 +99,47 @@ class Gui (kxg.Actor):
     def array_to_texture(self, buffer):
         width, height = buffer.shape[0:2]
         data, stride = buffer.tostring(), -buffer.strides[0]
+        image = pyglet.image.ImageData(width, height, 'RGBA', data, stride) 
+        return self.bin.add(image)
+
+
+    def load_icon(self, path):
+        buffer = self.path_to_array(path)
+
+        buffer[:,:,3] = buffer[:,:,0]
+        buffer[:,:,0:3] = 255
+
+        return self.array_to_texture(buffer)
+
+    def load_team_icon(self, path):
+        master_buffer = self.path_to_array(path)
+        colored_icons = {}
+
+        for name in colors:
+            red, green, blue = colors[name]
+            buffer = master_buffer.copy()
+            
+            buffer[:,:,3] = buffer[:,:,0]
+            buffer[:,:,0] = red
+            buffer[:,:,1] = green
+            buffer[:,:,2] = blue
+
+            colored_icons[name] = self.array_to_texture(buffer)
+
+        return colored_icons
+
+    def load_health_icon(self, path, frames):
+        master_buffer = self.path_to_array(path)
+        health_bar = []
+
+        width, height = master_buffer.shape[0:2]
+        y, x = numpy.mgrid[0:width, 0:height]
+        angles = numpy.arctan2(height//2 - y, x - width//2)
+
+        for index in range(frames):
+            percent = index / (frames - 1)
+            threshold = numpy.pi * (1 - percent)
+
             buffer = master_buffer.copy()
             buffer[:,:,3] = buffer[:,:,0] * (angles >= threshold)
             buffer[:,:,0:3] = 255
@@ -169,52 +198,55 @@ class CommunityExtension (kxg.TokenExtension):
         self.token = token
 
         batch = gui.batch
-        layer = self.get_layer()
+        layer = gui.community_layers[self.type]
         back = pyglet.graphics.OrderedGroup(0, parent=layer)
         front = pyglet.graphics.OrderedGroup(1, parent=layer)
 
         self.type_sprite = pyglet.sprite.Sprite(
-                gui.community_types[self.type],
-                x=x, y=y, batch=batch, group=front)
+                gui.community_icons[self.type],
+                batch=batch, group=front)
 
         self.engagement_sprite = pyglet.sprite.Sprite(
-                gui.normal_shapes[color],
-                x=x, y=y, batch=batch, group=back)
+                gui.normal_shapes[token.player.color],
+                batch=batch, group=back)
 
         self.selection_sprite = pyglet.sprite.Sprite(
-                gui.normal_outlines[color],
-                x=x, y=y, batch=batch, group=back)
+                gui.normal_outlines[token.player.color],
+                batch=batch, group=back)
 
         self.health_bar_sprite = pyglet.sprite.Sprite(
                 gui.health_bar[-1],
-                x=x, y=y, batch=batch, group=front)
+                batch=batch, group=front)
 
         self.health_outline_sprite = pyglet.sprite.Sprite(
                 gui.health_outline,
-                x=x, y=y, batch=batch, group=front)
+                batch=batch, group=front)
 
         self.level_sprite = pyglet.text.Label(
                 str(token.level),
                 font_name='Deja Vu Sans Bold', font_size=14,
-                x=(x + 40), y=(y + 50.25), color=(255, 255, 255, 255),
+                color=(255, 255, 255, 255),
                 anchor_x='center', anchor_y='center',
-                group=front, batch=batch)
+                batch=batch, group=front)
 
         self.selection_sprite.visible = False
+        self.update_position()
 
 
     def setup(self):
         pass
 
     def update_position(self):
-        position = x, y = self.token.position.tuple
+        vector = self.token.position - (40, 40)
+        position = x, y = vector.tuple
 
         self.type_sprite.position = position
         self.engagement_sprite.position = position
         self.selection_sprite.position = position
         self.health_bar_sprite.position = position
         self.health_outline_sprite.position = position
-        self.level_sprite.position = x + 40, y + 50.25
+        self.level_sprite.x = x + 40
+        self.level_sprite.y = y + 50.25
 
     def update_health(self):
         frames = self.manager.health_bar
@@ -231,7 +263,7 @@ class CommunityExtension (kxg.TokenExtension):
         self.level_sprite.text = str(level)
 
     def update_engagement(self):
-        color = self.token.get_player.get_color()
+        color = self.token.player.color
 
         if self.token.is_in_battle():
             self.engagement_sprite.image = self.gui.normal_shapes[color]
@@ -265,44 +297,3 @@ class ArmyExtension (CommunityExtension):
 
 
 
-#!/usr/bin/env python
-
-from __future__ import division
-
-import math
-import numpy
-import pyglet
-
-colors = {            # (fold)
-        'red':          (164,   0,   0),
-        'brown':        (143,  89,   2),
-        'orange':       (206,  92,   0),
-        'yellow':       (196, 160,   0),
-        'green':        ( 78, 154,   6),
-        'blue':         ( 32,  74, 135),
-        'purple':       ( 92,  53, 102),
-        'black':        ( 46,  52,  54),
-}
-
-
-class Gui (kxg.Actor):
-
-    def __init__(self, window):
-        kxg.Actor.__init__(self)
-
-        self.window = window
-        self.window.set_handler(self)
-        self.batch = pyglet.graphics.Batch()
-        self.bin = pyglet.image.atlas.TextureBin()
-    
-        self.map_layer = pyglet.graphics.OrderedGroup(0)
-        self.road_layer = pyglet.graphics.OrderedGroup(1)
-        self.city_layer = pyglet.graphics.OrderedGroup(2)
-        self.army_layer = pyglet.graphics.OrderedGroup(3)
-    
-        self.community_icons = {
-                'city': self.load_icon('images/city-icon.png'),
-                'army': self.load_icon('images/army-icon.png') }
-
-        self.normal_shapes = self.load_team_icon('images/normal-shape.png')
-        self.battle_shapes = self.load_team_icon('images/battle-shape.png')
