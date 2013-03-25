@@ -24,6 +24,6 @@ for x in range(iterations):
     vertices.append("%s,%s" % vector.tuple)
 
 print '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">'
-print '<polygon points="-40,-40 -40,40 40,40 40,-40"/>'
-print '<polygon points="%s"/>' % string.join(vertices)
+print '<polygon fill="black" points="-40,-40 -40,40 40,40 40,-40"/>'
+print '<polygon fill="white" points="%s"/>' % string.join(vertices)
 print '</svg>'

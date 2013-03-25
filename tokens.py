@@ -698,6 +698,9 @@ class Army (Community):
             else:
                 self.position += heading.get_scaled(self.speed * time)
 
+                for extension in self.get_extensions():
+                    extension.update_position()
+
     def report(self, messenger):
         if self.health <= 0:
             message = messages.DestroyArmy(self)
@@ -777,6 +780,9 @@ class Road (kxg.Token):
     def __iter__(self):
         yield self.start
         yield self.end
+
+    def __extend__(self):
+        return {'gui': gui.RoadExtension}
 
 
     @kxg.check_for_safety

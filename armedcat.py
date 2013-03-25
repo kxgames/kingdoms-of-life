@@ -3,10 +3,13 @@
 import os, kxg
 import tokens, gui, messages
 
-class SandboxLoop (kxg.MainLoop):
+class SandboxLoop (kxg.PygletLoop):
 
     def __init__(self):
-        world, referee, actor = tokens.World(), tokens.Referee(), gui.Gui()
+        kxg.PygletLoop.__init__(self)
+
+        world, referee, actor = \
+                tokens.World(), tokens.Referee(), gui.Gui(self.window)
         actors_to_greetings = {
                 actor: messages.CreatePlayer("Sandbox", 'orange')}
 
@@ -21,7 +24,7 @@ class SandboxLoop (kxg.MainLoop):
         return self.stage
 
 
-class ClientLoop (kxg.MainLoop):
+class ClientLoop (kxg.PygletLoop):
 
     def __init__(self, name, host, port):
         self.stage = ClientConnectionStage(name, host, port)
@@ -30,7 +33,7 @@ class ClientLoop (kxg.MainLoop):
         return self.stage
 
 
-class ServerLoop (kxg.MainLoop):
+class ServerLoop (kxg.PygameLoop):
 
     def __init__(self, host, port):
         self.stage = ServerConnectionStage(host, port)
@@ -74,7 +77,8 @@ class ClientConnectionStage (kxg.Stage):
             self.exit_stage()
 
     def teardown(self):
-        world, actor, pipe = tokens.World(), gui.Gui(), self.pipe
+        window = self.get_master().get_window()
+        world, actor, pipe = tokens.World(), gui.Gui(window), self.pipe
 
         game_stage = kxg.MultiplayerClientGameStage(world, actor, pipe)
         postgame_stage = PostgameSplashStage(world, actor)
