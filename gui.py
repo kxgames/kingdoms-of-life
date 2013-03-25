@@ -117,7 +117,10 @@ class Gui (kxg.Actor):
     def upgrade_city(self, city, is_mine):
         self.refresh()
 
-    def upgrade_army(self, city, is_mine):
+    def upgrade_army(self, army, is_mine):
+        self.refresh()
+
+    def destroy_army(self, is_mine):
         self.refresh()
 
     def request_battle(self, campaign, is_mine):

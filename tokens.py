@@ -71,6 +71,23 @@ class World (kxg.World):
         army.upgrade()
         army.player.spend_wealth(price)
 
+    @kxg.check_for_safety
+    def destroy_army(self, army):
+        # Removing army from battle.
+        if army.battle:
+            army.battle.remove_community(army)
+
+        # Destroying any associated campaigns.
+        if army.campaigns:
+            for campaign in army.campaigns:
+                campaign.teardown()
+                self.remove_token(campaign)
+
+        army.teardown()
+
+        army.player.armies.remove(army)
+        self.remove_token(army)
+
 
     @kxg.check_for_safety
     def request_battle(self, campaign):
@@ -300,6 +317,9 @@ class Referee (kxg.Referee):
     def upgrade_army(self, army, is_mine):
         assert not is_mine
 
+    def destroy_army(self, is_mine):
+        pass
+
     def request_battle(self, campaign, is_mine):
         assert not is_mine
 
@@ -382,6 +402,12 @@ class Player (kxg.Token):
     def teardown(self):
         pass
 
+
+    def remove_army(self, army):
+        try:
+            self.armies.remove(army)
+        except ValueError:
+            pass
 
     def spend_wealth(self, price):
         self.wealth -= price
@@ -643,11 +669,13 @@ class Army (Community):
                 self.position += heading.get_scaled(self.speed * time)
 
     def report(self, messenger):
-        pass
+        if self.health <= 0:
+            message = messages.DestroyArmy(self)
+            messenger.send_message(message)
 
     @kxg.check_for_safety
     def teardown(self):
-        raise AssertionError
+        pass
 
 
     def chase (self, campaign):
@@ -804,6 +832,7 @@ class Campaign (kxg.Token):
 
     def was_successful(self):
         return self.army.check_engagement_proximity(self.community)
+
 
 class Battle (kxg.Token):
 

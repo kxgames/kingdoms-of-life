@@ -271,6 +271,40 @@ class UpgradeArmy (kxg.Message):
 
 
 
+class DestroyArmy (kxg.Message):
+    
+    def __init__(self, army):
+        self.army = army
+
+    def check(self, world, sender):
+        army = self.army
+        
+        # Make sure the city is actually an city.
+        if not isinstance(army, tokens.Army):
+            self.error = "Community must be an army."
+            return False
+
+        # Make sure the city is at 0 health.
+        if not army.get_health() <= 0:
+            self.error = "Army must be at zero health to be destroyed."
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.show_error(self)
+
+    def setup(self, world, sender, id):
+        print "Destroying army %s" %(self.army.get_id())
+
+    def execute(self, world):
+        world.destroy_army(self.army)
+
+    def notify(self, actor, is_mine):
+        actor.destroy_army(is_mine)
+
+
+
 class RequestBattle (kxg.Message):
 
     def __init__(self, army, community):
