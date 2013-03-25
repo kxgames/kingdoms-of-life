@@ -516,6 +516,11 @@ class Community (kxg.Token):
         self.campaigns = []
 
 
+    def update(self, time):
+        if not self.battle:
+            if self.health < self.get_max_health():
+                self.heal(self.get_healing() * time)
+
     def upgrade(self):
         health_percent = self.health / self.get_max_health()
         self.level += 1
@@ -526,6 +531,15 @@ class Community (kxg.Token):
 
     def damage(self, delta):
         self.health -= delta
+
+        for extension in self.get_extensions():
+            extension.update_health()
+
+    def heal(self, delta):
+        self.health += delta
+
+        if self.health > self.get_max_health():
+            self.health = self.get_max_health()
 
         for extension in self.get_extensions():
             extension.update_health()
@@ -604,7 +618,7 @@ class City (Community):
 
     @kxg.check_for_safety
     def update(self, time):
-        pass
+        Community.update(self, time)
 
     def report(self, messenger):
         if self.health <= 0:
@@ -642,10 +656,10 @@ class City (Community):
         return 10 * self.level
 
     def get_max_health(self):
-        return 20 + 5 * self.level
+        return 80 + 20 * self.level
 
     def get_healing(self):
-        return 4 * self.level
+        return 2 * self.level
 
     def get_attack(self):
         return 2 + self.level // 2
@@ -678,6 +692,7 @@ class Army (Community):
 
     @kxg.check_for_safety
     def update(self, time):
+        Community.update(self, time)
         if self.my_campaign:
             target_community = self.my_campaign.community
             start = self.position
@@ -745,10 +760,10 @@ class Army (Community):
         return 10 * self.level
 
     def get_max_health(self):
-        return 15 + 4 * self.level
+        return 60 + 16 * self.level
 
     def get_healing(self):
-        return 2 * self.level
+        return self.level
 
     def get_attack(self):
         return 10 + 2 * self.level
