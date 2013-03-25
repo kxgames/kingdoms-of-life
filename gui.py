@@ -154,7 +154,7 @@ class Gui (kxg.Actor):
     def capture_city(self, siege):
         self.refresh()
 
-    def defeat_player(self, player):
+    def defeat_player(self):
         self.refresh()
 
 

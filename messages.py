@@ -72,6 +72,11 @@ class CreateCity (kxg.Message):
             self.error = "City requested by wrong player."
             return False
 
+        # Make sure the player is still alive.
+        if player.was_defeated():
+            self.error = "Defeated players can't build cities."
+            return False
+
         # Make sure the player can afford this city.
         if not player.can_afford_price(self.price):
             self.error = "Can't afford $%d for a new city." % price
@@ -113,6 +118,11 @@ class CreateArmy (kxg.Message):
             self.error = "Army requested by wrong player."
             return False
 
+        # Make sure the player is still alive.
+        if player.was_defeated():
+            self.error = "Defeated players can't build armies."
+            return False
+
         # Make sure the player can afford this army.
         if not player.can_afford_price(price):
             self.error = "Can't afford $%d for a new army." % price
@@ -151,6 +161,11 @@ class CreateRoad (kxg.Message):
         # Make sure the right player is sending this message.
         if sender is not player:
             self.error = "Road requested by wrong player."
+            return False
+
+        # Make sure the player is still alive.
+        if player.was_defeated():
+            self.error = "Defeated players can't build roads."
             return False
 
         # Make sure the right player owns the cities being connected.
@@ -210,6 +225,11 @@ class UpgradeCity (kxg.Message):
             self.error = "Upgrade requested by wrong player."
             return False
 
+        # Make sure the player is still alive.
+        if player.was_defeated():
+            self.error = "Defeated players can't upgrade cities."
+            return False
+
         # Make sure the city in question is not in a battle.
         if city.is_in_battle():
             self.error = "Can't upgrade a city that's engaged in a battle."
@@ -246,6 +266,11 @@ class UpgradeArmy (kxg.Message):
         # Make sure the right player is sending this message.
         if sender is not player:
             self.error = "Upgrade requested by wrong player."
+            return False
+
+        # Make sure the player is still alive.
+        if player.was_defeated():
+            self.error = "Defeated players can't upgrade armies."
             return False
 
         # Make sure the army in question is in a battle.
@@ -319,6 +344,11 @@ class RequestBattle (kxg.Message):
         # Make sure the right player is sending this message.
         if sender is not player:
             self.error = "Battle requested by wrong player."
+            return False
+
+        # Make sure the player is still alive.
+        if player.was_defeated():
+            self.error = "Defeated players can't request battles."
             return False
 
         # Make sure the army is not attacking one of its own.
@@ -598,13 +628,16 @@ class DefeatPlayer (kxg.Message):
         self.player = player
 
     def check(self, world, sender):
-        return self.player.was_defeated()
+        return self.player.was_defeated() and not self.player.is_dead()
+
+    def setup(self, world, sender, id):
+        print "Player %s defeated" %self.player.get_id()
 
     def execute(self, world):
         world.defeat_player(self.player)
 
     def notify(self, actor, sent_from_here):
-        actor.defeat_player(self.player)
+        actor.defeat_player()
 
 
 
@@ -624,6 +657,11 @@ class MoveArmy (kxg.Message):
             self.error = "Army motion requested by wrong player."
             return False
         #
+        # Make sure the player is still alive.
+        if player.was_defeated():
+            self.error = "Defeated players can't move armies."
+            return False
+
         # Make sure the army is not already in a battle.
         if army.battle:
             self.error = "Army can't move when it is in a battle."

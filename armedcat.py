@@ -93,7 +93,7 @@ class ServerConnectionStage (kxg.Stage):
 
         self.pipes = []
         self.greetings = []
-        self.colors = 'orange', 'purple'
+        self.colors = 'orange', 'purple', 'green'
         self.successor = None
 
         self.server = kxg.network.Server(
@@ -154,6 +154,7 @@ class PostgameSplashStage (kxg.Stage):
         pass
 
     def update(self, time):
+        kxg.engine.Token._actor = self.gui.get_name()
         self.gui.update(time)
 
     def teardown(self):

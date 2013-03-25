@@ -11,6 +11,7 @@ class World (kxg.World):
         kxg.World.__init__(self)
 
         self.players = []
+        self.defeated_players = []
         self.map = kxg.geometry.Rectangle.from_size(500, 500)
         self.winner = None
 
@@ -43,7 +44,7 @@ class World (kxg.World):
     @kxg.check_for_safety
     def create_city(self, city, price):
         self.add_token(city)
-        city.player.cities.append(city)
+        city.player.add_city(city)
         city.player.spend_wealth(price)
         city.setup()
 
@@ -201,9 +202,11 @@ class World (kxg.World):
 
     @kxg.check_for_safety
     def defeat_player(self, player):
+        player.dead = True
+        self.defeated_players.append(player)
         self.players.remove(player)
         player.teardown()
-        self.remove_token(player)
+        #self.remove_token(player)
     
 
     def find_closest_city(self, target, player=None, cutoff=None):
@@ -257,6 +260,7 @@ class World (kxg.World):
                 yield city
 
     def yield_armies(self):
+
         for player in self.players:
             for army in player.armies:
                 yield army
@@ -353,7 +357,7 @@ class Referee (kxg.Referee):
             message = messages.DefeatPlayer(battle.defender)
             self.send_message(message)
 
-    def defeat_player(self, player):
+    def defeat_player(self):
         if len(self.world.players) == 1:
             winner = self.world.players[0]
             message = messages.GameOver(winner)
@@ -377,6 +381,8 @@ class Player (kxg.Token):
         self.armies = []
         self.roads = []
         self.battles = []
+        self.played_city = False
+        self.dead = False
 
         self.wealth = self.starting_wealth
         self.revenue = self.starting_revenue
@@ -396,12 +402,26 @@ class Player (kxg.Token):
         self.wealth += time * self.revenue / 30
 
     def report(self, messenger):
-        pass
+        if self.was_defeated() and not self.is_dead():
+            message = messages.DefeatPlayer(self)
+            messenger.send_message(message)
 
     @kxg.check_for_safety
     def teardown(self):
-        pass
+        for battle in self.battles:
+            battle.remove_player(self)
+        for token in self.cities + self.armies + self.roads:
+            token.teardown()
+            self.world.remove_token(token)
+        self.cities = []
+        self.armies = []
+        self.roads = []
+        self.battles = []
 
+
+    def add_city(self, city):
+        self.cities.append(city)
+        self.played_city = True
 
     def remove_army(self, army):
         try:
@@ -411,6 +431,7 @@ class Player (kxg.Token):
 
     def spend_wealth(self, price):
         self.wealth -= price
+
 
     def can_afford_price(self, price):
         return price <= self.wealth
@@ -470,8 +491,11 @@ class Player (kxg.Token):
     def find_closest_army(self, target, cutoff=None):
         return self.world.find_closest_army(target, self, cutoff)
 
+    def is_dead(self):
+        return self.dead
+
     def was_defeated(self):
-        return not self.cities
+        return (not self.cities and self.played_city) or self.is_dead()
 
 
 class Community (kxg.Token):
@@ -523,6 +547,9 @@ class Community (kxg.Token):
         return self.health
 
     def get_max_health(self):
+        raise NotImplementedError
+
+    def get_healing(self):
         raise NotImplementedError
 
     def get_attack(self):
@@ -616,6 +643,9 @@ class City (Community):
 
     def get_max_health(self):
         return 20 + 5 * self.level
+
+    def get_healing(self):
+        return 4 * self.level
 
     def get_attack(self):
         return 2 + self.level // 2
@@ -713,6 +743,9 @@ class Army (Community):
 
     def get_max_health(self):
         return 15 + 4 * self.level
+
+    def get_healing(self):
+        return 2 * self.level
 
     def get_attack(self):
         return 10 + 2 * self.level
@@ -925,6 +958,12 @@ class Battle (kxg.Token):
             self.communities[player] = []
         self.communities[player].append(community)
         community.engage_battle(self)
+
+    def remove_player(self, player):
+        if player in self.communities:
+            for community in self.communities[player]:
+                community.battle = None
+            del self.communities[player]
 
     def get_initiation_price(self):
         pass

@@ -13,5 +13,6 @@ debugger = kxg.MultiplayerDebugger()
 debugger.loop("Server", armedcat.ServerLoop(host, port))
 debugger.loop("Client-1", armedcat.ClientLoop("Client 1", host, port))
 debugger.loop("Client-2", armedcat.ClientLoop("Client 2", host, port))
+#debugger.loop("Client-3", armedcat.ClientLoop("Client 3", host, port))
 
 debugger.run()
