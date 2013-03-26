@@ -158,8 +158,8 @@ class PostgameSplashStage (kxg.Stage):
         pass
 
     def update(self, time):
-        kxg.engine.Token._actor = self.gui.get_name()
-        self.gui.update(time)
+        with self.gui.lock():
+            self.gui.update(time)
 
     def teardown(self):
         pass

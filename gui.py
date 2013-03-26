@@ -27,6 +27,8 @@ class Gui (kxg.Actor):
         kxg.Actor.__init__(self)
 
         self.player = None
+        self.selection = None
+
         self.window = window
         self.window.set_handlers(self)
 
@@ -76,18 +78,32 @@ class Gui (kxg.Actor):
         self.batch.draw()
 
     def on_mouse_release(self, x, y, button, modifiers):
-        position = kxg.geometry.Vector(x, y)
+        with self.lock():
+            position = kxg.geometry.Vector(x, y)
+            closest_distance = kxg.geometry.infinity
+            closest_community = None
 
-        if button == pyglet.window.mouse.LEFT:
-            message = messages.CreateCity(self.player, position)
-            self.send_message(message)
+            for community in self.world.yield_communities():
+                distance = position.get_distance(community.position)
 
-        if button == pyglet.window.mouse.RIGHT:
-            message = messages.CreateArmy(self.player, position)
-            self.send_message(message)
+                if distance < closest_distance:
+                    closest_distance = distance
+                    closest_community = community
+
+            if button == pyglet.window.mouse.LEFT:
+                if closest_distance < 40:
+                    if self.selection:
+                        self.selection.get_extension().unselect()
+                    self.selection = closest_community
+                    self.selection.get_extension().select()
+
+            if button == pyglet.window.mouse.RIGHT:
+                message = messages.CreateArmy(self.player, position)
+                self.send_message(message)
 
     def on_key_release(self, symbol, modifiers):
-        pass
+        with self.lock():
+            pass
 
 
     def path_to_array(self, path):
@@ -283,10 +299,10 @@ class CommunityExtension (kxg.TokenExtension):
 
 
     def select(self):
-        self.outline.visible = True
+        self.selection_sprite.visible = True
 
     def unselect(self):
-        self.outline.visible = False
+        self.selection_sprite.visible = False
 
 
 class CityExtension (CommunityExtension):
