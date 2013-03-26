@@ -387,6 +387,9 @@ class Player (kxg.Token):
         self.wealth = self.starting_wealth
         self.revenue = self.starting_revenue
 
+    def __extend__(self):
+        return {'gui': gui.PlayerExtension}
+
 
     @kxg.check_for_safety
     def setup(self, world):
@@ -400,6 +403,9 @@ class Player (kxg.Token):
             self.revenue += road.get_revenue()
 
         self.wealth += time * self.revenue / 30
+
+        for extension in self.get_extensions():
+            extension.update_wealth()
 
     def report(self, messenger):
         if self.was_defeated() and not self.is_dead():
