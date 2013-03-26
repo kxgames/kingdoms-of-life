@@ -67,8 +67,6 @@ class CreateCity (kxg.Message):
         self.price = self.city.get_price()
         player = city.player
 
-        return True
-
         # Make sure the right player is sending this message.
         if sender is not player:
             self.error = "City requested by wrong player."

@@ -54,16 +54,15 @@ class Gui (kxg.Actor):
         self.normal_outlines = self.load_team_icon('images/normal-selection.png')
         self.battle_outlines = self.load_team_icon('images/battle-selection.png')
 
-        self.health_bar = self.load_health_icon('images/full-health.png', 25)
+        self.health_bar = self.load_health_icon('images/full-health.png', 50)
         self.health_outline = self.load_icon('images/empty-health.png')
 
         width, height = window.get_size()
 
         self.mode_sprite = pyglet.text.Label("",
                 font_name='Deja Vu Sans', font_size=12,
-                color=(0, 0, 0, 255),
-                anchor_x='right', anchor_y='top',
-                x=(width - 5), y=(height - 5),
+                x=(width / 2), y=5, color=(0, 0, 0, 255),
+                anchor_x='center', anchor_y='bottom',
                 batch=self.batch, group=self.community_layers['gui'])
 
 
@@ -82,12 +81,13 @@ class Gui (kxg.Actor):
 
     def update_mode(self, mode=None):
         self.mode = mode
-        self.selection = None
 
-        if not self.mode:
-            self.mode_sprite.text = ''
+        if self.mode == 'develop':
+            self.mode_sprite.text = "Click to place a city."
+        elif self.mode == 'fight':
+            self.mode_sprite.text = "Click to place an army."
         else:
-            self.mode_sprite.text = '%s Mode' % self.mode.title()
+            self.mode_sprite.text = ""
 
     def update_selection(self, community=None):
         if self.selection:
@@ -111,7 +111,6 @@ class Gui (kxg.Actor):
             find_closest_community = self.player.find_closest_community
             
             if button == pyglet.window.mouse.LEFT:
-                
                 if self.mode == 'fight':
                     message = messages.CreateArmy(self.player, position)
                     self.send_message(message)
@@ -129,9 +128,17 @@ class Gui (kxg.Actor):
                     self.update_selection(community)
 
             if button == pyglet.window.mouse.RIGHT:
+                target = self.world.find_closest_community(position, cutoff=40)
+                if target.player is self.player:
+                    target = None
+
                 if self.selection and self.selection.can_move():
-                    message = messages.MoveArmy(self.selection, position)
-                    self.send_message(message)
+                    if target:
+                        message = messages.RequestBattle(self.selection, target)
+                        self.send_message(message)
+                    else:
+                        message = messages.MoveArmy(self.selection, position)
+                        self.send_message(message)
 
     def on_key_press(self, symbol, modifiers):
         with self.lock():
@@ -228,21 +235,45 @@ class Gui (kxg.Actor):
     def upgrade_army(self, city, is_mine):
         pass
 
+    def destroy_army(self, city, is_mine):
+        pass
+
+    def request_battle(self, campaign, is_mine):
+        pass
+
+    def start_battle(self, battle):
+        pass
+
+    def join_battle(self, battle):
+        pass
+
+    def retreat_battle(self, army, target, is_mine):
+        pass
+
+    def zombify_city(self, battle, city, is_mine):
+        pass
+
+    def end_battle(self, is_mine):
+        pass
+
     def move_army(self, army, target, is_mine):
         pass
 
-    def attack_city(self, siege, was_me):
+    def attack_city(self, battle, is_mine):
         pass
 
-    def defend_city(self, siege, was_me):
+    def defend_city(self, battle, is_mine):
         pass
 
-    def capture_city(self, siege):
+    def capture_city(self, battle):
         pass
 
-    def defeat_player(self, player):
+    def defeat_player(self):
         pass
 
+    
+    def show_error(self, message):
+        print message.error
 
 
 class CommunityExtension (kxg.TokenExtension):
@@ -303,14 +334,13 @@ class CommunityExtension (kxg.TokenExtension):
         self.level_sprite.y = y + 50.25
 
     def update_health(self):
-        frames = self.manager.health_bar
+        frames = self.gui.health_bar
 
         health = self.token.get_health()
         max_health = self.token.get_max_health()
         max_index = len(frames) - 1
-        index = (max_index * health) // max_health
-
-        self.health_bar_sprite.image = frames[index]
+        index = max_index * health / max_health
+        self.health_bar_sprite.image = frames[int(index)]
 
     def update_level(self):
         level = self.token.get_level()

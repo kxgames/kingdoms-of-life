@@ -257,7 +257,7 @@ class World (kxg.World):
         closest_community = None
 
         if player is None:
-            communities = self.yield_community()
+            communities = self.yield_communities()
         else:
             communities = player.cities + player.armies
 
