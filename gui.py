@@ -28,19 +28,21 @@ class Gui (kxg.Actor):
 
         self.player = None
         self.selection = None
+        self.mode = None
 
         self.window = window
-        self.window.set_handlers(self)
+        self.window.push_handlers(self)
 
         self.batch = pyglet.graphics.Batch()
         self.bin = pyglet.image.atlas.TextureBin()
         self.frame_rate = pyglet.clock.ClockDisplay()
 
         self.community_layers = {
-                'map': pyglet.graphics.OrderedGroup(0),
+                'map':  pyglet.graphics.OrderedGroup(0),
                 'road': pyglet.graphics.OrderedGroup(1),
                 'city': pyglet.graphics.OrderedGroup(2),
-                'army': pyglet.graphics.OrderedGroup(3) }
+                'army': pyglet.graphics.OrderedGroup(3),
+                'gui':  pyglet.graphics.OrderedGroup(4) }
     
         self.community_icons = {
                 'city': self.load_icon('images/city-icon.png'),
@@ -55,6 +57,16 @@ class Gui (kxg.Actor):
         self.health_bar = self.load_health_icon('images/full-health.png', 25)
         self.health_outline = self.load_icon('images/empty-health.png')
 
+        width, height = window.get_size()
+
+        self.mode_sprite = pyglet.text.Label("",
+                font_name='Deja Vu Sans', font_size=12,
+                color=(0, 0, 0, 255),
+                anchor_x='right', anchor_y='top',
+                x=(width - 5), y=(height - 5),
+                batch=self.batch, group=self.community_layers['gui'])
+
+
     def get_name(self):
         return 'gui'
 
@@ -68,6 +80,22 @@ class Gui (kxg.Actor):
     def update(self, time):
         pass
 
+    def update_mode(self, mode=None):
+        self.mode = mode
+        self.selection = None
+
+        if not self.mode:
+            self.mode_sprite.text = ''
+        else:
+            self.mode_sprite.text = '%s Mode' % self.mode.title()
+
+    def update_selection(self, community=None):
+        if self.selection:
+            self.selection.get_extension().unselect()
+        self.selection = community
+        if self.selection:
+            self.selection.get_extension().select()
+
     def teardown(self):
         pass
 
@@ -80,30 +108,40 @@ class Gui (kxg.Actor):
     def on_mouse_release(self, x, y, button, modifiers):
         with self.lock():
             position = kxg.geometry.Vector(x, y)
-            closest_distance = kxg.geometry.infinity
-            closest_community = None
-
-            for community in self.world.yield_communities():
-                distance = position.get_distance(community.position)
-
-                if distance < closest_distance:
-                    closest_distance = distance
-                    closest_community = community
-
+            find_closest_community = self.player.find_closest_community
+            
             if button == pyglet.window.mouse.LEFT:
-                if closest_distance < 40:
-                    if self.selection:
-                        self.selection.get_extension().unselect()
-                    self.selection = closest_community
-                    self.selection.get_extension().select()
+                
+                if self.mode == 'fight':
+                    message = messages.CreateArmy(self.player, position)
+                    self.send_message(message)
+                    self.update_mode()
+                    self.update_selection()
+
+                elif self.mode == 'develop':
+                    message = messages.CreateCity(self.player, position)
+                    self.send_message(message)
+                    self.update_mode()
+                    self.update_selection()
+
+                else:
+                    community = find_closest_community(position, cutoff=40)
+                    self.update_selection(community)
 
             if button == pyglet.window.mouse.RIGHT:
-                message = messages.CreateArmy(self.player, position)
-                self.send_message(message)
+                if self.selection and self.selection.can_move():
+                    message = messages.MoveArmy(self.selection, position)
+                    self.send_message(message)
 
-    def on_key_release(self, symbol, modifiers):
+    def on_key_press(self, symbol, modifiers):
         with self.lock():
-            pass
+            if symbol == pyglet.window.key.F:
+                self.update_mode('fight')
+            if symbol == pyglet.window.key.D:
+                self.update_mode('develop')
+            if symbol == pyglet.window.key.ESCAPE:
+                self.update_mode()
+                return True
 
 
     def path_to_array(self, path):

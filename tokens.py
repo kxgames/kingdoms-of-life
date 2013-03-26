@@ -252,6 +252,28 @@ class World (kxg.World):
 
         return closest_army
 
+    def find_closest_community(self, target, player=None, cutoff=None):
+        closest_distance = kxg.geometry.infinity
+        closest_community = None
+
+        if player is None:
+            communities = self.yield_community()
+        else:
+            communities = player.cities + player.armies
+
+        for community in communities:
+            offset = target - community.position
+            distance = offset.magnitude
+
+            if distance < closest_distance:
+                closest_distance = distance
+                closest_community = community
+
+        if (cutoff is not None) and (closest_distance > cutoff):
+            return None
+
+        return closest_community
+
 
     def yield_cities(self):
         for player in self.players:
@@ -496,6 +518,9 @@ class Player (kxg.Token):
     def find_closest_army(self, target, cutoff=None):
         return self.world.find_closest_army(target, self, cutoff)
 
+    def find_closest_community(self, target, cutoff=None):
+        return self.world.find_closest_community(target, self, cutoff)
+    
     def is_dead(self):
         return self.dead
 
@@ -577,6 +602,9 @@ class Community (kxg.Token):
     def get_supply(self):
         raise NotImplementedError
 
+    def can_move(self):
+        raise NotImplementedError
+
     def get_distance_to(self, other):
         return self.position.get_distance(other.position)
 
@@ -634,7 +662,6 @@ class City (Community):
             else:
                 raise NotImplementedError
 
-
     @kxg.check_for_safety
     def teardown(self):
         raise AssertionError
@@ -674,6 +701,9 @@ class City (Community):
     
     def get_battle_price(self):
         return 100
+
+    def can_move(self):
+        return False
 
 
 class Army (Community):
@@ -784,6 +814,9 @@ class Army (Community):
 
     def get_battle_price(self):
         return 0
+
+    def can_move(self):
+        return True
 
     def can_move_to(self, position):
         return True
