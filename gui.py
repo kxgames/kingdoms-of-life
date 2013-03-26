@@ -276,13 +276,13 @@ class Gui (kxg.Actor):
         print message.error
 
 
+
 class PlayerExtension (kxg.TokenExtension):
 
     def __init__(self, gui, player):
         self.gui = gui
         self.player = player
         self.wealth_label = None
-
 
     def setup(self):
         pass
@@ -308,12 +308,10 @@ class PlayerExtension (kxg.TokenExtension):
 
         wealth = player.wealth
         revenue = player.revenue
-        self.wealth_label.text = '%4i + %3i' %(player.wealth, player.revenue)
-
+        self.wealth_label.text = '%4i %+3i' %(player.wealth, player.revenue)
 
     def teardown(self):
         self.wealth_label.delete()
-
 
 
 class CommunityExtension (kxg.TokenExtension):
@@ -418,6 +416,29 @@ class CityExtension (CommunityExtension):
 
 class ArmyExtension (CommunityExtension):
     type = 'army'
+
+class RoadExtension (kxg.TokenExtension):
+
+    def __init__(self, gui, road):
+        self.gui = gui
+        self.road = road
+
+        batch = gui.batch
+
+        start = road.start.position
+        end = road.end.position
+
+        self.road_line = batch.add(
+                count=2, mode=GL_LINE,
+                data=('v2f', start.pygame + end.pygame)
+                )
+
+    def setup(self):
+        pass
+
+    def teardown(self):
+        self.road_line.delete()
+
 
 
 
