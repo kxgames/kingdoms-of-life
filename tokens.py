@@ -119,11 +119,8 @@ class World (kxg.World):
 
     @kxg.check_for_safety
     def retreat_battle(self, army, target):
-
-        battle = army.battle
-
-        battle.retreat(army)
-
+        army.battle.retreat(army)
+        army.exit_battle()
         army.move_to(target)
 
     @kxg.check_for_safety
@@ -138,9 +135,9 @@ class World (kxg.World):
                 winner = battle.communities.keys()[0]
                 if winner != city.player:
                     self.capture_city(city, winner)
+
         battle.teardown()
         self.remove_token(battle)
-
 
     @kxg.check_for_safety
     def capture_city(self, city, attacker):
@@ -586,8 +583,15 @@ class Community (kxg.Token):
     def forget_campaign(self, campaign):
         raise NotImplementedError
 
-    def engage_battle(self, battle):
-        raise NotImplementedError
+    def enter_battle(self, battle):
+        self.battle = battle
+        for extension in self.get_extensions():
+            extension.update_engagement()
+
+    def exit_battle(self):
+        self.battle = None
+        for extension in self.get_extensions():
+            extension.update_engagement()
 
 
     def get_level(self):
@@ -678,9 +682,6 @@ class City (Community):
             self.campaigns.remove(campaign)
         except ValueError:
             pass
-
-    def engage_battle(self, battle):
-        self.battle = battle
 
     def set_health_to_min(self):
         if self.health <= 1:
@@ -785,8 +786,8 @@ class Army (Community):
                 self.my_campaign = None
                 self.target = None
         
-    def engage_battle(self, battle):
-        self.battle = battle
+    def enter_battle(self, battle):
+        Community.enter_battle(self, battle)
         self.target = None
         self.forget_campaign(self.my_campaign)
 
@@ -985,10 +986,11 @@ class Battle (kxg.Token):
     def teardown(self):
         if self.zombie_city:
             self.zombie_city.battle = None
+            self.zombie_city.exit_battle()
             self.zombie_city = None
         for communities in self.communities.values():
             for community in communities:
-                community.battle = None
+                community.exit_battle()
         self.communities = {}
 
 
@@ -1022,7 +1024,7 @@ class Battle (kxg.Token):
         if player not in self.communities:
             self.communities[player] = []
         self.communities[player].append(community)
-        community.engage_battle(self)
+        community.enter_battle(self)
 
     def remove_player(self, player):
         if player in self.communities:

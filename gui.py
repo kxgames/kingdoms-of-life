@@ -129,7 +129,7 @@ class Gui (kxg.Actor):
 
             if button == pyglet.window.mouse.RIGHT:
                 target = self.world.find_closest_community(position, cutoff=40)
-                if target.player is self.player:
+                if target and target.player is self.player:
                     target = None
 
                 if self.selection and self.selection.can_move():
@@ -288,27 +288,28 @@ class PlayerExtension (kxg.TokenExtension):
         pass
 
     def update_wealth(self):
-
         player = self.player
+        wealth = player.wealth
+        revenue = player.revenue
+
         if not self.wealth_label:
             gui = self.gui
+
             if player is gui.player:
                 window = gui.window
                 batch = gui.batch
-                #front = pyglet.graphics.OrderedGroup(1, parent=layer)
+                layer = gui.community_layers['gui']
 
                 self.wealth_label = pyglet.text.Label(
                         font_name='Deja Vu Sans', font_size=12,
                         color=(0, 0, 0, 255),
-                        x=0, y=window.height,
+                        x=5, y=window.height - 5,
                         anchor_x='left', anchor_y='top',
-                        batch=batch)
+                        batch=batch, group=layer)
             else:
                 return
 
-        wealth = player.wealth
-        revenue = player.revenue
-        self.wealth_label.text = '%4i %+3i' %(player.wealth, player.revenue)
+        self.wealth_label.text = '%d/+%d' % (wealth, revenue)
 
     def teardown(self):
         self.wealth_label.delete()
@@ -387,7 +388,7 @@ class CommunityExtension (kxg.TokenExtension):
     def update_engagement(self):
         color = self.token.player.color
 
-        if self.token.is_in_battle():
+        if not self.token.is_in_battle():
             self.engagement_sprite.image = self.gui.normal_shapes[color]
             self.selection_sprite.image = self.gui.normal_outlines[color]
 
