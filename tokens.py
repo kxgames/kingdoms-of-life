@@ -11,9 +11,8 @@ class World (kxg.World):
         kxg.World.__init__(self)
 
         self.players = []
-        self.defeated_players = []
+        self.losers = []; self.winner = None
         self.map = kxg.geometry.Rectangle.from_size(500, 500)
-        self.winner = None
 
         self.game_started = False
         self.game_ended = False
@@ -203,7 +202,7 @@ class World (kxg.World):
     @kxg.check_for_safety
     def defeat_player(self, player):
         player.dead = True
-        self.defeated_players.append(player)
+        self.losers.append(player)
         self.players.remove(player)
         player.teardown()
         #self.remove_token(player)
@@ -260,8 +259,14 @@ class World (kxg.World):
                 yield city
 
     def yield_armies(self):
-
         for player in self.players:
+            for army in player.armies:
+                yield army
+
+    def yield_communities(self):
+        for player in self.players:
+            for city in player.cities:
+                yield city
             for army in player.armies:
                 yield army
 
