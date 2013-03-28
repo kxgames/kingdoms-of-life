@@ -64,6 +64,8 @@ class Gui (kxg.Actor):
                 x=(width / 2), y=5, color=(0, 0, 0, 255),
                 anchor_x='center', anchor_y='bottom',
                 batch=self.batch, group=self.community_layers['gui'])
+        
+        self.drag_start_city = None
 
 
     def get_name(self):
@@ -86,6 +88,8 @@ class Gui (kxg.Actor):
             self.mode_sprite.text = "Click to place a city."
         elif self.mode == 'fight':
             self.mode_sprite.text = "Click to place an army."
+        elif self.mode == 'develop road':
+            self.mode_sprite.text = "Drag to another city to place a road."
         else:
             self.mode_sprite.text = ""
 
@@ -105,6 +109,31 @@ class Gui (kxg.Actor):
         pyglet.gl.glClearColor(255, 250, 240, 255)
         self.batch.draw()
 
+    def on_mouse_press(self, x, y, button, modifiers):
+        with self.lock():
+            position = kxg.geometry.Vector(x, y)
+            find_closest_community = self.player.find_closest_community
+            
+            if button == pyglet.window.mouse.LEFT:
+                if self.mode == 'develop':
+                    drag_start = find_closest_community(position, cutoff=40)
+                    if drag_start and drag_start.is_city():
+                        self.update_selection(drag_start)
+                        self.drag_start_city = drag_start
+
+    def on_mouse_drag(self, x, y, dx, dy, button, modifiers):
+        with self.lock():
+            position = kxg.geometry.Vector(x, y)
+            
+            if button == pyglet.window.mouse.LEFT:
+                drag_start = self.drag_start_city
+                if drag_start:
+                    drag_dist = position.get_distance(drag_start.position)
+                    if self.mode == 'develop' and drag_dist > 40:
+                        self.update_mode('develop road')
+                    elif self.mode == 'develop road' and drag_dist <= 40:
+                        self.update_mode('develop')
+
     def on_mouse_release(self, x, y, button, modifiers):
         with self.lock():
             position = kxg.geometry.Vector(x, y)
@@ -117,10 +146,27 @@ class Gui (kxg.Actor):
                     self.update_mode()
                     self.update_selection()
 
-                elif self.mode == 'develop':
-                    message = messages.CreateCity(self.player, position)
-                    self.send_message(message)
+                elif self.mode == 'develop road':
+                    drag_start = self.drag_start_city
+                    drag_end = self.world.find_closest_community(position, cutoff=40)
+                    self.drag_start_city = None
+                    
+                    if drag_start and drag_end:
+                        if drag_start.is_city() and drag_end.is_city():
+                            if not (drag_start is drag_end):
+                                message = messages.CreateRoad(self.player, drag_start, drag_end)
+                                self.send_message(message)
+                                self.update_selection()
                     self.update_mode()
+
+                elif self.mode == 'develop':
+                    if self.drag_start_city:
+                        #upgrade?
+                        self.drag_start_city = None
+                    else:
+                        message = messages.CreateCity(self.player, position)
+                        self.send_message(message)
+                        self.update_mode()
                     self.update_selection()
 
                 else:
@@ -309,7 +355,7 @@ class PlayerExtension (kxg.TokenExtension):
             else:
                 return
 
-        self.wealth_label.text = '%d/+%d' % (wealth, revenue)
+        self.wealth_label.text = '%d/%+d' % (wealth, revenue)
 
     def teardown(self):
         self.wealth_label.delete()
@@ -421,17 +467,22 @@ class ArmyExtension (CommunityExtension):
 class RoadExtension (kxg.TokenExtension):
 
     def __init__(self, gui, road):
+        self.width = 20
+
         self.gui = gui
         self.road = road
 
         batch = gui.batch
+        group = gui.community_layers['road']
 
         start = road.start.position
         end = road.end.position
+        color = colors[gui.player.color]
 
         self.road_line = batch.add(
-                count=2, mode=GL_LINE,
-                data=('v2f', start.pygame + end.pygame)
+                2, pyglet.gl.GL_LINES, group,
+                ('v2f', start.pygame + end.pygame),
+                ('c3B', color*2)
                 )
 
     def setup(self):

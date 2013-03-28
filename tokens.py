@@ -98,7 +98,7 @@ class World (kxg.World):
     @kxg.check_for_safety
     def start_battle(self, campaign, battle):
 
-        if isinstance(campaign.community, Army):
+        if campaign.community.is_army():
             cancelled_campaign = campaign.community.my_campaign
             if cancelled_campaign:
                 cancelled_campaign.teardown()
@@ -636,9 +636,15 @@ class Community (kxg.Token):
         
         return radius >= distance.magnitude
 
+
     def is_in_battle(self):
         return self.battle is not None
 
+    def is_army(self):
+        raise NotImplementedError
+
+    def is_city(self):
+        raise NotImplementedError
 
 class City (Community):
 
@@ -711,6 +717,12 @@ class City (Community):
 
     def can_move(self):
         return False
+
+    def is_army(self):
+        return False
+
+    def is_city(self):
+        return True
 
 
 class Army (Community):
@@ -827,6 +839,12 @@ class Army (Community):
 
     def can_move_to(self, position):
         return True
+
+    def is_army(self):
+        return True
+
+    def is_city(self):
+        return False
 
 
 class Road (kxg.Token):
