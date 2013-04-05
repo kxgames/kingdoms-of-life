@@ -328,7 +328,7 @@ class DestroyArmy (kxg.Message):
         world.destroy_army(self.army)
 
     def notify(self, actor, is_mine):
-        actor.destroy_army(is_mine)
+        actor.destroy_army(actor, is_mine)
 
 
 

@@ -345,7 +345,7 @@ class Referee (kxg.Referee):
     def upgrade_army(self, army, is_mine):
         assert not is_mine
 
-    def destroy_army(self, is_mine):
+    def destroy_army(self, army, is_mine):
         pass
 
     def request_battle(self, campaign, is_mine):
@@ -646,6 +646,7 @@ class Community (kxg.Token):
     def is_city(self):
         raise NotImplementedError
 
+
 class City (Community):
 
     # Settings (fold)
@@ -777,7 +778,8 @@ class Army (Community):
 
     @kxg.check_for_safety
     def teardown(self):
-        pass
+        for extension in self.get_extensions():
+            extension.teardown()
 
 
     def chase (self, campaign):

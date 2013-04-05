@@ -9,18 +9,6 @@ import math
 import numpy
 import pyglet
 
-colors = {            # (fold)
-        'red':          (164,   0,   0),
-        'brown':        (143,  89,   2),
-        'orange':       (206,  92,   0),
-        'yellow':       (196, 160,   0),
-        'green':        ( 78, 154,   6),
-        'blue':         ( 32,  74, 135),
-        'purple':       ( 92,  53, 102),
-        'black':        ( 46,  52,  54),
-}
-
-
 class Gui (kxg.Actor):
 
     def __init__(self, window):
@@ -37,12 +25,13 @@ class Gui (kxg.Actor):
         self.bin = pyglet.image.atlas.TextureBin()
         self.frame_rate = pyglet.clock.ClockDisplay()
 
-        self.community_layers = {
-                'map':  pyglet.graphics.OrderedGroup(0),
-                'road': pyglet.graphics.OrderedGroup(1),
-                'city': pyglet.graphics.OrderedGroup(2),
-                'army': pyglet.graphics.OrderedGroup(3),
-                'gui':  pyglet.graphics.OrderedGroup(4) }
+        self.layers = {
+                'map 1':    pyglet.graphics.OrderedGroup(0),
+                'map 2':    pyglet.graphics.OrderedGroup(1),
+                'road':     pyglet.graphics.OrderedGroup(2),
+                'city':     pyglet.graphics.OrderedGroup(3),
+                'army':     pyglet.graphics.OrderedGroup(4),
+                'gui':      pyglet.graphics.OrderedGroup(5) }
     
         self.community_icons = {
                 'city': self.load_icon('images/city-icon.png'),
@@ -63,7 +52,7 @@ class Gui (kxg.Actor):
                 font_name='Deja Vu Sans', font_size=12,
                 x=(width / 2), y=5, color=(0, 0, 0, 255),
                 anchor_x='center', anchor_y='bottom',
-                batch=self.batch, group=self.community_layers['gui'])
+                batch=self.batch, group=self.layers['gui'])
         
         self.drag_start_city = None
 
@@ -106,7 +95,8 @@ class Gui (kxg.Actor):
 
     def on_draw(self):
         self.window.clear()
-        pyglet.gl.glClearColor(255, 250, 240, 255)
+        background = colors['background'] + (255,)
+        pyglet.gl.glClearColor(*background)
         self.batch.draw()
 
     def on_mouse_press(self, x, y, button, modifiers):
@@ -278,10 +268,10 @@ class Gui (kxg.Actor):
     def upgrade_city(self, city, is_mine):
         pass
 
-    def upgrade_army(self, city, is_mine):
+    def upgrade_army(self, army, is_mine):
         pass
 
-    def destroy_army(self, city, is_mine):
+    def destroy_army(self, army, is_mine):
         pass
 
     def request_battle(self, campaign, is_mine):
@@ -323,6 +313,28 @@ class Gui (kxg.Actor):
 
 
 
+colors = {            # (fold)
+        'red':          (164,   0,   0),
+        'brown':        (143,  89,   2),
+        'orange':       (206,  92,   0),
+        'yellow':       (196, 160,   0),
+        'green':        ( 78, 154,   6),
+        'blue':         ( 32,  74, 135),
+        'purple':       ( 92,  53, 102),
+        'black':        ( 46,  52,  54),
+        'background':   (255, 250, 240),
+}
+
+def fade_color(source, extent=0.80):
+    r = interpolate_color(source[0], 255, extent) / 255
+    g = interpolate_color(source[1], 255, extent) / 255
+    b = interpolate_color(source[2], 255, extent) / 255
+    return (r, g, b)
+
+def interpolate_color(start, end, extent):
+    return start + extent * (end - start)
+
+
 class PlayerExtension (kxg.TokenExtension):
 
     def __init__(self, gui, player):
@@ -344,7 +356,7 @@ class PlayerExtension (kxg.TokenExtension):
             if player is gui.player:
                 window = gui.window
                 batch = gui.batch
-                layer = gui.community_layers['gui']
+                layer = gui.layers['gui']
 
                 self.wealth_label = pyglet.text.Label(
                         font_name='Deja Vu Sans', font_size=12,
@@ -368,7 +380,7 @@ class CommunityExtension (kxg.TokenExtension):
         self.token = token
 
         batch = gui.batch
-        layer = gui.community_layers[self.type]
+        layer = gui.layers[self.type]
         back = pyglet.graphics.OrderedGroup(0, parent=layer)
         front = pyglet.graphics.OrderedGroup(1, parent=layer)
 
@@ -461,6 +473,62 @@ class CommunityExtension (kxg.TokenExtension):
 class CityExtension (CommunityExtension):
     type = 'city'
 
+    def __init__(self, gui, token):
+        CommunityExtension.__init__(self, gui, token)
+        self.inner_circle = None
+        self.outer_circle = None
+        self.update_engagement()
+
+    def update_engagement(self):
+        CommunityExtension.update_engagement(self)
+
+        gui = self.gui
+        token = self.token
+
+        if token.player is not gui.player:
+            if self.inner_circle: 
+                print "Deleting inner circle."
+                self.inner_circle.delete()
+            if self.outer_circle:
+                print "Deleting outer circle."
+                self.outer_circle.delete()
+
+        else:
+            num_vertices = 50
+            center = token.position
+            vector = kxg.geometry.Vector.from_radians
+
+            inner_vertices = center.tuple
+            outer_vertices = center.tuple
+            inner_radius = token.buffer
+            outer_radius = token.border
+
+            for iteration in range(num_vertices + 1):
+                angle = 2 * math.pi * iteration / num_vertices
+                inner_vertex = token.position + inner_radius * vector(angle)
+                outer_vertex = token.position + outer_radius * vector(angle)
+                inner_vertices += inner_vertex.tuple
+                outer_vertices += outer_vertex.tuple
+
+            player_color = colors[token.player.color]
+            player_color = fade_color(player_color, 0.85)
+            background_color = colors['background']
+
+            self.inner_circle = gui.batch.add(
+                    num_vertices + 2,
+                    pyglet.gl.GL_TRIANGLE_FAN,
+                    gui.layers['map 2'],
+                    ('v2f', inner_vertices),
+                    ('c3B', background_color * (num_vertices + 2)) )
+
+            self.outer_circle = gui.batch.add(
+                    num_vertices + 2,
+                    pyglet.gl.GL_TRIANGLE_FAN,
+                    gui.layers['map 1'],
+                    ('v2f', outer_vertices),
+                    ('c3f', player_color * (num_vertices + 2)) )
+
+
 class ArmyExtension (CommunityExtension):
     type = 'army'
 
@@ -473,7 +541,7 @@ class RoadExtension (kxg.TokenExtension):
         self.road = road
 
         batch = gui.batch
-        group = gui.community_layers['road']
+        group = gui.layers['road']
 
         start = road.start.position
         end = road.end.position
@@ -481,9 +549,8 @@ class RoadExtension (kxg.TokenExtension):
 
         self.road_line = batch.add(
                 2, pyglet.gl.GL_LINES, group,
-                ('v2f', start.pygame + end.pygame),
-                ('c3B', color*2)
-                )
+                ('v2f', start.tuple + end.tuple),
+                ('c3B', 2 * color))
 
     def setup(self):
         pass
