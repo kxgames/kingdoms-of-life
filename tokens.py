@@ -882,6 +882,9 @@ class Road (kxg.Token):
         self.start.roads.remove(self)
         self.end.roads.remove(self)
 
+        for extension in self.get_extensions():
+            extension.teardown()
+
 
     def get_price(self):
         return 20 + 10 * len(self.player.roads)

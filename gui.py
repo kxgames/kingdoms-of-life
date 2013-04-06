@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+# Imports (fold)
 from __future__ import division
 
 import kxg
@@ -9,6 +10,7 @@ import math
 import numpy
 import pyglet
 import operator
+
 
 class Gui (kxg.Actor):
 
@@ -561,29 +563,41 @@ class ArmyExtension (CommunityExtension):
 class RoadExtension (kxg.TokenExtension):
 
     def __init__(self, gui, road):
-        self.width = 20
-
         self.gui = gui
         self.road = road
+        self.width = 3
 
         batch = gui.batch
         group = gui.layers['road']
 
         start = road.start.position
         end = road.end.position
-        color = colors[gui.player.color]
+        direction = end - start
+        normal = direction.orthonormal
+        color = colors[road.player.color]
+
+        top_left = start + (self.width / 2) * normal
+        top_right = end + (self.width / 2) * normal
+        bottom_left = start - (self.width / 2) * normal
+        bottom_right = end - (self.width / 2) * normal
+
+        vertices = (
+                top_left.tuple + top_right.tuple +
+                bottom_right.tuple + bottom_left.tuple)
+
+        # This line will be pretty ugly, because it isn't anti-aliased.  I 
+        # don't think there is an easy way to deal with this.
 
         self.road_line = batch.add(
-                2, pyglet.gl.GL_LINES, group,
-                ('v2f', start.tuple + end.tuple),
-                ('c3B', 2 * color))
+                4, pyglet.gl.GL_QUADS, group,
+                ('v2f', vertices),
+                ('c3B', 4 * color))
 
     def setup(self):
         pass
 
     def teardown(self):
         self.road_line.delete()
-
 
 
 
