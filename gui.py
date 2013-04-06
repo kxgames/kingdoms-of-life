@@ -8,6 +8,7 @@ import messages
 import math
 import numpy
 import pyglet
+import operator
 
 class Gui (kxg.Actor):
 
@@ -96,6 +97,7 @@ class Gui (kxg.Actor):
     def on_draw(self):
         self.window.clear()
         background = colors['background'] + (255,)
+        print background
         pyglet.gl.glClearColor(*background)
         self.batch.draw()
 
@@ -485,15 +487,12 @@ class CityExtension (CommunityExtension):
         gui = self.gui
         token = self.token
 
-        if token.player is not gui.player:
-            if self.inner_circle: 
-                print "Deleting inner circle."
-                self.inner_circle.delete()
-            if self.outer_circle:
-                print "Deleting outer circle."
-                self.outer_circle.delete()
+        if self.inner_circle: 
+            self.inner_circle.delete()
+        if self.outer_circle:
+            self.outer_circle.delete()
 
-        else:
+        if token.player is gui.player:
             num_vertices = 50
             center = token.position
             vector = kxg.geometry.Vector.from_radians
@@ -502,6 +501,11 @@ class CityExtension (CommunityExtension):
             outer_vertices = center.tuple
             inner_radius = token.buffer
             outer_radius = token.border
+
+            zeros = (0,) * (num_vertices + 1)
+            indices = range(1, num_vertices + 2)
+            index = reduce(operator.add, zip(zeros, indices))
+            index = (index[0],) + index + (index[-1],)
 
             for iteration in range(num_vertices + 1):
                 angle = 2 * math.pi * iteration / num_vertices
@@ -514,17 +518,19 @@ class CityExtension (CommunityExtension):
             player_color = fade_color(player_color, 0.85)
             background_color = colors['background']
 
-            self.inner_circle = gui.batch.add(
+            self.inner_circle = gui.batch.add_indexed(
                     num_vertices + 2,
-                    pyglet.gl.GL_TRIANGLE_FAN,
+                    pyglet.gl.GL_TRIANGLE_STRIP,
                     gui.layers['map 2'],
+                    index,
                     ('v2f', inner_vertices),
                     ('c3B', background_color * (num_vertices + 2)) )
 
-            self.outer_circle = gui.batch.add(
+            self.outer_circle = gui.batch.add_indexed(
                     num_vertices + 2,
-                    pyglet.gl.GL_TRIANGLE_FAN,
+                    pyglet.gl.GL_TRIANGLE_STRIP,
                     gui.layers['map 1'],
+                    index,
                     ('v2f', outer_vertices),
                     ('c3f', player_color * (num_vertices + 2)) )
 
