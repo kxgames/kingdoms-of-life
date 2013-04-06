@@ -96,9 +96,20 @@ class Gui (kxg.Actor):
 
     def on_draw(self):
         self.window.clear()
-        background = colors['background'] + (255,)
-        print background
-        pyglet.gl.glClearColor(*background)
+
+        if not self.player:
+            pyglet.gl.glClearColor(0, 0, 0, 1)
+            return
+
+        player_color = colors[self.player.color]
+        player_color = fade_color(player_color, 0.85) + (1,)
+        background_color = [x / 255 for x in colors['background']] + [1]
+
+        if not self.player.cities:
+            pyglet.gl.glClearColor(*player_color)
+        else:
+            pyglet.gl.glClearColor(*background_color)
+
         self.batch.draw()
 
     def on_mouse_press(self, x, y, button, modifiers):
@@ -487,37 +498,37 @@ class CityExtension (CommunityExtension):
         gui = self.gui
         token = self.token
 
+        num_vertices = 50
+        center = token.position
+        vector = kxg.geometry.Vector.from_radians
+
+        inner_vertices = center.tuple
+        outer_vertices = center.tuple
+        inner_radius = token.buffer
+        outer_radius = token.border
+
+        zeros = (0,) * (num_vertices + 1)
+        indices = range(1, num_vertices + 2)
+        index = reduce(operator.add, zip(zeros, indices))
+        index = (index[0],) + index + (index[-1],)
+
+        for iteration in range(num_vertices + 1):
+            angle = 2 * math.pi * iteration / num_vertices
+            inner_vertex = token.position + inner_radius * vector(angle)
+            outer_vertex = token.position + outer_radius * vector(angle)
+            inner_vertices += inner_vertex.tuple
+            outer_vertices += outer_vertex.tuple
+
+        player_color = colors[token.player.color]
+        player_color = fade_color(player_color, 0.85)
+        background_color = colors['background']
+
         if self.inner_circle: 
             self.inner_circle.delete()
         if self.outer_circle:
             self.outer_circle.delete()
 
         if token.player is gui.player:
-            num_vertices = 50
-            center = token.position
-            vector = kxg.geometry.Vector.from_radians
-
-            inner_vertices = center.tuple
-            outer_vertices = center.tuple
-            inner_radius = token.buffer
-            outer_radius = token.border
-
-            zeros = (0,) * (num_vertices + 1)
-            indices = range(1, num_vertices + 2)
-            index = reduce(operator.add, zip(zeros, indices))
-            index = (index[0],) + index + (index[-1],)
-
-            for iteration in range(num_vertices + 1):
-                angle = 2 * math.pi * iteration / num_vertices
-                inner_vertex = token.position + inner_radius * vector(angle)
-                outer_vertex = token.position + outer_radius * vector(angle)
-                inner_vertices += inner_vertex.tuple
-                outer_vertices += outer_vertex.tuple
-
-            player_color = colors[token.player.color]
-            player_color = fade_color(player_color, 0.85)
-            background_color = colors['background']
-
             self.inner_circle = gui.batch.add_indexed(
                     num_vertices + 2,
                     pyglet.gl.GL_TRIANGLE_STRIP,
@@ -533,6 +544,15 @@ class CityExtension (CommunityExtension):
                     index,
                     ('v2f', outer_vertices),
                     ('c3f', player_color * (num_vertices + 2)) )
+
+        else:
+            self.outer_circle = gui.batch.add_indexed(
+                    num_vertices + 2,
+                    pyglet.gl.GL_TRIANGLE_STRIP,
+                    gui.layers['map 2'],
+                    index,
+                    ('v2f', outer_vertices),
+                    ('c3B', background_color * (num_vertices + 2)) )
 
 
 class ArmyExtension (CommunityExtension):
