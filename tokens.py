@@ -380,6 +380,10 @@ class Referee (kxg.Referee):
             self.send_message(message)
 
 
+    def show_error(self, message):
+        print message.error
+
+
 
 class Player (kxg.Token):
 

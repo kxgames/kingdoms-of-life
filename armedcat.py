@@ -148,11 +148,11 @@ class PostgameSplashStage (kxg.Stage):
         self.gui = gui
 
     def setup(self):
-        pass
+        with self.gui.lock():
+            self.gui.setup_postgame()
 
     def update(self, time):
-        with self.gui.lock():
-            self.gui.update(time)
+        pass
 
     def teardown(self):
         pass

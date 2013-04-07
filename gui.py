@@ -11,6 +11,8 @@ import numpy
 import pyglet
 import operator
 
+#from pyglet.gl import *
+
 
 class Gui (kxg.Actor):
 
@@ -29,12 +31,14 @@ class Gui (kxg.Actor):
         self.frame_rate = pyglet.clock.ClockDisplay()
 
         self.layers = {
-                'map 1':    pyglet.graphics.OrderedGroup(0),
-                'map 2':    pyglet.graphics.OrderedGroup(1),
-                'road':     pyglet.graphics.OrderedGroup(2),
-                'city':     pyglet.graphics.OrderedGroup(3),
-                'army':     pyglet.graphics.OrderedGroup(4),
-                'gui':      pyglet.graphics.OrderedGroup(5) }
+                'map 1':        pyglet.graphics.OrderedGroup(0),
+                'map 2':        pyglet.graphics.OrderedGroup(1),
+                'road':         pyglet.graphics.OrderedGroup(2),
+                'city':         pyglet.graphics.OrderedGroup(3),
+                'army':         pyglet.graphics.OrderedGroup(4),
+                'gui':          pyglet.graphics.OrderedGroup(5),
+                'messages 1':   pyglet.graphics.OrderedGroup(6),
+                'messages 2':   pyglet.graphics.OrderedGroup(7) }
     
         self.community_icons = {
                 'city': self.load_icon('images/city-icon.png'),
@@ -68,7 +72,53 @@ class Gui (kxg.Actor):
 
 
     def setup(self):
-        pass
+        gl = pyglet.gl
+        gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
+        gl.glEnable(gl.GL_BLEND)
+        gl.glEnable(gl.GL_LINE_SMOOTH)
+        gl.glHint(gl.GL_LINE_SMOOTH_HINT, gl.GL_DONT_CARE)
+
+    def setup_postgame(self):
+        # Turn off any user input.
+        self.window.pop_handlers()
+        self.window.push_handlers(self.on_draw)
+
+        if self.selection:
+            self.selection.get_extension().unselect()
+
+        # Draw a transparent back rectangle across the screen.
+        batch = self.batch
+        group = self.layers['messages 1']
+
+        window_width, window_height = self.window.get_size()
+        banner_height = 100
+
+        left, right = 0, window_width
+        top = (window_height + banner_height) / 2
+        bottom = (window_height - banner_height) / 2
+
+        vertices = left, top, right, top, right, bottom, left, bottom
+        color = 0, 0, 0, 0.8
+
+        self.banner_background = batch.add(
+                4, pyglet.gl.GL_QUADS, group,
+                ('v2f', vertices),
+                ('c4f', 4 * color))
+
+        # Draw a victory or defeat message, as appropriate.
+        if self.player is self.world.winner:
+            message = "You won!"
+        else:
+            message = "You lost!"
+
+        group = self.layers['messages 2']
+        self.banner_message = pyglet.text.Label(
+                message, color=(255, 255, 255, 255),
+                font_name='Deja Vu Sans', font_size=42,
+                x=window_width//2, y=window_height//2,
+                anchor_x='center', anchor_y='center',
+                batch=batch, group=group)
+
 
     def update(self, time):
         pass
@@ -92,13 +142,7 @@ class Gui (kxg.Actor):
         if self.selection:
             self.selection.get_extension().select()
 
-    def teardown(self):
-        pass
-
-
-    def on_draw(self):
-        self.window.clear()
-
+    def update_background(self):
         if not self.player:
             pyglet.gl.glClearColor(0, 0, 0, 1)
             return
@@ -107,11 +151,20 @@ class Gui (kxg.Actor):
         player_color = fade_color(player_color, 0.85) + (1,)
         background_color = [x / 255 for x in colors['background']] + [1]
 
-        if not self.player.cities:
+        if self.player in self.world.losers:
+            pyglet.gl.glClearColor(*background_color)
+        elif not self.player.cities:
             pyglet.gl.glClearColor(*player_color)
         else:
             pyglet.gl.glClearColor(*background_color)
 
+    def teardown(self):
+        pass
+
+
+    def on_draw(self):
+        self.window.clear()
+        self.update_background()
         self.batch.draw()
 
     def on_mouse_press(self, x, y, button, modifiers):
