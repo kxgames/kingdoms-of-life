@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="community-symbols.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="321.43494"
+     inkscape:cy="833.98562"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1914"
+     inkscape:window-height="1176"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0">
+    <sodipodi:guide
+       orientation="1,0"
+       position="121.97592,1.5152288"
+       id="guide5479" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="193.19167,-52.527932"
+       id="guide5481" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="205.56604,-70.584409"
+       id="guide5483" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Background"
+     style="opacity:1">
+    <polygon
+       style="fill:#000000"
+       points="-40,-40 -40,40 40,40 40,-40 "
+       id="polygon3691"
+       transform="translate(347.89653,76.554829)" />
+    <polygon
+       style="fill:#ffffff"
+       points="4.4211749,25.073729 1.9913562e-15,32.521315 -4.4344565,25.149053 -11.632994,31.961388 -12.654574,21.918366 -24.723022,29.46375 -19.88975,16.689482 -29.587001,17.082063 -23.650832,8.6081989 -38.106484,6.7192013 -26.369487,3.2293307e-15 -32.980519,-5.8153554 -24.814269,-9.0316553 -32.7944,-18.933856 -19.958821,-16.74744 -21.535947,-25.665542 -12.953714,-22.43649 -11.49291,-31.576511 -4.6107704,-26.148979 -6.4804112e-15,-35.277715 4.449004,-25.231555 13.209673,-36.293279 13.410978,-23.228494 25.304838,-30.157131 19.616025,-16.459799 29.569456,-17.071933 24.770941,-9.015885 37.156485,-6.5516909 25.50863,0 34.726533,6.1232247 23.831559,8.6739781 28.836553,16.648792 19.265987,16.166083 20.963359,24.983158 12.517149,21.680338 11.300024,31.04656 "
+       id="polygon3693"
+       transform="translate(347.89653,76.554829)" />
+    <polygon
+       points="-40,40 40,40 40,-40 -40,-40 "
+       id="polygon3756"
+       transform="translate(458.9123,78.676144)" />
+    <polygon
+       points="21.433957,25.543995 12.655528,21.920018 11.462776,31.493717 4.6025163,26.102167 2.2734986e-15,37.12905 -4.5201117,25.634827 -12.39413,34.052591 -13.183427,22.834365 -21.522333,25.649317 -19.513358,16.373651 -30.27723,17.480567 -25.698073,9.3533337 -35.958798,6.3405063 -26.504518,3.2458673e-15 -33.27426,-5.8671498 -24.863097,-9.0494271 -33.763836,-19.49356 -19.592841,-16.440346 -22.296232,-26.571615 -12.875367,-22.30079 -11.221704,-30.831379 -4.4720494,-25.362252 -6.3681618e-15,-34.666658 4.3761279,-24.818255 11.657572,-32.028916 13.535491,-23.444158 25.600539,-30.509534 19.810756,-16.623198 28.222008,-16.293984 23.819295,-8.6695142 35.299212,-6.2242035 26.954792,0 36.240981,6.3902628 25.219914,9.1792979 29.003897,16.745408 21.019406,17.637376 "
+       id="polygon3758"
+       transform="translate(458.9123,78.676144)"
+       style="fill:#ffffff" />
+    <polygon
+       points="40,40 40,-40 -40,-40 -40,40 "
+       id="polygon3821"
+       transform="translate(568.51386,76.554823)" />
+    <polygon
+       points="13.063939,22.627405 12.22674,33.592693 4.6548699,26.399079 2.1717934e-15,35.468078 -4.3887712,24.889958 -13.651639,37.507569 -12.85654,22.268181 -24.422196,29.10524 -19.506464,16.367867 -32.588245,18.814832 -23.976058,8.7265713 -38.34952,6.7620551 -25.091224,3.0727887e-15 -32.970791,-5.81364 -25.069611,-9.1245921 -32.411967,-18.713058 -19.468756,-16.336226 -22.956575,-27.358581 -12.761123,-22.102914 -12.200143,-33.519617 -4.5122098,-25.590014 -6.3681417e-15,-34.666549 4.7674453,-27.037526 13.266839,-36.450342 13.269195,-22.98292 22.663169,-27.008913 19.998086,-16.780386 32.990812,-19.047254 24.478647,-8.909499 37.256134,-6.5692616 26.661021,0 34.555456,6.0930592 24.849972,9.04465 30.887908,17.833142 19.422696,16.297577 22.481154,26.791996 "
+       id="polygon3823"
+       transform="translate(568.51386,76.554823)"
+       style="fill:#ffffff" />
+    <polygon
+       points="-40,40 40,40 40,-40 -40,-40 "
+       id="polygon3886"
+       transform="translate(671.04434,80.090358)" />
+    <polygon
+       points="25.309622,30.162833 13.699811,23.728768 11.928523,32.773347 4.5744858,25.943198 2.2396214e-15,36.575794 -4.6916879,26.607884 -13.645847,37.491656 -12.721779,22.034767 -21.259151,25.335669 -20.168168,16.923103 -33.049333,19.081042 -24.634081,8.9660721 -37.318526,6.5802631 -25.488674,3.1214623e-15 -34.301726,-6.0483197 -25.283111,-9.2023 -32.925723,-19.009675 -20.568785,-17.25926 -25.622958,-30.536252 -13.674762,-23.685382 -13.463869,-36.991675 -4.6650026,-26.456545 -6.5802709e-15,-35.821326 4.4647165,-25.320665 12.14552,-33.369543 13.731396,-23.783476 22.649856,-26.993047 20.393651,-17.112305 34.604584,-19.978966 25.810176,-9.3941359 38.497783,-6.7881978 27.468021,0 36.678145,6.4673466 23.797117,8.6614421 28.386487,16.388946 20.746266,17.408184 "
+       id="polygon3888"
+       transform="translate(671.04434,80.090358)"
+       style="fill:#ffffff" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <polygon
+       transform="translate(212.42789,320.59345)"
+       points="-40,-40 -40,40 40,40 40,-40 "
+       id="polygon6-5-1"
+       style="fill:#000000"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/empty-health.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="color:#000000;fill:#000000;stroke:#ffffff;stroke-width:1;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new"
+       d="m 189.92789,320.58062 c 0,-12.38846 10.0706,-22.46875 22.5,-22.46875 12.4293,0 22.5,10.08029 22.5,22.46875 l -3,0 c 0,-10.80751 -8.7334,-19.5 -19.5,-19.5 -10.7667,0 -19.5,8.69249 -19.5,19.5 l -3,0 z"
+       id="rect10141-0-2-1-1-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/empty-health.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <polygon
+       transform="translate(87.558978,71.504543)"
+       points="40,40 40,-40 -40,-40 -40,40 "
+       id="polygon6-5-1-5"
+       style="fill:#000000"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/normal-shape.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new"
+       id="path4113-0-5-0-0-0-4-82-2-40-0-5-3-1"
+       sodipodi:cx="-367.19046"
+       sodipodi:cy="284.64624"
+       sodipodi:rx="29.7995"
+       sodipodi:ry="30.304577"
+       d="m -337.39096,284.64624 a 29.7995,30.304577 0 1 1 -59.599,0 29.7995,30.304577 0 1 1 59.599,0 z"
+       transform="matrix(0.90605549,0,0,0.89095455,420.25391,-182.10232)"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/normal-shape.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <polygon
+       transform="translate(211.636,209.97614)"
+       points="40,40 40,-40 -40,-40 -40,40 "
+       id="polygon6-5-1-5-7"
+       style="fill:#000000"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/army-icon.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g5180-2-6-9-7-6-6-6"
+       transform="matrix(0.79753636,0,0,0.79753636,494.6725,-166.88238)"
+       style="fill:#ffffff"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/army-icon.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:connector-curvature="0"
+         id="rect5023-5-0-3-5-7-4-3-0"
+         d="m -367.16518,487.10714 c -2.216,0 -4,1.784 -4,4 0,2.216 1.784,4 4,4 l 20,0 c 2.216,0 4,-1.784 4,-4 0,-2.216 -1.784,-4 -4,-4 l -20,0 z m 0.15625,2 c 1.10457,0 2,0.89543 2,2 0,1.10457 -0.89543,2 -2,2 -1.10457,0 -2,-0.89543 -2,-2 0,-1.10457 0.89543,-2 2,-2 z m 6.5625,0 c 1.10457,0 2,0.89543 2,2 0,1.10457 -0.89543,2 -2,2 -1.10457,0 -2,-0.89543 -2,-2 0,-1.10457 0.89543,-2 2,-2 z m 6.59375,0 c 1.10457,0 2,0.89543 2,2 0,1.10457 -0.89543,2 -2,2 -1.10457,0 -2,-0.89543 -2,-2 0,-1.10457 0.89543,-2 2,-2 z m 6.5625,0 c 1.10457,0 2,0.89543 2,2 0,1.10457 -0.89543,2 -2,2 -1.10457,0 -2,-0.89543 -2,-2 0,-1.10457 0.89543,-2 2,-2 z"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5166-5-2-9-8-0-4-2"
+         d="m -373.69643,480.66964 0,8 1.59375,0 c 0.90303,-1.81212 2.7881,-3.0625 4.9375,-3.0625 l 20,0 c 2.1494,0 4.03447,1.25038 4.9375,3.0625 l 2.53125,0 0,-2.96875 -7.21875,-5.03125 -26.78125,0 z"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new" />
+      <path
+         sodipodi:nodetypes="czcccc"
+         inkscape:connector-curvature="0"
+         id="rect5082-6-8-5-3-9-9-8-6"
+         d="m -365.73684,475.76964 c 0,0 0.36337,-2.6 8.5,-2.6 8.13663,0 8.5,2.6 8.5,2.6 l 0,3.4 -17,0 z"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new" />
+      <path
+         inkscape:connector-curvature="0"
+         id="rect5085-8-1-4-4-5-9-4-2"
+         d="m -340.08059,475.16469 0,1 -7.15625,0 0,2 7.15625,0 0,1 4,0 0,-4 -4,0 z"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new" />
+    </g>
+    <polygon
+       transform="translate(89.306527,210.2848)"
+       points="-40,40 40,40 40,-40 -40,-40 "
+       id="polygon6-3-8"
+       style="fill:#000000;fill-opacity:1"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/city-icon.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path9660-9-5-0-1-0"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new"
+       d="m 85.260827,209.84133 -10.9543,7.674 0.9045,1.3021 10.0498,-7.0377 8.3598,5.8548 0.8648,0.6064 1.2227,0 8.598403,0 0,-1.5905 -9.324103,0 -3.3598,-2.3558 0,-3.7277 -2.2267,0 0,2.167 -4.1351,-2.8926 z m 0.01,3.0434 -9.2943,6.5009 0,7.3161 -1.1531,0 0,1.5905 8.4096,0 0,-7.3161 4.0557,0 0,7.3161 16.878703,0 0,-1.5905 -1.1531,0 0,-7.3161 -8.459203,0 -9.2843,-6.5009 z m -0.01,4.1749 c 1.1199,0 2.0278,0.9079 2.0278,2.0279 l -4.0557,0 c 0,-1.12 0.9079,-2.0279 2.0279,-2.0279 z m -6.6601,3.9165 2.8628,0 0,3.499 -2.8628,0 0,-3.499 z m 10.4772,0 2.8628,0 0,3.499 -2.8628,0 0,-3.499 z m 4.662,0 2.8628,0 0,3.499 -2.8628,0 0,-3.499 z m 4.6719,0 2.862903,0 0,3.499 -2.862903,0 0,-3.499 z"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/city-icon.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <polygon
+       transform="translate(221.32342,78.055829)"
+       points="40,-40 -40,-40 -40,40 40,40 "
+       id="polygon6-3-7"
+       style="fill:#000000;fill-opacity:1"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/battle-shape.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <polygon
+       transform="matrix(-0.37240964,-0.92806846,0.92806846,-0.37240964,221.32342,78.055829)"
+       points="-6.0113997e-15,-32.724536 4.6384983,-26.306231 11.314401,-31.08606 13.031564,-22.571331 23.474579,-27.975913 20.519442,-17.217856 28.585902,-16.504078 24.249814,-8.8262103 35.328666,-6.2293971 25.963163,0 38.431811,6.7765653 24.808676,9.0296194 29.617667,17.099768 19.582788,16.43191 22.511057,26.827633 13.51006,23.40011 13.26544,36.446496 4.4691234,25.345658 2.3221343e-15,37.923332 -4.6682411,26.474911 -12.689582,34.864341 -12.911285,22.363001 -24.604517,29.322522 -19.227681,16.13394 -32.732942,18.898373 -24.569977,8.9427404 -32.888229,5.7990821 -27.007714,3.307491e-15 -32.933906,-5.8071362 -24.65684,-8.9743557 -33.591297,-19.393944 -20.423295,-17.13718 -23.732736,-28.283574 -13.069424,-22.636907 -13.165317,-36.17141 -4.6048876,-26.115615 "
+       id="polygon4-9-5"
+       style="fill:#ffffff"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/battle-shape.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <polygon
+       transform="translate(85.320238,322.27744)"
+       points="40,40 40,-40 -40,-40 -40,40 "
+       id="polygon6-5-1-3"
+       style="fill:#000000"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/full-health.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="color:#000000;fill:#ffffff;stroke:#ffffff;stroke-width:1;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new"
+       d="m 62.820238,322.26461 c 0,-12.38846 10.0706,-22.46875 22.5,-22.46875 12.4293,0 22.500002,10.08029 22.500002,22.46875 l -3,0 c 0,-10.80751 -8.733402,-19.5 -19.500002,-19.5 -10.7667,0 -19.5,8.69249 -19.5,19.5 l -3,0 z"
+       id="rect10141-0-2-1-1-2-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/images/full-health.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>
