@@ -4,10 +4,7 @@ import os, kxg
 import tokens, gui, messages
 
 class SandboxLoop (kxg.PygletLoop):
-
-    def __init__(self):
-        kxg.PygletLoop.__init__(self)
-
+    def get_initial_stage(self):
         world, referee, actor = \
                 tokens.World(), tokens.Referee(), gui.Gui(self.window)
         actors_to_greetings = {
@@ -17,12 +14,8 @@ class SandboxLoop (kxg.PygletLoop):
                 world, referee, actors_to_greetings)
         postgame_stage = PostgameSplashStage(world, actor)
         
-        self.stage = game_stage
-        self.stage.successor = postgame_stage
-
-    def get_initial_stage(self):
-        return self.stage
-
+        game_stage.successor = postgame_stage
+        return game_stage
 
 class ClientLoop (kxg.PygletLoop):
 

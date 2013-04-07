@@ -492,6 +492,9 @@ class CityExtension (CommunityExtension):
         CommunityExtension.__init__(self, gui, token)
         self.inner_circle = None
         self.outer_circle = None
+
+        print "%d: Created city." % token.get_id()
+
         self.update_engagement()
 
     def update_engagement(self):
@@ -504,22 +507,22 @@ class CityExtension (CommunityExtension):
         center = token.position
         vector = kxg.geometry.Vector.from_radians
 
-        inner_vertices = center.tuple
-        outer_vertices = center.tuple
+        inner_vertices = ()
+        outer_vertices = ()
         inner_radius = token.buffer
         outer_radius = token.border
 
-        zeros = (0,) * (num_vertices + 1)
-        indices = range(1, num_vertices + 2)
-        index = reduce(operator.add, zip(zeros, indices))
-        index = (index[0],) + index + (index[-1],)
-
         for iteration in range(num_vertices + 1):
-            angle = 2 * math.pi * iteration / num_vertices
+            angle = math.pi * iteration / num_vertices
+            if iteration % 2: angle *= -1
+
             inner_vertex = token.position + inner_radius * vector(angle)
             outer_vertex = token.position + outer_radius * vector(angle)
             inner_vertices += inner_vertex.tuple
             outer_vertices += outer_vertex.tuple
+
+        inner_vertices = inner_vertices[0:2] + inner_vertices + inner_vertices[-2:]
+        outer_vertices = outer_vertices[0:2] + outer_vertices + outer_vertices[-2:]
 
         player_color = colors[token.player.color]
         player_color = fade_color(player_color, 0.85)
@@ -531,30 +534,31 @@ class CityExtension (CommunityExtension):
             self.outer_circle.delete()
 
         if token.player is gui.player:
-            self.inner_circle = gui.batch.add_indexed(
-                    num_vertices + 2,
+            print "%d: Redrawing own territory." % token.get_id()
+
+            self.inner_circle = gui.batch.add(
+                    num_vertices + 3,
                     pyglet.gl.GL_TRIANGLE_STRIP,
                     gui.layers['map 2'],
-                    index,
                     ('v2f', inner_vertices),
-                    ('c3B', background_color * (num_vertices + 2)) )
+                    ('c3B', background_color * (num_vertices + 3)) )
 
-            self.outer_circle = gui.batch.add_indexed(
-                    num_vertices + 2,
+            self.outer_circle = gui.batch.add(
+                    num_vertices + 3,
                     pyglet.gl.GL_TRIANGLE_STRIP,
                     gui.layers['map 1'],
-                    index,
                     ('v2f', outer_vertices),
-                    ('c3f', player_color * (num_vertices + 2)) )
+                    ('c3f', player_color * (num_vertices + 3)) )
 
         else:
-            self.outer_circle = gui.batch.add_indexed(
-                    num_vertices + 2,
+            print "%d: Redrawing opponent territory." % token.get_id()
+
+            self.outer_circle = gui.batch.add(
+                    num_vertices + 3,
                     pyglet.gl.GL_TRIANGLE_STRIP,
                     gui.layers['map 2'],
-                    index,
                     ('v2f', outer_vertices),
-                    ('c3B', background_color * (num_vertices + 2)) )
+                    ('c3B', background_color * (num_vertices + 3)) )
 
 
 class ArmyExtension (CommunityExtension):
