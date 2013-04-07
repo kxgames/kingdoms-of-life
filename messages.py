@@ -212,15 +212,15 @@ class CreateRoad (kxg.Message):
 
 
 
-class UpgradeCity (kxg.Message):
+class UpgradeCommunity (kxg.Message):
 
-    def __init__(self, city):
-        self.city = city
+    def __init__(self, community):
+        self.community = community
 
     def check(self, world, sender):
-        city = self.city
-        player = city.player
-        price = self.city.get_upgrade_price()
+        community = self.community
+        player = community.player
+        price = self.community.get_upgrade_price()
         
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -232,14 +232,14 @@ class UpgradeCity (kxg.Message):
             self.error = "Defeated players can't upgrade cities."
             return False
 
-        # Make sure the city in question is not in a battle.
-        if city.is_in_battle():
-            self.error = "Can't upgrade a city that's engaged in a battle."
+        # Make sure the community in question is not in a battle.
+        if community.is_in_battle():
+            self.error = "Can't upgrade a community that's engaged in a battle."
             return False
 
-        # Make sure the player can afford to upgrade the city.
+        # Make sure the player can afford to upgrade the community.
         if not player.can_afford_price(price):
-            self.error = "Can't afford $%d to upgrade this city." % price
+            self.error = "Can't afford $%d to upgrade this community." % price
             return False
 
         return True
@@ -248,54 +248,10 @@ class UpgradeCity (kxg.Message):
         actor.show_error(self)
 
     def execute(self, world):
-        world.upgrade_city(self.city, self.city.get_upgrade_price())
+        world.upgrade_community(self.community, self.community.get_upgrade_price())
 
     def notify(self, actor, is_mine):
-        actor.upgrade_city(self.city, is_mine)
-
-
-class UpgradeArmy (kxg.Message):
-
-    def __init__(self, army):
-        self.army = army
-        self.price = army.get_upgrade_price()
-
-    def check(self, world, sender):
-        army = self.army
-        player = army.player
-        price = self.price
-        
-        # Make sure the right player is sending this message.
-        if sender is not player:
-            self.error = "Upgrade requested by wrong player."
-            return False
-
-        # Make sure the player is still alive.
-        if player.was_defeated():
-            self.error = "Defeated players can't upgrade armies."
-            return False
-
-        # Make sure the army in question is in a battle.
-        if army.is_in_battle():
-            self.error = "Can't upgrade a army that is in a battle."
-            return False
-
-        # Make sure the player can afford to upgrade army.
-        if not player.can_afford_price(price):
-            self.error = "Can't afford $%d to upgrade this army." % price
-            return False
-
-        return True
-
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def execute(self, world):
-        world.upgrade_army(self.army, self.price)
-
-    def notify(self, actor, is_mine):
-        actor.upgrade_army(self.army, is_mine)
-
+        actor.upgrade_community(self.community, is_mine)
 
 
 class DestroyArmy (kxg.Message):

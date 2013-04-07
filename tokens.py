@@ -62,14 +62,9 @@ class World (kxg.World):
         road.setup()
 
     @kxg.check_for_safety
-    def upgrade_city(self, city, price):
-        city.upgrade()
-        city.player.spend_wealth(price)
-
-    @kxg.check_for_safety
-    def upgrade_army(self, army, price):
-        army.upgrade()
-        army.player.spend_wealth(price)
+    def upgrade_community(self, community, price):
+        community.upgrade()
+        community.player.spend_wealth(price)
 
     @kxg.check_for_safety
     def destroy_army(self, army):
@@ -339,10 +334,7 @@ class Referee (kxg.Referee):
     def create_road(self, road, is_mine):
         assert not is_mine
 
-    def upgrade_city(self, city, is_mine):
-        assert not is_mine
-
-    def upgrade_army(self, army, is_mine):
+    def upgrade_community(self, community, is_mine):
         assert not is_mine
 
     def destroy_army(self, army, is_mine):

@@ -123,7 +123,6 @@ class Gui (kxg.Actor):
                 if self.mode == 'develop':
                     drag_start = find_closest_community(position, cutoff=40)
                     if drag_start and drag_start.is_city():
-                        self.update_selection(drag_start)
                         self.drag_start_city = drag_start
 
     def on_mouse_drag(self, x, y, dx, dy, button, modifiers):
@@ -197,6 +196,9 @@ class Gui (kxg.Actor):
                 self.update_mode('fight')
             if symbol == pyglet.window.key.D:
                 self.update_mode('develop')
+            if symbol == pyglet.window.key.SPACE and self.selection:
+                message = messages.UpgradeCommunity(self.selection)
+                self.send_message(message)
             if symbol == pyglet.window.key.ESCAPE:
                 self.update_mode()
                 return True
@@ -280,10 +282,7 @@ class Gui (kxg.Actor):
     def create_road(self, road, is_mine):
         pass
 
-    def upgrade_city(self, city, is_mine):
-        pass
-
-    def upgrade_army(self, army, is_mine):
+    def upgrade_community(self, community, is_mine):
         pass
 
     def destroy_army(self, army, is_mine):
@@ -393,6 +392,7 @@ class CommunityExtension (kxg.TokenExtension):
     def __init__(self, gui, token):
         self.gui = gui
         self.token = token
+        self.active = True
 
         batch = gui.batch
         layer = gui.layers[self.type]
@@ -470,6 +470,7 @@ class CommunityExtension (kxg.TokenExtension):
             self.selection_sprite.image = self.gui.battle_outlines[color]
 
     def teardown(self):
+        self.active = False
         self.type_sprite.delete()
         self.engagement_sprite.delete()
         self.selection_sprite.delete()
@@ -482,7 +483,8 @@ class CommunityExtension (kxg.TokenExtension):
         self.selection_sprite.visible = True
 
     def unselect(self):
-        self.selection_sprite.visible = False
+        if self.active:
+            self.selection_sprite.visible = False
 
 
 class CityExtension (CommunityExtension):
