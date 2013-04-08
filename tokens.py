@@ -550,6 +550,10 @@ class Community (kxg.Token):
             if self.health < self.get_max_health():
                 self.heal(self.get_healing() * time)
 
+        for extension in self.get_extensions():
+            extension.update(time)
+
+
     def upgrade(self):
         health_percent = self.health / self.get_max_health()
         self.level += 1
@@ -744,6 +748,7 @@ class Army (Community):
     @kxg.check_for_safety
     def update(self, time):
         Community.update(self, time)
+
         if self.my_campaign:
             target_community = self.my_campaign.community
             start = self.position
@@ -778,6 +783,9 @@ class Army (Community):
             extension.teardown()
 
 
+    # This function fails when decorated with @kxg.check_for_safety.  That 
+    # probably means it is being called directly by the GUI, which is a bug.
+
     def chase (self, campaign):
         self.my_campaign = campaign
 
@@ -785,6 +793,7 @@ class Army (Community):
         return True
 
 
+    @kxg.check_for_safety
     def forget_campaign(self, campaign):
         if campaign:
             try:
@@ -796,13 +805,17 @@ class Army (Community):
                 self.my_campaign = None
                 self.target = None
         
+    @kxg.check_for_safety
     def enter_battle(self, battle):
         Community.enter_battle(self, battle)
         self.target = None
         self.forget_campaign(self.my_campaign)
 
+    @kxg.check_for_safety
     def move_to(self, target):
         self.target = target
+        for extension in self.get_extensions():
+            extension.update_target()
 
 
     def get_price(self):

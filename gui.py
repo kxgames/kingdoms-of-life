@@ -50,6 +50,9 @@ class Gui (kxg.Actor):
         self.normal_outlines = self.load_team_icon('images/normal-selection.png')
         self.battle_outlines = self.load_team_icon('images/battle-selection.png')
 
+        self.normal_targets = self.load_team_icon('images/normal-waypoint.png')
+        self.battle_targets = self.load_team_icon('images/battle-waypoint.png')
+
         self.health_bar = self.load_health_icon('images/full-health.png', 50)
         self.health_outline = self.load_icon('images/empty-health.png')
 
@@ -486,6 +489,9 @@ class CommunityExtension (kxg.TokenExtension):
     def setup(self):
         pass
 
+    def update(self, time):
+        pass
+
     def update_position(self):
         vector = self.token.position - (40, 40)
         position = x, y = vector.tuple
@@ -618,6 +624,32 @@ class CityExtension (CommunityExtension):
 
 class ArmyExtension (CommunityExtension):
     type = 'army'
+
+    def __init__(self, gui, token):
+        CommunityExtension.__init__(self, gui, token)
+
+        self.target_sprite = pyglet.sprite.Sprite(
+                gui.normal_targets[token.player.color],
+                batch=gui.batch, group=gui.layers['gui'])
+
+        self.target_sprite.visible = False
+
+    def update(self, time):
+        position = self.token.position
+        target = self.token.target
+
+        if target:
+            distance = position.get_distance(target)
+            if distance < 50: self.hide_target()
+
+    def update_target(self):
+        position = self.token.target - (8, 8)
+        self.target_sprite.visible = True
+        self.target_sprite.position = position.tuple
+
+    def hide_target(self):
+        self.target_sprite.visible = False
+
 
 class RoadExtension (kxg.TokenExtension):
 
