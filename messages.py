@@ -79,7 +79,7 @@ class CreateCity (kxg.Message):
 
         # Make sure the player can afford this city.
         if not player.can_afford_price(self.price):
-            self.error = "Can't afford $%d for a new city." % price
+            self.error = "Can't afford $%d for a new city." % self.price
             return False
 
         # Make sure this city can be placed here.
@@ -110,10 +110,8 @@ class CreateArmy (kxg.Message):
 
     def check(self, world, sender):
         army = self.army
-        price = self.price
+        self.price = self.army.get_price()
         player = army.player
-
-        return True
 
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -126,8 +124,8 @@ class CreateArmy (kxg.Message):
             return False
 
         # Make sure the player can afford this army.
-        if not player.can_afford_price(price):
-            self.error = "Can't afford $%d for a new army." % price
+        if not player.can_afford_price(self.price):
+            self.error = "Can't afford $%d for a new army." % self.price
             return False
 
         # Make sure this army can be placed here.

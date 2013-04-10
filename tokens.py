@@ -86,6 +86,10 @@ class World (kxg.World):
 
     @kxg.check_for_safety
     def request_battle(self, campaign):
+        player = campaign.army.player
+        price = campaign.community.get_battle_price()
+        player.spend_wealth(price)
+
         self.add_token(campaign)
         campaign.setup()
         campaign.army.chase(campaign)
@@ -126,6 +130,8 @@ class World (kxg.World):
     def end_battle(self, battle):
         city = battle.zombie_city
         if city:
+            city.set_health_to_min()
+
             if battle.communities.keys():
                 winner = battle.communities.keys()[0]
                 if winner != city.player:
@@ -149,9 +155,6 @@ class World (kxg.World):
                 defender.roads.remove(road)
                 road.teardown()
                 self.remove_token(road)
-
-        # Make the health at least 1
-        city.set_health_to_min()
 
 
     @kxg.check_for_safety
@@ -819,7 +822,7 @@ class Army (Community):
 
 
     def get_price(self):
-        return 30 + 10 * len(self.player.cities)
+        return 30 + 10 * len(self.player.armies)
 
     def get_upgrade_price(self):
         return 10 * self.level
