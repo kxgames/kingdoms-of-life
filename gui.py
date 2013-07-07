@@ -591,8 +591,10 @@ class CityExtension (CommunityExtension):
 
         if self.inner_circle: 
             self.inner_circle.delete()
+            self.inner_circle = None
         if self.outer_circle:
             self.outer_circle.delete()
+            self.outer_circle = None
 
         if token.player is gui.player:
             print "%d: Redrawing own territory." % token.get_id()
