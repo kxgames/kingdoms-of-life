@@ -119,7 +119,7 @@ class CreateArmy (kxg.Message):
             return False
 
         # Make sure the player is still alive.
-        if player.was_defeated():
+        if player.was_defeated() or player.is_destroyed():
             self.error = "Defeated players can't build armies."
             return False
 
@@ -164,7 +164,7 @@ class CreateRoad (kxg.Message):
             return False
 
         # Make sure the player is still alive.
-        if player.was_defeated():
+        if player.was_defeated() or player.is_destroyed():
             self.error = "Defeated players can't build roads."
             return False
 
@@ -230,6 +230,11 @@ class UpgradeCommunity (kxg.Message):
             self.error = "Defeated players can't upgrade cities."
             return False
 
+        # Make sure the community still exists.
+        if community.is_destroyed():
+            self.error = "Community was already removed from the world."
+            return False
+
         # Make sure the community in question is not in a battle.
         if community.is_in_battle():
             self.error = "Can't upgrade a community that's engaged in a battle."
@@ -252,6 +257,54 @@ class UpgradeCommunity (kxg.Message):
         actor.upgrade_community(self.community, is_mine)
 
 
+class MoveArmy (kxg.Message):
+
+    def __init__(self, army, end_point):
+        self.army = army
+        self.target = end_point
+
+    def check(self, world, sender):
+        army = self.army
+        target = self.target
+        player = army.player
+
+        # Make sure the right player is sending this message.
+        if sender is not player:
+            self.error = "Army motion requested by wrong player."
+            return False
+
+        # Make sure the army still exists.
+        if army.is_destroyed():
+            self.error = "Army was already removed from the world."
+            return False
+
+        # Make sure the player is still alive.
+        if player.was_defeated():
+            self.error = "Defeated players can't move armies."
+            return False
+
+        # Make sure the army is not already in a battle.
+        if army.battle:
+            self.error = "Army can't move when it is in a battle."
+            return False
+
+        # Make sure the army can move to the end point.
+        if not army.can_move_to(target):
+            self.error = "Army can't move there."
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.show_error(self)
+
+    def execute(self, world):
+        self.army.move_to(self.target)
+
+    def notify(self, actor, is_mine):
+        actor.move_army(self.army, self.target, is_mine)
+
+
 class DestroyArmy (kxg.Message):
     
     def __init__(self, army):
@@ -260,12 +313,17 @@ class DestroyArmy (kxg.Message):
     def check(self, world, sender):
         army = self.army
         
-        # Make sure the city is actually an city.
+        # Make sure this army still exists.
+        if army.is_destroyed():
+            self.error = "Army was already removed from the world."
+            return False
+
+        # Make sure the army is actually an army.
         if not isinstance(army, tokens.Army):
             self.error = "Community must be an army."
             return False
 
-        # Make sure the city is at 0 health.
+        # Make sure the army is at 0 health.
         if not army.get_health() <= 0:
             self.error = "Army must be at zero health to be destroyed."
             return False
@@ -283,6 +341,24 @@ class DestroyArmy (kxg.Message):
 
     def notify(self, actor, is_mine):
         actor.destroy_army(actor, is_mine)
+
+
+class DefeatPlayer (kxg.Message):
+
+    def __init__(self, player):
+        self.player = player
+
+    def check(self, world, sender):
+        return self.player.was_defeated() and not self.player.is_dead()
+
+    def setup(self, world, sender, id):
+        print "Player %s defeated" %self.player.get_id()
+
+    def execute(self, world):
+        world.defeat_player(self.player)
+
+    def notify(self, actor, sent_from_here):
+        actor.defeat_player()
 
 
 
@@ -305,6 +381,16 @@ class RequestBattle (kxg.Message):
         # Make sure the player is still alive.
         if player.was_defeated():
             self.error = "Defeated players can't request battles."
+            return False
+
+        # Make sure this army still exists.
+        if army.is_destroyed():
+            self.error = "Army was already removed from the world."
+            return False
+
+        # Make sure the target community still exists.
+        if community.is_destroyed():
+            self.error = "Target was already removed from the world."
             return False
 
         # Make sure the army is not attacking one of its own.
@@ -353,6 +439,11 @@ class StartBattle (kxg.Message):
     def check(self, world, sender):
         army = self.campaign.army
         target = self.campaign.community
+
+        # Make sure the campaign still exists.
+        if self.campaign.is_destroyed():
+            self.error = "Campaign was already removed from the world."
+            return False
         
         # Make sure the army is not attacking one of its own.
         if target.player is army.player:
@@ -402,16 +493,25 @@ class JoinBattle (kxg.Message):
         army = self.campaign.army
         community = self.campaign.community
         
-        ## If the community is friendly, then the army is coming to it's aid.  
-        ## No need to check ownership.
+        # Make sure the campaign still exists.
+        if self.campaign.is_destroyed():
+            self.error = "Campaign was already removed from the world."
+            return False
+        
+        # Make sure the battle still exists.
+        if self.battle.is_destroyed():
+            self.error = "Battle was already removed from the world."
+            return False
+        
+        # If the community is friendly, then the army is coming to it's aid.  
+        # No need to check ownership.
         
         # Make sure the army is not already in a battle.
         if army.battle:
             self.error = "Army can't start a new battle while it is already in one."
             return False
         
-        # Make sure the target is in a battle.
-        # Use StartBattle if they aren't.
+        # Make sure the target is in a battle.  Use StartBattle if it isn't.
         if not community.battle:
             self.error = "Target must be in a battle for the army to join."
             return False
@@ -459,6 +559,11 @@ class RetreatBattle (kxg.Message):
             self.error = "Retreat requested by wrong player."
             return False
 
+        # Make sure the army still exists.
+        if self.army.is_destroyed():
+            self.error = "Army was already removed from the world."
+            return False
+
         # Make sure the army is actually an army.
         if not isinstance(army, tokens.Army):
             self.error = "Only armies can retreat."
@@ -467,6 +572,11 @@ class RetreatBattle (kxg.Message):
         # Make sure the army is in a battle or campaign.
         if not army.battle and not army.my_campaign:
             self.error = "Army must be in a battle or campaign to retreat."
+            return False
+
+        # Make sure the battle still exists.
+        if self.army.battle.is_destroyed():
+            self.error = "Battle was already removed from the world."
             return False
 
         # Make sure the army can move to the end point.
@@ -505,6 +615,11 @@ class ZombifyCity (kxg.Message):
     def check(self, world, sender):
         city = self.city
         
+        # Make sure the city still exists.
+        if city.is_destroyed():
+            self.error = "City was already removed from the world."
+            return False
+
         # Make sure the city is actually an city.
         if not isinstance(city, tokens.City):
             self.error = "Only cities can be zombified."
@@ -542,6 +657,11 @@ class EndBattle (kxg.Message):
 
     def check(self, world, sender):
         
+        # Make sure the battle still exists.
+        if self.battle.is_destroyed():
+            self.error = "Battle was already removed from the world."
+            return False
+
         # Make sure the battle is actually over.
         if not self.battle.was_successful():
             self.error = "Can't end the battle, battle is still in progress."
@@ -561,83 +681,6 @@ class EndBattle (kxg.Message):
     def notify(self, actor, is_mine):
         actor.end_battle(is_mine)
 
-
-
-class old_CaptureCity (kxg.Message):
-
-    def __init__(self, battle):
-        self.battle = battle
-
-    def check(self, world, sender):
-        return self.battle.was_successful()
-
-    def execute(self, world):
-        world.capture_city(self.battle)
-
-    def notify(self, actor, sent_from_here):
-        actor.capture_city(self.battle)
-
-
-class DefeatPlayer (kxg.Message):
-
-    def __init__(self, player):
-        self.player = player
-
-    def check(self, world, sender):
-        return self.player.was_defeated() and not self.player.is_dead()
-
-    def setup(self, world, sender, id):
-        print "Player %s defeated" %self.player.get_id()
-
-    def execute(self, world):
-        world.defeat_player(self.player)
-
-    def notify(self, actor, sent_from_here):
-        actor.defeat_player()
-
-
-
-class MoveArmy (kxg.Message):
-
-    def __init__(self, army, end_point):
-        self.army = army
-        self.target = end_point
-
-    def check(self, world, sender):
-        army = self.army
-        target = self.target
-        player = army.player
-
-        # Make sure the right player is sending this message.
-        if sender is not player:
-            self.error = "Army motion requested by wrong player."
-            return False
-        #
-        # Make sure the player is still alive.
-        if player.was_defeated():
-            self.error = "Defeated players can't move armies."
-            return False
-
-        # Make sure the army is not already in a battle.
-        if army.battle:
-            self.error = "Army can't move when it is in a battle."
-            return False
-
-        # Make sure the army can move to the end point.
-        if not army.can_move_to(target):
-            self.error = "Army can't move there."
-            return False
-
-        return True
-
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def execute(self, world):
-        self.army.move_to(self.target)
-
-    def notify(self, actor, is_mine):
-        actor.move_army(self.army, self.target, is_mine)
 
 
 
