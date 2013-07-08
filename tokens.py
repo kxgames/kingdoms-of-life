@@ -390,7 +390,7 @@ class Referee (kxg.Referee):
 class Player (kxg.Token):
 
     # Settings (fold)
-    starting_wealth = 5000000
+    starting_wealth = 200
     starting_revenue = 25
     
     def __init__(self, name, color):
@@ -730,8 +730,8 @@ class City (Community):
         return 80 + 20 * self.level
 
     def get_revenue(self):
-        clear_roads = (road for road in self.roads if not road.is_blocked())
-        return 5 * level + 10 * sum(clear_roads)
+        clear_roads = sum(1 for road in self.roads if not road.is_blocked())
+        return 5 * self.level + 10 * clear_roads
 
     def get_healing(self):
         return 2 * self.level
