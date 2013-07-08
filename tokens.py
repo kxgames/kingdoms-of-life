@@ -447,16 +447,19 @@ class Player (kxg.Token):
         self.battles = []
 
 
+    @kxg.check_for_safety
     def add_city(self, city):
         self.cities.append(city)
         self.played_city = True
 
+    @kxg.check_for_safety
     def remove_army(self, army):
         try:
             self.armies.remove(army)
         except ValueError:
             pass
 
+    @kxg.check_for_safety
     def spend_wealth(self, price):
         self.wealth -= price
 
@@ -547,6 +550,7 @@ class Community (kxg.Token):
         self.campaigns = []
 
 
+    @kxg.check_for_safety
     def update(self, time):
         if not self.battle:
             if self.health < self.get_max_health():
@@ -556,6 +560,7 @@ class Community (kxg.Token):
             extension.update(time)
 
 
+    @kxg.check_for_safety
     def upgrade(self):
         health_percent = self.health / self.get_max_health()
         self.level += 1
@@ -564,12 +569,14 @@ class Community (kxg.Token):
         for extension in self.get_extensions():
             extension.update_level()
 
+    @kxg.check_for_safety
     def damage(self, delta):
         self.health -= delta
 
         for extension in self.get_extensions():
             extension.update_health()
 
+    @kxg.check_for_safety
     def heal(self, delta):
         self.health += delta
 
@@ -579,17 +586,21 @@ class Community (kxg.Token):
         for extension in self.get_extensions():
             extension.update_health()
 
+    @kxg.check_for_safety
     def add_campaign(self, campaign):
         self.campaigns.append(campaign)
 
+    @kxg.check_for_safety
     def forget_campaign(self, campaign):
         raise NotImplementedError
 
+    @kxg.check_for_safety
     def enter_battle(self, battle):
         self.battle = battle
         for extension in self.get_extensions():
             extension.update_engagement()
 
+    @kxg.check_for_safety
     def exit_battle(self):
         self.battle = None
         for extension in self.get_extensions():
@@ -686,12 +697,14 @@ class City (Community):
         raise AssertionError
 
 
+    @kxg.check_for_safety
     def forget_campaign(self, campaign):
         try:
             self.campaigns.remove(campaign)
         except ValueError:
             pass
 
+    @kxg.check_for_safety
     def set_health_to_min(self):
         if self.health <= 1:
             self.health = 1
@@ -788,12 +801,9 @@ class Army (Community):
     # This function fails when decorated with @kxg.check_for_safety.  That 
     # probably means it is being called directly by the GUI, which is a bug.
 
+    @kxg.check_for_safety
     def chase (self, campaign):
         self.my_campaign = campaign
-
-    def can_request_battle(self, community):
-        return True
-
 
     @kxg.check_for_safety
     def forget_campaign(self, campaign):
@@ -852,6 +862,10 @@ class Army (Community):
 
     def can_move_to(self, position):
         return True
+
+    def can_request_battle(self, community):
+        return True
+
 
     def is_army(self):
         return True
@@ -933,6 +947,7 @@ class Campaign (kxg.Token):
 
         self.army = army
         self.community = community
+
 
     @kxg.check_for_safety
     def setup(self):
@@ -1059,11 +1074,13 @@ class Battle (kxg.Token):
         self.communities[player].append(community)
         community.enter_battle(self)
 
+    @kxg.check_for_safety
     def remove_player(self, player):
         if player in self.communities:
             for community in self.communities[player]:
                 community.battle = None
             del self.communities[player]
+
 
     def get_initiation_price(self):
         pass
