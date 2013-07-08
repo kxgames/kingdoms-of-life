@@ -342,7 +342,8 @@ class Gui (kxg.Actor):
         pass
 
     def destroy_army(self, army, is_mine):
-        pass
+        if self.selection is army:
+            self.update_selection()
 
     def request_battle(self, campaign, is_mine):
         pass
@@ -359,8 +360,9 @@ class Gui (kxg.Actor):
     def zombify_city(self, battle, city, is_mine):
         pass
 
-    def end_battle(self, is_mine):
-        pass
+    def end_battle(self, battle, is_mine):
+        if self.selection is battle.get_zombie_city():
+            self.update_selection()
 
     def move_army(self, army, target, is_mine):
         pass
@@ -369,9 +371,6 @@ class Gui (kxg.Actor):
         pass
 
     def defend_city(self, battle, is_mine):
-        pass
-
-    def capture_city(self, battle):
         pass
 
     def defeat_player(self):

@@ -3,7 +3,6 @@ from __future__ import division
 import kxg
 import messages
 import gui
-import random
 
 class World (kxg.World):
 
@@ -358,7 +357,7 @@ class Referee (kxg.Referee):
     def zombify_city(self, battle, city, is_mine):
         pass
 
-    def end_battle(self, is_mine):
+    def end_battle(self, battle, is_mine):
         pass
 
     def move_army(self, army, target, is_mine):
@@ -391,7 +390,7 @@ class Referee (kxg.Referee):
 class Player (kxg.Token):
 
     # Settings (fold)
-    starting_wealth = 500
+    starting_wealth = 5000000
     starting_revenue = 25
     
     def __init__(self, name, color):
@@ -949,6 +948,7 @@ class Campaign (kxg.Token):
             army = self.army
             community = self.community
 
+            print army.battle
             assert not army.battle
 
             if community.battle:
@@ -1022,11 +1022,9 @@ class Battle (kxg.Token):
         if self.zombie_city:
             self.zombie_city.battle = None
             self.zombie_city.exit_battle()
-            self.zombie_city = None
         for communities in self.communities.values():
             for community in communities:
                 community.exit_battle()
-        self.communities = {}
 
 
     @kxg.check_for_safety
@@ -1072,6 +1070,9 @@ class Battle (kxg.Token):
 
     def get_retreat_battle_price(self):
         return 50
+
+    def get_zombie_city(self):
+        return self.zombie_city
 
     def was_successful(self):
         return len(self.communities.keys()) <= 1

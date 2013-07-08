@@ -1,6 +1,5 @@
 import kxg
 import tokens
-import random
 
 class WelcomeClient (object):
     def __init__(self, name):
@@ -282,7 +281,7 @@ class DestroyArmy (kxg.Message):
         world.destroy_army(self.army)
 
     def notify(self, actor, is_mine):
-        actor.destroy_army(actor, is_mine)
+        actor.destroy_army(self.army, is_mine)
 
 
 
@@ -559,7 +558,7 @@ class EndBattle (kxg.Message):
         world.end_battle(self.battle)
 
     def notify(self, actor, is_mine):
-        actor.end_battle(is_mine)
+        actor.end_battle(self.battle, is_mine)
 
 
 
@@ -640,93 +639,3 @@ class MoveArmy (kxg.Message):
         actor.move_army(self.army, self.target, is_mine)
 
 
-
-## undefined helper functions:
-#
-## RetreatBattle
-# army: get_retreat_battle_price()
-# world: retreat_battle(battle)
-# actor: retreat_battle(battle)
-#
-## JoinBattle
-# battle: add_army(army)
-# world: join_battle(battle)
-# actor: join_battle(battle)
-#
-
-## StartBattle
-# - city: get_attack_price(attacker)
-# - actor: show_error(self)
-# - world: attack_city(battle, price)
-# - actor: attack_city(battle, was_me)
-# army: check_engagement_proximity(community)
-# tokens: Battle(army, community) ## instead of Battle(attacker, city)
-# world: start_battle(battle)
-# actor: start_battle(battle)
-#
-
-## RequestBattle
-# target: get_battle_price()
-# army: can_request_battle(target)
-# world: request_battle(army, target)
-# actor: reject_request_battle(self)
-# actor: request_battle(army, target, is_mine)
-#
-
-## MoveArmy
-# army: can_move_to_position(army, end)
-# world: move_army(army, end)
-# actor: move_army(army, end, is_mine)
-# 
-
-## CreateArmy
-# Army: init(player, position)
-# Army: get_next_price(player)
-# player: can_place_army(army)
-# actor: show_error(self)
-# army: give_id(id)
-# world: create_army(army, price)
-# actor: create_army(army, is_mine)
-# 
-## UpgradeArmy
-# army: get_upgrade_price()
-# world: upgrade_army(army, price)
-# actor: upgrade_army(army, is_mine)
-#
-## UpgradeCity
-# city: get_upgrade_price()
-# world: upgrade_city(city, price)
-# actor: upgrade_city(city, is_mine)
-
-
-
-
-# Messages to create:
-# Destroy army: N/A
-
-
-
-# Build city: <D-click>, within territory but not on existing city.
-# Upgrade city: <D-click>, on existing city.
-# Build road: <D-drag>, between cities.
-
-# Build army: <F-click>, within territory.
-# Upgrade army: <F-click>, on existing army.
-# Move army: <F-drag>, start on army.
-# Attack city: <F-drag>, drag onto enemy city.
-# Attack army: <F-drag>, drag onto enemy army.
-# Join Battle: <F-drag>, drag onto enemy city/army in existing battle.
-# Retreat army: <F-drag>, drag out of existing battle.
-# Destroy army: N/A
-
-# Hotkey   Mnemonic
-# ======   ========
-# D        Develop
-# F        Fight
-
-# GUI
-# ===
-# 1. Show city/army HP?  Yes.
-# 2. Show battles?  No.
-# 3. Show battle request?  Dotted line between army and target.
-# 3. Suck armies into battles? Must close to within some radius.
