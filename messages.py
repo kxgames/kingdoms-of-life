@@ -402,6 +402,11 @@ class RequestBattle (kxg.Message):
             self.error = "Army can't start a new battle while it is already in one."
             return False
 
+        # Make sure the army is not chasing anyone.
+        if army.is_chasing():
+            self.error = "Army can't start a new campaign while it is already on one."
+            return False
+
         # Make sure the army can move to the end point.
         if not army.can_request_battle(community):
             self.error = "Army can't move there."

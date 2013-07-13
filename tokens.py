@@ -891,6 +891,9 @@ class Army (Community):
 
         return max(city_supplies)
 
+    def get_campaign(self):
+        return self.my_campaign
+    
     def get_battle_price(self):
         return 0
 
@@ -903,6 +906,9 @@ class Army (Community):
     def can_request_battle(self, community):
         return True
 
+
+    def is_chasing(self):
+        return self.my_campaign is not None
 
     def is_army(self):
         return True
@@ -1016,6 +1022,13 @@ class Campaign (kxg.Token):
     def teardown(self):
         self.army.forget_campaign(self)
         self.community.forget_campaign(self)
+
+
+    def get_army(self):
+        return self.army
+
+    def get_community(self):
+        return self.community
 
 
     def was_successful(self):
