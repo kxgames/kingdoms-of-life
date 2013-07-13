@@ -535,6 +535,31 @@ class Player (kxg.Token):
         return True
 
     def can_place_army(self, city):
+        inside_border = False
+        inside_opponent = False
+
+        for other in self.world.yield_communities():
+            offset = city.position - other.position
+            distance = offset.magnitude
+
+            if distance <= 2 * other.radius:
+                return False
+
+        for other in self.world.yield_cities():
+            offset = city.position - other.position
+            distance = offset.magnitude
+
+            if other.player is self:
+                inside_border = (distance <= other.border) or inside_border
+            else:
+                inside_opponent = (distance <= other.border) or inside_opponent 
+
+        if inside_opponent:
+            return False
+
+        if not inside_border:
+            return False
+
         return True
 
     def can_place_road(self, road):
