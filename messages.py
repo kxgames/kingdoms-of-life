@@ -593,9 +593,8 @@ class JoinBattle (kxg.Message):
 
 class RetreatBattle (kxg.Message):
     
-    def __init__(self, army, target):
+    def __init__(self, army):
         self.army = army
-        self.target = target
         self.battle = army.battle
 
     def __str__(self):
@@ -603,22 +602,22 @@ class RetreatBattle (kxg.Message):
 
     def check(self, world, sender):
         army = self.army
-        target = self.target
         player = army.player
+        self.price = army.get_retreat_price()
         
         # Make sure the right player is sending this message.
         if sender is not player:
             self.error = "Retreat requested by wrong player."
             return False
 
-        # Make sure the army still exists.
-        if self.army.is_destroyed():
-            self.error = "Army was already removed from the world."
-            return False
-
         # Make sure the army is actually an army.
         if not isinstance(army, tokens.Army):
             self.error = "Only armies can retreat."
+            return False
+
+        # Make sure the army still exists.
+        if self.army.is_destroyed():
+            self.error = "Army was already removed from the world."
             return False
 
         # Make sure the army is in a battle or campaign.
@@ -627,17 +626,15 @@ class RetreatBattle (kxg.Message):
             return False
 
         # Make sure the battle still exists.
-        if self.army.battle.is_destroyed():
+        if army.battle and self.army.battle.is_destroyed():
             self.error = "Battle was already removed from the world."
             return False
 
-        # Make sure the army can move to the end point.
-        if not army.can_move_to(target):
-            self.error = "Army can't move there."
+        # Make sure the campaign still exists.
+        if army.my_campaign and self.army.my_campaign.is_destroyed():
+            self.error = "Campaign was already removed from the world."
             return False
-        
-        self.price = army.battle.get_retreat_battle_price()
-        
+
         # Make sure the player can afford to retreat.
         if not player.can_afford_price(self.price):
             self.error = "Can't afford $%d to retreat from battle." % self.price
@@ -649,13 +646,13 @@ class RetreatBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "  RetreatBattle  %s  Army %s" %(self.battle.get_id(), self.army.get_id())
+        pass
 
     def execute(self, world):
-        world.retreat_battle(self.army, self.target)
+        world.retreat_battle(self.army, self.price)
 
     def notify(self, actor, is_mine):
-        actor.retreat_battle(self.army, self.target, is_mine)
+        actor.retreat_battle(self.army, is_mine)
 
 
 class ZombifyCity (kxg.Message):

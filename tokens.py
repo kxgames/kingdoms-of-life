@@ -116,10 +116,16 @@ class World (kxg.World):
         self.remove_token(campaign)
 
     @kxg.check_for_safety
-    def retreat_battle(self, army, target):
-        army.battle.retreat(army)
-        army.exit_battle()
-        army.move_to(target)
+    def retreat_battle(self, army, price):
+        army.player.spend_wealth(price)
+
+        if army.battle:
+            army.battle.retreat(army)
+            army.exit_battle()
+        else:
+            campaign = army.my_campaign
+            campaign.teardown()
+            self.remove_token(campaign)
 
     @kxg.check_for_safety
     def zombify_city(self, battle, city):
@@ -352,7 +358,7 @@ class Referee (kxg.Referee):
     def join_battle(self, battle):
         pass
 
-    def retreat_battle(self, army, target, is_mine):
+    def retreat_battle(self, army, is_mine):
         assert not is_mine
 
     def zombify_city(self, battle, city, is_mine):
@@ -391,7 +397,7 @@ class Referee (kxg.Referee):
 class Player (kxg.Token):
 
     # Settings (fold)
-    starting_wealth = 20000
+    starting_wealth = 200
     starting_revenue = 25
     
     def __init__(self, name, color):
@@ -923,6 +929,9 @@ class Army (Community):
     def get_battle_price(self):
         return 0
 
+    def get_retreat_price(self):
+        return 50
+
     def can_move(self):
         return True
 
@@ -1130,7 +1139,7 @@ class Battle (kxg.Token):
 
     @kxg.check_for_safety
     def retreat(self, army):
-        self.remove_community (army)
+        self.remove_community(army)
 
     @kxg.check_for_safety
     def zombify_city(self, city):

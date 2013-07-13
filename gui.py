@@ -269,6 +269,9 @@ class Gui (kxg.Actor):
             if symbol == pyglet.window.key.SPACE and self.selection:
                 message = messages.UpgradeCommunity(self.selection)
                 self.send_message(message)
+            if symbol == pyglet.window.key.BACKSPACE and self.selection:
+                message = messages.RetreatBattle(self.selection)
+                self.send_message(message)
             if symbol == pyglet.window.key.ESCAPE:
                 self.update_mode()
                 return True
@@ -368,7 +371,7 @@ class Gui (kxg.Actor):
     def join_battle(self, battle):
         pass
 
-    def retreat_battle(self, army, target, is_mine):
+    def retreat_battle(self, army, is_mine):
         pass
 
     def zombify_city(self, battle, city, is_mine):
