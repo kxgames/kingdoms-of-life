@@ -144,9 +144,8 @@ class World (kxg.World):
         defender = city.player
         
         # Give control of the city to the attacker.
-        city.player = attacker
-        defender.cities.remove(city)
-        attacker.cities.append(city)
+        defender.lose_city(city)
+        attacker.add_city(city)
 
         # Remove all the existing roads into this city.
         for road in defender.roads[:]:
@@ -392,7 +391,7 @@ class Referee (kxg.Referee):
 class Player (kxg.Token):
 
     # Settings (fold)
-    starting_wealth = 200
+    starting_wealth = 20000
     starting_revenue = 25
     
     def __init__(self, name, color):
@@ -401,6 +400,7 @@ class Player (kxg.Token):
         self.name = name
         self.color = color
         self.world = None
+        self.capitol = None
         self.cities = []
         self.armies = []
         self.roads = []
@@ -460,8 +460,18 @@ class Player (kxg.Token):
 
     @kxg.check_for_safety
     def add_city(self, city):
+        city.player = self
+        if not self.cities:
+            self.capitol = city
+            self.played_city = True
         self.cities.append(city)
-        self.played_city = True
+
+    @kxg.check_for_safety
+    def lose_city(self, city):
+        city.player = None
+        self.cities.remove(city)
+        if city is self.capitol and self.cities:
+            self.capitol = self.cities[0]
 
     @kxg.check_for_safety
     def remove_army(self, army):
@@ -536,6 +546,9 @@ class Player (kxg.Token):
     def find_closest_community(self, target, cutoff=None):
         return self.world.find_closest_community(target, self, cutoff)
     
+    def get_capitol(self):
+        return self.capitol
+
     def is_dead(self):
         return self.dead
 
@@ -862,7 +875,20 @@ class Army (Community):
         return 60 + 16 * self.level
 
     def get_healing(self):
-        return self.level
+        capitol = self.player.get_capitol()
+        radius = self.radius
+
+        distance = self.get_distance_to(capitol)
+        a = - 1.0 / (3 * radius)
+        b = self.level
+        rate = a * (distance - 2 * radius) + b
+
+        if rate <= 0:
+            return 0
+        elif rate >= b:
+            return b
+        else:
+            return rate
 
     def get_attack(self):
         return 4 + 2 * self.level
@@ -876,6 +902,9 @@ class Army (Community):
 
         return max(city_supplies)
 
+    def get_campaign(self):
+        return self.my_campaign
+    
     def get_battle_price(self):
         return 0
 
@@ -888,6 +917,9 @@ class Army (Community):
     def can_request_battle(self, community):
         return True
 
+
+    def is_chasing(self):
+        return self.my_campaign is not None
 
     def is_army(self):
         return True
@@ -1006,6 +1038,13 @@ class Campaign (kxg.Token):
     def teardown(self):
         self.army.forget_campaign(self)
         self.community.forget_campaign(self)
+
+
+    def get_army(self):
+        return self.army
+
+    def get_community(self):
+        return self.community
 
 
     def was_successful(self):

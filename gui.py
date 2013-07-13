@@ -240,8 +240,20 @@ class Gui (kxg.Actor):
 
                 if self.selection and self.selection.can_move():
                     if target:
-                        message = messages.RequestBattle(self.selection, target)
-                        self.send_message(message)
+                        if self.selection.is_chasing():
+                            campaign = self.selection.get_campaign()
+                            if campaign.get_community() is target:
+                                # Trying to attack a community that the 
+                                # army is already chasing. Just ignore 
+                                # it.
+                                pass
+                            else:
+                                # Cancel campaign
+                                # Request battle
+                                pass
+                        else:
+                            message = messages.RequestBattle(self.selection, target)
+                            self.send_message(message)
                     else:
                         message = messages.MoveArmy(self.selection, position)
                         self.send_message(message)
