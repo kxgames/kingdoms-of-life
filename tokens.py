@@ -463,6 +463,7 @@ class Player (kxg.Token):
         city.player = self
         if not self.cities:
             self.capitol = city
+            self.capitol.update_capitol()
             self.played_city = True
         self.cities.append(city)
 
@@ -470,8 +471,13 @@ class Player (kxg.Token):
     def lose_city(self, city):
         city.player = None
         self.cities.remove(city)
-        if city is self.capitol and self.cities:
-            self.capitol = self.cities[0]
+
+        if city is self.capitol:
+            city.update_capitol()
+
+            if self.cities:
+                self.capitol = self.cities[0]
+                self.capitol.update_capitol()
 
     @kxg.check_for_safety
     def remove_army(self, army):
@@ -740,6 +746,12 @@ class City (Community):
         if self.health <= 1:
             self.health = 1
 
+    @kxg.check_for_safety
+    def update_capitol(self):
+        print 'Update capitol'
+        for extension in self.get_extensions():
+            extension.update_capitol()
+
 
     def get_price(self):
         return 20 + 10 * len(self.player.cities)
@@ -774,6 +786,9 @@ class City (Community):
 
     def is_city(self):
         return True
+
+    def is_capitol(self):
+        return self.player and self.player.capitol is self
 
 
 class Army (Community):

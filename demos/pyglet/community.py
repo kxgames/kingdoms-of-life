@@ -35,6 +35,7 @@ class Manager:
 
         self.army_icon = self.load_icon('images/army-icon.png')
         self.city_icon = self.load_icon('images/city-icon.png')
+        self.capitol_icon = self.load_icon('images/capitol-icon.png')
 
         self.normal_shape = self.load_team_icon('images/normal-shape.png')
         self.battle_shape = self.load_team_icon('images/battle-shape.png')
@@ -201,15 +202,6 @@ class CommunityIcon:
         self.health_bar.image = animation[index]
 
 
-class CityIcon (CommunityIcon):
-
-    def get_layer(self):
-        return self.manager.army_layer
-
-    def get_icon(self):
-        return self.manager.city_icon
-
-
 class ArmyIcon (CommunityIcon):
 
     def update(self, time):
@@ -237,6 +229,24 @@ class ArmyIcon (CommunityIcon):
 
     def get_icon(self):
         return self.manager.army_icon
+
+
+class CityIcon (CommunityIcon):
+
+    def get_layer(self):
+        return self.manager.army_layer
+
+    def get_icon(self):
+        return self.manager.city_icon
+
+
+class CapitolIcon (CommunityIcon):
+
+    def get_layer(self):
+        return self.manager.army_layer
+
+    def get_icon(self):
+        return self.manager.capitol_icon
 
 
 window = pyglet.window.Window()
@@ -280,6 +290,10 @@ def on_mouse_release(x, y, button, modifiers):
 
         if button == pyglet.window.mouse.LEFT:
             city = CityIcon(manager, x, y, color)
+            communities.append(city)
+
+        if button == pyglet.window.mouse.MIDDLE:
+            city = CapitolIcon(manager, x, y, color)
             communities.append(city)
 
         if button == pyglet.window.mouse.RIGHT:

@@ -35,14 +35,16 @@ class Gui (kxg.Actor):
                 'map 2':        pyglet.graphics.OrderedGroup(1),
                 'road':         pyglet.graphics.OrderedGroup(2),
                 'city':         pyglet.graphics.OrderedGroup(3),
+                'capitol':      pyglet.graphics.OrderedGroup(3),
                 'army':         pyglet.graphics.OrderedGroup(4),
                 'gui':          pyglet.graphics.OrderedGroup(5),
                 'messages 1':   pyglet.graphics.OrderedGroup(6),
                 'messages 2':   pyglet.graphics.OrderedGroup(7) }
     
         self.community_icons = {
+                'army': self.load_icon('images/army-icon.png'),
                 'city': self.load_icon('images/city-icon.png'),
-                'army': self.load_icon('images/army-icon.png') }
+                'capitol': self.load_icon('images/capitol-icon.png') }
 
         self.normal_shapes = self.load_team_icon('images/normal-shape.png')
         self.battle_shapes = self.load_team_icon('images/battle-shape.png')
@@ -466,6 +468,9 @@ class CommunityExtension (kxg.TokenExtension):
         back = pyglet.graphics.OrderedGroup(0, parent=layer)
         front = pyglet.graphics.OrderedGroup(1, parent=layer)
 
+        self.back = back
+        self.front = front
+
         self.type_sprite = pyglet.sprite.Sprite(
                 gui.community_icons[self.type],
                 batch=batch, group=front)
@@ -557,7 +562,37 @@ class CommunityExtension (kxg.TokenExtension):
             self.selection_sprite.visible = False
 
 
+class ArmyExtension (CommunityExtension):
+    type = 'army'
+
+    def __init__(self, gui, token):
+        CommunityExtension.__init__(self, gui, token)
+
+        self.target_sprite = pyglet.sprite.Sprite(
+                gui.normal_targets[token.player.color],
+                batch=gui.batch, group=gui.layers['gui'])
+
+        self.target_sprite.visible = False
+
+    def update(self, time):
+        position = self.token.position
+        target = self.token.target
+
+        if target:
+            distance = position.get_distance(target)
+            if distance < 50: self.hide_target()
+
+    def update_target(self):
+        position = self.token.target - (8, 8)
+        self.target_sprite.visible = True
+        self.target_sprite.position = position.tuple
+
+    def hide_target(self):
+        self.target_sprite.visible = False
+
+
 class CityExtension (CommunityExtension):
+
     type = 'city'
 
     def __init__(self, gui, token):
@@ -565,9 +600,17 @@ class CityExtension (CommunityExtension):
         self.inner_circle = None
         self.outer_circle = None
 
-        print "%d: Created city." % token.get_id()
-
+        self.update_capitol()
         self.update_engagement()
+
+    def update_capitol(self):
+        icon = 'capitol' if self.token.is_capitol() else 'city'
+
+        self.type_sprite = pyglet.sprite.Sprite(
+                self.gui.community_icons[icon],
+                batch=self.gui.batch, group=self.front)
+
+        self.update_position()
 
     def update_engagement(self):
         CommunityExtension.update_engagement(self)
@@ -608,8 +651,6 @@ class CityExtension (CommunityExtension):
             self.outer_circle = None
 
         if token.player is gui.player:
-            print "%d: Redrawing own territory." % token.get_id()
-
             self.inner_circle = gui.batch.add(
                     num_vertices + 3,
                     pyglet.gl.GL_TRIANGLE_STRIP,
@@ -625,8 +666,6 @@ class CityExtension (CommunityExtension):
                     ('c3f', player_color * (num_vertices + 3)) )
 
         else:
-            print "%d: Redrawing opponent territory." % token.get_id()
-
             self.outer_circle = gui.batch.add(
                     num_vertices + 3,
                     pyglet.gl.GL_TRIANGLE_STRIP,
@@ -634,34 +673,6 @@ class CityExtension (CommunityExtension):
                     ('v2f', outer_vertices),
                     ('c3B', background_color * (num_vertices + 3)) )
 
-
-class ArmyExtension (CommunityExtension):
-    type = 'army'
-
-    def __init__(self, gui, token):
-        CommunityExtension.__init__(self, gui, token)
-
-        self.target_sprite = pyglet.sprite.Sprite(
-                gui.normal_targets[token.player.color],
-                batch=gui.batch, group=gui.layers['gui'])
-
-        self.target_sprite.visible = False
-
-    def update(self, time):
-        position = self.token.position
-        target = self.token.target
-
-        if target:
-            distance = position.get_distance(target)
-            if distance < 50: self.hide_target()
-
-    def update_target(self):
-        position = self.token.target - (8, 8)
-        self.target_sprite.visible = True
-        self.target_sprite.position = position.tuple
-
-    def hide_target(self):
-        self.target_sprite.visible = False
 
 
 class RoadExtension (kxg.TokenExtension):
