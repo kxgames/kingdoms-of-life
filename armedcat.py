@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 import os, kxg
-import tokens, gui, replay, messages
-
-use_gui = True
+import tokens, gui, messages
 
 class SandboxLoop (kxg.PygletLoop):
     def get_initial_stage(self):
@@ -19,16 +17,7 @@ class SandboxLoop (kxg.PygletLoop):
         game_stage.successor = postgame_stage
         return game_stage
 
-class PygameClientLoop (kxg.PygameLoop):
-
-    def __init__(self, name, host, port):
-        self.stage = ClientConnectionStage(name, host, port)
-
-    def get_initial_stage(self):
-        return self.stage
-
-
-class PygletClientLoop (kxg.PygletLoop):
+class ClientLoop (kxg.PygletLoop):
 
     def __init__(self, name, host, port):
         self.stage = ClientConnectionStage(name, host, port)
@@ -81,22 +70,16 @@ class ClientConnectionStage (kxg.Stage):
             self.exit_stage()
 
     def teardown(self):
-        #world, actor, pipe = tokens.World(), gui.Gui(window), self.pipe
-
-        if use_gui:
-            window = self.get_master().get_window()
-            actor = replay.GuiReplayActor(self.name, window)
-        else:
-            actor = replay.ReplayActor(self.name)
-
         world = tokens.World()
+        window = self.get_master().get_window()
+        actor = gui.Gui(window)
         pipe = self.pipe
 
         game_stage = kxg.MultiplayerClientGameStage(world, actor, pipe)
         postgame_stage = PostgameSplashStage(world, actor)
 
         self.successor = game_stage
-        #game_stage.successor = postgame_stage
+        game_stage.successor = postgame_stage
 
     def get_successor(self):
         return self.successor
