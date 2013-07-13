@@ -2,11 +2,18 @@ import kxg
 import tokens
 
 class WelcomeClient (object):
+
     def __init__(self, name):
         from string import capwords
         self.name = capwords(name)
 
+    def __str__(self):
+        return '<WelcomeClient>'
+
 class StartGame (kxg.Message):
+
+    def __str__(self):
+        return '<StartGame>'
 
     def check(self, world, sender):
         return not world.has_game_started()
@@ -23,6 +30,9 @@ class GameOver (kxg.Message):
     def __init__(self, winner):
         self.winner = winner
 
+    def __str__(self):
+        return '<GameOver>'
+
     def check(self, world, sender):
         return sender == 'referee'
 
@@ -38,6 +48,9 @@ class CreatePlayer (kxg.Greeting):
 
     def __init__(self, name, color):
         self.player = tokens.Player(name, color)
+
+    def __str__(self):
+        return '<CreatePlayer>'
 
     def get_sender(self):
         return self.player
@@ -60,6 +73,9 @@ class CreateCity (kxg.Message):
     def __init__(self, player, position):
         self.city = tokens.City(player, position)
         self.price = self.city.get_price()
+
+    def __str__(self):
+        return '<CreateCity>'
 
     def check(self, world, sender):
         city = self.city
@@ -93,6 +109,7 @@ class CreateCity (kxg.Message):
 
     def setup(self, world, sender, id):
         self.city.give_id(id)
+        print " ", self.city, self.city.position
 
     def execute(self, world):
         world.create_city(self.city, self.price)
@@ -106,6 +123,9 @@ class CreateArmy (kxg.Message):
     def __init__(self, player, position):
         self.army = tokens.Army(player, position)
         self.price = self.army.get_price()
+
+    def __str__(self):
+        return '<CreateArmy>'
 
     def check(self, world, sender):
         army = self.army
@@ -139,6 +159,7 @@ class CreateArmy (kxg.Message):
 
     def setup(self, world, sender, id):
         self.army.give_id(id)
+        print " ", self.army, self.army.position
 
     def execute(self, world):
         world.create_army(self.army, self.price)
@@ -152,6 +173,9 @@ class CreateRoad (kxg.Message):
     def __init__(self, player, start, end):
         self.road = tokens.Road(player, start, end)
         self.price = self.road.get_price()
+
+    def __str__(self):
+        return '<CreateRoad>'
 
     def check(self, world, sender):
         road = self.road; price = self.price
@@ -214,6 +238,9 @@ class UpgradeCommunity (kxg.Message):
     def __init__(self, community):
         self.community = community
 
+    def __str__(self):
+        return '<UpgradeCommunity>'
+
     def check(self, world, sender):
         community = self.community
         player = community.player
@@ -262,6 +289,9 @@ class MoveArmy (kxg.Message):
         self.army = army
         self.target = end_point
 
+    def __str__(self):
+        return '<MoveArmy>'
+
     def check(self, world, sender):
         army = self.army
         target = self.target
@@ -309,6 +339,9 @@ class DestroyArmy (kxg.Message):
     def __init__(self, army):
         self.army = army
 
+    def __str__(self):
+        return '<DestroyArmy>'
+
     def check(self, world, sender):
         army = self.army
         
@@ -347,6 +380,9 @@ class DefeatPlayer (kxg.Message):
     def __init__(self, player):
         self.player = player
 
+    def __str__(self):
+        return '<DefeatPlayer>'
+
     def check(self, world, sender):
         return self.player.was_defeated() and not self.player.is_dead()
 
@@ -365,6 +401,9 @@ class RequestBattle (kxg.Message):
 
     def __init__(self, army, community):
         self.campaign = tokens.Campaign(army, community)
+
+    def __str__(self):
+        return '<RequestBattle>'
 
     def check(self, world, sender):
         army = self.campaign.army
@@ -419,7 +458,7 @@ class RequestBattle (kxg.Message):
 
     def setup (self, world, sender, id):
         self.campaign.give_id(id)
-        print "RequestBattle: Campaign %s" %self.campaign.get_id()
+        print "  RequestBattle: Campaign %s" %self.campaign.get_id()
         print "    Army %s chasing Community %s" %(self.campaign.army.get_id(), self.campaign.community.get_id())
 
     def execute(self, world):
@@ -434,6 +473,9 @@ class StartBattle (kxg.Message):
     def __init__(self, campaign):
         self.campaign = campaign
         self.battle = tokens.Battle(campaign)
+
+    def __str__(self):
+        return '<StartBattle>'
 
     def check(self, world, sender):
         army = self.campaign.army
@@ -471,9 +513,9 @@ class StartBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        self.battle.give_id(id)
-        print "StartBattle  %s (Campaign %s completed!)" %(self.battle.get_id(), self.campaign.get_id())
+        print "  StartBattle  %s (Campaign %s completed!)" %(self.battle.get_id(), self.campaign.get_id())
         print "    Battle %s communities: %s, %s" %(self.battle.get_id(), self.campaign.army.get_id(), self.campaign.community.get_id())
+        self.battle.give_id(id)
 
     def execute(self, world):
         world.start_battle(self.campaign, self.battle)
@@ -487,6 +529,9 @@ class JoinBattle (kxg.Message):
     def __init__(self, campaign, battle):
         self.campaign = campaign
         self.battle = battle
+
+    def __str__(self):
+        return '<JoinBattle>'
 
     def check(self, world, sender):
         army = self.campaign.army
@@ -527,7 +572,7 @@ class JoinBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "JoinBattle %s (Campaign %s completed!)" %(self.battle.get_id(), self.campaign.get_id())
+        print "  JoinBattle %s (Campaign %s completed!)" %(self.battle.get_id(), self.campaign.get_id())
         msg = ""
         for coms in self.battle.communities.values():
             for com in coms:
@@ -547,6 +592,9 @@ class RetreatBattle (kxg.Message):
         self.army = army
         self.target = target
         self.battle = army.battle
+
+    def __str__(self):
+        return '<RetreatBattle>'
 
     def check(self, world, sender):
         army = self.army
@@ -596,7 +644,7 @@ class RetreatBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "RetreatBattle  %s  Army %s" %(self.battle.get_id(), self.army.get_id())
+        print "  RetreatBattle  %s  Army %s" %(self.battle.get_id(), self.army.get_id())
 
     def execute(self, world):
         world.retreat_battle(self.army, self.target)
@@ -610,6 +658,9 @@ class ZombifyCity (kxg.Message):
     def __init__(self, city):
         self.city = city
         self.battle = city.battle
+
+    def __str__(self):
+        return '<ZombifyCity>'
 
     def check(self, world, sender):
         city = self.city
@@ -640,7 +691,7 @@ class ZombifyCity (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "zombifying city %s  in battle %s" %(self.city.get_id(), self.battle.get_id())
+        print "  Zombifying city %s  in battle %s" %(self.city.get_id(), self.battle.get_id())
 
     def execute(self, world):
         world.zombify_city(self.city.battle, self.city)
@@ -653,6 +704,9 @@ class EndBattle (kxg.Message):
     
     def __init__(self, battle):
         self.battle = battle
+
+    def __str__(self):
+        return '<EndBattle>'
 
     def check(self, world, sender):
         

@@ -1,0 +1,35 @@
+July 7, 2013
+Frames/Sec                                      Error Rate  Elapsed Time  Notes
+==========                                      ==========  ============  =====
+         5                                             10%         37:05
+        25                                             12%         14:00
+        50                                             11%         11:08
+       100                                             20%          9:41
+       500                                             32%          8:32    [1]
+
+July 9, 2013
+Frames/Sec  Latency (ms)                        Error Rate  Elapsed Time  Notes
+==========  ============                        ==========  ============  =====
+        50           100                                0%         11:28
+        50            10                                4%         11:09
+        50             1                               16%         11:08
+
+July 10, 2013
+Frames/Sec  Distance                            Error Rate  Elapsed Time  Notes
+==========  ========                            ==========  ============  =====
+        50         1                                   20%         11:08
+        50        25                                   22%         11:08
+        50        50                                   26%         11:08
+        50  (2R)  54                                   18%         11:15
+        50        55                                   11%         11:15
+        50        56                                   18%         11:15
+        50        57
+        50        60                                    0%         11:27
+        50       100                                    0%         14:01
+        50       200                                    0%         20:45
+
+
+
+[1] This data is suspicious, because the game seems to crash for other reasons 
+more often than not.
+

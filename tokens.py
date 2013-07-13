@@ -302,6 +302,7 @@ class Referee (kxg.Referee):
     def __init__(self):
         kxg.Referee.__init__(self)
         self.world = None
+        self.frame = 0
 
     def get_name(self):
         return 'referee'
@@ -313,6 +314,7 @@ class Referee (kxg.Referee):
 
     def update(self, time):
         kxg.Referee.update(self, time)
+        self.frame += 1
 
     def teardown(self):
         pass
@@ -411,6 +413,9 @@ class Player (kxg.Token):
 
     def __extend__(self):
         return {'gui': gui.PlayerExtension}
+
+    def __str__(self):
+        return '<Player name=%s>' % self.name
 
 
     @kxg.check_for_safety
@@ -684,6 +689,9 @@ class City (Community):
     def __extend__(self):
         return {'gui': gui.CityExtension}
 
+    def __str__(self):
+        return "<City id=%s>" % self.get_id()
+
 
     @kxg.check_for_safety
     def setup(self):
@@ -769,6 +777,9 @@ class Army (Community):
     def __extend__(self):
         return {'gui': gui.ArmyExtension}
 
+    def __str__(self):
+        return "<Army id=%s>" % self.get_id()
+
 
     @kxg.check_for_safety
     def setup(self):
@@ -813,7 +824,7 @@ class Army (Community):
 
 
     @kxg.check_for_safety
-    def chase (self, campaign):
+    def chase(self, campaign):
         self.my_campaign = campaign
 
     @kxg.check_for_safety
@@ -900,6 +911,9 @@ class Road (kxg.Token):
     def __extend__(self):
         return {'gui': gui.RoadExtension}
 
+    def __str__(self):
+        return "<Road id=%s>" % self.get_id()
+
 
     @kxg.check_for_safety
     def setup(self):
@@ -961,6 +975,8 @@ class Campaign (kxg.Token):
         self.army = army
         self.community = community
 
+    def __str__(self):
+        return '<Campaign id=%s>' % self.get_id()
 
     @kxg.check_for_safety
     def setup(self):
@@ -1007,6 +1023,9 @@ class Battle (kxg.Token):
         self.init_campaign = campaign  # Will be deleted in setup
         self.communities = {}
         self.zombie_city = None
+
+    def __str__(self):
+        return "<Battle id=%s>" % self.get_id()
 
 
     @kxg.check_for_safety
