@@ -48,6 +48,7 @@ class CreatePlayer (kxg.Greeting):
 
     def __init__(self, name, color):
         self.player = tokens.Player(name, color)
+        self.city = None
 
     def __str__(self):
         return '<CreatePlayer>'
@@ -59,13 +60,31 @@ class CreatePlayer (kxg.Greeting):
         return not world.has_game_started()
 
     def setup(self, world, sender, id):
+        import random
+
+        # Place the two players on opposite sides of the maps.  This algorithm 
+        # doesn't scale well to more than two players.
+
+        position = kxg.geometry.Vector.null()
+
+        if world.players:
+            position.x = world.map.left + 50
+            position.y = 50 + random.random() * (world.map.height - 100)
+        else:
+            position.x = world.map.right - 50
+            position.y = 50 + random.random() * (world.map.height - 100)
+
+        self.city = tokens.City(self.player, position)
+
         self.player.give_id(id)
+        self.city.give_id(id)
 
     def execute(self, world):
-        world.create_player(self.player)
+        world.create_player(self.player, self.city)
 
     def notify(self, actor, is_mine):
         actor.create_player(self.player, is_mine)
+        actor.create_city(self.city, is_mine)
 
 
 class CreateCity (kxg.Message):

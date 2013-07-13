@@ -11,7 +11,7 @@ class World (kxg.World):
 
         self.players = []
         self.losers = []; self.winner = None
-        self.map = kxg.geometry.Rectangle.from_size(500, 500)
+        self.map = kxg.geometry.Rectangle.from_size(800, 800)
 
         self.game_started = False
         self.game_ended = False
@@ -34,10 +34,14 @@ class World (kxg.World):
 
 
     @kxg.check_for_safety
-    def create_player(self, player):
-        self.players.append(player)
+    def create_player(self, player, city):
         self.add_token(player)
+        self.players.append(player)
         player.setup(self)
+
+        self.add_token(city)
+        city.player.add_city(city)
+        city.setup()
 
     @kxg.check_for_safety
     def create_city(self, city, price):
@@ -754,7 +758,6 @@ class City (Community):
 
     @kxg.check_for_safety
     def update_capitol(self):
-        print 'Update capitol'
         for extension in self.get_extensions():
             extension.update_capitol()
 

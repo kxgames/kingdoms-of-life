@@ -77,6 +77,10 @@ class Gui (kxg.Actor):
 
 
     def setup(self):
+        size = self.world.map.size
+        self.window.set_size(*size)
+        self.window.set_visible(True)
+
         gl = pyglet.gl
         gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
         gl.glEnable(gl.GL_BLEND)
@@ -347,7 +351,11 @@ class Gui (kxg.Actor):
         if is_mine: self.player = player
 
     def create_city(self, city, is_mine):
-        pass
+        # This is a hack for the first city.  The first city gets created 
+        # before self.player is set, so update_engagement() doesn't work like 
+        # it should.  There's probably a better way to address this, but it 
+        # probably involves tweaking the game engine.
+        city.get_extension().update_engagement()
 
     def create_army(self, army, is_mine):
         pass
