@@ -24,14 +24,11 @@ class Gui (kxg.Actor):
         self.selection = None
         self.mode = None
 
-        handlers = GameHandlers(self)
-
         self.window = window
-        self.window.push_handlers(handlers)
 
-        self.batch = pyglet.graphics.Batch()
-        self.bin = pyglet.image.atlas.TextureBin()
-        self.frame_rate = pyglet.clock.ClockDisplay()
+        self.drag_start_city = None
+        self.play_again = False
+        self.finished = False
 
         self.layers = {
                 'map 1':        pyglet.graphics.OrderedGroup(0),
@@ -44,6 +41,32 @@ class Gui (kxg.Actor):
                 'messages 1':   pyglet.graphics.OrderedGroup(6),
                 'messages 2':   pyglet.graphics.OrderedGroup(7) }
     
+
+    def get_name(self):
+        return 'gui'
+
+    def get_world(self):
+        return self.world
+
+
+    def setup(self):
+        self.player = None
+        self.selection = None
+        self.mode = None
+        self.drag_start_city = None
+
+        self.finished = False
+        self.play_again = False
+
+        self.bin = pyglet.image.atlas.TextureBin()
+        self.frame_rate = pyglet.clock.ClockDisplay()
+
+        gl = pyglet.gl
+        gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
+        gl.glEnable(gl.GL_BLEND)
+        gl.glEnable(gl.GL_LINE_SMOOTH)
+        gl.glHint(gl.GL_LINE_SMOOTH_HINT, gl.GL_DONT_CARE)
+
         self.community_icons = {
                 'army': self.load_icon('images/army-icon.png'),
                 'city': self.load_icon('images/city-icon.png'),
@@ -61,55 +84,41 @@ class Gui (kxg.Actor):
         self.health_bar = self.load_health_icon('images/full-health.png', 50)
         self.health_outline = self.load_icon('images/empty-health.png')
 
-        self.drag_start_city = None
 
+    def setup_pregame(self):
+        width, height = self.window.get_size()
+        self.batch = pyglet.graphics.Batch()
 
-    def get_name(self):
-        return 'gui'
+        group = self.layers['messages 2']
+        self.pregame_message = pyglet.text.Label(
+                "Waiting for players...", color=(255, 255, 255, 255),
+                font_name='Deja Vu Sans', font_size=42,
+                x=width//2, y=height//2,
+                anchor_x='center', anchor_y='center',
+                batch=self.batch, group=group)
 
-    def get_world(self):
-        return self.world
+        handlers = PregameHandlers(self)
+        self.window.push_handlers(handlers)
 
+    def setup_game(self):
+        self.teardown_pregame()
 
-    def setup(self):
         width, height = self.world.map.size
+        handlers = GameHandlers(self)
+
         self.window.set_size(width, height)
         self.window.set_visible(True)
-
-        gl = pyglet.gl
-        gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
-        gl.glEnable(gl.GL_BLEND)
-        gl.glEnable(gl.GL_LINE_SMOOTH)
-        gl.glHint(gl.GL_LINE_SMOOTH_HINT, gl.GL_DONT_CARE)
+        self.window.push_handlers(handlers)
 
         self.mode_sprite = pyglet.text.Label("",
                 font_name='Deja Vu Sans', font_size=12,
                 x=(width / 2), y=5, color=(0, 0, 0, 255),
                 anchor_x='center', anchor_y='bottom',
                 batch=self.batch, group=self.layers['gui'])
-        
-        #message = '<font face="Deja Vu Sans size="12" color="black">Enter: <i>Play Again</i>\tEsc: <i>Exit</i></font>'
-        #self.play_again_message = pyglet.text.HTMLLabel(
-        #        message,
-        #        x = width - 10, y = 10,
-        #        anchor_x='right', anchor_y='bottom',
-        #        batch=self.batch, group=self.layers['gui'])
-
-        self.play_again_message = pyglet.text.Label(
-                "Enter: Play Again\nEsc: Quit Game", color=(0, 0, 0, 255),
-                font_name='Deja Vu Sans', font_size=12,
-                x=(width - 5), y=(height - 5),
-                anchor_x='right', anchor_y='top',
-                multiline=True, width=200,
-                batch=self.batch, group=self.layers['gui'])
-
-        self.play_again_message.set_style('align', 'right')
-        
 
     def setup_postgame(self):
         # Turn off any user input.
         handlers = PostgameHandlers(self)
-        self.window.pop_handlers()
         self.window.push_handlers(handlers)
 
         if self.selection:
@@ -149,14 +158,16 @@ class Gui (kxg.Actor):
                 batch=batch, group=group)
 
         # Draw a "Play again?" message.
-        group = self.layers['messages 2']
-        #self.play_again_message = pyglet.text.Label(
-                #"Enter: <i>Play Again</i>, Esc: <i>Exit</i>",
-                #color=(0, 0, 0, 255),
-                #font_name='Deja Vu Sans', font_size=12,
-                #x=window_width//2, y=window_height//2 - banner_height//2 - 10,
-                #anchor_x='center', anchor_y='top',
-                #batch=batch, group=group)
+        self.play_again_message = pyglet.text.Label(
+                "Enter: Play Again\nEsc: Quit Game", color=(0, 0, 0, 255),
+                font_name='Deja Vu Sans', font_size=12,
+                x=(window_width - 8), y=(window_height - 5),
+                anchor_x='right', anchor_y='top',
+                multiline=True, width=200,
+                batch=batch, group=group)
+
+        self.play_again_message.set_style('align', 'right')
+        
 
 
     def update(self, time):
@@ -197,8 +208,20 @@ class Gui (kxg.Actor):
         else:
             pyglet.gl.glClearColor(*background_color)
 
+
+    def teardown_pregame(self):
+        self.pregame_message.delete()
+        self.window.pop_handlers()
+
     def teardown(self):
-        pass
+        self.window.pop_handlers()
+
+    def teardown_postgame(self):
+        self.banner_message.delete()
+        self.banner_background.delete()
+        self.play_again_message.delete()
+
+        self.window.pop_handlers()
 
 
     def path_to_array(self, path):
@@ -262,7 +285,7 @@ class Gui (kxg.Actor):
 
 
     def start_game(self):
-        pass
+        self.setup_game()
 
     def game_over(self, winner):
         pass
@@ -325,6 +348,9 @@ class Gui (kxg.Actor):
     def show_error(self, message):
         print message.error
 
+    def postgame_finished(self):
+        return self.finished
+
 
 
 colors = {            # (fold)
@@ -349,7 +375,7 @@ def interpolate_color(start, end, extent):
     return start + extent * (end - start)
 
 
-class GameHandlers:
+class BaseHandlers (object):
 
     def __init__(self, gui):
         self.gui = gui
@@ -358,6 +384,17 @@ class GameHandlers:
         self.gui.window.clear()
         self.gui.update_background()
         self.gui.batch.draw()
+
+class PregameHandlers (BaseHandlers):
+
+    def __init__(self, gui):
+        BaseHandlers.__init__(self, gui)
+
+
+class GameHandlers (BaseHandlers):
+
+    def __init__(self, gui):
+        BaseHandlers.__init__(self, gui)
 
     def on_mouse_press(self, x, y, button, modifiers):
         with self.gui.lock():
@@ -369,6 +406,15 @@ class GameHandlers:
                     drag_start = find_closest_community(position, cutoff=40)
                     if drag_start and drag_start.is_city():
                         self.gui.drag_start_city = drag_start
+
+            if button == pyglet.window.mouse.MIDDLE:
+                print 'Players:', self.gui.world.players
+                print
+                for player in self.gui.world.players:
+                    print ' %s:' % player.name
+                    print ' Cities:', player.cities
+                    print ' Armies:', player.armies
+                print
 
     def on_mouse_drag(self, x, y, dx, dy, button, modifiers):
         with self.gui.lock():
@@ -464,15 +510,19 @@ class GameHandlers:
                 return True
 
 
-class PostgameHandlers:
+class PostgameHandlers (BaseHandlers):
 
     def __init__(self, gui):
-        self.gui = gui
+        BaseHandlers.__init__(self, gui)
 
-    def on_draw(self):
-        self.gui.window.clear()
-        self.gui.update_background()
-        self.gui.batch.draw()
+    def on_key_press(self, symbol, modifiers):
+        if symbol == pyglet.window.key.ENTER:
+            self.gui.play_again = True
+            self.gui.finished = True
+        if symbol == pyglet.window.key.ESCAPE:
+            self.gui.play_again = False
+            self.gui.finished = True
+            return True
 
 
 
