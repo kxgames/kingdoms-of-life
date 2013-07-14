@@ -11,7 +11,7 @@ class World (kxg.World):
 
         self.players = []
         self.losers = []; self.winner = None
-        self.map = kxg.geometry.Rectangle.from_size(800, 800)
+        self.map = kxg.geometry.Rectangle.from_size(762, 762)
 
         self.game_started = False
         self.game_ended = False
