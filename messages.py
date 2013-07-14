@@ -68,10 +68,10 @@ class CreatePlayer (kxg.Greeting):
         position = kxg.geometry.Vector.null()
 
         if world.players:
-            position.x = world.map.left + 50
+            position.x = world.map.left + 100
             position.y = 50 + random.random() * (world.map.height - 100)
         else:
-            position.x = world.map.right - 50
+            position.x = world.map.right - 100
             position.y = 50 + random.random() * (world.map.height - 100)
 
         self.city = tokens.City(self.player, position)

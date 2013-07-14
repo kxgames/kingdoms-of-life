@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# encoding: utf-8
 
 # Imports (fold)
 from __future__ import division
@@ -23,8 +24,10 @@ class Gui (kxg.Actor):
         self.selection = None
         self.mode = None
 
+        handlers = GameHandlers(self)
+
         self.window = window
-        self.window.push_handlers(self)
+        self.window.push_handlers(handlers)
 
         self.batch = pyglet.graphics.Batch()
         self.bin = pyglet.image.atlas.TextureBin()
@@ -58,14 +61,6 @@ class Gui (kxg.Actor):
         self.health_bar = self.load_health_icon('images/full-health.png', 50)
         self.health_outline = self.load_icon('images/empty-health.png')
 
-        width, height = window.get_size()
-
-        self.mode_sprite = pyglet.text.Label("",
-                font_name='Deja Vu Sans', font_size=12,
-                x=(width / 2), y=5, color=(0, 0, 0, 255),
-                anchor_x='center', anchor_y='bottom',
-                batch=self.batch, group=self.layers['gui'])
-        
         self.drag_start_city = None
 
 
@@ -77,8 +72,8 @@ class Gui (kxg.Actor):
 
 
     def setup(self):
-        size = self.world.map.size
-        self.window.set_size(*size)
+        width, height = self.world.map.size
+        self.window.set_size(width, height)
         self.window.set_visible(True)
 
         gl = pyglet.gl
@@ -87,10 +82,35 @@ class Gui (kxg.Actor):
         gl.glEnable(gl.GL_LINE_SMOOTH)
         gl.glHint(gl.GL_LINE_SMOOTH_HINT, gl.GL_DONT_CARE)
 
+        self.mode_sprite = pyglet.text.Label("",
+                font_name='Deja Vu Sans', font_size=12,
+                x=(width / 2), y=5, color=(0, 0, 0, 255),
+                anchor_x='center', anchor_y='bottom',
+                batch=self.batch, group=self.layers['gui'])
+        
+        #message = '<font face="Deja Vu Sans size="12" color="black">Enter: <i>Play Again</i>\tEsc: <i>Exit</i></font>'
+        #self.play_again_message = pyglet.text.HTMLLabel(
+        #        message,
+        #        x = width - 10, y = 10,
+        #        anchor_x='right', anchor_y='bottom',
+        #        batch=self.batch, group=self.layers['gui'])
+
+        self.play_again_message = pyglet.text.Label(
+                "Enter: Play Again\nEsc: Quit Game", color=(0, 0, 0, 255),
+                font_name='Deja Vu Sans', font_size=12,
+                x=(width - 5), y=(height - 5),
+                anchor_x='right', anchor_y='top',
+                multiline=True, width=200,
+                batch=self.batch, group=self.layers['gui'])
+
+        self.play_again_message.set_style('align', 'right')
+        
+
     def setup_postgame(self):
         # Turn off any user input.
+        handlers = PostgameHandlers(self)
         self.window.pop_handlers()
-        self.window.push_handlers(self.on_draw)
+        self.window.push_handlers(handlers)
 
         if self.selection:
             self.selection.get_extension().unselect()
@@ -127,6 +147,16 @@ class Gui (kxg.Actor):
                 x=window_width//2, y=window_height//2,
                 anchor_x='center', anchor_y='center',
                 batch=batch, group=group)
+
+        # Draw a "Play again?" message.
+        group = self.layers['messages 2']
+        #self.play_again_message = pyglet.text.Label(
+                #"Enter: <i>Play Again</i>, Esc: <i>Exit</i>",
+                #color=(0, 0, 0, 255),
+                #font_name='Deja Vu Sans', font_size=12,
+                #x=window_width//2, y=window_height//2 - banner_height//2 - 10,
+                #anchor_x='center', anchor_y='top',
+                #batch=batch, group=group)
 
 
     def update(self, time):
@@ -169,116 +199,6 @@ class Gui (kxg.Actor):
 
     def teardown(self):
         pass
-
-
-    def on_draw(self):
-        self.window.clear()
-        self.update_background()
-        self.batch.draw()
-
-    def on_mouse_press(self, x, y, button, modifiers):
-        with self.lock():
-            position = kxg.geometry.Vector(x, y)
-            find_closest_community = self.player.find_closest_community
-            
-            if button == pyglet.window.mouse.LEFT:
-                if self.mode == 'develop':
-                    drag_start = find_closest_community(position, cutoff=40)
-                    if drag_start and drag_start.is_city():
-                        self.drag_start_city = drag_start
-
-    def on_mouse_drag(self, x, y, dx, dy, button, modifiers):
-        with self.lock():
-            position = kxg.geometry.Vector(x, y)
-            
-            if button == pyglet.window.mouse.LEFT:
-                drag_start = self.drag_start_city
-                if drag_start:
-                    drag_dist = position.get_distance(drag_start.position)
-                    if self.mode == 'develop' and drag_dist > 40:
-                        self.update_mode('develop road')
-                    elif self.mode == 'develop road' and drag_dist <= 40:
-                        self.update_mode('develop')
-
-    def on_mouse_release(self, x, y, button, modifiers):
-        with self.lock():
-            position = kxg.geometry.Vector(x, y)
-            find_closest_community = self.player.find_closest_community
-            
-            if button == pyglet.window.mouse.LEFT:
-                if self.mode == 'fight':
-                    message = messages.CreateArmy(self.player, position)
-                    self.send_message(message)
-                    self.update_mode()
-                    self.update_selection()
-
-                elif self.mode == 'develop road':
-                    drag_start = self.drag_start_city
-                    drag_end = self.world.find_closest_community(position, cutoff=40)
-                    self.drag_start_city = None
-                    
-                    if drag_start and drag_end:
-                        if drag_start.is_city() and drag_end.is_city():
-                            if not (drag_start is drag_end):
-                                message = messages.CreateRoad(self.player, drag_start, drag_end)
-                                self.send_message(message)
-                                self.update_selection()
-                    self.update_mode()
-
-                elif self.mode == 'develop':
-                    if self.drag_start_city:
-                        #upgrade?
-                        self.drag_start_city = None
-                    else:
-                        message = messages.CreateCity(self.player, position)
-                        self.send_message(message)
-                        self.update_mode()
-                    self.update_selection()
-
-                else:
-                    community = find_closest_community(position, cutoff=40)
-                    self.update_selection(community)
-
-            if button == pyglet.window.mouse.RIGHT:
-                target = self.world.find_closest_community(position, cutoff=40)
-                if target and target.player is self.player:
-                    target = None
-
-                if self.selection and self.selection.can_move():
-                    if target:
-                        if self.selection.is_chasing():
-                            campaign = self.selection.get_campaign()
-                            if campaign.get_community() is target:
-                                # Trying to attack a community that the 
-                                # army is already chasing. Just ignore 
-                                # it.
-                                pass
-                            else:
-                                # Cancel campaign
-                                # Request battle
-                                pass
-                        else:
-                            message = messages.RequestBattle(self.selection, target)
-                            self.send_message(message)
-                    else:
-                        message = messages.MoveArmy(self.selection, position)
-                        self.send_message(message)
-
-    def on_key_press(self, symbol, modifiers):
-        with self.lock():
-            if symbol == pyglet.window.key.F:
-                self.update_mode('fight')
-            if symbol == pyglet.window.key.D:
-                self.update_mode('develop')
-            if symbol == pyglet.window.key.SPACE and self.selection:
-                message = messages.UpgradeCommunity(self.selection)
-                self.send_message(message)
-            if symbol == pyglet.window.key.BACKSPACE and self.selection:
-                message = messages.RetreatBattle(self.selection)
-                self.send_message(message)
-            if symbol == pyglet.window.key.ESCAPE:
-                self.update_mode()
-                return True
 
 
     def path_to_array(self, path):
@@ -427,6 +347,133 @@ def fade_color(source, extent=0.80):
 
 def interpolate_color(start, end, extent):
     return start + extent * (end - start)
+
+
+class GameHandlers:
+
+    def __init__(self, gui):
+        self.gui = gui
+
+    def on_draw(self):
+        self.gui.window.clear()
+        self.gui.update_background()
+        self.gui.batch.draw()
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        with self.gui.lock():
+            position = kxg.geometry.Vector(x, y)
+            find_closest_community = self.gui.player.find_closest_community
+            
+            if button == pyglet.window.mouse.LEFT:
+                if self.gui.mode == 'develop':
+                    drag_start = find_closest_community(position, cutoff=40)
+                    if drag_start and drag_start.is_city():
+                        self.gui.drag_start_city = drag_start
+
+    def on_mouse_drag(self, x, y, dx, dy, button, modifiers):
+        with self.gui.lock():
+            position = kxg.geometry.Vector(x, y)
+            
+            if button == pyglet.window.mouse.LEFT:
+                drag_start = self.gui.drag_start_city
+                if drag_start:
+                    drag_dist = position.get_distance(drag_start.position)
+                    if self.gui.mode == 'develop' and drag_dist > 40:
+                        self.gui.update_mode('develop road')
+                    elif self.gui.mode == 'develop road' and drag_dist <= 40:
+                        self.gui.update_mode('develop')
+
+    def on_mouse_release(self, x, y, button, modifiers):
+        with self.gui.lock():
+            position = kxg.geometry.Vector(x, y)
+            find_closest_community = self.gui.player.find_closest_community
+            
+            if button == pyglet.window.mouse.LEFT:
+                if self.gui.mode == 'fight':
+                    message = messages.CreateArmy(self.gui.player, position)
+                    self.gui.send_message(message)
+                    self.gui.update_mode()
+                    self.gui.update_selection()
+
+                elif self.gui.mode == 'develop road':
+                    drag_start = self.gui.drag_start_city
+                    drag_end = self.gui.world.find_closest_community(position, cutoff=40)
+                    self.gui.drag_start_city = None
+                    
+                    if drag_start and drag_end:
+                        if drag_start.is_city() and drag_end.is_city():
+                            if not (drag_start is drag_end):
+                                message = messages.CreateRoad(self.gui.player, drag_start, drag_end)
+                                self.gui.send_message(message)
+                                self.gui.update_selection()
+                    self.gui.update_mode()
+
+                elif self.gui.mode == 'develop':
+                    if self.gui.drag_start_city:
+                        #upgrade?
+                        self.gui.drag_start_city = None
+                    else:
+                        message = messages.CreateCity(self.gui.player, position)
+                        self.gui.send_message(message)
+                        self.gui.update_mode()
+                    self.gui.update_selection()
+
+                else:
+                    community = find_closest_community(position, cutoff=40)
+                    self.gui.update_selection(community)
+
+            if button == pyglet.window.mouse.RIGHT:
+                target = self.gui.world.find_closest_community(position, cutoff=40)
+                if target and target.player is self.gui.player:
+                    target = None
+
+                if self.gui.selection and self.gui.selection.can_move():
+                    if target:
+                        if self.gui.selection.is_chasing():
+                            campaign = self.gui.selection.get_campaign()
+                            if campaign.get_community() is target:
+                                # Trying to attack a community that the 
+                                # army is already chasing. Just ignore 
+                                # it.
+                                pass
+                            else:
+                                # Cancel campaign
+                                # Request battle
+                                pass
+                        else:
+                            message = messages.RequestBattle(self.gui.selection, target)
+                            self.gui.send_message(message)
+                    else:
+                        message = messages.MoveArmy(self.gui.selection, position)
+                        self.gui.send_message(message)
+
+    def on_key_press(self, symbol, modifiers):
+        with self.gui.lock():
+            if symbol == pyglet.window.key.F:
+                self.gui.update_mode('fight')
+            if symbol == pyglet.window.key.D:
+                self.gui.update_mode('develop')
+            if symbol == pyglet.window.key.SPACE and self.gui.selection:
+                message = messages.UpgradeCommunity(self.gui.selection)
+                self.gui.send_message(message)
+            if symbol == pyglet.window.key.BACKSPACE and self.gui.selection:
+                message = messages.RetreatBattle(self.gui.selection)
+                self.gui.send_message(message)
+            if symbol == pyglet.window.key.ESCAPE:
+                self.gui.update_mode()
+                return True
+
+
+class PostgameHandlers:
+
+    def __init__(self, gui):
+        self.gui = gui
+
+    def on_draw(self):
+        self.gui.window.clear()
+        self.gui.update_background()
+        self.gui.batch.draw()
+
 
 
 class PlayerExtension (kxg.TokenExtension):
