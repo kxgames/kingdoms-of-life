@@ -115,8 +115,6 @@ class Gui (kxg.Actor):
                 x=(width / 2), y=5, color=(0, 0, 0, 255),
                 anchor_x='center', anchor_y='bottom',
                 batch=self.batch, group=self.layers['gui'])
-        
-        print 'gui.setup()'
 
     def setup_postgame(self):
         # Turn off any user input.
@@ -287,7 +285,6 @@ class Gui (kxg.Actor):
 
 
     def start_game(self):
-        print 'StartGame'
         self.setup_game()
 
     def game_over(self, winner):
@@ -295,7 +292,6 @@ class Gui (kxg.Actor):
 
     def create_player(self, player, is_mine):
         if is_mine: self.player = player
-        print 'CreatePlayer', player, is_mine
 
     def create_city(self, city, is_mine):
         # This is a hack for the first city.  The first city gets created 
