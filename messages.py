@@ -128,7 +128,6 @@ class CreateCity (kxg.Message):
 
     def setup(self, world, sender, id):
         self.city.give_id(id)
-        print " ", self.city, self.city.position
 
     def execute(self, world):
         world.create_city(self.city, self.price)
@@ -178,7 +177,6 @@ class CreateArmy (kxg.Message):
 
     def setup(self, world, sender, id):
         self.army.give_id(id)
-        print " ", self.army, self.army.position
 
     def execute(self, world):
         world.create_army(self.army, self.price)
@@ -385,7 +383,7 @@ class DestroyArmy (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "Destroying army %s" %(self.army.get_id())
+        pass
 
     def execute(self, world):
         world.destroy_army(self.army)
@@ -406,7 +404,7 @@ class DefeatPlayer (kxg.Message):
         return self.player.was_defeated() and not self.player.is_dead()
 
     def setup(self, world, sender, id):
-        print "Player %s defeated" %self.player.get_id()
+        pass
 
     def execute(self, world):
         world.defeat_player(self.player)
@@ -482,8 +480,6 @@ class RequestBattle (kxg.Message):
 
     def setup (self, world, sender, id):
         self.campaign.give_id(id)
-        print "  RequestBattle: Campaign %s" %self.campaign.get_id()
-        print "    Army %s chasing Community %s" %(self.campaign.army.get_id(), self.campaign.community.get_id())
 
     def execute(self, world):
         world.request_battle(self.campaign)
@@ -537,8 +533,6 @@ class StartBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "  StartBattle  %s (Campaign %s completed!)" %(self.battle.get_id(), self.campaign.get_id())
-        print "    Battle %s communities: %s, %s" %(self.battle.get_id(), self.campaign.army.get_id(), self.campaign.community.get_id())
         self.battle.give_id(id)
 
     def execute(self, world):
@@ -592,16 +586,10 @@ class JoinBattle (kxg.Message):
         return True
 
     def reject(self, actor):
-        print self.error
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "  JoinBattle %s (Campaign %s completed!)" %(self.battle.get_id(), self.campaign.get_id())
-        msg = ""
-        for coms in self.battle.communities.values():
-            for com in coms:
-                msg += "%d, " % com.get_id()
-        print "    Battle %s communities: %s%s" %(self.battle.get_id(), msg, self.campaign.army.get_id())
+        pass
 
     def execute(self, world):
         world.join_battle(self.campaign, self.battle)
@@ -712,7 +700,7 @@ class ZombifyCity (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "  Zombifying city %s  in battle %s" %(self.city.get_id(), self.battle.get_id())
+        pass
 
     def execute(self, world):
         world.zombify_city(self.city.battle, self.city)
@@ -747,7 +735,7 @@ class EndBattle (kxg.Message):
         actor.show_error(self)
 
     def setup(self, world, sender, id):
-        print "Battle %s ended" %self.battle.get_id()
+        pass
 
     def execute(self, world):
         world.end_battle(self.battle)

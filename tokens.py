@@ -744,7 +744,7 @@ class City (Community):
         return {'gui': gui.CityExtension}
 
     def __str__(self):
-        return "<City id=%s>" % self.get_id()
+        return '<City id=%s xy=%s>' % (self.get_id(), self.position)
 
 
     @kxg.check_for_safety
@@ -1076,7 +1076,6 @@ class Campaign (kxg.Token):
             army = self.army
             community = self.community
 
-            print army.battle
             assert not army.battle
 
             if community.battle:
