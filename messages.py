@@ -91,15 +91,15 @@ class CreateCity (kxg.Message):
 
     def __init__(self, player, position):
         self.city = tokens.City(player, position)
-        self.price = self.city.get_price()
+        self.price = player.get_city_price()
 
     def __str__(self):
         return '<CreateCity>'
 
     def check(self, world, sender):
         city = self.city
-        self.price = self.city.get_price()
         player = city.player
+        self.price = player.get_city_price()
 
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -141,15 +141,15 @@ class CreateArmy (kxg.Message):
 
     def __init__(self, player, position):
         self.army = tokens.Army(player, position)
-        self.price = self.army.get_price()
+        self.price = player.get_army_price()
 
     def __str__(self):
         return '<CreateArmy>'
 
     def check(self, world, sender):
         army = self.army
-        self.price = self.army.get_price()
         player = army.player
+        self.price = player.get_army_price()
 
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -191,7 +191,7 @@ class CreateRoad (kxg.Message):
 
     def __init__(self, player, start, end):
         self.road = tokens.Road(player, start, end)
-        self.price = self.road.get_price()
+        self.price = player.get_road_price()
 
     def __str__(self):
         return '<CreateRoad>'

@@ -482,6 +482,7 @@ class PlayerExtension (kxg.TokenExtension):
         self.gui = gui
         self.player = player
         self.wealth_label = None
+        self.cost_label = None
 
     def setup(self):
         pass
@@ -509,6 +510,42 @@ class PlayerExtension (kxg.TokenExtension):
                 return
 
         self.wealth_label.text = '%d/%+d' % (wealth, revenue)
+
+    def update_costs(self):
+        player = self.player
+
+        if not self.cost_label:
+            gui = self.gui
+
+            if player is gui.player:
+                window = gui.window
+                batch = gui.batch
+                layer = gui.layers['gui']
+
+                self.cost_label = pyglet.text.Label(
+                        font_name='Deja Vu Sans', font_size=12,
+                        color=(0, 0, 0, 255),
+                        x=5, y=window.height - 24,
+                        anchor_x='left', anchor_y='top',
+                        multiline=True, width=200,
+                        batch=batch, group=layer)
+            else:
+                return
+
+        message  = '%3i : Build City\n' % player.get_city_price()
+        message += '%3i : Build Army\n' % player.get_army_price()
+        message += '%3i : Build Road\n' % player.get_road_price()
+
+        selection = self.gui.selection
+        if selection:
+            if selection.is_city():
+                message += '%3i : Upgrade City\n' % selection.get_upgrade_price()
+            elif selection.is_army():
+                message += '%3i : Upgrade Army\n' % selection.get_upgrade_price()
+                message += '%3i : Attack\n' % selection.get_battle_price()
+                message += '%3i : Retreat\n' % selection.get_retreat_price()
+
+        self.cost_label.text = message
 
     def teardown(self):
         self.wealth_label.delete()
