@@ -552,7 +552,7 @@ class PlayerExtension (kxg.TokenExtension):
 
                 self.wealth_label = pyglet.text.Label(
                         font_name='Deja Vu Sans', font_size=12,
-                        color=(0, 0, 0, 255),
+                        color=(0, 0, 0, 255), bold=True,
                         x=5, y=window.height - 5,
                         anchor_x='left', anchor_y='top',
                         batch=batch, group=layer)
