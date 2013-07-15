@@ -4,7 +4,7 @@ import argparse
 import armedcat
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--host', '-x', default='localhost')
+parser.add_argument('--host', '-x', default='kxgames.net')
 parser.add_argument('--port', '-p', default=53351, type=int)
 
 arguments = parser.parse_args()
