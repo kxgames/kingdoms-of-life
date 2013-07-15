@@ -278,6 +278,12 @@ class UpgradeCommunity (kxg.Message):
             self.error = "Community was already removed from the world."
             return False
 
+        # Communities can't be upgraded beyond level 5.
+        if community.get_level() >= 5:
+            title = "Cities" if community.is_city() else "Armies"
+            self.error = "%s can't be upgraded beyond level 5." % title
+            return False
+
         # Make sure the community in question is not in a battle.
         if community.is_in_battle():
             self.error = "Can't upgrade a community that's engaged in a battle."
