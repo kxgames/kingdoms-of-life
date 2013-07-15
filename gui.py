@@ -575,18 +575,18 @@ class PlayerExtension (kxg.TokenExtension):
             else:
                 return
 
-        message  = '%3i : Build City\n' % player.get_city_price()
-        message += '%3i : Build Army\n' % player.get_army_price()
-        message += '%3i : Build Road\n' % player.get_road_price()
+        message  = 'Build City: %d\n' % player.get_city_price()
+        message += 'Build Army: %d\n' % player.get_army_price()
+        message += 'Build Road: %d\n' % player.get_road_price()
 
         selection = self.gui.selection
         if selection:
             if selection.is_city():
-                message += '%3i : Upgrade City\n' % selection.get_upgrade_price()
+                message += 'Upgrade City: %d\n' % selection.get_upgrade_price()
             elif selection.is_army():
-                message += '%3i : Upgrade Army\n' % selection.get_upgrade_price()
-                message += '%3i : Attack\n' % selection.get_battle_price()
-                message += '%3i : Retreat\n' % selection.get_retreat_price()
+                message += 'Upgrade Army: %d\n' % selection.get_upgrade_price()
+                message += 'Attack: %d\n' % selection.get_battle_price()
+                message += 'Retreat: %d\n' % selection.get_retreat_price()
 
         self.cost_label.text = message
 
