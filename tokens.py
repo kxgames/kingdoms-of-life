@@ -1,5 +1,7 @@
 from __future__ import division
 
+from math import sqrt
+
 import kxg
 import messages
 import gui
@@ -799,17 +801,31 @@ class City (Community):
 
 
     def get_upgrade_price(self):
-        return 10 * self.level
+        return 83 * self.level - 33
 
     def get_max_health(self):
         return 150 + 30 * self.level
 
     def get_revenue(self):
         clear_roads = sum(1 for road in self.roads if not road.is_blocked())
-        return 5 * self.level + 10 * clear_roads
+        return 3 + 10 * sqrt(clear_roads) + 5 * self.level * sqrt(clear_roads)
 
     def get_healing(self):
-        return 2 * self.level
+        capitol = self.player.get_capitol()
+        radius = self.radius
+
+        distance = self.get_distance_to(capitol)
+        a = - 1.0 / (3 * radius)
+        max_rate = 2 * self.level
+        rate = a * (distance - 2 * radius) + max_rate
+
+        baseline = 1
+        if rate <= baseline:
+            return baseline
+        elif rate >= max_rate:
+            return max_rate
+        else:
+            return rate
 
     def get_attack(self):
         return 2 + self.level // 2
@@ -931,13 +947,14 @@ class Army (Community):
 
         distance = self.get_distance_to(capitol)
         a = - 1.0 / (3 * radius)
-        b = self.level
-        rate = a * (distance - 2 * radius) + b
+        max_rate = 2 * self.level
+        rate = a * (distance - 2 * radius) + max_rate
 
-        if rate <= 0:
-            return 0
-        elif rate >= b:
-            return b
+        baseline = 1
+        if rate <= baseline:
+            return baseline
+        elif rate >= max_rate:
+            return max_rate
         else:
             return rate
 
