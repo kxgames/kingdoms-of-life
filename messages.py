@@ -426,7 +426,7 @@ class RequestBattle (kxg.Message):
         army = self.campaign.army
         community = self.campaign.community
         player = army.player
-        price = community.get_battle_price()
+        price = army.get_battle_price()
 
         # Make sure the right player is sending this message.
         if sender is not player:
@@ -468,10 +468,12 @@ class RequestBattle (kxg.Message):
             self.error = "Army can't move there."
             return False
         
-        # Make sure the player can afford to battle community.
-        if not player.can_afford_price(price):
-            self.error = "Can't afford $%d to battle this community." % price
-            return False
+        # Only charge the player for starting a battle.
+        if not community.is_in_battle():
+            # Make sure the player can afford to battle community.
+            if not player.can_afford_price(price):
+                self.error = "Can't afford $%d to battle this community." % price
+                return False
 
         return True
 

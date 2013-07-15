@@ -90,8 +90,10 @@ class World (kxg.World):
     @kxg.check_for_safety
     def request_battle(self, campaign):
         player = campaign.army.player
-        price = campaign.community.get_battle_price()
-        player.spend_wealth(price)
+        # Pay to start a battle.
+        if not campaign.community.is_in_battle():
+            price = campaign.army.get_battle_price()
+            player.spend_wealth(price)
 
         self.add_token(campaign)
         campaign.setup()
@@ -711,9 +713,6 @@ class Community (kxg.Token):
     def get_distance_to(self, other):
         return self.position.get_distance(other.position)
 
-    def get_battle_price(self):
-        raise NotImplementedError
-
     def check_battle_proximity(self, battle):
         communities = battle.communities
         for player in battle.communities.keys():
@@ -817,9 +816,6 @@ class City (Community):
     def get_supply(self):
         return sum((road.get_supply_to(self) for road in self.roads), 1)
     
-    def get_battle_price(self):
-        return 100
-
     def can_move(self):
         return False
 
@@ -960,7 +956,7 @@ class Army (Community):
         return self.my_campaign
     
     def get_battle_price(self):
-        return 0
+        return 100
 
     def get_retreat_price(self):
         return 50
