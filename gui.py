@@ -40,6 +40,8 @@ class Gui (kxg.Actor):
                 'gui':          pyglet.graphics.OrderedGroup(5),
                 'messages 1':   pyglet.graphics.OrderedGroup(6),
                 'messages 2':   pyglet.graphics.OrderedGroup(7) }
+
+        self.status_area = None
     
 
     def get_name(self):
@@ -176,7 +178,8 @@ class Gui (kxg.Actor):
 
 
     def update(self, time):
-        self.status_area.update(time)
+        if self.status_area:
+            self.status_area.update(time)
 
     def update_mode(self, mode=None):
         self.mode = mode
