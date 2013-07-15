@@ -29,7 +29,7 @@ class Gui (kxg.Actor):
         self.drag_start_city = None
         self.play_again = False
         self.finished = False
-
+        
         self.layers = {
                 'map 1':        pyglet.graphics.OrderedGroup(0),
                 'map 2':        pyglet.graphics.OrderedGroup(1),
@@ -47,6 +47,9 @@ class Gui (kxg.Actor):
 
     def get_world(self):
         return self.world
+
+    def postgame_finished(self):
+        return self.finished
 
 
     def setup(self):
@@ -84,7 +87,6 @@ class Gui (kxg.Actor):
         self.health_bar = self.load_health_icon('images/full-health.png', 50)
         self.health_outline = self.load_icon('images/empty-health.png')
 
-
     def setup_pregame(self):
         width, height = self.window.get_size()
         self.batch = pyglet.graphics.Batch()
@@ -115,6 +117,9 @@ class Gui (kxg.Actor):
                 x=(width / 2), y=5, color=(0, 0, 0, 255),
                 anchor_x='center', anchor_y='bottom',
                 batch=self.batch, group=self.layers['gui'])
+
+        self.status_area = StatusArea(self)
+
 
     def setup_postgame(self):
         # Turn off any user input.
@@ -171,19 +176,11 @@ class Gui (kxg.Actor):
 
 
     def update(self, time):
-        pass
+        self.status_area.update(time)
 
     def update_mode(self, mode=None):
         self.mode = mode
-
-        if self.mode == 'develop':
-            self.mode_sprite.text = "Click to place a city."
-        elif self.mode == 'fight':
-            self.mode_sprite.text = "Click to place an army."
-        elif self.mode == 'develop road':
-            self.mode_sprite.text = "Drag to another city to place a road."
-        else:
-            self.mode_sprite.text = ""
+        self.status_area.change_mode()
 
     def update_selection(self, community=None):
         if self.selection:
@@ -235,7 +232,6 @@ class Gui (kxg.Actor):
         data, stride = buffer.tostring(), -buffer.strides[0]
         image = pyglet.image.ImageData(width, height, 'RGBA', data, stride) 
         return self.bin.add(image)
-
 
     def load_icon(self, path):
         buffer = self.path_to_array(path)
@@ -346,10 +342,7 @@ class Gui (kxg.Actor):
 
     
     def show_error(self, message):
-        print message.error
-
-    def postgame_finished(self):
-        return self.finished
+        self.status_area.add_warning(message.error)
 
 
 
@@ -819,7 +812,6 @@ class CityExtension (CommunityExtension):
                     ('c3B', background_color * (num_vertices + 3)) )
 
 
-
 class RoadExtension (kxg.TokenExtension):
 
     def __init__(self, gui, road):
@@ -860,4 +852,44 @@ class RoadExtension (kxg.TokenExtension):
         self.road_line.delete()
 
 
+
+class StatusArea (object):
+
+    def __init__(self, gui):
+        self.gui = gui
+        self.warning = ""
+        self.elapsed = 0
+
+        width, height = self.gui.window.get_size()
+        self.widget = pyglet.text.Label(
+                "", color=(0, 0, 0, 255),
+                font_name='Deja Vu Sans', font_size=12,
+                x=width//2, y=5,
+                anchor_x='center', anchor_y='bottom',
+                batch=self.gui.batch, group=self.gui.layers['messages 2'])
+
+    def change_mode(self):
+        if self.gui.mode == 'develop':
+            mode = "Click to place a city."
+        elif self.gui.mode == 'fight':
+            mode = "Click to place an army."
+        elif self.gui.mode == 'develop road':
+            mode = "Drag to another city to place a road."
+        else:
+            mode = ""
+
+        self.widget.text = mode
+        self.warning = False
+
+    def add_warning(self, message):
+        self.widget.text = message
+        self.warning = True
+        self.elapsed = 0
+
+    def update(self, time):
+
+        if self.warning:
+            self.elapsed += time
+            if self.elapsed > 2:
+                self.change_mode()
 
