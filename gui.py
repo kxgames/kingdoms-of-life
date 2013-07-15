@@ -719,11 +719,17 @@ class ArmyExtension (CommunityExtension):
         position = self.token.position
         target = self.token.target
 
+        if self.token.player is not self.gui.player:
+            return
+
         if target:
             distance = position.get_distance(target)
-            if distance < 50: self.hide_target()
+            if distance < 30: self.hide_target()
 
     def update_target(self):
+        if self.token.player is not self.gui.player:
+            return
+
         position = self.token.target - (8, 8)
         self.target_sprite.visible = True
         self.target_sprite.position = position.tuple
