@@ -42,6 +42,7 @@ class World (kxg.World):
         self.add_token(city)
         city.player.add_city(city)
         city.setup()
+        city.upgrade()
 
     @kxg.check_for_safety
     def create_city(self, city, price):
