@@ -506,13 +506,13 @@ class Player (kxg.Token):
 
 
     def get_city_price(self):
-        return 20 + 10 * len(self.cities)
+        return 30 + 10 * len(self.cities)
 
     def get_army_price(self):
-        return 30 + 10 * len(self.armies)
+        return 50 + 100 * len(self.armies)
 
     def get_road_price(self):
-        return 20 + 10 * len(self.roads)
+        return 30 + 15 * len(self.roads)
 
 
     def can_afford_price(self, price):
@@ -802,7 +802,7 @@ class City (Community):
         return 10 * self.level
 
     def get_max_health(self):
-        return 80 + 20 * self.level
+        return 150 + 30 * self.level
 
     def get_revenue(self):
         clear_roads = sum(1 for road in self.roads if not road.is_blocked())
@@ -920,10 +920,10 @@ class Army (Community):
 
 
     def get_upgrade_price(self):
-        return 10 * self.level
+        return 83 * self.level - 33
 
     def get_max_health(self):
-        return 60 + 16 * self.level
+        return 150 + 30 * self.level
 
     def get_healing(self):
         capitol = self.player.get_capitol()
@@ -942,7 +942,13 @@ class Army (Community):
             return rate
 
     def get_attack(self):
-        return 4 + 2 * self.level
+        return 2 + 3 * self.level
+
+    def get_battle_price(self):
+        return 30
+
+    def get_retreat_price(self):
+        return 70
 
     def get_supply(self):
         city_supplies = []
@@ -956,12 +962,6 @@ class Army (Community):
     def get_campaign(self):
         return self.my_campaign
     
-    def get_battle_price(self):
-        return 100
-
-    def get_retreat_price(self):
-        return 50
-
     def can_move(self):
         return True
 
