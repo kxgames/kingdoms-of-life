@@ -909,6 +909,8 @@ class Army (Community):
     @kxg.check_for_safety
     def chase(self, campaign):
         self.my_campaign = campaign
+        for extension in self.get_extensions():
+            extension.update_engagement()
 
     @kxg.check_for_safety
     def forget_campaign(self, campaign):

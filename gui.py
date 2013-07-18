@@ -78,6 +78,7 @@ class Gui (kxg.Actor):
                 'capitol': self.load_icon('images/capitol-icon.png') }
 
         self.normal_shapes = self.load_team_icon('images/normal-shape.png')
+        self.campaign_shapes = self.load_team_icon('images/campaign-shape.png')
         self.battle_shapes = self.load_team_icon('images/battle-shape.png')
 
         self.normal_outlines = self.load_team_icon('images/normal-selection.png')
@@ -677,13 +678,13 @@ class CommunityExtension (kxg.TokenExtension):
     def update_engagement(self):
         color = self.token.player.color
 
-        if not self.token.is_in_battle():
-            self.engagement_sprite.image = self.gui.normal_shapes[color]
-            self.selection_sprite.image = self.gui.normal_outlines[color]
-
-        else:
+        if self.token.is_in_battle():
             self.engagement_sprite.image = self.gui.battle_shapes[color]
             self.selection_sprite.image = self.gui.battle_outlines[color]
+
+        else:
+            self.engagement_sprite.image = self.gui.normal_shapes[color]
+            self.selection_sprite.image = self.gui.normal_outlines[color]
 
     def teardown(self):
         self.active = False
@@ -733,6 +734,21 @@ class ArmyExtension (CommunityExtension):
         position = self.token.target - (8, 8)
         self.target_sprite.visible = True
         self.target_sprite.position = position.tuple
+
+    def update_engagement(self):
+        color = self.token.player.color
+
+        if self.token.is_in_battle():
+            self.engagement_sprite.image = self.gui.battle_shapes[color]
+            self.selection_sprite.image = self.gui.battle_outlines[color]
+
+        elif self.token.is_chasing():
+            self.engagement_sprite.image = self.gui.campaign_shapes[color]
+            self.selection_sprite.image = self.gui.battle_outlines[color]
+
+        else:
+            self.engagement_sprite.image = self.gui.normal_shapes[color]
+            self.selection_sprite.image = self.gui.normal_outlines[color]
 
     def hide_target(self):
         self.target_sprite.visible = False
