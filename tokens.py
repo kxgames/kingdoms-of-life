@@ -3,8 +3,7 @@ from __future__ import division
 from math import sqrt
 
 import kxg
-import messages
-import gui
+import gui, messages, arguments
 
 class World (kxg.World):
 
@@ -425,6 +424,9 @@ class Player (kxg.Token):
 
         self.wealth = self.starting_wealth
         self.revenue = self.starting_revenue
+        
+        if arguments.wealthy:
+            self.wealth = 10000
 
     def __extend__(self):
         return {'gui': gui.PlayerExtension}
@@ -833,6 +835,9 @@ class City (Community):
     def get_supply(self):
         return sum((road.get_supply_to(self) for road in self.roads), 1)
     
+    def get_line_of_sight(self):
+        return self.border
+
     def can_move(self):
         return False
 
@@ -977,6 +982,9 @@ class Army (Community):
             city_supplies.append(city_supply)
 
         return max(city_supplies)
+
+    def get_line_of_sight(self):
+        return 100
 
     def get_campaign(self):
         return self.my_campaign

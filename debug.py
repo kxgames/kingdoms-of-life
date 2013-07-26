@@ -1,17 +1,12 @@
 #!/usr/bin/env python
 
-import argparse
-import kxg, armedcat
+import kxg
+import armedcat
+import arguments
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--port', '-p', default=53351, type=int)
-parser.add_argument('--wealthy', '-w', action='store_true')
-arguments = parser.parse_args()
+arguments.parser.add_argument('--port', '-p', default=53351, type=int)
+arguments.parse_args()
 host, port = 'localhost', arguments.port
-
-if arguments.wealthy:
-    import tokens
-    tokens.Player.starting_wealth = 10000
 
 debugger = kxg.MultiplayerDebugger()
 

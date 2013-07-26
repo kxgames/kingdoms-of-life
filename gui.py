@@ -6,6 +6,8 @@ from __future__ import division
 
 import kxg
 import messages
+import drawing
+import arguments
 
 import math
 import numpy
@@ -42,6 +44,7 @@ class Gui (kxg.Actor):
                 'messages 2':   pyglet.graphics.OrderedGroup(7) }
 
         self.status_area = None
+        self.frame_rate = pyglet.clock.ClockDisplay()
     
 
     def get_name(self):
@@ -64,7 +67,6 @@ class Gui (kxg.Actor):
         self.play_again = False
 
         self.bin = pyglet.image.atlas.TextureBin()
-        self.frame_rate = pyglet.clock.ClockDisplay()
 
         gl = pyglet.gl
         gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
@@ -92,7 +94,9 @@ class Gui (kxg.Actor):
 
     def setup_pregame(self):
         width, height = self.window.get_size()
+
         self.batch = pyglet.graphics.Batch()
+        self.stencil_batch = pyglet.graphics.Batch()
 
         group = self.layers['messages 2']
         self.pregame_message = pyglet.text.Label(
@@ -122,7 +126,6 @@ class Gui (kxg.Actor):
                 batch=self.batch, group=self.layers['gui'])
 
         self.status_area = StatusArea(self)
-
 
     def setup_postgame(self):
         # Turn off any user input.
@@ -382,6 +385,9 @@ class BaseHandlers (object):
         self.gui.update_background()
         self.gui.batch.draw()
 
+        if arguments.fps:
+            self.gui.frame_rate.draw()
+
 class PregameHandlers (BaseHandlers):
 
     def __init__(self, gui):
@@ -640,6 +646,8 @@ class CommunityExtension (kxg.TokenExtension):
                 anchor_x='center', anchor_y='center',
                 batch=batch, group=front)
 
+        self.vision_sprite = None
+
         self.selection_sprite.visible = False
         self.update_position()
 
@@ -842,39 +850,32 @@ class RoadExtension (kxg.TokenExtension):
     def __init__(self, gui, road):
         self.gui = gui
         self.road = road
-        self.width = 3
+        self.width = 1.5
+        self.sprite = None
 
-        batch = gui.batch
-        group = gui.layers['road']
+        self.update_owner()
 
-        start = road.start.position
-        end = road.end.position
-        direction = end - start
-        normal = direction.orthonormal
-        color = colors[road.player.color]
+    def update_owner(self):
+        if self.sprite:
+            self.sprite.delete()
 
-        top_left = start + (self.width / 2) * normal
-        top_right = end + (self.width / 2) * normal
-        bottom_left = start - (self.width / 2) * normal
-        bottom_right = end - (self.width / 2) * normal
+        start, end = self.road.start.position, self.road.end.position
+        stroke = self.width
 
-        vertices = (
-                top_left.tuple + top_right.tuple +
-                bottom_right.tuple + bottom_left.tuple)
+        if self.road.is_blocked(): color = drawing.gray
+        else: color = drawing.colors[self.road.player.color]
 
-        # This line will be pretty ugly, because it isn't anti-aliased.  I 
-        # don't think there is an easy way to deal with this.
+        batch = self.gui.batch
+        group = self.gui.layers['road']
 
-        self.road_line = batch.add(
-                4, pyglet.gl.GL_QUADS, group,
-                ('v2f', vertices),
-                ('c3B', 4 * color))
+        self.sprite = drawing.draw_pretty_line(
+                start, end, stroke, color=color, batch=batch, group=group)
 
     def setup(self):
         pass
 
     def teardown(self):
-        self.road_line.delete()
+        self.sprite.delete()
 
 
 
