@@ -640,6 +640,11 @@ class Community (kxg.Token):
 
 
     @kxg.check_for_safety
+    def setup(self):
+        for extension in self.get_extensions():
+            extension.setup()
+
+    @kxg.check_for_safety
     def update(self, time):
         if not self.battle:
             if self.health < self.get_max_health():
@@ -770,7 +775,7 @@ class City (Community):
 
     @kxg.check_for_safety
     def setup(self):
-        pass
+        Community.setup(self)
 
     @kxg.check_for_safety
     def update(self, time):
@@ -1041,10 +1046,6 @@ class Road (kxg.Token):
     def setup(self):
         self.start.roads.append(self)
         self.end.roads.append(self)
-
-        for city in self:
-            for extension in city.get_extensions():
-                extension.update_revenue()
 
     @kxg.check_for_safety
     def update(self, time):

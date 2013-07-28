@@ -789,11 +789,14 @@ class CityExtension (CommunityExtension):
         self.update_engagement()
         self.update_revenue()
 
-    def update_level(self):
-        CommunityExtension.update_level(self)
+    def update(self, time):
         self.update_revenue()
 
     def update_revenue(self):
+        if self.gui.player is not self.token.player:
+            self.revenue_label.visible = False
+            return
+
         revenue = self.token.get_revenue()
         max_revenue = self.token.get_maximum_revenue()
         self.revenue_label.text = '%+d/%d' % (revenue, max_revenue)
