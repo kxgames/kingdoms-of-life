@@ -516,7 +516,7 @@ class Player (kxg.Token):
 
 
     def get_city_price(self):
-        return 30 + 10 * len(self.cities)
+        return 40 + 5 * len(self.cities)
 
     def get_army_price(self):
         return 50 + 100 * len(self.armies)
