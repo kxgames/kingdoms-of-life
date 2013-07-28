@@ -17,7 +17,7 @@
    inkscape:export-filename="cube.png"
    inkscape:export-xdpi="88.93"
    inkscape:export-ydpi="88.93"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="cube.svg">
   <defs
      id="defs4">
     <inkscape:perspective
@@ -36,13 +36,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="204.20613"
+     inkscape:cx="216.18244"
      inkscape:cy="447.08378"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1264"
-     inkscape:window-height="1194"
+     inkscape:window-width="944"
+     inkscape:window-height="894"
      inkscape:window-x="650"
      inkscape:window-y="0"
      inkscape:window-maximized="0" />
@@ -66,31 +66,97 @@
        inkscape:connector-curvature="0"
        id="path3019"
        style="fill:#afafde;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       d="m 118.69167,648.52381 45.56347,46.96504 75.87578,-22.15503 -60.07517,-36.81419 z" />
+       d="m 118.69167,648.52381 45.56347,46.96504 75.87578,-22.15503 -60.07517,-36.81419 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/blue-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
     <path
        inkscape:connector-curvature="0"
        id="path3021"
        style="fill:#353564;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       d="m 118.69167,579.46276 0,69.06105 61.36408,-12.00418 0,-62.28483 z" />
+       d="m 118.69167,579.46276 0,69.06105 61.36408,-12.00418 0,-62.28483 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/blue-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
     <path
        inkscape:connector-curvature="0"
        id="path3023"
        style="fill:#e9e9ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       d="m 180.05575,574.2348 60.07517,16.03301 0,83.06601 -60.07517,-36.81419 z" />
+       d="m 180.05575,574.2348 60.07517,16.03301 0,83.06601 -60.07517,-36.81419 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/blue-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
     <path
        inkscape:connector-curvature="0"
        id="path3025"
        style="fill:#4d4d9f;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       d="m 118.69167,579.46276 45.56347,20.45382 75.87578,-9.64877 -60.07517,-16.03301 z" />
+       d="m 118.69167,579.46276 45.56347,20.45382 75.87578,-9.64877 -60.07517,-16.03301 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/blue-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
     <path
        inkscape:connector-curvature="0"
        id="path3027"
        style="fill:#d7d7ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       d="m 164.25514,599.91658 0,95.57227 75.87578,-22.15503 0,-83.06601 z" />
+       d="m 164.25514,599.91658 0,95.57227 75.87578,-22.15503 0,-83.06601 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/blue-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
     <path
        inkscape:connector-curvature="0"
        id="path3029"
        style="fill:#8686bf;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       d="m 118.69167,579.46276 45.56347,20.45382 0,95.57227 -45.56347,-46.96504 z" />
+       d="m 118.69167,579.46276 45.56347,20.45382 0,95.57227 -45.56347,-46.96504 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/blue-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3019-4"
+       style="fill:#afafde;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 280.20686,613.47583 45.56347,46.96504 75.87578,-22.15503 -60.07517,-36.81419 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/red-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3021-1"
+       style="fill:#353564;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 280.20686,544.41478 0,69.06105 61.36408,-12.00418 0,-62.28483 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/red-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3023-7"
+       style="fill:#e9e9ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 341.57094,539.18682 60.07517,16.03301 0,83.06601 -60.07517,-36.81419 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/red-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3025-5"
+       style="fill:#a40000;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 280.20686,544.41478 45.56347,20.45382 75.87578,-9.64877 -60.07517,-16.03301 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/red-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3027-3"
+       style="fill:#ef2929;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 325.77033,564.8686 0,95.57227 75.87578,-22.15503 0,-83.06601 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/red-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3029-7"
+       style="fill:#cc0000;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 280.20686,544.41478 45.56347,20.45382 0,95.57227 -45.56347,-46.96504 z"
+       inkscape:export-filename="/home/kale/kxgames/seacow/armed-cat/demos/pyglet/red-cube.png"
+       inkscape:export-xdpi="88.93"
+       inkscape:export-ydpi="88.93" />
   </g>
 </svg>

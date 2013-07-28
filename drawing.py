@@ -128,9 +128,11 @@ yellow = Color(196, 160, 0)
 green = Color(78, 154, 6)
 blue = Color(32, 74, 135)
 purple = Color(92, 53, 102)
-black = Color(46, 52, 54)
+black = Color(0, 0, 0)
+dark = Color(46, 52, 54)
 gray = Color(85, 87, 83)
-white = Color(255, 250, 240)
+light = Color(255, 250, 240)
+white = Color(255, 255, 255)
 
 colors = {
         'red': red,
@@ -164,7 +166,7 @@ def draw_circle(
     vertices = vertices[0:2] + vertices + vertices[-2:]
 
     if batch is None:
-        return graphics.vertex_list(
+        return pyglet.graphics.vertex_list(
                 num_vertices + 3,
                 ('v2f/%' % usage, vertices),
                 ('c3B', color.tuple * (num_vertices + 3)))

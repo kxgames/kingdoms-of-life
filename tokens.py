@@ -836,7 +836,7 @@ class City (Community):
         return sum((road.get_supply_to(self) for road in self.roads), 1)
     
     def get_line_of_sight(self):
-        return self.border
+        return self.border + 30
 
     def can_move(self):
         return False

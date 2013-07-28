@@ -14,8 +14,6 @@ import numpy
 import pyglet
 import operator
 
-#from pyglet.gl import *
-
 
 class Gui (kxg.Actor):
 
@@ -37,11 +35,14 @@ class Gui (kxg.Actor):
                 'map 2':        pyglet.graphics.OrderedGroup(1),
                 'road':         pyglet.graphics.OrderedGroup(2),
                 'city':         pyglet.graphics.OrderedGroup(3),
-                'capitol':      pyglet.graphics.OrderedGroup(3),
-                'army':         pyglet.graphics.OrderedGroup(4),
-                'gui':          pyglet.graphics.OrderedGroup(5),
-                'messages 1':   pyglet.graphics.OrderedGroup(6),
-                'messages 2':   pyglet.graphics.OrderedGroup(7) }
+                'capitol':      pyglet.graphics.OrderedGroup(4),
+                'stencil':      StencilGroup(5),
+                'army':         WhereStencilIs(6),
+                #'fog of war':   WhereStencilIsnt(7),
+                'army':         pyglet.graphics.OrderedGroup(6),
+                'gui':          pyglet.graphics.OrderedGroup(8),
+                'messages 1':   pyglet.graphics.OrderedGroup(9),
+                'messages 2':   pyglet.graphics.OrderedGroup(10) }
 
         self.status_area = None
         self.frame_rate = pyglet.clock.ClockDisplay()
@@ -381,12 +382,14 @@ class BaseHandlers (object):
         self.gui = gui
 
     def on_draw(self):
+
         self.gui.window.clear()
         self.gui.update_background()
         self.gui.batch.draw()
 
         if arguments.fps:
             self.gui.frame_rate.draw()
+
 
 class PregameHandlers (BaseHandlers):
 
@@ -526,6 +529,114 @@ class PostgameHandlers (BaseHandlers):
             self.gui.play_again = False
             self.gui.finished = True
             return True
+
+
+
+class OrderedGroup (object):
+
+    # I copied this class out of the pyglet distribution, because it doesn't 
+    # look like I can import pyglet.graphics before initializing the window or 
+    # something.  But the group classes are pretty simple, so there's no reason 
+    # I can't use them.  This is probably a weakness in pyglet, but I'd still 
+    # like to tweak our code to be able to use pyglet.graphics.OrderedGroup.
+
+    def __init__(self, order, parent=None):
+        self.order = order
+        self.parent = parent
+
+    def __cmp__(self, other):
+        if isinstance(other, OrderedGroup):
+            return cmp(self.order, other.order)
+        return -1
+
+    def __eq__(self, other):
+        return (self.__class__ is other.__class__ and
+            self.order == other.order and
+            self.parent == other.parent)
+
+    def __hash__(self):
+        return hash((self.order, self.parent))
+
+    def __repr__(self):
+        return '%s(%d)' % (self.__class__.__name__, self.order)
+
+
+    def set_state(self):
+        pass
+
+    def unset_state(self):
+        pass
+
+    def set_state_recursive(self):
+        if self.parent:
+            self.parent.set_state_recursive()
+        self.set_state()
+
+    def unset_state_recursive(self):
+        self.unset_state()
+        if self.parent:
+            self.parent.unset_state_recursive()
+
+
+class StencilGroup (OrderedGroup):
+
+    def __init__(self, order, parent=None):
+        OrderedGroup.__init__(self, order, parent)
+
+    def set_state(self):
+        from pyglet.gl import GL_DEPTH_BUFFER_BIT
+        from pyglet.gl import GL_STENCIL_TEST
+        from pyglet.gl import GL_STENCIL_BUFFER_BIT
+        from pyglet.gl import GL_FALSE, GL_NEVER
+        from pyglet.gl import GL_REPLACE, GL_KEEP
+
+        pyglet.gl.glClear(GL_DEPTH_BUFFER_BIT)
+        pyglet.gl.glEnable(GL_STENCIL_TEST)
+        pyglet.gl.glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE)
+        pyglet.gl.glDepthMask(GL_FALSE)
+        pyglet.gl.glStencilFunc(GL_NEVER, 1, 0xFF)
+        pyglet.gl.glStencilOp(GL_REPLACE, GL_KEEP, GL_KEEP)
+
+        pyglet.gl.glStencilMask(0xFF)
+        pyglet.gl.glClear(GL_STENCIL_BUFFER_BIT)
+
+    def unset_state(self):
+        from pyglet.gl import GL_TRUE
+
+        pyglet.gl.glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE)
+        pyglet.gl.glDepthMask(GL_TRUE);
+
+
+class WhereStencilIs (OrderedGroup):
+
+    def __init__(self, order, parent=None):
+        OrderedGroup.__init__(self, order, parent)
+
+    def set_state(self):
+        from pyglet.gl import GL_EQUAL
+
+        pyglet.gl.glStencilMask(0x00)
+        pyglet.gl.glStencilFunc(GL_EQUAL, 1, 0xFF)
+
+    def unset_state(self):
+        from pyglet.gl import GL_STENCIL_TEST
+        pyglet.gl.glDisable(GL_STENCIL_TEST)
+
+
+class WhereStencilIsnt (OrderedGroup):
+
+    def __init__(self, order, parent=None):
+        OrderedGroup.__init__(self, order, parent)
+
+    def set_state(self):
+        from pyglet.gl import GL_EQUAL
+
+        pyglet.gl.glStencilMask(0x00);
+        pyglet.gl.glStencilFunc(GL_EQUAL, 0, 0xFF)
+
+    def unset_state(self):
+        from pyglet.gl import GL_STENCIL_TEST
+        pyglet.gl.glDisable(GL_STENCIL_TEST)
 
 
 
@@ -669,6 +780,18 @@ class CommunityExtension (kxg.TokenExtension):
         self.health_outline_sprite.position = position
         self.level_sprite.x = x + 40
         self.level_sprite.y = y + 50.25
+
+        if self.vision_sprite:
+            self.vision_sprite.delete()
+            self.vision_sprite = None
+
+        center = self.token.position
+        radius = self.token.get_line_of_sight()
+        batch = self.gui.batch
+        group = self.gui.layers['stencil']
+
+        self.vision_sprite = drawing.draw_circle(center, radius,
+                color=drawing.white, batch=batch, group=group)
 
     def update_health(self):
         frames = self.gui.health_bar
