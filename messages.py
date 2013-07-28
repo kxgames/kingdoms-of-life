@@ -69,7 +69,7 @@ class CreatePlayer (kxg.Greeting):
 
         if world.players:
             position.x = world.map.left + 100
-            position.y = 50 + random.random() * (world.map.height - 100)
+            position.y = 50 + random.random() * (world.map.height - 250)
         else:
             position.x = world.map.right - 100
             position.y = 50 + random.random() * (world.map.height - 100)
@@ -279,7 +279,7 @@ class UpgradeCommunity (kxg.Message):
             return False
 
         # Communities can't be upgraded beyond level 5.
-        if community.get_level() >= 5:
+        if community.get_level() >= community.get_maximum_level():
             title = "Cities" if community.is_city() else "Armies"
             self.error = "%s can't be upgraded beyond level 5." % title
             return False
