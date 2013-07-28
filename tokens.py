@@ -141,14 +141,16 @@ class World (kxg.World):
 
     @kxg.check_for_safety
     def end_battle(self, battle):
-        city = battle.zombie_city
+        city = battle.get_zombie_city()
+        winner = None
+        if battle.communities.keys():
+            winner = battle.communities.keys()[0]
+            winner.gain_wealth(battle.get_plunder())
+
         if city:
             city.set_health_to_min()
-
-            if battle.communities.keys():
-                winner = battle.communities.keys()[0]
-                if winner != city.player:
-                    self.capture_city(city, winner)
+            if winner != city.player:
+                self.capture_city(city, winner)
 
         battle.teardown()
         self.remove_token(battle)
@@ -507,6 +509,10 @@ class Player (kxg.Token):
     @kxg.check_for_safety
     def spend_wealth(self, price):
         self.wealth -= price
+
+    @kxg.check_for_safety
+    def gain_wealth(self, amount):
+        self.wealth += amount
 
 
     def get_city_price(self):
@@ -1149,6 +1155,7 @@ class Battle (kxg.Token):
         self.init_campaign = campaign  # Will be deleted in setup
         self.communities = {}
         self.zombie_city = None
+        self.plunder = 0
 
     def __str__(self):
         return "<Battle id=%s>" % self.get_id()
@@ -1232,6 +1239,8 @@ class Battle (kxg.Token):
         self.communities[player].append(community)
         community.enter_battle(self)
 
+        self.plunder += self.get_plunder_rate()
+
     @kxg.check_for_safety
     def remove_player(self, player):
         if player in self.communities:
@@ -1245,6 +1254,12 @@ class Battle (kxg.Token):
 
     def get_retreat_battle_price(self):
         return 50
+
+    def get_plunder_rate(self):
+        return 30
+
+    def get_plunder(self):
+        return self.plunder
 
     def get_zombie_city(self):
         return self.zombie_city
