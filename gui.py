@@ -771,8 +771,32 @@ class CityExtension (CommunityExtension):
         self.inner_circle = None
         self.outer_circle = None
 
+        batch = gui.batch
+        layer = gui.layers['city']
+        x, y = self.token.position.tuple
+        color = colors[token.player.color] + (255,)
+
+        self.revenue_label = pyglet.text.Label(
+                font_name='Deja Vu Sans', font_size=12,
+                x=(x - 6), y=(y - 35), color=color,
+                anchor_x='center', anchor_y='top',
+                batch=batch, group=layer)
+
+        background_color = colors['background'] + (255,)
+        self.revenue_label.set_style('background_color', background_color)
+
         self.update_capitol()
         self.update_engagement()
+        self.update_revenue()
+
+    def update_level(self):
+        CommunityExtension.update_level(self)
+        self.update_revenue()
+
+    def update_revenue(self):
+        revenue = self.token.get_revenue()
+        max_revenue = self.token.get_maximum_revenue()
+        self.revenue_label.text = '%+d/%d' % (revenue, max_revenue)
 
     def update_capitol(self):
         icon = 'capitol' if self.token.is_capitol() else 'city'

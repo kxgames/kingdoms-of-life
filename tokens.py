@@ -809,8 +809,11 @@ class City (Community):
         return 150 + 30 * self.level
 
     def get_revenue(self):
-        clear_roads = sum(1 for road in self.roads if not road.is_blocked())
-        return 3 + 10 * sqrt(clear_roads) + 5 * self.level * sqrt(clear_roads)
+        cap = self.get_maximum_revenue()
+        return min(cap, -5 + 10 * self.level)
+
+    def get_maximum_revenue(self):
+        return 5 + 10 * sum(road.get_supply_to(self) for road in self.roads)
 
     def get_healing(self):
         capitol = self.player.get_capitol()
@@ -1033,6 +1036,10 @@ class Road (kxg.Token):
         self.start.roads.append(self)
         self.end.roads.append(self)
 
+        for city in self:
+            for extension in city.get_extensions():
+                extension.update_revenue()
+
     @kxg.check_for_safety
     def update(self, time):
         pass
@@ -1057,6 +1064,9 @@ class Road (kxg.Token):
 
     def get_supply_to(self, city):
         assert self.has_terminus(city)
+
+        if self.is_blocked():
+            return 0
 
         if city is self.start:
             return self.end.level

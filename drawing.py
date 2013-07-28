@@ -83,6 +83,8 @@ class Color (object):
     def get_pyglet(self):
         return (self / 255).tuple
 
+    def get_rgba(self):
+        return 
 
     def set_red(self, red):
         self._red = min(max(red, 0), 255)
