@@ -528,6 +528,27 @@ class Player (kxg.Token):
     def can_afford_price(self, price):
         return price <= self.wealth
 
+    def inside_territory(self, community):
+        inside_border = False
+        inside_opponent = False
+
+        for other in self.world.yield_cities():
+            offset = community.position - other.position
+            distance = offset.magnitude
+
+            if other.player is self:
+                inside_border = (distance <= other.border) or inside_border
+            else:
+                inside_opponent = (distance <= other.border) or inside_opponent 
+
+        if inside_opponent:
+            return False
+
+        if not inside_border:
+            return False
+
+        return True
+
     def can_place_city(self, city):
         inside_buffer = False
         inside_border = False
@@ -558,19 +579,19 @@ class Player (kxg.Token):
 
         return True
 
-    def can_place_army(self, city):
+    def can_place_army(self, army):
         inside_border = False
         inside_opponent = False
 
         for other in self.world.yield_communities():
-            offset = city.position - other.position
+            offset = army.position - other.position
             distance = offset.magnitude
 
             if distance <= 2 * other.radius:
                 return False
 
         for other in self.world.yield_cities():
-            offset = city.position - other.position
+            offset = army.position - other.position
             distance = offset.magnitude
 
             if other.player is self:
@@ -739,6 +760,9 @@ class Community (kxg.Token):
         
         return radius >= distance.magnitude
 
+
+    def inside_friendly_territory(self):
+        return self.player.inside_territory(self)
 
     def is_in_battle(self):
         return self.battle is not None
@@ -975,7 +999,8 @@ class Army (Community):
             return rate
 
     def get_attack(self):
-        return 2 + 3 * self.level
+        level = self.level + 1 if self.inside_friendly_territory() else self.level
+        return 2 + 3 * level
 
     def get_battle_price(self):
         return 30
@@ -1256,7 +1281,7 @@ class Battle (kxg.Token):
         return 50
 
     def get_plunder_rate(self):
-        return 30
+        return 15
 
     def get_plunder(self):
         return self.plunder
