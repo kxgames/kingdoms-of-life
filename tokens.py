@@ -814,14 +814,14 @@ class City (Community):
 
 
     def get_upgrade_price(self):
-        return 83 * self.level - 33
+        return 40 * self.level
 
     def get_max_health(self):
         return 150 + 30 * self.level
 
     def get_revenue(self):
         cap = self.get_maximum_revenue()
-        return min(cap, -5 + 10 * self.level)
+        return min(cap, 5 + 10 * self.level)
 
     def get_maximum_revenue(self):
         return 5 + 10 * sum(road.get_supply_to(self) for road in self.roads)
@@ -849,6 +849,9 @@ class City (Community):
     def get_supply(self):
         return sum((road.get_supply_to(self) for road in self.roads), 1)
     
+    def get_maximum_level(self):
+        return 9
+
     def get_line_of_sight(self):
         return self.border
 
@@ -996,6 +999,9 @@ class Army (Community):
             city_supplies.append(city_supply)
 
         return max(city_supplies)
+
+    def get_maximum_level(self):
+        return 5
 
     def get_line_of_sight(self):
         return 100
