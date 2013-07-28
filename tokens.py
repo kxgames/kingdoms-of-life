@@ -845,7 +845,7 @@ class City (Community):
 
     def get_revenue(self):
         cap = self.get_maximum_revenue()
-        return min(cap, 5 + 10 * self.level)
+        return min(cap, 15 * self.level)
 
     def get_maximum_revenue(self):
         return 5 + 10 * sum(road.get_supply_to(self) for road in self.roads)
