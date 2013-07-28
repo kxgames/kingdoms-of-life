@@ -15,6 +15,124 @@ import pyglet
 import operator
 
 
+class OrderedGroup (object):
+
+    # I copied this class out of the pyglet distribution, because it doesn't 
+    # look like I can import pyglet.graphics before initializing the window or 
+    # something.  But the group classes are pretty simple, so there's no reason 
+    # I can't use them.  This is probably a weakness in pyglet, but I'd still 
+    # like to tweak our code to be able to use pyglet.graphics.OrderedGroup.
+
+    def __init__(self, order, parent=None):
+        self.order = order
+        self.parent = parent
+
+    def __cmp__(self, other):
+        if isinstance(other, OrderedGroup):
+            return cmp(self.order, other.order)
+        return -1
+
+    def __eq__(self, other):
+        return (self.__class__ is other.__class__ and
+            self.order == other.order and
+            self.parent == other.parent)
+
+    def __hash__(self):
+        return hash((self.order, self.parent))
+
+    def __repr__(self):
+        return '%s(%d)' % (self.__class__.__name__, self.order)
+
+
+    def set_state(self):
+        pass
+
+    def unset_state(self):
+        pass
+
+    def set_state_recursive(self):
+        if self.parent:
+            self.parent.set_state_recursive()
+        self.set_state()
+
+    def unset_state_recursive(self):
+        self.unset_state()
+        if self.parent:
+            self.parent.unset_state_recursive()
+
+
+class StencilGroup (OrderedGroup):
+
+    def __init__(self, order, parent=None):
+        OrderedGroup.__init__(self, order, parent)
+
+    def set_state(self):
+        from pyglet.gl import GL_STENCIL_TEST
+        from pyglet.gl import GL_DEPTH_BUFFER_BIT
+
+        pyglet.gl.glClear(GL_DEPTH_BUFFER_BIT)
+        pyglet.gl.glEnable(GL_STENCIL_TEST)
+
+    def unset_state(self):
+        from pyglet.gl import GL_STENCIL_TEST
+        pyglet.gl.glDisable(GL_STENCIL_TEST)
+
+
+class ClippingMask (OrderedGroup):
+
+    def __init__(self, order, parent=None):
+        OrderedGroup.__init__(self, order, parent)
+
+    def set_state(self):
+        from pyglet.gl import GL_FALSE, GL_NEVER
+        from pyglet.gl import GL_REPLACE, GL_KEEP
+        from pyglet.gl import GL_STENCIL_BUFFER_BIT
+
+        pyglet.gl.glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE)
+        pyglet.gl.glDepthMask(GL_FALSE)
+        pyglet.gl.glStencilFunc(GL_NEVER, 1, 0xFF)
+        pyglet.gl.glStencilOp(GL_REPLACE, GL_KEEP, GL_KEEP)
+
+        pyglet.gl.glStencilMask(0xFF)
+        pyglet.gl.glClear(GL_STENCIL_BUFFER_BIT)
+
+    def unset_state(self):
+        from pyglet.gl import GL_TRUE
+        pyglet.gl.glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE)
+        pyglet.gl.glDepthMask(GL_TRUE);
+
+
+class WhereMaskIs (OrderedGroup):
+
+    def __init__(self, order, parent=None):
+        OrderedGroup.__init__(self, order, parent)
+
+    def set_state(self):
+        from pyglet.gl import GL_EQUAL
+
+        pyglet.gl.glStencilMask(0x00)
+        pyglet.gl.glStencilFunc(GL_EQUAL, 1, 0xFF)
+
+    def unset_state(self):
+        pass
+
+
+class WhereMaskIsnt (OrderedGroup):
+
+    def __init__(self, order, parent=None):
+        OrderedGroup.__init__(self, order, parent)
+
+    def set_state(self):
+        from pyglet.gl import GL_EQUAL
+
+        pyglet.gl.glStencilMask(0x00);
+        pyglet.gl.glStencilFunc(GL_EQUAL, 0, 0xFF)
+
+    def unset_state(self):
+        pass
+
+
+
 class Gui (kxg.Actor):
 
     def __init__(self, window):
@@ -29,20 +147,21 @@ class Gui (kxg.Actor):
         self.drag_start_city = None
         self.play_again = False
         self.finished = False
+
+        stencil_group = StencilGroup(5)
         
         self.layers = {
-                'map 1':        pyglet.graphics.OrderedGroup(0),
-                'map 2':        pyglet.graphics.OrderedGroup(1),
-                'road':         pyglet.graphics.OrderedGroup(2),
-                'city':         pyglet.graphics.OrderedGroup(3),
-                'capitol':      pyglet.graphics.OrderedGroup(4),
-                'stencil':      StencilGroup(5),
-                'army':         WhereStencilIs(6),
-                #'fog of war':   WhereStencilIsnt(7),
-                'army':         pyglet.graphics.OrderedGroup(6),
-                'gui':          pyglet.graphics.OrderedGroup(8),
-                'messages 1':   pyglet.graphics.OrderedGroup(9),
-                'messages 2':   pyglet.graphics.OrderedGroup(10) }
+                'map 1':        OrderedGroup(0),
+                'map 2':        OrderedGroup(1),
+                'road':         OrderedGroup(2),
+                'city':         OrderedGroup(3),
+                'capitol':      OrderedGroup(4),
+                'mask':         ClippingMask(6, stencil_group),
+                'army':         WhereMaskIs(7, stencil_group),
+                'fog of war':   WhereMaskIsnt(8, stencil_group),
+                'gui':          OrderedGroup(9),
+                'messages 1':   OrderedGroup(10),
+                'messages 2':   OrderedGroup(11) }
 
         self.status_area = None
         self.frame_rate = pyglet.clock.ClockDisplay()
@@ -125,6 +244,10 @@ class Gui (kxg.Actor):
                 x=(width / 2), y=5, color=(0, 0, 0, 255),
                 anchor_x='center', anchor_y='bottom',
                 batch=self.batch, group=self.layers['gui'])
+
+        self.fog_of_war_sprite = drawing.draw_rectangle(
+                self.world.map, color=drawing.black.tuple + (128,),
+                batch=self.batch, group=self.layers['fog of war'])
 
         self.status_area = StatusArea(self)
 
@@ -295,7 +418,9 @@ class Gui (kxg.Actor):
         pass
 
     def create_player(self, player, is_mine):
-        if is_mine: self.player = player
+        if is_mine:
+            self.player = player
+            player.get_extension().setup_for_real()
 
     def create_city(self, city, is_mine):
         # This is a hack for the first city.  The first city gets created 
@@ -532,114 +657,6 @@ class PostgameHandlers (BaseHandlers):
 
 
 
-class OrderedGroup (object):
-
-    # I copied this class out of the pyglet distribution, because it doesn't 
-    # look like I can import pyglet.graphics before initializing the window or 
-    # something.  But the group classes are pretty simple, so there's no reason 
-    # I can't use them.  This is probably a weakness in pyglet, but I'd still 
-    # like to tweak our code to be able to use pyglet.graphics.OrderedGroup.
-
-    def __init__(self, order, parent=None):
-        self.order = order
-        self.parent = parent
-
-    def __cmp__(self, other):
-        if isinstance(other, OrderedGroup):
-            return cmp(self.order, other.order)
-        return -1
-
-    def __eq__(self, other):
-        return (self.__class__ is other.__class__ and
-            self.order == other.order and
-            self.parent == other.parent)
-
-    def __hash__(self):
-        return hash((self.order, self.parent))
-
-    def __repr__(self):
-        return '%s(%d)' % (self.__class__.__name__, self.order)
-
-
-    def set_state(self):
-        pass
-
-    def unset_state(self):
-        pass
-
-    def set_state_recursive(self):
-        if self.parent:
-            self.parent.set_state_recursive()
-        self.set_state()
-
-    def unset_state_recursive(self):
-        self.unset_state()
-        if self.parent:
-            self.parent.unset_state_recursive()
-
-
-class StencilGroup (OrderedGroup):
-
-    def __init__(self, order, parent=None):
-        OrderedGroup.__init__(self, order, parent)
-
-    def set_state(self):
-        from pyglet.gl import GL_DEPTH_BUFFER_BIT
-        from pyglet.gl import GL_STENCIL_TEST
-        from pyglet.gl import GL_STENCIL_BUFFER_BIT
-        from pyglet.gl import GL_FALSE, GL_NEVER
-        from pyglet.gl import GL_REPLACE, GL_KEEP
-
-        pyglet.gl.glClear(GL_DEPTH_BUFFER_BIT)
-        pyglet.gl.glEnable(GL_STENCIL_TEST)
-        pyglet.gl.glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE)
-        pyglet.gl.glDepthMask(GL_FALSE)
-        pyglet.gl.glStencilFunc(GL_NEVER, 1, 0xFF)
-        pyglet.gl.glStencilOp(GL_REPLACE, GL_KEEP, GL_KEEP)
-
-        pyglet.gl.glStencilMask(0xFF)
-        pyglet.gl.glClear(GL_STENCIL_BUFFER_BIT)
-
-    def unset_state(self):
-        from pyglet.gl import GL_TRUE
-
-        pyglet.gl.glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE)
-        pyglet.gl.glDepthMask(GL_TRUE);
-
-
-class WhereStencilIs (OrderedGroup):
-
-    def __init__(self, order, parent=None):
-        OrderedGroup.__init__(self, order, parent)
-
-    def set_state(self):
-        from pyglet.gl import GL_EQUAL
-
-        pyglet.gl.glStencilMask(0x00)
-        pyglet.gl.glStencilFunc(GL_EQUAL, 1, 0xFF)
-
-    def unset_state(self):
-        from pyglet.gl import GL_STENCIL_TEST
-        pyglet.gl.glDisable(GL_STENCIL_TEST)
-
-
-class WhereStencilIsnt (OrderedGroup):
-
-    def __init__(self, order, parent=None):
-        OrderedGroup.__init__(self, order, parent)
-
-    def set_state(self):
-        from pyglet.gl import GL_EQUAL
-
-        pyglet.gl.glStencilMask(0x00);
-        pyglet.gl.glStencilFunc(GL_EQUAL, 0, 0xFF)
-
-    def unset_state(self):
-        from pyglet.gl import GL_STENCIL_TEST
-        pyglet.gl.glDisable(GL_STENCIL_TEST)
-
-
-
 class PlayerExtension (kxg.TokenExtension):
 
     def __init__(self, gui, player):
@@ -651,50 +668,42 @@ class PlayerExtension (kxg.TokenExtension):
     def setup(self):
         pass
 
+    def setup_for_real(self):
+        if self.player is not self.gui.player:
+            return
+
+        window = self.gui.window
+        batch = self.gui.batch
+        layer = self.gui.layers['gui']
+
+        self.wealth_label = pyglet.text.Label(
+                font_name='Deja Vu Sans', font_size=12,
+                color=(0, 0, 0, 255), bold=True,
+                x=5, y=window.height - 5,
+                anchor_x='left', anchor_y='top',
+                batch=batch, group=layer)
+
+        self.cost_label = pyglet.text.Label(
+                font_name='Deja Vu Sans', font_size=12,
+                color=(0, 0, 0, 255),
+                x=5, y=window.height - 24,
+                anchor_x='left', anchor_y='top',
+                multiline=True, width=200,
+                batch=batch, group=layer)
+
     def update_wealth(self):
-        player = self.player
-        wealth = player.wealth
-        revenue = player.revenue
+        wealth = self.player.wealth
+        revenue = self.player.revenue
 
-        if not self.wealth_label:
-            gui = self.gui
+        if self.wealth_label:
+            self.wealth_label.text = '%d/%+d' % (wealth, revenue)
 
-            if player is gui.player:
-                window = gui.window
-                batch = gui.batch
-                layer = gui.layers['gui']
-
-                self.wealth_label = pyglet.text.Label(
-                        font_name='Deja Vu Sans', font_size=12,
-                        color=(0, 0, 0, 255), bold=True,
-                        x=5, y=window.height - 5,
-                        anchor_x='left', anchor_y='top',
-                        batch=batch, group=layer)
-            else:
-                return
-
-        self.wealth_label.text = '%d/%+d' % (wealth, revenue)
 
     def update_costs(self):
         player = self.player
 
         if not self.cost_label:
-            gui = self.gui
-
-            if player is gui.player:
-                window = gui.window
-                batch = gui.batch
-                layer = gui.layers['gui']
-
-                self.cost_label = pyglet.text.Label(
-                        font_name='Deja Vu Sans', font_size=12,
-                        color=(0, 0, 0, 255),
-                        x=5, y=window.height - 24,
-                        anchor_x='left', anchor_y='top',
-                        multiline=True, width=200,
-                        batch=batch, group=layer)
-            else:
-                return
+            return
 
         message  = 'Build City: %d\n' % player.get_city_price()
         message += 'Build Army: %d\n' % player.get_army_price()
@@ -781,17 +790,7 @@ class CommunityExtension (kxg.TokenExtension):
         self.level_sprite.x = x + 40
         self.level_sprite.y = y + 50.25
 
-        if self.vision_sprite:
-            self.vision_sprite.delete()
-            self.vision_sprite = None
-
-        center = self.token.position
-        radius = self.token.get_line_of_sight()
-        batch = self.gui.batch
-        group = self.gui.layers['stencil']
-
-        self.vision_sprite = drawing.draw_circle(center, radius,
-                color=drawing.white, batch=batch, group=group)
+        self.update_vision()
 
     def update_health(self):
         frames = self.gui.health_bar
@@ -817,6 +816,22 @@ class CommunityExtension (kxg.TokenExtension):
             self.engagement_sprite.image = self.gui.normal_shapes[color]
             self.selection_sprite.image = self.gui.normal_outlines[color]
 
+        self.update_vision()
+
+    def update_vision(self):
+        if self.vision_sprite:
+            self.vision_sprite.delete()
+            self.vision_sprite = None
+
+        if self.gui.player is self.token.player:
+            center = self.token.position
+            radius = self.token.get_line_of_sight()
+            batch = self.gui.batch
+            group = self.gui.layers['mask']
+
+            self.vision_sprite = drawing.draw_circle(center, radius,
+                    color=drawing.white, batch=batch, group=group)
+
     def teardown(self):
         self.active = False
         self.type_sprite.delete()
@@ -825,6 +840,9 @@ class CommunityExtension (kxg.TokenExtension):
         self.health_bar_sprite.delete()
         self.health_outline_sprite.delete()
         self.level_sprite.delete()
+
+        if self.vision_sprite:
+            self.vision_sprite.delete()
 
 
     def select(self):

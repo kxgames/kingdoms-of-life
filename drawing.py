@@ -9,13 +9,6 @@ from kxg import geometry
 from numpy import *
 import numpy as np
 
-inf = float('inf')
-set_printoptions(threshold=inf, linewidth=inf)
-# This module will contain code to:
-#
-# 1. Easily draw fucking circles.
-# 2. Draw antialiased lines (slowly).
-
 class Color (object):
 
     @staticmethod
@@ -175,6 +168,26 @@ def draw_circle(
                 num_vertices + 3, pyglet.gl.GL_TRIANGLE_STRIP, group,
                 ('v2f', vertices),
                 ('c3B', color.tuple * (num_vertices + 3)))
+
+def draw_rectangle(
+        rectangle, color=(255, 255, 255, 255),
+        batch=None, group=None, usage='static'):
+    
+    vertices = (
+            rectangle.top_left.tuple + rectangle.top_left.tuple +
+            rectangle.bottom_left.tuple + rectangle.top_right.tuple +
+            rectangle.bottom_right.tuple + rectangle.bottom_right.tuple)
+
+    if batch is None:
+        return pyglet.graphics.vertex_list(
+                6,
+                ('v2f/%' % usage, vertices),
+                ('c4B', color * 6))
+    else:
+        return batch.add(
+                6, pyglet.gl.GL_TRIANGLE_STRIP, group,
+                ('v2f', vertices),
+                ('c4B', color * 6))
 
 def draw_pretty_line(
         start, end, stroke, color=green,
