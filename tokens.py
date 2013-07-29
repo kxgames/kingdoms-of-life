@@ -7,12 +7,13 @@ import gui, messages, arguments
 
 class World (kxg.World):
 
+    map = kxg.geometry.Rectangle.from_size(762, 762)
+
     def __init__ (self):
         kxg.World.__init__(self)
 
         self.players = []
         self.losers = []; self.winner = None
-        self.map = kxg.geometry.Rectangle.from_size(762, 762)
 
         self.game_started = False
         self.game_ended = False
@@ -877,7 +878,7 @@ class City (Community):
         return 9
 
     def get_line_of_sight(self):
-        return self.border
+        return self.border + 30
 
     def can_move(self):
         return False
@@ -1029,7 +1030,7 @@ class Army (Community):
         return 5
 
     def get_line_of_sight(self):
-        return 100
+        return 150
 
     def get_campaign(self):
         return self.my_campaign

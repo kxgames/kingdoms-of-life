@@ -9,63 +9,74 @@ from kxg import geometry
 from numpy import *
 import numpy as np
 
-inf = float('inf')
-set_printoptions(threshold=inf, linewidth=inf)
-# This module will contain code to:
-#
-# 1. Easily draw fucking circles.
-# 2. Draw antialiased lines (slowly).
-
 class Color (object):
 
     @staticmethod
     def from_hex(hex):
-        red, green, blue = int(hex[1:3]), int(hex[3:5]), int(hex[5:7])
-        return Color.__init__(red, green, blue)
+        red, green, blue, alpha =   \
+                int(hex[1:3]), int(hex[3:5]), int(hex[5:7]), int(hex[7:9])
+        return Color.__init__(red, green, blue, alpha)
 
     @staticmethod
-    def from_rgb(red, green, blue):
-        return Color.__init__(red, green, blue)
+    def from_int(red, green, blue, alpha=255):
+        return Color.__init__(red, green, blue, alpha)
 
     @staticmethod
-    def from_rgb_tuple(rgb):
+    def from_int_tuple(rgba):
         return Color.__init__(*rgb)
 
     @staticmethod
-    def from_floats(red, green, blue):
+    def from_float(red, green, blue, alpha=1.0):
         return Color.__init__(255 * red, 255 * green, 255 * blue)
 
     @staticmethod
-    def from_float_tuple(self, rgb):
-        return Color.from_floats(*rgb)
+    def from_float_tuple(self, rgba):
+        return Color.from_floats(*rgba)
 
 
-    def __init__(self, red, green, blue):
+    def __init__(self, red, green, blue, alpha=255):
         self.r = red
         self.g = green
         self.b = blue
+        self.a = alpha
 
     def __iter__(self):
         return iter(self.tuple)
 
     def __str__(self):
-        return '#%02x%02x%02x' % self.tuple
+        return '#%02x%02x%02x%02x' % self.tuple
 
     def __repr__(self):
         return self.__str__()
 
 
     def __add__(self, other):
-        return Color(self.r + other.r, self.g + other.g, self.b + other.b)
+        return Color(
+                self.r + other.r,
+                self.g + other.g,
+                self.b + other.b,
+                self.a + other.a)
 
     def __sub__(self, other):
-        return Color(self.r - other.r, self.g - other.g, self.b - other.b)
+        return Color(
+                self.r - other.r,
+                self.g - other.g,
+                self.b - other.b,
+                self.a - other.a)
 
     def __mul__(self, scalar):
-        return Color(scalar * self.r, scalar * self.g, scalar * self.b)
+        return Color(
+                scalar * self.r,
+                scalar * self.g,
+                scalar * self.b,
+                scalar * self.a)
 
     def __div__(self, scalar):
-        return Color(self.r / scalar, self.g / scalar, self.b / scalar)
+        return Color(
+                self.r / scalar,
+                self.g / scalar,
+                self.b / scalar,
+                self.a / scalar)
 
 
     def get_red(self):
@@ -77,26 +88,38 @@ class Color (object):
     def get_blue(self):
         return self._blue
 
+    def get_alpha(self):
+        return self._alpha
+
     def get_tuple(self):
-        return self.r, self.g, self.b
+        return self.r, self.g, self.b, self.a
     
-    def get_pyglet(self):
+    def get_float(self):
         return (self / 255).tuple
 
     def get_rgba(self):
         return 
 
     def set_red(self, red):
-        self._red = min(max(red, 0), 255)
+        self._red = int(min(max(red, 0), 255))
 
     def set_green(self, green):
-        self._green = min(max(green, 0), 255)
+        self._green = int(min(max(green, 0), 255))
 
     def set_blue(self, blue):
-        self._blue = min(max(blue, 0), 255)
+        self._blue = int(min(max(blue, 0), 255))
 
-    def set_tuple(self, red, green, blue):
-        self.r, self.g, self.b = red, green, blue
+    def set_alpha(self, alpha):
+        self._alpha = int(min(max(alpha, 0), 255))
+
+    def set_tuple(self, red, green, blue, alpha):
+        self.r, self.g, self.b, self.a = red, green, blue, alpha
+
+    def set_float(self, red, green, blue, alpha):
+        self.r = int(255 * red)
+        self.g = int(255 * green)
+        self.b = int(255 * blue)
+        self.a = int(255 * alpha)
 
 
     def lighten(self, extent):
@@ -105,21 +128,20 @@ class Color (object):
     def darken(self, extent):
         self.interpolate(black, extent)
 
+    def disappear(self, extent):
+        self.alpha = extent * self.alpha
+
     def interpolate(self, target, extent):
         self += extent * (target - self)
 
 
     # Properties (fold)
-    r = property(get_red, set_red)
-    g = property(get_green, set_green)
-    b = property(get_blue, set_blue)
-
-    red = property(get_red, set_red)
-    green = property(get_green, set_green)
-    blue = property(get_blue, set_blue)
-
-    tuple = property(get_tuple)
-    pyglet = property(get_pyglet)
+    red = r = property(get_red, set_red)
+    green = g = property(get_green, set_green)
+    blue = b = property(get_blue, set_blue)
+    alpha = a = property(get_alpha, set_alpha)
+    tuple = property(get_tuple, set_tuple)
+    float = property(get_float, set_float)
 
     
 # Colors (fold)
@@ -130,9 +152,11 @@ yellow = Color(196, 160, 0)
 green = Color(78, 154, 6)
 blue = Color(32, 74, 135)
 purple = Color(92, 53, 102)
-black = Color(46, 52, 54)
+black = Color(0, 0, 0)
+dark = Color(46, 52, 54)
 gray = Color(85, 87, 83)
-white = Color(255, 250, 240)
+light = Color(255, 250, 240)
+white = Color(255, 255, 255)
 
 colors = {
         'red': red,
@@ -166,15 +190,35 @@ def draw_circle(
     vertices = vertices[0:2] + vertices + vertices[-2:]
 
     if batch is None:
-        return graphics.vertex_list(
+        return pyglet.graphics.vertex_list(
                 num_vertices + 3,
                 ('v2f/%' % usage, vertices),
-                ('c3B', color.tuple * (num_vertices + 3)))
+                ('c4B', color.tuple * (num_vertices + 3)))
     else:
         return batch.add(
                 num_vertices + 3, pyglet.gl.GL_TRIANGLE_STRIP, group,
                 ('v2f', vertices),
-                ('c3B', color.tuple * (num_vertices + 3)))
+                ('c4B', color.tuple * (num_vertices + 3)))
+
+def draw_rectangle(
+        rectangle, color=green,
+        batch=None, group=None, usage='static'):
+    
+    vertices = (
+            rectangle.top_left.tuple + rectangle.top_left.tuple +
+            rectangle.bottom_left.tuple + rectangle.top_right.tuple +
+            rectangle.bottom_right.tuple + rectangle.bottom_right.tuple)
+
+    if batch is None:
+        return pyglet.graphics.vertex_list(
+                6,
+                ('v2f/%' % usage, vertices),
+                ('c4B', color.tuple * 6))
+    else:
+        return batch.add(
+                6, pyglet.gl.GL_TRIANGLE_STRIP, group,
+                ('v2f', vertices),
+                ('c4B', color.tuple * 6))
 
 def draw_pretty_line(
         start, end, stroke, color=green,

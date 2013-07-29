@@ -1,6 +1,13 @@
 import kxg
 import tokens
 
+# Messages that do more than one thing might need to interleave calls to 
+# execute() and notify().  Consider the CreatePlayer message, which creates a 
+# player and a city.  I really need to call notify after the player is created, 
+# so that the GUI can be properly set up before the city is created.  As it is, 
+# the city is instantiated and setup before the gui knows about the player, 
+# which makes it difficult to smartly initialize the city.
+
 class WelcomeClient (object):
 
     def __init__(self, name):
