@@ -5,6 +5,7 @@
 from __future__ import division
 
 import kxg
+import tokens
 import messages
 import drawing
 import arguments
@@ -213,7 +214,12 @@ class Gui (kxg.Actor):
         self.health_outline = self.load_icon('images/empty-health.png')
 
     def setup_pregame(self):
-        width, height = self.window.get_size()
+        width, height = tokens.World.map.size
+        handlers = PregameHandlers(self)
+
+        self.window.set_size(width, height)
+        self.window.set_visible(True)
+        self.window.push_handlers(handlers)
 
         self.batch = pyglet.graphics.Batch()
         self.stencil_batch = pyglet.graphics.Batch()
@@ -226,14 +232,15 @@ class Gui (kxg.Actor):
                 anchor_x='center', anchor_y='center',
                 batch=self.batch, group=group)
 
-        handlers = PregameHandlers(self)
-        self.window.push_handlers(handlers)
-
     def setup_game(self):
         self.teardown_pregame()
 
         width, height = self.world.map.size
         handlers = GameHandlers(self)
+
+        batch = self.batch
+        gui = self.layers['gui']
+        fog = self.layers['fog of war']
 
         self.window.set_size(width, height)
         self.window.set_visible(True)
@@ -245,9 +252,10 @@ class Gui (kxg.Actor):
                 anchor_x='center', anchor_y='bottom',
                 batch=self.batch, group=self.layers['gui'])
 
-        self.fog_of_war_sprite = drawing.draw_rectangle(
-                self.world.map, color=drawing.black.tuple + (128,),
-                batch=self.batch, group=self.layers['fog of war'])
+        # This image must be at least as big as the map.
+        image = pyglet.image.load('images/fog-of-war.png')
+        self.fog_of_war_sprite = pyglet.sprite.Sprite(
+                image, batch=batch, group=fog)
 
         self.status_area = StatusArea(self)
 
@@ -258,6 +266,9 @@ class Gui (kxg.Actor):
 
         if self.selection:
             self.selection.get_extension().unselect()
+
+        # Turn off fog of war.
+        self.fog_of_war_sprite.delete()
 
         # Draw a transparent back rectangle across the screen.
         batch = self.batch
@@ -491,6 +502,8 @@ colors = {            # (fold)
         'background':   (255, 250, 240),
 }
 
+half_white = 255, 255, 255, 128
+
 def fade_color(source, extent=0.80):
     r = interpolate_color(source[0], 255, extent) / 255
     g = interpolate_color(source[1], 255, extent) / 255
@@ -691,13 +704,15 @@ class PlayerExtension (kxg.TokenExtension):
                 multiline=True, width=200,
                 batch=batch, group=layer)
 
+        self.wealth_label.set_style('background_color', half_white)
+        self.cost_label.set_style('background_color', half_white)
+
     def update_wealth(self):
         wealth = self.player.wealth
         revenue = self.player.revenue
 
         if self.wealth_label:
             self.wealth_label.text = '%d/%+d' % (wealth, revenue)
-
 
     def update_costs(self):
         player = self.player
@@ -1034,6 +1049,8 @@ class StatusArea (object):
                 x=width//2, y=5,
                 anchor_x='center', anchor_y='bottom',
                 batch=self.gui.batch, group=self.gui.layers['messages 2'])
+
+        self.widget.set_style('background_color', half_white)
 
     def change_mode(self):
         if self.gui.mode == 'develop':
