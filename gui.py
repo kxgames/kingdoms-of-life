@@ -465,6 +465,9 @@ class Gui (kxg.Actor):
     def retreat_battle(self, army, is_mine):
         pass
 
+    def reinforce_community(self, army, is_mine):
+        pass
+
     def zombify_city(self, battle, city, is_mine):
         pass
 
@@ -618,7 +621,7 @@ class GameHandlers (BaseHandlers):
                     target = None
 
                 if self.gui.selection and self.gui.selection.can_move():
-                    if target:
+                    if target and self.gui.player.can_see(target):
                         if self.gui.selection.is_chasing():
                             campaign = self.gui.selection.get_campaign()
                             if campaign.get_community() is target:
@@ -644,7 +647,10 @@ class GameHandlers (BaseHandlers):
             if symbol == pyglet.window.key.D:
                 self.gui.update_mode('develop')
             if symbol == pyglet.window.key.SPACE and self.gui.selection:
-                message = messages.UpgradeCommunity(self.gui.selection)
+                if self.gui.selection.is_in_battle():
+                    message = messages.ReinforceCommunity(self.gui.selection)
+                else:
+                    message = messages.UpgradeCommunity(self.gui.selection)
                 self.gui.send_message(message)
             if symbol == pyglet.window.key.BACKSPACE and self.gui.selection:
                 message = messages.RetreatBattle(self.gui.selection)
@@ -730,7 +736,7 @@ class PlayerExtension (kxg.TokenExtension):
                 message += 'Upgrade City: %d\n' % selection.get_upgrade_price()
             elif selection.is_army():
                 message += 'Upgrade Army: %d\n' % selection.get_upgrade_price()
-                message += 'Attack: %d\n' % selection.get_battle_price()
+                message += 'Reinforce: %d\n' % selection.get_reinforce_price()
                 message += 'Retreat: %d\n' % selection.get_retreat_price()
 
         self.cost_label.text = message

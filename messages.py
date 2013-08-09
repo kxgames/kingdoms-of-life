@@ -677,6 +677,60 @@ class RetreatBattle (kxg.Message):
         actor.retreat_battle(self.army, is_mine)
 
 
+class ReinforceCommunity (kxg.Message):
+
+    def __init__(self, community):
+        self.community = community
+
+    def __str__(self):
+        return '<ReinforceArmy>'
+
+    def check(self, world, sender):
+        community = self.community
+        player = community.player
+        price = community.get_reinforce_price()
+        name = 'army' if community.is_army() else 'city'
+        
+        # Make sure the right player is sending this message.
+        if sender is not player:
+            self.error = "Reinforcements requested by wrong player."
+            return False
+
+        # Make sure the community still exists.
+        if community.is_destroyed():
+            self.error = "%s was already removed from the world." % name.title()
+            return False
+
+        # Make sure the army is in a battle or campaign.
+        if not community.is_in_battle():
+            self.error = "%s must be in a battle to be reinforced." % name.title()
+            return False
+
+        # Make sure the battle still exists.
+        if community.is_in_battle() and community.battle.is_destroyed():
+            self.error = "Battle was already removed from the world."
+            return False
+
+        # Make sure the player can afford to retreat.
+        if not player.can_afford_price(price):
+            self.error = "Can't afford $%d to reinforce this %s." % (price, name)
+            return False
+
+        return True
+
+    def reject(self, actor):
+        actor.show_error(self)
+
+    def setup(self, world, sender, id):
+        pass
+
+    def execute(self, world):
+        world.reinforce_community(self.community)
+
+    def notify(self, actor, is_mine):
+        actor.reinforce_community(self.community, is_mine)
+
+
 class ZombifyCity (kxg.Message):
     
     def __init__(self, city):

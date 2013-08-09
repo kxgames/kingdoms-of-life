@@ -104,7 +104,6 @@ class World (kxg.World):
 
     @kxg.check_for_safety
     def start_battle(self, campaign, battle):
-
         if campaign.community.is_army():
             cancelled_campaign = campaign.community.my_campaign
             if cancelled_campaign:
@@ -135,6 +134,14 @@ class World (kxg.World):
             campaign = army.my_campaign
             campaign.teardown()
             self.remove_token(campaign)
+
+    @kxg.check_for_safety
+    def reinforce_community(self, community):
+        bonus = community.get_reinforce_bonus()
+        price = community.get_reinforce_price()
+
+        community.player.spend_wealth(price)
+        community.heal(bonus)
 
     @kxg.check_for_safety
     def zombify_city(self, battle, city):
@@ -372,6 +379,9 @@ class Referee (kxg.Referee):
     def retreat_battle(self, army, is_mine):
         assert not is_mine
 
+    def reinforce_community(self, army, is_mine):
+        assert not is_mine
+
     def zombify_city(self, battle, city, is_mine):
         pass
 
@@ -550,6 +560,22 @@ class Player (kxg.Token):
 
         return True
 
+    def can_see(self, target):
+        # Cities are always visible through the fog-of-war.
+        if target.is_city():
+            return True
+
+        # Armies are only visible if they are within some radius of a city or 
+        # army controlled by the player.
+        for community in self.cities + self.armies:
+            distance = community.position.get_distance(target.position) - 40
+            line_of_sight = community.get_line_of_sight() 
+
+            if distance <= line_of_sight:
+                return True
+
+        return False
+
     def can_place_city(self, city):
         inside_buffer = False
         inside_border = False
@@ -723,6 +749,9 @@ class Community (kxg.Token):
             extension.update_engagement()
 
 
+    def get_position(self):
+        return self.position
+
     def get_level(self):
         return self.level
 
@@ -744,6 +773,15 @@ class Community (kxg.Token):
     def get_revenue(self):
         # Any community can generate revenue, but only cities can right now.
         return 0
+
+    def get_reinforce_price(self):
+        return 20
+
+    def get_reinforce_bonus(self):
+        return 5
+
+    def get_line_of_sight(self):
+        raise NotImplementedError
 
     def can_move(self):
         raise NotImplementedError
@@ -826,6 +864,9 @@ class City (Community):
             self.campaigns.remove(campaign)
         except ValueError:
             pass
+
+        for extension in self.get_extensions():
+            extension.update_engagement()
 
     @kxg.check_for_safety
     def set_health_to_min(self):
@@ -970,6 +1011,9 @@ class Army (Community):
             if self.my_campaign is campaign:
                 self.my_campaign = None
                 self.target = None
+
+        for extension in self.get_extensions():
+            extension.update_engagement()
         
     @kxg.check_for_safety
     def enter_battle(self, battle):
@@ -1012,10 +1056,11 @@ class Army (Community):
         return 2 + 3 * level
 
     def get_battle_price(self):
-        return 30
+        return 0
 
     def get_retreat_price(self):
-        return 70
+        # Campaigns can be retreated for free.
+        return 70 if self.is_in_battle() else 0
 
     def get_supply(self):
         city_supplies = []
