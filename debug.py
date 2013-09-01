@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import kxg
-import armedcat
+import seacow
 import arguments
 
 arguments.parser.add_argument('--port', '-p', default=53351, type=int)
@@ -10,8 +10,8 @@ host, port = 'localhost', arguments.port
 
 debugger = kxg.MultiplayerDebugger()
 
-debugger.loop("Server", armedcat.ServerLoop(host, port))
-debugger.loop("Alice", armedcat.ClientLoop("Alice", host, port))
-debugger.loop("Bob", armedcat.ClientLoop("Bob", host, port))
+debugger.loop("Server", seacow.ServerLoop(host, port))
+debugger.loop("Alice", seacow.ClientLoop("Alice", host, port))
+debugger.loop("Bob", seacow.ClientLoop("Bob", host, port))
 
 debugger.run()

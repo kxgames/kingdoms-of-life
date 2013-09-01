@@ -55,7 +55,7 @@ class ClientConnectionStage (kxg.Stage):
 
     def setup(self):
         arguments = self.host, self.port, self.name
-        print "ArmedCat client running: %s:%d (%s)" % arguments
+        print "Seacow client running: %s:%d (%s)" % arguments
 
         window = self.get_master().get_window()
         self.gui = gui.Gui(window)
@@ -108,7 +108,7 @@ class ServerConnectionStage (kxg.Stage):
                 host, port, 2, self.clients_connected)
 
     def setup(self):
-        print "ArmedCat server running: %s:%d" % (self.host, self.port)
+        print "Seacow server running: %s:%d" % (self.host, self.port)
         self.server.open()
 
     def update(self, time):
