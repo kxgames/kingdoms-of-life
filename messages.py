@@ -8,6 +8,12 @@ import tokens
 # the city is instantiated and setup before the gui knows about the player, 
 # which makes it difficult to smartly initialize the city.
 
+class Message (kxg.Message):
+
+    def reject(self, actor):
+        actor.show_error(self)
+
+
 class WelcomeClient (object):
 
     def __init__(self, name):
@@ -17,22 +23,20 @@ class WelcomeClient (object):
     def __str__(self):
         return '<WelcomeClient>'
 
-class StartGame (kxg.Message):
+
+class StartGame (Message):
 
     def __str__(self):
         return '<StartGame>'
 
     def check(self, world, sender):
-        return not world.has_game_started()
+        return self.was_sent_by_referee() and not world.has_game_started()
 
     def execute(self, world):
         world.start_game()
 
-    def notify(self, actor, sent_from_here):
-        actor.start_game()
 
-
-class GameOver (kxg.Message):
+class GameOver (Message):
 
     def __init__(self, winner):
         self.winner = winner
@@ -40,18 +44,15 @@ class GameOver (kxg.Message):
     def __str__(self):
         return '<GameOver>'
 
-    def check(self, world, sender):
-        return sender == 'referee'
+    def check(self, world, sender_id):
+        return self.was_sent_by_referee()
 
     def execute(self, world):
         world.game_over(self.winner)
 
-    def notify(self, actor, sent_from_here):
-        actor.game_over(self.winner)
 
 
-
-class CreatePlayer (kxg.Greeting):
+class CreatePlayer (Message):
 
     def __init__(self, name, color):
         self.player = tokens.Player(name, color)
@@ -60,13 +61,11 @@ class CreatePlayer (kxg.Greeting):
     def __str__(self):
         return '<CreatePlayer>'
 
-    def get_sender(self):
-        return self.player
-
     def check(self, world, sender):
-        return not world.has_game_started()
+        self.player.set_actor(sender)
+        return True
 
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         import random
 
         # Place the two players on opposite sides of the maps.  This algorithm 
@@ -89,12 +88,8 @@ class CreatePlayer (kxg.Greeting):
     def execute(self, world):
         world.create_player(self.player, self.city)
 
-    def notify(self, actor, is_mine):
-        actor.create_player(self.player, is_mine)
-        actor.create_city(self.city, is_mine)
 
-
-class CreateCity (kxg.Message):
+class CreateCity (Message):
 
     def __init__(self, player, position):
         self.city = tokens.City(player, position)
@@ -109,7 +104,7 @@ class CreateCity (kxg.Message):
         self.price = player.get_city_price()
 
         # Make sure the right player is sending this message.
-        if sender is not player:
+        if sender.player is not player:
             self.error = "City requested by wrong player."
             return False
 
@@ -130,20 +125,14 @@ class CreateCity (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         self.city.give_id(id)
 
     def execute(self, world):
         world.create_city(self.city, self.price)
 
-    def notify(self, actor, is_mine):
-        actor.create_city(self.city, is_mine)
 
-
-class CreateArmy (kxg.Message):
+class CreateArmy (Message):
 
     def __init__(self, player, position):
         self.army = tokens.Army(player, position)
@@ -153,17 +142,16 @@ class CreateArmy (kxg.Message):
         return '<CreateArmy>'
 
     def check(self, world, sender):
-        army = self.army
-        player = army.player
+        army = self.army; player = army.player
         self.price = player.get_army_price()
 
         # Make sure the right player is sending this message.
-        if sender is not player:
+        if sender is not player.actor:
             self.error = "Army requested by wrong player."
             return False
 
         # Make sure the player is still alive.
-        if player.was_defeated() or player.is_destroyed():
+        if player.was_defeated() or not player.is_registered():
             self.error = "Defeated players can't build armies."
             return False
 
@@ -179,20 +167,14 @@ class CreateArmy (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         self.army.give_id(id)
 
     def execute(self, world):
         world.create_army(self.army, self.price)
 
-    def notify(self, actor, is_mine):
-        actor.create_army(self.army, is_mine)
 
-
-class CreateRoad (kxg.Message):
+class CreateRoad (Message):
 
     def __init__(self, player, start, end):
         self.road = tokens.Road(player, start, end)
@@ -206,12 +188,12 @@ class CreateRoad (kxg.Message):
         player = road.player; start = road.start; end = road.end
 
         # Make sure the right player is sending this message.
-        if sender is not player:
+        if sender is not player.actor:
             self.error = "Road requested by wrong player."
             return False
 
         # Make sure the player is still alive.
-        if player.was_defeated() or player.is_destroyed():
+        if player.was_defeated():
             self.error = "Defeated players can't build roads."
             return False
 
@@ -243,21 +225,15 @@ class CreateRoad (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         self.road.give_id(id)
 
     def execute(self, world):
         world.create_road(self.road, self.price)
 
-    def notify(self, actor, is_mine):
-        actor.create_road(self.road, is_mine)
 
 
-
-class UpgradeCommunity (kxg.Message):
+class UpgradeCommunity (Message):
 
     def __init__(self, community):
         self.community = community
@@ -271,7 +247,7 @@ class UpgradeCommunity (kxg.Message):
         price = self.community.get_upgrade_price()
         
         # Make sure the right player is sending this message.
-        if sender is not player:
+        if sender is not player.actor:
             self.error = "Upgrade requested by wrong player."
             return False
 
@@ -281,7 +257,7 @@ class UpgradeCommunity (kxg.Message):
             return False
 
         # Make sure the community still exists.
-        if community.is_destroyed():
+        if community.is_after_teardown():
             self.error = "Community was already removed from the world."
             return False
 
@@ -303,17 +279,11 @@ class UpgradeCommunity (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
     def execute(self, world):
         world.upgrade_community(self.community, self.community.get_upgrade_price())
 
-    def notify(self, actor, is_mine):
-        actor.upgrade_community(self.community, is_mine)
 
-
-class MoveArmy (kxg.Message):
+class MoveArmy (Message):
 
     def __init__(self, army, end_point):
         self.army = army
@@ -328,12 +298,12 @@ class MoveArmy (kxg.Message):
         player = army.player
 
         # Make sure the right player is sending this message.
-        if sender is not player:
+        if sender is not player.actor:
             self.error = "Army motion requested by wrong player."
             return False
 
         # Make sure the army still exists.
-        if army.is_destroyed():
+        if army.is_after_teardown():
             self.error = "Army was already removed from the world."
             return False
 
@@ -354,17 +324,11 @@ class MoveArmy (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
     def execute(self, world):
         self.army.move_to(self.target)
 
-    def notify(self, actor, is_mine):
-        actor.move_army(self.army, self.target, is_mine)
 
-
-class DestroyArmy (kxg.Message):
+class DestroyArmy (Message):
     
     def __init__(self, army):
         self.army = army
@@ -376,7 +340,7 @@ class DestroyArmy (kxg.Message):
         army = self.army
         
         # Make sure this army still exists.
-        if army.is_destroyed():
+        if army.is_after_teardown():
             self.error = "Army was already removed from the world."
             return False
 
@@ -392,20 +356,14 @@ class DestroyArmy (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         pass
 
     def execute(self, world):
         world.destroy_army(self.army)
 
-    def notify(self, actor, is_mine):
-        actor.destroy_army(self.army, is_mine)
 
-
-class DefeatPlayer (kxg.Message):
+class DefeatPlayer (Message):
 
     def __init__(self, player):
         self.player = player
@@ -416,18 +374,14 @@ class DefeatPlayer (kxg.Message):
     def check(self, world, sender):
         return self.player.was_defeated() and not self.player.is_dead()
 
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         pass
 
     def execute(self, world):
         world.defeat_player(self.player)
 
-    def notify(self, actor, sent_from_here):
-        actor.defeat_player()
 
-
-
-class RequestBattle (kxg.Message):
+class RequestBattle (Message):
 
     def __init__(self, army, community):
         self.campaign = tokens.Campaign(army, community)
@@ -442,7 +396,7 @@ class RequestBattle (kxg.Message):
         price = army.get_battle_price()
 
         # Make sure the right player is sending this message.
-        if sender is not player:
+        if sender is not player.actor:
             self.error = "Battle requested by wrong player."
             return False
 
@@ -452,12 +406,12 @@ class RequestBattle (kxg.Message):
             return False
 
         # Make sure this army still exists.
-        if army.is_destroyed():
+        if army.is_after_teardown():
             self.error = "Army was already removed from the world."
             return False
 
         # Make sure the target community still exists.
-        if community.is_destroyed():
+        if community.is_after_teardown():
             self.error = "Target was already removed from the world."
             return False
 
@@ -490,20 +444,14 @@ class RequestBattle (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup (self, world, sender, id):
+    def setup (self, world, id):
         self.campaign.give_id(id)
 
     def execute(self, world):
         world.request_battle(self.campaign)
 
-    def notify(self, actor, is_mine):
-        actor.request_battle(self.campaign, is_mine)
 
-
-class StartBattle (kxg.Message):
+class StartBattle (Message):
 
     def __init__(self, campaign):
         self.campaign = campaign
@@ -517,7 +465,7 @@ class StartBattle (kxg.Message):
         target = self.campaign.community
 
         # Make sure the campaign still exists.
-        if self.campaign.is_destroyed():
+        if self.campaign.is_after_teardown():
             self.error = "Campaign was already removed from the world."
             return False
         
@@ -544,20 +492,14 @@ class StartBattle (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         self.battle.give_id(id)
 
     def execute(self, world):
         world.start_battle(self.campaign, self.battle)
 
-    def notify(self, actor, sent_from_here):
-        actor.start_battle(self.battle)
 
-
-class JoinBattle (kxg.Message):
+class JoinBattle (Message):
 
     def __init__(self, campaign, battle):
         self.campaign = campaign
@@ -571,12 +513,12 @@ class JoinBattle (kxg.Message):
         community = self.campaign.community
         
         # Make sure the campaign still exists.
-        if self.campaign.is_destroyed():
+        if self.campaign.is_after_teardown():
             self.error = "Campaign was already removed from the world."
             return False
         
         # Make sure the battle still exists.
-        if self.battle.is_destroyed():
+        if self.battle.is_after_teardown():
             self.error = "Battle was already removed from the world."
             return False
         
@@ -600,20 +542,15 @@ class JoinBattle (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         pass
 
     def execute(self, world):
         world.join_battle(self.campaign, self.battle)
 
-    def notify(self, actor, sent_from_here):
-        actor.join_battle(self.battle)
 
 
-class RetreatBattle (kxg.Message):
+class RetreatBattle (Message):
     
     def __init__(self, army):
         self.army = army
@@ -628,7 +565,7 @@ class RetreatBattle (kxg.Message):
         self.price = army.get_retreat_price()
         
         # Make sure the right player is sending this message.
-        if sender is not player:
+        if sender is not player.actor:
             self.error = "Retreat requested by wrong player."
             return False
 
@@ -638,7 +575,7 @@ class RetreatBattle (kxg.Message):
             return False
 
         # Make sure the army still exists.
-        if self.army.is_destroyed():
+        if self.army.is_after_teardown():
             self.error = "Army was already removed from the world."
             return False
 
@@ -648,12 +585,12 @@ class RetreatBattle (kxg.Message):
             return False
 
         # Make sure the battle still exists.
-        if army.battle and self.army.battle.is_destroyed():
+        if army.battle and self.army.battle.is_after_teardown():
             self.error = "Battle was already removed from the world."
             return False
 
         # Make sure the campaign still exists.
-        if army.my_campaign and self.army.my_campaign.is_destroyed():
+        if army.my_campaign and self.army.my_campaign.is_after_teardown():
             self.error = "Campaign was already removed from the world."
             return False
 
@@ -664,20 +601,14 @@ class RetreatBattle (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         pass
 
     def execute(self, world):
         world.retreat_battle(self.army, self.price)
 
-    def notify(self, actor, is_mine):
-        actor.retreat_battle(self.army, is_mine)
 
-
-class ReinforceCommunity (kxg.Message):
+class ReinforceCommunity (Message):
 
     def __init__(self, community):
         self.community = community
@@ -692,12 +623,12 @@ class ReinforceCommunity (kxg.Message):
         name = 'army' if community.is_army() else 'city'
         
         # Make sure the right player is sending this message.
-        if sender is not player:
+        if sender is not player.actor:
             self.error = "Reinforcements requested by wrong player."
             return False
 
         # Make sure the community still exists.
-        if community.is_destroyed():
+        if community.is_after_teardown():
             self.error = "%s was already removed from the world." % name.title()
             return False
 
@@ -707,7 +638,7 @@ class ReinforceCommunity (kxg.Message):
             return False
 
         # Make sure the battle still exists.
-        if community.is_in_battle() and community.battle.is_destroyed():
+        if community.is_in_battle() and community.battle.is_after_teardown():
             self.error = "Battle was already removed from the world."
             return False
 
@@ -718,20 +649,14 @@ class ReinforceCommunity (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         pass
 
     def execute(self, world):
         world.reinforce_community(self.community)
 
-    def notify(self, actor, is_mine):
-        actor.reinforce_community(self.community, is_mine)
 
-
-class ZombifyCity (kxg.Message):
+class ZombifyCity (Message):
     
     def __init__(self, city):
         self.city = city
@@ -744,7 +669,7 @@ class ZombifyCity (kxg.Message):
         city = self.city
         
         # Make sure the city still exists.
-        if city.is_destroyed():
+        if city.is_after_teardown():
             self.error = "City was already removed from the world."
             return False
 
@@ -765,20 +690,14 @@ class ZombifyCity (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         pass
 
     def execute(self, world):
         world.zombify_city(self.city.battle, self.city)
 
-    def notify(self, actor, is_mine):
-        actor.zombify_city(self.city.battle, self.city, is_mine)
 
-
-class EndBattle (kxg.Message):
+class EndBattle (Message):
     
     def __init__(self, battle):
         self.battle = battle
@@ -789,7 +708,7 @@ class EndBattle (kxg.Message):
     def check(self, world, sender):
         
         # Make sure the battle still exists.
-        if self.battle.is_destroyed():
+        if self.battle.is_after_teardown():
             self.error = "Battle was already removed from the world."
             return False
 
@@ -800,16 +719,11 @@ class EndBattle (kxg.Message):
 
         return True
 
-    def reject(self, actor):
-        actor.show_error(self)
-
-    def setup(self, world, sender, id):
+    def setup(self, world, id):
         pass
 
     def execute(self, world):
         world.end_battle(self.battle)
 
-    def notify(self, actor, is_mine):
-        actor.end_battle(self.battle, is_mine)
 
 
