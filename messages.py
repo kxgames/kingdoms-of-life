@@ -29,8 +29,9 @@ class StartGame (Message):
     def __str__(self):
         return '<StartGame>'
 
-    def check(self, world, sender):
-        return self.was_sent_by_referee() and not world.has_game_started()
+    def check(self, world, sender_id):
+        return self.was_sent_by_referee(sender_id) \
+                and not world.has_game_started()
 
     def execute(self, world):
         world.start_game()
@@ -45,7 +46,7 @@ class GameOver (Message):
         return '<GameOver>'
 
     def check(self, world, sender_id):
-        return self.was_sent_by_referee()
+        return self.was_sent_by_referee(sender_id)
 
     def execute(self, world):
         world.game_over(self.winner)
