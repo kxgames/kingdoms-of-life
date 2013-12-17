@@ -1125,9 +1125,7 @@ class DemandExtension (kxg.TokenExtension):
         self.gui = gui
         self.demand = demand
 
-        self.plot = self.gui.batch.add(
-                0, pyglet.gl.GL_LINES, self.gui.layers['gui'],
-                ('v2f', ()), ('c4B', ()))
+        self.plot = None
 
         self.offset = 0
 
@@ -1155,7 +1153,9 @@ class DemandExtension (kxg.TokenExtension):
                 ('v2f', (100 + dx, 200, 500 + dx, 200, 350 + dx, 400)),
                 ('c4B', 3 * drawing.green.tuple))
 
-        self.plot.delete()
+        if self.plot:
+            self.plot.delete()
+
         self.plot = self.gui.batch.add(
                 num_vertices, pyglet.gl.GL_LINE_STRIP, self.gui.layers['gui'],
                 ('v2f', vertices), ('c4B', colors))
