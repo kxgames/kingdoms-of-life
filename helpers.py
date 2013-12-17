@@ -1,4 +1,5 @@
 from __future__ import division
+from math import *
 
 def gaussian(x, mean, stddev):
     dx = x - mean

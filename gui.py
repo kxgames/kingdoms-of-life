@@ -1025,6 +1025,51 @@ class RoadExtension (kxg.TokenExtension):
         self.sprite.delete()
 
 
+class DemandExtension (kxg.TokenExtension):
+
+    def __init__(self, gui, demand):
+        self.gui = gui
+        self.demand = demand
+
+        self.plot = self.gui.batch.add(
+                0, pyglet.gl.GL_LINES, self.gui.layers['gui'],
+                ('v2f', ()), ('c4B', ()))
+
+        self.offset = 0
+
+        #drawing.draw_circle((300, 300), 50, 
+                #batch=self.gui.batch, group=self.gui.layers['gui'])
+
+    def setup(self):
+        pass
+
+    def update_history(self):
+        num_vertices = len(self.demand.history)
+        vertices = ()
+        colors = drawing.red.tuple * num_vertices
+
+        print self.demand.times[-1], self.demand.history[-1]
+        print
+
+        for pair in zip(self.demand.times, self.demand.history):
+            vertices += 10 * pair[0] + 100, 500 * pair[1] + 100
+
+        self.offset += 10
+        dx = self.offset
+        self.gui.batch.add(
+                3, pyglet.gl.GL_LINES, self.gui.layers['gui'],
+                ('v2f', (100 + dx, 200, 500 + dx, 200, 350 + dx, 400)),
+                ('c4B', 3 * drawing.green.tuple))
+
+        self.plot.delete()
+        self.plot = self.gui.batch.add(
+                num_vertices, pyglet.gl.GL_LINE_STRIP, self.gui.layers['gui'],
+                ('v2f', vertices), ('c4B', colors))
+
+    def teardown(self):
+        print self.demand.resource, self.demand.history
+
+
 
 class StatusArea (object):
 

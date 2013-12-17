@@ -26,8 +26,41 @@ class StartGame (Message):
         return self.was_sent_by_referee(sender_id) \
                 and not world.has_game_started()
 
+    def setup(self, world, id):
+        self.economy = {
+                'chevron': tokens.EarlyGameDemand(
+                    1.0, 5, 5),
+                
+                ## Early-game resources
+                #'target': tokens.EarlyGameDemand(
+                #    1.0, 13, 5, spiral=-1, wave=-1),
+
+                #'spiral': tokens.EarlyGameDemand(
+                #    1.5, 8, 5, target=-1, wave=-1),
+
+                #'wave': tokens.EarlyGameDemand(
+                #    0.5, 18, 5, target=-1, spiral=-1),
+
+                ## Mid-game resources
+                #'oculus': tokens.MidGameDemand(
+                #    1.0, 5, 20, 5),
+
+                #'moon': tokens.MidGameDemand(
+                #    1.0, 13, 28, 5, oculus=1),
+
+                ## Late-game resources
+                #'ridge': tokens.LateGameDemand(
+                #    1.0, 25, 5, valley=-1),
+
+                #'valley': tokens.LateGameDemand(
+                #    1.0, 25, 5, ridge=-1),
+        }
+
+        for demand in self.economy.values():
+            demand.give_id(id)
+
     def execute(self, world):
-        world.start_game()
+        world.start_game(self.economy)
 
 
 class GameOver (Message):
