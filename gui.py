@@ -15,7 +15,6 @@ import numpy
 import pyglet
 import operator
 
-
 class OrderedGroup (object):
 
     # I copied this class out of the pyglet distribution, because it doesn't 
@@ -194,6 +193,11 @@ class Gui (kxg.Actor):
         gl.glEnable(gl.GL_BLEND)
         gl.glEnable(gl.GL_LINE_SMOOTH)
         gl.glHint(gl.GL_LINE_SMOOTH_HINT, gl.GL_DONT_CARE)
+
+        self.tile_icons = {
+                'land' : self.load_image('images/map/grass-64-res.png'),
+                #'Water' : self.load_image('images/map/water-tile.png'),
+                'mountain': self.load_image('images/map/mountains-64-res.png') }
 
         self.community_icons = {
                 'army': self.load_icon('images/army-icon.png'),
@@ -420,6 +424,11 @@ class Gui (kxg.Actor):
             health_bar.append(frame)
 
         return health_bar
+
+    def load_image(self, path):
+        buffer = self.path_to_array(path)
+
+        return self.array_to_texture(buffer)
 
 
     def start_game(self):
@@ -1065,6 +1074,92 @@ class RoadExtension (kxg.TokenExtension):
 
     def teardown(self):
         self.sprite.delete()
+
+
+class MapExtension (kxg.TokenExtension):
+    def __init__(self, gui, map):
+        self.gui = gui
+        self.map = map
+        self.tile_sprites = []
+        self.dots = []
+
+        #'map 1':        OrderedGroup(0),
+        #'map 2':        OrderedGroup(1),
+        #'road':         OrderedGroup(2),
+        #'city':         OrderedGroup(3),
+        #'capitol':      OrderedGroup(4),
+        #'mask':         ClippingMask(6, stencil_group),
+        #'army':         WhereMaskIs(7, stencil_group),
+        #'fog of war':   WhereMaskIsnt(8, stencil_group),
+        #'gui':          OrderedGroup(9),
+        #'messages 1':   OrderedGroup(10),
+        #'messages 2':   OrderedGroup(11) }
+
+        batch = gui.batch
+        layer = gui.layers['map 1']
+        size = map.array_size
+        width = map.tile_width
+        offset = width / 2.0
+
+        print 'Map size is: %s' %size
+
+        for tile_x in range(size[0]):
+            for tile_y in range(size[1]):
+                x = tile_x * width - offset
+                y = tile_y * width - offset
+                batch.add(1, GL_POINTS, gui.layers['map 2'],
+                        ('v2f', (x, y)),
+                        ('c3B', (255,0,0)) )
+                #self.tile_sprites.append(pyglet.sprite.Sprite(
+                #        gui.tile_icons['land'],
+                #        x=x, y=y,
+                #        batch=batch, group=layer) )
+
+    def setup(self):
+        pass
+        ##is setup being called?
+        #vlist = self.vertex_list
+
+        #grass_img = pyglet.image.load('images/map/grass-64-res.png')
+        #grass_tex = grass_img.get_texture()
+        #mountain_img = pyglet.image.load('images/map/mountains-64-res.png')
+        #mountain_tex = mountain_img.get_texture()
+
+        #size = self.map.array_size
+        #tile_width = self.map.tile_width
+        #tile_width = self.map.tile_width
+        #tile_half_width = tile_width / 2.0
+
+        #vertex_count = 4 * size[0] * size[1]
+
+        #pyglet.gl.glEnable(grass_tex.target)
+        #pyglet.gl.glBindTexture(grass_tex.target, grass_tex.id)
+        #self.vertex_list = batch.add(vertex_count, GL_QUADS, layer, 'v2f', 't2f')
+
+        #for tile_x in range(size[0]):
+        #    for tile_y in range(size[1]):
+        #        # i initially is the first position of the tile in the 
+        #        # 2D vertex list. The corner for loop increments i by 2 
+        #        # because each coordinate takes two spots in the vertex 
+        #        # list.
+        #        i = 2 * (4 * (y * size[0] + x) + corner)
+
+        #        tile_type = self.map.get_type(tile_x, tile_y)
+        #        pyglet.gl.glBindTexture(grass_tex.target, grass_tex.id)
+        #        for corner in (-1,-1), (1,-1), (1,1), (-1,1):
+        #            dx,dy = corner
+        #            x = tile_x + dx * tile_half_width
+        #            y = tile_y + dy * tile_half_width
+        #            vlist.vertices[i:i+2] = [x, y]
+
+        #            tx, ty = corner
+        #            tx = (tx + 1) / 2.0
+        #            ty = (ty + 1) / 2.0
+        #            vlist.tex_coords[i:i+2] = [tx,ty]
+
+        #            i += 2;
+
+        #pyglet.gl.glDisable(grass_tex.target)
 
 
 

@@ -156,7 +156,7 @@ class ServerConnectionStage (kxg.Stage):
 
 class PostgameSplashStage (kxg.Stage):
 
-    def __init__(self, world, gui, name, host, port):
+    def __init__(self, world, gui, name='', host='', port=0):
         kxg.Stage.__init__(self)
 
         self.world = world

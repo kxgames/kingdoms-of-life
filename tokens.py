@@ -4,10 +4,11 @@ from math import sqrt
 
 import kxg
 import gui, messages, arguments
+import map
 
 class World (kxg.World):
 
-    map = kxg.geometry.Rectangle.from_size(762, 762)
+    map = map.Map(10, 10, 64)
 
     def __init__ (self):
         kxg.World.__init__(self)
