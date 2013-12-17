@@ -10,6 +10,8 @@ class SandboxLoop (kxg.PygletLoop):
         actors_to_greetings = {
                 actor: messages.CreatePlayer("Sandbox", 'orange')}
 
+        actor.setup_pregame()
+
         game_stage = kxg.SinglePlayerGameStage(
                 world, referee, actors_to_greetings)
         postgame_stage = PostgameSplashStage(world, actor)

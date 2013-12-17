@@ -177,7 +177,8 @@ class Gui (kxg.Actor):
         return self.finished
 
 
-    def setup(self):
+    def setup(self, world):
+        self.world = world
         self.player = None
         self.selection = None
         self.mode = None
@@ -269,7 +270,7 @@ class Gui (kxg.Actor):
         self.window.push_handlers(handlers)
 
         if self.selection:
-            self.selection.get_extension().unselect()
+            self.selection.get_extension(self).unselect()
 
         # Turn off fog of war.
         self.fog_of_war_sprite.delete()
@@ -330,10 +331,10 @@ class Gui (kxg.Actor):
 
     def update_selection(self, community=None):
         if self.selection:
-            self.selection.get_extension().unselect()
+            self.selection.get_extension(self).unselect()
         self.selection = community
         if self.selection:
-            self.selection.get_extension().select()
+            self.selection.get_extension(self).select()
 
     def update_background(self):
         if not self.player:
@@ -431,72 +432,33 @@ class Gui (kxg.Actor):
         return self.array_to_texture(buffer)
 
 
-    def start_game(self):
+    def handle_start_game(self, message, is_mine):
         self.setup_game()
 
-    def game_over(self, winner):
-        pass
-
-    def create_player(self, player, is_mine):
+    def handle_create_player(self, message, is_mine):
+        print 'Gui.handle_create_player()'
         if is_mine:
-            self.player = player
-            player.get_extension().setup_for_real()
+            print '  ', message
+            print '  ', message.player
+            self.player = message.player
+            self.player.get_extension(self).setup_for_real()
 
-    def create_city(self, city, is_mine):
+    def handle_create_city(self, message, is_mine):
         # This is a hack for the first city.  The first city gets created 
         # before self.player is set, so update_engagement() doesn't work like 
         # it should.  There's probably a better way to address this, but it 
         # probably involves tweaking the game engine.
-        city.get_extension().update_engagement()
+        message.city.get_extension(self).update_engagement()
 
-    def create_army(self, army, is_mine):
-        pass
-
-    def create_road(self, road, is_mine):
-        pass
-
-    def upgrade_community(self, community, is_mine):
-        pass
-
-    def destroy_army(self, army, is_mine):
-        if self.selection is army:
+    def handle_destroy_army(self, message, is_mine):
+        if self.selection is message.army:
             self.update_selection()
 
-    def request_battle(self, campaign, is_mine):
-        pass
-
-    def start_battle(self, battle):
-        pass
-
-    def join_battle(self, battle):
-        pass
-
-    def retreat_battle(self, army, is_mine):
-        pass
-
-    def reinforce_community(self, army, is_mine):
-        pass
-
-    def zombify_city(self, battle, city, is_mine):
-        pass
-
-    def end_battle(self, battle, is_mine):
-        if self.selection is battle.get_zombie_city():
+    def handle_end_battle(self, message, is_mine):
+        if self.selection is message.battle.get_zombie_city():
             self.update_selection()
 
-    def move_army(self, army, target, is_mine):
-        pass
 
-    def attack_city(self, battle, is_mine):
-        pass
-
-    def defend_city(self, battle, is_mine):
-        pass
-
-    def defeat_player(self):
-        pass
-
-    
     def show_error(self, message):
         self.status_area.add_warning(message.error)
 
@@ -553,120 +515,116 @@ class GameHandlers (BaseHandlers):
         BaseHandlers.__init__(self, gui)
 
     def on_mouse_press(self, x, y, button, modifiers):
-        with self.gui.lock():
-            position = kxg.geometry.Vector(x, y)
-            find_closest_community = self.gui.player.find_closest_community
-            
-            if button == pyglet.window.mouse.LEFT:
-                if self.gui.mode == 'develop':
-                    drag_start = find_closest_community(position, cutoff=40)
-                    if drag_start and drag_start.is_city():
-                        self.gui.drag_start_city = drag_start
+        position = kxg.geometry.Vector(x, y)
+        find_closest_community = self.gui.player.find_closest_community
+        
+        if button == pyglet.window.mouse.LEFT:
+            if self.gui.mode == 'develop':
+                drag_start = find_closest_community(position, cutoff=40)
+                if drag_start and drag_start.is_city():
+                    self.gui.drag_start_city = drag_start
 
-            if button == pyglet.window.mouse.MIDDLE:
-                print 'Players:', self.gui.world.players
-                print
-                for player in self.gui.world.players:
-                    print ' %s:' % player.name
-                    print ' Cities:', player.cities
-                    print ' Armies:', player.armies
-                print
+        if button == pyglet.window.mouse.MIDDLE:
+            print 'Players:', self.gui.world.players
+            print
+            for player in self.gui.world.players:
+                print ' %s:' % player.name
+                print ' Cities:', player.cities
+                print ' Armies:', player.armies
+            print
 
     def on_mouse_drag(self, x, y, dx, dy, button, modifiers):
-        with self.gui.lock():
-            position = kxg.geometry.Vector(x, y)
-            
-            if button == pyglet.window.mouse.LEFT:
-                drag_start = self.gui.drag_start_city
-                if drag_start:
-                    drag_dist = position.get_distance(drag_start.position)
-                    if self.gui.mode == 'develop' and drag_dist > 40:
-                        self.gui.update_mode('develop road')
-                    elif self.gui.mode == 'develop road' and drag_dist <= 40:
-                        self.gui.update_mode('develop')
+        position = kxg.geometry.Vector(x, y)
+        
+        if button == pyglet.window.mouse.LEFT:
+            drag_start = self.gui.drag_start_city
+            if drag_start:
+                drag_dist = position.get_distance(drag_start.position)
+                if self.gui.mode == 'develop' and drag_dist > 40:
+                    self.gui.update_mode('develop road')
+                elif self.gui.mode == 'develop road' and drag_dist <= 40:
+                    self.gui.update_mode('develop')
 
     def on_mouse_release(self, x, y, button, modifiers):
-        with self.gui.lock():
-            position = kxg.geometry.Vector(x, y)
-            find_closest_community = self.gui.player.find_closest_community
-            
-            if button == pyglet.window.mouse.LEFT:
-                if self.gui.mode == 'fight':
-                    message = messages.CreateArmy(self.gui.player, position)
+        position = kxg.geometry.Vector(x, y)
+        find_closest_community = self.gui.player.find_closest_community
+        
+        if button == pyglet.window.mouse.LEFT:
+            if self.gui.mode == 'fight':
+                message = messages.CreateArmy(self.gui.player, position)
+                self.gui.send_message(message)
+                self.gui.update_mode()
+                self.gui.update_selection()
+
+            elif self.gui.mode == 'develop road':
+                drag_start = self.gui.drag_start_city
+                drag_end = self.gui.world.find_closest_community(position, cutoff=40)
+                self.gui.drag_start_city = None
+                
+                if drag_start and drag_end:
+                    if drag_start.is_city() and drag_end.is_city():
+                        if not (drag_start is drag_end):
+                            message = messages.CreateRoad(self.gui.player, drag_start, drag_end)
+                            self.gui.send_message(message)
+                            self.gui.update_selection()
+                self.gui.update_mode()
+
+            elif self.gui.mode == 'develop':
+                if self.gui.drag_start_city:
+                    #upgrade?
+                    self.gui.drag_start_city = None
+                else:
+                    message = messages.CreateCity(self.gui.player, position)
                     self.gui.send_message(message)
                     self.gui.update_mode()
-                    self.gui.update_selection()
+                self.gui.update_selection()
 
-                elif self.gui.mode == 'develop road':
-                    drag_start = self.gui.drag_start_city
-                    drag_end = self.gui.world.find_closest_community(position, cutoff=40)
-                    self.gui.drag_start_city = None
-                    
-                    if drag_start and drag_end:
-                        if drag_start.is_city() and drag_end.is_city():
-                            if not (drag_start is drag_end):
-                                message = messages.CreateRoad(self.gui.player, drag_start, drag_end)
-                                self.gui.send_message(message)
-                                self.gui.update_selection()
-                    self.gui.update_mode()
+            else:
+                community = find_closest_community(position, cutoff=40)
+                self.gui.update_selection(community)
 
-                elif self.gui.mode == 'develop':
-                    if self.gui.drag_start_city:
-                        #upgrade?
-                        self.gui.drag_start_city = None
-                    else:
-                        message = messages.CreateCity(self.gui.player, position)
-                        self.gui.send_message(message)
-                        self.gui.update_mode()
-                    self.gui.update_selection()
+        if button == pyglet.window.mouse.RIGHT:
+            target = self.gui.world.find_closest_community(position, cutoff=40)
+            if target and target.player is self.gui.player:
+                target = None
 
-                else:
-                    community = find_closest_community(position, cutoff=40)
-                    self.gui.update_selection(community)
-
-            if button == pyglet.window.mouse.RIGHT:
-                target = self.gui.world.find_closest_community(position, cutoff=40)
-                if target and target.player is self.gui.player:
-                    target = None
-
-                if self.gui.selection and self.gui.selection.can_move():
-                    if target and self.gui.player.can_see(target):
-                        if self.gui.selection.is_chasing():
-                            campaign = self.gui.selection.get_campaign()
-                            if campaign.get_community() is target:
-                                # Trying to attack a community that the 
-                                # army is already chasing. Just ignore 
-                                # it.
-                                pass
-                            else:
-                                # Cancel campaign
-                                # Request battle
-                                pass
+            if self.gui.selection and self.gui.selection.can_move():
+                if target and self.gui.player.can_see(target):
+                    if self.gui.selection.is_chasing():
+                        campaign = self.gui.selection.get_campaign()
+                        if campaign.get_community() is target:
+                            # Trying to attack a community that the 
+                            # army is already chasing. Just ignore 
+                            # it.
+                            pass
                         else:
-                            message = messages.RequestBattle(self.gui.selection, target)
-                            self.gui.send_message(message)
+                            # Cancel campaign
+                            # Request battle
+                            pass
                     else:
-                        message = messages.MoveArmy(self.gui.selection, position)
+                        message = messages.RequestBattle(self.gui.selection, target)
                         self.gui.send_message(message)
+                else:
+                    message = messages.MoveArmy(self.gui.selection, position)
+                    self.gui.send_message(message)
 
     def on_key_press(self, symbol, modifiers):
-        with self.gui.lock():
-            if symbol == pyglet.window.key.F:
-                self.gui.update_mode('fight')
-            if symbol == pyglet.window.key.D:
-                self.gui.update_mode('develop')
-            if symbol == pyglet.window.key.SPACE and self.gui.selection:
-                if self.gui.selection.is_in_battle():
-                    message = messages.ReinforceCommunity(self.gui.selection)
-                else:
-                    message = messages.UpgradeCommunity(self.gui.selection)
-                self.gui.send_message(message)
-            if symbol == pyglet.window.key.BACKSPACE and self.gui.selection:
-                message = messages.RetreatBattle(self.gui.selection)
-                self.gui.send_message(message)
-            if symbol == pyglet.window.key.ESCAPE:
-                self.gui.update_mode()
-                return True
+        if symbol == pyglet.window.key.F:
+            self.gui.update_mode('fight')
+        if symbol == pyglet.window.key.D:
+            self.gui.update_mode('develop')
+        if symbol == pyglet.window.key.SPACE and self.gui.selection:
+            if self.gui.selection.is_in_battle():
+                message = messages.ReinforceCommunity(self.gui.selection)
+            else:
+                message = messages.UpgradeCommunity(self.gui.selection)
+            self.gui.send_message(message)
+        if symbol == pyglet.window.key.BACKSPACE and self.gui.selection:
+            message = messages.RetreatBattle(self.gui.selection)
+            self.gui.send_message(message)
+        if symbol == pyglet.window.key.ESCAPE:
+            self.gui.update_mode()
+            return True
 
 
 class PostgameHandlers (BaseHandlers):
