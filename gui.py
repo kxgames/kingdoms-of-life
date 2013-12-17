@@ -178,7 +178,8 @@ class Gui (kxg.Actor):
         return self.finished
 
 
-    def setup(self):
+    def setup(self, world):
+        self.world = world
         self.player = None
         self.selection = None
         self.mode = None

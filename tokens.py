@@ -312,7 +312,8 @@ class Referee (kxg.Referee):
         return 'referee'
 
 
-    def setup(self):
+    def setup(self, world):
+        kxg.Referee.setup(self, world)
         message = messages.StartGame()
         self.send_message(message)
 
@@ -375,8 +376,9 @@ class Player (kxg.Token):
         return '<Player name=%s>' % self.name
 
 
-    def setup(self):
+    def setup(self, world):
         pass
+
     def update(self, time):
         self.revenue = self.starting_revenue
 
@@ -622,9 +624,8 @@ class Community (kxg.Token):
         self.campaigns = []
 
 
-    def setup(self):
-        for extension in self.get_extensions():
-            extension.setup()
+    def setup(self, world):
+        self.world = world
 
     def update(self, time):
         if not self.battle:
@@ -781,8 +782,8 @@ class City (Community):
         return '<City id=%s xy=%s>' % (self.get_id(), self.position)
 
 
-    def setup(self):
-        Community.setup(self)
+    def setup(self, world):
+        Community.setup(self, world)
 
     def update(self, time):
         Community.update(self, time)
@@ -914,8 +915,8 @@ class Army (Community):
         return "<Army id=%s>" % self.get_id()
 
 
-    def setup(self):
-        pass
+    def setup(self, world):
+        Community.setup(self, world)
 
     def update(self, time):
         Community.update(self, time)
@@ -1091,7 +1092,8 @@ class Road (kxg.Token):
         return "<Road id=%s>" % self.get_id()
 
 
-    def setup(self):
+    def setup(self, world):
+        self.world = world
         self.start.roads.append(self)
         self.end.roads.append(self)
 
@@ -1156,7 +1158,8 @@ class Campaign (kxg.Token):
     def __str__(self):
         return '<Campaign id=%s>' % self.get_id()
 
-    def setup(self):
+    def setup(self, world):
+        self.world = world
         self.army.add_campaign(self)
         self.community.add_campaign(self)
 
@@ -1214,12 +1217,10 @@ class Battle (kxg.Token):
         return "<Battle id=%s>" % self.get_id()
 
 
-    def setup(self):
-        print "SETUP"
-        campaign = self.init_campaign
-        self.add_community(campaign.army)
-        self.add_community(campaign.community)
-
+    def setup(self, world):
+        self.world = world
+        self.add_community(self.init_campaign.army)
+        self.add_community(self.init_campaign.community)
         del self.init_campaign
 
     def update(self, time):
@@ -1325,12 +1326,20 @@ class Battle (kxg.Token):
 class Demand (kxg.Token):
 
     def __init__(self, **relations):
+        kxg.Token.__init__(self)
         self.relations = relations
+        self.current_value = 0
+        self.previous_value = 0
         self.perturbations = []
 
+    def __extend__(self):
+        return {gui.Gui: gui.DemandExtension}
 
-    def setup(self):
-        self.economy = self.world.economy
+
+    def setup(self, world):
+        self.world = world
+        self.economy = world.economy
+
         self.current_value = self.update_demand()
         self.previous_value = self.current_value
         self.monopoly = False
