@@ -1,3 +1,6 @@
 [submodule "kxg"]
-	path = kxg
+	path = libs/kxg
 	url = kxgames:git/engine
+[submodule "libs/pyglet-gui"]
+	path = libs/pyglet-gui
+	url = https://github.com/jorgecarleitao/pyglet-gui.git

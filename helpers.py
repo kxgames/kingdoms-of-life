@@ -1,4 +1,3 @@
-from __future__ import division
 from math import *
 
 def gaussian(x, mean, stddev):
@@ -7,4 +6,4 @@ def gaussian(x, mean, stddev):
 
 def sigmoid(x, inflection, breadth):
     dx = x - inflection
-    return 1 / (1 + exp(-breadth * dx))
+    return 1 / (1 + exp(-dx / breadth))

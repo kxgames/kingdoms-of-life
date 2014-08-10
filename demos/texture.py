@@ -58,6 +58,7 @@ if __name__ == '__main__':
 
         return array_to_texture(buffer)
 
+
     # Run tests
     map = Map()
     map.setup(25,25)
@@ -80,6 +81,16 @@ if __name__ == '__main__':
     offset = width / 2.0
     icon = load_image('grass-64-res.png')
     tile_sprites = []
+
+    grass = pyglet.resource.image('grass-64-res.png')
+    grass = pyglet.resource.image('grass-64-res.png')
+
+    tileset = pyglet.image.load('outdoor-tileset.png')
+    tiles = pyglet.image.ImageGrid(explosion, 6, 16)
+
+    grass = tiles[4, 1] # Also (4,10) (4,11) (5,10) (5,11)
+    water = tiles[3, 3]
+
 
     for tile_x in range(size[0]):
         for tile_y in range(size[1]):

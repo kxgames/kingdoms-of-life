@@ -27,40 +27,11 @@ class StartGame (Message):
                 and not world.has_game_started()
 
     def setup(self, world, id):
-        self.economy = {
-                'chevron': tokens.EarlyGameDemand(
-                    1.0, 5, 5),
-                
-                ## Early-game resources
-                #'target': tokens.EarlyGameDemand(
-                #    1.0, 13, 5, spiral=-1, wave=-1),
-
-                #'spiral': tokens.EarlyGameDemand(
-                #    1.5, 8, 5, target=-1, wave=-1),
-
-                #'wave': tokens.EarlyGameDemand(
-                #    0.5, 18, 5, target=-1, spiral=-1),
-
-                ## Mid-game resources
-                #'oculus': tokens.MidGameDemand(
-                #    1.0, 5, 20, 5),
-
-                #'moon': tokens.MidGameDemand(
-                #    1.0, 13, 28, 5, oculus=1),
-
-                ## Late-game resources
-                #'ridge': tokens.LateGameDemand(
-                #    1.0, 25, 5, valley=-1),
-
-                #'valley': tokens.LateGameDemand(
-                #    1.0, 25, 5, ridge=-1),
-        }
-
-        for demand in self.economy.values():
-            demand.give_id(id)
+        self.map = tokens.Map('maps/small.png')
+        self.map.give_id(id)
 
     def execute(self, world):
-        world.start_game(self.economy)
+        world.start_game(self.map)
 
 
 class GameOver (Message):
@@ -94,26 +65,10 @@ class CreatePlayer (Message):
 
     def setup(self, world, id):
         import random
-
-        # Place the two players on opposite sides of the maps.  This algorithm 
-        # doesn't scale well to more than two players.
-
-        position = kxg.geometry.Vector.null()
-
-        if world.players:
-            position.x = world.map.left + 100
-            position.y = 50 + random.random() * (world.map.height - 250)
-        else:
-            position.x = world.map.right - 100
-            position.y = 50 + random.random() * (world.map.height - 100)
-
-        self.city = tokens.City(self.player, position)
-
         self.player.give_id(id)
-        self.city.give_id(id)
 
     def execute(self, world):
-        world.create_player(self.player, self.city)
+        world.create_player(self.player)
 
 
 class CreateCity (Message):

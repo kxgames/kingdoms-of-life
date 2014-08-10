@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-# Imports (fold)
-from __future__ import division
-
 import kxg
 import tokens
 import messages
@@ -14,159 +11,27 @@ import math
 import numpy
 import pyglet
 import operator
+import random
+import pyglet_gui.core
 
-class OrderedGroup (object):
-
-    # I copied this class out of the pyglet distribution, because it doesn't 
-    # look like I can import pyglet.graphics before initializing the window or 
-    # something.  But the group classes are pretty simple, so there's no reason 
-    # I can't use them.  This is probably a weakness in pyglet, but I'd still 
-    # like to tweak our code to be able to use pyglet.graphics.OrderedGroup.
-
-    def __init__(self, order, parent=None):
-        self.order = order
-        self.parent = parent
-
-    def __cmp__(self, other):
-        if isinstance(other, OrderedGroup):
-            return cmp(self.order, other.order)
-        return -1
-
-    def __eq__(self, other):
-        return (self.__class__ is other.__class__ and
-            self.order == other.order and
-            self.parent == other.parent)
-
-    def __hash__(self):
-        return hash((self.order, self.parent))
-
-    def __repr__(self):
-        return '%s(%d)' % (self.__class__.__name__, self.order)
-
-
-    def set_state(self):
-        pass
-
-    def unset_state(self):
-        pass
-
-    def set_state_recursive(self):
-        if self.parent:
-            self.parent.set_state_recursive()
-        self.set_state()
-
-    def unset_state_recursive(self):
-        self.unset_state()
-        if self.parent:
-            self.parent.unset_state_recursive()
-
-
-class StencilGroup (OrderedGroup):
-
-    def __init__(self, order, parent=None):
-        OrderedGroup.__init__(self, order, parent)
-
-    def set_state(self):
-        from pyglet.gl import GL_STENCIL_TEST
-        from pyglet.gl import GL_DEPTH_BUFFER_BIT
-
-        pyglet.gl.glClear(GL_DEPTH_BUFFER_BIT)
-        pyglet.gl.glEnable(GL_STENCIL_TEST)
-
-    def unset_state(self):
-        from pyglet.gl import GL_STENCIL_TEST
-        pyglet.gl.glDisable(GL_STENCIL_TEST)
-
-
-class ClippingMask (OrderedGroup):
-
-    def __init__(self, order, parent=None):
-        OrderedGroup.__init__(self, order, parent)
-
-    def set_state(self):
-        from pyglet.gl import GL_FALSE, GL_NEVER
-        from pyglet.gl import GL_REPLACE, GL_KEEP
-        from pyglet.gl import GL_STENCIL_BUFFER_BIT
-
-        pyglet.gl.glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE)
-        pyglet.gl.glDepthMask(GL_FALSE)
-        pyglet.gl.glStencilFunc(GL_NEVER, 1, 0xFF)
-        pyglet.gl.glStencilOp(GL_REPLACE, GL_KEEP, GL_KEEP)
-
-        pyglet.gl.glStencilMask(0xFF)
-        pyglet.gl.glClear(GL_STENCIL_BUFFER_BIT)
-
-    def unset_state(self):
-        from pyglet.gl import GL_TRUE
-        pyglet.gl.glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE)
-        pyglet.gl.glDepthMask(GL_TRUE);
-
-
-class WhereMaskIs (OrderedGroup):
-
-    def __init__(self, order, parent=None):
-        OrderedGroup.__init__(self, order, parent)
-
-    def set_state(self):
-        from pyglet.gl import GL_EQUAL
-
-        pyglet.gl.glStencilMask(0x00)
-        pyglet.gl.glStencilFunc(GL_EQUAL, 1, 0xFF)
-
-    def unset_state(self):
-        pass
-
-
-class WhereMaskIsnt (OrderedGroup):
-
-    def __init__(self, order, parent=None):
-        OrderedGroup.__init__(self, order, parent)
-
-    def set_state(self):
-        from pyglet.gl import GL_EQUAL
-
-        pyglet.gl.glStencilMask(0x00);
-        pyglet.gl.glStencilFunc(GL_EQUAL, 0, 0xFF)
-
-    def unset_state(self):
-        pass
-
-
+from pyglet.graphics import OrderedGroup
+from kxg.tools import printf
 
 class Gui (kxg.Actor):
 
     def __init__(self, window):
         kxg.Actor.__init__(self)
 
-        self.player = None
-        self.selection = None
-        self.mode = None
-
         self.window = window
 
-        self.drag_start_city = None
+        self.world = None
+        self.player = None
+        self.selection = None
         self.play_again = False
         self.finished = False
 
-        stencil_group = StencilGroup(5)
-        
-        self.layers = {
-                'map 1':        OrderedGroup(0),
-                'map 2':        OrderedGroup(1),
-                'road':         OrderedGroup(2),
-                'city':         OrderedGroup(3),
-                'capitol':      OrderedGroup(4),
-                'mask':         ClippingMask(6, stencil_group),
-                'army':         WhereMaskIs(7, stencil_group),
-                'fog of war':   WhereMaskIsnt(8, stencil_group),
-                'gui':          OrderedGroup(9),
-                'messages 1':   OrderedGroup(10),
-                'messages 2':   OrderedGroup(11) }
-
-        self.status_area = None
         self.frame_rate = pyglet.clock.ClockDisplay()
     
-
     def get_name(self):
         return 'gui'
 
@@ -181,45 +46,11 @@ class Gui (kxg.Actor):
         self.world = world
         self.player = None
         self.selection = None
-        self.mode = None
-        self.drag_start_city = None
-
         self.finished = False
         self.play_again = False
 
-        self.bin = pyglet.image.atlas.TextureBin()
-
-        gl = pyglet.gl
-        gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
-        gl.glEnable(gl.GL_BLEND)
-        gl.glEnable(gl.GL_LINE_SMOOTH)
-        gl.glHint(gl.GL_LINE_SMOOTH_HINT, gl.GL_DONT_CARE)
-
-        self.tile_icons = {
-                'land' : self.load_image('images/map/grass-64-res.png'),
-                #'Water' : self.load_image('images/map/water-tile.png'),
-                'mountain': self.load_image('images/map/mountains-64-res.png') }
-
-        self.community_icons = {
-                'army': self.load_icon('images/army-icon.png'),
-                'city': self.load_icon('images/city-icon.png'),
-                'capitol': self.load_icon('images/capitol-icon.png') }
-
-        self.normal_shapes = self.load_team_icon('images/normal-shape.png')
-        self.campaign_shapes = self.load_team_icon('images/campaign-shape.png')
-        self.battle_shapes = self.load_team_icon('images/battle-shape.png')
-
-        self.normal_outlines = self.load_team_icon('images/normal-selection.png')
-        self.battle_outlines = self.load_team_icon('images/battle-selection.png')
-
-        self.normal_targets = self.load_team_icon('images/normal-waypoint.png')
-        self.battle_targets = self.load_team_icon('images/battle-waypoint.png')
-
-        self.health_bar = self.load_health_icon('images/full-health.png', 50)
-        self.health_outline = self.load_icon('images/empty-health.png')
-
     def setup_pregame(self):
-        width, height = tokens.World.map.size
+        width, height = 500, 500
         handlers = PregameHandlers(self)
 
         self.window.set_size(width, height)
@@ -227,130 +58,36 @@ class Gui (kxg.Actor):
         self.window.push_handlers(handlers)
 
         self.batch = pyglet.graphics.Batch()
-        self.stencil_batch = pyglet.graphics.Batch()
 
-        group = self.layers['messages 2']
         self.pregame_message = pyglet.text.Label(
-                "Waiting for players...", color=(255, 255, 255, 255),
+                "Waiting for players...",
+                color=(255, 255, 255, 255),
                 font_name='Deja Vu Sans', font_size=42,
                 x=width//2, y=height//2,
                 anchor_x='center', anchor_y='center',
-                batch=self.batch, group=group)
+                batch=self.batch)
 
     def setup_game(self):
         self.teardown_pregame()
 
-        width, height = self.world.map.size
         handlers = GameHandlers(self)
-
-        batch = self.batch
-        gui = self.layers['gui']
-        fog = self.layers['fog of war']
-
-        self.window.set_size(width, height)
-        self.window.set_visible(True)
         self.window.push_handlers(handlers)
 
-        self.mode_sprite = pyglet.text.Label("",
-                font_name='Deja Vu Sans', font_size=12,
-                x=(width / 2), y=5, color=(0, 0, 0, 255),
-                anchor_x='center', anchor_y='bottom',
-                batch=self.batch, group=self.layers['gui'])
-
-        # This image must be at least as big as the map.
-        image = pyglet.image.load('images/fog-of-war.png')
-        self.fog_of_war_sprite = pyglet.sprite.Sprite(
-                image, batch=batch, group=fog)
-
-        self.status_area = StatusArea(self)
-
     def setup_postgame(self):
-        # Turn off any user input.
         handlers = PostgameHandlers(self)
         self.window.push_handlers(handlers)
 
-        if self.selection:
-            self.selection.get_extension(self).unselect()
-
-        # Turn off fog of war.
-        self.fog_of_war_sprite.delete()
-
-        # Draw a transparent back rectangle across the screen.
-        batch = self.batch
-        group = self.layers['messages 1']
-
-        window_width, window_height = self.window.get_size()
-        banner_height = 100
-
-        left, right = 0, window_width
-        top = (window_height + banner_height) / 2
-        bottom = (window_height - banner_height) / 2
-
-        vertices = left, top, right, top, right, bottom, left, bottom
-        color = 0, 0, 0, 0.8
-
-        self.banner_background = batch.add(
-                4, pyglet.gl.GL_QUADS, group,
-                ('v2f', vertices),
-                ('c4f', 4 * color))
-
-        # Draw a victory or defeat message, as appropriate.
-        if self.player is self.world.winner:
-            message = "You won!"
-        else:
-            message = "You lost!"
-
-        group = self.layers['messages 2']
-        self.banner_message = pyglet.text.Label(
-                message, color=(255, 255, 255, 255),
-                font_name='Deja Vu Sans', font_size=42,
-                x=window_width//2, y=window_height//2,
-                anchor_x='center', anchor_y='center',
-                batch=batch, group=group)
-
-        # Draw a "Play again?" message.
-        self.play_again_message = pyglet.text.Label(
-                "Enter: Play Again\nEsc: Quit Game", color=(0, 0, 0, 255),
-                font_name='Deja Vu Sans', font_size=12,
-                x=(window_width - 8), y=(window_height - 5),
-                anchor_x='right', anchor_y='top',
-                multiline=True, width=200,
-                batch=batch, group=group)
-
-        self.play_again_message.set_style('align', 'right')
-        
-
 
     def update(self, time):
-        if self.status_area:
-            self.status_area.update(time)
-
-    def update_mode(self, mode=None):
-        self.mode = mode
-        self.status_area.change_mode()
-
-    def update_selection(self, community=None):
-        if self.selection:
-            self.selection.get_extension(self).unselect()
-        self.selection = community
-        if self.selection:
-            self.selection.get_extension(self).select()
+        pass
 
     def update_background(self):
         if not self.player:
             pyglet.gl.glClearColor(0, 0, 0, 1)
             return
 
-        player_color = colors[self.player.color]
-        player_color = fade_color(player_color, 0.85) + (1,)
         background_color = [x / 255 for x in colors['background']] + [1]
-
-        if self.player in self.world.losers:
-            pyglet.gl.glClearColor(*background_color)
-        elif not self.player.cities:
-            pyglet.gl.glClearColor(*player_color)
-        else:
-            pyglet.gl.glClearColor(*background_color)
+        pyglet.gl.glClearColor(*background_color)
 
 
     def teardown_pregame(self):
@@ -361,140 +98,200 @@ class Gui (kxg.Actor):
         self.window.pop_handlers()
 
     def teardown_postgame(self):
-        self.banner_message.delete()
-        self.banner_background.delete()
-        self.play_again_message.delete()
-
         self.window.pop_handlers()
-
-
-    def path_to_array(self, path):
-        from matplotlib.pyplot import imread
-        buffer = 255 * imread(path)
-        buffer = buffer.astype('uint8')
-        return buffer
-
-    def array_to_texture(self, buffer):
-        width, height = buffer.shape[0:2]
-        data, stride = buffer.tostring(), -buffer.strides[0]
-        image = pyglet.image.ImageData(width, height, 'RGBA', data, stride) 
-        return self.bin.add(image)
-
-    def load_icon(self, path):
-        buffer = self.path_to_array(path)
-
-        buffer[:,:,3] = buffer[:,:,0]
-        buffer[:,:,0:3] = 255
-
-        return self.array_to_texture(buffer)
-
-    def load_team_icon(self, path):
-        master_buffer = self.path_to_array(path)
-        colored_icons = {}
-
-        for name in colors:
-            red, green, blue = colors[name]
-            buffer = master_buffer.copy()
-            
-            buffer[:,:,3] = buffer[:,:,0]
-            buffer[:,:,0] = red
-            buffer[:,:,1] = green
-            buffer[:,:,2] = blue
-
-            colored_icons[name] = self.array_to_texture(buffer)
-
-        return colored_icons
-
-    def load_health_icon(self, path, frames):
-        master_buffer = self.path_to_array(path)
-        health_bar = []
-
-        width, height = master_buffer.shape[0:2]
-        y, x = numpy.mgrid[0:width, 0:height]
-        angles = numpy.arctan2(height//2 - y, x - width//2)
-
-        for index in range(frames):
-            percent = index / (frames - 1)
-            threshold = numpy.pi * (1 - percent)
-
-            buffer = master_buffer.copy()
-            buffer[:,:,3] = buffer[:,:,0] * (angles >= threshold)
-            buffer[:,:,0:3] = 255
-
-            frame = self.array_to_texture(buffer)
-            health_bar.append(frame)
-
-        return health_bar
-
-    def load_image(self, path):
-        buffer = self.path_to_array(path)
-
-        return self.array_to_texture(buffer)
 
 
     def handle_start_game(self, message, is_mine):
         self.setup_game()
 
-    def handle_create_player(self, message, is_mine):
-        print 'Gui.handle_create_player()'
-        if is_mine:
-            print '  ', message
-            print '  ', message.player
-            self.player = message.player
-            self.player.get_extension(self).setup_for_real()
-
-    def handle_create_city(self, message, is_mine):
-        # This is a hack for the first city.  The first city gets created 
-        # before self.player is set, so update_engagement() doesn't work like 
-        # it should.  There's probably a better way to address this, but it 
-        # probably involves tweaking the game engine.
-        message.city.get_extension(self).update_engagement()
-
-    def handle_destroy_army(self, message, is_mine):
-        if self.selection is message.army:
-            self.update_selection()
-
-    def handle_end_battle(self, message, is_mine):
-        if self.selection is message.battle.get_zombie_city():
-            self.update_selection()
-
 
     def show_error(self, message):
-        self.status_area.add_warning(message.error)
+        print(message.error)
 
 
 
-colors = {            # (fold)
-        'red':          (164,   0,   0),
-        'brown':        (143,  89,   2),
-        'orange':       (206,  92,   0),
-        'yellow':       (196, 160,   0),
-        'green':        ( 78, 154,   6),
-        'blue':         ( 32,  74, 135),
-        'purple':       ( 92,  53, 102),
-        'black':        ( 46,  52,  54),
-        'background':   (255, 250, 240),
-}
+class MapWidget (pyglet_gui.core.Viewer):
 
-half_white = 255, 255, 255, 128
+    # Get size from parent, which presumably will be an hbox or a vbox or 
+    # something.  
+    #
+    # Desired size       vs. Actual size
+    # get_desired_size()     get_size()
+    #
+    #
+    # def resize():
+    #   pass
+    #
+    # def reposition():
+    #   pass
 
-def fade_color(source, extent=0.80):
-    r = interpolate_color(source[0], 255, extent) / 255
-    g = interpolate_color(source[1], 255, extent) / 255
-    b = interpolate_color(source[2], 255, extent) / 255
-    return (r, g, b)
+    # Only knows about screen coords.
+    # Really this class has to manage the viewport.
+    # Should the viewport be a member of the map extension?
+    #
+    # This class:
+    # Convert screen coords to pixel coords
+    #
+    # Map Extension:
+    # Convert pixel coords to world coords
+    
+    # Keep track of viewport: part of map that is visible in pixel coords
+    # viewport moves in response to mouse push events.
+    #
+    # Managing a viewport is good because that's pretty general.  Can emit 
+    # viewport_moved events, can convert from screen to pixel coordinates, and 
+    # can manage a TranslationGroup.
+    #
+    # Do I want to convert to world coords in two steps, though.  Widget: 
+    # screen->pixel, MapExt: pixel->world.  I can always subclass and provide a 
+    # convenience method.  I definitely can't do anything with world 
+    # coordinates in a general sense, because world coordinates could be 
+    # defined however.
+    #
+    def __init__(self, gui):
+        self.gui = gui
+        self.translate_group = ...
+        self.map_gui = gui.map.get_extension(gui)
 
-def interpolate_color(start, end, extent):
-    return start + extent * (end - start)
+    def get_path(self):
+        return ["map"]
+
+    def load_graphics(self):
+        self.map_gui.load_map(translate_group)
+
+        screen_coords
+        pixel_coords
+        world_coords
+        viewport = kxg.geometry.Rect();
+
+    def on_mouse_push(self, dx, dy):
+        viewport.displace((dx, dy))     # All screen coords.
+
+        # Could in principle make viewport bigger or smaller.
+        self.map_gui.draw_map(viewport)
+
+    def on_mouse_click(self, x, y):
+        self.map.get_world_coords(viewport, x, y)
 
 
-class BaseHandlers (object):
+class MapExtension (kxg.TokenExtension):
+
+    # For big map:  Keep track of viewport.  As viewport moves, change 
+    # visibility of the tile sprites so that only sprites within the viewport 
+    # are visible.
+
+    def __init__(self, gui, map):
+        self.gui = gui
+        self.map = map
+        self.sprites = []
+
+        tileset_path = 'images/open-game-art/outdoor-tileset.png'
+        tileset_image = pyglet.resource.image(tileset_path)
+        tileset = pyglet.image.ImageGrid(tileset_image, 6, 16)
+
+        window_width = gui.window.width
+        window_height = gui.window.height
+        tile_width = tileset[0].width       # All tiles are the same size.
+        tile_height = tileset[0].height
+
+        # Make a sprite for each tile.
+
+        for row in range(map.rows - 1):
+            for col in range(map.columns - 1):
+                terrains = (
+                    map.tiles[row + 0, col + 0].terrain, # top left
+                    map.tiles[row + 0, col + 1].terrain, # bottom left
+                    map.tiles[row + 1, col + 1].terrain, # bottom right
+                    map.tiles[row + 1, col + 0].terrain, # top right
+                )
+
+                # 4 land
+
+                if terrains == ('land', 'land', 'land', 'land'):
+                    ##         empty, flower,  grass,  grass,  grass
+                    #indices = (4,1), (4,10), (4,11), (5,10), (5,11)
+                    #weights =    80,      3,     10,     10,     10
+                    #index = kxg.tools.weighted_choice(indices, weights)
+                    index = 4, 1
+
+                # 3 land, 1 sea
+
+                elif terrains == ('land', 'land', 'land', 'sea'):
+                    index = 4, 3
+
+                elif terrains == ('land', 'land', 'sea', 'land'):
+                    index = 5, 3
+
+                elif terrains == ('land', 'sea', 'land', 'land'):
+                    index = 5, 4
+
+                elif terrains == ('sea', 'land', 'land', 'land'):
+                    index = 4, 4
+
+                # 2 land, 2 sea
+
+                elif terrains == ('land', 'land', 'sea', 'sea'):
+                    index = 4, 2
+
+                elif terrains == ('land', 'sea', 'sea', 'land'):
+                    index = 3, 1
+
+                elif terrains == ('sea', 'sea', 'land', 'land'):
+                    index = 4, 0
+
+                elif terrains == ('sea', 'land', 'land', 'sea'):
+                    index = 5, 1
+
+                # 1 land, 3 sea
+
+                elif terrains == ('land', 'sea', 'sea', 'sea'):
+                    index = 3, 2
+
+                elif terrains == ('sea', 'sea', 'sea', 'land'):
+                    index = 3, 0
+
+                elif terrains == ('sea', 'sea', 'land', 'sea'):
+                    index = 5, 0
+
+                elif terrains == ('sea', 'land', 'sea', 'sea'):
+                    index = 5, 2
+
+                # 4 sea
+
+                elif terrains == ('sea', 'sea', 'sea', 'sea'):
+                    index = 3, 3
+
+                # Diagonal combinations of 2 land and 2 sea are not supported.  
+
+                else:
+                    printf('Unsupported tile at {}x{}', row, column)
+                    continue
+
+                x = row * tile_width
+                y = window_height - (col + 1) * tile_height
+
+                # It seems like I have to keep references to all my sprites in 
+                # order to keep them from getting garbage collected.
+
+                image = tileset[index]
+                sprite = pyglet.sprite.Sprite(image, x, y, batch=gui.batch)
+                self.sprites.append(sprite)
+
+
+    def draw_on_map(self):
+        pass
+
+    def draw_on_minimap(self):
+        pass
+
+
+
+class BaseHandlers:
 
     def __init__(self, gui):
         self.gui = gui
 
     def on_draw(self):
-
         self.gui.window.clear()
         self.gui.update_background()
         self.gui.batch.draw()
@@ -515,116 +312,39 @@ class GameHandlers (BaseHandlers):
         BaseHandlers.__init__(self, gui)
 
     def on_mouse_press(self, x, y, button, modifiers):
-        position = kxg.geometry.Vector(x, y)
-        find_closest_community = self.gui.player.find_closest_community
-        
-        if button == pyglet.window.mouse.LEFT:
-            if self.gui.mode == 'develop':
-                drag_start = find_closest_community(position, cutoff=40)
-                if drag_start and drag_start.is_city():
-                    self.gui.drag_start_city = drag_start
-
-        if button == pyglet.window.mouse.MIDDLE:
-            print 'Players:', self.gui.world.players
-            print
-            for player in self.gui.world.players:
-                print ' %s:' % player.name
-                print ' Cities:', player.cities
-                print ' Armies:', player.armies
-            print
+        pass
 
     def on_mouse_drag(self, x, y, dx, dy, button, modifiers):
         position = kxg.geometry.Vector(x, y)
         
         if button == pyglet.window.mouse.LEFT:
-            drag_start = self.gui.drag_start_city
-            if drag_start:
-                drag_dist = position.get_distance(drag_start.position)
-                if self.gui.mode == 'develop' and drag_dist > 40:
-                    self.gui.update_mode('develop road')
-                elif self.gui.mode == 'develop road' and drag_dist <= 40:
-                    self.gui.update_mode('develop')
+            pass
 
     def on_mouse_release(self, x, y, button, modifiers):
         position = kxg.geometry.Vector(x, y)
-        find_closest_community = self.gui.player.find_closest_community
         
         if button == pyglet.window.mouse.LEFT:
-            if self.gui.mode == 'fight':
-                message = messages.CreateArmy(self.gui.player, position)
-                self.gui.send_message(message)
-                self.gui.update_mode()
-                self.gui.update_selection()
-
-            elif self.gui.mode == 'develop road':
-                drag_start = self.gui.drag_start_city
-                drag_end = self.gui.world.find_closest_community(position, cutoff=40)
-                self.gui.drag_start_city = None
-                
-                if drag_start and drag_end:
-                    if drag_start.is_city() and drag_end.is_city():
-                        if not (drag_start is drag_end):
-                            message = messages.CreateRoad(self.gui.player, drag_start, drag_end)
-                            self.gui.send_message(message)
-                            self.gui.update_selection()
-                self.gui.update_mode()
-
-            elif self.gui.mode == 'develop':
-                if self.gui.drag_start_city:
-                    #upgrade?
-                    self.gui.drag_start_city = None
-                else:
-                    message = messages.CreateCity(self.gui.player, position)
-                    self.gui.send_message(message)
-                    self.gui.update_mode()
-                self.gui.update_selection()
-
-            else:
-                community = find_closest_community(position, cutoff=40)
-                self.gui.update_selection(community)
+            pass
 
         if button == pyglet.window.mouse.RIGHT:
-            target = self.gui.world.find_closest_community(position, cutoff=40)
-            if target and target.player is self.gui.player:
-                target = None
+            pass
 
-            if self.gui.selection and self.gui.selection.can_move():
-                if target and self.gui.player.can_see(target):
-                    if self.gui.selection.is_chasing():
-                        campaign = self.gui.selection.get_campaign()
-                        if campaign.get_community() is target:
-                            # Trying to attack a community that the 
-                            # army is already chasing. Just ignore 
-                            # it.
-                            pass
-                        else:
-                            # Cancel campaign
-                            # Request battle
-                            pass
-                    else:
-                        message = messages.RequestBattle(self.gui.selection, target)
-                        self.gui.send_message(message)
-                else:
-                    message = messages.MoveArmy(self.gui.selection, position)
-                    self.gui.send_message(message)
+    def on_mouse_motion(self, x, y, dx, dy):
+        pass
 
     def on_key_press(self, symbol, modifiers):
         if symbol == pyglet.window.key.F:
-            self.gui.update_mode('fight')
+            pass
         if symbol == pyglet.window.key.D:
-            self.gui.update_mode('develop')
+            pass
+        if symbol == pyglet.window.key._1:
+            pass
         if symbol == pyglet.window.key.SPACE and self.gui.selection:
-            if self.gui.selection.is_in_battle():
-                message = messages.ReinforceCommunity(self.gui.selection)
-            else:
-                message = messages.UpgradeCommunity(self.gui.selection)
-            self.gui.send_message(message)
+            pass
         if symbol == pyglet.window.key.BACKSPACE and self.gui.selection:
-            message = messages.RetreatBattle(self.gui.selection)
-            self.gui.send_message(message)
+            pass
         if symbol == pyglet.window.key.ESCAPE:
-            self.gui.update_mode()
-            return True
+            pass
 
 
 class PostgameHandlers (BaseHandlers):
@@ -642,568 +362,4 @@ class PostgameHandlers (BaseHandlers):
             return True
 
 
-
-class PlayerExtension (kxg.TokenExtension):
-
-    def __init__(self, gui, player):
-        self.gui = gui
-        self.player = player
-        self.wealth_label = None
-        self.cost_label = None
-
-    def setup(self):
-        pass
-
-    def setup_for_real(self):
-        if self.player is not self.gui.player:
-            return
-
-        window = self.gui.window
-        batch = self.gui.batch
-        layer = self.gui.layers['gui']
-
-        self.wealth_label = pyglet.text.Label(
-                font_name='Deja Vu Sans', font_size=12,
-                color=(0, 0, 0, 255), bold=True,
-                x=5, y=window.height - 5,
-                anchor_x='left', anchor_y='top',
-                batch=batch, group=layer)
-
-        self.cost_label = pyglet.text.Label(
-                font_name='Deja Vu Sans', font_size=12,
-                color=(0, 0, 0, 255),
-                x=5, y=window.height - 24,
-                anchor_x='left', anchor_y='top',
-                multiline=True, width=200,
-                batch=batch, group=layer)
-
-        self.wealth_label.set_style('background_color', half_white)
-        self.cost_label.set_style('background_color', half_white)
-
-    def update_wealth(self):
-        wealth = self.player.wealth
-        revenue = self.player.revenue
-
-        if self.wealth_label:
-            self.wealth_label.text = '%d/%+d' % (wealth, revenue)
-
-    def update_costs(self):
-        player = self.player
-
-        if not self.cost_label:
-            return
-
-        message  = 'Build City: %d\n' % player.get_city_price()
-        message += 'Build Army: %d\n' % player.get_army_price()
-        message += 'Build Road: %d\n' % player.get_road_price()
-
-        selection = self.gui.selection
-        if selection:
-            if selection.is_city():
-                message += 'Upgrade City: %d\n' % selection.get_upgrade_price()
-            elif selection.is_army():
-                message += 'Upgrade Army: %d\n' % selection.get_upgrade_price()
-                message += 'Reinforce: %d\n' % selection.get_reinforce_price()
-                message += 'Retreat: %d\n' % selection.get_retreat_price()
-
-        self.cost_label.text = message
-
-    def teardown(self):
-        self.wealth_label.delete()
-
-
-class CommunityExtension (kxg.TokenExtension):
-
-    def __init__(self, gui, token):
-        self.gui = gui
-        self.token = token
-        self.active = True
-
-        batch = gui.batch
-        layer = gui.layers[self.type]
-        back = pyglet.graphics.OrderedGroup(0, parent=layer)
-        front = pyglet.graphics.OrderedGroup(1, parent=layer)
-
-        self.back = back
-        self.front = front
-
-        self.type_sprite = pyglet.sprite.Sprite(
-                gui.community_icons[self.type],
-                batch=batch, group=front)
-
-        self.engagement_sprite = pyglet.sprite.Sprite(
-                gui.normal_shapes[token.player.color],
-                batch=batch, group=back)
-
-        self.selection_sprite = pyglet.sprite.Sprite(
-                gui.normal_outlines[token.player.color],
-                batch=batch, group=back)
-
-        self.health_bar_sprite = pyglet.sprite.Sprite(
-                gui.health_bar[-1],
-                batch=batch, group=front)
-
-        self.health_outline_sprite = pyglet.sprite.Sprite(
-                gui.health_outline,
-                batch=batch, group=front)
-
-        self.level_sprite = pyglet.text.Label(
-                str(token.level),
-                font_name='Deja Vu Sans Bold', font_size=14,
-                color=(255, 255, 255, 255),
-                anchor_x='center', anchor_y='center',
-                batch=batch, group=front)
-
-        self.vision_sprite = None
-
-        self.selection_sprite.visible = False
-        self.update_position()
-
-
-    def setup(self):
-        pass
-
-    def update(self, time):
-        pass
-
-    def update_position(self):
-        vector = self.token.position - (40, 40)
-        position = x, y = vector.tuple
-
-        self.type_sprite.position = position
-        self.engagement_sprite.position = position
-        self.selection_sprite.position = position
-        self.health_bar_sprite.position = position
-        self.health_outline_sprite.position = position
-        self.level_sprite.x = x + 40
-        self.level_sprite.y = y + 50.25
-
-        self.update_vision()
-
-    def update_health(self):
-        frames = self.gui.health_bar
-
-        health = self.token.get_health()
-        max_health = self.token.get_max_health()
-        max_index = len(frames) - 1
-        index = max_index * health / max_health
-        self.health_bar_sprite.image = frames[int(index)]
-
-    def update_level(self):
-        level = self.token.get_level()
-        self.level_sprite.text = str(level)
-
-    def update_engagement(self):
-        color = self.token.player.color
-
-        if self.token.is_in_battle():
-            self.engagement_sprite.image = self.gui.battle_shapes[color]
-            self.selection_sprite.image = self.gui.battle_outlines[color]
-
-        else:
-            self.engagement_sprite.image = self.gui.normal_shapes[color]
-            self.selection_sprite.image = self.gui.normal_outlines[color]
-
-        self.update_vision()
-
-    def update_vision(self):
-        if self.vision_sprite:
-            self.vision_sprite.delete()
-            self.vision_sprite = None
-
-        if self.gui.player is self.token.player:
-            center = self.token.position
-            radius = self.token.get_line_of_sight()
-            batch = self.gui.batch
-            group = self.gui.layers['mask']
-
-            self.vision_sprite = drawing.draw_circle(center, radius,
-                    color=drawing.white, batch=batch, group=group)
-
-    def teardown(self):
-        self.active = False
-        self.type_sprite.delete()
-        self.engagement_sprite.delete()
-        self.selection_sprite.delete()
-        self.health_bar_sprite.delete()
-        self.health_outline_sprite.delete()
-        self.level_sprite.delete()
-
-        if self.vision_sprite:
-            self.vision_sprite.delete()
-
-
-    def select(self):
-        self.selection_sprite.visible = True
-
-    def unselect(self):
-        if self.active:
-            self.selection_sprite.visible = False
-
-
-class ArmyExtension (CommunityExtension):
-    type = 'army'
-
-    def __init__(self, gui, token):
-        CommunityExtension.__init__(self, gui, token)
-
-        self.target_sprite = pyglet.sprite.Sprite(
-                gui.normal_targets[token.player.color],
-                batch=gui.batch, group=gui.layers['gui'])
-
-        self.target_sprite.visible = False
-
-    def update(self, time):
-        position = self.token.position
-        target = self.token.target
-
-        if self.token.player is not self.gui.player:
-            return
-
-        if target:
-            distance = position.get_distance(target)
-            if distance < 30: self.hide_target()
-
-    def update_target(self):
-        if self.token.player is not self.gui.player:
-            return
-
-        position = self.token.target - (8, 8)
-        self.target_sprite.visible = True
-        self.target_sprite.position = position.tuple
-
-    def update_engagement(self):
-        color = self.token.player.color
-
-        if self.token.is_in_battle():
-            self.engagement_sprite.image = self.gui.battle_shapes[color]
-            self.selection_sprite.image = self.gui.battle_outlines[color]
-
-        elif self.token.is_chasing():
-            self.engagement_sprite.image = self.gui.campaign_shapes[color]
-            self.selection_sprite.image = self.gui.battle_outlines[color]
-
-        else:
-            self.engagement_sprite.image = self.gui.normal_shapes[color]
-            self.selection_sprite.image = self.gui.normal_outlines[color]
-
-    def hide_target(self):
-        self.target_sprite.visible = False
-
-
-class CityExtension (CommunityExtension):
-
-    type = 'city'
-
-    def __init__(self, gui, token):
-        CommunityExtension.__init__(self, gui, token)
-        self.inner_circle = None
-        self.outer_circle = None
-
-        batch = gui.batch
-        layer = gui.layers['city']
-        x, y = self.token.position.tuple
-        color = colors[token.player.color] + (255,)
-
-        self.revenue_label = pyglet.text.Label(
-                font_name='Deja Vu Sans', font_size=12,
-                x=(x - 6), y=(y - 35), color=color,
-                anchor_x='center', anchor_y='top',
-                batch=batch, group=layer)
-
-        background_color = colors['background'] + (255,)
-        self.revenue_label.set_style('background_color', background_color)
-
-        self.update_capitol()
-        self.update_engagement()
-        self.update_revenue()
-
-    def update(self, time):
-        self.update_revenue()
-
-    def update_revenue(self):
-        if self.gui.player is not self.token.player:
-            self.revenue_label.visible = False
-            return
-
-        revenue = self.token.get_revenue()
-        max_revenue = self.token.get_maximum_revenue()
-        self.revenue_label.text = '%+d/%d' % (revenue, max_revenue)
-
-    def update_capitol(self):
-        icon = 'capitol' if self.token.is_capitol() else 'city'
-
-        self.type_sprite = pyglet.sprite.Sprite(
-                self.gui.community_icons[icon],
-                batch=self.gui.batch, group=self.front)
-
-        self.update_position()
-
-    def update_engagement(self):
-        CommunityExtension.update_engagement(self)
-
-        gui = self.gui
-        token = self.token
-
-        num_vertices = 50
-        center = token.position
-        vector = kxg.geometry.Vector.from_radians
-
-        inner_vertices = ()
-        outer_vertices = ()
-        inner_radius = token.buffer
-        outer_radius = token.border
-
-        for iteration in range(num_vertices + 1):
-            angle = math.pi * iteration / num_vertices
-            if iteration % 2: angle *= -1
-
-            inner_vertex = token.position + inner_radius * vector(angle)
-            outer_vertex = token.position + outer_radius * vector(angle)
-            inner_vertices += inner_vertex.tuple
-            outer_vertices += outer_vertex.tuple
-
-        inner_vertices = inner_vertices[0:2] + inner_vertices + inner_vertices[-2:]
-        outer_vertices = outer_vertices[0:2] + outer_vertices + outer_vertices[-2:]
-
-        player_color = colors[token.player.color]
-        player_color = fade_color(player_color, 0.85)
-        background_color = colors['background']
-
-        if self.inner_circle: 
-            self.inner_circle.delete()
-            self.inner_circle = None
-        if self.outer_circle:
-            self.outer_circle.delete()
-            self.outer_circle = None
-
-        if token.player is gui.player:
-            self.inner_circle = gui.batch.add(
-                    num_vertices + 3,
-                    pyglet.gl.GL_TRIANGLE_STRIP,
-                    gui.layers['map 2'],
-                    ('v2f', inner_vertices),
-                    ('c3B', background_color * (num_vertices + 3)) )
-
-            self.outer_circle = gui.batch.add(
-                    num_vertices + 3,
-                    pyglet.gl.GL_TRIANGLE_STRIP,
-                    gui.layers['map 1'],
-                    ('v2f', outer_vertices),
-                    ('c3f', player_color * (num_vertices + 3)) )
-
-        else:
-            self.outer_circle = gui.batch.add(
-                    num_vertices + 3,
-                    pyglet.gl.GL_TRIANGLE_STRIP,
-                    gui.layers['map 2'],
-                    ('v2f', outer_vertices),
-                    ('c3B', background_color * (num_vertices + 3)) )
-
-
-class RoadExtension (kxg.TokenExtension):
-
-    def __init__(self, gui, road):
-        self.gui = gui
-        self.road = road
-        self.width = 1.5
-        self.sprite = None
-
-        self.update_owner()
-
-    def update_owner(self):
-        if self.sprite:
-            self.sprite.delete()
-
-        start, end = self.road.start.position, self.road.end.position
-        stroke = self.width
-
-        if self.road.is_blocked(): color = drawing.gray
-        else: color = drawing.colors[self.road.player.color]
-
-        batch = self.gui.batch
-        group = self.gui.layers['road']
-
-        self.sprite = drawing.draw_pretty_line(
-                start, end, stroke, color=color, batch=batch, group=group)
-
-    def setup(self):
-        pass
-
-    def teardown(self):
-        self.sprite.delete()
-
-
-class MapExtension (kxg.TokenExtension):
-    def __init__(self, gui, map):
-        self.gui = gui
-        self.map = map
-        self.tile_sprites = []
-        self.dots = []
-
-        #'map 1':        OrderedGroup(0),
-        #'map 2':        OrderedGroup(1),
-        #'road':         OrderedGroup(2),
-        #'city':         OrderedGroup(3),
-        #'capitol':      OrderedGroup(4),
-        #'mask':         ClippingMask(6, stencil_group),
-        #'army':         WhereMaskIs(7, stencil_group),
-        #'fog of war':   WhereMaskIsnt(8, stencil_group),
-        #'gui':          OrderedGroup(9),
-        #'messages 1':   OrderedGroup(10),
-        #'messages 2':   OrderedGroup(11) }
-
-        batch = gui.batch
-        layer = gui.layers['map 1']
-        size = map.array_size
-        width = map.tile_width
-        offset = width / 2.0
-
-        print 'Map size is: %s' %size
-
-        for tile_x in range(size[0]):
-            for tile_y in range(size[1]):
-                x = tile_x * width - offset
-                y = tile_y * width - offset
-                batch.add(1, GL_POINTS, gui.layers['map 2'],
-                        ('v2f', (x, y)),
-                        ('c3B', (255,0,0)) )
-                #self.tile_sprites.append(pyglet.sprite.Sprite(
-                #        gui.tile_icons['land'],
-                #        x=x, y=y,
-                #        batch=batch, group=layer) )
-
-    def setup(self):
-        pass
-        ##is setup being called?
-        #vlist = self.vertex_list
-
-        #grass_img = pyglet.image.load('images/map/grass-64-res.png')
-        #grass_tex = grass_img.get_texture()
-        #mountain_img = pyglet.image.load('images/map/mountains-64-res.png')
-        #mountain_tex = mountain_img.get_texture()
-
-        #size = self.map.array_size
-        #tile_width = self.map.tile_width
-        #tile_width = self.map.tile_width
-        #tile_half_width = tile_width / 2.0
-
-        #vertex_count = 4 * size[0] * size[1]
-
-        #pyglet.gl.glEnable(grass_tex.target)
-        #pyglet.gl.glBindTexture(grass_tex.target, grass_tex.id)
-        #self.vertex_list = batch.add(vertex_count, GL_QUADS, layer, 'v2f', 't2f')
-
-        #for tile_x in range(size[0]):
-        #    for tile_y in range(size[1]):
-        #        # i initially is the first position of the tile in the 
-        #        # 2D vertex list. The corner for loop increments i by 2 
-        #        # because each coordinate takes two spots in the vertex 
-        #        # list.
-        #        i = 2 * (4 * (y * size[0] + x) + corner)
-
-        #        tile_type = self.map.get_type(tile_x, tile_y)
-        #        pyglet.gl.glBindTexture(grass_tex.target, grass_tex.id)
-        #        for corner in (-1,-1), (1,-1), (1,1), (-1,1):
-        #            dx,dy = corner
-        #            x = tile_x + dx * tile_half_width
-        #            y = tile_y + dy * tile_half_width
-        #            vlist.vertices[i:i+2] = [x, y]
-
-        #            tx, ty = corner
-        #            tx = (tx + 1) / 2.0
-        #            ty = (ty + 1) / 2.0
-        #            vlist.tex_coords[i:i+2] = [tx,ty]
-
-        #            i += 2;
-
-        #pyglet.gl.glDisable(grass_tex.target)
-
-class DemandExtension (kxg.TokenExtension):
-
-    def __init__(self, gui, demand):
-        self.gui = gui
-        self.demand = demand
-
-        self.plot = None
-
-        self.offset = 0
-
-        #drawing.draw_circle((300, 300), 50, 
-                #batch=self.gui.batch, group=self.gui.layers['gui'])
-
-    def setup(self):
-        pass
-
-    def update_history(self):
-        num_vertices = len(self.demand.history)
-        vertices = ()
-        colors = drawing.red.tuple * num_vertices
-
-        print self.demand.times[-1], self.demand.history[-1]
-        print
-
-        for pair in zip(self.demand.times, self.demand.history):
-            vertices += 10 * pair[0] + 100, 500 * pair[1] + 100
-
-        self.offset += 10
-        dx = self.offset
-        self.gui.batch.add(
-                3, pyglet.gl.GL_LINES, self.gui.layers['gui'],
-                ('v2f', (100 + dx, 200, 500 + dx, 200, 350 + dx, 400)),
-                ('c4B', 3 * drawing.green.tuple))
-
-        if self.plot:
-            self.plot.delete()
-
-        self.plot = self.gui.batch.add(
-                num_vertices, pyglet.gl.GL_LINE_STRIP, self.gui.layers['gui'],
-                ('v2f', vertices), ('c4B', colors))
-
-    def teardown(self):
-        print self.demand.resource, self.demand.history
-
-
-
-class StatusArea (object):
-
-    def __init__(self, gui):
-        self.gui = gui
-        self.warning = ""
-        self.elapsed = 0
-
-        width, height = self.gui.window.get_size()
-        self.widget = pyglet.text.Label(
-                "", color=(0, 0, 0, 255),
-                font_name='Deja Vu Sans', font_size=12,
-                x=width//2, y=5,
-                anchor_x='center', anchor_y='bottom',
-                batch=self.gui.batch, group=self.gui.layers['messages 2'])
-
-        self.widget.set_style('background_color', half_white)
-
-    def change_mode(self):
-        if self.gui.mode == 'develop':
-            mode = "Click to place a city."
-        elif self.gui.mode == 'fight':
-            mode = "Click to place an army."
-        elif self.gui.mode == 'develop road':
-            mode = "Drag to another city to place a road."
-        else:
-            mode = ""
-
-        self.widget.text = mode
-        self.warning = False
-
-    def add_warning(self, message):
-        self.widget.text = message
-        self.warning = True
-        self.elapsed = 0
-
-    def update(self, time):
-
-        if self.warning:
-            self.elapsed += time
-            if self.elapsed > 2:
-                self.change_mode()
 

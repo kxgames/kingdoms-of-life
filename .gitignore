@@ -1,3 +1,5 @@
+/env
+/images/resource-icons
 *.pyc
 *.sw*
-images/resource-icons
+

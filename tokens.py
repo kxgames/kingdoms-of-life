@@ -1,18 +1,15 @@
-from __future__ import division
-
-import kxg
-import gui, messages, helpers, arguments, map
+import kxg, networkx
+import messages, helpers, gui, arguments
 
 class World (kxg.World):
-
-    map = map.Map(10, 10, 64)
 
     def __init__ (self):
         kxg.World.__init__(self)
 
+        self.map = None
         self.players = []
-        self.losers = []; self.winner = None
-        self.economy = {}
+        self.winner = None
+        self.losers = []
 
         self.game_started = False
         self.game_ended = False
@@ -21,16 +18,9 @@ class World (kxg.World):
     def update(self, time):
         self.elapsed_time += time
 
-        for demand in self.economy.values():
-            demand.update(time)
-
-
-    def start_game(self, economy):
+    def start_game(self, map):
         self.game_started = True
-        self.economy = economy
-
-        for demand in economy.values():
-            self.add_token(demand)
+        self.map = self.add_token(map)
 
     def game_over(self, winner):
         self.game_ended = True
@@ -45,13 +35,9 @@ class World (kxg.World):
         return self.game_ended
 
 
-    def create_player(self, player, city):
+    def create_player(self, player):
         self.add_token(player, self.players)
         player.set_world(self)
-
-        self.add_token(city)
-        city.player.add_city(city)
-        city.upgrade()
 
     def create_city(self, city, price):
         self.add_token(city)
@@ -171,11 +157,6 @@ class World (kxg.World):
         self.players.remove(player)
         player.teardown()
     
-
-    @kxg.read_only
-    def get_demand(self, resource):
-        return self.economy[resource].get()
-
 
     @kxg.read_only
     def find_closest_city(self, target, player=None, cutoff=None):
@@ -304,22 +285,8 @@ class Referee (kxg.Referee):
         pass
 
 
-    def handle_capture_city(self, message, is_mine):
-        # Check to see if the defender has lost.
-        if message.battle.defender.was_defeated():
-            response = messages.DefeatPlayer(message.battle.defender)
-            self.send_message(response)
-
-    def handle_defeat_player(self, message, is_mine):
-        if len(self.world.players) == 1:
-            winner = self.world.players[0]
-            response = messages.GameOver(winner)
-            self.send_message(response)
-
-
     def show_error(self, message):
-        print message.error
-
+        print(message.error)
 
 
 class Player (kxg.Token):
@@ -328,6 +295,7 @@ class Player (kxg.Token):
     starting_wealth = 200
     starting_revenue = 25
     
+
     def __init__(self, name, color):
         kxg.Token.__init__(self)
 
@@ -349,7 +317,7 @@ class Player (kxg.Token):
             self.wealth = 10000
 
     def __extend__(self):
-        return {gui.Gui: gui.PlayerExtension}
+        return {}
 
     def __str__(self):
         return '<Player name=%s>' % self.name
@@ -590,6 +558,50 @@ class Player (kxg.Token):
         return (not self.cities and self.played_city) or self.is_dead()
 
 
+class Map (kxg.Token):
+
+    terrains = { # (fold)
+            (0, 255, 0): "land",
+            (0, 0, 255): "sea"
+    }
+
+    def __init__(self, path):
+        kxg.Token.__init__(self)
+        self.path = path
+        self.tiles = {}
+        self.graph = None
+
+    def __extend__(self):
+            return {gui.Gui: gui.MapExtension}
+
+    def __getitem__(self, index):
+        return self.grid[index]
+
+    def __str__(self):
+        return '<Map w={} h={}>'.format(self.columns, self.rows)
+
+    def setup(self, world):
+        from PIL import Image
+
+        image = Image.open(self.path)
+        self.rows, self.columns = image.size
+
+        self.graph = networkx.grid_2d_graph(self.rows, self.columns)
+
+        for row in range(self.rows):
+            for col in range(self.columns):
+                pixel = image.getpixel((row, col))
+                terrain = Map.terrains[pixel]
+                self.tiles[row, col] = Tile(row, col, terrain)
+
+
+class Tile:
+
+    def __init__(self, row, col, terrain):
+        self.node = row, col
+        self.terrain = terrain
+
+
 class Community (kxg.Token):
 
     # Settings (fold)
@@ -761,7 +773,7 @@ class City (Community):
         self.roads = []
 
     def __extend__(self):
-        return {gui.Gui: gui.CityExtension}
+        return {}
 
     def __str__(self):
         return '<City id=%s xy=%s>' % (self.get_id(), self.position)
@@ -896,7 +908,7 @@ class Army (Community):
         self.target = None
 
     def __extend__(self):
-        return {gui.Gui: gui.ArmyExtension}
+        return {}
 
     def __str__(self):
         return "<Army id=%s>" % self.get_id()
@@ -1063,7 +1075,7 @@ class Road (kxg.Token):
         yield self.end
 
     def __extend__(self):
-        return {gui.Gui: gui.RoadExtension}
+        return {}
 
     def __str__(self):
         return "<Road id=%s>" % self.get_id()
@@ -1121,7 +1133,6 @@ class Road (kxg.Token):
     @kxg.read_only
     def is_blocked(self):
         return self.start.is_in_battle() or self.end.is_in_battle()
-
 
 
 class Campaign (kxg.Token):
@@ -1297,156 +1308,6 @@ class Battle (kxg.Token):
     @kxg.read_only
     def was_successful(self):
         return len(self.communities.keys()) <= 1
-
-
-
-class Demand (kxg.Token):
-
-    def __init__(self, **relations):
-        kxg.Token.__init__(self)
-        self.relations = relations
-        self.current_value = 0
-        self.previous_value = 0
-        self.perturbations = []
-
-    def __extend__(self):
-        return {gui.Gui: gui.DemandExtension}
-
-
-    def setup(self, world):
-        self.world = world
-        self.economy = world.economy
-
-        self.current_value = self.update_demand()
-        self.previous_value = self.current_value
-        self.monopoly = False
-
-        self.times = [0]
-        self.history = [self.current_value]
-        self.history_timer = 0
-        self.history_interval = 1
-
-        # Automatically figure out which resource is being represented by this 
-        # object.  This is tricky shit!
-
-        for resource, demand_object in self.economy.items():
-            if demand_object is self:
-                self.resource = resource
-                break
-
-        assert self.resource
-
-        # Setup any extension objects.
-
-    def update(self, time):
-        self.previous_value = self.current_value
-        self.current_value = self.update_demand()
-
-        self.history_timer += time
-
-        if self.history_timer > self.history_interval:
-            self.times.append(self.world.elapsed_time)
-            self.history.append(self.current_value)
-            self.history_timer = 0
-
-            for extension in self.get_extensions():
-                extension.update_history()
-
-    def update_demand(self):
-        time = self.world.elapsed_time
-        demand = self.base_demand(time)
-
-        # Calculate the affect of any perturbations on this resource.
-        for weight, mean, stddev in self.perturbations:
-            demand += weight * helpers.gaussian(time, mean, stddev)
-
-        # Factor in the demand for related resources.
-        for resource, weight in self.relations.items():
-            demand += weight * self.economy[resource].get_previous()
-
-        # Factor in how much of this resource is being supplied.
-        supply = [x.get_supply(self.resource) for x in self.world.players]
-        supply.sort()
-        self.monopoly = (len(supply) >= 2) and (0.1 * supply[0]) > supply[1]
-
-        if self.monopoly:
-            demand *= 1.5
-        elif supply and supply[0] > 1:
-            demand /= sum(supply)
-
-        return demand
-
-    def base_demand(self, time):
-        raise NotImplementedError
-
-
-    def perturb(self, weight, mean, stddev):
-        perturbation = weight, mean, stddev
-        self.perturbations.append(perturbation)
-
-    def update_relations(self, **relations):
-        self.relations.update(relations)
-
-    def replace_relations(self, **relations):
-        self.relations = relations
-
-
-    @kxg.read_only
-    def get(self):
-        return self.current_value
-
-    @kxg.read_only
-    def get_current(self):
-        return self.current_value
-
-    @kxg.read_only
-    def get_previous(self):
-        return self.previous_value
-
-    @kxg.read_only
-    def is_monopoly(self):
-        return self.monopoly
-
-
-class EarlyGameDemand (Demand):
-    
-    def __init__(self, weight, inflection, breadth, **relations):
-        Demand.__init__(self, **relations)
-        self.weight = weight
-        self.inflection = inflection
-        self.breadth = breadth
-
-    def base_demand(self, time):
-        return self.weight * (1 - helpers.sigmoid(
-                time, self.inflection, self.breadth))
-
-
-class MidGameDemand (Demand):
-
-    def __init__(self, weight, rise, fall, breadth, **relations):
-        Demand.__init__(self, **relations)
-        self.weight = weight
-        self.rise = rise
-        self.fall = fall
-        self.breadth = breadth
-
-    def base_demand(self, time):
-        rising_term = helpers.sigmoid(time, self.rise, self.breadth)
-        falling_term = helpers.sigmoid(time, self.fall, self.breadth)
-        return self.weight * (rising_term - falling_term)
-
-
-class LateGameDemand (Demand):
-    
-    def __init__(self, weight, inflection, breadth, **relations):
-        Demand.__init__(self, **relations)
-        self.weight = weight
-        self.inflection = inflection
-        self.breadth = breadth
-
-    def base_demand(self, time):
-        return self.weight * helpers.sigmoid(
-                time, self.inflection, self.breadth)
 
 
 
