@@ -1,6 +1,9 @@
 [submodule "kxg"]
 	path = libs/kxg
-	url = kxgames:git/engine
-[submodule "libs/pyglet-gui"]
-	path = libs/pyglet-gui
-	url = https://github.com/jorgecarleitao/pyglet-gui.git
+	url = git@github.com:kxgames/GameEngine.git
+[submodule "libs/glooey"]
+	path = libs/glooey
+	url = git@github.com:kxgames/glooey.git
+[submodule "libs/vecrec"]
+	path = libs/vecrec
+	url = git@github.com:kxgames/vecrec.git

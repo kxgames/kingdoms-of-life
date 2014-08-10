@@ -12,7 +12,6 @@ import numpy
 import pyglet
 import operator
 import random
-import pyglet_gui.core
 
 from pyglet.graphics import OrderedGroup
 from kxg.tools import printf
@@ -108,70 +107,6 @@ class Gui (kxg.Actor):
     def show_error(self, message):
         print(message.error)
 
-
-
-class MapWidget (pyglet_gui.core.Viewer):
-
-    # Get size from parent, which presumably will be an hbox or a vbox or 
-    # something.  
-    #
-    # Desired size       vs. Actual size
-    # get_desired_size()     get_size()
-    #
-    #
-    # def resize():
-    #   pass
-    #
-    # def reposition():
-    #   pass
-
-    # Only knows about screen coords.
-    # Really this class has to manage the viewport.
-    # Should the viewport be a member of the map extension?
-    #
-    # This class:
-    # Convert screen coords to pixel coords
-    #
-    # Map Extension:
-    # Convert pixel coords to world coords
-    
-    # Keep track of viewport: part of map that is visible in pixel coords
-    # viewport moves in response to mouse push events.
-    #
-    # Managing a viewport is good because that's pretty general.  Can emit 
-    # viewport_moved events, can convert from screen to pixel coordinates, and 
-    # can manage a TranslationGroup.
-    #
-    # Do I want to convert to world coords in two steps, though.  Widget: 
-    # screen->pixel, MapExt: pixel->world.  I can always subclass and provide a 
-    # convenience method.  I definitely can't do anything with world 
-    # coordinates in a general sense, because world coordinates could be 
-    # defined however.
-    #
-    def __init__(self, gui):
-        self.gui = gui
-        self.translate_group = ...
-        self.map_gui = gui.map.get_extension(gui)
-
-    def get_path(self):
-        return ["map"]
-
-    def load_graphics(self):
-        self.map_gui.load_map(translate_group)
-
-        screen_coords
-        pixel_coords
-        world_coords
-        viewport = kxg.geometry.Rect();
-
-    def on_mouse_push(self, dx, dy):
-        viewport.displace((dx, dy))     # All screen coords.
-
-        # Could in principle make viewport bigger or smaller.
-        self.map_gui.draw_map(viewport)
-
-    def on_mouse_click(self, x, y):
-        self.map.get_world_coords(viewport, x, y)
 
 
 class MapExtension (kxg.TokenExtension):
