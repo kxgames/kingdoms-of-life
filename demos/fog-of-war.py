@@ -49,6 +49,7 @@ class StencilMask (OrderedGroup):
         pyglet.gl.glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE)
         pyglet.gl.glDepthMask(GL_TRUE);
 
+
 class WhereStencilIs (OrderedGroup):
 
     def __init__(self, order, parent=None):

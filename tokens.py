@@ -570,9 +570,7 @@ class Map (kxg.Token):
         self.path = path
         self.tiles = {}
         self.graph = None
-
-    def __extend__(self):
-            return {gui.Gui: gui.MapExtension}
+        self.rows, self.columns = 0, 0
 
     def __getitem__(self, index):
         return self.grid[index]
@@ -584,13 +582,13 @@ class Map (kxg.Token):
         from PIL import Image
 
         image = Image.open(self.path)
-        self.rows, self.columns = image.size
+        self.columns, self.rows = image.size
 
         self.graph = networkx.grid_2d_graph(self.rows, self.columns)
 
         for row in range(self.rows):
             for col in range(self.columns):
-                pixel = image.getpixel((row, col))
+                pixel = image.getpixel((col, row))
                 terrain = Map.terrains[pixel]
                 self.tiles[row, col] = Tile(row, col, terrain)
 
