@@ -209,5 +209,29 @@ class MapWidget (glooey.Widget):
                         image, x, y, batch=self.batch, group=self.group)
                 self.sprites.append(sprite)
 
+    def on_mouse_release(self, x, y, button, modifiers):
+        if button == 4:
+            # Right click
+            col, row = self.pixel_to_index_coordinates(x, y)
+            tile = self.map[row,col]
+
+            if tile.terrain == 'land':
+                message = 'Building City at index={}'
+                print(message.format((x, y), (col, row)))
+            else:
+                message = 'Cannot build city in the {}'
+                print(message.format(tile.terrain))
+
+    def pixel_to_index_coordinates(self, x, y):
+        i = math.floor(x / self.tile_width)
+        j = math.floor((self.rect.height - y) / self.tile_height)
+
+        if x == self.map.columns:
+            i -=1
+        if y == 0:
+            j -=1
+
+        return i,j
+
 
 

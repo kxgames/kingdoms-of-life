@@ -573,7 +573,9 @@ class Map (kxg.Token):
         self.rows, self.columns = 0, 0
 
     def __getitem__(self, index):
-        return self.grid[index]
+        # index is (row, col)
+        # y, x ~ row, col
+        return self.tiles[index]
 
     def __str__(self):
         return '<Map w={} h={}>'.format(self.columns, self.rows)
