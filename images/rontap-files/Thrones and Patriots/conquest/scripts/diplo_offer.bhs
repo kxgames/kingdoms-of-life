@@ -1,6 +1,0 @@
-include "game_structs.bhs"
-
-int scenario diplo_offer (ref ConquestDiploOffer offer)
-{
-  return false;
-}

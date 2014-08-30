@@ -1,7 +1,0 @@
-int conquest battlebonus (ref string text) {  
-  start = num_units_built(1);
-  end = num_unit_category(1, "");
-  end -= num_decoys(1);
-
-  return end * 250 / start;
-}

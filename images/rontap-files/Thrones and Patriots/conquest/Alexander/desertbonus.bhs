@@ -1,4 +1,0 @@
-int conquest desertbonus(ref string text) {
-  text = $S("For saving some units, you have received a bonus of +$NUM0 for each resource in a battle.");
-  return 10*get_ctw_int("units_escaped");
-}

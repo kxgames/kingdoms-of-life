@@ -1,6 +1,0 @@
-states {
-  NUM_CORNERS = 5,
-  FLATTEN_LAND_SIZE = 6,
-
-  UINT_MAX = 0xffffffff
-}
