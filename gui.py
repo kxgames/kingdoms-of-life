@@ -221,7 +221,7 @@ class MapWidget (glooey.Widget):
 
             if tile.terrain == 'land':
                 printf('Building City at index {}', position)
-                message = messages.CreateCity(self.gui.player, position)
+                #message = messages.CreateCity(self.gui.player, position)
 
             else:
                 printf('Cannot build city in the {}', tile.terrain)
