@@ -1,0 +1,232 @@
+include "ctw_lib.bhs"
+
+conquest {
+if (get_ctw_campaign() == "Napoleon") {
+  napoleon_rules();
+}
+
+labels {
+  HUMAN = 1,
+  BADGUY = 2
+}
+static int diff = get_difficulty();
+static int diffmod = 2;
+
+run_once {
+  if (diff > 4) diffmod = 3;
+  if (diff < 3) diffmod = 0;
+
+  create_unit_upgrade(HUMAN, 3, 227, "explorer", 3);
+  create_unit_upgrade(HUMAN, 3, 227, "cannon", 8 - diffmod);
+  create_unit_upgrade(HUMAN, 3, 227, "musketeers", 12 - diffmod);
+  create_unit_upgrade(HUMAN, 3, 227, "fusiliers", 8 - diffmod);
+  create_unit_upgrade(HUMAN, 3, 227, "supply wagon", 1 + diffmod);
+  create_unit_upgrade(HUMAN, 3, 227, "horse guard grenadier", 10 - diffmod);
+  create_unit_upgrade(HUMAN, 3, 227, "carabineer", 10 - diffmod);
+
+  if (diff < 4) {
+    destroy_building(BADGUY, find_build(BADGUY, "fortress"));
+  }
+  if (diff < 3) {
+    destroy_building(BADGUY, find_build(BADGUY, "fortress"));
+  }
+  
+  String leader_array[] = [$S("King Federick Wilhelm III"), $S("King Stanislaus II"), $S("Louis Bourbon-Condé"), $S("Stadtholder William V"), $S("King George III"), $S("Elector Charles Theodore")];
+  
+  String tribes[] = ["Germans", "Koreans", "Persian", "Dutch", "British", "Bantu"];
+  int added;
+  
+  set_nation_name("Germans", $S("Allied Forces"));
+  if (ctw_is_defeated("Greeks") || ctw_is_ally("Greeks", "French")) {
+    for (i = 0; i < leader_array.length; i++) {
+      if (ctw_is_defeated(tribes[i]) || ctw_is_ally("French", tribes[i])) {
+        if (i == leader_array.length-1) {
+          defeat(3);
+          added = i+1;
+          break;
+        }
+      }
+      else {
+        set_leader_name(3, leader_array[i]);
+        added = i+1;
+        break;
+      }
+    }
+  }
+  if (ctw_is_defeated("Russians") || ctw_is_ally("Russians", "French")) {
+    if (added >= leader_array.length) {
+      defeat(4);
+    }
+    for (i = added; i < leader_array.length; i++) {
+      if (ctw_is_defeated(tribes[i]) || ctw_is_ally("French", tribes[i])) {
+        if (i == leader_array.length-1) {
+          defeat(4);
+          added = i+1; 
+          break;
+        }
+      }
+      else {
+        set_leader_name(4, leader_array[i]);
+        added = i+1;
+        break;
+      }
+    }
+  }    
+  if (ctw_is_defeated("Maya") || ctw_is_ally("Maya", "French")) {
+    if (added >= leader_array.length) {
+      defeat(5);
+    }
+    for (i = added; i < leader_array.length; i++) {
+      if (ctw_is_defeated(tribes[i]) || ctw_is_ally("French", tribes[i])) {
+        if (i == leader_array.length-1) {
+          defeat(5);
+          added = i+1;
+          break;
+        }
+      }
+      else {
+        set_leader_name(5, leader_array[i]);
+        added = i+1;
+        break;
+      }
+    }
+  } 
+
+  switch(diff) {
+    case 1 :
+      give_good(HUMAN, "Food", 600);
+      give_good(HUMAN, "Timber", 600);
+      give_good(HUMAN, "Wealth", 600);
+      give_good(HUMAN, "Metal", 600);
+      give_good(HUMAN, "Oil", 600);
+      give_good(HUMAN, "Knowledge", 600);
+      break;
+    case 2 :
+      give_good(HUMAN, "Food", 500);
+      give_good(HUMAN, "Timber", 500);
+      give_good(HUMAN, "Wealth", 500);
+      give_good(HUMAN, "Metal", 500);
+      give_good(HUMAN, "Oil", 500);
+      give_good(HUMAN, "Knowledge", 500);
+      break;
+    case 3 :
+      give_good(HUMAN, "Food", 400);
+      give_good(HUMAN, "Timber", 400);
+      give_good(HUMAN, "Wealth", 400);
+      give_good(HUMAN, "Metal", 400);
+      give_good(HUMAN, "Oil", 400);
+      give_good(HUMAN, "Knowledge", 400);
+      break;
+    case 4 :
+      give_good(HUMAN, "Food", 400);
+      give_good(HUMAN, "Timber", 400);
+      give_good(HUMAN, "Wealth", 400);
+      give_good(HUMAN, "Metal", 400);
+      give_good(HUMAN, "Oil", 400);
+      give_good(HUMAN, "Knowledge", 400);
+      break;
+    case 5 :
+      give_good(HUMAN, "Food", 400);
+      give_good(HUMAN, "Timber", 400);
+      give_good(HUMAN, "Wealth", 300);
+      give_good(HUMAN, "Metal", 300);
+      give_good(HUMAN, "Oil", 300);
+      give_good(HUMAN, "Knowledge", 300);
+      break;
+    case 6 :
+      give_good(HUMAN, "Food", 400);
+      give_good(HUMAN, "Timber", 400);
+      give_good(HUMAN, "Wealth", 200);
+      give_good(HUMAN, "Metal", 200);
+      give_good(HUMAN, "Oil", 200);
+      give_good(HUMAN, "Knowledge", 200);
+      break;
+  } // switch (diff)
+}
+
+
+  int nation;
+  String nation_name;
+  int unit;
+  int x;
+  int y;
+  String city_name;
+
+  if (get_ctw_campaign() == "Napoleon") {
+    for (nation = 2; nation < 9; nation++) {
+      nation_name = find_nation(nation);
+      if (nation_name == "Turks") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "Djezzar", 1);
+        create_unit_upgrade(nation, x + 1, y, "Musketeers", 2);
+        if (diff > 2) {
+          create_unit_upgrade(nation, x, y + 2, "Musketeers", 4);
+          create_unit_upgrade(nation, x + 2, y, "Horse Archer", 1);
+          create_unit_upgrade(nation, x + 2, y, "Hussar", 2);
+          create_unit_upgrade(nation, x, y + 1, "Supply Wagon", 1);
+        }
+        if (diff > 4) {
+          create_unit_upgrade(nation, x, y + 2, "Fusiliers", 1);
+        }
+      } else if (nation_name == "British") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "Wellington", 1);
+      } else if (nation_name == "Greeks") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "Archduke Charles", 1);
+      } else if (nation_name == "Germans") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "General Blucher", 1);
+      } else if (nation_name == "Russians") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "General Kutosov", 1);
+      }
+    }
+  }
+
+}

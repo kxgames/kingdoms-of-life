@@ -1,0 +1,449 @@
+//offensive tactics scenario runtime
+
+conquest
+{
+  labels {
+    ATTACKER,
+    DEFENDER,
+  }
+
+  static int count_time;
+  static capital_id = 0;
+  static int diff;
+  static capital_name;
+  static int city_two_id = 0;
+  static String city_two;
+  static int loc_x;
+  static int loc_y;
+  int unit;
+  int your_unit;
+  int y;
+  int x;
+  static int x_diff;
+  static int y_diff;
+  static int unit_x;
+  static int unit_y;
+  static int x_check;
+  static int y_check;
+  static int x_distance_absl;
+  static int y_distance_absl;
+  static int x_distance;
+  static int y_distance;
+  static int building_x;
+  static int building_y;
+  static int x_check_absl = 0;
+  static int y_check_absl = 0;
+  static int who_unit;
+  static int general;
+  static int scout;
+  static int use_scout;
+  int catapult;
+  int cat_x;
+  int cat_y;
+  static int attack_count;
+  static int build_check;
+  static int max_attack_count;
+  static String def_capital = find_capital(DEFENDER);
+  static int def_capital_id = find_city_id(def_capital);
+  static int def_cap_x = object_position_x(DEFENDER, def_capital_id);
+  static int def_cap_y = object_position_y(DEFENDER, def_capital_id);
+
+  run_once {
+    diff = get_difficulty();
+    count_time = rand_int(45,75);
+    if (diff > 3 && diff < 6) set_timer("lcav", 55);
+    if (diff > 5) set_timer("lcav", 45);
+    capital_name = find_capital(DEFENDER);
+    capital_id = find_city_id(capital_name);
+    gain_tech(DEFENDER, "The Art of War");
+    gain_tech(ATTACKER, "The Art of War");
+    give_good(ATTACKER, "Food", 100);
+    give_good(ATTACKER, "Timber", 250);
+    give_good(ATTACKER, "Metal", 100);
+    give_good(ATTACKER, "Wealth", 150);
+    enable_trigger("findCity");
+    set_timer("under_attack", 20);  
+    set_timer("build_units", 70);
+    set_timer("waves", 10);
+    enable_trigger("army_of");
+    //enable_trigger("attack_waves");
+    if (diff < 3) max_attack_count = 5;
+    else if (diff == 3) max_attack_count = 6;
+    else if (diff == 4) max_attack_count = 7;
+    else if (diff == 5) max_attack_count = 8;
+    else if (diff == 6) max_attack_count = 9;
+  }
+
+  if (timer_expired("waves")) {
+        who = 2;
+    //find human army
+    who_unit = find_unit(1, "");
+    scout = find_unit(1, "scout");
+    general = find_unit(1, "general");
+    use_scout = rand_int(1,5);
+    if (use_scout < 2) who_unit = scout;
+    unit_x = object_position_x(1, who_unit);
+    unit_y = object_position_y(1, who_unit);
+    x_check = unit_x;
+    y_check = unit_y;
+
+    /*if (x_check == 0 && y_check == 0) {
+      who_unit = find_unit(1, "");
+      x_check = object_position_x(2, who_unit);
+      y_check = object_position_y(2, who_unit);
+    }*/
+    //find place spot for army
+    building_id = find_military_build(who);
+    building_x = object_position_x(who, building_id);
+    building_y = object_position_y(who, building_id);
+    x_distance = x_check - building_x;
+    y_distance = y_check - building_y;
+    x_distance_absl = absl_int(x_distance);
+    y_distance_absl = absl_int(y_distance);
+    if (x_check_absl > y_check_absl) {
+      if ((x_check - building_x) > 0) {
+        x = x_check - 20;
+        if (age(DEFENDER) >= 2) {
+          x = x - 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          x = x - 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          x = x - 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          x = x - 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          x = x_check - 25;
+        }
+      }
+      else {
+        x = x_check + 20;
+        if (age(DEFENDER) >= 2) {
+          x = x + 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          x = x + 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          x = x + 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          x = x + 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          x = x_check + 25;
+        }
+      }
+      if ((y_check - building_y) > 0) {
+        y = y_check - 15;
+        if (age(DEFENDER) >= 2) {
+          y = y - 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          y = y - 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          y = y - 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          y = y - 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          y = x_check - 20;
+        }
+      }
+      else {
+        y = y_check + 15;
+        if (age(DEFENDER) >= 2) {
+          y = y + 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          y = y + 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          y = y + 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          y = y + 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          y = y_check - 20;
+        }
+      }
+    }
+    else {
+      if ((y_check - building_y) > 0) {
+        y = y_check - 20;
+        if (age(DEFENDER) >= 2) {
+          y = y - 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          y = y - 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          y = y - 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          y = y - 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          y = y_check - 25;
+        }
+      }
+      else {
+        y = y_check + 20;
+        if (age(DEFENDER) >= 2) {
+          y = y + 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          y = y + 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          y = y + 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          y = y + 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          y = y_check + 25;
+        }
+      }
+      if ((x_check - building_x) > 0) {
+        x = x_check - 15;
+        if (age(DEFENDER) >= 2) {
+          x = x - 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          x = x - 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          x = x - 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          x = x - 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          x = x_check - 20;
+        }
+      }
+      else {
+        x = x_check + 15;
+        if (age(DEFENDER) >= 2) {
+          x = x + 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          x = x + 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          x = x + 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          x = x + 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          x = x_check - 20;
+        }
+      }
+    }
+    if (x < 0) x3 = 1;
+    if (y < 0) y3 = 1;
+    if (!map_is_land(x, y)) {
+      x = def_cap_x + 3;
+      y = def_cap_y;
+    }
+    //easiest, easy, moderate
+    if (diff < 4 && attack_count < 3) {
+      create_unit_upgrade(DEFENDER, x, y, "slingers", 2);
+      if (age(DEFENDER) > 3) create_unit_in_group(DEFENDER, x, y, "slingers", 1);
+      if (age(DEFENDER) > 6) create_unit_in_group(DEFENDER, x, y, "slingers", 1);
+      group_attack_to_order(who, x_check, y_check);
+    }
+    else if (diff < 4 && attack_count < 5) {
+      create_unit_upgrade(DEFENDER, x, y, "light horse", 1);
+      if (age(DEFENDER) > 3) create_unit_in_group(DEFENDER, x, y, "bowmen", 1);
+      if (age(DEFENDER) > 6) create_unit_in_group(DEFENDER, x, y, "bowmen", 1);
+      group_attack_to_order(who, x_check, y_check);
+    }
+    else if (diff < 4 && attack_count < 7) {
+      create_unit_upgrade(DEFENDER, x, y, "hoplites", 2);
+      if (age(DEFENDER) > 3) create_unit_in_group(DEFENDER, x, y, "hoplites", 1);
+      if (age(DEFENDER) > 6) create_unit_in_group(DEFENDER, x, y, "hoplites", 1);
+      group_attack_to_order(who, x_check, y_check);
+    }
+    //tough
+    else if (diff == 4 && attack_count < 3) {
+      create_unit_upgrade(DEFENDER, x, y, "slingers", 2);
+      if (age(DEFENDER) > 3) create_unit_in_group(DEFENDER, x, y, "slingers", 1);
+      if (age(DEFENDER) > 6) create_unit_in_group(DEFENDER, x, y, "slingers", 1);
+      group_attack_to_order(who, x_check, y_check);
+    }
+    else if (diff == 4 && attack_count < 5) {
+      create_unit_upgrade(DEFENDER, x, y, "light horse", 1);
+      if (diff == 4) create_unit_in_group(DEFENDER, x, y, "light horse", 1);
+      if (age(DEFENDER) > 3) create_unit_in_group(DEFENDER, x, y, "light horse", 1);
+      if (age(DEFENDER) > 6) create_unit_in_group(DEFENDER, x, y, "light horse", 1);
+      group_attack_to_order(who, x_check, y_check);
+    }
+    else if (diff == 4 && attack_count < 7) {
+      create_unit_upgrade(DEFENDER, x, y, "hoplites", 2);
+      if (age(DEFENDER) > 3) create_unit_in_group(DEFENDER, x, y, "hoplites", 1);
+      if (age(DEFENDER) > 6) create_unit_in_group(DEFENDER, x, y, "hoplites", 1);
+      group_attack_to_order(who, x_check, y_check);
+    }
+    //tougher, toughest
+    else if (diff > 4 && attack_count < 4) {
+      create_unit_upgrade(DEFENDER, x, y, "slingers", 2);
+      create_unit_in_group(DEFENDER, x, y, "bowmen", 1);
+      if (age(DEFENDER) > 3) create_unit_in_group(DEFENDER, x, y, "slingers", 1);
+      if (age(DEFENDER) > 6) create_unit_in_group(DEFENDER, x, y, "bowmen", 2);
+      group_attack_to_order(who, x_check, y_check);
+    }
+    else if (diff > 4 && attack_count < 7) {
+      create_unit_upgrade(DEFENDER, x, y, "hoplites", 2);
+      if (age(DEFENDER) > 3) create_unit_in_group(DEFENDER, x, y, "slingers", 1);
+      if (age(DEFENDER) > 6) create_unit_in_group(DEFENDER, x, y, "hoplites", 2);
+      group_attack_to_order(who, x_check, y_check);
+    }
+    else if (diff > 4 && attack_count < 9) {
+      create_unit_upgrade(DEFENDER, x, y, "light horse", 1);
+      if (age(DEFENDER) > 3) create_unit_in_group(DEFENDER, x, y, "light horse", 1);
+      if (age(DEFENDER) > 6) create_unit_in_group(DEFENDER, x, y, "light horse", 2);
+      catapult = find_unit(ATTACKER, "catapult");
+      cat_x = object_position_x(ATTACKER, catapult);
+      cat_y = object_position_y(ATTACKER, catapult);
+      group_attack_to_order(who, cat_x, cat_y);
+    }
+
+    attack_count++;
+    set_timer("waves", 21);
+  }
+
+  trigger army_of(num_unit_category(ATTACKER, "Artillery") == 0 && num_type_upgrade(ATTACKER, "hoplites") == 0 && num_unit_category(ATTACKER, "Mounted") == 0 && num_cities(ATTACKER) == 0) {
+    unit = find_unit(ATTACKER, "");
+    scout = find_unit(ATTACKER, "scout");
+    if (unit == scout) unit = find_unit(ATTACKER, "");
+    x = object_position_x(ATTACKER, unit);
+    y = object_position_y(ATTACKER, unit);
+    create_unit_upgrade(DEFENDER, x + 17, y + 11, "light horse", 4);
+    create_unit_in_group(DEFENDER, x + 17, y + 11, "cataphract", 4);
+    group_attack_to_order(DEFENDER, x, y);
+    disable_trigger("army_of");
+  }
+
+  if (timer_expired("build_units")) {
+    train_unit_with_cost(DEFENDER, "hoplites", 1);
+    train_unit_with_cost(DEFENDER, "slingers", 1);
+    train_unit_with_cost(DEFENDER, "bowmen", 1);
+    train_unit_with_cost(DEFENDER, "light horse", 1);
+    train_unit_with_cost(DEFENDER, "cataphract", 1);
+    train_unit_with_cost(DEFENDER, "horse archer", 1);
+    set_timer("build_units", 20);
+  }
+
+  if (have_tech(DEFENDER, "City State")) place_city_with_cost(DEFENDER);
+
+  if (timer_expired("under_attack")) { 
+    //if (any_object_near_build(1, 20, 2, capital_id, 5)) {
+    for (i = 0; i < 1; i++) {
+      build_check = find_build(DEFENDER, "");
+      if (object_health(DEFENDER, build_check) < 100) {
+        clear_group(DEFENDER);
+        for (n = num_military_units(DEFENDER); n > 0; n--) {
+          unit = find_military(DEFENDER);
+          add_to_group(DEFENDER, unit);
+        }
+        your_unit = find_military(ATTACKER);
+        x = object_position_x(ATTACKER, your_unit);
+        y = object_position_y(ATTACKER, your_unit);
+        group_stance_order(DEFENDER, "Aggressive");
+        group_attack_to_order(DEFENDER, x, y);
+      }
+    }
+    set_timer("under_attack", 1);
+  }
+
+  trigger findCity(find_city_with_num(ATTACKER, 1)) {
+    city_two = find_city_with_num(ATTACKER, 1);
+    city_two_id = find_city_id(city_two);
+    city_assimilate(1, city_two);
+    loc_x = object_position_x(ATTACKER, city_two_id);
+    loc_y = object_position_y(ATTACKER, city_two_id);
+    create_unit(ATTACKER, loc_x, loc_y, "citizen", 5);
+    disable_trigger("findCity");
+  }
+
+  if (timer_expired("lcav")) {
+    if (find_unit(ATTACKER, "catapult")) {
+      cat = find_unit(ATTACKER, "catapult");
+      x = object_position_x(ATTACKER, cat);
+      y = object_position_y(ATTACKER, cat);
+      x2 = x + (rand_int(17,24));
+      y2 = y + (rand_int(8,11));
+      if (age(DEFENDER) >= 2) {
+        x = x + 3;
+        y = y + 1;
+      }
+      if (age(DEFENDER) >= 5) {
+        x = x + 3;
+        y = y + 1;
+      }
+      if (age(DEFENDER) >= 6) {
+        x = x + 3;
+        y = y + 1;
+      }
+      if (age(DEFENDER) >= 7) {
+        x = x + 3;
+        y = y + 1;
+      }
+      if (x < 0) x3 = 1;
+      if (y < 0) y3 = 1;
+      if (!map_is_land(x, y)) {
+        x = def_cap_x + 3;
+        y = def_cap_y;
+      }
+      if (diff >= 2 && age(DEFENDER) < 3) {
+        for (i = diff - 3; i > 0; i--) {
+          light_cav = create_unit_upgrade(DEFENDER, x2, y2, "light horse", 1);
+          unit_attack_order(DEFENDER, light_cav, ATTACKER, cat);
+        }
+      }
+      else if (diff >= 2 && age(DEFENDER) > 2) {
+        for (i = diff - 2; i > 0; i--) {
+          light_cav = create_unit_upgrade(DEFENDER, x2, y2, "light horse", 1);
+          unit_attack_order(DEFENDER, light_cav, ATTACKER, cat);
+        }
+      }
+      count_time = rand_int(45,90);
+      set_timer("lcav", "count_time");
+    }
+    else if (find_unit(ATTACKER, "supply wagon")) {
+      sw = find_unit(ATTACKER, "supply wagon");
+      x = object_position_x(ATTACKER, sw);
+      y = object_position_y(ATTACKER, sw);
+      x2 = x + (rand_int(17,24));
+      y2 = y + (rand_int(8,11));
+      if (diff >= 2) {
+        for (i = (diff - 1); i > 0; i--) {
+          light_cav = create_unit_upgrade(DEFENDER, x2, y2, "light horse", 1);
+          unit_attack_order(DEFENDER, light_cav, ATTACKER, sw);
+        }
+      }
+      count_time = rand_int(45,75);
+      set_timer("lcav", 45);
+    }
+  }
+
+
+  trigger (num_military_units(ATTACKER) == 0) {
+    victory(DEFENDER);
+  }
+
+
+  
+  trigger (city_id_captured(DEFENDER, capital_id)) {
+    victory(ATTACKER);
+  }
+}

@@ -1,0 +1,366 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  labels  {
+    PLAYER1,
+    PLAYER2,
+  }
+
+  int set_barb;
+  String bowmen_type = "Bowmen";
+  String hoplites_type = "Hoplites";
+  String slingers_type = "Slingers";
+
+  if (get_age() < 3) {
+    if (get_country_owner(get_attack_to()) == "") {
+      barbarian_rules();
+      set_barb = 1;
+      bowmen_type = "Barbarian Archers";
+      hoplites_type = "Barbarian Phalanx";
+      slingers_type = "Barbarian Javelineers";
+    }
+  }
+
+  static int step = 1;
+  static int x2;
+  static int y2;
+  static int who;
+  static int map_size = get_map_size();
+  static int diff = get_difficulty();
+  static int center;
+  static int x;
+  static int y;
+  static int x3;
+  static int x4;
+  static int x5;
+  static int x6;
+  static int x7;
+  static int x8;
+  static int x9;
+
+  if (diff == 4) set_time_limit(7);
+  else if (diff == 3) set_time_limit(8);
+  else if (diff == 2) set_time_limit(9);
+  else if (diff == 1) set_time_limit(10);
+  else if (diff == 5) set_time_limit(6);
+  else if (diff == 6) set_time_limit(5);
+
+  field_battle_enable();
+
+  //give player technologies
+  if (age(PLAYER1) > 3) gain_tech(PLAYER1, "Tactics");
+  if (age(PLAYER1) > 4) gain_tech(PLAYER1, "Operations");
+  if (age(PLAYER1) > 6) gain_tech(PLAYER1, "Strategy");
+
+  set_object_type_max_health("scout", 35);
+
+  if (age(PLAYER1) < 4) {
+    set_object_type_max_health("barracks", 400);
+    set_object_type_max_health("stable", 400);
+    set_object_type_max_health("airbase", 400);
+  }
+  else if (age(PLAYER1) >= 4 && age(PLAYER1) < 6) {
+    set_object_type_max_health("barracks", 500);
+    set_object_type_max_health("stable", 500);
+    set_object_type_max_health("airbase", 500);
+  }
+  else if (age(PLAYER1) >= 6 && age(PLAYER1) < 8) {
+    set_object_type_max_health("barracks", 700);
+    set_object_type_max_health("stable", 700);
+    set_object_type_max_health("airbase", 700);
+  }
+  else if (age(PLAYER1) == 8) {
+    set_object_type_max_health("barracks", 1100);
+    set_object_type_max_health("stable", 1100);
+    set_object_type_max_health("airbase", 1100);
+  }
+
+  //player
+  who = 1;
+  x = get_starting_loc_x(1);
+  y = get_starting_loc_y(1);
+  x2 = x;
+  y2 = y;
+  force_transport_ability(who);
+  String campaign = get_ctw_campaign();
+  String general_name = "general";
+  if (campaign == "Napoleon") {
+    general_name = "Napoleon";
+    create_unit_in_group(who, x - 4, y, "Spy", 5);
+  }
+  
+  //drop in units
+  if (age(who) == 0) {
+    if (diff < 3) {
+      create_unit_upgrade(who, x - 4, y, "scout", 1);
+      create_unit_in_group(who, x, y, hoplites_type, 10);
+      create_unit_in_group(who, x - 2, y, bowmen_type, 9);
+      create_unit_in_group(who, x - 1, y, slingers_type, 8);
+      create_unit_in_group(who, x - 3, y, "light horse", 7);
+      create_unit_in_group(who, x - 4, y, general_name, 1);
+    }
+    else if (diff == 3) {
+      create_unit_upgrade(who, x - 4, y, "scout", 1);
+      create_unit_in_group(who, x, y, hoplites_type, 8);
+      create_unit_in_group(who, x - 2, y, bowmen_type, 7);
+      create_unit_in_group(who, x - 1, y, slingers_type, 6);
+      create_unit_in_group(who, x - 3, y, "light horse", 5);
+      create_unit_in_group(who, x - 4, y, general_name, 1);
+    }
+    else {
+      create_unit_upgrade(who, x - 4, y, "scout", 1);
+      create_unit_in_group(who, x, y, hoplites_type, 8);
+      create_unit_in_group(who, x - 2, y, bowmen_type, 7);
+      create_unit_in_group(who, x - 1, y, slingers_type, 6);
+      create_unit_in_group(who, x - 3, y, "light horse", 5);
+      create_unit_in_group(who, x - 4, y, general_name, 1);
+    }
+  } else {
+    if (diff < 4) {
+      create_unit_upgrade(who, x - 4, y, "scout", 1);
+      create_unit_in_group(who, x, y, hoplites_type, 7);
+      create_unit_in_group(who, x - 2, y, bowmen_type, 6);
+      create_unit_in_group(who, x - 1, y, slingers_type, 5);
+      create_unit_in_group(who, x - 3, y, "light horse", 5);
+      create_unit_in_group(who, x - 5, y, "cataphract", 3);
+      create_unit_in_group(who, x - 6, y, "horse archer", 4);
+      create_unit_in_group(who, x - 4, y, general_name, 1);
+      if (age(who) >= 3) {
+        create_unit_in_group(who, x - 2, y + 6, hoplites_type, 1);
+        create_unit_in_group(who, x - 3, y + 6, "slingeres", 1);
+      }
+    }
+    else {
+      create_unit_upgrade(who, x - 4, y, "scout", 1);
+      create_unit_in_group(who, x, y, hoplites_type, 6);
+      create_unit_in_group(who, x - 2, y, bowmen_type, 5);
+      create_unit_in_group(who, x - 1, y, slingers_type, 4);
+      create_unit_in_group(who, x - 3, y, "light horse", 3);
+
+      create_unit_in_group(who, x - 5, y, "cataphract", 4);
+      create_unit_in_group(who, x - 6, y, "horse archer", 4);
+      create_unit_in_group(who, x - 4, y, general_name, 1);
+      if (age(who) >= 3) {
+        create_unit_in_group(who, x - 2, y + 6, hoplites_type, 1);
+        create_unit_in_group(who, x - 3, y + 6, "slingeres", 1);
+      }
+    }
+  }
+  group_stance_order(who, "Defensive");
+  center = get_map_size()/2;
+
+  //get the proper angle
+  dir = get_conquest_invasion_dir();
+  dir = dir + 180;
+  if (dir >= 360) {
+    dir = dir - 360;
+  }
+
+  group_jump_move(who, x, y, dir);
+
+
+  //if (x > center && y > center) {
+  //  //group_move_order(who, x - 5, y - 1);
+  //  group_jump_move(who, x- 5, y - 1);
+  //}
+  //else if (x > center && y < center) {
+  //  //group_move_order(who, x - 1, y + 5);
+  //  group_jump_move(who, x- 1, y + 5);
+  //}
+  //else if (x < center && y > center) {
+  //  //group_move_order(who, x + 1, y - 5);
+  //  group_jump_move(who, x + 1, y - 5);
+  //}
+  //else if (x < center && y < center) {
+  //  //group_move_order(who, x + 5, y + 1);
+  //  group_jump_move(who, x + 5, y + 1);
+  //}
+
+
+  //computer
+  who = 2;
+  set_population_cap(who, 50);
+  
+  force_transport_ability(who);
+
+  //drop in buildings and units
+
+  x = get_starting_loc_x(2);
+  y = get_starting_loc_y(2);
+
+  String nation_name = find_nation(2);
+
+  if (campaign == "Napoleon") {
+    if (nation_name == "British") {
+      general_name = "Wellington";
+    }
+    else if (nation_name == "Greeks") {
+      general_name = "Archduke Charles";
+    }
+    else if (nation_name == "Germans") {
+      general_name = "General Blucher";
+    }
+    else if (nation_name == "Turks") {
+      general_name = "Djezzar";
+    }
+    else if (nation_name == "Russians") {
+      general_name = "Generalo Kutosov";
+    }
+    create_unit_in_group(who, x - 4, y, "Spy", 5);
+    create_unit_in_group(who, x - 4, y, "Explorer", 5);
+  }
+
+  create_building_near(who, x, y, "barracks", 12);
+  if (create_building_near(who, x + 4, y, "barracks", 12));
+  else if (create_building_near(who, x, y - 4, "barracks", 12));
+  else create_building_near(who, x, y + 4, "stable", 12);
+  if (diff == 5) {
+    if (age(who) == 0) {
+      if (set_barb == 0) {
+        create_unit_upgrade(who, x - 2, y + 6, hoplites_type, 3);
+        create_unit_in_group(who, x - 3, y + 6, slingers_type, 2);
+        create_unit_in_group(who, x - 4, y + 6, bowmen_type, 2);
+      }
+      else {
+        create_unit_upgrade(who, x - 2, y + 6, "barbarian phalanx", 3);
+        create_unit_in_group(who, x - 3, y + 6, "barbarian javelineers", 2);
+        create_unit_in_group(who, x - 4, y + 6, "barbarian archers", 2);
+      }
+      create_unit_in_group(who, x - 6, y + 6, "light horse", 2); 
+      create_unit_in_group(who, x - 5, y + 6, "general", 1);
+    }
+    else {
+      create_unit_in_group(who, x - 5, y + 6, "cataphract", 1);
+      create_unit_in_group(who, x - 4, y + 6, "horse archer", 2);   
+      if (set_barb == 0) { 
+        create_unit_upgrade(who, x - 2, y + 6, hoplites_type, 3);
+        create_unit_in_group(who, x - 3, y + 6, slingers_type, 2);
+        create_unit_in_group(who, x - 4, y + 6, bowmen_type, 2);
+      }
+      else {
+        create_unit_upgrade(who, x - 2, y + 6, "barbarian phalanx", 3);
+        create_unit_in_group(who, x - 3, y + 6, "barbarian javelineers", 2);
+        create_unit_in_group(who, x - 4, y + 6, "barbarian archers", 2);
+      }
+      create_unit_in_group(who, x - 6, y + 6, "light horse", 2); 
+      create_unit_in_group(who, x - 5, y + 6, "general", 1);
+      if (age(who) >= 3) {
+        if (set_barb == 0) {
+          create_unit_in_group(who, x - 2, y + 6, hoplites_type, 1);
+          create_unit_in_group(who, x - 3, y + 6, "slingeres", 1);
+        }
+        else {
+          create_unit_in_group(who, x - 2, y + 6, "barbarian phalanx", 1);
+          create_unit_in_group(who, x - 3, y + 6, "barbarian javelineers", 1);        
+        }
+      }
+      if (age(who) >= 5) {
+        create_unit_in_group(who, x - 6, y + 6, "cataphract", 1);
+        create_unit_in_group(who, x - 6, y + 6, "light horse", 1);  
+      }
+      if (age(who) > 5) { 
+        if (set_barb == 0) {
+          create_unit_in_group(who, x - 7, y + 6, hoplites_type, 1);
+          create_unit_in_group(who, x - 8, y + 6, slingers_type, 1);
+        }
+        else {
+          create_unit_in_group(who, x - 7, y + 6, "barbarian phalanx", 1);
+          create_unit_in_group(who, x - 8, y + 6, "barbarian javelineers", 1);
+        }
+      }
+    }
+  }
+  else if (diff == 3 || diff == 4) {
+    if (age(who) == 0) {
+      if (set_barb == 0) {
+        create_unit_upgrade(who, x - 2, y + 6, hoplites_type, 2);
+        create_unit_in_group(who, x - 3, y + 6, slingers_type, 2);
+        create_unit_in_group(who, x - 4, y + 6, bowmen_type, 2);
+        create_unit_in_group(who, x - 6, y + 6, "light horse", 1);
+      }
+      else {
+        create_unit_upgrade(who, x - 2, y + 6, "barbarian phalanx", 2);
+        create_unit_in_group(who, x - 3, y + 6, "barbarian javelineers", 2);
+        create_unit_in_group(who, x - 4, y + 6, "barbarian archers", 2);
+      }       
+    }
+    else {
+      create_unit_in_group(who, x - 5, y + 6, "cataphract", 1);
+      create_unit_in_group(who, x - 4, y + 6, "horse archer", 2);    
+      create_unit_upgrade(who, x - 2, y + 6, hoplites_type, 2);
+      create_unit_in_group(who, x - 3, y + 6, slingers_type, 2);
+      create_unit_in_group(who, x - 4, y + 6, bowmen_type, 2);
+      create_unit_in_group(who, x - 6, y + 6, "light horse", 2); 
+      if (age(who) >= 3) {
+        create_unit_in_group(who, x - 2, y + 6, hoplites_type, 1);
+        create_unit_in_group(who, x - 3, y + 6, "slingeres", 1);
+      }
+      if (age(who) >= 5) {
+        create_unit_in_group(who, x - 6, y + 6, "light horse", 2);  
+      }
+      if (age(who) > 5) { 
+        create_unit_in_group(who, x - 7, y + 6, hoplites_type, 1);
+        create_unit_in_group(who, x - 8, y + 6, slingers_type, 1);
+      }
+    }
+  }
+  else if (diff == 1 || diff == 2) {
+    if (age(who) == 0) {
+      create_unit_upgrade(who, x - 2, y + 6, hoplites_type, 2);
+      create_unit_in_group(who, x - 3, y + 6, slingers_type, 2);
+      create_unit_in_group(who, x - 4, y + 6, bowmen_type, 2);
+      create_unit_in_group(who, x - 6, y + 6, "light horse", 1); 
+    }
+    else {
+      create_unit_in_group(who, x - 5, y + 6, "cataphract", 1);
+      create_unit_in_group(who, x - 4, y + 6, "horse archer", 1);    
+      create_unit_upgrade(who, x - 2, y + 6, hoplites_type, 2);
+      create_unit_in_group(who, x - 3, y + 6, slingers_type, 2);
+      create_unit_in_group(who, x - 4, y + 6, bowmen_type, 2);
+      create_unit_in_group(who, x - 6, y + 6, "light horse", 1); 
+      if (age(who) >= 3) {
+        create_unit_in_group(who, x - 2, y + 6, hoplites_type, 1);
+        create_unit_in_group(who, x - 3, y + 6, "slingeres", 1);
+      }
+      if (age(who) >= 5) {
+        create_unit_in_group(who, x - 6, y + 6, "light horse", 2);  
+      }
+      if (age(who) > 5) { 
+        create_unit_in_group(who, x - 7, y + 6, hoplites_type, 1);
+        create_unit_in_group(who, x - 8, y + 6, slingers_type, 1);
+      }
+    }
+  }
+  else if (diff > 5) {
+    if (age(who) == 0) {
+      create_unit_upgrade(who, x - 2, y + 6, hoplites_type, 3);
+      create_unit_in_group(who, x - 3, y + 6, slingers_type, 2);
+      create_unit_in_group(who, x - 4, y + 6, bowmen_type, 2);
+      create_unit_in_group(who, x - 6, y + 6, "light horse", 2);  
+      create_unit_in_group(who, x - 5, y + 6, "general", 1);
+    }
+    else {
+      create_unit_in_group(who, x - 5, y + 6, "cataphract", 1);
+      create_unit_in_group(who, x - 4, y + 6, "horse archer", 2);    
+      create_unit_upgrade(who, x - 2, y + 6, hoplites_type, 3);
+      create_unit_in_group(who, x - 3, y + 6, slingers_type, 2);
+      create_unit_in_group(who, x - 4, y + 6, bowmen_type, 2);
+      create_unit_in_group(who, x - 6, y + 6, "light horse", 2); 
+      create_unit_in_group(who, x - 5, y + 6, "general", 1);
+      if (age(who) >= 3) {
+        create_unit_in_group(who, x - 2, y + 6, hoplites_type, 1);
+        create_unit_in_group(who, x - 3, y + 6, "slingeres", 1);
+      }
+      if (age(who) >= 5) {
+        create_unit_in_group(who, x - 6, y + 6, "cataphract", 1);
+        create_unit_in_group(who, x - 6, y + 6, "light horse", 1); 
+      }
+      if (age(who) > 5) { 
+        create_unit_in_group(who, x - 7, y + 6, hoplites_type, 1);
+        create_unit_in_group(who, x - 8, y + 6, slingers_type, 1);
+      }
+    }
+  }
+}

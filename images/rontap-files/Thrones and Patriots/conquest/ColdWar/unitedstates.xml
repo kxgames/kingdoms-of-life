@@ -1,0 +1,43 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Warroom (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Americans">
+  <LEADERS>
+    <LEADER>President Harry Truman</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Denver</CITY>
+    <CITY>Los Angeles</CITY>
+    <CITY>San Francisco</CITY>
+    <CITY>Detroit</CITY>
+    <CITY>Chicago</CITY>
+    <CITY>Springfield</CITY>
+    <CITY>Miami</CITY>
+    <CITY>Kansas City</CITY>
+    <CITY>Orlando</CITY>
+    <CITY>Austin</CITY>
+    <CITY>Atlanta</CITY>
+    <CITY>Atlantic City</CITY>
+    <CITY>Las Vegas</CITY>
+    <CITY>Tahoe</CITY>
+    <CITY>Dallas</CITY>
+    <CITY>Fresno</CITY>
+    <CITY>Cleveland</CITY>
+    <CITY>Cincinnati</CITY>
+    <CITY>Seattle</CITY>
+    <CITY>Houston</CITY>
+    <CITY>New Orleans</CITY>
+    <CITY>Helena</CITY>
+    <CITY>Minneapolis</CITY>
+    <CITY>San Diego</CITY>
+    <CITY>St. Louis</CITY>
+    <CITY>Oklahoma City</CITY>
+    <CITY>Boston</CITY>
+    <CITY>Buffalo</CITY>
+    <CITY>Pittsburgh</CITY>
+    <CITY>Tampa Bay</CITY>
+    <CITY>Jacksonville</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 Europe</UNIT_CONTINENT>
+  <BUILD_CONTINENT>7 Colonial</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>7 Colonial</BACKUP_BUILD_CONTINENT>
+</TRIBE>

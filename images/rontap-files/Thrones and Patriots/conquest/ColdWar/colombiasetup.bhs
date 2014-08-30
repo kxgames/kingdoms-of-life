@@ -1,0 +1,135 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  labels {
+    AMERICANS, 
+    COLOMBIANS, 
+    REBELS = 7,
+  }
+  
+  int diff = get_difficulty();
+  
+  //set_nation_name("Lakota", $S("Rebels"));
+  disable_tech(2, "Information Age");
+
+  disable_type_by_tribe("Strategic Bomber", "Lakota");
+  disable_type_by_tribe("Stealth Bomber", "Lakota");
+  disable_type_by_tribe("Jet Fighter", "Lakota");
+  disable_type_by_tribe("Advanced Fighter", "Lakota");
+  enable_type_by_tribe("Fighter", "Lakota", "Airbase", 0, 0);
+  enable_type_by_tribe("Bomber", "Lakota", "Airbase", 0, 1);
+  gain_tech(REBELS, "Fighter");
+  gain_tech(REBELS, "Bomber");
+
+  place_building_upgrade(AMERICANS, "Stable", find_capital(AMERICANS));
+  place_building_upgrade(AMERICANS, "Barracks", find_capital(AMERICANS));
+  place_building_upgrade(AMERICANS, "Siege Factory", find_capital(AMERICANS));
+  place_building_upgrade(COLOMBIANS, "Temple", find_capital(COLOMBIANS));
+
+  if (diff > 2) {
+    place_building_upgrade(COLOMBIANS, "Tower", find_capital(COLOMBIANS));
+    place_building_upgrade(AMERICANS, "Tower", find_capital(AMERICANS));
+  }
+  else {
+    place_building_upgrade(COLOMBIANS, "Fort", find_capital(COLOMBIANS));
+    place_building_upgrade(AMERICANS, "Fort", find_capital(AMERICANS));
+  }
+ 
+
+  disable_city_defeat(REBELS);
+  
+  coldwar_rules();
+
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  int amount = 7 - diff;
+  String goods[] = ["Food", "Timber", "Metal", "Wealth", "Knowledge"];
+
+  for (i = 0; i < goods.length; i++) {
+    give_good(AMERICANS, goods[i], num_type(AMERICANS, goods[i])*amount);
+  }
+
+  int unit;
+
+  for (i = 0; i < num_type(REBELS, "Merchant"); i++) {
+    unit = find_unit(REBELS, "Merchant");
+    unit_ignore_orders(REBELS, unit);
+  }
+
+  disable_tech(COLOMBIANS, "Populism");
+  disable_tech(COLOMBIANS, "Civic");
+  disable_tech(COLOMBIANS, "City State");
+
+  //disable_building_attrition(REBELS);
+
+  int building;
+  int keep_number[] = [0,0,0];
+  int mer = 0;
+  int units = 1;
+  int builds = 2;
+
+  if (diff == 5) {
+    keep_number[mer] = 19;
+    keep_number[units] = 36;
+    keep_number[builds] = 33;
+  }
+  else if (diff == 4) {
+    keep_number[mer] = 15;
+    keep_number[units] = 30;
+    keep_number[builds] = 27;
+  }
+  else if (diff == 3) {
+    keep_number[mer] = 12;
+    keep_number[units] = 24;
+    keep_number[builds] = 21;
+  }
+  else if (diff == 2) {
+    keep_number[mer] = 9;
+    keep_number[units] = 19;
+    keep_number[builds] = 15;
+  }
+  else if (diff == 1) {
+    keep_number[mer] = 6;
+    keep_number[units] = 15;
+    keep_number[builds] = 10;
+  }
+
+  if (diff < 6) {
+    for (i = num_type(REBELS, "Merchant"); i > keep_number[mer]; i--) {
+      unit = find_unit(REBELS, "Merchant");
+      kill_unit_anim(REBELS, unit, 1);
+    }
+
+    for (i = num_military_units(REBELS); i > keep_number[units]; i--) {
+      unit = find_all_military(REBELS);
+      kill_unit_anim(REBELS, unit, 1);
+    }
+
+    for (i = num_military_buildings(REBELS); i > keep_number[builds]; i--) {
+      building = find_military_build(REBELS);
+      destroy_building(REBELS, building);
+    }
+  }
+
+  if (diff < 3) {
+    while (num_type(REBELS, "Airport") > 0) {
+      building = find_build(REBELS, "Airport");
+      destroy_building(REBELS, building);
+    }
+  }
+
+  if (diff > 4) {
+    set_time_limit(45);
+  }
+  else if (diff > 2) {
+    set_time_limit(60);
+  }
+
+}
+
+

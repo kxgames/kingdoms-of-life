@@ -1,0 +1,71 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+
+  int macedonians = 1;
+  int mineans = 2;
+  int sabeans = 3;
+  int hadhramis = 4;
+  int qattabanians = 5;
+  int himyarites = 6;
+
+  int diff = get_difficulty();
+  int nation;
+
+  for (i = 2; i < 9; i++) {
+    place_building_upgrade(i, "Senate", find_capital(i));
+    disable_type_by_tribe("Senate", find_nation(i));
+  }
+
+  for (nation = num_players(); nation > 1; nation--) {
+    diplomacy_set_wait(nation);
+  }
+
+  int building;
+  String city_name;
+
+  set_nation_name("Greeks", $S("Macedonians"));
+  set_nation_name("Nubians", $S("Shebans"));
+
+  for (nation = 2; nation < 7; nation++) {
+    set_leader_difficulty(nation, diff);
+    //if (diff == 1) set_population_cap(nation, 50);
+    //else if (diff == 2) set_population_cap(nation, 75);
+    //else if (diff == 3) set_population_cap(nation, 100);
+    //else if (diff == 4) set_population_cap(nation, 150);
+    //else if (diff == 5) set_population_cap(nation, 175);
+  }
+
+  int amount = 200;
+
+  if (diff < 3) {
+    amount += amount + amount;
+  }
+  else if (diff < 5) {
+    amount += amount;
+  }
+
+  give_good(macedonians, "Food", amount);
+  give_good(macedonians, "Timber", amount);
+  give_good(macedonians, "Wealth", amount/2);
+  give_good(macedonians, "Metal", amount/2);
+  
+  city_name = find_capital(1);
+  
+  if (diff < 4) {
+    place_building_upgrade(1, "Tower", city_name);
+  }
+
+  int unit;
+
+  for (nation = 2; nation < num_players(); nation++) {
+    for (i = 0; i < num_type(nation, "War Elephant")/2; i++) {
+      unit = find_unit(nation, "War Elephant");
+      kill_unit_anim(nation, unit, 1);
+    }
+  }
+
+}

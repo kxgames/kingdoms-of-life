@@ -1,0 +1,924 @@
+// Rise of Nations
+// Developer : Big Huge Games
+// File Name : cewonder.bhs
+// Knowledge Keeper : Doug Kaufman
+// Lead Designer : Kristine Ishii
+// Project Members : Bruce Milligan, Brian Kaiser, John Hawkins
+// Project Date : September 30, 2002
+
+/*
+Chess Exercise #6 - Protect the Wonder
+Mode : Toughest
+Setup : 5 nations, with Player nation in center and Computer nations on outside.  
+Map : Standard size Himalayas (Snow tileset)
+-= Current Specs =-
+5 rounds of attack, each progressively harder, and in an age or two after last attack.
+Wonder = Temple of Tikal
+*/
+
+include "ce_io_lib.bhs"
+
+scenario {
+
+  labels {
+    MONGOLS = 1,
+    BANTU = 2,
+    MAYA = 3,
+    KOREANS = 4,
+    ROMANS = 5,
+  }
+
+  static int round;
+  static int dead_guys;
+  static int p2_count;
+  static int p3_count;
+  static int p4_count;
+  static int p5_count;
+  static int x_wonder;
+  static int y_wonder;
+  static int wonder_id;
+  static int p_count;
+  static int origin_x;
+  static int origin_y;
+  static int round_done;
+  String player_name1;
+  String player_name2;
+  String player_name3;
+  static int score_data1;
+  static int score_data2;
+  static int score_data3;
+  static int health;
+  int unit1 = 0;
+  int unit2 = 0;
+  int unit3 = 0;
+  int unit4 = 0;
+  int unit5 = 0;
+  int unit6 = 0;
+  int unit7 = 0;
+  int unit8 = 0;
+  int unit9 = 0;
+  int unit10 = 0;
+  int unit11 = 0;
+  int unit12 = 0;
+  int unit13 = 0;  
+  int unit14 = 0;
+  int unit15 = 0;
+  int unit16 = 0;
+  int unit17 = 0;
+  int unit18 = 0;
+  int unit19 = 0;
+  int unit20 = 0;  
+  int unit21 = 0;
+  int unit22 = 0;
+  int unit23 = 0;
+  int unit24 = 0;
+  int unit25 = 0;
+  int unit26 = 0;
+  int PLAYER = 0;
+
+
+  run_once {
+
+    String player_name = get_player_profile_name();
+    set_leader_name(1, player_name);
+
+    wonder_id = find_build(1, "Colosseum");
+    add_goal(1, "wonder", $S("Keep your wonder alive and beat five waves of attack to win."));
+    disable_city_defeat(2);
+    disable_city_defeat(3);
+    disable_city_defeat(4);
+    disable_city_defeat(5);
+    origin_origin_x = 0;
+    origin_origin_y = 0;
+    set_time_limit(6);
+    set_timer("check_health", 10);
+    set_timer("round1", 30);
+    dead_guys = object_health(1, wonder_id);
+    obj_message = "________________________"; //just a line to seperate things
+    high_scores = add_objective_text("______________________", "high_score_list", "select_army.wav");   
+    high_scores = add_objective_text($S("Most Wonder Health Left"),     "high_score_list", "select_army.wav");
+    
+    display_results("cewonder", false, true);
+
+    high_scores = add_objective_text("______________________", "high_score_list", "select_army.wav"); 
+    high_scores = add_objective_text($S("Current Game"),    "high_score_list", "select_army.wav"); 
+    kill_count =  add_objective_text(parse($S("Wonder Health: $NUM0"), dead_guys), "civilian_killed", "select_army.wav"); 
+    high_scores = add_objective_text("______________________", "high_score_list", "select_army.wav");   
+    round = 0;
+    p2_count = 0;
+    p3_count = 0;
+    p4_count = 0;
+    p5_count = 0;
+    disable_city_defeat(1);
+    x_wonder = 97;
+    y_wonder = 86;
+    p_count = 0;
+    round_done = 0;
+  }
+
+  set_type_build_time("Legions", 1);
+  set_type_build_time("Caesar's Legions", 1);
+  set_type_build_time("Praetorian Guard", 1);
+  set_type_build_time("Royal Tercios", 1);
+  set_type_build_time("Citizen", 1);
+  set_type_build_time("Merchant", 1);
+  set_type_build_time("Caravan", 1);
+  set_type_build_time("Scholar", 1);
+  set_type_build_time("Slingers", 1);
+  set_type_build_time("Hoplites", 1);
+  set_type_build_time("Bowmen", 1);
+  set_type_build_time("Scout", 1);
+  set_type_build_time("Javelineers", 1);
+  set_type_build_time("Phalanx", 1);
+  set_type_build_time("Archers", 1);
+  set_type_build_time("Light Horse", 1);
+  set_type_build_time("Cataphract", 1);
+  set_type_build_time("Horse Archer", 1);
+  set_type_build_time("Catapult", 1);
+  set_type_build_time("Elite Javelineers", 1);
+  set_type_build_time("Pikemen", 1);
+  set_type_build_time("Crossbowmen", 1);
+  set_type_build_time("Explorer", 1);
+  set_type_build_time("Light Cavalry", 1);
+  set_type_build_time("Knight", 1);
+  set_type_build_time("Heavy Cavalry Archer", 1);
+  set_type_build_time("Trebuchet", 1);
+  set_type_build_time("Arquebusiers", 1);
+  set_type_build_time("Elite Pikemen", 1);
+  set_type_build_time("Elite Light Cavalry", 1);
+  set_type_build_time("Heavy Knight", 1);
+  set_type_build_time("Dragoon", 1);
+  set_type_build_time("Bombard", 1);
+  set_type_build_time("Musketeers", 1);
+  set_type_build_time("Fusiliers", 1);
+  set_type_build_time("Commando", 1);
+  set_type_build_time("Hussar", 1);
+  set_type_build_time("Cuirassier", 1);
+  set_type_build_time("Carabineer", 1);
+  set_type_build_time("Assault Infantry", 1);
+  set_type_build_time("Cannon", 1);
+  set_type_build_time("Riflemen", 1);
+  set_type_build_time("Anti-Tank Rifle", 1);
+  set_type_build_time("Howitzer", 1);
+  set_type_build_time("Machine Gun", 1);
+  set_type_build_time("Commando", 1);
+  set_type_build_time("Armored Car", 1);
+  set_type_build_time("Light Tank", 1);
+  set_type_build_time("Artillery", 1);
+  set_type_build_time("Supply Wagon", 1);
+  set_type_build_time("Infantry", 1);
+  set_type_build_time("Bazooka", 1);
+  set_type_build_time("Heavy Machine Gun", 1);
+  set_type_build_time("Special Forces", 1);
+  set_type_build_time("Armored Scout Car", 1);
+  set_type_build_time("Tank", 1);
+  set_type_build_time("Tank Killer", 1);
+  set_type_build_time("Missile Silo", 1);
+  set_type_build_time("Attack Helicopter", 1);
+  set_type_build_time("Auto Plant", 1);
+  set_type_build_time("Howitzer", 1);
+  set_type_build_time("Fighter", 1);
+  set_type_build_time("Bomber", 1);
+  set_type_build_time("Helicopter", 1);
+  set_type_build_time("V2 Rocket", 1);
+  set_type_build_time("Nuclear Missile", 1);
+  set_type_build_time("Cruise Missile", 1);
+  set_type_build_time("Assualt Infantry", 1);
+  set_type_build_time("Anti-Tank Missile", 1);
+  set_type_build_time("Advanced Machine Gun", 1);
+  set_type_build_time("Elite Special Forces", 1);
+  set_type_build_time("Armored Cavalry Car", 1);
+  set_type_build_time("Main Battle Tank", 1);
+  set_type_build_time("Rocket Artillery", 1);
+  set_type_build_time("Jet Fighter", 1);
+  set_type_build_time("Praetorian Guards", 1);
+  set_type_build_time("Heavy Horse Archer", 1);
+  set_type_build_time("Strategic Bomber", 1);
+  set_type_build_time("Advanced Fighter", 1);
+  set_type_build_time("Stealth Bomber", 1);
+  set_type_build_time("Nuclear ICBM", 1);
+  set_type_build_time("Anti-Aircraft Gun", 1);
+  set_type_build_time("Anti-Aircraft Missile", 1);
+  set_type_build_time("Anti-Aircraft Battery", 1);
+  set_type_build_time("Zeppelin", 1);
+  set_type_build_time("Biplane", 1);
+  set_type_build_time("Fighter", 1);
+  set_type_build_time("Bomber", 1);
+  set_type_build_time("Strategic Bomber", 1);
+  set_type_build_time("Stealth Bomber", 1);
+  set_type_build_time("Jet Fighter", 1);
+  set_type_build_time("Advanced Fighter", 1);
+  set_type_build_time("General", 1);
+  set_type_build_time("Spy", 1);
+  set_type_build_time("Flamethrower", 1);
+  set_type_build_time("Refinery", 1);
+  set_type_build_time("Oil Well", 1);
+  set_type_build_time("Mine", 1);
+  set_type_build_time("Farm", 1);
+  set_type_build_time("Woodcutter's Camp", 1);
+  set_type_build_time("Lumber Mill", 1);
+  set_type_build_time("Granary", 1);
+  set_type_build_time("Smelter", 1);
+  set_type_build_time("Temple", 1);
+  set_type_build_time("University", 1);
+  set_type_build_time("Library", 1);
+  set_type_build_time("Market", 1);
+  set_type_build_time("Barracks", 1);
+  set_type_build_time("Stable", 1);
+  set_type_build_time("Siege Factory", 1);
+  set_type_build_time("Factory", 1);
+  set_type_build_time("Tank Destroyer", 1);
+  set_type_build_time("Fort", 1);
+  set_type_build_time("Castle", 1);
+  set_type_build_time("Fortress", 1);
+  set_type_build_time("Redoubt", 1);
+  set_type_build_time("Tower", 1);
+  set_type_build_time("Keep", 1);
+  set_type_build_time("Stockade", 1);
+  set_type_build_time("Bunker", 1);
+  set_type_build_time("Lookout", 1);
+  set_type_build_time("Observation Post", 1);
+  set_type_build_time("SAM Installation", 1);
+  set_type_build_time("Air Defense Gun", 1);
+  set_type_build_time("Radar Air Defense", 1);
+  set_type_build_time("Airbase", 1);
+  set_type_build_time("Classical Age", 1);
+  set_type_build_time("The Art of War", 1);
+  set_type_build_time("City State", 1);
+  set_type_build_time("Barter", 1);
+  set_type_build_time("Written Word", 1);
+  set_type_build_time("Medieval Age", 1);
+  set_type_build_time("Mercenaries", 1);
+  set_type_build_time("Empire", 1);
+  set_type_build_time("Coinage", 1);
+  set_type_build_time("Mathematics", 1);
+  set_type_build_time("Gunpowder Age", 1);
+  set_type_build_time("Standing Army", 1);
+  set_type_build_time("Feudalism", 1);
+  set_type_build_time("Trade", 1);
+  set_type_build_time("Chemistry", 1);
+  set_type_build_time("Enlightenment Age", 1);
+  set_type_build_time("Conscription", 1);
+  set_type_build_time("Divine Right", 1);
+  set_type_build_time("Mercantilism", 1);
+  set_type_build_time("Laws of Nature", 1);
+  set_type_build_time("Industrial Age", 1);
+  set_type_build_time("Levee en Masse", 1);
+  set_type_build_time("Constitution", 1);
+  set_type_build_time("Finance", 1);
+  set_type_build_time("Electricity", 1);
+  set_type_build_time("Modern Age", 1);
+  set_type_build_time("Nation-in-Arms", 1);
+  set_type_build_time("Great Power", 1);
+  set_type_build_time("Assembly Line", 1);
+  set_type_build_time("Electronics", 1);
+  set_type_build_time("Information Age", 1);
+  set_type_build_time("Selective Service", 1);
+  set_type_build_time("International Law", 1);
+  set_type_build_time("Globalization", 1);
+  set_type_build_time("Computerization", 1);
+  set_type_build_time("Missile Shield", 1);
+  set_type_build_time("Artificial Intelligence", 1);
+  set_type_build_time("Global Prosperity", 1);
+  set_type_build_time("World Government", 1);
+  set_type_build_time("Allegiance", 1);
+  set_type_build_time("Militia", 1);
+  set_type_build_time("Herbal Lore", 1);
+  set_type_build_time("Construction", 1);
+  set_type_build_time("Taxation", 1);
+  set_type_build_time("Religion", 1);
+  set_type_build_time("Oath of Fealty", 1);
+  set_type_build_time("Agriculture", 1);
+  set_type_build_time("Carpentry", 1);
+  set_type_build_time("Literacy", 1);
+  set_type_build_time("Monotheism", 1);
+  set_type_build_time("Vassalage", 1);
+  set_type_build_time("Printing Press", 1);
+  set_type_build_time("Crop Rotation", 1);
+  set_type_build_time("Medicine", 1);
+  set_type_build_time("Logging Industry", 1);
+  set_type_build_time("Architecture", 1);
+  set_type_build_time("Fortification", 1);
+  set_type_build_time("Tactics", 1);
+  set_type_build_time("Bombardment", 1);
+  set_type_build_time("Operations", 1);
+  set_type_build_time("Minuteman", 1);
+  set_type_build_time("Patriotism", 1);
+  set_type_build_time("Scientific Method", 1);
+  set_type_build_time("Social Contract", 1);
+  set_type_build_time("Strategic Reserves", 1);
+  set_type_build_time("Strategy", 1);
+  set_type_build_time("Food Industry", 1);
+  set_type_build_time("Pharmaceuticals", 1);
+  set_type_build_time("Papermill", 1);
+  set_type_build_time("Engineering", 1);
+  set_type_build_time("Institutional Research", 1);
+  set_type_build_time("Existentialism", 1);
+  set_type_build_time("Income Tax", 1);
+  set_type_build_time("Partisan", 1);
+  set_type_build_time("Nationalism", 1);
+  set_type_build_time("Supercomputers", 1);
+  set_type_build_time("Metal Alloys", 1);
+  set_type_build_time("Forage", 1);
+  set_type_build_time("Cold Casting", 1);
+  set_type_build_time("Supply", 1);
+  set_type_build_time("Steel", 1);
+  set_type_build_time("Logistics", 1);
+  set_type_build_time("Small City", 1);
+  set_type_build_time("City", 1);
+  set_type_build_time("Large City", 1);
+  set_type_build_time("Major City", 1);
+  disable_type("City");
+  
+  if (timer_expired("round1")) {
+    for (p_count = 0; p_count < 2; p_count++) {
+      switch(rand_int(1,4)) {
+        case 1:
+          if (p2_count == 0) {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            p2_count = 1;
+            ////p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            ////p_count = p_count + 1;
+            break;
+          }
+        case 2:
+          if (p3_count == 0) {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            p3_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 3:
+          if (p4_count == 0) {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            p4_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 4:
+          if (p5_count == 0) {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            p5_count = 1; 
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            ////p_count = p_count + 1;
+            break;
+          }
+      }
+      unit1 = create_unit(PLAYER, origin_x, origin_y, "Javelineer", 1);
+      unit2 = create_unit(PLAYER, origin_x - 1, origin_y, "Phalanx", 1);
+      unit3 = create_unit(PLAYER, origin_x - 2, origin_y, "Archers", 1);
+      unit4 = create_unit(PLAYER, origin_x - 3, origin_y, "Light Horse", 1);
+      unit5 = create_unit(PLAYER, origin_x - 4, origin_y, "Cataphract", 1);
+      unit_attack_order(PLAYER, unit1, 1, wonder_id);
+      unit_attack_order(PLAYER, unit2, 1, wonder_id);
+      unit_attack_order(PLAYER, unit3, 1, wonder_id);
+      unit_attack_order(PLAYER, unit4, 1, wonder_id);
+      unit_attack_order(PLAYER, unit5, 1, wonder_id);
+    }
+    round_done = 1;
+  }
+
+  
+  if (round_done == 1) {
+    if (num_military_units(2) + num_military_units(3) + num_military_units(4) + num_military_units(5) == 0) {
+      p2_count = 0;
+      p3_count = 0;
+      p4_count = 0;
+      p5_count = 0;
+      p_count = 0;
+      give_good(1, "Food", 1000);
+      give_good(1, "Timber", 1000);
+      give_good(1, "Metal", 1000);
+      give_good(1, "Wealth", 1000);
+      give_good(1, "Knowledge", 2000);
+      set_timer("round2", 30);
+      round_done = 0;
+    }
+  }
+
+  if (timer_expired("round2")) {
+    for (p_count = 0; p_count < 2; p_count++) {
+      switch(rand_int(1,4)) {
+        case 1:
+          if (p2_count == 0) {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            p2_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 2:
+          if (p3_count == 0) {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            p3_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 3:
+          if (p4_count == 0) {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            p4_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 4:
+          if (p5_count == 0) {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            p5_count = 1; 
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            //p_count = p_count + 1;
+            break;
+          }
+      }
+      unit1 = create_unit(PLAYER, origin_x, origin_y, "Arquebusiers", 1);
+      unit2 = create_unit(PLAYER, origin_x - 1, origin_y, "Elite Pikemen", 1);
+      unit3 = create_unit(PLAYER, origin_x - 2, origin_y, "Crossbowmen", 1);
+      unit4 = create_unit(PLAYER, origin_x - 3, origin_y, "Elite Light Cavalry", 1);
+      unit5 = create_unit(PLAYER, origin_x - 4, origin_y, "Heavy Knight", 1);
+      unit6 = create_unit(PLAYER, origin_x - 5, origin_y, "Bombard", 1);
+      unit7 = create_unit(PLAYER, origin_x - 6, origin_y, "Bombard", 1);
+      unit_attack_to_order(PLAYER, unit1, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit2, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit3, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit4, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit5, x_wonder, y_wonder);
+      unit_attack_order(PLAYER, unit6, 1, wonder_id);
+      unit_attack_order(PLAYER, unit7, 1, wonder_id);  
+    }
+    round_done = 2;
+  }
+
+  if (round_done == 2) {
+    if (num_military_units(2) + num_military_units(3) + num_military_units(4) + num_military_units(5) == 0) {
+      p2_count = 0;
+      p3_count = 0;
+      p4_count = 0;
+      p5_count = 0;
+      p_count = 0;
+      give_good(1, "Food", 1500);
+      give_good(1, "Timber", 1500);
+      give_good(1, "Metal", 1500);
+      give_good(1, "Wealth", 1500);
+      give_good(1, "Oil", 1500);
+      give_good(1, "Knowledge", 3000);
+      set_timer("round3", 30);
+      round_done = 0;
+    }
+  }
+
+  if (timer_expired("round3")) {
+    for (p_count = 0; p_count < 2; p_count++) {
+      switch(rand_int(1,4)) {
+        case 1:
+          if (p2_count == 0) {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            p2_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 2:
+          if (p3_count == 0) {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            p3_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 3:
+          if (p4_count == 0) {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            p4_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            //p_count = p_count + 1;
+            break;
+            }
+        case 4:
+          if (p5_count == 0) {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            p5_count = 1; 
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            //p_count = p_count + 1;
+            break;
+          }
+      }
+      unit1 = create_unit(PLAYER, origin_x, origin_y, "Riflemen", 1);
+      unit2 = create_unit(PLAYER, origin_x - 1, origin_y, "Anti-Tank Rifle", 1);
+      unit3 = create_unit(PLAYER, origin_x - 2, origin_y, "Riflemen", 1);
+      unit4 = create_unit(PLAYER, origin_x - 3, origin_y, "Anti-Tank Rifle", 1);
+      unit5 = create_unit(PLAYER, origin_x - 4, origin_y, "Machine Gun", 1);
+      unit6 = create_unit(PLAYER, origin_x - 5, origin_y, "Armored Car", 1);
+      unit7 = create_unit(PLAYER, origin_x - 6, origin_y, "Armored Car", 1);
+      unit8 = create_unit(PLAYER, origin_x - 7, origin_y, "Light Tank", 1);
+      unit9 = create_unit(PLAYER, origin_x - 8, origin_y, "Artillery", 1);
+      unit10 = create_unit(PLAYER, origin_x - 9, origin_y, "Artillery", 1);
+      unit11 = create_unit(PLAYER, origin_x - 10, origin_y, "Artillery", 1);
+      unit12 = create_unit(PLAYER, origin_x - 11, origin_y, "Supply Wagon", 1);
+      unit13 = create_unit(PLAYER, origin_x - 12, origin_y, "Supply Wagon", 1);
+      unit16 = create_unit(PLAYER, origin_x - 15, origin_y, "Biplane", 1);
+      unit_attack_order(PLAYER, unit1, 1, wonder_id);
+      unit_attack_order(PLAYER, unit2, 1, wonder_id);
+      unit_attack_order(PLAYER, unit3, 1, wonder_id);
+      unit_attack_order(PLAYER, unit4, 1, wonder_id);
+      unit_attack_order(PLAYER, unit5, 1, wonder_id);
+      unit_attack_order(PLAYER, unit6, 1, wonder_id);
+      unit_attack_order(PLAYER, unit7, 1, wonder_id);
+      unit_attack_order(PLAYER, unit8, 1, wonder_id);
+      unit_attack_order(PLAYER, unit9, 1, wonder_id);
+      unit_attack_order(PLAYER, unit10, 1, wonder_id);
+      unit_attack_order(PLAYER, unit11, 1, wonder_id);
+      unit_attack_order(PLAYER, unit12, 1, wonder_id);
+      unit_attack_order(PLAYER, unit13, 1, wonder_id);
+      unit_attack_order(PLAYER, unit14, 1, wonder_id);
+      unit_attack_order(PLAYER, unit15, 1, wonder_id);
+      unit_attack_order(PLAYER, unit16, 1, wonder_id);
+    }
+    round_done = 3;
+  }
+
+  if (round_done == 3) {
+    if (num_military_units(2) + num_military_units(3) + num_military_units(4) + num_military_units(5) == 0) {
+      p2_count = 0;
+      p3_count = 0;
+      p4_count = 0;
+      p5_count = 0;
+      p_count = 0;
+      give_good(1, "Food", 2000);
+      give_good(1, "Timber", 2000);
+      give_good(1, "Metal", 2000);
+      give_good(1, "Wealth", 2000);
+      give_good(1, "Oil", 2000);
+      give_good(1, "Knowledge", 4000);
+      set_timer("round4", 30);
+      round_done = 0;
+    }
+  }
+
+  if (timer_expired("round4")) {
+    for (p_count = 0; p_count < 2; p_count++) {
+      switch(rand_int(1,4)) {
+        case 1:
+          if (p2_count == 0) {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            p2_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 2:
+          if (p3_count == 0) {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            p3_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 3:
+          if (p4_count == 0) {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            p4_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 4:
+          if (p5_count == 0) {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            p5_count = 1; 
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            //p_count = p_count + 1;
+            break;
+          }
+      }
+      unit1 = create_unit(PLAYER, origin_x, origin_y, "Infantry", 1);
+      unit2 = create_unit(PLAYER, origin_x - 1, origin_y, "Bazooka", 1);
+      unit3 = create_unit(PLAYER, origin_x - 2, origin_y, "Infantry", 1);
+      unit4 = create_unit(PLAYER, origin_x - 3, origin_y, "Bazooka", 1);
+      unit5 = create_unit(PLAYER, origin_x - 4, origin_y, "Heavy Machine Gun", 1);
+      unit6 = create_unit(PLAYER, origin_x - 5, origin_y, "Armored Scout Car", 1);
+      unit7 = create_unit(PLAYER, origin_x - 6, origin_y, "Armored Scout Car", 1);
+      unit8 = create_unit(PLAYER, origin_x - 7, origin_y, "Tank", 1);
+      unit9 = create_unit(PLAYER, origin_x - 8, origin_y, "Howitzer", 1);
+      unit10 = create_unit(PLAYER, origin_x - 9, origin_y, "Howitzer", 1);
+      unit11 = create_unit(PLAYER, origin_x - 10, origin_y, "Howitzer", 1);
+      unit12 = create_unit(PLAYER, origin_x - 11, origin_y, "Supply Wagon", 1);
+      unit13 = create_unit(PLAYER, origin_x - 12, origin_y, "Supply Wagon", 1);
+      unit16 = create_unit(PLAYER, origin_x - 15, origin_y, "General", 1);
+      unit17 = create_unit(PLAYER, origin_x - 16, origin_y, "Bomber", 1);
+      unit18 = create_unit(PLAYER, origin_x - 17, origin_y, "Bomber", 1);
+      unit_attack_to_order(PLAYER, unit1, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit2, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit3, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit4, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit5, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit6, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit7, x_wonder, y_wonder);
+      unit_attack_to_order(PLAYER, unit8, x_wonder, y_wonder);
+      unit_attack_order(PLAYER, unit9, 1, 457);
+      unit_attack_order(PLAYER, unit10, 1, wonder_id);
+      unit_attack_order(PLAYER, unit11, 1, wonder_id);
+      unit_move_order(PLAYER, unit12, x_wonder, y_wonder);
+      unit_move_order(PLAYER, unit13, x_wonder, y_wonder);
+      unit_attack_order(PLAYER, unit14, 1, wonder_id);
+      unit_attack_order(PLAYER, unit15, 1, wonder_id);
+      unit_move_order(PLAYER, unit16, x_wonder, y_wonder);
+      unit_attack_ground_order(PLAYER, unit17, x_wonder, y_wonder);
+      unit_attack_ground_order(PLAYER, unit18, x_wonder, y_wonder);
+      unit_attack_ground_order(PLAYER, unit19, x_wonder, y_wonder);
+      unit_attack_ground_order(PLAYER, unit20, x_wonder, y_wonder);
+      unit_attack_ground_order(PLAYER, unit21, x_wonder, y_wonder);
+      unit_attack_ground_order(PLAYER, unit22, x_wonder, y_wonder);
+      unit_attack_ground_order(PLAYER, unit23, x_wonder, y_wonder);
+      unit_attack_ground_order(PLAYER, unit24, x_wonder, y_wonder);
+      unit_attack_ground_order(PLAYER, unit24, x_wonder, y_wonder);
+    }
+    round_done = 4;
+  }
+
+  if (round_done == 4) {
+    if (num_military_units(2) + num_military_units(3) + num_military_units(4) + num_military_units(5) == 0) {
+      p2_count = 0;
+      p3_count = 0;
+      p4_count = 0;
+      p5_count = 0;
+      p_count = 0;
+      give_good(1, "Food", 3000);
+      give_good(1, "Timber", 3000);
+      give_good(1, "Metal", 3000);
+      give_good(1, "Wealth", 3000);
+      give_good(1, "Oil", 3000);
+      give_good(1, "Knowledge", 6000);
+      set_timer("round5", 30);
+      round_done = 0;
+    }
+  }
+
+  if (timer_expired("round5")) {
+    for (p_count = 0; p_count < 2; p_count++) {
+      switch(rand_int(1,4)) {
+        case 1:
+          if (p2_count == 0) {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            p2_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 2:
+          if (p3_count == 0) {
+            PLAYER = 3;
+            origin_x = 139;
+            origin_y = 152;
+            p3_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 3:
+          if (p4_count == 0) {
+            PLAYER = 4;
+            origin_x = 59;
+            origin_y = 139;
+            p4_count = 1;
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            //p_count = p_count + 1;
+            break;
+          }
+        case 4:
+          if (p5_count == 0) {
+            PLAYER = 5;
+            origin_x = 47;
+            origin_y = 50;
+            p5_count = 1; 
+            //p_count = p_count + 1;
+            break;
+          }
+          else {
+            PLAYER = 2;
+            origin_x = 152;
+            origin_y = 83;
+            //p_count = p_count + 1;
+            break;
+          }
+      }
+      unit1 = create_unit(PLAYER, origin_x, origin_y, "Assault Infantry", 1);
+      unit2 = create_unit(PLAYER, origin_x - 1, origin_y, "Anti-Tank Missile", 1);
+      unit3 = create_unit(PLAYER, origin_x - 2, origin_y, "Assault Infantry", 1);
+      unit4 = create_unit(PLAYER, origin_x - 3, origin_y, "Anti-Tank Missile", 1);
+      unit5 = create_unit(PLAYER, origin_x - 4, origin_y, "Assualt Infantry", 1);
+      unit6 = create_unit(PLAYER, origin_x - 5, origin_y, "Anti-tank Missile", 1);
+      unit7 = create_unit(PLAYER, origin_x - 6, origin_y, "Advanced Machine Gun", 1);
+      unit8 = create_unit(PLAYER, origin_x - 7, origin_y, "Armored Cavalry Car", 1);
+      unit9 = create_unit(PLAYER, origin_x - 8, origin_y, "Armored Cavalry Car", 1);
+      unit10 = create_unit(PLAYER, origin_x - 9, origin_y, "Main Battle Tank", 1);
+      unit11 = create_unit(PLAYER, origin_x - 10, origin_y, "Main Battle Tank", 1);
+      unit12 = create_unit(PLAYER, origin_x - 11, origin_y, "Rocket Artillery", 1);
+      unit13 = create_unit(PLAYER, origin_x - 12, origin_y, "Rocket Artillery", 1);
+      unit14 = create_unit(PLAYER, origin_x - 13, origin_y, "Rocket Artillery", 1);
+      unit15 = create_unit(PLAYER, origin_x - 14, origin_y, "Rocket Artillery", 1);
+      unit16 = create_unit(PLAYER, origin_x - 15, origin_y, "Supply Wagon", 1);
+      unit17 = create_unit(PLAYER, origin_x - 16, origin_y, "Supply Wagon", 1);
+      unit21 = create_unit(PLAYER, origin_x - 20, origin_y, "General", 1);
+      unit22 = create_unit(PLAYER, origin_x - 21, origin_y, "Advanced Fighter", 1);
+      unit23 = create_unit(PLAYER, origin_x - 22, origin_y, "Advanced Fighter", 1);
+      unit_attack_order(PLAYER, unit1, 1, wonder_id);
+      unit_attack_order(PLAYER, unit2, 1, wonder_id);
+      unit_attack_order(PLAYER, unit3, 1, wonder_id);
+      unit_attack_order(PLAYER, unit4, 1, wonder_id);
+      unit_attack_order(PLAYER, unit5, 1, wonder_id);
+      unit_attack_order(PLAYER, unit6, 1, wonder_id);
+      unit_attack_order(PLAYER, unit7, 1, wonder_id);
+      unit_attack_order(PLAYER, unit8, 1, wonder_id);
+      unit_attack_order(PLAYER, unit9, 1, wonder_id);
+      unit_attack_order(PLAYER, unit10, 1, wonder_id);
+      unit_attack_order(PLAYER, unit11, 1, wonder_id);
+      unit_attack_order(PLAYER, unit12, 1, wonder_id);
+      unit_attack_order(PLAYER, unit13, 1, wonder_id);
+      unit_attack_order(PLAYER, unit14, 1, wonder_id);
+      unit_attack_order(PLAYER, unit15, 1, wonder_id);
+      unit_attack_order(PLAYER, unit16, 1, wonder_id);
+      unit_attack_order(PLAYER, unit17, 1, wonder_id);
+      unit_attack_order(PLAYER, unit18, 1, wonder_id);
+      unit_attack_order(PLAYER, unit19, 1, wonder_id);
+      unit_attack_order(PLAYER, unit20, 1, wonder_id);
+      unit_attack_order(PLAYER, unit21, 1, wonder_id);
+      unit_attack_order(PLAYER, unit22, 1, wonder_id);
+      unit_attack_order(PLAYER, unit23, 1, wonder_id);
+      unit_attack_order(PLAYER, unit24, 1, wonder_id);
+      unit_attack_order(PLAYER, unit25, 1, wonder_id);
+      unit_attack_order(PLAYER, unit26, 1, wonder_id);
+    }
+    round_done = 5;
+  }
+
+  if (object_health(1, wonder_id) < (dead_guys )) {
+    dead_guys = object_health(1, wonder_id);
+    if (dead_guys < 0) dead_guys = 0;
+    change_objective_text("civilian_killed", parse($S("Wonder Health: $NUM0"), dead_guys)); 
+  }
+
+  if (building_destroyed(1, wonder_id)) {
+    defeat(1);
+  }
+
+  if (round_done == 5) {
+    if (num_military_units(2) + num_military_units(3) + num_military_units(4) + num_military_units(5) == 0) {
+      health = dead_guys;
+      save_results("cewonder", get_player_profile_name(), health);
+      victory(1);
+    }
+  }
+}
+

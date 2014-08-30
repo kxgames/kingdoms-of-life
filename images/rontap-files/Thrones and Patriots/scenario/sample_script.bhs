@@ -1,0 +1,101 @@
+//******************** Sample_Script.bhs ********************//
+
+//This is a sample script file
+//The following is a skeleton scenario script file
+scenario
+{
+
+labels {
+  //Add any constant labels here in a comma separated list.
+}
+
+run_once {
+  //Insert commands that should be executed only once when the script is loaded here.
+}
+
+//Main script body.
+//Add triggers and other commands to be executed each game frame here.
+//Use Edit->Insert Trigger Function to select from the list of available functions
+//Use Edit->Insert Trigger Block to add a blank trigger block.
+
+
+trigger sample_trigger (/*conditions under which the trigger will fire*/) {
+  /*Insert commands that will execute when trigger condition is true and the trigger is enabled.
+    Use trigger functions from (see list by selecting Edit->Insert Trigger Function) to control game events*/ 
+}
+
+}
+
+
+//Using the Rise of Nations Script Editor
+//====================================================================
+//====================================================================
+
+//You can use this Script Editor to edit & debug scripts
+//This editor is accessible:
+// 1. from the Tools & Extras menu
+// 2. through the Edit Script button in the Scenario Editor
+// 3. Via the Ctrl + Alt + Z hotkey during game, which may be used to debug scripts
+//Script debugging capabilities are enabled when the game is running.
+
+//All scripts are are normally stored in .bhs files, which can be loaded and debugged in this
+//editor
+//All scripts that are currently loaded either internally by the game or in this editor are listed
+//in the "Loaded Scripts" menu.
+
+
+//Scripts are used for several areas, including Scenario Editor-made scenarios, Conquer The World scenarios
+//and AI building placement. However, all can be edited and debugged through this editor.
+
+
+//Editing
+//====================================================================
+//Scripts can be edited, saved and compiled through this editor.
+//It is generally recommended to edit the script from the main menu or from Scenario Editor "Edit Script" option
+//For debugging purposes, it is also possible to edit a script on the fly while it is at a breakpoint
+
+//Trigger Function Library
+//====================================================================
+//The 500 or so trigger functions are the primary method of accessing and manipulating game state by scripts
+//For a list of available script functions, see Edit->Insert Trigger Functions.
+//All listed functions are available for use within any script
+
+//Debugging 
+//============================================================
+//To debug one of the scripts loaded by the game:
+//1. Select script from "Loaded Scripts" menu
+//2. Set breakpoints (by clicking in the dark grey bar to the left OR using toggle breakpoint command)
+//3. Step into/Run the script from the editor OR hit the "X" at the top right corner to hide the editor
+//   A message will appear when the breakpoint is hit
+//4. Once at a breakpoint, additional options will appear.
+//   At this point you may use watch windows to check/alter the values of the variables
+//5. Hiding the editor ("X" top right corner) will resume the game and continue running the scripts
+
+
+
+//Scenario Scripts
+//============================================================
+//Scenario scripts are associated with a specific scenario
+//and run every frame
+//Scenario scripts primarily rely on Triggers (can be created through Edit->Insert Trigger Block)
+//and rely on the library of trigger functions (see Edit->Insert Trigger Function for specs)
+//to set the behavior of the scenario
+//The scenario script is accessible directly through "Edit Script" button in scenario editor
+//The script for a scenario saved in <<filename>>.sce is always <<filename>>.bhs
+//See any of the scripts in ,\scenario directory for complete examples
+
+
+//Conquer the World Scenario Scripts
+//============================================================
+//These are no different then plain scenario scripts, only that
+//they are set to run with the various scenarios available in CtW
+//For more information, see scripts in .\conquest\scripts directory
+
+
+//AI Best-Build Scripts
+//============================================================
+//These scripts are used for AI building placement
+//There are two such scripts, "economic" and "defensive" and they are designed
+//to handle the build strategy for computer AI
+//These scripts are fine-tuned for balance, and are mostly for internal use
+//The scripts are locaed in .\ai\scripts directory

@@ -1,0 +1,43 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+
+labels {
+}
+  diff = get_difficulty();
+
+  set_time_limit(5);
+
+  set_explored(1, world_x_size()/2, world_y_size()/2, world_x_size());
+
+  set_leader_name(3, $S("Scout Team"));
+
+  gain_tech(3, "Science");
+  gain_tech(3, "Science");
+  gain_tech(3, "Science");
+  gain_tech(3, "Science");
+
+  //get starting location
+  x = get_starting_loc_x(1);
+  y = get_starting_loc_y(1);
+
+  create_unit_upgrade(1, x, y, "Javelineers", 4);
+  create_unit_upgrade(1, x, y, "Phalanx", 2);
+  create_unit_upgrade(1, x, y, "Archers", 4);
+  create_unit_upgrade(1, x, y, "Light Horse", 4);
+  create_unit_upgrade(1, x, y, "Cataphract", 8);
+  create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+  if (get_ctw_campaign() == "Alexander the Great") {
+    create_unit_in_group(1, x - 4, y, "Alexander", 1);
+  }
+  else if (get_ctw_campaign() == "Napoleon") {
+    create_unit_in_group(1, x - 4, y, "Napoleon", 1);
+  }
+  else {
+    create_unit_in_group(1, x, y, "General", 1);
+  }
+  create_unit_upgrade(1, x, y, "Scout", 3);
+}

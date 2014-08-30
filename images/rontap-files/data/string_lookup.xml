@@ -1,0 +1,1151 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Jason Coleman (Big Huge Games) -->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION: All text within STRING elements-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<ROOT>
+	<CAT hash="3920216">
+		<STRING hash="0" hash_i="0" needed="0"/>
+		<STRING hash="10416096" hash_i="11226112" needed="0">Teams &amp; Allies:</STRING>
+		<STRING hash="5820335" hash_i="5803731" needed="0">Game Rules:</STRING>
+		<STRING hash="4776064" hash_i="4717396" needed="0">Map Style:</STRING>
+		<STRING hash="6449465" hash_i="6434995" needed="0">Difficulty:</STRING>
+		<STRING hash="3668910" hash_i="3610242" needed="0">Map Size:</STRING>
+		<STRING hash="3098722" hash_i="3076364" needed="0">Victory:</STRING>
+		<STRING hash="7402063" hash_i="7387925" needed="0">Elimination:</STRING>
+		<STRING hash="5901328" hash_i="5857444" needed="0">Start With:</STRING>
+		<STRING hash="5144092" hash_i="5122650" needed="0">Resources:</STRING>
+		<STRING hash="10669646" hash_i="11648524" needed="0">Defender Bonus:</STRING>
+		<STRING hash="6056078" hash_i="6033572" needed="0">Technology:</STRING>
+		<STRING hash="4190828" hash_i="4791364" needed="0">Start Age:</STRING>
+		<STRING hash="6976133" hash_i="7903331" needed="0">Defender Age:</STRING>
+		<STRING hash="2247494" hash_i="2639534" needed="0">End Age:</STRING>
+		<STRING hash="6319993" hash_i="6318887" needed="0">Reveal Map:</STRING>
+		<STRING hash="6203405" hash_i="6182561" needed="0">Population:</STRING>
+		<STRING hash="5772019" hash_i="5749829" needed="0">Rush Rules:</STRING>
+		<STRING hash="6768248" hash_i="6821576" needed="0">Cannon Time:</STRING>
+		<STRING hash="10175165" hash_i="10176011" needed="0">Other Nations:</STRING>
+		<STRING hash="10539490" hash_i="10491672" needed="0">Max Observers:</STRING>
+		<STRING hash="5376021" hash_i="5357137" needed="0">Game Speed:</STRING>
+		<STRING hash="1420697" hash_i="1398875" needed="0">Score:</STRING>
+		<STRING hash="5568970" hash_i="5569968" needed="0">Time Limit:</STRING>
+		<STRING hash="12147140" hash_i="13031630" needed="0">Musical Chairs:</STRING>
+		<STRING hash="12357003" hash_i="12311769" needed="0">Wonder Victory:</STRING>
+		<STRING hash="11676407" hash_i="11763517" needed="0">Territory Goal:</STRING>
+		<STRING hash="7350754" hash_i="7364912" needed="0">Income Goal:</STRING>
+		<STRING hash="21834034" hash_i="24498646" needed="0">Conquest Bonus Cards</STRING>
+		<STRING hash="4500312" hash_i="4509124" needed="1">Game Mods:</STRING>
+	</CAT>
+	<CAT hash="1979549">
+		<STRING hash="3518863" hash_i="3501657" needed="0">Military</STRING>
+		<STRING hash="1325279" hash_i="1400671" needed="0">Civic</STRING>
+		<STRING hash="3292351" hash_i="3367743" needed="0">Commerce</STRING>
+		<STRING hash="2632232" hash_i="2610410" needed="0">Science</STRING>
+		<STRING hash="659880" hash_i="644452" needed="0">Foot</STRING>
+		<STRING hash="2102572" hash_i="2085366" needed="0">Mounted</STRING>
+		<STRING hash="5345985" hash_i="5328779" needed="0">Mechanized</STRING>
+		<STRING hash="19302702" hash_i="20309678" needed="0">Siege and Artillery</STRING>
+		<STRING hash="27043938" hash_i="27197386" needed="0">Command and Leadership</STRING>
+		<STRING hash="43655280" hash_i="45661268" needed="0">Civilian and Non-Combatant</STRING>
+		<STRING hash="10111480" hash_i="10111604" needed="0">Sailing Vessel</STRING>
+		<STRING hash="8580167" hash_i="8574753" needed="0">Modern Naval</STRING>
+		<STRING hash="338844" hash_i="406550" needed="0">Air</STRING>
+		<STRING hash="3621047" hash_i="3606909" needed="0">Economic</STRING>
+		<STRING hash="1493636" hash_i="1469282" needed="0">Wonder</STRING>
+		<STRING hash="4986669" hash_i="5054375" needed="0">Aggressive</STRING>
+		<STRING hash="3775778" hash_i="3761308" needed="0">Defensive</STRING>
+		<STRING hash="7441301" hash_i="7456903" needed="0">Stand Ground</STRING>
+		<STRING hash="679072" hash_i="657630" needed="0">Raid</STRING>
+		<STRING hash="772144" hash_i="750702" needed="0">Raze</STRING>
+		<STRING hash="3522606" hash_i="3539644" needed="0">Hold Fire</STRING>
+		<STRING hash="1633076" hash_i="1617220" needed="0">Gather</STRING>
+		<STRING hash="10032762" hash_i="10186100" needed="0">Build &amp; Gather</STRING>
+		<STRING hash="874157" hash_i="947031" needed="0">Build</STRING>
+		<STRING hash="531728" hash_i="514750" needed="0">Idle</STRING>
+		<STRING hash="5396068" hash_i="6044030" needed="0">Auto Craft</STRING>
+		<STRING hash="8254070" hash_i="8997984" needed="0">Manual Craft</STRING>
+		<STRING hash="6302470" hash_i="6411260" needed="0">Auto Deploy</STRING>
+		<STRING hash="9187448" hash_i="9212466" needed="0">Manual Deploy</STRING>
+		<STRING hash="2415994" hash_i="2483700" needed="0">Ancient</STRING>
+		<STRING hash="5055938" hash_i="5131330" needed="0">Classical</STRING>
+		<STRING hash="3271147" hash_i="3253941" needed="0">Medieval</STRING>
+		<STRING hash="3896038" hash_i="3880182" needed="0">Gunpowder</STRING>
+		<STRING hash="8707027" hash_i="8692889" needed="0">Enlightenment</STRING>
+		<STRING hash="5641758" hash_i="5624780" needed="0">Industrial</STRING>
+		<STRING hash="1495270" hash_i="1478064" needed="0">Modern</STRING>
+		<STRING hash="6746924" hash_i="6729946" needed="0">Information</STRING>
+		<STRING hash="617427" hash_i="720895" needed="0">WAR!</STRING>
+		<STRING hash="1366925" hash_i="1346081" needed="0">Peace</STRING>
+		<STRING hash="669166" hash_i="736872" needed="0">Ally</STRING>
+		<STRING hash="5094893" hash_i="5080423" needed="0">Diplomacy</STRING>
+		<STRING hash="28999951" hash_i="29139981" needed="0">Survival of the Fittest</STRING>
+		<STRING hash="3887577" hash_i="3955283" needed="0">Assassin!</STRING>
+		<STRING hash="32811580" hash_i="33103126" needed="0">Barbarians at the Gates!</STRING>
+		<STRING hash="3962092" hash_i="3939586" needed="0">Teams of 2</STRING>
+		<STRING hash="3978471" hash_i="3955965" needed="0">Teams of 3</STRING>
+		<STRING hash="3995870" hash_i="3973364" needed="0">Teams of 4</STRING>
+		<STRING hash="12258848" hash_i="12277426" needed="0">Team Diplomacy</STRING>
+		<STRING hash="27122274" hash_i="27313812" needed="0">Cooperative Diplomacy</STRING>
+		<STRING hash="23932259" hash_i="24028221" needed="0">Cooperative Survival</STRING>
+		<STRING hash="16393466" hash_i="16480536" needed="0">Cooperative Teams</STRING>
+		<STRING hash="6044513" hash_i="6120673" needed="0">Custom Open</STRING>
+		<STRING hash="8281712" hash_i="9118224" needed="0">Custom Closed</STRING>
+		<STRING hash="5097224" hash_i="5112826" needed="0">Saved Game</STRING>
+		<STRING hash="3362659" hash_i="3340837" needed="0">Standard</STRING>
+		<STRING hash="1626432" hash_i="1701824" needed="0">Custom</STRING>
+		<STRING hash="2287567" hash_i="2235461" needed="0">No Rush</STRING>
+		<STRING hash="7466821" hash_i="7487223" needed="0">Sudden Death</STRING>
+		<STRING hash="6202864" hash_i="6188394" needed="0">Deathmatch</STRING>
+		<STRING hash="5502719" hash_i="5533577" needed="0">Art of War</STRING>
+		<STRING hash="1150372" hash_i="1132098" needed="0">Nomad</STRING>
+		<STRING hash="19608465" hash_i="19667523" needed="0">Peaceful Tech Race</STRING>
+		<STRING hash="4184613" hash_i="4201953" needed="0">Fast Game</STRING>
+		<STRING hash="13573600" hash_i="13598166" needed="0">Scenario/Script</STRING>
+		<STRING hash="1638468" hash_i="1617026" needed="0">Random</STRING>
+		<STRING hash="12443480" hash_i="12521400" needed="0">Random Land Map</STRING>
+		<STRING hash="11012901" hash_i="11063723" needed="0">Random Sea Map</STRING>
+		<STRING hash="3843874" hash_i="3770100" needed="0">Old World</STRING>
+		<STRING hash="9418409" hash_i="9398215" needed="0">Great Sahara</STRING>
+		<STRING hash="16188804" hash_i="16242958" needed="0">Amazon Rainforest</STRING>
+		<STRING hash="5200590" hash_i="5182292" needed="0">Himalayas</STRING>
+		<STRING hash="10802627" hash_i="10875571" needed="0">Southwest Mesa</STRING>
+		<STRING hash="24115318" hash_i="24350282" needed="0">African Watering Hole</STRING>
+		<STRING hash="9940214" hash_i="9923008" needed="0">Mediterranean</STRING>
+		<STRING hash="21369198" hash_i="21496408" needed="0">Australian Outback</STRING>
+		<STRING hash="6671033" hash_i="6681793" needed="0">Great Lakes</STRING>
+		<STRING hash="11123843" hash_i="11126259" needed="0">Warring States</STRING>
+		<STRING hash="3908601" hash_i="3836205" needed="0">New World</STRING>
+		<STRING hash="12241427" hash_i="12372987" needed="0">Colonial Powers</STRING>
+		<STRING hash="6061595" hash_i="6073493" needed="0">East Indies</STRING>
+		<STRING hash="11895988" hash_i="11909598" needed="0">East Meets West</STRING>
+		<STRING hash="18397047" hash_i="18556061" needed="0">Atlantic Sea Power</STRING>
+		<STRING hash="5325479" hash_i="5348289" needed="0">Nile Delta</STRING>
+		<STRING hash="8499128" hash_i="8642368" needed="0">British Isles</STRING>
+		<STRING hash="2394462" hash_i="2380324" needed="0">Easiest</STRING>
+		<STRING hash="834472" hash_i="820334" needed="0">Easy</STRING>
+		<STRING hash="3195623" hash_i="3178417" needed="0">Moderate</STRING>
+		<STRING hash="931728" hash_i="909222" needed="0">Tough</STRING>
+		<STRING hash="2966159" hash_i="2943653" needed="0">Toughest</STRING>
+		<STRING hash="699868" hash_i="677362" needed="0">Tiny</STRING>
+		<STRING hash="13797706" hash_i="13775884" needed="0">Small (2-player)</STRING>
+		<STRING hash="15304602" hash_i="15287396" needed="0">Medium (3-player)</STRING>
+		<STRING hash="19705220" hash_i="19683398" needed="0">Standard (4-player)</STRING>
+		<STRING hash="13700862" hash_i="13683462" needed="0">Large (6-player)</STRING>
+		<STRING hash="12121526" hash_i="12103228" needed="0">Huge (8-player)</STRING>
+		<STRING hash="2690747" hash_i="2739779" needed="0">Big Huge</STRING>
+		<STRING hash="3078682" hash_i="3154074" needed="0">Conquest</STRING>
+		<STRING hash="1095973" hash_i="1074151" needed="0">Score</STRING>
+		<STRING hash="4883849" hash_i="4884847" needed="0">Time Limit</STRING>
+		<STRING hash="11258799" hash_i="12143289" needed="0">Musical Chairs</STRING>
+		<STRING hash="4264419" hash_i="4241913" needed="0">Territory</STRING>
+		<STRING hash="4907690" hash_i="4884436" needed="0">Tech Race</STRING>
+		<STRING hash="2694088" hash_i="2769480" needed="0">Capital</STRING>
+		<STRING hash="23151211" hash_i="24563837" needed="0">Sudden Death Capital</STRING>
+		<STRING hash="13330612" hash_i="14035040" needed="0">City Center Only</STRING>
+		<STRING hash="5325302" hash_i="5294354" needed="0">Small Town</STRING>
+		<STRING hash="5183670" hash_i="5157144" needed="0">Large Town</STRING>
+		<STRING hash="397842" hash_i="380442" needed="0">Low</STRING>
+		<STRING hash="77133" hash_i="77133" needed="0">x2</STRING>
+		<STRING hash="79312" hash_i="79312" needed="0">x3</STRING>
+		<STRING hash="83574" hash_i="83574" needed="0">x5</STRING>
+		<STRING hash="583411" hash_i="583411" needed="0">x10</STRING>
+		<STRING hash="406458" hash_i="406458" needed="0">x20</STRING>
+		<STRING hash="2794072" hash_i="2777094" needed="0">Infinite</STRING>
+		<STRING hash="8039338" hash_i="8107588" needed="0">Variable Low</STRING>
+		<STRING hash="11922177" hash_i="11992367" needed="0">Variable Medium</STRING>
+		<STRING hash="8650551" hash_i="8709821" needed="0">Variable High</STRING>
+		<STRING hash="11463394" hash_i="11440824" needed="0">Same Resources</STRING>
+		<STRING hash="14904404" hash_i="14876382" needed="0">Double Resources</STRING>
+		<STRING hash="14616767" hash_i="14580709" needed="0">Triple Resources</STRING>
+		<STRING hash="20993156" hash_i="21020180" needed="0">Quadruple Resources</STRING>
+		<STRING hash="20865034" hash_i="20892058" needed="0">Quintuple Resources</STRING>
+		<STRING hash="10908563" hash_i="11098279" needed="0">Cheap and Fast</STRING>
+		<STRING hash="1161548" hash_i="1236940" needed="0">Cheap</STRING>
+		<STRING hash="12686222" hash_i="12778140" needed="0">Normal and Fast</STRING>
+		<STRING hash="1864760" hash_i="1846486" needed="0">Normal</STRING>
+		<STRING hash="12266383" hash_i="12281573" needed="0">Normal and Slow</STRING>
+		<STRING hash="3876878" hash_i="3862740" needed="0">Expensive</STRING>
+		<STRING hash="17484138" hash_i="17504654" needed="0">Expensive and Slow</STRING>
+		<STRING hash="10314296" hash_i="10335014" needed="0">Very Expensive</STRING>
+		<STRING hash="29852837" hash_i="29964251" needed="0">Very Expensive and Slow</STRING>
+		<STRING hash="5622063" hash_i="6522291" needed="0">Ancient Age</STRING>
+		<STRING hash="8843171" hash_i="9947361" needed="0">Classical Age</STRING>
+		<STRING hash="6818848" hash_i="7743310" needed="0">Medieval Age</STRING>
+		<STRING hash="7683271" hash_i="8696213" needed="0">Gunpowder Age</STRING>
+		<STRING hash="13782908" hash_i="15146344" needed="0">Enlightenment Age</STRING>
+		<STRING hash="9696711" hash_i="10787533" needed="0">Industrial Age</STRING>
+		<STRING hash="4270575" hash_i="4953001" needed="0">Modern Age</STRING>
+		<STRING hash="11109641" hash_i="12277097" needed="0">Information Age</STRING>
+		<STRING hash="13700477" hash_i="13723301" needed="0">All Technologies</STRING>
+		<STRING hash="5193805" hash_i="5871995" needed="0">Random Age!</STRING>
+		<STRING hash="2574263" hash_i="3086581" needed="0">Same Age</STRING>
+		<STRING hash="1424530" hash_i="1747290" needed="0">+1 Age</STRING>
+		<STRING hash="1247577" hash_i="1570337" needed="0">+2 Age</STRING>
+		<STRING hash="1249756" hash_i="1572516" needed="0">+3 Age</STRING>
+		<STRING hash="1252139" hash_i="1574899" needed="0">+4 Age</STRING>
+		<STRING hash="6015289" hash_i="6498421" needed="0">No Ally LOS</STRING>
+		<STRING hash="2783183" hash_i="2769045" needed="0">Explored</STRING>
+		<STRING hash="6645813" hash_i="6669377" needed="0">All Visible</STRING>
+		<STRING hash="216236" hash_i="216236" needed="0">50</STRING>
+		<STRING hash="58989" hash_i="58989" needed="0">75</STRING>
+		<STRING hash="631931" hash_i="631931" needed="0">100</STRING>
+		<STRING hash="227070" hash_i="227070" needed="0">125</STRING>
+		<STRING hash="471802" hash_i="471802" needed="0">150</STRING>
+		<STRING hash="543176" hash_i="543176" needed="0">200</STRING>
+		<STRING hash="383047" hash_i="383047" needed="0">250</STRING>
+		<STRING hash="543987" hash_i="543987" needed="0">300</STRING>
+		<STRING hash="36489255" hash_i="40020081" needed="0">Peace until Classical Age</STRING>
+		<STRING hash="30793466" hash_i="32958956" needed="0">Peace until Medieval Age</STRING>
+		<STRING hash="33384663" hash_i="35729265" needed="0">Peace until Gunpowder Age</STRING>
+		<STRING hash="46053282" hash_i="48817826" needed="0">Peace until Enlightenment Age</STRING>
+		<STRING hash="37813093" hash_i="40228831" needed="0">Peace until Industrial Age</STRING>
+		<STRING hash="24369589" hash_i="26310579" needed="0">Peace until Modern Age</STRING>
+		<STRING hash="40894511" hash_i="43426883" needed="0">Peace until Information Age</STRING>
+		<STRING hash="6310670" hash_i="6248254" needed="0">Non Violent</STRING>
+		<STRING hash="34210057" hash_i="34189213" needed="0">Peace for first 2 minutes</STRING>
+		<STRING hash="34290364" hash_i="34269520" needed="0">Peace for first 5 minutes</STRING>
+		<STRING hash="39249590" hash_i="39228746" needed="0">Peace for first 10 minutes</STRING>
+		<STRING hash="37860339" hash_i="37839495" needed="0">Peace for first 15 minutes</STRING>
+		<STRING hash="37754009" hash_i="37733165" needed="0">Peace for first 20 minutes</STRING>
+		<STRING hash="37781050" hash_i="37760206" needed="0">Peace for first 30 minutes</STRING>
+		<STRING hash="579008" hash_i="560734" needed="0">None</STRING>
+		<STRING hash="8625958" hash_i="8930594" needed="0">1 Cannon Time</STRING>
+		<STRING hash="10150716" hash_i="10455352" needed="0">2 Cannon Times</STRING>
+		<STRING hash="10152440" hash_i="10457076" needed="0">4 Cannon Times</STRING>
+		<STRING hash="10156878" hash_i="10461514" needed="0">8 Cannon Times</STRING>
+		<STRING hash="2973011" hash_i="2951189" needed="0">Skill +1</STRING>
+		<STRING hash="2267908" hash_i="2246086" needed="0">Skill +2</STRING>
+		<STRING hash="2279333" hash_i="2257511" needed="0">Skill +3</STRING>
+		<STRING hash="2291574" hash_i="2269752" needed="0">Skill +4</STRING>
+		<STRING hash="2301799" hash_i="2279977" needed="0">Skill +5</STRING>
+		<STRING hash="2312696" hash_i="2290874" needed="0">Skill +6</STRING>
+		<STRING hash="2334729" hash_i="2312907" needed="0">Skill +7</STRING>
+		<STRING hash="2346826" hash_i="2325004" needed="0">Skill +8</STRING>
+		<STRING hash="2356187" hash_i="2334365" needed="0">Skill +9</STRING>
+		<STRING hash="4120634" hash_i="4098812" needed="0">Skill +10</STRING>
+		<STRING hash="4171825" hash_i="4150003" needed="0">Skill +11</STRING>
+		<STRING hash="3380004" hash_i="3358182" needed="0">Skill +12</STRING>
+		<STRING hash="3394277" hash_i="3372455" needed="0">Skill +13</STRING>
+		<STRING hash="3409468" hash_i="3387646" needed="0">Skill +14</STRING>
+		<STRING hash="3422391" hash_i="3400569" needed="0">Skill +15</STRING>
+		<STRING hash="3436070" hash_i="3414248" needed="0">Skill +16</STRING>
+		<STRING hash="3462277" hash_i="3440455" needed="0">Skill +17</STRING>
+		<STRING hash="3477306" hash_i="3455484" needed="0">Skill +18</STRING>
+		<STRING hash="3489257" hash_i="3467435" needed="0">Skill +19</STRING>
+		<STRING hash="3415531" hash_i="3393709" needed="0">Skill +20</STRING>
+		<STRING hash="596884" hash_i="577232" needed="0">Open</STRING>
+		<STRING hash="1399797" hash_i="1475189" needed="0">Closed</STRING>
+		<STRING hash="3026557" hash_i="3101949" needed="0">Computer</STRING>
+		<STRING hash="32013233" hash_i="32235091" needed="0">Computer (Rush and Raid)</STRING>
+		<STRING hash="32990843" hash_i="36136497" needed="0">Computer (Boom and Build)</STRING>
+		<STRING hash="1239052" hash_i="1220754" needed="0">Human</STRING>
+		<STRING hash="6855043" hash_i="6930757" needed="0">Boot Player</STRING>
+		<STRING hash="14535148" hash_i="16570584" needed="0">Human Control All</STRING>
+		<STRING hash="20332051" hash_i="23137319" needed="0">Computer Control All</STRING>
+		<STRING hash="90319" hash_i="90319" needed="0">0</STRING>
+		<STRING hash="95232" hash_i="95232" needed="0">1</STRING>
+		<STRING hash="6477" hash_i="6477" needed="0">2</STRING>
+		<STRING hash="7288" hash_i="7288" needed="0">3</STRING>
+		<STRING hash="8201" hash_i="8201" needed="0">4</STRING>
+		<STRING hash="8862" hash_i="8862" needed="0">5</STRING>
+		<STRING hash="9607" hash_i="9607" needed="0">6</STRING>
+		<STRING hash="11744" hash_i="11744" needed="0">7</STRING>
+		<STRING hash="4162022" hash_i="4136636" needed="0">Very Slow</STRING>
+		<STRING hash="693623" hash_i="671801" needed="0">Slow</STRING>
+		<STRING hash="799468" hash_i="784040" needed="0">Fast</STRING>
+		<STRING hash="5428119" hash_i="5450241" needed="0">Hyper Fast</STRING>
+		<STRING hash="1071111" hash_i="1071111" needed="0">1000</STRING>
+		<STRING hash="982356" hash_i="982356" needed="0">2000</STRING>
+		<STRING hash="983167" hash_i="983167" needed="0">3000</STRING>
+		<STRING hash="984080" hash_i="984080" needed="0">4000</STRING>
+		<STRING hash="984741" hash_i="984741" needed="0">5000</STRING>
+		<STRING hash="985486" hash_i="985486" needed="0">6000</STRING>
+		<STRING hash="987623" hash_i="987623" needed="0">7000</STRING>
+		<STRING hash="988518" hash_i="988518" needed="0">8000</STRING>
+		<STRING hash="989071" hash_i="989071" needed="0">9000</STRING>
+		<STRING hash="1624178" hash_i="1624178" needed="0">10000</STRING>
+		<STRING hash="1464049" hash_i="1464049" needed="0">15000</STRING>
+		<STRING hash="1535423" hash_i="1535423" needed="0">20000</STRING>
+		<STRING hash="5128202" hash_i="5128202" needed="0">15 minutes</STRING>
+		<STRING hash="5200387" hash_i="5200387" needed="0">30 minutes</STRING>
+		<STRING hash="5041171" hash_i="5041171" needed="0">45 minutes</STRING>
+		<STRING hash="5202706" hash_i="5202706" needed="0">60 minutes</STRING>
+		<STRING hash="5206291" hash_i="5206291" needed="0">90 minutes</STRING>
+		<STRING hash="2346665" hash_i="2330683" needed="0">2 Hours</STRING>
+		<STRING hash="2347476" hash_i="2331494" needed="0">3 Hours</STRING>
+		<STRING hash="2348389" hash_i="2332407" needed="0">4 Hours</STRING>
+		<STRING hash="5095600" hash_i="5095600" needed="0">2  minutes</STRING>
+		<STRING hash="5097985" hash_i="5097985" needed="0">5  minutes</STRING>
+		<STRING hash="5101762" hash_i="5101762" needed="0">8  minutes</STRING>
+		<STRING hash="5288331" hash_i="5288331" needed="0">10 minutes</STRING>
+		<STRING hash="5199576" hash_i="5199576" needed="0">20 minutes</STRING>
+		<STRING hash="5039447" hash_i="5039447" needed="0">25 minutes</STRING>
+		<STRING hash="10118651" hash_i="10140669" needed="0">1 Wonder Point</STRING>
+		<STRING hash="11762956" hash_i="11784974" needed="0">2 Wonder Points</STRING>
+		<STRING hash="11763767" hash_i="11785785" needed="0">3 Wonder Points</STRING>
+		<STRING hash="11764680" hash_i="11786698" needed="0">4 Wonder Points</STRING>
+		<STRING hash="11766086" hash_i="11788104" needed="0">6 Wonder Points</STRING>
+		<STRING hash="11769118" hash_i="11791136" needed="0">8 Wonder Points</STRING>
+		<STRING hash="13584305" hash_i="13593573" needed="0">10 Wonder Points</STRING>
+		<STRING hash="13417735" hash_i="13427003" needed="0">12 Wonder Points</STRING>
+		<STRING hash="13426223" hash_i="13435491" needed="0">16 Wonder Points</STRING>
+		<STRING hash="13495550" hash_i="13504818" needed="0">20 Wonder Points</STRING>
+		<STRING hash="13333542" hash_i="13342810" needed="0">24 Wonder Points</STRING>
+		<STRING hash="16707981" hash_i="16682321" needed="0">No Wonder Victory</STRING>
+		<STRING hash="27517740" hash_i="27517740" needed="0">30% of world territory</STRING>
+		<STRING hash="27357611" hash_i="27357611" needed="0">35% of world territory</STRING>
+		<STRING hash="27518653" hash_i="27518653" needed="0">40% of world territory</STRING>
+		<STRING hash="27358524" hash_i="27358524" needed="0">45% of world territory</STRING>
+		<STRING hash="27519314" hash_i="27519314" needed="0">50% of world territory</STRING>
+		<STRING hash="27359185" hash_i="27359185" needed="0">55% of world territory</STRING>
+		<STRING hash="27520059" hash_i="27520059" needed="0">60% of world territory</STRING>
+		<STRING hash="27359930" hash_i="27359930" needed="0">65% of world territory</STRING>
+		<STRING hash="27522196" hash_i="27522196" needed="0">70% of world territory</STRING>
+		<STRING hash="27362067" hash_i="27362067" needed="0">75% of world territory</STRING>
+		<STRING hash="27523091" hash_i="27523091" needed="0">80% of world territory</STRING>
+		<STRING hash="27523644" hash_i="27523644" needed="0">90% of world territory</STRING>
+		<STRING hash="24251887" hash_i="24219249" needed="0">No Territory Victory</STRING>
+		<STRING hash="20494236" hash_i="21127420" needed="0">+100 Average Income</STRING>
+		<STRING hash="20317283" hash_i="20950467" needed="0">+200 Average Income</STRING>
+		<STRING hash="20319462" hash_i="20952646" needed="0">+300 Average Income</STRING>
+		<STRING hash="20321845" hash_i="20955029" needed="0">+400 Average Income</STRING>
+		<STRING hash="20323724" hash_i="20956908" needed="0">+500 Average Income</STRING>
+		<STRING hash="20325771" hash_i="20958955" needed="0">+600 Average Income</STRING>
+		<STRING hash="20330602" hash_i="20963786" needed="0">+700 Average Income</STRING>
+		<STRING hash="20332949" hash_i="20966133" needed="0">+800 Average Income</STRING>
+		<STRING hash="20334612" hash_i="20967796" needed="0">+900 Average Income</STRING>
+		<STRING hash="2617521" hash_i="2601665" needed="0">Generic</STRING>
+		<STRING hash="2529104" hash_i="2514966" needed="0">Economy</STRING>
+		<STRING hash="11453981" hash_i="11467731" needed="0">Save to Profile</STRING>
+		<STRING hash="13283113" hash_i="13258929" needed="0">Turbo Resources</STRING>
+		<STRING hash="13892810" hash_i="13908124" needed="0">No Nation Powers</STRING>
+		<STRING hash="11891103" hash_i="11885157" needed="0">No Unique Units</STRING>
+		<STRING hash="9660804" hash_i="11019674" needed="0">Cooperative AI</STRING>
+		<STRING hash="5361655" hash_i="5349067" needed="0">Free Pause</STRING>
+		<STRING hash="13076813" hash_i="13099507" needed="0">Tournament Play</STRING>
+		<STRING hash="11252230" hash_i="11311588" needed="0">Lock Game Speed</STRING>
+		<STRING hash="22800730" hash_i="22838982" needed="0">Require Random Teams</STRING>
+		<STRING hash="28098967" hash_i="28204931" needed="0">Require Random Nations</STRING>
+		<STRING hash="24159387" hash_i="24901257" needed="0">Share Control of Team</STRING>
+		<STRING hash="7992306" hash_i="7990562" needed="0">Victory Type</STRING>
+		<STRING hash="3785788" hash_i="3762800" needed="0">Game Time</STRING>
+		<STRING hash="4141632" hash_i="4082964" needed="0">Map Style</STRING>
+		<STRING hash="3125071" hash_i="3066403" needed="0">Map Size</STRING>
+		<STRING hash="3764196" hash_i="3739842" needed="0">Winner(s)</STRING>
+		<STRING hash="5382453" hash_i="5361127" needed="0">High Score</STRING>
+		<STRING hash="24464796" hash_i="24490670" needed="0">Most Valuable Player</STRING>
+		<STRING hash="9378603" hash_i="9381019" needed="0">Wonders Score</STRING>
+		<STRING hash="6940560" hash_i="6913716" needed="0">Total Score</STRING>
+		<STRING hash="5540116" hash_i="5604794" needed="0">Army Score</STRING>
+		<STRING hash="8632642" hash_i="8691442" needed="0">Combat Score</STRING>
+		<STRING hash="12696106" hash_i="12717590" needed="0">Territory Score</STRING>
+		<STRING hash="5548430" hash_i="5620794" needed="0">City Score</STRING>
+		<STRING hash="9679017" hash_i="9691649" needed="0">Economy Score</STRING>
+		<STRING hash="11483852" hash_i="11508798" needed="0">Research Score</STRING>
+		<STRING hash="7552353" hash_i="8367475" needed="0">Largest Army</STRING>
+		<STRING hash="6104809" hash_i="6741767" needed="0">Units Built</STRING>
+		<STRING hash="6884928" hash_i="6885488" needed="0">Units Killed</STRING>
+		<STRING hash="5122376" hash_i="5127416" needed="0">Units Lost</STRING>
+		<STRING hash="11224199" hash_i="12382719" needed="0">Buildings Built</STRING>
+		<STRING hash="11977059" hash_i="12098103" needed="0">Buildings Razed</STRING>
+		<STRING hash="10005722" hash_i="10171228" needed="0">Buildings Lost</STRING>
+		<STRING hash="7262581" hash_i="8078949" needed="0">Cities Built</STRING>
+		<STRING hash="12018339" hash_i="12854851" needed="0">Cities Captured</STRING>
+		<STRING hash="6244407" hash_i="6338583" needed="0">Cities Lost</STRING>
+		<STRING hash="14528556" hash_i="14463250" needed="0">$GOOD0 collected</STRING>
+		<STRING hash="11480916" hash_i="11458726" needed="0">Rare Resources</STRING>
+		<STRING hash="8807759" hash_i="9444851" needed="0">Ruins Bonuses</STRING>
+		<STRING hash="10595342" hash_i="10617890" needed="0">Resources Sent</STRING>
+		<STRING hash="17856933" hash_i="17883661" needed="0">Resources Received</STRING>
+		<STRING hash="3387135" hash_i="4149457" needed="0">$AGE0 Age</STRING>
+		<STRING hash="15706062" hash_i="15718852" needed="0">Library Research</STRING>
+		<STRING hash="11988524" hash_i="11969640" needed="0">Misc. Research</STRING>
+		<STRING hash="9268572" hash_i="9245444" needed="0">Unit Upgrades</STRING>
+		<STRING hash="8951821" hash_i="9514871" needed="0">Most Citizens</STRING>
+		<STRING hash="10686305" hash_i="11249355" needed="0">Most Caravans</STRING>
+		<STRING hash="10230105" hash_i="10209871" needed="0">Most Scholars</STRING>
+		<STRING hash="6025598" hash_i="6588648" needed="0">Most Cities</STRING>
+		<STRING hash="12557116" hash_i="12531402" needed="0">%Most Territory</STRING>
+		<STRING hash="7601203" hash_i="7565777" needed="0">Most Wonders</STRING>
+		<STRING hash="6122190" hash_i="6765296" needed="0">Forts Built</STRING>
+		<STRING hash="7479015" hash_i="8115973" needed="0">Units Bribed</STRING>
+		<STRING hash="19185094" hash_i="19280018" needed="0">*Survival to Finish</STRING>
+		<STRING hash="7155262" hash_i="7117826" needed="0">Player Speed</STRING>
+		<STRING hash="11546773" hash_i="11564047" needed="0">Hotkeys Pressed</STRING>
+		<STRING hash="7863506" hash_i="8522460" needed="0">Mouse Clicks</STRING>
+		<STRING hash="15783004" hash_i="15953162" needed="0">Clicks in Minimap</STRING>
+		<STRING hash="9126305" hash_i="9296463" needed="0">Clicks in Map</STRING>
+		<STRING hash="20963599" hash_i="21136265" needed="0">Clicks in Interface</STRING>
+		<STRING hash="10925217" hash_i="10975543" needed="0">%Time Zoomed In</STRING>
+		<STRING hash="13218634" hash_i="13231524" needed="0">%Time Zoomed Out</STRING>
+		<STRING hash="23257213" hash_i="23555821" needed="0">Control Groups Formed</STRING>
+		<STRING hash="34415018" hash_i="36043770" needed="0">Control Groups Activated</STRING>
+		<STRING hash="514554" hash_i="490200" needed="0">War</STRING>
+		<STRING hash="5050203" hash_i="5123077" needed="0">Benevolent</STRING>
+		<STRING hash="9043730" hash_i="9029592" needed="0">Enthusiastic</STRING>
+		<STRING hash="2930177" hash_i="2914749" needed="0">Friendly</STRING>
+		<STRING hash="2467926" hash_i="2543318" needed="0">Cordial</STRING>
+		<STRING hash="5716430" hash_i="5694608" needed="0">Suspicious</STRING>
+		<STRING hash="2119924" hash_i="2101626" needed="0">Hostile</STRING>
+		<STRING hash="2323593" hash_i="2305295" needed="0">Hateful</STRING>
+		<STRING hash="27420273" hash_i="28034941" needed="0">$TRIBE0 Oath of Fealty</STRING>
+		<STRING hash="18325327" hash_i="18297647" needed="0">Wonder of the World</STRING>
+		<STRING hash="2302627" hash_i="2287199" needed="0">Fortify</STRING>
+		<STRING hash="3490332" hash_i="3468510" needed="0">Sabotage</STRING>
+		<STRING hash="13678753" hash_i="15286789" needed="0">$TECHCAT0 Eureka</STRING>
+		<STRING hash="20297186" hash_i="21838306" needed="0">$RES0 Economic Boom</STRING>
+		<STRING hash="6849444" hash_i="6832238" needed="0">Mercenaries</STRING>
+		<STRING hash="4610896" hash_i="4588390" needed="0">Treachery</STRING>
+		<STRING hash="8763179" hash_i="8738197" needed="0">Great Thinker</STRING>
+		<STRING hash="10266132" hash_i="10354974" needed="0">Merchant Guild</STRING>
+		<STRING hash="4572512" hash_i="4555112" needed="0">Logistics</STRING>
+		<STRING hash="4635510" hash_i="4614666" needed="0">Partisans</STRING>
+		<STRING hash="19218381" hash_i="19413681" needed="0">Cultural Dominance</STRING>
+		<STRING hash="9764900" hash_i="9791844" needed="0">Trade Embargo</STRING>
+		<STRING hash="6151502" hash_i="6130658" needed="0">Propaganda</STRING>
+		<STRING hash="6151350" hash_i="6788062" needed="0">Skill Bonus</STRING>
+		<STRING hash="13280387" hash_i="14624785" needed="0">Standard No City</STRING>
+		<STRING hash="2675689" hash_i="2661219" needed="0">Defender</STRING>
+		<STRING hash="3507367" hash_i="3575073" needed="0">Attacker</STRING>
+		<STRING hash="12928821" hash_i="13116435" needed="0">Attacker Defense</STRING>
+		<STRING hash="12901459" hash_i="13828657" needed="0">Defender Attack</STRING>
+		<STRING hash="7217963" hash_i="7191803" needed="0">Small Scale</STRING>
+		<STRING hash="3795366" hash_i="3775714" needed="0">Offensive</STRING>
+		<STRING hash="5102533" hash_i="5175407" needed="0">Barbarian</STRING>
+		<STRING hash="2615769" hash_i="2593947" needed="0">Startup</STRING>
+		<STRING hash="12009942" hash_i="12048602" needed="0">Primordial Ooze</STRING>
+		<STRING hash="1559393" hash_i="1542415" needed="0">Intern</STRING>
+		<STRING hash="5351983" hash_i="5331139" needed="0">Programmer</STRING>
+		<STRING hash="2589416" hash_i="2646426" needed="0">Cro-Mag</STRING>
+		<STRING hash="2126730" hash_i="2112260" needed="0">Dolphin</STRING>
+		<STRING hash="2852636" hash_i="2920342" needed="0">Aquaman</STRING>
+		<STRING hash="11879544" hash_i="11916208" needed="0">Stephen Hawking</STRING>
+		<STRING hash="16654941" hash_i="16727885" needed="0">Spiritual Machine</STRING>
+		<STRING hash="9240505" hash_i="9898799" needed="0">Jason Coleman</STRING>
+		<STRING hash="18485684" hash_i="18518894" needed="0">Infinite Resources</STRING>
+		<STRING hash="9358844" hash_i="9323470" needed="0">Secret Random</STRING>
+		<STRING hash="18006925" hash_i="18072535" needed="0">Secret Random Land</STRING>
+		<STRING hash="16259381" hash_i="16258661" needed="0">Secret Random Sea</STRING>
+		<STRING hash="1251249" hash_i="1228743" needed="0">Total</STRING>
+		<STRING hash="690095" hash_i="757801" needed="0">Army</STRING>
+		<STRING hash="2186557" hash_i="2261949" needed="0">Combat</STRING>
+		<STRING hash="698409" hash_i="773801" needed="0">City</STRING>
+		<STRING hash="3666487" hash_i="3645045" needed="0">Research</STRING>
+		<STRING hash="2228690" hash_i="2204336" needed="0">Wonders</STRING>
+		<STRING hash="14253685" hash_i="14298823" needed="0">Most Wonders Held</STRING>
+		<STRING hash="1236480" hash_i="1304186" needed="0">Arena</STRING>
+		<STRING hash="17195067" hash_i="17173245" needed="0">Small (2/3-player)</STRING>
+		<STRING hash="5917400" hash_i="5861630" needed="0">No Victory</STRING>
+		<STRING hash="15563815" hash_i="15681431" needed="0">Custom Diplomacy</STRING>
+		<STRING hash="13212921" hash_i="13271721" needed="0">Custom Survival</STRING>
+		<STRING hash="2139850" hash_i="2117344" needed="0">Tougher</STRING>
+		<STRING hash="20373797" hash_i="22048227" needed="0">Allow Observer Chat</STRING>
+		<STRING hash="13116235" hash_i="13175035" needed="0">Custom Scenario</STRING>
+		<STRING hash="17135323" hash_i="17117923" needed="0">Large (5/6-player)</STRING>
+		<STRING hash="15347371" hash_i="15329073" needed="0">Huge (7/8-player)</STRING>
+		<STRING hash="13422297" hash_i="13431565" needed="0">14 Wonder Points</STRING>
+		<STRING hash="8072927" hash_i="8126255" needed="0">Custom Teams</STRING>
+		<STRING hash="15317080" hash_i="15336286" needed="0">Scenario Victory</STRING>
+		<STRING hash="13749655" hash_i="13773761" needed="1">Info Age Deathmatch</STRING>
+		<STRING hash="11987735" hash_i="11964673" needed="1">-None Selected-</STRING>
+		<STRING hash="3386354" hash_i="3364532" needed="1">Scenario</STRING><STRING hash="11183579" hash_i="11195879" needed="1">Disable Saving</STRING></CAT>
+	<CAT hash="2001345">
+		<STRING hash="50981888" hash_i="51543922" needed="0">Population Limit, Siege, Forts</STRING>
+		<STRING hash="46243831" hash_i="48628873" needed="0">City Limit, National Borders</STRING>
+		<STRING hash="96409525" hash_i="101220031" needed="0">Commerce Cap, Gather Enhancer Buildings</STRING>
+		<STRING hash="87408647" hash_i="89808329" needed="0">Research Speed and Cost, Line-of-sight</STRING>
+		<STRING hash="0" hash_i="0" needed="0"/>
+		<STRING hash="4886119" hash_i="5054375" needed="0">AGGRESSIVE</STRING>
+		<STRING hash="3720352" hash_i="3761308" needed="0">DEFENSIVE</STRING>
+		<STRING hash="6966019" hash_i="7456903" needed="0">STAND GROUND</STRING>
+		<STRING hash="543802" hash_i="657630" needed="0">RAID</STRING>
+		<STRING hash="657446" hash_i="750702" needed="0">RAZE</STRING>
+		<STRING hash="3451374" hash_i="3539644" needed="0">HOLD FIRE</STRING>
+		<STRING hash="1533492" hash_i="1617220" needed="0">GATHER</STRING>
+		<STRING hash="8881582" hash_i="10186100" needed="0">BUILD &amp; GATHER</STRING>
+		<STRING hash="933873" hash_i="947031" needed="0">BUILD</STRING>
+		<STRING hash="560748" hash_i="514750" needed="0">IDLE</STRING>
+		<STRING hash="4654856" hash_i="6044030" needed="0">AUTO CRAFT</STRING>
+		<STRING hash="6609992" hash_i="8997984" needed="0">MANUAL CRAFT</STRING>
+		<STRING hash="6194878" hash_i="6411260" needed="0">AUTO DEPLOY</STRING>
+		<STRING hash="8366798" hash_i="9212466" needed="0">MANUAL DEPLOY</STRING>
+		<STRING hash="273987" hash_i="341693" needed="0">Age</STRING>
+		<STRING hash="699868" hash_i="677362" needed="0">Tiny</STRING>
+		<STRING hash="1146660" hash_i="1124838" needed="0">Small</STRING>
+		<STRING hash="1512996" hash_i="1495790" needed="0">Medium</STRING>
+		<STRING hash="3362659" hash_i="3340837" needed="0">Standard</STRING>
+		<STRING hash="1005028" hash_i="987628" needed="0">Large</STRING>
+		<STRING hash="553863" hash_i="535565" needed="0">Huge</STRING>
+		<STRING hash="2690747" hash_i="2739779" needed="0">Big Huge</STRING>
+		<STRING hash="180303618" hash_i="180281112" needed="0">Take on the nation power of this nation for one battle.</STRING>
+		<STRING hash="183688558" hash_i="186317930" needed="0">Build a Wonder from this Age in any occupied territory.</STRING>
+		<STRING hash="194902380" hash_i="194885174" needed="0">Make any occupied territory invulnerable to attack.</STRING>
+		<STRING hash="219355655" hash_i="218356809" needed="0">Destroy the defense of a territory protected by the 'Fortify' bonus.</STRING>
+		<STRING hash="100842296" hash_i="100820474" needed="0">Start one battle with extra technology.</STRING>
+		<STRING hash="214321010" hash_i="214299568" needed="0">Receive a 5% boost in production for this resource in one battle.</STRING>
+		<STRING hash="78231022" hash_i="78303896" needed="0">Begin one battle with extra troops.</STRING>
+		<STRING hash="200566579" hash_i="200550723" needed="0">Gain a non-capital, non-fortified territory without a fight.</STRING>
+		<STRING hash="197341710" hash_i="197409416" needed="0">All research in the next battle is 20% faster and 20% cheaper.</STRING>
+		<STRING hash="314900243" hash_i="314980239" needed="0">Goods at the Market are 20% cheaper to buy and earn 20% more when sold during one battle.</STRING>
+		<STRING hash="242748025" hash_i="242726449" needed="0">Units heal 50% faster and are immune to attrition damage during one battle.</STRING>
+		<STRING hash="226046937" hash_i="226029959" needed="0">Invading enemy troops take 50% more attrition damage during one battle.</STRING>
+		<STRING hash="202254843" hash_i="202240705" needed="0">Enemy tribes are deprived of their nation powers for one battle.</STRING>
+		<STRING hash="239345225" hash_i="239331087" needed="0">Enemy tribes gain no benefit from their strategic resources in one battle.</STRING>
+		<STRING hash="180183029" hash_i="180167173" needed="0">Gain the use of the enemy nation power for one battle.</STRING>
+		<STRING hash="486640902" hash_i="496131788" needed="0">Start one battle with bonus +$NUM0 of each resource.  The amount depends on your performance in a Barbarian battle.</STRING>
+		<STRING hash="226159838" hash_i="226142632" needed="0">Make any occupied non-capital territory invulnerable to attack.</STRING>
+		<STRING hash="207058700" hash_i="207037258" needed="0">Reduce the territory strength of an enemy territory by two levels.</STRING>
+		<STRING hash="211089915" hash_i="211068473" needed="0">Reduce the territory strength of an enemy territory by two levels.</STRING>
+		<STRING hash="1236480" hash_i="1304186" needed="0">Arena</STRING>
+		<STRING hash="559909775" hash_i="561287125" needed="0">Gain any non-capital territory without a fight. Target territory must be adjacent to your nation and have a strength of four or lower.</STRING>
+		<STRING hash="733441215" hash_i="738771179" needed="0">Start one battle with bonus +$NUM0 of each resource.  The amount depends on the number of your troops that survive a Field Battle or Tactics scenario.</STRING>
+		<STRING hash="169090987" hash_i="169075131" needed="0">Gain this nation's special powers for one battle.</STRING>
+		<STRING hash="204222049" hash_i="204207911" needed="0">Enemy nations are deprived of their nation powers for one battle.</STRING>
+		<STRING hash="249376835" hash_i="249362697" needed="0">Enemy nations gain no benefit from their strategic resources in one battle.</STRING>
+		<STRING hash="219151950" hash_i="226481378" needed="0">Build a Wonder from this Age or an earlier Age in any occupied territory.</STRING>
+		<STRING hash="254275421" hash_i="254253845" needed="0">Units heal 100% faster and are immune to attrition damage during one battle.</STRING>
+	</CAT>
+	<CAT hash="2909936">
+		<STRING hash="7689646" hash_i="7757352" needed="0">Achievements</STRING>
+		<STRING hash="3975033" hash_i="3982495" needed="0">Main Menu</STRING>
+		<STRING hash="923135" hash_i="998527" needed="0">Close</STRING>
+		<STRING hash="686598" hash_i="670742" needed="0">Game</STRING>
+		<STRING hash="1095973" hash_i="1074151" needed="0">Score</STRING>
+		<STRING hash="3518863" hash_i="3501657" needed="0">Military</STRING>
+		<STRING hash="771111" hash_i="756973" needed="0">Econ</STRING>
+		<STRING hash="3666487" hash_i="3645045" needed="0">Research</STRING>
+		<STRING hash="1083102" hash_i="1067246" needed="0">Glory</STRING>
+		<STRING hash="821524" hash_i="799702" needed="0">Speed</STRING>
+		<STRING hash="6578330" hash_i="6593932" needed="0">Score Graph</STRING>
+		<STRING hash="11031296" hash_i="11120138" needed="0">Military Graph</STRING>
+		<STRING hash="12357488" hash_i="12444598" needed="0">Territory Graph</STRING>
+		<STRING hash="10960775" hash_i="11045381" needed="0">Resource Graph</STRING>
+		<STRING hash="5497623" hash_i="5507885" needed="0">Tech Graph</STRING>
+		<STRING hash="2721837" hash_i="2699331" needed="0">Timeline</STRING>
+		<STRING hash="0" hash_i="0" needed="0"/>
+		<STRING hash="9586178" hash_i="9624946" needed="0">Learn to Play</STRING>
+		<STRING hash="4023686" hash_i="4034632" needed="0">Solo Game</STRING>
+		<STRING hash="14113984" hash_i="14194906" needed="0">Multiplayer Game</STRING>
+		<STRING hash="16500687" hash_i="16535783" needed="0">Options &amp; Profiles</STRING>
+		<STRING hash="11006481" hash_i="11079901" needed="0">Tools &amp; Extras</STRING>
+		<STRING hash="658084" hash_i="643946" needed="0">Exit</STRING>
+		<STRING hash="8929486" hash_i="8999528" needed="0">Tutorial Menu</STRING>
+		<STRING hash="1255743" hash_i="1233921" needed="0">Start</STRING>
+		<STRING hash="935119" hash_i="1007993" needed="0">Back</STRING>
+		<STRING hash="877696" hash_i="858044" needed="0">Okay</STRING>
+		<STRING hash="10781766" hash_i="10807450" needed="0">Reset Defaults</STRING>
+		<STRING hash="1878427" hash_i="1953819" needed="0">Cancel</STRING>
+		<STRING hash="4690900" hash_i="4672016" needed="0">Game Speed</STRING>
+		<STRING hash="13552917" hash_i="13624975" needed="0">Difficulty Level</STRING>
+		<STRING hash="19865577" hash_i="20006103" needed="0">Help Message Detail</STRING>
+		<STRING hash="14390415" hash_i="14466147" needed="0">Message Duration</STRING>
+		<STRING hash="7460361" hash_i="8108323" needed="0">Auto Citizen</STRING>
+		<STRING hash="531728" hash_i="514750" needed="0">Idle</STRING>
+		<STRING hash="874157" hash_i="947031" needed="0">Build</STRING>
+		<STRING hash="1633076" hash_i="1617220" needed="0">Gather</STRING>
+		<STRING hash="13522108" hash_i="13704598" needed="0">Build and Gather</STRING>
+		<STRING hash="17784693" hash_i="18566811" needed="0">Auto Citizen Delay</STRING>
+		<STRING hash="14885015" hash_i="15004277" needed="0">Building Stances</STRING>
+		<STRING hash="4986669" hash_i="5054375" needed="0">Aggressive</STRING>
+		<STRING hash="3775778" hash_i="3761308" needed="0">Defensive</STRING>
+		<STRING hash="7441301" hash_i="7456903" needed="0">Stand Ground</STRING>
+		<STRING hash="679072" hash_i="657630" needed="0">Raid</STRING>
+		<STRING hash="772144" hash_i="750702" needed="0">Raze</STRING>
+		<STRING hash="3522606" hash_i="3539644" needed="0">Hold Fire</STRING>
+		<STRING hash="25165512" hash_i="25745034" needed="0">Show Advanced Options</STRING>
+		<STRING hash="14720530" hash_i="15939694" needed="0">Friend/Foe Colors</STRING>
+		<STRING hash="26172404" hash_i="26861892" needed="0">Scouts Auto Transport</STRING>
+		<STRING hash="27264437" hash_i="27856271" needed="0">Use Abilities as Group</STRING>
+		<STRING hash="43831685" hash_i="46335511" needed="0">Show Research Progress Bars</STRING>
+		<STRING hash="12151156" hash_i="12792608" needed="0">Show City Names</STRING>
+		<STRING hash="48669557" hash_i="48730359" needed="0">Start Game Paused (solo only)</STRING>
+		<STRING hash="42710657" hash_i="42688835" needed="0">Siege units deploy when idle</STRING>
+		<STRING hash="12977214" hash_i="14780622" needed="0">Auto "All-Clear"</STRING>
+		<STRING hash="37315318" hash_i="37383024" needed="0">Always combine unit types</STRING>
+		<STRING hash="7848322" hash_i="7826880" needed="0">Record games</STRING>
+		<STRING hash="1492138" hash_i="1559844" needed="0">Assign</STRING>
+		<STRING hash="1518125" hash_i="1496683" needed="0">Remove</STRING>
+		<STRING hash="23696953" hash_i="24351401" needed="0">Left-Click Interface</STRING>
+		<STRING hash="18230202" hash_i="18764774" needed="0">One Click Garrison</STRING>
+		<STRING hash="20751536" hash_i="21526716" needed="0">Right-Click Execute</STRING>
+		<STRING hash="44268066" hash_i="44466868" needed="0">Drag-Select Prefer Military</STRING>
+		<STRING hash="13221428" hash_i="13196224" needed="0">Map Scroll Speed</STRING>
+		<STRING hash="1520839" hash_i="1557933" needed="0">All On</STRING>
+		<STRING hash="2005644" hash_i="2042738" needed="0">All Off</STRING>
+		<STRING hash="2286595" hash_i="2334949" needed="0">All Low</STRING>
+		<STRING hash="2623229" hash_i="2667093" needed="0">All High</STRING>
+		<STRING hash="2954634" hash_i="3428518" needed="0">All Auto</STRING>
+		<STRING hash="21918359" hash_i="22041921" needed="0">Change to Resolution</STRING>
+		<STRING hash="10215001" hash_i="10285547" needed="0">Auto Peasants</STRING>
+		<STRING hash="2517723" hash_i="2495217" needed="0">Terrain</STRING>
+		<STRING hash="4404155" hash_i="4386949" needed="0">Mountains</STRING>
+		<STRING hash="5442268" hash_i="5389992" needed="0">Fog of War</STRING>
+		<STRING hash="626342" hash_i="604520" needed="0">Surf</STRING>
+		<STRING hash="6446028" hash_i="6466796" needed="0">Ocean Floor</STRING>
+		<STRING hash="1122282" hash_i="1097928" needed="0">Water</STRING>
+		<STRING hash="1618712" hash_i="1597270" needed="0">Rivers</STRING>
+		<STRING hash="1856542" hash_i="1931934" needed="0">Coasts</STRING>
+		<STRING hash="1149898" hash_i="1128456" needed="0">Roads</STRING>
+		<STRING hash="2209225" hash_i="2282099" needed="0">Borders</STRING>
+		<STRING hash="7023317" hash_i="7008847" needed="0">Decorations</STRING>
+		<STRING hash="2532666" hash_i="2518196" needed="0">Doobers</STRING>
+		<STRING hash="940914" hash_i="918408" needed="0">Trees</STRING>
+		<STRING hash="1041852" hash_i="1020276" needed="0">Units</STRING>
+		<STRING hash="3773812" hash_i="3846686" needed="0">Buildings</STRING>
+		<STRING hash="952899" hash_i="937043" needed="0">Goods</STRING>
+		<STRING hash="5890470" hash_i="6441148" needed="0">Dead Bodies</STRING>
+		<STRING hash="612182" hash_i="679888" needed="0">Ammo</STRING>
+		<STRING hash="2516897" hash_i="2495075" needed="0">Shadows</STRING>
+		<STRING hash="1660727" hash_i="1638905" needed="0">Storms</STRING>
+		<STRING hash="4451578" hash_i="4430734" needed="0">Particles</STRING>
+		<STRING hash="3524623" hash_i="3504971" needed="0">Overlays</STRING>
+		<STRING hash="4523674" hash_i="4502098" needed="0">Underlays</STRING>
+		<STRING hash="4678862" hash_i="4661884" needed="0">Interface</STRING>
+		<STRING hash="12471224" hash_i="12522762" needed="0">Show Frame Rate</STRING>
+		<STRING hash="74339958" hash_i="74321660" needed="0">Highlight units behind structures.</STRING>
+		<STRING hash="3975861" hash_i="3891733" needed="0">FX Volume</STRING>
+		<STRING hash="7842469" hash_i="7817173" needed="0">Music Volume</STRING>
+		<STRING hash="18279455" hash_i="18981197" needed="0">Allow Audio Taunts</STRING>
+		<STRING hash="373132" hash_i="354858" needed="0">New</STRING>
+		<STRING hash="1690123" hash_i="1668681" needed="0">Rename</STRING>
+		<STRING hash="1407606" hash_i="1393136" needed="0">Delete</STRING>
+		<STRING hash="3070132" hash_i="3114116" needed="0">Add Name</STRING>
+		<STRING hash="6250378" hash_i="6247700" needed="0">Delete Name</STRING>
+		<STRING hash="11773555" hash_i="11874961" needed="0">Scenario Editor</STRING>
+		<STRING hash="5003860" hash_i="4972912" needed="0">Skill Test</STRING>
+		<STRING hash="13721217" hash_i="14193451" needed="0">Script Editor IDE</STRING>
+		<STRING hash="16525213" hash_i="17090437" needed="0">Unit Balance Tool</STRING>
+		<STRING hash="14718304" hash_i="15144794" needed="0">Map Balance Tool</STRING>
+		<STRING hash="7311227" hash_i="7869125" needed="0">View Credits</STRING>
+		<STRING hash="24604858" hash_i="24758760" needed="0">About Rise of Nations</STRING>
+		<STRING hash="653244" hash_i="580008" needed="0">MOTD</STRING>
+		<STRING hash="5451217" hash_i="5421247" needed="0">Patch Test</STRING>
+		<STRING hash="1911187" hash_i="1889365" needed="0">Select</STRING>
+		<STRING hash="3386354" hash_i="3364532" needed="0">Scenario</STRING>
+		<STRING hash="1695196" hash_i="1676922" needed="0">Nation</STRING>
+		<STRING hash="487294" hash_i="470088" needed="0">Map</STRING>
+		<STRING hash="4509660" hash_i="4488218" needed="0">Resources</STRING>
+		<STRING hash="5094893" hash_i="5080423" needed="0">Diplomacy</STRING>
+		<STRING hash="2881693" hash_i="2859187" needed="0">Triggers</STRING>
+		<STRING hash="752824" hash_i="735424" needed="0">Load</STRING>
+		<STRING hash="747903" hash_i="726081" needed="0">Save</STRING>
+		<STRING hash="1193029" hash_i="1193029" needed="0">. . .</STRING>
+		<STRING hash="330236" hash_i="330236" needed="0">get</STRING>
+		<STRING hash="343836" hash_i="343836" needed="0">set</STRING>
+		<STRING hash="24222715" hash_i="24236941" needed="0">Load Scenario Script</STRING>
+		<STRING hash="2072581" hash_i="2054307" needed="0">Nation:</STRING>
+		<STRING hash="1318292" hash_i="1393684" needed="0">Color:</STRING>
+		<STRING hash="2689237" hash_i="2764629" needed="0">Control:</STRING>
+		<STRING hash="2721230" hash_i="2701578" needed="0">Options:</STRING>
+		<STRING hash="64830" hash_i="64830" needed="0">+</STRING>
+		<STRING hash="70786" hash_i="70786" needed="0">-</STRING>
+		<STRING hash="11587138" hash_i="11654844" needed="0">Auto-transport</STRING>
+		<STRING hash="11371302" hash_i="11354324" needed="0">Ignore pop cap</STRING>
+		<STRING hash="8339564" hash_i="9510062" needed="0">Production AI</STRING>
+		<STRING hash="1914920" hash_i="2457054" needed="0">Unit AI</STRING>
+		<STRING hash="3959833" hash_i="4805223" needed="0">Combat AI</STRING>
+		<STRING hash="4776064" hash_i="4717396" needed="0">Map Style:</STRING>
+		<STRING hash="2840460" hash_i="2822186" needed="0">Nations:</STRING>
+		<STRING hash="812154" hash_i="812154" needed="0">size:</STRING>
+		<STRING hash="3726317" hash_i="3708917" needed="0">Lock seed</STRING>
+		<STRING hash="8046425" hash_i="8123117" needed="0">Generate Map</STRING>
+		<STRING hash="2234590" hash_i="2217190" needed="0">Loading</STRING>
+		<STRING hash="554264" hash_i="532442" needed="0">Send</STRING>
+		<STRING hash="2311020" hash_i="2291368" needed="0">Options</STRING>
+		<STRING hash="973370" hash_i="951928" needed="0">Reset</STRING>
+		<STRING hash="13744261" hash_i="14600789" needed="0">Terrain Balance</STRING>
+		<STRING hash="2926079" hash_i="2895981" needed="0">ReGen +1</STRING>
+		<STRING hash="5146506" hash_i="5116408" needed="0">ReGen same</STRING>
+		<STRING hash="511505" hash_i="489683" needed="0">Seed</STRING>
+		<STRING hash="1049392" hash_i="1027570" needed="0">Setup</STRING>
+		<STRING hash="3486313" hash_i="3558439" needed="0">BatchRun</STRING>
+		<STRING hash="2831122" hash_i="2835336" needed="0">Save Img</STRING>
+		<STRING hash="813336" hash_i="888728" needed="0">Chat</STRING>
+		<STRING hash="4031707" hash_i="4641239" needed="0">Chat Ally</STRING>
+		<STRING hash="2851091" hash_i="3460623" needed="0">Chat All</STRING>
+		<STRING hash="928596" hash_i="1266708" needed="0">CLEAR</STRING>
+		<STRING hash="1366925" hash_i="1346081" needed="0">Peace</STRING>
+		<STRING hash="669166" hash_i="736872" needed="0">Ally</STRING>
+		<STRING hash="8782237" hash_i="8805295" needed="0">Script Editor</STRING>
+		<STRING hash="3177121" hash_i="3420233" needed="0">Close IDE</STRING>
+		<STRING hash="14667037" hash_i="14797045" needed="0">Open From File...</STRING>
+		<STRING hash="25465449" hash_i="25489871" needed="0">Open Loaded Script...</STRING>
+		<STRING hash="5585081" hash_i="5563259" needed="0">Scripts...</STRING>
+		<STRING hash="10833397" hash_i="10932707" needed="0">Show Error  Log</STRING>
+		<STRING hash="23629190" hash_i="23920104" needed="0">Game Script Error Log</STRING>
+		<STRING hash="4556849" hash_i="4632241" needed="0">Clipboard</STRING>
+		<STRING hash="15587940" hash_i="16306410" needed="0">Toggle Breakpoint</STRING>
+		<STRING hash="10374000" hash_i="10396824" needed="0">Add Trigger...</STRING>
+		<STRING hash="12894035" hash_i="12952249" needed="0">Add Function...</STRING>
+		<STRING hash="8771132" hash_i="8743804" needed="0">Go To Line...</STRING>
+		<STRING hash="15933003" hash_i="15911181" needed="0">Scroll to trigger:</STRING>
+		<STRING hash="15509130" hash_i="15487308" needed="0">Scroll to script:</STRING>
+		<STRING hash="4076280" hash_i="4169652" needed="0">Break Now</STRING>
+		<STRING hash="6976407" hash_i="6951557" needed="0">Stop Script</STRING>
+		<STRING hash="14557728" hash_i="14511312" needed="0">Watch Windows...</STRING>
+		<STRING hash="13233658" hash_i="13359238" needed="0">Continue Running</STRING>
+		<STRING hash="3897867" hash_i="3902081" needed="0">Step Into</STRING>
+		<STRING hash="14678941" hash_i="14693585" needed="0">Step into Trigger</STRING>
+		<STRING hash="3921777" hash_i="3909947" needed="0">Step Over</STRING>
+		<STRING hash="5828306" hash_i="5825648" needed="0">Run to Line</STRING>
+		<STRING hash="3071210" hash_i="3059380" needed="0">Step Out</STRING>
+		<STRING hash="668370" hash_i="646548" needed="0">Stop</STRING>
+		<STRING hash="7691436" hash_i="8249870" needed="0">Save Changes</STRING>
+		<STRING hash="8147677" hash_i="8218731" needed="0">Close Script</STRING>
+		<STRING hash="10972267" hash_i="11074429" needed="0">Compile Script</STRING>
+		<STRING hash="22315147" hash_i="22473363" needed="0">Compile &amp; Run Script</STRING>
+		<STRING hash="18336361" hash_i="18573695" needed="0">Compile &amp; Step Into</STRING>
+		<STRING hash="13272702" hash_i="13297268" needed="0">Select a Script</STRING>
+		<STRING hash="60843" hash_i="36329" needed="0">X</STRING>
+		<STRING hash="7943953" hash_i="8581341" needed="0">Quick Battle</STRING>
+		<STRING hash="39472655" hash_i="41488085" needed="0">Conquer the World Campaign</STRING>
+		<STRING hash="13452927" hash_i="13418935" needed="0">Load a Scenario</STRING>
+		<STRING hash="12083713" hash_i="12168341" needed="0">Load Saved Game</STRING>
+		<STRING hash="31467542" hash_i="31601472" needed="0">Recorded Game Playback</STRING>
+		<STRING hash="14723823" hash_i="14786869" needed="0">Conquer the World</STRING>
+		<STRING hash="8147586" hash_i="8573920" needed="0">New Campaign</STRING>
+		<STRING hash="15996944" hash_i="17090864" needed="0">Continue Campaign</STRING>
+		<STRING hash="9604089" hash_i="10166945" needed="0">Load Campaign</STRING>
+		<STRING hash="5764344" hash_i="5749874" needed="0">Difficulty</STRING>
+		<STRING hash="8861679" hash_i="9043119" needed="0">Conquest Game</STRING>
+		<STRING hash="18876752" hash_i="19046972" needed="0">Conquest Interface</STRING>
+		<STRING hash="6465100" hash_i="7214134" needed="0">Bonus Cards</STRING>
+		<STRING hash="11480916" hash_i="11458726" needed="0">Rare Resources</STRING>
+		<STRING hash="2228690" hash_i="2204336" needed="0">Wonders</STRING>
+		<STRING hash="5124546" hash_i="5120840" needed="0">Show Hints</STRING>
+		<STRING hash="7428115" hash_i="7453211" needed="0">World Events</STRING>
+		<STRING hash="4140000" hash_i="4215392" needed="0">Conquests</STRING>
+		<STRING hash="2845427" hash_i="2830957" needed="0">Defenses</STRING>
+		<STRING hash="3536343" hash_i="3515499" needed="0">Purchase</STRING>
+		<STRING hash="1083042" hash_i="1158434" needed="0">Cards</STRING>
+		<STRING hash="26874025" hash_i="27108063" needed="0">Show Events Every Turn</STRING>
+		<STRING hash="37078883" hash_i="38285341" needed="0">Conquest Campaign Results</STRING>
+		<STRING hash="28738297" hash_i="28913881" needed="0">Conquer the World Rules</STRING>
+		<STRING hash="8419892" hash_i="8391200" needed="0">World Status</STRING>
+		<STRING hash="592299" hash_i="575093" needed="0">More</STRING>
+		<STRING hash="741820" hash_i="720378" needed="0">Rank</STRING>
+		<STRING hash="698047" hash_i="679773" needed="0">Name</STRING>
+		<STRING hash="1851009" hash_i="1826655" needed="0">World %</STRING>
+		<STRING hash="4264419" hash_i="4241913" needed="0">Territory</STRING>
+		<STRING hash="1501062" hash_i="1568768" needed="0">Armies</STRING>
+		<STRING hash="2517695" hash_i="2495189" needed="0">Tribute</STRING>
+		<STRING hash="2042215" hash_i="2020393" needed="0">Stance</STRING>
+		<STRING hash="2841814" hash_i="2909520" needed="0">Attitude</STRING>
+		<STRING hash="19410681" hash_i="22075293" needed="0">Choose a Bonus Card</STRING>
+		<STRING hash="161441" hash_i="123533" needed="0">OK</STRING>
+		<STRING hash="9505553" hash_i="9533545" needed="0">Buy Territory</STRING>
+		<STRING hash="29719515" hash_i="31111817" needed="0">Propose Peace/Alliance</STRING>
+		<STRING hash="8129791" hash_i="8119303" needed="0">Declare War!</STRING>
+		<STRING hash="31838066" hash_i="31816244" needed="0">Show tips at game start</STRING>
+		<STRING hash="7427446" hash_i="7446150" needed="0">Previous Tip</STRING>
+		<STRING hash="2992698" hash_i="2967292" needed="0">Next Tip</STRING>
+		<STRING hash="2214432" hash_i="2289824" needed="0">Credits</STRING>
+		<STRING hash="6667305" hash_i="6721481" needed="0">Examine Map</STRING>
+		<STRING hash="11591267" hash_i="11571749" needed="0">View Playback</STRING>
+		<STRING hash="668857" hash_i="647711" needed="0">Quit</STRING>
+		<STRING hash="13150489" hash_i="13187181" needed="0">Skills Test Menu</STRING>
+		<STRING hash="26131241" hash_i="26204247" needed="0">Scenario Introduction</STRING>
+		<STRING hash="16782149" hash_i="16903929" needed="0">Conquest Scenario</STRING>
+		<STRING hash="874758" hash_i="947632" needed="0">Begin</STRING>
+		<STRING hash="49084535" hash_i="49280515" needed="0">GameSpy Internet Matchmaking</STRING>
+		<STRING hash="85180286" hash_i="86710302" needed="0">Local Area Network or Direct Internet</STRING>
+		<STRING hash="10817260" hash_i="11566294" needed="0">Begin Campaign</STRING>
+		<STRING hash="15510563" hash_i="15747603" needed="0">Back to Main Menu</STRING>
+		<STRING hash="1559857" hash_i="1519511" needed="0">BONUS!</STRING>
+		<STRING hash="2928789" hash_i="3004181" needed="0">Continue</STRING>
+		<STRING hash="9989659" hash_i="10095371" needed="0">Solo Game Menu</STRING>
+		<STRING hash="15233528" hash_i="15383556" needed="0">Exit to Main Menu</STRING>
+		<STRING hash="9102854" hash_i="9176178" needed="0">Return to Map</STRING>
+		<STRING hash="2532464" hash_i="2517994" needed="0">Defeats</STRING>
+		<STRING hash="2529104" hash_i="2514966" needed="0">Economy</STRING>
+		<STRING hash="14049952" hash_i="14132502" needed="0">Technology Graph</STRING>
+		<STRING hash="24217264" hash_i="24481118" needed="0">Multiplayer Game Menu</STRING>
+		<STRING hash="4967471" hash_i="5066961" needed="0">Buddy List</STRING>
+		<STRING hash="263897" hash_i="331603" needed="0">Add</STRING>
+		<STRING hash="8716848" hash_i="8726098" needed="0">GameSpy Login</STRING>
+		<STRING hash="1428701" hash_i="1414563" needed="0">Email:</STRING>
+		<STRING hash="3917417" hash_i="3899143" needed="0">Nickname:</STRING>
+		<STRING hash="3686476" hash_i="3665632" needed="0">Password:</STRING>
+		<STRING hash="9653093" hash_i="9634111" needed="0">Save Password</STRING>
+		<STRING hash="918190" hash_i="900790" needed="0">Login</STRING>
+		<STRING hash="9947770" hash_i="10014394" needed="0">Create Profile</STRING>
+		<STRING hash="6627328" hash_i="6612858" needed="0">Description</STRING>
+		<STRING hash="9527755" hash_i="10337771" needed="0">Teams &amp; Allies</STRING>
+		<STRING hash="4141632" hash_i="4082964" needed="0">Map Style</STRING>
+		<STRING hash="3125071" hash_i="3066403" needed="0">Map Size</STRING>
+		<STRING hash="5135214" hash_i="5118610" needed="0">Game Rules</STRING>
+		<STRING hash="211646" hash_i="159918" needed="0">PW</STRING>
+		<STRING hash="178280" hash_i="226484" needed="0">CT</STRING>
+		<STRING hash="189665" hash_i="143295" needed="0">TP</STRING>
+		<STRING hash="201227" hash_i="152597" needed="0">RT</STRING>
+		<STRING hash="177617" hash_i="137451" needed="0">RN</STRING>
+		<STRING hash="196599" hash_i="149033" needed="0">TR</STRING>
+		<STRING hash="166993" hash_i="127701" needed="0">FP</STRING>
+		<STRING hash="575406" hash_i="554562" needed="0">Ping</STRING>
+		<STRING hash="605846" hash_i="587980" needed="0">Join</STRING>
+		<STRING hash="1708385" hash_i="1783777" needed="0">Create</STRING>
+		<STRING hash="2104439" hash_i="2082997" needed="0">Refresh</STRING>
+		<STRING hash="1533859" hash_i="1518431" needed="0">Filter</STRING>
+		<STRING hash="6425006" hash_i="6531534" needed="0">Create Game</STRING>
+		<STRING hash="10416096" hash_i="11226112" needed="0">Teams &amp; Allies:</STRING>
+		<STRING hash="3668910" hash_i="3610242" needed="0">Map Size:</STRING>
+		<STRING hash="7799138" hash_i="7745360" needed="0">Max Players:</STRING>
+		<STRING hash="8206992" hash_i="8260320" needed="0">Cannon Times:</STRING>
+		<STRING hash="5820335" hash_i="5803731" needed="0">Game Rules:</STRING>
+		<STRING hash="13283113" hash_i="13258929" needed="0">Turbo Resources</STRING>
+		<STRING hash="5361655" hash_i="5349067" needed="0">Free Pause</STRING>
+		<STRING hash="11072177" hash_i="11104419" needed="0">Tournment Play</STRING>
+		<STRING hash="22800730" hash_i="22838982" needed="0">Require Random Teams</STRING>
+		<STRING hash="28098967" hash_i="28204931" needed="0">Require Random Nations</STRING>
+		<STRING hash="7348406" hash_i="7333936" needed="0">Description:</STRING>
+		<STRING hash="397842" hash_i="380442" needed="0">Low</STRING>
+		<STRING hash="532432" hash_i="514134" needed="0">High</STRING>
+		<STRING hash="663755" hash_i="731461" needed="0">Auto</STRING>
+		<STRING hash="9977569" hash_i="9959295" needed="0">Notifications</STRING>
+		<STRING hash="33311751" hash_i="33297613" needed="0">Enemy reaches a new age.</STRING>
+		<STRING hash="30345597" hash_i="30413303" needed="0">Ally reaches a new age.</STRING>
+		<STRING hash="22575216" hash_i="22550564" needed="0">You reach a new age.</STRING>
+		<STRING hash="26441069" hash_i="26425641" needed="0">Future tech research.</STRING>
+		<STRING hash="39276789" hash_i="39258515" needed="0">Nuclear weapons research.</STRING>
+		<STRING hash="37437771" hash_i="37419497" needed="0">Nuclear missile launched.</STRING>
+		<STRING hash="33446592" hash_i="33421940" needed="0">Your city under attack.</STRING>
+		<STRING hash="39532161" hash_i="39599867" needed="0">Allied city under attack.</STRING>
+		<STRING hash="22058539" hash_i="22033887" needed="0">You capture a city.</STRING>
+		<STRING hash="14743520" hash_i="14718868" needed="0">You lose a city.</STRING>
+		<STRING hash="30755496" hash_i="30734652" needed="0">Player starts a wonder.</STRING>
+		<STRING hash="35342567" hash_i="35321723" needed="0">Player finishes a wonder.</STRING>
+		<STRING hash="55195631" hash_i="55173273" needed="0">Victory timer starts or stops.</STRING>
+		<STRING hash="38109733" hash_i="38177439" needed="0">Armageddon count changes.</STRING>
+		<STRING hash="29462566" hash_i="29441722" needed="0">Player leaves the game.</STRING>
+		<STRING hash="28224454" hash_i="28203012" needed="0">Reinforcements arrive.</STRING>
+		<STRING hash="16768953" hash_i="16842595" needed="0">Battle Objectives</STRING>
+		<STRING hash="44106662" hash_i="44082010" needed="0">Your capital under attack.</STRING>
+		<STRING hash="51233027" hash_i="51300733" needed="0">Allied capital under attack.</STRING>
+		<STRING hash="7004608" hash_i="7021768" needed="0">Loaded Files</STRING>
+		<STRING hash="539954" hash_i="524526" needed="0">File</STRING>
+		<STRING hash="599940" hash_i="585802" needed="0">Edit</STRING>
+		<STRING hash="644049" hash_i="621691" needed="0">View</STRING>
+		<STRING hash="14761399" hash_i="14739577" needed="0">Scroll to trigger</STRING>
+		<STRING hash="14477187" hash_i="14455365" needed="0">Scroll to script</STRING>
+		<STRING hash="6683944" hash_i="6756818" needed="0">Breakpoints</STRING>
+		<STRING hash="2062733" hash_i="2138125" needed="0">Compile</STRING>
+		<STRING hash="4163655" hash_i="4380539" needed="0">Run in IDE</STRING>
+		<STRING hash="1133858" hash_i="1119388" needed="0">Debug</STRING>
+		<STRING hash="9426433" hash_i="9380017" needed="0">Watch Windows</STRING>
+		<STRING hash="50125581" hash_i="52132285" needed="0">Current Script at Breakpoint:</STRING>
+		<STRING hash="7556300" hash_i="7513598" needed="0">Static Vars</STRING>
+		<STRING hash="6090578" hash_i="6065088" needed="0">Local Vars</STRING>
+		<STRING hash="8867786" hash_i="8906330" needed="0">Custom Watch</STRING>
+		<STRING hash="13855303" hash_i="13856013" needed="0">Functions Window</STRING>
+		<STRING hash="8123211" hash_i="8181425" needed="0">Add Function</STRING>
+		<STRING hash="2084271" hash_i="2094949" needed="0">Join IP</STRING>
+		<STRING hash="2354080" hash_i="2334428" needed="0">Observe</STRING>
+		<STRING hash="4802900" hash_i="4909782" needed="0">Observe IP</STRING>
+		<STRING hash="6855043" hash_i="6930757" needed="0">Boot Player</STRING>
+		<STRING hash="2017618" hash_i="2000218" needed="0">Launch</STRING>
+		<STRING hash="11934861" hash_i="11961859" needed="0">GameSpy Filters</STRING>
+		<STRING hash="6616867" hash_i="6591333" needed="0">Team Styles</STRING>
+		<STRING hash="4186389" hash_i="4127721" needed="0">Map Sizes</STRING>
+		<STRING hash="5380687" hash_i="5322019" needed="0">Map Styles</STRING>
+		<STRING hash="7454249" hash_i="7507577" needed="0">Cannon Times</STRING>
+		<STRING hash="928542" hash_i="911336" needed="0">Misc</STRING>
+		<STRING hash="4920784" hash_i="5598594" needed="0">Select All</STRING>
+		<STRING hash="3692195" hash_i="4389945" needed="0">Clear All</STRING>
+		<STRING hash="6091734" hash_i="6817974" needed="0">Add a Buddy</STRING>
+		<STRING hash="2047051" hash_i="2025229" needed="0">Search</STRING>
+		<STRING hash="2060752" hash_i="2133626" needed="0">Buddies</STRING>
+		<STRING hash="3768021" hash_i="3778201" needed="0">Game Info</STRING>
+		<STRING hash="2523146" hash_i="2502302" needed="0">Players</STRING>
+		<STRING hash="12376139" hash_i="12364509" needed="0">Drop Players(s)</STRING>
+		<STRING hash="27997921" hash_i="28189459" needed="0">Convert to "Diplomacy"</STRING>
+		<STRING hash="76887027" hash_i="77461273" needed="0">Convert to "Survival of the Fittest"</STRING>
+		<STRING hash="11242446" hash_i="12612938" needed="0">Replace with AI</STRING>
+		<STRING hash="8836697" hash_i="8938103" needed="0">Save and Exit</STRING>
+		<STRING hash="8700596" hash_i="8696450" needed="0">Edit Objects</STRING>
+		<STRING hash="5479162" hash_i="5482520" needed="0">Import Map</STRING>
+		<STRING hash="693695" hash_i="676295" needed="0">Land</STRING>
+		<STRING hash="1338397" hash_i="1318745" needed="0">Ocean</STRING>
+		<STRING hash="1613382" hash_i="1597954" needed="0">Forest</STRING>
+		<STRING hash="6897391" hash_i="6943199" needed="0">Terrain Map</STRING>
+		<STRING hash="4206302" hash_i="4195712" needed="0">Rocks/Oil</STRING>
+		<STRING hash="1456634" hash_i="1532026" needed="0">Cliffs</STRING>
+		<STRING hash="10872930" hash_i="10829424" needed="0">Remove Terrain</STRING>
+		<STRING hash="1308833" hash_i="1381707" needed="0">Brush:</STRING>
+		<STRING hash="1674528" hash_i="1652022" needed="0">Type 1</STRING>
+		<STRING hash="1145995" hash_i="1123489" needed="0">Type 2</STRING>
+		<STRING hash="1154858" hash_i="1132352" needed="0">Type 3</STRING>
+		<STRING hash="1164333" hash_i="1141827" needed="0">Type 4</STRING>
+		<STRING hash="5038587" hash_i="5021381" needed="0">Mountains:</STRING>
+		<STRING hash="1551515" hash_i="1534309" needed="0">Modify</STRING>
+		<STRING hash="3050345" hash_i="3183347" needed="0">VICTORY!</STRING>
+		<STRING hash="38070161" hash_i="38480465" needed="0">Continue to Strategic Map</STRING>
+		<STRING hash="7975158" hash_i="8095158" needed="0">Begin Defense</STRING>
+		<STRING hash="6256388" hash_i="6895270" needed="0">Offer Bribe</STRING>
+		<STRING hash="5349318" hash_i="5445046" needed="0">Center Map</STRING>
+		<STRING hash="17056293" hash_i="17166007" needed="0">Script Message Log</STRING>
+		<STRING hash="696113" hash_i="771505" needed="0">Copy</STRING>
+		<STRING hash="1191316" hash_i="1266708" needed="0">Clear</STRING>
+		<STRING hash="12850141" hash_i="13856433" needed="0">Teams and Allies</STRING>
+		<STRING hash="7683728" hash_i="7653132" needed="0">Taunt Volume</STRING>
+		<STRING hash="11445591" hash_i="11469029" needed="0">Render Elements</STRING>
+		<STRING hash="19840150" hash_i="19861634" needed="0">Territory Strengths</STRING>
+		<STRING hash="9520122" hash_i="10079232" needed="0">Quit Campaign</STRING>
+		<STRING hash="30596725" hash_i="30664431" needed="0">Auto combine unit types</STRING>
+		<STRING hash="6911556" hash_i="6894350" needed="0">Multiplayer</STRING>
+		<STRING hash="6028572" hash_i="6009688" needed="0">Game Speeds</STRING>
+		<STRING hash="5376021" hash_i="5357137" needed="0">Game Speed:</STRING>
+		<STRING hash="2594554" hash_i="2572048" needed="0">Tileset:</STRING>
+		<STRING hash="9528923" hash_i="9486601" needed="0">Return Values</STRING>
+		<STRING hash="1224793" hash_i="1203351" needed="0">Rocks</STRING>
+		<STRING hash="1527171" hash_i="1600045" needed="0">Bushes</STRING>
+		<STRING hash="5243833" hash_i="5271977" needed="0">Add Random</STRING>
+		<STRING hash="6907977" hash_i="6890811" needed="0">Edit Script</STRING>
+		<STRING hash="430053" hash_i="497759" needed="0">Age:</STRING>
+		<STRING hash="825727" hash_i="803221" needed="0">Type:</STRING>
+		<STRING hash="1387214" hash_i="1366370" needed="0">Place</STRING>
+		<STRING hash="27136199" hash_i="27110379" needed="0"> Show all unique units</STRING>
+		<STRING hash="3561299" hash_i="3561299" needed="0">up_arrow</STRING>
+		<STRING hash="5992175" hash_i="5992175" needed="0">down_arrow</STRING>
+		<STRING hash="12813964" hash_i="12778970" needed="0">Remove Resource</STRING>
+		<STRING hash="22658602" hash_i="23374816" needed="0">Remove All Resources</STRING>
+		<STRING hash="12036581" hash_i="12014759" needed="0">Show all unique</STRING>
+		<STRING hash="5355119" hash_i="5399103" needed="0">Add Nation</STRING>
+		<STRING hash="4527722" hash_i="5205912" needed="0">Remove All</STRING>
+		<STRING hash="6766132" hash_i="6716418" needed="0">No Password</STRING>
+		<STRING hash="514554" hash_i="490200" needed="0">War</STRING>
+		<STRING hash="20711732" hash_i="21018950" needed="0">Allow In-Game Music</STRING>
+		<STRING hash="12697533" hash_i="12696427" needed="0">Remove Mountain</STRING>
+		<STRING hash="10611547" hash_i="10624665" needed="0">Remove Feature</STRING>
+		<STRING hash="27568974" hash_i="27644366" needed="0">Cannon time has begun.</STRING>
+		<STRING hash="14610289" hash_i="14685681" needed="0">Cannon time ends.</STRING>
+		<STRING hash="13075845" hash_i="13158115" needed="0">Show Ignore List</STRING>
+		<STRING hash="6106288" hash_i="6108094" needed="0">Ignore List</STRING>
+		<STRING hash="13048688" hash_i="13105302" needed="0">Remove from List</STRING>
+		<STRING hash="585802" hash_i="585802" needed="0">edit</STRING>
+		<STRING hash="12188775" hash_i="12260271" needed="0">Restore Default</STRING>
+		<STRING hash="4051612" hash_i="4060978" needed="0">Edit Land</STRING>
+		<STRING hash="8181976" hash_i="8159454" needed="0">Place Random</STRING>
+		<STRING hash="12344607" hash_i="12357725" needed="0">Remove Features</STRING>
+		<STRING hash="10255989" hash_i="11092501" needed="0">Commit Changes</STRING>
+		<STRING hash="14919533" hash_i="14948877" needed="0">Password Required</STRING>
+		<STRING hash="79263" hash_i="79263" needed="0">.</STRING>
+		<STRING hash="8858590" hash_i="9602456" needed="0">Apply Changes</STRING>
+		<STRING hash="13076813" hash_i="13099507" needed="0">Tournament Play</STRING>
+		<STRING hash="18762145" hash_i="19943443" needed="0">New GameSpy Acount</STRING>
+		<STRING hash="2338747" hash_i="2317171" needed="0">Unrated</STRING>
+		<STRING hash="22170572" hash_i="22219362" needed="0">Unrated Intermediate</STRING>
+		<STRING hash="10381542" hash_i="10455892" needed="0">Unrated Expert</STRING>
+		<STRING hash="1009003" hash_i="987561" needed="0">Rated</STRING>
+		<STRING hash="1548549" hash_i="1531149" needed="0">Lobby</STRING>
+		<STRING hash="19315732" hash_i="19482828" needed="0">Display Ignore List</STRING>
+		<STRING hash="5816999" hash_i="6475759" needed="0">Lobby Chat</STRING>
+		<STRING hash="4267693" hash_i="4832093" needed="0">Game Chat</STRING>
+		<STRING hash="34184426" hash_i="34312708" needed="0">Insert Selected Function</STRING>
+		<STRING hash="8322825" hash_i="8402131" needed="0">Adjust Height</STRING>
+		<STRING hash="31074704" hash_i="31207838" needed="0">Reconnecting to Gamespy</STRING>
+		<STRING hash="19323279" hash_i="19353427" needed="0">New GameSpy Profile</STRING>
+		<STRING hash="6449465" hash_i="6434995" needed="0">Difficulty:</STRING>
+		<STRING hash="90319" hash_i="90319" needed="0">0</STRING>
+		<STRING hash="95232" hash_i="95232" needed="0">1</STRING>
+		<STRING hash="6477" hash_i="6477" needed="0">2</STRING>
+		<STRING hash="7288" hash_i="7288" needed="0">3</STRING>
+		<STRING hash="8201" hash_i="8201" needed="0">4</STRING>
+		<STRING hash="8862" hash_i="8862" needed="0">5</STRING>
+		<STRING hash="9607" hash_i="9607" needed="0">6</STRING>
+		<STRING hash="11744" hash_i="11744" needed="0">7</STRING>
+		<STRING hash="12639" hash_i="12639" needed="0">8</STRING>
+		<STRING hash="13192" hash_i="13192" needed="0">9</STRING>
+		<STRING hash="15928688" hash_i="16050776" needed="0">Check for Updates</STRING>
+		<STRING hash="39958591" hash_i="40137615" needed="1">Randomize Nation Positions</STRING>
+		<STRING hash="15111791" hash_i="16175995" needed="1">Randomize Bonuses</STRING>
+		<STRING hash="7710349" hash_i="7717177" needed="1">Quick Match</STRING>
+		<STRING hash="1904605" hash_i="1882783" needed="1">Switch</STRING>
+		<STRING hash="5964316" hash_i="5938782" needed="1">Team Style:</STRING>
+		<STRING hash="17286905" hash_i="17323379" needed="1">Number of Players:</STRING>
+		<STRING hash="13174412" hash_i="13172926" needed="1">Strict Matching</STRING>
+		<STRING hash="4489210" hash_i="4466704" needed="1">Teammates</STRING>
+		<STRING hash="7647446" hash_i="7657738" needed="1">Play a Game!</STRING>
+		<STRING hash="1513522" hash_i="1496544" needed="1">Invite</STRING>
+		<STRING hash="1119028" hash_i="1101628" needed="1">Leave</STRING>
+		<STRING hash="10673505" hash_i="10651961" needed="1">Match Settings</STRING>
+		<STRING hash="2596232" hash_i="2571878" needed="1">Wombat:</STRING><STRING hash="2906296" hash_i="2881942" needed="1">Wombat2:</STRING><STRING hash="2916611" hash_i="2892257" needed="1">Wombat3:</STRING><STRING hash="2927640" hash_i="2903286" needed="1">Wombat4:</STRING><STRING hash="28054022" hash_i="28937082" needed="1">View/Update Online MOTD</STRING><STRING hash="22416788" hash_i="22402318" needed="1">Disable unique units</STRING><STRING hash="25464586" hash_i="25450116" needed="1">Disable nation powers</STRING><STRING hash="21158210" hash_i="21225916" needed="1">Allow rule overrides</STRING><STRING hash="7307635" hash_i="7323343" needed="1">Find a Game!</STRING><STRING hash="2273775" hash_i="2251953" needed="1">Staging</STRING><STRING hash="15491512" hash_i="15608320" needed="1">Never Host a Game</STRING><STRING hash="17610167" hash_i="17686127" needed="1">In-game Diplomacy</STRING></CAT>
+	<CAT hash="18830057">
+		<STRING hash="205886020" hash_i="206425258" needed="0">The enemy is resisting your invasion.  Take their capital to win.</STRING>
+		<STRING hash="435786597" hash_i="434710227" needed="0">Your enemy has launched a surprise attack on this territory.  Hold off the attackers to achieve victory.</STRING>
+		<STRING hash="402322319" hash_i="400946661" needed="0">You are being invaded by a treacherous neighbor.  Take the enemy capital to force them to withdraw.</STRING>
+		<STRING hash="922027410" hash_i="928783650" needed="0">Expecting no resistance to your invasion, no support troops were included in your expeditionary force.  A small barbarian nation has been encountered, however, and must be eliminated.</STRING>
+		<STRING hash="1143005318" hash_i="1146834860" needed="0">Your army has reached the largest barbarian settlement in this territory.  Capture the city and the territory will fall.  The barbarian leader is crafty, so beware of ambush by the barbarian troops.</STRING>
+		<STRING hash="789294977" hash_i="786098565" needed="0">Your armies encountered no resistance in taking the province.  However, the natives have rallied and are assaulting your new outpost.  Survive until the timer expires to win.</STRING>
+		<STRING hash="577017800" hash_i="583766208" needed="0">The enemy has mustered their troops to meet yours in the field.  Destroy their army to win the scenario.  Be sure to protect your general.</STRING>
+		<STRING hash="963014836" hash_i="962046504" needed="0">There are several native tribes in this territory vying for power.  However, they are sure to join your empire if you prove your dominance in the area by taking territory from the barbarians.</STRING>
+		<STRING hash="782757605" hash_i="781563091" needed="0">There are several native tribes in this territory vying for power.  Use your diplomatic skills to play them off of each other and ensure your own dominance in the area.</STRING>
+		<STRING hash="205285029" hash_i="205270559" needed="0">Drive the barbarians from your homeland to found your new nation.</STRING>
+		<STRING hash="674269684" hash_i="673606112" needed="0">The barbarians in this territory are hostile and must be eliminated.  Defeat them by capturing their capitals or capturing most of their territory.</STRING>
+		<STRING hash="699657885" hash_i="699635379" needed="0">The barbarian nations in this region are weak and sure to kneel to your nation if you are able to prove your superiority by capturing one of their cities.</STRING>
+		<STRING hash="1053349682" hash_i="1049167724" needed="0">A group of barbarian tribes in this region have united together to destroy you.  Fortunately you brought extra supplies and the barbarians are an age behind you.  Survive until the timer expires to win.</STRING>
+		<STRING hash="430542475" hash_i="431624267" needed="0">Your army is approaching the enemy's army.  Find their encampment and destroy all their buildings in order to win.</STRING>
+		<STRING hash="827198245" hash_i="833954485" needed="0">Expecting no resistance to your invasion, no support troops were included in your expeditionary force.  A fortified city has been encountered, however, and must be eliminated.</STRING>
+		<STRING hash="743852416" hash_i="742761258" needed="0">The enemy has found your army's encampment.  Protect your buildings and destroy their army to win the scenario.  If the enemy destroys your buildings, you will lose.</STRING>
+		<STRING hash="443076995" hash_i="444158787" needed="0">Your army is approaching a barbarian army.  Find their encampment and destroy all their buildings in order to win.</STRING>
+		<STRING hash="919698896" hash_i="922950814" needed="0">Your army has reached the largest enemy settlement in this territory.  Capture the city and the territory will fall.  The enemy leader is crafty, so beware of ambush by the enemy troops.</STRING>
+		<STRING hash="447593473" hash_i="452416295" needed="0">Your army is approaching the enemy's army.  Attack their encampment and destroy all their buildings in order to win.</STRING>
+		<STRING hash="460127993" hash_i="464950815" needed="0">Your army is approaching a barbarian army.  Attack their encampment and destroy all their buildings in order to win.</STRING>
+		<STRING hash="789319796" hash_i="786160832" needed="0">Your armies encountered no resistance in taking the territory.  However, the natives have rallied and are assaulting your new outpost.  Survive until the timer expires to win.</STRING>
+		<STRING hash="547043201" hash_i="545966831" needed="0">Your enemy has launched a surprise attack on this territory.  Hold off the attackers and defend your capital to achieve victory.</STRING>
+		<STRING hash="886320487" hash_i="884168747" needed="0">Your armies encountered no resistance in taking the territory.  However, the natives have rallied and are assaulting your new outpost.  Defend your capital until the timer expires to win.</STRING>
+		<STRING hash="1041644836" hash_i="1049167724" needed="0">A group of barbarian tribes in this region have united together to destroy you.  Fortunately you brought extra supplies and the barbarians are an Age behind you.  Survive until the timer expires to win.</STRING>
+		<STRING hash="1068774033" hash_i="1064758895" needed="0">The barbarian nations in this region are weak and sure to kneel to your nation if you are able to prove your superiority by capturing one of their cities. They must capture your capital to defeat you.</STRING>
+		<STRING hash="951055101" hash_i="954335789" needed="0">Your army has reached the largest enemy settlement in this territory.  Capture the capital and the territory will fall.  The enemy leader is crafty, so beware of ambush by the enemy troops.</STRING>
+		<STRING hash="316863640" hash_i="314127508" needed="0">The enemy is resisting your invasion. Take their capital in $NUM0 minutes or less to win.</STRING>
+		<STRING hash="626068804" hash_i="620602416" needed="0">You are being invaded by a treacherous neighbor. Take the enemy capital or hold off their assault for $NUM0 minutes to force them to withdraw.</STRING>
+		<STRING hash="339796965" hash_i="337129057" needed="0">The enemy is resisting your invasion. Take their capital(s) in $NUM0 minutes or less to win.</STRING>
+		<STRING hash="657405878" hash_i="652050402" needed="0">You are being invaded by a treacherous neighbor. Take the enemy capital(s) or hold off their assault for $NUM0 minutes to force them to withdraw.</STRING>
+		<STRING hash="1178321956" hash_i="1164321508" needed="0">The barbarian nations in this region are weak and sure to kneel to your nation if you are able to prove your superiority by capturing one of their cities in $NUM0 minutes. They must capture your capital to defeat you.</STRING>
+		<STRING hash="1081931692" hash_i="1085402682" needed="0">Your army has reached the largest enemy settlement in this territory. Capture the capital in 120 minutes and the territory will fall. The enemy leader is crafty, so beware of ambush by the enemy troops.</STRING>
+		<STRING hash="755002002" hash_i="743847024" needed="0">The barbarians in this territory are hostile and must be eliminated. Defeat them by capturing their capitals or capturing most of their territory in $NUM0 minutes.</STRING>
+		<STRING hash="1170166231" hash_i="1166423633" needed="0">There are several native tribes in this territory vying for power. Use your diplomatic skills to play them off of each other and ensure your own dominance in the area.  Defeat the barbarian tribes in 120 minutes.</STRING>
+	</CAT>
+	<CAT hash="21745476">
+		<STRING hash="3078682" hash_i="3154074" needed="0">Conquest</STRING>
+		<STRING hash="14272504" hash_i="15192350" needed="0">Surprise Attack!</STRING>
+		<STRING hash="3073683" hash_i="3051177" needed="0">Tactics</STRING>
+		<STRING hash="1757765" hash_i="1825471" needed="0">Ambush</STRING>
+		<STRING hash="13723440" hash_i="13844484" needed="0">Barbarian Rally</STRING>
+		<STRING hash="7519564" hash_i="8162670" needed="0">Field Battle</STRING>
+		<STRING hash="7466821" hash_i="7487223" needed="0">Sudden Death</STRING>
+		<STRING hash="10112253" hash_i="10212761" needed="0">Wheel and Deal</STRING>
+		<STRING hash="11216731" hash_i="11939433" needed="0">Nation Building</STRING>
+		<STRING hash="821127" hash_i="803921" needed="0">Melee</STRING>
+		<STRING hash="32811580" hash_i="33103126" needed="0">Barbarians at the Gates!</STRING>
+	</CAT>
+	<CAT hash="30698867">
+		<STRING hash="0" hash_i="0" needed="0"/>
+		<STRING hash="66457806" hash_i="66439508" needed="0">Hold off the enemy for 15 minutes.</STRING>
+		<STRING hash="41980852" hash_i="42056244" needed="0">Capture the enemy capital.</STRING>
+		<STRING hash="90105976" hash_i="90090548" needed="0">Find and capture the enemy's capital.</STRING>
+		<STRING hash="36412767" hash_i="36398297" needed="0">Destroy the enemy's army.</STRING>
+		<STRING hash="49582913" hash_i="49658305" needed="0">Capture any barbarian city.</STRING>
+		<STRING hash="51377575" hash_i="51363105" needed="0">Defeat the barbarian tribes.</STRING>
+		<STRING hash="208440775" hash_i="208516167" needed="0">Capture the enemy capital or defeat them by capturing territory.</STRING>
+		<STRING hash="164281570" hash_i="164356962" needed="0">Capture one city from each nation to defeat them.</STRING>
+		<STRING hash="59485593" hash_i="59471123" needed="0">Destroy the enemy's encampment.</STRING>
+		<STRING hash="37152612" hash_i="37138142" needed="0">Defeat the invading army.</STRING>
+		<STRING hash="66307671" hash_i="66289373" needed="0">Hold off the enemy for 30 minutes.</STRING>
+		<STRING hash="74894997" hash_i="74880527" needed="0">Defend your capital for 15 minutes.</STRING>
+		<STRING hash="115951391" hash_i="115933093" needed="0">Hold off the enemy until the timer expires.</STRING>
+		<STRING hash="119025659" hash_i="120479815" needed="0">Capture the enemy capital in $NUM0 minutes.</STRING>
+		<STRING hash="172875505" hash_i="175801469" needed="0">Capture the enemy capital or hold out for $NUM0 minutes.</STRING>
+		<STRING hash="137773498" hash_i="139438982" needed="0">Capture the enemy capital(s) in $NUM0 minutes.</STRING>
+		<STRING hash="177875231" hash_i="182163563" needed="0">Capture the enemy capital(s) or hold out for $NUM0 minutes.</STRING>
+		<STRING hash="178310682" hash_i="178295254" needed="0">Find and capture the enemy's capital in 120 minutes.</STRING>
+		<STRING hash="275982086" hash_i="273091602" needed="0">Capture the enemy capital or defeat them by capturing territory in $NUM0 minutes.</STRING>
+		<STRING hash="208496370" hash_i="205072638" needed="0">Capture one city from each nation to defeat them in $NUM0 minutes.</STRING>
+		<STRING hash="120889362" hash_i="120874892" needed="0">Defeat the barbarian tribes in 120 minutes.</STRING>
+	</CAT>
+	<CAT hash="5254184">
+		<STRING hash="0" hash_i="0" needed="0"/>
+	</CAT>
+	<CAT hash="11815213">
+		<STRING hash="25349290" hash_i="25777580" needed="0">AI Building Placement</STRING>
+		<STRING hash="914487" hash_i="982193" needed="0">Audio</STRING>
+		<STRING hash="8012543" hash_i="8180245" needed="0">Building Info</STRING>
+		<STRING hash="1989908" hash_i="2065300" needed="0">Camera</STRING>
+		<STRING hash="813336" hash_i="888728" needed="0">Chat</STRING>
+		<STRING hash="1509376" hash_i="1584768" needed="0">Cities</STRING>
+		<STRING hash="15873493" hash_i="17148917" needed="0">Comparison Checks</STRING>
+		<STRING hash="64338956" hash_i="64402002" needed="0">Conquer the World-only functions</STRING>
+		<STRING hash="11809701" hash_i="11885861" needed="0">Create Objects</STRING>
+		<STRING hash="24030927" hash_i="24138873" needed="0">Destroy/Kill Objects</STRING>
+		<STRING hash="5094893" hash_i="5080423" needed="0">Diplomacy</STRING>
+		<STRING hash="8124541" hash_i="8346763" needed="0">File IO (XML)</STRING>
+		<STRING hash="1137444" hash_i="1122016" needed="0">Flags</STRING>
+		<STRING hash="16725274" hash_i="16813704" needed="0">Game Settings Info</STRING>
+		<STRING hash="16365690" hash_i="17302440" needed="0">General AI Toggles</STRING>
+		<STRING hash="1675743" hash_i="1659887" needed="0">Groups</STRING>
+		<STRING hash="1676239" hash_i="1657941" needed="0">Health</STRING>
+		<STRING hash="13811062" hash_i="13921536" needed="0">Keyboard, Events</STRING>
+		<STRING hash="2946928" hash_i="2912480" needed="0">Map Info</STRING>
+		<STRING hash="11378197" hash_i="11316849" needed="0">Map Visibility</STRING>
+		<STRING hash="1674717" hash_i="1657511" needed="0">Market</STRING>
+		<STRING hash="3173306" hash_i="3156100" needed="0">Messages</STRING>
+		<STRING hash="9737108" hash_i="9802656" needed="0">Messages, Help</STRING>
+		<STRING hash="30037351" hash_i="30253031" needed="0">Messages, Popup Dialogs</STRING>
+		<STRING hash="41075833" hash_i="41146853" needed="0">Messages, Resource Warning</STRING>
+		<STRING hash="19040878" hash_i="19094028" needed="0">Mouse Over Objects</STRING>
+		<STRING hash="8808325" hash_i="8835999" needed="0">Mouse, Events</STRING>
+		<STRING hash="26160442" hash_i="26251490" needed="0">Nation &amp; Player Stats</STRING>
+		<STRING hash="13670302" hash_i="13669434" needed="0">Object Location</STRING>
+		<STRING hash="25878700" hash_i="25879618" needed="0">Objectives (Scenario)</STRING>
+		<STRING hash="28514147" hash_i="28506173" needed="0">Objectives (Temporary)</STRING>
+		<STRING hash="575406" hash_i="554562" needed="0">Ping</STRING>
+		<STRING hash="21955690" hash_i="23295828" needed="0">Ping &amp; Screen Arrows</STRING>
+		<STRING hash="5518284" hash_i="5497440" needed="0">Population</STRING>
+		<STRING hash="5250533" hash_i="5228711" needed="0">Screenshot</STRING>
+		<STRING hash="14988263" hash_i="15001001" needed="0">Search Functions</STRING>
+		<STRING hash="4256969" hash_i="4235147" needed="0">Selection</STRING>
+		<STRING hash="6331529" hash_i="6889279" needed="0">Team Change</STRING>
+		<STRING hash="6736573" hash_i="7546589" needed="0">Techs &amp; Ages</STRING>
+		<STRING hash="568489" hash_i="545983" needed="0">Time</STRING>
+		<STRING hash="1580487" hash_i="1557981" needed="0">Timers</STRING>
+		<STRING hash="10447694" hash_i="11101348" needed="0">Types Controls</STRING>
+		<STRING hash="8447815" hash_i="8386265" needed="0">UI, Highlight</STRING>
+		<STRING hash="24075136" hash_i="24082494" needed="0">UI, Screen Locations</STRING>
+		<STRING hash="9499857" hash_i="9420687" needed="0">UI, Selection</STRING>
+		<STRING hash="4673620" hash_i="4594450" needed="0">UI, Stats</STRING>
+		<STRING hash="3736105" hash_i="3740565" needed="0">Unit Info</STRING>
+		<STRING hash="6222357" hash_i="6210773" needed="0">Unit Orders</STRING>
+		<STRING hash="9172085" hash_i="9143377" needed="0">Unit Training</STRING>
+		<STRING hash="11180905" hash_i="11251485" needed="0">Victory/Defeat</STRING>
+		<STRING hash="2881693" hash_i="2859187" needed="0">Triggers</STRING>
+		<STRING hash="21258708" hash_i="21358820" needed="0">Utilities, Debugging</STRING>
+		<STRING hash="12008190" hash_i="12075470" needed="0">Utilities, Math</STRING>
+		<STRING hash="14923394" hash_i="14935282" needed="0">Utilities, String</STRING>
+		<STRING hash="15336000" hash_i="15347888" needed="0">Utilities, System</STRING>
+	</CAT>
+	<CAT hash="617724">
+		<STRING hash="22740565" hash_i="23051043" needed="0">© 2003 Big Huge Games, Inc. Portions © 2003 Microsoft Corporation. All rights reserved. Big Huge Games is the exclusive trademark of Big Huge Games Inc. Microsoft Windows, the Microsoft Game Studios logo and Rise of Nations™ are either registered trademarks or trademarks of Microsoft Corporation in the United States and/or other countries.</STRING>
+	</CAT>
+	<CAT hash="44397162">
+		<STRING hash="34157738" hash_i="34133086" needed="0">You have won the battle.</STRING>
+		<STRING hash="0" hash_i="0" needed="0"/>
+	</CAT>
+	<CAT hash="38438024">
+		<STRING hash="37310381" hash_i="37285729" needed="0">You have lost the battle.</STRING>
+		<STRING hash="886320487" hash_i="884168747" needed="0">Your armies encountered no resistance in taking the territory.  However, the natives have rallied and are assaulting your new outpost.  Defend your capital until the timer expires to win.</STRING>
+		<STRING hash="460127993" hash_i="464950815" needed="0">Your army is approaching a barbarian army.  Attack their encampment and destroy all their buildings in order to win.</STRING>
+		<STRING hash="699657885" hash_i="699635379" needed="0">The barbarian nations in this region are weak and sure to kneel to your nation if you are able to prove your superiority by capturing one of their cities.</STRING>
+		<STRING hash="782757605" hash_i="781563091" needed="0">There are several native tribes in this territory vying for power.  Use your diplomatic skills to play them off of each other and ensure your own dominance in the area.</STRING>
+		<STRING hash="1041644836" hash_i="1049167724" needed="0">A group of barbarian tribes in this region have united together to destroy you.  Fortunately you brought extra supplies and the barbarians are an Age behind you.  Survive until the timer expires to win.</STRING>
+		<STRING hash="0" hash_i="0" needed="0"/>
+	</CAT>
+	<CAT hash="2960089">
+		<STRING hash="1142441" hash_i="1120619" needed="0">Snowy</STRING>
+		<STRING hash="1095411" hash_i="1080941" needed="0">Dirty</STRING>
+		<STRING hash="4125335" hash_i="4066685" needed="0">SW_Desert</STRING>
+		<STRING hash="4087849" hash_i="4040229" needed="0">GS_Desert</STRING>
+		<STRING hash="1406746" hash_i="1406746" needed="0">jungle</STRING>
+		<STRING hash="17041553" hash_i="17041553" needed="0">african_savannah</STRING>
+		<STRING hash="2260669" hash_i="2260669" needed="0">arctic</STRING>
+		<STRING hash="2952237" hash_i="2952237" needed="0">m_steppe</STRING>
+	</CAT>
+	<CAT hash="5045222">
+		<STRING hash="2054343" hash_i="2054343" needed="0">See ./scenario/sample_script.bhs for additional documentation</STRING>
+		<STRING hash="2044028" hash_i="2044028" needed="0">Use trigger functions from (see list by selecting Edit-&gt;Insert Trigger Function) to control game events</STRING>
+		<STRING hash="2660675" hash_i="2660675" needed="0">Insert commands that will execute when trigger condition is true and the trigger is enabled.</STRING>
+		<STRING hash="3935950" hash_i="3935950" needed="0">conditions under which the trigger will fire</STRING>
+		<STRING hash="865265" hash_i="865265" needed="0">Use Edit-&gt;Insert Trigger Block to add a blank trigger block.</STRING>
+		<STRING hash="858586" hash_i="858586" needed="0">Use Edit-&gt;Insert Trigger Function to select from the list of available functions</STRING>
+		<STRING hash="852417" hash_i="852417" needed="0">Add triggers and other commands to be executed each game frame here.</STRING>
+		<STRING hash="1294078" hash_i="1294078" needed="0">Main script body.</STRING>
+		<STRING hash="3549171" hash_i="3549171" needed="0">Insert commands that should be executed only once when the script is loaded here.</STRING>
+		<STRING hash="1853852" hash_i="1853852" needed="0">Add any constant labels here in a comma separated list.</STRING>
+	</CAT>
+	<CAT hash="14677498">
+		<STRING hash="1009003" hash_i="987561" needed="0">Rated</STRING>
+		<STRING hash="2338747" hash_i="2317171" needed="0">Unrated</STRING>
+	</CAT>
+</ROOT>

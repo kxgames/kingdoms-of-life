@@ -1,0 +1,54 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  
+  labels {
+    PLAYER,
+    BRITISH,
+  }
+  
+  new_world_rules();
+  new_world_setup();
+
+  infrastructure_setup(0, "Quebec", "Montreal", "Trois-Rivieres");
+
+  int nation;
+  int diff = get_difficulty();
+
+  for (nation = 2; nation < 7; nation++) {
+    set_leader_difficulty(nation, diff);
+  }
+  
+  force_transport_ability(PLAYER);
+
+  //gain_next_age(red);
+  int x;
+  int y;
+  String from = get_attack_from();
+
+  if (from == "Nunavut" || from == "Greenland") {
+    x = 40;
+    y = 40;
+  }
+  else {
+    x = get_map_size() - 40;
+    y = x;
+  }
+
+  
+  place_new_world_army(1,x,y);
+
+  //get the proper angle
+  dir = get_conquest_invasion_dir();
+  dir = dir + 180;
+  if (dir >= 360) {
+    dir = dir - 360;
+  }
+  group_jump_move(PLAYER, x, y, dir);
+  
+  x = 216;
+  y = 49;
+  place_new_world_army(2,x,y);
+
+}

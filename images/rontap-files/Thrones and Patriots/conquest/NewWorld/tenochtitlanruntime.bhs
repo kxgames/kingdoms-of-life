@@ -1,0 +1,147 @@
+include "ctw_lib.bhs"
+
+       conquest
+{
+new_world_rules();
+
+static int diff = get_difficulty();
+static String tech_name = "";
+
+run_once {
+  new_world_setup();
+  ctw_add_objective_text($S("Capture all of the enemy cities."), "Hint_id", 0);
+
+  if (get_age() < 4) {
+    clear_group(2);
+    x = 182;
+    y = 90;
+    unit_id = create_unit(2, x, y, "Galley", 1);
+    add_to_group(2, unit_id);
+    if (diff > 3) {
+      unit_id = create_unit(2, x, y, "Galley", 1);
+      add_to_group(2, unit_id);
+    }
+    unit_id = create_unit(2, x, y, "Dromon", 1);
+    add_to_group(2, unit_id);
+    group_patrol_order(2, 50, 118);
+
+    clear_group(2);
+    x = 166;
+    y = 122;
+    unit_id = create_unit(2, x, y, "Galley", 1);
+    add_to_group(2, unit_id);
+    if (diff > 3) {
+      unit_id = create_unit(2, x, y, "Dromon", 1);
+      add_to_group(2, unit_id);
+    }
+    unit_id = create_unit(2, x, y, "Dromon", 1);
+    add_to_group(2, unit_id);
+    group_patrol_order(2, 174, 178);
+
+    clear_group(2);
+    x = 130;
+    y = 194;
+    unit_id = create_unit(2, x, y, "Galley", 1);
+    add_to_group(2, unit_id);
+    if (diff > 3) {
+      unit_id = create_unit(2, x, y, "Galley", 1);
+      add_to_group(2, unit_id);
+    }
+    unit_id = create_unit(2, x, y, "Dromon", 1);
+    add_to_group(2, unit_id);
+    group_patrol_order(2, 166, 186);
+
+    clear_group(2);
+    x = 102;
+    y = 198;
+    unit_id = create_unit(2, x, y, "Galley", 1);
+    add_to_group(2, unit_id);
+    if (diff > 3) {
+      unit_id = create_unit(2, x, y, "Dromon", 1);
+      add_to_group(2, unit_id);
+    }
+    unit_id = create_unit(2, x, y, "Dromon", 1);
+    add_to_group(2, unit_id);
+    group_patrol_order(2, 34, 126);
+  }
+  else {
+    clear_group(2);
+    x = 182;
+    y = 90;
+    unit_id = create_unit_upgrade(2, x, y, "Galley", 1);
+    add_to_group(2, unit_id);
+    if (diff > 3) {
+      unit_id = create_unit_upgrade(2, x, y, "Galley", 1);
+      add_to_group(2, unit_id);
+    }
+    unit_id = create_unit_upgrade(2, x, y, "Dromon", 1);
+    add_to_group(2, unit_id);
+    group_patrol_order(2, 50, 118);
+
+    clear_group(2);
+    x = 166;
+    y = 122;
+    unit_id = create_unit_upgrade(2, x, y, "Galley", 1);
+    add_to_group(2, unit_id);
+    if (diff > 3) {
+      unit_id = create_unit_upgrade(2, x, y, "Dromon", 1);
+      add_to_group(2, unit_id);
+    }
+    unit_id = create_unit_upgrade(2, x, y, "Dromon", 1);
+    add_to_group(2, unit_id);
+    group_patrol_order(2, 174, 178);
+
+    clear_group(2);
+    x = 130;
+    y = 194;
+    unit_id = create_unit_upgrade(2, x, y, "Galley", 1);
+    add_to_group(2, unit_id);
+    if (diff > 3) {
+      unit_id = create_unit_upgrade(2, x, y, "Galley", 1);
+      add_to_group(2, unit_id);
+    }
+    unit_id = create_unit_upgrade(2, x, y, "Dromon", 1);
+    add_to_group(2, unit_id);
+    group_patrol_order(2, 166, 186);
+
+    clear_group(2);
+    x = 102;
+    y = 198;
+    unit_id = create_unit_upgrade(2, x, y, "Galley", 1);
+    add_to_group(2, unit_id);
+    if (diff > 3) {
+      unit_id = create_unit_upgrade(2, x, y, "Dromon", 1);
+      add_to_group(2, unit_id);
+    }
+    unit_id = create_unit_upgrade(2, x, y, "Dromon", 1);
+    add_to_group(2, unit_id);
+    group_patrol_order(2, 34, 126);
+  }
+
+  if (find_nation(1) == "Americans" || find_nation(1) == "British" || find_nation(1) == "French" || find_nation(1) == "Spanish" || find_nation(1) == "Nubians") {
+    disable_trigger("take_library");
+    disable_trigger("give_library");
+  }
+
+  if (diff < 5) {
+    tech_name = "Standing Army";
+  }
+  else {
+    tech_name = "Conscription";
+  }
+}
+
+trigger take_library(have_tech(2, tech_name)) {
+  disable_type_by_tribe("Library", "Aztecs");
+  destroy_building_type(2, "Library");
+}
+
+trigger give_library(num_cities(1) > num_cities(2)) {
+  enable_type_by_tribe("Library", "Aztecs");
+}
+
+if (time() >= get_time_limit()) {
+  defeat(1);
+}
+
+}

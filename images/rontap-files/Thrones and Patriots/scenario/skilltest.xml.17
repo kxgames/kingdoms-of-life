@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Tim Train (Big Huge Games) -->
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Scott Lewis (Big Huge Games) -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION All DESCRIPTION elements-->
+<!--LOCALIZATION All INTRO elements-->
+<!--LOCALIZATION All SCORE_NAME elements-->
+<!--LOCALIZATION All SCORE_DATA elements-->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<ROOT>
+	<SCENARIO title="Aging Madness - Age 2" id="test6" year=" " index="0" file=".\scenario\Chess Exercise\ceaging1.scx" image=".\art\wrapper_pieces_04.tga" score_type="0">
+		<DESCRIPTION>How fast can you get to Classical Age?  Find out if your resource management is good enough.</DESCRIPTION>
+		<INTRO>Easy Mode.  The goal is to reach the Classical Age in 3 minutes or less.</INTRO>
+		<SCORE_NAME>%d:%02d min.</SCORE_NAME>
+		<SCORE_DATA name="Pharoah Ramessess II" score="135"/>
+		<SCORE_DATA name="Alexander the Great" score="141"/>
+		<SCORE_DATA name="Queen Cleopatra" score="159"/>
+		<SCORE_DATA name="Empress Livia" score="161"/>
+		<SCORE_DATA name="Julius Caesar" score="170"/>
+	</SCENARIO>
+	<SCENARIO title="Aging Madness - Age 4" id="test7" year=" " index="1" file=".\scenario\Chess Exercise\ceaging2.scx" image=".\art\wrapper_pieces_04.tga" score_type="0">
+		<DESCRIPTION>How fast can you get to Gunpowder Age?  Find out if your resource management is good enough.</DESCRIPTION>
+		<INTRO>Medium Mode.  The goal is to reach the Gunpowder Age in 14 minutes or less.</INTRO>
+		<SCORE_NAME>%d:%02d min.</SCORE_NAME>
+		<SCORE_DATA name="King Phillip II" score="718"/>
+		<SCORE_DATA name="Emperor Wu Dii" score="734"/>
+		<SCORE_DATA name="Emperor Shi Huangdi" score="765"/>
+		<SCORE_DATA name="Queen Isabellai" score="777"/>
+		<SCORE_DATA name="Mehmed II Khan Gazi" score="810"/>
+	</SCENARIO>
+	<SCENARIO title="Aging Madness - Age 8" id="test8" year=" " index="2" file=".\scenario\Chess Exercise\ceaging3.scx" image=".\art\wrapper_pieces_04.tga" score_type="0">
+		<DESCRIPTION>How fast can you get to Information Age?  Find out if your resource management is good enough.</DESCRIPTION>
+		<INTRO>Difficult Mode.  The goal is to reach the Information Age in 30 minutes or less.</INTRO>
+		<SCORE_NAME>%d:%02d min.</SCORE_NAME>
+		<SCORE_DATA name="Vladimir Lenin" score="1500"/>
+		<SCORE_DATA name="Emperor Moctezuma" score="1588"/>
+		<SCORE_DATA name="King Shaka" score="1677"/>
+		<SCORE_DATA name="Chac Balam" score="1744"/>
+		<SCORE_DATA name="Queen Amanishakhete" score="1788"/>
+	</SCENARIO>
+	<SCENARIO title="Raiding Party" id="test2" year=" " index="3" file=".\scenario\Chess Exercise\ceraiding1.scx" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>Take your bloodthirsty Mongol horde and pay a visit to some enemy towns in an exercise of micromanagement.</DESCRIPTION>
+		<INTRO>In this test, you are Ghengis Khan and must lead your bloodthirsty Mongol horde to pillage the countryside. There are four nations surrounding you, each with its own deadly defenses. Keep in mind that enemy troops are too frightened of the Mongol horde to enter your territory; also, more nomads will join the horde every two minutes.  Kill 100 civilian units (Citizens, Merchants, and Caravans) in 10 minutes to win. (Caravans are worth triple.)</INTRO>
+		<SCORE_NAME>$NUM0 kills</SCORE_NAME>
+		<SCORE_DATA name="Genghis Khan" score="115"/>
+		<SCORE_DATA name="Kublai Khan" score="110"/>
+		<SCORE_DATA name="Queen Chabi" score="108"/>
+		<SCORE_DATA name="Emperor Topa Inca" score="104"/>
+		<SCORE_DATA name="Ogadei Khan" score="100"/>
+	</SCENARIO>
+	<SCENARIO title="Hotkey Handling" id="test4" year=" " index="4" file=".\scenario\Chess Exercise\cehotkey1.scx" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>Do you know your hotkeys?  This is a test of hotkey knowledge.</DESCRIPTION>
+		<INTRO>Do you know your hotkeys?  Press the right hotkey or hotkey combination to pass 25 out of the 30 rounds in order to win.</INTRO>
+		<SCORE_NAME>$NUM0 clicks</SCORE_NAME>
+		<SCORE_DATA name="Nobunaga Oda" score="29"/>
+		<SCORE_DATA name="Emperor Itzcoatl" score="28"/>
+		<SCORE_DATA name="King Dangun" score="27"/>
+		<SCORE_DATA name="Queen Jinseong" score="26"/>
+		<SCORE_DATA name="King Jinheung" score="25"/>
+	</SCENARIO>
+	<SCENARIO title="Protect the Wonder" id="test1" year=" " index="5" file=".\scenario\Chess Exercise\cewonder.scx" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>Protect your Wonder from jealous enemies in an exercise in defense.</DESCRIPTION>
+		<INTRO>Your nation owns a magnificient Wonder. Your neighbors are jealous and are plotting to destroy it. There will be five waves of enemy attacks in this scenario, and build times are instant. At the start of each wave, your citizens will give you a vast amount of resources as Tribute, after which you will have thirty seconds to prepare for the next wave of attack.  Keep your Wonder alive, and beat all five waves in order to win.</INTRO>
+		<SCORE_NAME>$NUM0 percent</SCORE_NAME>
+		<SCORE_DATA name="Emperor Trajan" score="75"/>
+		<SCORE_DATA name="Emperor Hadrian" score="59"/>
+		<SCORE_DATA name="Emperor Justinian" score="46"/>
+		<SCORE_DATA name="Empress Theodora" score="33"/>
+		<SCORE_DATA name="Emperor Augustus" score="14"/>
+	</SCENARIO>
+	<SCENARIO title="Tactics" id="test5" year=" " index="6" file=".\scenario\Chess Exercise\cemicrowars.scx" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>Defeat the enemy troops to take control of a valuable resource without losing more than half your army in this test of generalship.</DESCRIPTION>
+		<INTRO>An enemy nation has control of a deadly rare resource, and your nation has sent an army to defeat them in order to take control of the rare resource.  Keep at least half your army alive to win, or risk upsetting your citizens at home and losing.</INTRO>
+		<SCORE_NAME>$NUM0 units</SCORE_NAME>
+		<SCORE_DATA name="Tsar Peter the Great" score="22"/>
+		<SCORE_DATA name="Tsar Ivan the Terrible" score="20"/>
+		<SCORE_DATA name="King Henry VIII" score="17"/>
+		<SCORE_DATA name="King Sonni Ali" score="16"/>
+		<SCORE_DATA name="Richard the Lionheart" score="16"/>
+	</SCENARIO>
+	<SCENARIO title="Whack the General" id="test3" year=" " index="7" file=".\scenario\Chess Exercise\cegeneral3.scx" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>How fast can you click your mouse?  This is a test of clicking ability.</DESCRIPTION>
+		<INTRO>Select the highlighted General. There are three levels of difficulty, each mode lasting for 10 possible clicks. 25 out of 30 possible clicks are required to win.</INTRO>
+		<SCORE_NAME>$NUM0 clicks</SCORE_NAME>
+		<SCORE_DATA name="Emperor Napoleon" score="29"/>
+		<SCORE_DATA name="King Louis XIV" score="28"/>
+		<SCORE_DATA name="Otto von Bismarck" score="27"/>
+		<SCORE_DATA name="Frederick the Great" score="26"/>
+		<SCORE_DATA name="Alaric the Visigoth" score="25"/>
+	</SCENARIO>
+	<SCENARIO title="タイム レース - 古代への進化" id="test6" year=" " index="0" file=".\scenario\Chess Exercise\ceaging1.sce" image=".\art\wrapper_pieces_04.tga" score_type="0">
+		<DESCRIPTION>どれだけ速く古代に進化できるだろうか? 資源採集が成功へのカギだ。</DESCRIPTION>
+		<INTRO>目標: 3 分以内に古代に進化すること。(難易度: 簡単)</INTRO>
+		<SCORE_NAME>%d:%02d 分</SCORE_NAME>
+		<SCORE_DATA name="ラムセス 2 世" score="135"/>
+		<SCORE_DATA name="アレクサンドロス大王" score="141"/>
+		<SCORE_DATA name="クレオパトラ女王" score="159"/>
+		<SCORE_DATA name="女帝リウィア" score="161"/>
+		<SCORE_DATA name="ユリウス カエサル" score="170"/>
+	</SCENARIO>
+	<SCENARIO title="タイム レース - ルネサンスへの進化" id="test7" year=" " index="1" file=".\scenario\Chess Exercise\ceaging2.sce" image=".\art\wrapper_pieces_04.tga" score_type="0">
+		<DESCRIPTION>どれだけ速くルネサンスに進化できるだろうか? 資源採集が成功へのカギだ。</DESCRIPTION>
+		<INTRO>目標: 14 分以内にルネサンスに進化すること。(難易度: 普通)</INTRO>
+		<SCORE_NAME>%d:%02d 分</SCORE_NAME>
+		<SCORE_DATA name="フェリペ 2 世" score="718"/>
+		<SCORE_DATA name="武帝" score="734"/>
+		<SCORE_DATA name="始皇帝" score="765"/>
+		<SCORE_DATA name="イザベル女王" score="777"/>
+		<SCORE_DATA name="征服者メフメト 2 世" score="810"/>
+	</SCENARIO>
+	<SCENARIO title="タイム レース - 現代への進化" id="test8" year=" " index="2" file=".\scenario\Chess Exercise\ceaging3.sce" image=".\art\wrapper_pieces_04.tga" score_type="0">
+		<DESCRIPTION>どれだけ速く現代に進化できるだろうか? 資源採集が成功へのカギだ。</DESCRIPTION>
+		<INTRO>目標: 30 分以内にルネサンスに進化すること。(難易度: 難しい)</INTRO>
+		<SCORE_NAME>%d:%02d 分</SCORE_NAME>
+		<SCORE_DATA name="ウラジミール レーニン" score="1500"/>
+		<SCORE_DATA name="モクテスマ皇帝" score="1588"/>
+		<SCORE_DATA name="シャカ王" score="1677"/>
+		<SCORE_DATA name="チャク バラム" score="1744"/>
+		<SCORE_DATA name="アマニシャケテ女王" score="1788"/>
+	</SCENARIO>
+	<SCENARIO title="モンゴル騎馬隊による襲撃" id="test2" year=" " index="3" file=".\scenario\Chess Exercise\ceraiding1.sce" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>血に飢えたモンゴル騎馬隊を率いて敵国の町に進攻しよう。これは、軍事ユニット操作の訓練である。</DESCRIPTION>
+		<INTRO>プレイヤーはチンギス ハーンとなり、荒ぶるモンゴル騎馬隊を率いて地方都市を占領する。プレイヤーの周囲をとりまく 4 つの民族は、それぞれ堅固な防衛陣を敷いているが、モンゴル騎馬隊を極度に恐れる敵軍はプレイヤーの領土には踏み込むことはできない。10 分以内に 100 の民間ユニット (市民、商人、隊商) を倒せば勝利となる。隊商は市民や商人の 3 倍のポイントになるぞ。また、2 分ごとに新たな軽騎馬射手がモンゴル騎馬隊に加わるということも覚えておこう。</INTRO>
+		<SCORE_NAME>$NUM0 人</SCORE_NAME>
+		<SCORE_DATA name="チンギス ハーン" score="115"/>
+		<SCORE_DATA name="フビライ ハーン" score="110"/>
+		<SCORE_DATA name="チャビ皇后" score="108"/>
+		<SCORE_DATA name="トゥパ インカ皇帝" score="104"/>
+		<SCORE_DATA name="オゴタイ ハーン" score="100"/>
+	</SCENARIO>
+	<SCENARIO title="ホットキーの操作" id="test4" year=" " index="4" file=".\scenario\Chess Exercise\cehotkey1.sce" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>ホットキーの機能はご存知かな? さあ、テストしてみよう。</DESCRIPTION>
+		<INTRO>ホットキーの訓練だ。指示された動作の正しいホットキーまたはホットキーの組み合わせを押し、30 回中 25 回成功したら勝利となる。</INTRO>
+		<SCORE_NAME>クリック $NUM0 回</SCORE_NAME>
+		<SCORE_DATA name="織田信長" score="29"/>
+		<SCORE_DATA name="イシュコアトル皇帝" score="28"/>
+		<SCORE_DATA name="檀君" score="27"/>
+		<SCORE_DATA name="真聖女王" score="26"/>
+		<SCORE_DATA name="真興王" score="25"/>
+	</SCENARIO>
+	<SCENARIO title="偉大な建造物を死守せよ" id="test1" year=" " index="5" file=".\scenario\Chess Exercise\cewonder.sce" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>自国の偉大な建造物を、嫉妬深い隣国から守ろう。これは防御の練習だ。</DESCRIPTION>
+		<INTRO>隣国は、プレイヤーの民族が所有する偉大な建造物をうらやみ、破壊しようと企んでいる。このシナリオでは、敵からの攻撃を 5 回立て続けに受けることになる。攻撃開始時には、市民から大量の資源が献上され、その後に与えられる 30 秒間が次の攻撃の準備時間となる。偉大な建造物を破壊されることなく 5 度にわたる敵の攻撃に耐え、勝利を収めよう。  </INTRO>
+		<SCORE_NAME>$NUM0 パーセント</SCORE_NAME>
+		<SCORE_DATA name="皇帝トラヤヌス" score="75"/>
+		<SCORE_DATA name="皇帝ハドリアヌス" score="59"/>
+		<SCORE_DATA name="皇帝ユスティニアヌス" score="46"/>
+		<SCORE_DATA name="女帝テオドラ" score="33"/>
+		<SCORE_DATA name="皇帝アウグストゥス" score="14"/>
+	</SCENARIO>
+	<SCENARIO title="希少資源を奪取せよ" id="test5" year=" " index="6" file=".\scenario\Chess Exercise\cemicrowars.sce" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>自軍のユニットの半数以上を失わずに敵軍を倒し、貴重な資源を掌握しよう。これは、指揮能力を問うテストだ。</DESCRIPTION>
+		<INTRO>敵を倒し、きわめて希少な資源を奪取しなければならない。ユニットの半数を失うと負けとなる。</INTRO>
+		<SCORE_NAME>$NUM0 ユニット</SCORE_NAME>
+		<SCORE_DATA name="ピョートル大帝" score="22"/>
+		<SCORE_DATA name="イワン雷帝" score="20"/>
+		<SCORE_DATA name="ヘンリー 8 世" score="17"/>
+		<SCORE_DATA name="スンニ アリ王" score="16"/>
+		<SCORE_DATA name="リチャード獅子心王" score="16"/>
+	</SCENARIO>
+	<SCENARIO title="将軍たたきゲーム" id="test3" year=" " index="7" file=".\scenario\Chess Exercise\cegeneral3.sce" image=".\art\wrapper_pieces_04.tga" score_type="1">
+		<DESCRIPTION>できるだけすばやくマウスをクリックしよう。これはマウス操作のテストだ。</DESCRIPTION>
+		<INTRO>旗を振っている将軍をクリックしよう。 難易度は 3 レベルあり、レベルごとに 10 回のクリックが可能だ。30 回のうち 25 回正しくクリックできれば勝利となる。</INTRO>
+		<SCORE_NAME>クリック $NUM0 回</SCORE_NAME>
+		<SCORE_DATA name="ナポレオン皇帝" score="29"/>
+		<SCORE_DATA name="ルイ 14 世" score="28"/>
+		<SCORE_DATA name="ビスマルク" score="27"/>
+		<SCORE_DATA name="フリードリヒ 2 世" score="26"/>
+		<SCORE_DATA name="アラリック 1 世" score="25"/>
+	</SCENARIO>
+</ROOT>

@@ -1,0 +1,3 @@
+int conquest supplybonus(ref string text) {
+  return 10*get_ctw_int("sw_killed");
+}

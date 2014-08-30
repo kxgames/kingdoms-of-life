@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<ROOT>
+	<CAT hash="587613">
+		<STRING hash="11685233" hash_i="11756429" needed="0">Basic Resource</STRING>
+		<STRING hash="20489380" hash_i="20551444" needed="0">Rare Food Resource.</STRING>
+		<STRING hash="147467286" hash_i="156441532" needed="0">Reduces research and upgrade times by $NUMBER0%.</STRING>
+		<STRING hash="113202238" hash_i="120574496" needed="0">Cost of unit upgrades reduced by $NUMBER0%.</STRING>
+		<STRING hash="180822180" hash_i="192662692" needed="0">Cost of #ICON27 Science research reduced by $NUMBER0%.</STRING>
+		<STRING hash="172749797" hash_i="187362279" needed="0">Cost of #ICON25 Civic research reduced by $NUMBER0%.</STRING>
+		<STRING hash="182561711" hash_i="193954395" needed="0">Cost of #ICON26 Commerce research reduced by $NUMBER0%.</STRING>
+		<STRING hash="87506613" hash_i="93518609" needed="0">Caravan income increased by $NUMBER0%.</STRING>
+		<STRING hash="127701008" hash_i="136619784" needed="0">Cost of Barracks troops reduced by $NUMBER0%.</STRING>
+		<STRING hash="108052760" hash_i="115154366" needed="0">Cost of Stable units reduced by $NUMBER0%.</STRING>
+		<STRING hash="132453351" hash_i="141713909" needed="0">Cost of Auto Plant units reduced by $NUMBER0%.</STRING>
+		<STRING hash="166713158" hash_i="178869008" needed="0">Cost of Siege/Artillery units reduced by $NUMBER0%.</STRING>
+		<STRING hash="178361967" hash_i="190646447" needed="0">Market sell prices +$NUMBER0 and buy prices -$NUMBER1.</STRING>
+		<STRING hash="165161095" hash_i="176196279" needed="0">#ICON23 Age advancement cost reduced by $NUMBER0%.</STRING>
+		<STRING hash="179338198" hash_i="190089704" needed="0">Citizens construct buildings and wonders $NUMBER0% faster.</STRING>
+		<STRING hash="112820383" hash_i="120189315" needed="0">Cost to build Wonders reduced by $NUMBER0%.</STRING>
+		<STRING hash="183793237" hash_i="193611755" needed="0">Cost of #ICON24 Military research reduced by $NUMBER0%.</STRING>
+		<STRING hash="223947293" hash_i="223468201" needed="0">Barracks, Stable, and Dock production times reduced by $NUMBER0%.</STRING>
+		<STRING hash="122452978" hash_i="130056882" needed="0">Granary research costs reduced by $NUMBER0%.</STRING>
+		<STRING hash="171072432" hash_i="178172594" needed="0">Factory and Dock units receive +$NUMBER0% hit points.</STRING>
+		<STRING hash="94163552" hash_i="96831316" needed="0">+$NUMBER0% to #ICON20 population limit.</STRING>
+		<STRING hash="69993360" hash_i="69971538" needed="0">Ships at sea heal automatically.</STRING>
+		<STRING hash="76521631" hash_i="82031785" needed="0">Reduces all Food costs by $NUMBER0%.</STRING>
+		<STRING hash="117828710" hash_i="126659822" needed="0">Raises #ICON21 commerce limit by +$NUMBER0%.</STRING>
+		<STRING hash="42031216" hash_i="46557986" needed="0">National Borders +$NUMBER0%.</STRING>
+		<STRING hash="219551962" hash_i="224074346" needed="0">Aircraft costs reduced by $NUMBER0%/speed increased by $NUMBER1%.</STRING>
+		<STRING hash="104712415" hash_i="111694881" needed="0">Increases sailing ship speed by $NUMBER0%.</STRING>
+		<STRING hash="177991301" hash_i="192101669" needed="0">Archers, Towers, Forts, and Cities gain +$NUMBER1 attack.</STRING>
+		<STRING hash="172156159" hash_i="185192517" needed="0">Citizens produced $NUMBER0% faster and $NUMBER1% cheaper.</STRING>
+		<STRING hash="126026323" hash_i="135826793" needed="0">Reduces all #ICON2 Timber costs by $NUMBER0%.</STRING>
+		<STRING hash="172570610" hash_i="184862394" needed="0">Nuclear missiles $NUMBER0% faster and $NUMBER1% cheaper.</STRING>
+		<STRING hash="162975423" hash_i="173047229" needed="0">Attrition in enemy territory reduced by $NUMBER0%.</STRING>
+		<STRING hash="39526173" hash_i="44052943" needed="0">National Borders +$NUMBER0.</STRING></CAT>
+	<CAT hash="5799388">
+		<STRING hash="0" hash_i="0" needed="0"/>
+		<STRING hash="18235975" hash_i="18298039" needed="0">Rare Food Resource</STRING>
+		<STRING hash="48316772" hash_i="48424200" needed="0">Faster Research and Upgrades</STRING>
+		<STRING hash="20180700" hash_i="20289892" needed="0">Cheap Unit Upgrades</STRING>
+		<STRING hash="28254149" hash_i="30066889" needed="0">Science Research Bonus</STRING>
+		<STRING hash="23093140" hash_i="24722438" needed="0">Civic Research Bonus</STRING>
+		<STRING hash="30961383" hash_i="32991505" needed="0">Commerce Research Bonus</STRING>
+		<STRING hash="9549012" hash_i="10503438" needed="0">Caravan Bonus</STRING>
+		<STRING hash="30587098" hash_i="32405312" needed="0">Barracks Troops Cheaper</STRING>
+		<STRING hash="22163518" hash_i="23519296" needed="0">Stable Units Cheaper</STRING>
+		<STRING hash="32968667" hash_i="34925325" needed="0">Auto Plant Units Cheaper</STRING>
+		<STRING hash="49316992" hash_i="52418960" needed="0">Siege/Artillery Units Cheaper</STRING>
+		<STRING hash="17709399" hash_i="19040397" needed="0">Market Price Bonus</STRING>
+		<STRING hash="20242399" hash_i="22000635" needed="0">Age Advance Cheaper</STRING>
+		<STRING hash="24055863" hash_i="25267355" needed="0">Citizens Build Faster</STRING>
+		<STRING hash="11828830" hash_i="12706172" needed="0">Wonders Cheaper</STRING>
+		<STRING hash="31187895" hash_i="33125419" needed="0">Military Research Bonus</STRING>
+		<STRING hash="55849638" hash_i="56475694" needed="0">Produce Foot/Horse/Sail Faster</STRING>
+		<STRING hash="34474051" hash_i="36338081" needed="0">Granary Research Cheaper</STRING>
+		<STRING hash="35489584" hash_i="36208990" needed="0">Ship/Artillery Hit Points</STRING>
+		<STRING hash="26362468" hash_i="28232524" needed="0">Population Limit Bonus</STRING>
+		<STRING hash="15177844" hash_i="16318806" needed="0">Ships Heal At Sea</STRING>
+		<STRING hash="17531243" hash_i="18134095" needed="0">Food Costs Reduced</STRING>
+		<STRING hash="10397967" hash_i="11466707" needed="0">Commerce Bonus</STRING>
+		<STRING hash="36183080" hash_i="40709850" needed="0">National Borders +$NUMBER0</STRING>
+		<STRING hash="43631754" hash_i="44994796" needed="0">Aircraft Cheaper and Faster</STRING>
+		<STRING hash="22178329" hash_i="22313841" needed="0">Sailing Ships Faster</STRING>
+		<STRING hash="9048116" hash_i="9994856" needed="0">Archery Bonus</STRING>
+		<STRING hash="85845041" hash_i="89559069" needed="0">Civilians Produced Faster and Cheaper</STRING>
+		<STRING hash="19809197" hash_i="20628375" needed="0">Timber Costs Halved</STRING>
+		<STRING hash="24772106" hash_i="26275680" needed="0">Nuclear Units Cheaper</STRING>
+		<STRING hash="15485697" hash_i="16296777" needed="0">Reduced Attrition</STRING>
+		<STRING hash="22234203" hash_i="23009365" needed="0">Timber Costs Reduced</STRING>
+	</CAT>
+</ROOT>

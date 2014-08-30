@@ -1,0 +1,80 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+coldwar_rules();
+
+labels {
+}
+
+disable_city_defeat(1);
+disable_city_defeat(2);
+
+set_time_limit(15);
+diff = get_difficulty();
+
+x = 144;
+y = 122;
+
+set_explored(-1);
+
+if (diff > 2) {
+  create_unit_upgrade(1, x, y, "Infantry", 2);
+  create_unit_upgrade(1, x, y, "Bazooka", 1);
+  create_unit_upgrade(1, x, y, "Armored Scout Car", 1);
+  create_unit_upgrade(1, x, y, "Helicopter", 4);
+  create_unit_upgrade(1, x, y, "Scout", 2);
+}
+else {
+  create_unit_upgrade(1, x, y, "Infantry", 3);
+  create_unit_upgrade(1, x, y, "Bazooka", 2);
+  create_unit_upgrade(1, x, y, "Armored Scout Car", 2);
+  create_unit_upgrade(1, x, y, "Tank", 1);
+  create_unit_upgrade(1, x, y, "Helicopter", 4);
+  create_unit_upgrade(1, x, y, "Scout", 2);
+}
+
+disable_take_attrition(1);
+
+set_good(1, "Food", 100);
+set_good(1, "Timber", 100);
+set_good(1, "Metal", 100);
+set_good(1, "Oil", 100);
+set_good(1, "Wealth", 100);
+
+if (get_turn() < 1) {
+  set_leader_name(2, $S("Harry Truman"));
+}
+//3, 4 - Eisenhower
+else if (get_turn() < 3) {
+  set_leader_name(2, $S("Dwight Eisenhower"));
+}
+//5 - Kennedy
+else if (get_turn() < 4) {
+  set_leader_name(2, $S("John Kennedy"));
+}
+//6 - Johnson
+else if (get_turn() < 5) {
+  set_leader_name(2, $S("Lyndon Johnson"));
+}
+//7, 8 - Nixon
+else if (get_turn() < 7) {
+  set_leader_name(2, $S("Richard Nixon"));
+}
+//9 - Ford
+else if (get_turn() < 8) {
+  set_leader_name(2, $S("Gerald Ford"));
+}
+//10 - Carter
+else if (get_turn() < 9) {
+  set_leader_name(2, $S("Jimmy Carter"));
+}
+//11, 12 - Reagan
+else {
+  set_leader_name(2, $S("Ronald Reagan"));
+}
+
+kill_unit_type_anim(2, "Bomber", 1);
+destroy_building_type(1, "Radar Air Defense");
+
+}

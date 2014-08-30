@@ -1,0 +1,142 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  labels {
+    AMERICANS,
+    PANAMANIANS,
+    GUATAMALANS,
+    SALVADORANS,
+    NICARAGUANS,
+    COSTARICANS,
+    REBELS,
+  }
+  
+  for (i = 2; i < 9; i++) {
+    place_building_upgrade(i, "Senate", find_capital(i));
+    disable_type_by_tribe("Senate", find_nation(i));
+  }
+
+  //unit_ignore_orders(COSTARICANS, find_all_unit(COSTARICANS, "Nuclear Missile"));
+
+  disable_tech(2, "Information Age");
+  set_nation_name("Lakota", $S("Rebels"));
+
+  int diff = get_difficulty();
+  int unit;
+  int x;
+  int unit2;
+  int y;
+  
+  if (diff > 4) {
+    for (i = 0; i < num_type_upgrade(2, "Merchant"); i++) {
+      unit = find_unit(2, "Merchant");
+      x = object_position_x(2, unit) + 2;
+      y = object_position_y(2, unit);
+      unit2 =  create_unit_upgrade(2, x, y, "Partisan", diff*2);
+      group_guard_order(2, 2, unit);
+    }
+  }
+  
+  if (diff < 5) {
+    place_building_upgrade(AMERICANS, "Tower", find_capital(1));
+  }
+  if (diff < 3) {
+    place_building_upgrade(AMERICANS, "Tower", find_capital(1));
+    place_building_upgrade(1, "Mine", find_capital(1));
+    give_good(1, "Metal", 100);
+  }
+
+  for (i = 2; i < num_players()+1; i++) {
+    for (z = 0; z < diff-2; z++) {
+      place_building_upgrade(i, "Lookout", find_capital(i));
+    }
+  }
+  
+  coldwar_rules();
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  int nation;
+  for (nation = num_players(); nation > 2; nation--) {
+    diplomacy_set_wait(nation);
+  }
+  
+  disable_building_attrition(REBELS);
+
+  int turn = get_turn();
+
+  if (turn == 0) {//truman
+    set_leader_name(GUATAMALANS, $S("Juan Arevalo"));
+    set_leader_name(SALVADORANS, $S("Tiburcio Carias"));
+    set_leader_name(NICARAGUANS, $S("Anastasio Somoza"));
+    set_leader_name(COSTARICANS, $S("Teodoro Picado"));
+  }
+  else if (turn == 1) {//eisenhower
+    set_leader_name(GUATAMALANS, $S("Jacoba Arbenz"));
+    set_leader_name(SALVADORANS, $S("Juan Galvez"));
+    set_leader_name(NICARAGUANS, $S("Victor Roman"));
+    set_leader_name(COSTARICANS, $S("Otilio Ulate"));
+  }
+  else if (turn == 2) {//eisenhower
+    set_leader_name(GUATAMALANS, $S("Castillo Armas"));
+    set_leader_name(SALVADORANS, $S("Julio Lozano"));
+    set_leader_name(NICARAGUANS, $S("Anastasio Somoza"));
+    set_leader_name(COSTARICANS, $S("Jose Figueres"));
+  }
+  else if (turn < 5) {//kennedy, johnson
+    if (turn == 3) {
+      set_leader_name(GUATAMALANS, $S("Miguel Ydigoras"));
+      set_leader_name(NICARAGUANS, $S("Luis Somoza"));
+      set_leader_name(COSTARICANS, $S("Mario Echandi"));
+    }
+    else {
+      set_leader_name(GUATAMALANS, $S("Enrique Peralta"));
+      set_leader_name(NICARAGUANS, $S("Rene Schick"));
+      set_leader_name(COSTARICANS, $S("Francisco Orlich"));
+    }
+    set_leader_name(SALVADORANS, $S("Jose Villeda"));
+  }
+  else if (turn < 7) {//nixon
+    if (turn == 5) {
+      set_leader_name(GUATAMALANS, $S("Julio Mendez"));
+      set_leader_name(COSTARICANS, $S("Jose Joaquin"));
+    }
+    else {
+      set_leader_name(GUATAMALANS, $S("Carlos Arana"));
+      set_leader_name(COSTARICANS, $S("Jose Figueres"));
+    }
+    set_leader_name(SALVADORANS, $S("Oswaldo Lopez"));
+    set_leader_name(NICARAGUANS, $S("Anastasio Somoza"));
+  }
+  else if (turn == 7) {//ford
+    set_leader_name(GUATAMALANS, $S("Kjell Laugerud"));
+    set_leader_name(SALVADORANS, $S("Juan Melgar"));
+    set_leader_name(NICARAGUANS, $S("Anastasio Somoza"));
+    set_leader_name(COSTARICANS, $S("Daniel Oduber"));
+  }
+  else if (turn == 8) {//carter
+    set_leader_name(GUATAMALANS, $S("Romeo Lucas"));
+    set_leader_name(SALVADORANS, $S("Policarpo Paz"));
+    set_leader_name(NICARAGUANS, $S("Daniel Ortega"));
+    set_leader_name(COSTARICANS, $S("Rodrigo Carazo"));
+  }
+  else if (turn == 9) {//reagon
+    set_leader_name(GUATAMALANS, $S("Oscar Mejia"));
+    set_leader_name(SALVADORANS, $S("Roberto Suazo"));
+    set_leader_name(NICARAGUANS, $S("Daniel Ortega"));
+    set_leader_name(COSTARICANS, $S("Luis Monge"));
+  }
+  else {
+    set_leader_name(GUATAMALANS, $S("Vinicio Cerezo"));
+    set_leader_name(SALVADORANS, $S("Jose Azcona"));
+    set_leader_name(NICARAGUANS, $S("Daniel Ortega"));
+    set_leader_name(COSTARICANS, $S("Oscar Arias"));
+  }
+
+}
+
+

@@ -1,0 +1,31 @@
+include "ctw_lib.bhs"
+
+       conquest
+{
+new_world_rules();
+
+static int diff = get_difficulty();
+
+run_once {
+  new_world_setup();
+  ctw_add_objective_text($S("Capture all of the enemy cities."), "Hint_id", 0);
+  if (find_nation(1) == "Americans" || find_nation(1) == "British" || find_nation(1) == "French" || find_nation(1) == "Spanish" || find_nation(1) == "Nubians") {
+    disable_trigger("take_library");
+    disable_trigger("give_library");
+  }
+}
+
+trigger take_library(have_tech(2, "Standing Army")) {
+  disable_type_by_tribe("Library", "Maya");
+  destroy_building_type(2, "Library");
+}
+
+trigger give_library(num_cities(1) > num_cities(2)) {
+  enable_type_by_tribe("Library", "Maya");
+}
+
+if (time() >= get_time_limit()) {
+  defeat(1);
+}
+
+}

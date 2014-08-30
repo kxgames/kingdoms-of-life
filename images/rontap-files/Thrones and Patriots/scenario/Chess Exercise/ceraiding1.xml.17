@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<ROOT>
+  <STRING hash="452842599">10 分以内に 100 の民間ユニット (市民、商人、隊商) を倒せば勝利です。隊商は市民や商人の 3 倍のポイントになります。</STRING>
+  <STRING hash="7744951">現在のゲーム</STRING>
+  <STRING hash="27709193">倒した民間ユニット数: $NUM0</STRING>
+  <STRING hash="39893562">モンゴル軽騎馬射手がモンゴル重装騎馬射手に合流しました。</STRING>
+  <STRING hash="8432464">新しいシナリオ</STRING>
+  <STRING hash="7702239">チンギス ハーン</STRING>
+  <STRING hash="32395306">ビラコチャ皇帝</STRING>
+  <STRING hash="12644398">マンドハイ皇后</STRING>
+  <STRING hash="19791536">アレクサンドロス大王</STRING>
+  <STRING hash="10599152">ユリウス カエサル</STRING>
+  <STRING hash="4441544">カラコルム</STRING>
+  <STRING hash="2758229">ゴコメレ</STRING>
+  <STRING hash="1296581">キルワ</STRING>
+  <STRING hash="2602105">マウヅー</STRING>
+  <STRING hash="1566727">カペニ</STRING>
+  <STRING hash="5515712">チュティシテョス</STRING>
+  <STRING hash="3011625">タヤサル</STRING>
+  <STRING hash="4287922">チャンポトゥン</STRING>
+  <STRING hash="1895061">元山</STRING>
+  <STRING hash="978183">晋州</STRING>
+  <STRING hash="764522">羅州</STRING>
+  <STRING hash="560387">ローマ</STRING>
+  <STRING hash="3978337">コルフィニウム</STRING>
+  <STRING hash="471626519">市民、商人および隊商の民間ユニットを 10 分以内に 100 ユニット倒してください。隊商は 3 倍のスコアになります。</STRING>
+  <STRING hash="5006799">ベスト スコア</STRING>
+</ROOT>

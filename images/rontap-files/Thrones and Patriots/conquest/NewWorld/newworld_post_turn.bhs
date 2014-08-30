@@ -1,0 +1,440 @@
+                                                
+//set battle_info_text to be the info shown when making an attack
+scenario post_turn (int turn)
+{
+
+  static int random_number_guy = get_ctw_seed() % 3;
+  String sub_goal1;
+  String sub_goal2;
+  static int num_owned = 0;
+
+  String nations[] = ["Nubians", "Aztecs", "Americans", "British", "French", "Inca", "Iroquois", "Maya", "Spanish", "Lakota", "Dutch"];
+
+
+  int strength;
+  int choice = -1;
+  int value;
+  String player = ctw_get_player_nation();
+  int player_nation = 0;
+  int largest_nation = -1;
+  int you_native;
+
+  if (player == "Aztecs" || player == "Maya" || player == "Inca" || player == "Lakota" || player == "Iroquois") {
+    player_nation = 1;
+    you_native = 1;
+  }
+  else if (player == "Spanish" || player == "Dutch" || player == "French" || player == "British" || player == "Nubians") {
+    player_nation = 2;
+  }
+  else {
+    player_nation = 3;
+  }
+
+  String str1;
+  String str2;
+  String str3;
+  String str4;
+  String str5;
+
+  //British
+  if (ctw_get_player_nation() != "British") {
+    ctw_set_leader_name("British", $S("Henry VIII"));
+  }
+
+  //Dutch
+  if (ctw_get_player_nation() != "Dutch") {
+    ctw_set_leader_name("Dutch", $S("Willem I"));
+  }
+
+  //French
+  if (ctw_get_player_nation() != "French") {
+    ctw_set_leader_name("French", $S("Louis XII"));
+  }
+
+  //Spanish
+  if (ctw_get_player_nation() != "Spanish") {
+    ctw_set_leader_name("Spanish", $S("Carlos I"));
+  }
+
+  //Nubian Portugese
+  if (ctw_get_player_nation() != "Nubians") {
+    ctw_set_leader_name("Nubians", $S("Manuel"));
+  }
+
+  //Americans
+  if (ctw_get_player_nation() != "Americans") {
+    ctw_set_leader_name("Americans", $S("Sam Adams"));
+  }
+
+  //Maya
+  if (ctw_get_player_nation() != "Maya") {
+    ctw_set_leader_name("Maya", $S("Pakal"));
+  }
+
+  //Lakota
+  if (ctw_get_player_nation() != "Lakota") {
+    ctw_set_leader_name("Lakota", $S("Red Cloud"));
+  }
+
+  //Iroquois
+  if (ctw_get_player_nation() != "Iroquois") {
+    ctw_set_leader_name("Iroquois", $S("Blacksnake"));
+  }
+
+  //Inca
+  if (ctw_get_player_nation() != "Inca") {
+    ctw_set_leader_name("Inca", $S("Atahuallpa"));
+  }
+
+  //Aztecs
+  if (ctw_get_player_nation() != "Aztecs") {
+    ctw_set_leader_name("Aztecs", $S("Montezuma"));
+  }
+  
+  /////////////////lifting of limitations for everyone
+  //changed it from a trigger to an if statement because the trigger statuses get reset when leaving the outer map to enter a scenario
+  if (get_turn() >= 8 && get_ctw_int("gun_mess") < 1) { //ice- made this a trigger with a >= because this can get skipped with cheats and make people think things are wrong
+    if (player_nation < 2) {
+      popup_dialog($S("Your warriors have learned how to use the new gunpowder weapons and Heavy Cavalry the Europeans brought with them. You can now show the Europeans how to use these weapons properly!"));
+    } else {
+      popup_dialog($S("Your people have learned how to thrive and make the most of this new land. You are no longer limited to a 125 population limit; you can go up to the full 200 now."));
+    }
+    
+    //gunpowder for natives
+    ctw_enable_gunpowder("Aztecs");
+    ctw_enable_gunpowder("Inca");
+    ctw_enable_gunpowder("Iroquois");
+    ctw_enable_gunpowder("Maya");
+    ctw_enable_gunpowder("Lakota");
+    set_ctw_int("gun_mess", 1);
+  }
+
+  //dont attack these places!!!!!
+  //if (turn < 7) {
+    for (i = 0; i < nations.length; i++) {
+      if (nations[i] == player) i++;
+      if (i == nations.length) break;
+      if (turn < 13) {
+        set_no_attack(nations[i], "West Indies");
+      }
+      if (turn < 16) {
+        set_no_attack(nations[i], "Amazon");
+      }
+      if (turn < 9) {
+        set_no_attack(nations[i], "Oregon");
+      }
+      if (turn < 10) {
+        set_no_attack(nations[i], "Yukon");
+      }
+      if (turn < 15) {
+        set_no_attack(nations[i], "Chile");
+      }
+    }
+  //}
+
+  if (turn < 2) {
+    if (player != "British") {
+      set_no_attack("British", "Great Lakes");
+    }
+    if (player != "Iroquois") {
+      set_no_attack("Iroquois", "Quebec");
+    }
+    if (player != "Aztecs") {
+      set_no_attack("Aztecs", "Yucatan");
+    }
+    if (player != "Maya") {
+      set_no_attack("Maya", "Mexico");
+    }
+  } 
+
+  if (turn < 6) {
+    if (player != "Maya" || player != "Aztecs") {
+      set_no_attack("Aztecs", "Yucatan");
+    }
+    if (player != "Aztecs") {
+      set_no_attack("Maya", "Mexico");
+    }
+
+    if (player != "Iroquois" || player != "British") {
+      set_no_attack("British", "Great Lakes");
+    }
+    if (player != "French" || player != "British") {
+      set_no_attack("British", "Louisiana");
+    }
+
+    if (player != "Iroquois" || player != "Americans") {
+      set_no_attack("Americans", "Great Lakes");
+    }
+    if (player != "French" || player != "Americans") {
+      set_no_attack("Americans", "Louisiana");
+    }
+
+    if (player != "Americans" || player != "French") {
+      set_no_attack("French", "Virginia");
+    }
+    if (player != "British" || player != "French") {
+      set_no_attack("French", "Quebec");
+    }
+
+    if (player != "Americans" || player != "Iroquois") {
+      set_no_attack("Iroquois", "Virginia");
+    }
+    if (player != "British" || player != "Iroquois") {
+      set_no_attack("Iroquois", "Quebec");
+    }
+  }
+
+  if (player == "Americans") {
+    set_no_attack("Spanish", "Quebec");
+    set_no_attack("Nubians", "Quebec");
+    set_no_attack("French", "Quebec");
+    set_no_attack("Dutch", "Quebec");
+    set_no_attack("Iroquois", "Quebec");
+    set_no_attack("Lakota", "Quebec");
+    set_no_attack("Aztecs", "Quebec");
+    set_no_attack("Maya", "Quebec");
+    set_no_attack("Inca", "Quebec");
+  }
+
+  ////////take british taxes from the americans
+  //if (get_ctw_int("Independent") < 1 && (ctw_get_player_nation() == "Americans" || ctw_get_player_nation() == "British") && ctw_is_ally("Americans", "British")) {
+  if (get_ctw_int("Independent") < 1 && ctw_is_ally("Americans", "British") && !ctw_is_defeated("Americans")) {
+    num_tax = get_num_tribute("Americans") * 30 / 100;
+    give_ctw_tribute("Americans", -num_tax);
+    give_ctw_tribute("British", num_tax);
+    if (ctw_get_player_nation() == "Americans") {
+      popup_dialog(parse("The British have taken $d0 tribute from us as taxes.", num_tax));
+    }
+    else if (ctw_get_player_nation() == "British") {
+      popup_dialog(parse("You have received $d0 tribute in taxes from the Americans.", num_tax));
+    }
+  }
+
+  if (get_ctw_int("Independent") < 3 && get_ctw_int("Independent") > 0 && ctw_get_player_nation() == "Americans") {
+    set_ctw_int("Independent", 3);
+    ctw_custom_end_screen($S("Liberty!"), $S("You have defeated the British in a major battle. This victory has forced the British to recognize your independence!"), ".\\art\\CTW_NewWorld_USA_back.tga", $S("Return to Map"), false);
+    set_ctw_int("Iron", 1);
+    popup_dialog($S("We are now able to build the powerful Ironclad unit! It can be built at your Dock."));
+  }
+
+  if (get_ctw_int("Independent") < 1 && ctw_get_player_nation() == "Americans" && get_territory_owner("Quebec") == "Americans") {
+    set_ctw_int("Independent", 3);
+    ctw_custom_end_screen($S("Liberty!"), $S("You have driven the British from the continent. No longer will you have to obey their orders or pay their oppressive taxes!"), ".\\art\\CTW_NewWorld_USA_back.tga", $S("Return to Map"), false);
+    set_ctw_int("Iron", 1);
+    popup_dialog($S("We are now able to build the powerful Ironclad unit! It can be built at your Dock."));
+  }
+  
+  if (get_ctw_int("Independent") < 1 && ctw_get_player_nation() == "Americans" && ctw_is_defeated("British")) {
+    set_ctw_int("Independent", 3);
+    ctw_custom_end_screen($S("Liberty!"), $S("The British have been driven from the continent. No longer will you have to obey their orders or pay their oppressive taxes!"), ".\\art\\CTW_NewWorld_USA_back.tga", $S("Return to Map"), false);
+    set_ctw_int("Iron", 1);
+    popup_dialog($S("We are now able to build the powerful Ironclad unit! It can be built at your Dock."));
+  }
+
+  if (ctw_get_player_nation() == "Americans" && get_ctw_int("Independent") < 1) {
+    set_player_no_negotiate($S("You have no authority to make negotiations with other nations. Until you gain your independence by declaring war on the British, the British Crown will decide your foreign policy for you."));
+  }
+
+  //////////Native Victory/////////////////////////
+  if (player_nation == 1) {
+    if (player == "Aztecs") {
+      if (get_num_territories(player) > get_num_territories("Maya") && get_num_territories(player) > get_num_territories("Inca") && get_num_territories(player) > get_num_territories("Lakota") && get_num_territories(player) > get_num_territories("Iroquois")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+    else if (player == "Maya") {
+      if (get_num_territories(player) > get_num_territories("Aztecs") && get_num_territories(player) > get_num_territories("Inca") && get_num_territories(player) > get_num_territories("Lakota") && get_num_territories(player) > get_num_territories("Iroquois")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+    else if (player == "Inca") {
+      if (get_num_territories(player) > get_num_territories("Maya") && get_num_territories(player) > get_num_territories("Aztecs") && get_num_territories(player) > get_num_territories("Lakota") && get_num_territories(player) > get_num_territories("Iroquois")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+    else if (player == "Lakota") {
+      if (get_num_territories(player) > get_num_territories("Maya") && get_num_territories(player) > get_num_territories("Inca") && get_num_territories(player) > get_num_territories("Aztecs") && get_num_territories(player) > get_num_territories("Iroquois")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+    else {//Iroquois
+      if (get_num_territories(player) > get_num_territories("Maya") && get_num_territories(player) > get_num_territories("Inca") && get_num_territories(player) > get_num_territories("Lakota") && get_num_territories(player) > get_num_territories("Aztecs")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+
+    if ((ctw_is_defeated("Nubians")||ctw_get_master("Nubians") == player) && (ctw_is_defeated("British")||ctw_get_master("British") == player)) {
+      if ((ctw_is_defeated("Dutch")||ctw_get_master("Dutch") == player) && (ctw_is_defeated("Spanish")||ctw_get_master("Spanish") == player)) {
+        if ((ctw_is_defeated("French")||ctw_get_master("French") == player) && (ctw_is_defeated("Americans")||ctw_get_master("Americans") == player) && largest_nation > 0) {
+          ctw_game_over(true, $S("Native Victory"), $S("You have defeated the invaders from across the seas, and established your empire as the dominant power in the Americas!"));
+        }
+      }
+    }
+  }
+
+  ////////////European Victory/////////////////////
+  if (player_nation == 2) {
+    if (player == "Spanish") {
+      if (get_num_territories(player) > get_num_territories("Nubians") && get_num_territories(player) > get_num_territories("British") && get_num_territories(player) > get_num_territories("Dutch") && get_num_territories(player) > get_num_territories("French") && get_num_territories(player) > get_num_territories("Americans")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+    else if (player == "British") {
+      if (get_num_territories(player) > get_num_territories("Nubians") && get_num_territories(player) > get_num_territories("Spanish") && get_num_territories(player) > get_num_territories("Dutch") && get_num_territories(player) > get_num_territories("French") && get_num_territories(player) > get_num_territories("Americans")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+    else if (player == "Dutch") {
+      if (get_num_territories(player) > get_num_territories("Nubians") && get_num_territories(player) > get_num_territories("Spanish") && get_num_territories(player) > get_num_territories("British") && get_num_territories(player) > get_num_territories("French") && get_num_territories(player) > get_num_territories("Americans")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+    else if (player == "French") {
+      if (get_num_territories(player) > get_num_territories("Nubians") && get_num_territories(player) > get_num_territories("Spanish") && get_num_territories(player) > get_num_territories("Dutch") && get_num_territories(player) > get_num_territories("British") && get_num_territories(player) > get_num_territories("Americans")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+    else if (player == "Nubians") {
+      if (get_num_territories(player) > get_num_territories("French") && get_num_territories(player) > get_num_territories("Spanish") && get_num_territories(player) > get_num_territories("Dutch") && get_num_territories(player) > get_num_territories("British") && get_num_territories(player) > get_num_territories("Americans")) {
+        largest_nation = 1;
+      }
+      else {
+        largest_nation = -1;
+      }
+    }
+
+    if ((ctw_is_defeated("Aztecs")||ctw_get_master("Aztecs") == player) && (ctw_is_defeated("Maya")||ctw_get_master("Maya") == player)) {
+      if ((ctw_is_defeated("Inca")||ctw_get_master("Inca") == player) && (ctw_is_defeated("Lakota")||ctw_get_master("Lakota") == player)) {
+        if ((ctw_is_defeated("Iroquois")||ctw_get_master("Iroquois") == player) && get_num_tribute(player) >= 1000 && largest_nation > 0) {
+          ctw_game_over(true, $S("European Victory"), $S("You have collected massive amounts of wealth and now control more territory than anyone else!"));
+        }
+      }
+    }
+  }
+
+  ////////////American Victory/////////////////////
+  if (player_nation == 3) {
+    largest_nation = 0;
+    if (get_territory_owner("Greenland") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Yukon") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Nunavut") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Great Lakes") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Quebec") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("New England") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Oregon") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Dakota Plains") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Indiana") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Pennsylvania") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Virginia") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("California") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("New Mexico") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Texas") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Louisiana") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Carolina") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Florida") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Mexico") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Yucatan") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Cuba") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("West Indies") == "Americans") {
+      largest_nation++;
+    }
+    if (get_territory_owner("Central America") == "Americans") {
+      largest_nation++;
+    }
+
+    if ((ctw_is_defeated("British")||ctw_get_master("British") == "Americans") && (ctw_is_defeated("Dutch")||ctw_get_master("Dutch") == "Americans")) {
+      if ((ctw_is_defeated("Spanish")||ctw_get_master("Spanish") == "Americans")) {
+        if ((ctw_is_defeated("French")||ctw_get_master("French") == "Americans") && (ctw_is_defeated("Nubians")||ctw_get_master("Nubians") == "Americans")) {
+          if (largest_nation == 22) {
+            ctw_game_over(true, $S("American Victory"), $S("You have eliminated the European influence in the New World and united North America."));
+          }
+        }
+      }
+    }
+  }
+
+  if (you_native == 1) {
+    sub_goal1 = $S("Defeat all of the European nations and conquer more territory than the other Native American nations.");
+  }
+  else if (player == "Americans") {
+    sub_goal1 = $S("Drive all of the European nations from the Western Hemisphere and conquer all of North America.");
+    if (get_ctw_int("Independent") < 1) sub_goal2 = $S("Win your independence from the British.");
+  }
+  else {
+    sub_goal1 = $S("Collect at least 1000 tribute, defeat all of the Native American nations, and conquer more territory than the other European nations and the Americans.");
+  }
+
+  if (sub_goal1 == "") {
+    sub_goal1 = $S("Expand your influence.");
+  }
+
+  ctw_set_sub_goals(sub_goal1, sub_goal2);
+
+}

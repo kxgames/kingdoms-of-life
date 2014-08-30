@@ -1,0 +1,73 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  if (get_ctw_campaign() == "The Cold War") {
+    coldwar_rules();
+
+    if (get_attack_to() == "Southeast Asia") {
+      if (find_nation(1) == "Americans") {
+        if (get_turn() < 6) {
+          set_leader_name(2, $S("Ho Chi Minh"));
+        }
+        else if (get_turn() < 10) {
+          set_leader_name(2, $S("Ton Duc Thang"));
+        }
+        else {
+          set_leader_name(2, $S("Truong Chinh"));
+        }
+      }
+      else {
+        if (get_turn() < 5) {
+          set_leader_name(2, $S("Ngo Dinh Diem"));
+        }
+        else {
+          set_leader_name(2, $S("Nguyen Van Thieu"));
+        }
+      }
+    }
+
+    if (find_nation(1) == "Americans") {
+      gain_tech(3, "Republic");
+      gain_tech(3, "Democracy");
+      gain_tech(3, "Capitalism");
+    }
+    else {
+      gain_tech(3, "Despotism");
+      gain_tech(3, "Monarchy");
+      gain_tech(3, "Socialism");
+    }
+  }
+
+  int diff = get_difficulty();
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  set_leader_difficulty(3, 1);
+  set_leader_name(3, $S("Rebels"));
+
+  declare_war(2, 3);
+  declare_war(2, 3);
+
+  make_alliance(1, 3);
+
+  city_name = find_capital(2);
+  city_id = find_city_id(city_name);
+
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  create_unit_upgrade(2, x, y, "Infantry", diff);
+  create_unit_upgrade(2, x, y, "Pikemen", diff);
+  create_unit_upgrade(2, x, y, "Armored Scout Car", diff);
+  create_unit_upgrade(2, x, y, "Tank", diff);
+  create_unit_upgrade(2, x, y, "General", 1);
+
+  set_good(2, "Food", 500);
+  set_good(2, "Timber", 500);
+  set_good(2, "Metal", 500);
+  set_good(2, "Wealth", 500);
+  set_good(2, "Oil", 500);
+}

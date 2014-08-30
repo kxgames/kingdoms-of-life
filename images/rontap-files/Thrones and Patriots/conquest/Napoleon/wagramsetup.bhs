@@ -1,0 +1,232 @@
+include "game_structs.bhs"
+include "ctw_lib.bhs"
+
+conquest {
+if (get_ctw_campaign() == "Napoleon") {
+  napoleon_rules();
+}
+
+
+  static int french = 1;
+  static int austrians = 2;
+
+  int diff = get_difficulty();
+  int army_x;
+  int army_y;
+
+  //110,119,140, 122, 113, 143
+  int takeaway_list[] = [110, 113, 119, 122, 140, 143];
+  if (diff > 2) {
+    for (i = 0; i < 3; i++) {
+      kill_unit_anim(1, takeaway_list[i], 1);
+    }
+  }  
+  if (diff > 3) {
+    for (i = 0; i < takeaway_list.length; i++) {
+      kill_unit_anim(1, takeaway_list[i], 1);
+    }
+  }
+  int giveaway_list[] = [108, 116, 128, 150, 151];
+  if (diff > 4) {
+    for (i = 3; i < takeaway_list.length; i++) {
+      kill_unit_anim(1, takeaway_list[i], 1);
+    }
+  }
+  
+  if (diff < 3) {
+    destroy_building(2, 2267);//evil island fort
+  }
+  
+  int napoleon = find_unit(french,"Napoleon");
+
+  infrastructure_setup(2, "Wagram", "Leopoldau", "");
+  infrastructure_setup(0, "Nussdorf", "", "");
+
+  UnitGroup aus_navy_2;
+  UnitGroup aus_navy_3;
+  UnitGroup aus_navy_4;
+  UnitGroup aus_navy_5;
+  UnitGroup aus_navy_6;
+  UnitGroup aus_div_3;
+  UnitGroup aus_div_4;
+  UnitGroup aus_div_5;
+  UnitGroup aus_div_6;
+
+  int num_tribes = num_players();
+  int unit;
+  int x;
+  int y;
+  int nation;
+  
+  for (i = 0; i < num_type(austrians, "Supply Wagon"); i++) {
+    unit = find_unit(austrians, "Supply Wagon");
+    unit_ignore_orders(austrians, unit);
+  }
+
+  for (i = 0; i < num_type(austrians, "Minuteman"); i++) {
+    unit = find_unit(austrians, "Minuteman");
+    unit_ignore_orders(austrians, unit);
+  }
+  
+  for (i = 0; i < num_type(austrians, "Caravan"); i++) {
+    unit = find_unit(austrians, "Caravan");
+    unit_ignore_orders(austrians, unit);
+  }
+  
+
+
+  if (num_tribes > 2) {
+    for (nation = num_tribes; nation > 2; nation--) {
+      set_leader_difficulty(nation, diff);
+      if (num_type(nation, "Citizen") == 0) {
+        unit = find_unit(nation, "");
+        x = object_position_x(nation, unit);
+        y = object_position_y(nation, unit);
+        create_unit(nation, x, y, "Citizen", 5);
+      }
+    }
+  }
+
+  set_leader_difficulty(austrians, diff);
+  gain_tech(austrians, "Allegiance");
+  for (i = 0; i < 7; i++) {
+    gain_tech(austrians, "Military");
+  }
+  if (diff > 4) set_population_cap(austrians,300);
+  else if (diff > 2) set_population_cap(austrians,250);
+
+  set_nation_name("Germans", $S("Austrians"));
+
+  //group near aspern
+  int aspern[] = [102,72,75,78,81,84,87,90,93,96,99];
+  clear_group(austrians);
+  for (i = 0; i < aspern.length; i++) {
+    add_to_group(austrians, aspern[i]);
+    unit_ignore_orders(austrians, aspern[i]);
+  }
+  x = object_position_x(french,napoleon);
+  y = object_position_y(french,napoleon);
+  group_attack_to_order(austrians, x,y);
+  
+  //austrian navy group patrol orders
+  clear_group(austrians);
+  for (i = 137; i < 142; i++) {
+    add_to_group(austrians, i);
+    unit_ignore_orders(austrians, i);
+  }
+  group_patrol_order(austrians, 4,179);
+  clear_group(austrians);
+  for (i = 117; i < 126; i++) {
+    if (diff < 5) {
+      kill_unit_anim(austrians, i, 1);
+    }
+    else {
+      add_to_group(austrians, i);
+      unit_ignore_orders(austrians, i);
+    }
+  }
+  if (diff > 4) {
+    group_patrol_order(austrians, 130,251);
+    clear_group(austrians);
+  }
+  for (i = 126; i < 137; i++) {
+    if (diff < 3) {
+      kill_unit_anim(austrians, i, 1);
+    }
+    else {
+      add_to_group(austrians, i);
+      unit_ignore_orders(austrians, i);
+    }
+  }
+  if (diff > 2) {
+    group_patrol_order(austrians, 160,227);
+    clear_group(austrians);
+  }
+  for (i = 113; i < 117; i++) {
+    add_to_group(austrians, i);
+    unit_ignore_orders(austrians, i);
+  }
+  group_patrol_order(austrians, 255,189);
+  clear_group(austrians);
+  for (i = 104; i < 113; i++) {
+    if (diff < 3 || (diff < 5 && i > 108)) {
+      kill_unit_anim(austrians, i, 1);
+    }
+    else {
+      add_to_group(austrians, i);
+      unit_ignore_orders(austrians, i);
+    }
+  }
+  if (diff > 2 || (diff > 4 && i < 109)) {
+    group_patrol_order(austrians, 312,261);
+  }
+  
+  //divisions
+  clear_group(austrians);
+  for (i = 217; i < 234; i++) {
+    kill_unit_anim(2, i, 1);
+  }
+  kill_unit_anim(austrians, 144,1);
+  kill_unit_anim(austrians, 103,1);
+  //group_patrol_order(austrians, 262,126);
+  clear_group(austrians);
+  int div_4[] = [234,235,238,241,244,247,250,253,256,259,262,265,268,271,274,277,280];
+  for (i = 0; i < div_4.length; i++) {
+    if (diff > 2) {
+      //add_to_group(austrians, div_4[i]);
+      unit_ignore_orders(austrians, div_4[i]);
+      //if (i%3 == 0 || i+1 == div_4.lenght) {
+       // group_patrol_order(austrians, 148+rand_int(-5,5),65+rand_int(-5,5));
+      //}
+    }
+    else {
+      kill_unit_anim(austrians, div_4[i], 1);
+    }
+  }
+  
+  clear_group(austrians);
+  add_to_group(austrians, 145);
+  for (i = 53; i < 62; i++) {
+    unit_ignore_orders(austrians, i);
+  }
+  int div_5[] = [29,34,38,20,23,35,26,41,32,47, 625, 626, 627];
+  for (i = 0; i < div_5.length; i++) {
+    unit_ignore_orders(austrians, div_5[i]);
+  }
+  group_patrol_order(austrians, 37,36);
+  clear_group(austrians);
+  add_to_group(austrians, 614);
+  unit_ignore_orders(austrians, 614);
+  for (i = 576; i < 581; i++) {
+    add_to_group(austrians, i);
+    unit_ignore_orders(austrians, i);
+  }
+  int div_6[] = [581,584,587,590,593,596,599,602,605,608,611];
+  for (i = 0; i < div_6.length; i++) {
+    if (diff > 4) {
+      add_to_group(austrians, div_6[i]);
+      unit_ignore_orders(austrians, div_6[i]);
+      if (i%3 == 0 || i+1 == div_6.length) {
+        group_patrol_order(austrians, 145+rand_int(-5,5),63+rand_int(-5,5));
+      }
+    }
+    else {
+      kill_unit_anim(austrians, i, div_6[i]);
+    }
+  }
+  
+    if (!find_unit(austrians, "Archduke Charles")) {
+      create_unit(austrians, x + 2, y, "Archduke Charles", 1);
+    }
+    
+  if (diff < 4) {
+    place_building_upgrade(1, "Tower", find_capital(1));
+    place_building_upgrade(1, "Barracks", find_capital(1));
+  }
+  
+  for (i = 0; i < num_type(2, "Sloop"); i++) {
+    unit = find_unit(2, "Sloop");
+    unit_clear_orders(2, unit);
+  }
+  
+}

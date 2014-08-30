@@ -1,0 +1,50 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Warroom (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute-->
+<TRIBE name="Portuguese" substitute="1">
+  <LEADERS>
+    <LEADER>Queen Maria I</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Lisbon</CITY>
+    <CITY>Fatima</CITY>
+    <CITY>Coimbra</CITY>
+    <CITY>Avero</CITY>
+    <CITY>Porto</CITY>
+    <CITY>Guarda</CITY>
+    <CITY>Castelo Branco</CITY>
+    <CITY>Evora</CITY>
+    <CITY>Beja</CITY>
+    <CITY>Portimao</CITY>
+    <CITY>Lagos</CITY>
+    <CITY>Sagres</CITY>
+    <CITY>Santo Antonio</CITY>
+    <CITY>Abrantes</CITY>
+    <CITY>Portalegre</CITY>
+    <CITY>Guimaraes</CITY>
+    <CITY>Trancoso</CITY>
+    <CITY>Aljubarrota</CITY>
+    <CITY>Santarem</CITY>
+    <CITY>Castelo de Vide</CITY>
+    <CITY>Crato</CITY>
+    <CITY>Alverca</CITY>
+    <CITY>Alarcos</CITY>
+    <CITY>Elvas</CITY>
+    <CITY>Juromenha</CITY>
+    <CITY>Alcacer do Sal</CITY>
+    <CITY>Moura</CITY>
+    <CITY>Serpa</CITY>
+    <CITY>Aljustrel</CITY>
+    <CITY>Mertola</CITY>
+    <CITY>Ourique</CITY>
+    <CITY>Silvas</CITY>
+    <CITY>Sao Vicente</CITY>
+    <CITY>Porches</CITY>
+    <CITY>Albuferia</CITY>
+    <CITY>Faro</CITY>
+    <CITY>Tavira</CITY>
+    <CITY>Cacela</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

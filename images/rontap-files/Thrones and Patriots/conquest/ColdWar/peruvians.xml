@@ -1,0 +1,41 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Peruvians">
+  <LEADERS>
+    <LEADER>Jose Luis Bustamante</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Lima</CITY>
+    <CITY>Cuzco</CITY>
+    <CITY>Arequipa</CITY>
+    <CITY>Trujillo</CITY>
+    <CITY>Chiclayo</CITY>
+    <CITY>Piura</CITY>
+    <CITY>Iquitos</CITY>
+    <CITY>Chimbote</CITY>
+    <CITY>Huancayo</CITY>
+    <CITY>Pucallpa</CITY>
+    <CITY>Tacna</CITY>
+    <CITY>Ica</CITY>
+    <CITY>Sullana</CITY>
+    <CITY>Juliaca</CITY>
+    <CITY>Huanuco</CITY>
+    <CITY>Chincha Alta</CITY>
+    <CITY>Ayacucho</CITY>
+    <CITY>Tarapoto</CITY>
+    <CITY>Talara</CITY>
+    <CITY>Cajamarca</CITY>
+    <CITY>Nazca</CITY>
+    <CITY>Pisco</CITY>
+    <CITY>Tumbes</CITY>
+    <CITY>Trujillo</CITY>
+    <CITY>Sechin</CITY>
+    <CITY>Machu Picchu</CITY>
+    <CITY>Yarinacocha</CITY>
+    <CITY>Caraz</CITY>
+    <CITY>Huaraz</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 American</UNIT_CONTINENT>
+  <BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

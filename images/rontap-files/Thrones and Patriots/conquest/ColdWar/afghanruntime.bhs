@@ -1,0 +1,61 @@
+ conquest
+{
+
+static int diff = get_difficulty();
+
+run_once {
+  ctw_add_objective_text($S("Build or capture a city."), "Hint_id", 0);
+  set_timer("GSpawn", 30);
+}
+
+trigger MessageChange(num_cities(1) > 0) {
+  ctw_change_objective_text("Hint_id", $S("Destroy all enemy buildings and capture all enemy cities before the timer runs out."));
+  ctw_add_objective_text($S("Hint: Use your Helicopters to patrol the map."), "Hint2_id", 0);
+}
+
+if (num_cities(1) < 1) {
+  disable_building_attrition(1);
+}
+else {
+  enable_building_attrition(1);
+}
+
+if (timer_expired("GSpawn") != 0 && num_type_upgrade(2, "Barracks") < 6) {
+  build_id = -1;
+  x = -1;
+  y = -1;
+  while(!map_is_buildable(x, y) || object_visible(1, 2, build_id)) {
+    destroy_building(2, build_id);
+    x = rand_int(5, world_x_size());
+    y = rand_int(5, world_y_size());
+    build_id = create_building_upgrade(2, x, y, "Barracks");
+  }
+  
+  for (i = 0; i < num_type_upgrade(2, "Barracks"); i++) {
+    build_id = find_build(2, "Barracks");
+    give_good(2, "Food", 200);
+    give_good(2, "Timber", 200);
+    train_unit_at(2, 1, "Infantry", build_id);
+  }
+  if (num_cities(2) > 1) {
+    set_timer("GSpawn", 240);
+  }
+  else {
+    set_timer("GSpawn", 120);
+  }
+}
+
+if (num_buildings(2) < 1) {
+  defeat(2);
+}
+
+if (num_cities(2) < 1) {
+  set_base_rate(2, "Food", 500);
+  set_base_rate(2, "Timber", 500);
+}
+
+if (time() >= get_time_limit()) {
+  defeat(1);
+}
+
+}

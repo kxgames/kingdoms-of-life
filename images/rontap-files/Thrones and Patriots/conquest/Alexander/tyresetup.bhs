@@ -1,0 +1,101 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+
+  int nation = 2;
+  int unit;
+  int x = 224;
+  int y = 105;
+  int diff = get_difficulty();
+
+  create_unit(nation, x, y, "Javelineers", 1);
+  if (diff >= 2) create_unit(nation, x, y, "Phalanx", 1);
+  if (diff >= 3) create_unit(nation, x, y, "Cataphract", 1);
+  if (diff >= 4) create_unit(nation, x, y, "Javelineers", 1);
+  if (diff >= 5) create_unit(nation, x, y, "Phalanx", 1);
+  if (diff >= 6) create_unit(nation, x, y, "Cataphract", 1);
+
+  set_leader_difficulty(2, diff);
+
+  set_nation_name("Greeks", $S("Macedonians"));
+  set_nation_name("Turks", $S("Phoenicians"));
+
+  if (diff < 3) set_object_type_max_health("Alexander", 300);
+  else if (diff < 5) set_object_type_max_health("Alexander", 200);
+  else set_object_type_max_health("Alexander", 100);
+
+  //group 1
+  unit_patrol_order(nation, 11, 228, 45);
+  unit_patrol_order(nation, 30, 228, 45);
+  unit_patrol_order(nation, 10, 228, 45);
+  unit_patrol_order(nation, 28, 159, 27);
+  unit_patrol_order(nation, 29, 159, 27);
+  unit_patrol_order(nation, 22, 198, 94);
+  unit_patrol_order(nation, 26, 198, 94);
+  unit_patrol_order(nation, 27, 198, 94);
+  unit_patrol_order(nation, 9, 198, 94);
+  unit_patrol_order(nation, 7, 195, 223);
+  unit_patrol_order(nation, 8, 195, 223);
+  unit_patrol_order(nation, 25, 195, 223);
+  unit_patrol_order(nation, 5, 184, 155);
+  unit_patrol_order(nation, 6, 184, 155);
+  unit_patrol_order(nation, 24, 184, 155);
+  unit_patrol_order(nation, 21, 156, 7);
+  unit_patrol_order(nation, 46, 188, 77);
+  unit_patrol_order(nation, 47, 188, 77);
+  unit_patrol_order(nation, 43, 99, 10);
+  unit_patrol_order(nation, 44, 99, 10);
+  unit_patrol_order(nation, 23, 135, 12);
+  unit_patrol_order(nation, 45, 135, 12);
+  unit_patrol_order(nation, 41, 184, 65);
+  unit_patrol_order(nation, 42, 184, 65);
+  unit_patrol_order(nation, 39, 172, 122);
+  unit_patrol_order(nation, 40, 172, 122);
+  unit_patrol_order(nation, 12, 131, 230);
+  unit_patrol_order(nation, 13, 131, 230);
+  unit_patrol_order(nation, 14, 131, 230);
+  unit_patrol_order(nation, 17, 15, 14);
+  unit_patrol_order(nation, 18, 15, 14);
+  if (diff != 3 || diff != 4) unit_patrol_order(nation, 20, 15, 14);
+  unit_patrol_order(nation, 15, 113, 98);
+  if (diff != 3 || diff != 4) unit_patrol_order(nation, 16, 113, 98);
+  unit_patrol_order(nation, 19, 113, 98);
+  if (diff > 4) {
+    unit_patrol_order(nation, 1, 86, 217);
+    unit_patrol_order(nation, 51, 20, 137);
+    unit_patrol_order(nation, 62, 164, 78);
+  }
+  if (diff == 3 || diff == 4) {
+    unit_patrol_order(nation, 16, 168, 57);
+    unit_patrol_order(nation, 20, 168, 57);
+    unit_patrol_order(nation, 1, 168, 57);
+  }
+  if (diff > 2) {
+    unit_patrol_order(nation, 57, 225, 222);
+    unit_patrol_order(nation, 58, 225, 222);
+    unit_patrol_order(nation, 56, 32, 127);
+    unit_patrol_order(nation, 55, 28, 229);
+    unit_patrol_order(nation, 54, 31, 12);
+    unit_patrol_order(nation, 53, 22, 74);
+    unit_patrol_order(nation, 0, 86, 217);
+    unit_patrol_order(nation, 2, 86, 217);
+    unit_patrol_order(nation, 3, 86, 217);
+    unit_patrol_order(nation, 4, 86, 217);
+    unit_patrol_order(nation, 48, 20, 137);
+    unit_patrol_order(nation, 49, 20, 137);
+    unit_patrol_order(nation, 50, 20, 137);
+    unit_patrol_order(nation, 52, 20, 137);
+    unit_patrol_order(nation, 59, 170, 170);
+    unit_patrol_order(nation, 60, 170, 170);
+    unit_patrol_order(nation, 61, 164, 78);
+    unit_patrol_order(nation, 65, 184, 38);
+    unit_patrol_order(nation, 66, 184, 38);
+    unit_patrol_order(nation, 67, 184, 38);
+    unit_patrol_order(nation, 68, 231, 44);
+    unit_patrol_order(nation, 69, 231, 44);
+  }
+
+}

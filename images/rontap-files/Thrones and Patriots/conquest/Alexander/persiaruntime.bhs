@@ -1,0 +1,186 @@
+conquest
+{
+
+  static int attacker = 1;
+  static int defender = 2;
+
+  //static String attack_from = get_attack_from();
+
+  static int lookout_num = num_type(defender, "Lookout");
+
+  static int old_rate = get_base_rate(attacker, "Knowledge");
+
+  static int rate;
+
+  static int alex = find_unit(attacker, "Alexander");
+  static int darius = find_unit(defender, "Darius");
+
+  static int pasar_id = find_city_id("Pasargadae");
+  static String susa_name = "Susa";
+  static String babylon_name = "Babylon";
+  static String persio_name = "Persepolis";
+
+  int building;
+  int unit;
+  int x;
+  int y;
+
+  static int susa_x;
+  static int susa_y;
+
+  static int cur_time = time_min();
+
+  static int end_time = get_time_limit();
+
+  int who;
+
+  static int diff = get_difficulty();
+  static int pop_time;
+
+  static int num_towers = num_type(defender, "Tower");
+  
+  static int tribute = get_num_tribute("Greeks");
+
+  run_once {
+
+    ctw_add_objective($S("Capture the Persian Capital(s)."), 15, "");
+
+    building = find_city_id(susa_name);
+    susa_x = object_position_x(defender, building);
+    susa_y = object_position_y(defender, building);
+
+  }
+
+  if (num_type(defender, "Tower") < num_towers) {
+    num_towers = num_type(defender, "Tower");
+    for (n = num_military_units(defender); n > 0; n--) {
+      unit = find_military(defender);
+      if (is_idle(defender, unit)) {
+        city_name = find_city_name(attacker);
+        building = find_city_id(city_name);
+        x = object_position_x(attacker, building);
+        y = object_position_y(attacker, building);
+        unit_attack_to_order(defender, unit, x, y);
+      }
+    }
+  } 
+
+  cur_time = time_min();
+
+  if (cur_time >= end_time) defeat(1);
+
+  if (city_captured(defender, persio_name)) {
+    ctw_objective_complete(15);
+    victory(attacker);
+  }
+
+  trigger have_dock(num_type(attacker, "Dock") > 0) {
+    ctw_remove_objective(2);
+    popup_dialog($S("Now that we have a Dock, let us set sail for Babylon or Susa. We will need to sack one or both of those cities in order to have enough force to capture the capital."));
+    ctw_add_objective($S("Hint: Capture the ancient city of Babylon."), 3, "");
+    ctw_add_objective($S("Hint: Capture the magnificent city of Susa."), 20, "");
+    building = find_city_id("Susa");
+    set_seen(attacker, defender, building);
+    building = find_city_id("Babylon");
+    set_seen(attacker, defender, building);
+  }
+
+  //The capturing and losing of Susa
+  trigger riches_susa(city_captured(defender, susa_name)) {
+    ctw_objective_complete(20);
+    popup_dialog($S("We have found a Stable full of War Elephants that have joined our side near Susa. Our prisoners have also shared with us some new Military research."));
+    gain_tech(attacker, "Military");
+    building = find_city_id(susa_name);
+    x = object_position_x(attacker, building);
+    y = object_position_y(attacker, building);
+    unit = create_unit(attacker, x+2,y, "War Elephant", 1);
+    unit = create_unit(attacker, x-2,y, "War Elephant", 1);
+    unit = create_unit(attacker, x,y+2, "War Elephant", 1);
+    unit = create_unit(attacker, x,y-2, "War Elephant", 1);
+    unit = create_unit(attacker, x+2,y+2, "War Elephant", 1);
+    unit = create_unit(attacker, x-2,y-2, "War Elephant", 1);
+    unit = create_unit(attacker, x-2,y+2, "War Elephant", 1);
+    unit = create_unit(attacker, x+2,y-2, "War Elephant", 1);
+  }
+
+  
+  //the capturing and losing of Babylon
+  trigger riches_bab(city_captured(defender, babylon_name)) {
+    ctw_objective_complete(3);
+    popup_dialog($S("The hospitality of Babylon has healed all our troops. Any troops in the surrounding area will always be healed very quickly."));
+    for (n = num_units(attacker); n > 0; n--) {
+      unit = find_all_unit(attacker, "");
+      if (object_near_build(attacker, unit, attacker, building, 16)) {
+        //if (!is_on_transport(attacker, unit)) {
+          heal_object(attacker, unit, 3);
+        //}
+      }
+    }
+    for (n = num_type(attacker, "Transport Barge"); n > 0; n--) {
+      unit = find_unit(attacker, "Transport Barge");
+      if (object_near_build(attacker, unit, attacker, building, 16)) {
+        heal_object(attacker, unit, 4);
+      }
+    }
+    set_timer("heal_baby", 1);
+    enable_trigger("lose_baby");
+  }    
+
+  trigger lose_baby(city_captured(attacker, babylon_Name)) {
+    stop_timer("heal_baby");
+    enable_trigger("take_baby");
+  }
+
+  trigger take_baby(city_captured(attacker, babylon_name)) {
+    set_timer("heal_baby", 1);
+    enable_trigger("lose_baby");
+  }
+
+  if (timer_expired("heal_baby")) {
+    building = find_city_id(babylon_name);
+    for (n = num_units(attacker); n > 0; n--) {
+      unit = find_all_unit(attacker, "");
+      if (object_near_build(attacker, unit, attacker, building, 16)) {
+        //if (!is_on_transport(attacker, unit)) {
+          heal_object(attacker, unit, 3);
+        //}
+      }
+    }
+    for (n = num_type(attacker, "Transport Barge"); n > 0; n--) {
+      unit = find_unit(attacker, "Transport Barge");
+      if (object_near_build(attacker, unit, attacker, building, 16)) {
+        heal_object(attacker, unit, 4);
+      }
+    }
+    set_timer("heal_baby", 2);
+  }
+
+  //trigger find_pasar(any_object_near_build(attacker, 1, defender, pasar_id, 30)) {
+    //popup_dialog($S("Rumor has it that there are great riches stored at the ancestral Persian capital of Pasargadae, which is just north of Persiopolis."));
+    //add_objective_text($S("Capture Pasargadae"), 5, "");
+  //}
+
+  //trigger riches_pasar(city_captured(defender, "Pasargadae")) {
+    //if (time_later_than(45) || city_captured(defender, "Persiopolis")) {
+      //if (popup_choice($S("The Persians have already taken the riches of Pasargadae. However, the local priests are willing to 'find' some forgotten riches if you sacrifice 30 units to them."), $S("Yes"), $S("No")) == 1) {
+       // for (n = 10; n > 0; n--) {
+          //unit = find_unit(attacker, "");
+          //kill_unit(attacker, unit);
+        //}
+        //popup_dialog($S("Message from the priests: Thank you very much. You will be pleased to find 
+      //}
+    //}
+    //else {
+      //if (popup_choice($S("The Persians have already taken the riches of Pasargadae. However, the local priests are willing to reduce the hit points of Persiopolis if you sacrifice 30 units to them."), $S("Yes"), $S("No")) == 1) {
+        //for (n = 30; n > 0; n--) {
+          //unit = find_unit(attacker, "");
+          //if (unit = alex) unit = find_unit(attacker, "");
+          //kill_unit(attacker, unit);
+        //}
+        //building = find_city_id("Persiopolis");
+        //set_object_health(defender, building, 50);
+      //}
+    //}
+  //}
+
+}

@@ -1,0 +1,691 @@
+              
+//set battle_info_text to be the info shown when making an attack
+String scenario battle_override (String from, String to, String player, String enemy, int turn, int age, int terr_str, int reinf, int enemy_reinf, int allies, int enemy_allies, ref String battle_info_text, ref String sub_goal1, ref String sub_goal2)
+{
+  String battle;
+  static int random_number_guy = get_ctw_seed() % 3;
+  static int diff = get_difficulty();
+  static int random_battle = turn+random_number_guy;
+  String battleground;
+  String nations[] = ["Nubians", "Aztecs", "Americans", "British", "French", "Inca", "Iroquois", "Maya", "Spanish", "Lakota", "Dutch"];
+
+  int you_native = 0;
+  int them_native = 0;
+
+  if (player == "Aztecs" || player == "Maya" || player == "Inca" || player == "Lakota" || player == "Iroquois") {
+    you_native = 1;
+  }
+  else {
+    you_native = 0;
+  }
+  if (enemy == "Aztecs" || enemy == "Maya" || enemy == "Inca" || enemy == "Lakota" || enemy == "Iroquois" || enemy == "") {
+    them_native = 1;
+  }
+  else {
+    them_native = 0;
+  }
+
+  if (player == "Americans" && get_ctw_int("Independent") > 0 && to == "Virginia" && from == "Pennsylvania" && get_territory_owner("Pennsylvania") == "British") {
+    battle = "Battle of Yorktown";
+    return battle;
+  }
+
+  if (player == "British" && to == "Virginia") {
+    battle = "British Yorktown";
+    battle_info_text = $S("This is the capital of those rebellious Americans.");
+    //return battle;
+  }
+
+  if (player != enemy) {
+    ///////////////////GENERIC BATTLE INFO TEXT//////////////////////////////
+    if (enemy == "Americans" && get_ctw_int("Independent") < 1) {
+      battle_info_text = $S("The Americans are not soldiers, but merely the clerks of the English, that nation of shopkeepers. They pose no threat to us.");
+    }
+    else if(enemy == "Americans" && get_ctw_int("Independent") > 0) {
+      battle_info_text = $S("The Americans pose no threat to us. Their 'democracy' will doubtless collapse into chaos.");
+    }
+    else if (enemy == "Aztecs") {
+      battle_info_text = $S("Be wary of fighting the Aztecs. They are notorious for their ferocity.");
+    }
+    else if (enemy == "British") {
+      battle_info_text = $S("The British have a strong desire to gain a large foothold in the New World. We will be hard-pressed to stop them.");
+    }
+    else if (enemy == "Dutch") {
+      battle_info_text = $S("The Dutch make good cheese, but they are little more than seagoing merchants. Draw a sword against them and they will go fleeing.");
+    }
+    else if (enemy == "French") {
+      battle_info_text = $S("The French do not have enough resources to hold onto their lands in the New World. They will be gone soon enough. However, I see no reason not to speed up the process.");
+    }
+    else if (enemy == "Inca") {
+      battle_info_text = $S("We have sent many scouting parties to find out more about the Inca. None of them have returned.");
+    }
+    else if (enemy == "Iroquois") {
+      battle_info_text = $S("The Iroquois are brutal and efficient warriors. I would tread lightly around them.");
+    }
+    else if (enemy == "Lakota") {
+      battle_info_text = $S("These Lakota cannot be much of a threat. They do not even believe in territory.");
+    }
+    else if (enemy == "Maya") {
+      battle_info_text = $S("The Maya should not be of much concern to us. The Aztecs crushed any dreams of glory that they ever had.");
+    }
+    else if (enemy == "Spanish") {
+      battle_info_text = $S("The Spanish were the first Europeans to arrive in the New World. If you wish, you can also make them the first to leave.");
+    }
+    else if (enemy == "") {
+      battle_info_text = $S("These lands look uninhabited, but looks can be deceiving.");
+    }
+
+    //////////////////Assiging native/euro/aztec rally/////////////////////////
+    if (enemy == "") {// && get_num_times_played("Custom", "Aztec Rally") + get_num_times_played("Custom", "Native Rally") + get_num_times_played("Custom", "European Rally") < 1) {
+      //north america
+      if (to == "California") {
+        random_battle = random_battle%4;
+        switch (random_battle) {
+          case 0:
+            battle = "Metal Rush!";
+            break;
+          case 1:
+            battle = "Frontier Expedition";
+            break;
+          case 2:
+            battle = "Hideaway";
+            break;
+          case 3:
+            battle = "Nomad";
+            break;
+        }
+      }
+      else if (to == "Florida") {
+        random_battle = random_battle%3;
+        switch (random_battle) {
+          case 0:
+            if (you_native == 1) {
+              battle = "War Party";
+            }
+            break;
+          case 1:
+            if (you_native == 0) {
+              battle = "Native Rally";
+            }
+            else if (player == "Aztecs") {
+              battle = "Aztec Rally";
+            }
+            else {
+              battle = "European Rally";
+            }
+            break;
+          case 2:
+            battle = "Tech Raid";
+            break;
+        }
+      }
+      else if (to == "Greenland") {
+        if (you_native == 0) {
+          battle = "Food for the Winter";
+        }
+      }
+      else if (to == "Indiana") {
+        random_battle = random_battle%5;
+        switch (random_battle) {
+          case 0:
+            if (you_native == 0) {
+              battle = "Federation";
+            }
+            break;
+          case 1:
+            battle = "Settlers";
+            break;
+          case 2:
+            battle = "Mercantile";
+            break;
+          case 3:
+            if (you_native == 0) {
+              battle = "Native Rally";
+            }
+            else if (player == "Aztecs") {
+              battle = "Aztec Rally";
+            }
+            else {
+              battle = "European Rally";
+            }
+            break;
+          case 4: 
+            if (you_native == 0) {
+              battle = "Food for the Winter";
+            }
+            else {
+              battle = "War Party";
+            }
+            break;
+        }
+      }
+      else if (to == "New England") {
+        random_battle = random_battle%5;
+        switch (random_battle) {
+          case 0:
+            if (you_native == 0) {
+              battle = "Federation";
+            }
+            else {
+              battle = "War Party";
+            }
+            break;
+          case 1:
+            battle = "Settlers";
+            break;
+          case 2:
+            battle = "Tech Raid";
+            break;
+          case 3:
+            if (you_native == 0) {
+              battle = "Food for the Winter";
+            }
+            break;
+          case 4:
+            if (you_native == 0) {
+              battle = "Native Rally";
+            }
+            else if (player == "Aztecs") {
+              battle = "Aztec Rally";
+            }
+            else {
+              battle = "European Rally";
+            }
+            break;
+        }
+      }
+      else if (to == "New Mexico") {
+        random_battle = random_battle%4;
+        switch (random_battle) {
+          case 0:
+            battle = "Nomad";
+            break;
+          case 1:
+            battle = "Hideaway";
+            break;
+          case 2:
+            battle = "Frontier Expedition";
+            break;
+          case 3:
+            battle = "Metal Rush!";
+            break;
+        }
+      }
+      else if (to == "Nunavut") {
+        random_battle = random_battle%3;
+        switch (random_battle) {
+          case 0:
+            battle = "Mercantile";
+            break;
+          case 1: 
+            battle = "Frontier Expedition";
+            break;
+          case 2:
+            battle = "Settlers";
+            break;
+        }
+      }
+      else if (to == "Oregon") {
+        if (player == "Iroquois") {
+          battle = "Battle of the Forest2";
+        }
+        else {
+          battle = "Battle of the Forest";
+        }
+      }
+      if (to == "Yukon") {
+        if (player == "Iroquois") {
+          battle = "Yukon2";
+        }
+        else {
+          battle = "Yukon";
+        }
+      }
+      else if (to == "Pennsylvania") {
+        random_battle = random_battle%3;
+        switch (random_battle) {
+          case 0:
+            battle = "Settlers";
+            break;
+          case 1:
+            if (you_native == 0) {
+              battle = "Federation";
+            }
+            break;
+          case 2:
+            if (you_native == 0) {
+              battle = "Food the for Winter";
+            }
+            else {
+              battle = "War Party";
+            }
+            break;
+        }
+      }
+      else if (to == "Texas") {
+        random_battle = random_battle%6;
+        switch (random_battle) {
+          case 0:
+            battle = "Hideaway";
+            break;
+          case 1:
+            battle = "Metal Rush!";
+            break;
+          case 2:
+            battle = "Nomad";
+            break;
+          case 3:
+            battle = "Frontier Expedition";
+            break;
+          case 4:
+            if (you_native == 0) {
+              battle = "Native Rally";
+            }
+            else if (player == "Aztecs") {
+              battle = "Aztec Rally";
+            }
+            else {
+              battle = "European Rally";
+            }
+            break;
+          case 5:
+            if (you_native == 1) {
+              battle = "War Party";
+            }
+            break;
+        }
+      }
+      //south america
+      else if (to == "Argentina") {
+        random_battle = random_battle%3;
+        switch (random_battle) {
+          case 0:
+            battle = "Mercantile";
+            break;
+          case 1:
+            battle = "Hideaway";
+            break;
+          case 2:
+            battle = "Nomad";
+            break;
+        }
+      }
+      else if (to == "Bolivia") {
+        random_battle = random_battle%4;
+        switch (random_battle) {
+          case 0:
+            battle = "Hideaway";
+            break;
+          case 1:
+            battle = "Metal Rush!";
+            break;
+          case 2:
+            battle = "Mercantile";
+            break;
+          case 3:
+            battle = "Nomad";
+            break;
+        }
+      }
+      else if (to == "Brazil") {
+        random_battle = random_battle%4;
+        switch (random_battle) {
+          case 0:
+            if (you_native == 0) {
+              battle = "Native Rally";
+            }
+            else if (player == "Aztecs") {
+              battle = "Aztec Rally";
+            }
+            else {
+              battle = "European Rally";
+            }
+            break;
+          case 1:
+            battle = "Tech Raid";
+            break;
+          case 2:
+            if (you_native == 1) {
+              battle = "War Party";
+            }
+            break;
+          case 3:
+            battle = "Frontier Expedition";
+            break;
+        }
+      }
+      else if (to == "Central America") {
+        random_battle = random_battle%3;
+        switch (random_battle) {
+          case 0:
+            if (you_native == 0) {
+              battle = "Native Rally";
+            }
+            else if (player == "Aztecs") {
+              battle = "Aztec Rally";
+            }
+            else {
+              battle = "European Rally";
+            }
+            break;
+          case 1:
+            battle = "Tech Raid";
+            break;
+          case 2:
+            if (you_native == 1) {
+              battle = "War Party";
+            }
+            break;
+        }
+      }
+      else if (to == "Chile") {
+        if (player == "Inca") {
+          battle = "Andes Trek2";
+        }
+        else {
+          battle = "Andes Trek";
+        }
+      }
+      else if (to == "New Granada") {
+        random_battle = random_battle%4;
+        switch (random_battle) {
+          case 0:
+            battle = "Metal Rush!";
+            break;
+          case 1:
+            if (you_native == 1) {
+              battle = "War Party";
+            }
+            break;
+          case 2:
+            if (you_native == 0) {
+              battle = "Native Rally";
+            }
+            else if (player == "Aztecs") {
+              battle = "Aztec Rally";
+            }
+            else {
+              battle = "European Rally";
+            }
+            break;
+          case 3:
+            battle = "Tech Raid";
+            break;
+        }
+      }
+      else if (to == "Venezuela") {
+        random_battle = random_battle%3;
+        switch (random_battle) {
+          case 0:
+            battle = "Nomad";
+            break;
+          case 1:
+            if (you_native == 0) {
+              battle = "Native Rally";
+            }
+            else if (player == "Aztecs") {
+              battle = "Aztec Rally";
+            }
+            else {
+              battle = "European Rally";
+            }
+            break;
+          case 2:
+            battle = "Tech Raid";
+            break;
+        }
+      }
+    }
+      //////////////////North America//////////////////////
+    if (to == "Cuba") {
+      if (enemy == "Spanish") {
+        battle = "Battle of Havana";
+      }
+      else {
+        battle = "Conquest";
+      }
+    }
+    else if (to == "Dakota Plains" && enemy == "Lakota") {
+      battle = "The Plains";
+    }
+
+    else if (to == "Great Lakes" && enemy == "Iroquois") {
+      if (from == "Quebec") {
+        battle = "The Lakes1";
+      }
+      else if (from == "Nunavut") {
+        battle = "The Lakes2";
+      }
+      else if (from == "Indiana") {
+        battle = "The Lakes3";
+      }
+      else {
+        battle = "The Lakes4";
+      }
+    }
+    else if (to == "Louisiana" && enemy == "French") {
+      battle = "Bayou Country";
+    }
+    else if (to == "Mexico" && enemy == "Aztecs") {
+      battle = "Technotitlan";
+    }
+
+
+    if (to == "Quebec" && enemy == "British") {
+      if (from == "Greenland" || from == "Nunavut") {
+        battle = "Battle of Quebec2";
+      }
+      else {
+        battle = "Battle of Quebec";
+      }
+    }
+
+    if (to == "West Indies" && enemy == "") {
+      if (from == "Cuba") {
+        if (player == "Aztecs") {
+          battle = "Island Diplomacy2";
+        }
+        else {
+          battle = "Island Diplomacy";
+        }
+      } else {
+        battle = "Pirate Storm";
+      }
+    }
+
+    if (to == "Yucatan" && enemy == "Maya") {
+      battle = "Yucatan";
+    }
+
+
+
+    //////////////////South America//////////////////////
+
+    if (to == "Amazon" && them_native == 1) {
+      battle = "Amazon";
+    }
+  
+    if (to == "Central Basin" && enemy == "Nubians") {
+      battle = "Battle of the Basin";
+    }
+
+    if (to == "Guyana" && enemy == "Dutch") {
+      battle = "Battle of the Jungle";
+    }
+
+    if (to == "Peru" && enemy == "Inca") {
+      battle = "Peru";
+    }
+
+    if (to == "Brazil" && enemy == "Nubians") {
+      battle = "Conquest";
+    }
+
+  }
+
+  if (you_native == 1) {
+    sub_goal1 = $S("Defeat all of the European nations and conquer more territory than the other Native American nations.");
+  }
+  else if (player == "Americans") {
+    sub_goal1 = $S("Drive all of the European nations from the Western Hemisphere and conquer all of North America.");
+    if (get_ctw_int("Independent") < 1) sub_goal2 = $S("Win your independence from the British.");
+  }
+  else {
+    sub_goal1 = $S("Collect 1000 Tribute, defeat all of the Native American nations, and conquer more territory than each of the other European nations and the Americans.");
+  }
+
+  /*if (to == "Greenland") {
+    battle_info_text = $S("Do not let the name of this land deceive you, it is anything but green.");
+  } else if (to == "Yukon Territory") {
+    battle_info_text = $S("There is very little settlement in these lands.");
+  } else if (to == "Nunavut") {
+    battle_info_text = $S("
+  } else if (to == "Quebec") {
+    battle_info_text = $S("
+  } else if (to == "Oregon Territory") {
+    battle_info_text = $S("
+  } else if (to == "Dakota Plains") {
+    battle_info_text = $S("
+  } else if (to == "Great Lakes") {
+    battle_info_text = $S("
+  } else if (to == "Indiana Territory") {
+    battle_info_text = $S("
+  } else if (to == "California") {
+    battle_info_text = $S("
+  } else if (to == "New England") {
+    battle_info_text = $S("
+  } else if (to == "New Mexico") {
+    battle_info_text = $S("
+  } else if (to == "Texas") {
+    battle_info_text = $S("
+  } else if (to == "Louisiana Territory") {
+    battle_info_text = $S("
+  } else if (to == "Mid-Atlantic") {
+    battle_info_text = $S("
+  } else if (to == "Mexico") {
+    battle_info_text = $S("
+  } else if (to == "Carolina") {
+    battle_info_text = $S("
+  } else if (to == "Florida") {
+    battle_info_text = $S("
+  } else if (to == "Cuba") {
+    battle_info_text = $S("
+  } else if (to == "West Indies") {
+    battle_info_text = $S("These tropical islands are known for their beauty.");
+  } else if (to == "Yucatan") {
+    battle_info_text = $S("
+  } else if (to == "Central America") {
+    battle_info_text = $S("
+  } else if (to == "New Granada") {
+    battle_info_text = $S("
+  } else if (to == "Venezuela") {
+    battle_info_text = $S("
+  } else if (to == "Guyana") {
+    battle_info_text = $S("
+  } else if (to == "Amazon") {
+    battle_info_text = $S("
+  } else if (to == "Brazil") {
+    battle_info_text = $S("
+  } else if (to == "Peru") {
+    battle_info_text = $S("
+  } else if (to == "Bolivia") {
+    battle_info_text = $S("
+  } else if (to == "Central Basin") {
+    battle_info_text = $S("
+  } else if (to == "Chile") {
+    battle_info_text = $S("
+  } else if (to == "Argentina") {
+    battle_info_text = $S("
+  }
+*/
+  if (to == "Florida" && from == "Cuba") {
+    battle = "";
+  }
+  if (to == "Venezuela" && (from == "Cuba" || from == "West Indies")) {
+    battle = "";
+  }
+
+  if (battle == "Nomad") {
+    battle_info_text = parse("Groups of nomads populate this region. We will have to destroy them to win this territory.", battle_info_text);
+  } else if (battle == "Hideaway") {
+    battle_info_text = parse("A band of mercenaries has made a base in this territory.", battle_info_text);
+  } else if (battle == "British Yorktown") {
+    battle_info_text = $S("This is the capital of those rebellious Americans.");
+  } else if (battle == "The Plains") {
+    battle_info_text = $S("Our scouts report nothing but open prairie as far as the eye can see. This may be the Lakota's capital, but if so, we have yet to find any sign of their presence.");;
+  } else if (battle == "Yucatan") {
+    battle_info_text = $S("This tropical paradise is populated by many city states. Do not expect them to give up even after losing their cities.");
+  } else if (battle == "Peru") {
+    battle_info_text = $S("Our scouts report many mountains in this region. We will have no problem finding Metal here.");
+  } else if (battle == "Technotitlan") {
+    battle_info_text = $S("The Aztecs' capital is located on an island on a lake. We will have a difficult time getting there.");
+  } else if (battle == "The Lakes") {
+    battle_info_text = $S("We can expect many lakes and large forests in the Iroquois capital.");
+  } else if (battle == "War Party") {
+    battle_info_text = parse("The enemy in this region is sure to leave once we inflict some casualties among their population.", battle_info_text);
+  } else if (battle == "Guerilla Warfare") {
+    battle_info_text = parse("The enemy in this region is sure to leave once we inflict some casualties among their population.", battle_info_text);
+  } else if (battle == "Mercantile") {
+    battle_info_text = parse("We will have to establish trade dominance in order to conquer this territory.", battle_info_text);
+  } else if (battle == "Frontier Expedition") {
+    battle_info_text = parse("The legends of this land have scared our soldiers. We will need to use our Explorers to show them that there is nothing to fear - even the enemy.", battle_info_text);
+  } else if (battle == "Tech Raid") {
+    battle_info_text = parse("We should have no problem conquering this land.", battle_info_text);
+  } else if (battle == "Pirate Storm") {
+    battle_info_text = parse("Pirates have recently overrun these islands. We will have to oust them before we can claim them for ourselves.", battle_info_text);
+  } else if (battle == "Island Diplomacy") {
+    battle_info_text = parse("Many different tribes live in this island chain. Hopefully we can turn them against one another, and then pick up the pieces.", battle_info_text);
+  } else if (battle == "Amazon") {
+    battle_info_text = $S("Broad rivers and dense jungle cover this area. ");
+  } else if (battle == "Mesa Verde") {
+    battle_info_text = $S("The people here control all the Metal in the area. We should have no problem taking it from them, though, as they are an Age behind us in technology.");
+  } else if (battle == "Native Rally") {
+    battle_info_text = parse("The natives of this region will not be happy if we come here.", battle_info_text);
+  } else if (battle == "European Rally") {
+    battle_info_text = parse("Foreigners have been known to send settlers to this region. Unfortunately, none have survived past the winter yet, but that could easily change.", battle_info_text);
+  } else if (battle == "Metal Rush!") {
+    battle_info_text = parse("The tribe in charge of this region has interest in one thing - Metal collection. They are not good at it, and are willing to hand the territory over to anyone who is.", battle_info_text);
+  } else if (battle == "Settlers") {
+    battle_info_text = parse("Many tribes wish to settle this region. Unfortunately, only one will survive - us, hopefully.", battle_info_text);
+  } else if (battle == "Food for the Winter") {
+    battle_info_text = parse("If we can survive here past the winter, we can claim this territory for ourselves.", battle_info_text);
+  } else if (battle == "Federation") {
+    battle_info_text = parse("There are many tribes in this territory. We will have to use diplomacy or they will all unite against us.", battle_info_text);
+  } else if (battle == "Aztec Rally") {
+    battle_info_text = parse("Others would like to think that this is their land, but they do not belong here. Let us rid ourselves of this pestilence.", battle_info_text);
+  } 
+  else if (battle == "Yukon" || battle == "Yukon2") {
+    battle_info_text = parse("This is a cold and desolate region. Our Caravans and Merchants refuse to follow us if we embark on this battle.", battle_info_text);
+  } 
+  else if (battle == "Andes Trek" || battle == "Andes Trek2") {
+    battle_info_text = parse("There are ruins of old civilizations spread throughout this region. We will have to find them and use the Resources gained to build more troops.", battle_info_text);
+  } 
+  else if (battle == "Battle of the Basin") {
+    battle_info_text = parse("The Portuguese are not the only colonists in this area. The French have established a colony as well. Perhaps we can work them against one another.");
+  } 
+  else if (battle == "Battle of Quebec") {
+    battle_info_text = parse("The British have built all their cities along the St. Lawrence River which runs through the middle of this province. We will be backed into a corner to start this battle, but if we take a city in the middle, we can break their nation into two.");
+  } 
+  else if (battle == "Bayou Country") {
+    battle_info_text = parse("If we expect to compete with the French on land we will first have to drive them from the sea.");
+  } 
+  else if (battle == "Battle of Havana") {
+    battle_info_text = parse("The Spanish have made their capital on the large main island here. We will have to build up on the smaller islands surrounding it before we strike.");
+  } 
+  else if (battle == "Battle of the Forest" || battle == "Battle of the Forest2") {
+    battle_info_text = parse("A local tribe is willing to ally with us here against two other tribes that have banded together.");
+  } 
+  else if (battle == "Battle of the Jungle") {
+    battle_info_text = parse("The Dutch have made their capital in a dense jungle. It will be hard finding our way around this province.");
+  } 
+
+  if (player == "Nubians" && battle == "Native Rally") {
+    battle = "";
+  }
+
+  //if (player == enemy && to == "Cuba") {
+    //battle = "Conquest";
+  //}
+
+  return battle;
+}

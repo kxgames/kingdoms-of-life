@@ -1,0 +1,364 @@
+include "ctw_lib.bhs"
+
+void conquest SpawnThis(int randomint, int nation, int x, int y);
+
+conquest
+{
+  
+  new_world_rules();
+
+  static int HUMAN = 1;
+  static int BLUE = 2;
+  static int PURPLE = 3;
+  static int GREEN = 4;
+  static int YELLOW = 5;
+
+  static int idle_toggle = BLUE;
+  static int timemod = 0;
+  static int timemod1 = 0;
+  static int capital = find_city_id(find_capital(HUMAN));
+  static int capital_x = object_position_x(HUMAN, capital);
+  static int capital_y = object_position_y(HUMAN, capital);
+  static int diff = get_difficulty();
+  static int end_time = get_time_limit();
+  static int bluefort = find_build(BLUE, "fort");
+  static int bluefort_health = object_health(BLUE, bluefort);
+  static int blue_x = object_position_x(BLUE, bluefort);
+  static int blue_y = object_position_y(BLUE, bluefort);
+  static int purplefort = find_build(PURPLE, "fort");
+  static int purplefort_health = object_health(PURPLE, purplefort);
+  static int purple_x = object_position_x(PURPLE, purplefort);
+  static int purple_y = object_position_y(PURPLE, purplefort);
+  static int greenfort = find_build(GREEN, "fort");
+  static int greenfort_health = object_health(GREEN, greenfort);
+  static int green_x = object_position_x(GREEN, greenfort);
+  static int green_y = object_position_y(GREEN, greenfort);
+  static int yellowfort = find_build(YELLOW, "fort");
+  static int yellowfort_health = object_health(YELLOW, yellowfort);
+  static int yellow_x = object_position_x(YELLOW, yellowfort);
+  static int yellow_y = object_position_y(YELLOW, yellowfort);
+  static int defeat_count = 0;
+  static string catapult_name = find_current_upgrade(BLUE, "catapult");
+
+  int unit;
+  int i;
+  int bluetemp;
+  int purpletemp;
+  int greentemp;
+  int yellowtemp;
+  int catapult;
+  int nation;
+  int randomint;
+  int x;
+  int y;
+  int cur_time;
+
+run_once{
+  if (diff < 3) {
+    ctw_add_objective_text($S("Destroy the native Towers to stop their attacks."), "fort_obj", "");
+    disable_trigger("blue_defeat");
+    disable_trigger("purple_defeat");
+    disable_trigger("green_defeat");
+    disable_trigger("yellow_defeat");
+  }
+  else {
+    ctw_add_objective_text($S("Destroy the native Forts to stop their attacks."), "fort_obj", "");
+    disable_trigger("blue_defeat2");
+    disable_trigger("purple_defeat2");
+    disable_trigger("green_defeat2");
+    disable_trigger("yellow_defeat2");
+  }
+  new_world_setup();
+  if (num_type(BLUE, "fort") < 1) {
+    disable_trigger ("blue_defeat");
+    blue_x = 5;
+    blue_y = 5;
+  }
+  if (num_type(PURPLE, "fort") < 1) {
+    disable_trigger ("purple_defeat");
+    purple_x = get_map_size() - 6;
+    purple_y = 5;
+  }
+  if (num_type(GREEN, "fort") < 1) {
+    disable_trigger ("green_defeat");
+    green_x = get_map_size() - 6;
+    green_y = get_map_size() - 6;
+  }
+  if (num_type(YELLOW, "fort") < 1) {
+    disable_trigger ("yellow_defeat");
+    yellow_x = 5;
+    yellow_y = get_map_size() - 6;
+  }
+  set_timer("idle_timer", 10);
+  set_timer("bluespawn_timer", 70 - 7*diff);
+  set_timer("purplespawn_timer", 80 - 8*diff);
+  set_timer("greenspawn_timer", 90 - 9*diff);
+  set_timer("yellowspawn_timer", 100 - 10*diff);
+  disable_tech(HUMAN, "Allegiance");
+} // run_once
+
+trigger timemod5(time_later_than(5)) {
+  timemod++;
+}
+trigger timemod8(time_later_than(8)) {
+  timemod++;
+}
+trigger timemod12(time_later_than(11)) {
+  timemod++;
+  timemod1++;
+}
+
+// ***********************
+// Times new enemy spawns
+// Blue spawn
+trigger bluespawn(timer_expired("bluespawn_timer")) {
+  randomint = rand_int(1 + timemod1, diff + timemod + 2);
+  nation = BLUE;
+  x = blue_x;
+  y = blue_y;
+  if (!is_defeated(nation)) {
+    SpawnThis(randomint, nation, x, y);
+    set_timer("bluespawn_timer", rand_int(50 - 3*diff, 70 - 2*diff) - 5*defeat_count - 2*timemod);
+    enable_trigger ("bluespawn");
+  }
+} // trigger bluespawn
+
+// Purple spawn
+trigger purplespawn(timer_expired("purplespawn_timer")) {
+  randomint = rand_int(1 + timemod1, diff + timemod + 2);
+  nation = PURPLE;
+  x = purple_x;
+  y = purple_y;
+  if (!is_defeated(nation)) {
+    SpawnThis(randomint, nation, x, y);
+    set_timer("purplespawn_timer", rand_int(50 - 2*diff, 80 - 3*diff) - 5*defeat_count - 3*timemod);
+    enable_trigger ("purplespawn");
+  }
+} // trigger purplespawn
+
+// Green spawn
+trigger greenspawn(timer_expired("greenspawn_timer")) {
+  randomint = rand_int(1 + timemod1, diff + timemod + 2);
+  nation = GREEN;
+  x = green_x;
+  y = green_y;
+  if (!is_defeated(nation)) {
+    SpawnThis(randomint, nation, x, y);
+    set_timer("greenspawn_timer", rand_int(40 - 3*diff, 70 - 3*diff) - 5*defeat_count - 4*timemod);
+    enable_trigger ("greenspawn");
+  }
+} // trigger greenspawn
+
+// Yellow spawn
+trigger yellowspawn(timer_expired("yellowspawn_timer")) {
+  randomint = rand_int(1 + timemod1, diff + timemod + 2);
+  nation = YELLOW;
+  x = yellow_x;
+  y = yellow_y;
+  if (!is_defeated(nation)) {
+    SpawnThis(randomint, nation, x, y);
+    set_timer("yellowspawn_timer", 60 - 2*diff - 5*defeat_count - 3*timemod);
+    enable_trigger ("yellowspawn");
+  }
+} // trigger yellowspawn
+
+// ****************************************
+// Defeat the nation when their fort falls
+trigger blue_defeat(num_type(BLUE, "fort") < 1) {
+  defeat(BLUE);
+  defeat_count++;
+}
+trigger purple_defeat(num_type(PURPLE, "fort") < 1) {
+  defeat(PURPLE);
+  defeat_count++;
+}
+trigger green_defeat(num_type(GREEN, "fort") < 1) {
+  defeat(GREEN);
+  defeat_count++;
+}
+trigger yellow_defeat(num_type(YELLOW, "fort") < 1) {
+  defeat(YELLOW);
+  defeat_count++;
+}
+
+// ****************************************
+// Defeat the nation when their tower falls
+trigger blue_defeat2(num_type(BLUE, "tower") < 1) {
+  defeat(BLUE);
+  defeat_count++;
+}
+trigger purple_defeat2(num_type(PURPLE, "tower") < 1) {
+  defeat(PURPLE);
+  defeat_count++;
+}
+trigger green_defeat2(num_type(GREEN, "tower") < 1) {
+  defeat(GREEN);
+  defeat_count++;
+}
+trigger yellow_defeat2(num_type(YELLOW, "tower") < 1) {
+  defeat(YELLOW);
+  defeat_count++;
+}
+
+// **********************************
+// Defend the forts if being attacked
+bluetemp = object_health(BLUE, bluefort);
+trigger bluedefense(bluetemp < bluefort_health) {
+  for (i = num_military_units(blue); i > 0; i--) {
+    unit = find_all_military(BLUE);
+    if (object_type(BLUE, unit) != catapult_name) unit_attack_to_order(BLUE, unit, blue_x, blue_y);
+  }
+  set_timer("forttimer", 20);
+  enable_trigger ("fort_reset");
+} // trigger bluedefense
+purpletemp = object_health(PURPLE, purplefort);
+trigger purpledefense(purpletemp < purplefort_health) {
+  for (i = num_military_units(purple); i > 0; i--) {
+    unit = find_all_military(PURPLE);
+    if (object_type(PURPLE, unit) != catapult_name) unit_attack_to_order(PURPLE, unit, purple_x, purple_y);
+  }
+  set_timer("forttimer", 20);
+  enable_trigger ("fort_reset");
+} // trigger purpledefense
+greentemp = object_health(GREEN, greenfort);
+trigger greendefense(greentemp < greenfort_health) {
+  for (i = num_military_units(GREEN); i > 0; i--) {
+    unit = find_all_military(GREEN);
+    if (object_type(GREEN, unit) != catapult_name) unit_attack_to_order(GREEN, unit, green_x, green_y);
+  }
+  set_timer("forttimer", 20);
+  enable_trigger ("fort_reset");
+} // trigger greendefense
+yellowtemp = object_health(YELLOW, yellowfort);
+trigger yellowdefense(yellowtemp < yellowfort_health) {
+  for (i = num_military_units(YELLOW); i > 0; i--) {
+    unit = find_all_military(YELLOW);
+    if (object_type(YELLOW, unit) != catapult_name) unit_attack_to_order(YELLOW, unit, yellow_x, yellow_y);
+  }
+  set_timer("fort_timer", 20);
+  enable_trigger ("fort_reset");
+} // trigger yellowdefense
+
+trigger fort_reset (timer_expired("fort_timer")) {
+  bluefort_health = object_health(BLUE, bluefort);
+  enable_trigger ("bluedefense");
+  purplefort_health = object_health(PURPLE, purplefort);
+  enable_trigger ("purpledefense");
+  greenfort_health = object_health(GREEN, greenfort);
+  enable_trigger ("greendefense");
+  yellowfort_health = object_health(YELLOW, yellowfort);
+  enable_trigger ("yellowdefense");
+} // trigger fort_reset
+
+// *********************
+// Clean up idle enemies
+trigger idle (timer_expired("idle_timer")) {
+  nation = idle_toggle;
+  for (i = num_military_units(nation); i > 0; i--) {
+    unit = find_all_military(nation);
+    if (is_idle(nation, unit)) unit_attack_to_order(nation, unit, capital_x, capital_y);
+  }
+  switch (idle_toggle) {
+    case 2:
+      idle_toggle = PURPLE;
+      break;
+    case 3:
+      idle_toggle = GREEN;
+      break;
+    case 4:
+      idle_toggle = YELLOW;
+      break;
+    case 5:
+      idle_toggle = BLUE;
+      break;
+  }
+  set_timer("idle_timer", 10);
+  enable_trigger("idle");
+} // trigger idle
+
+cur_time = time_min();
+if (cur_time >= end_time) victory(HUMAN);
+} // conquest
+
+// *************************************
+// Determines what the enemy will spawn
+void conquest SpawnThis(int randomint, int nation, int x, int y) {
+  int HUMAN = 1;
+  int catapult;
+  int capital = find_city_id(find_capital(HUMAN));
+  int capital_x = object_position_x(HUMAN, capital);
+  int capital_y = object_position_y(HUMAN, capital);
+  
+  clear_group(nation);
+  switch(randomint) {
+    case 1:
+      break;
+    case 2:
+      create_unit_upgrade(nation, x, y, "slingers", 1);
+      create_unit_in_group(nation, x, y, "archers", 1);
+      group_stance_order(nation, "raid");
+      group_attack_to_order(nation, capital_x, capital_y);
+      break;
+    case 3:
+      create_unit_upgrade(nation, x, y, "light horse", 2);
+      group_stance_order(nation, "raid");
+      group_attack_to_order(nation, capital_x, capital_y);
+      break;
+    case 4:
+      create_unit_upgrade(nation, x, y, "phalanx", 2);
+      group_stance_order(nation, "raze");
+      group_attack_to_order(nation, capital_x, capital_y);
+      break;
+    case 5:
+      create_unit_upgrade(nation, x, y, "horse archer", 2);
+      create_unit_in_group(nation, x, y, "light horse", 1);
+      group_stance_order(nation, "raid");
+      group_attack_to_order(nation, capital_x, capital_y);
+      break;
+    case 6:
+      catapult = create_unit_upgrade(nation, x, y, "catapult", 1);
+      unit_attack_to_order(nation, catapult, capital_x, capital_y);
+      clear_group(nation);
+      create_unit_upgrade(nation, x, y, "horse archer", 1);
+      create_unit_in_group(nation, x, y, "slingers", 1);
+      group_guard_order(nation, nation, catapult);
+      break;
+    case 7:
+      create_unit_upgrade(nation, x, y, "cataphract", 2);
+      create_unit_in_group(nation, x, y, "phalanx", 2);
+      group_attack_to_order(nation, capital_x, capital_y);
+      break;
+    case 8:
+      catapult = create_unit_upgrade(nation, x, y, "catapult", 1);
+      unit_attack_to_order(nation, catapult, capital_x, capital_y);
+      clear_group(nation);
+      create_unit_upgrade(nation, x, y, "light horse", 1);
+      create_unit_in_group(nation, x, y, "archers", 2);
+      group_guard_order(nation, nation, catapult);
+      break;
+    case 9:
+      catapult = create_unit_upgrade(nation, x, y, "catapult", 2);
+      unit_attack_to_order(nation, catapult, capital_x, capital_y);
+      clear_group(nation);
+      create_unit_upgrade(nation, x, y, "phalanx", 2);
+      create_unit_in_group(nation, x, y, "light horse", 1);
+      group_guard_order(nation, nation, catapult);
+      break;
+    case 10:
+      create_unit_upgrade(nation, x, y, "archers", 2);
+      create_unit_in_group(nation, x, y, "phalanx", 2);
+      create_unit_in_group(nation, x, y, "slingers", 2);
+      group_attack_to_order(nation, capital_x, capital_y);
+      break;
+    case 11:
+      catapult = create_unit_upgrade(nation, x, y, "catapult", 2);
+      unit_attack_to_order(nation, catapult, capital_x, capital_y);
+      clear_group(nation);
+      create_unit_upgrade(nation, x, y, "light horse", 1);
+      create_unit_in_group(nation, x, y, "slingers", 1);
+      create_unit_in_group(nation, x, y, "archers", 1);
+      create_unit_in_group(nation, x, y, "cataphract", 2);
+      group_guard_order(nation, nation, catapult);
+      break;
+  } // switch(randomint
+} // string SpawnThis

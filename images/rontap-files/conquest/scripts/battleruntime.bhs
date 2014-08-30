@@ -1,0 +1,1295 @@
+conquest
+{
+  labels  {
+    ATTACKER,
+    DEFENDER,
+  }
+
+  String build_this;
+  int how_long = 60;
+  String unit_name;
+  static int rax_id;
+  static int attack_wave = 1;
+  static int who_unit;
+  int pl_x;
+  int group_size;
+  int pl_y;
+  static int gen_ent = 0;
+  int gtr = 0;
+  int n = 0;
+  int icu;
+  int scout;
+  static int id1 = 0;
+  static int id2 = 0;
+  static int id3 = 0;
+  static int id1_health = 0;
+  static int id2_health = 0;
+  static int id3_health = 0;
+  static int step = 1;
+  static int attack_count = 1;
+  static int who = 2;
+  static int unit;
+  static int time = 1;
+  static int x;
+  static int y;
+  static int x_diff;
+  static int y_diff;
+  static int unit_x;
+  static int unit_y;
+  static int x_check;
+  static int y_check;
+  static int x_distance_absl;
+  static int y_distance_absl;
+  static int x_distance;
+  static int y_distance;
+  static int building_x;
+  static int building_y;
+  static int x_check_absl = 0;
+  static int y_check_absl = 0;
+  static int general_id1 = find_unit(1, "general");
+  static int general_id = find_unit(2, "general");
+  int general_ability;
+  static int diff = get_difficulty();
+  static int time_of_end = get_time_limit();
+  static int units_to_check;
+  static int check_step;
+  static int unit1;
+  static int unit2;
+  static int unit3;
+  static int unit4;
+  static int unit5;
+  static int unit6;
+  static int unit7;
+  static int unit8;
+  static int unit9;
+  static int unit10;
+  static int unit11;
+  static int unit12;
+  static int unit13;
+  static int unit14;
+  static int unit15;
+
+  run_once {
+    disable_all_triggers();
+    show_all_map_enable(2);
+    enable_trigger("player_near_barracks");
+    rax_id = find_build(2, "barracks");
+    set_timer("anyoneHere", 30);
+    disable_city_defeat(DEFENDER);
+    field_battle_enable();
+    for (n = num_military_buildings(DEFENDER); n > 0; n--) {
+      icu = find_military_build(DEFENDER);
+      set_seen(ATTACKER, DEFENDER, icu);
+    }
+    for (n = num_military_buildings(DEFENDER); n > 0; n--) {
+      icu = find_military_build(DEFENDER);
+      set_seen(ATTACKER, DEFENDER, icu);
+    }
+    gain_tech(1, "The Art of War");
+    gain_tech(1, "Mercenaries");
+
+    //set-up group
+    for (n = num_military_units(DEFENDER); n > 0; n--) {
+      unit_name = find_military(DEFENDER);
+      unit_clear_orders(DEFENDER, unit_name);
+      add_to_group(DEFENDER, unit_name);
+      gtr = gtr + 1;
+    }
+
+    if (num_military_buildings(DEFENDER) > 0) {
+      enable_trigger("protectBuild1");
+      id1 = find_build(DEFENDER, "barracks");
+      id1_health = object_health(DEFENDER, id1);
+      if (id1 <= 0) {
+        id1 = find_build(DEFENDER, "stable");
+        id1_health = object_health(DEFENDER, id1);
+      }
+    }
+    if (num_military_buildings(DEFENDER) > 1) {
+      enable_trigger("protectBuild2");
+      id2 = find_build(DEFENDER, "barracks");
+      id2_health = object_health(DEFENDER, id2);
+      if (id2 <= 0) {
+        id2 = find_build(DEFENDER, "stable");
+        id2_health = object_health(DEFENDER, id2);
+        if (id2 <= 0) {
+          id2 = find_build(DEFENDER, "airbase");
+          id2_health = object_health(DEFENDER, id2);
+        }
+      }
+    }
+
+    enable_trigger("unit1_check");
+
+    if (diff < 3) set_timer("attack1", 10);
+    else if (diff < 5 && diff > 2) set_timer("attack1", 8); 
+    else set_timer("attack1", 6);
+    disable_trigger("attack");
+    enable_trigger("first_attack");
+    set_timer("general_entrench", 1);
+    enable_trigger("unentrench");
+    enable_trigger("label_units");
+  }   
+
+
+  trigger label_units() {
+    //set-up what units to follow and see if they die
+    units_to_check = num_military_units(DEFENDER);
+
+    for (u = 0; u < units_to_check; u++) {   
+      check_step = u; 
+      switch(check_step) {
+        case 0: 
+          unit1 = find_unit(DEFENDER, "");
+          if (unit1 == general_id) unit1 = find_unit(DEFENDER, "");
+          break;
+        case 1: 
+          unit2 = find_unit(DEFENDER, "");
+          if (unit2 == general_id) unit2 = find_unit(DEFENDER, "");
+          break;
+        case 2: 
+          unit3 = find_unit(DEFENDER, "");
+          if (unit3 == general_id) unit3 = find_unit(DEFENDER, "");
+          break;
+        case 3: 
+          unit4 = find_unit(DEFENDER, "");
+          if (unit4 == general_id) unit4 = find_unit(DEFENDER, "");
+          break;
+        case 4: 
+          unit5 = find_unit(DEFENDER, "");
+          if (unit5 == general_id) unit5 = find_unit(DEFENDER, "");
+          break;
+        case 5: 
+          unit6 = find_unit(DEFENDER, "");
+          if (unit6 == general_id) unit6 = find_unit(DEFENDER, "");
+          break;
+        case 6: 
+          unit7 = find_unit(DEFENDER, "");
+          if (unit7 == general_id) unit7 = find_unit(DEFENDER, "");
+          break;
+        case 7: 
+          unit8 = find_unit(DEFENDER, "");
+          if (unit8 == general_id) unit8 = find_unit(DEFENDER, "");
+          break;
+        case 8: 
+          unit9 = find_unit(DEFENDER, "");
+          if (unit9 == general_id) unit9 = find_unit(DEFENDER, "");
+          break;
+        case 9: 
+          unit10 = find_unit(DEFENDER, "");
+          if (unit10 == general_id) unit10 = find_unit(DEFENDER, "");
+          break;
+        case 10: 
+          unit11 = find_unit(DEFENDER, "");
+          if (unit11 == general_id) unit11 = find_unit(DEFENDER, "");
+          break;
+        case 11: 
+          unit12 = find_unit(DEFENDER, "");
+          if (unit12 == general_id) unit12 = find_unit(DEFENDER, "");
+          break;
+        case 12: 
+          unit13 = find_unit(DEFENDER, "");
+          if (unit13 == general_id) unit13 = find_unit(DEFENDER, "");
+          break;
+        case 13: 
+          unit14 = find_unit(DEFENDER, "");
+          if (unit14 == general_id) unit14 = find_unit(DEFENDER, "");
+          break;
+        case 14: 
+          unit15 = find_unit(DEFENDER, "");
+          if (unit15 == general_id) unit15 = find_unit(DEFENDER, "");
+          break;
+      }
+    }
+    disable_trigger("label_units");
+  }
+
+  trigger unit1_check() {
+    if (unit_killed(DEFENDER, unit1) && unit_killed(DEFENDER, unit2) && unit_killed(DEFENDER, unit3)) {
+      disable_trigger("unit1_check");
+      enable_trigger("unit2_check");
+    }
+    else {
+      enable_trigger("unit1_check");
+    }
+  }  
+
+  trigger unit2_check() {
+    if (unit_killed(DEFENDER, unit4) && unit_killed(DEFENDER, unit5) && unit_killed(DEFENDER, unit6)) {
+      disable_trigger("unit2_check");
+      enable_trigger("unit3_check");
+    }
+    else {
+      enable_trigger("unit2_check");
+    }
+  }  
+
+  trigger unit3_check() {
+    if (unit_killed(DEFENDER, unit7) && unit_killed(DEFENDER, unit8) && unit_killed(DEFENDER, unit9)) {
+      disable_trigger("unit3_check");
+      enable_trigger("unit4_check");
+    }
+    else {
+      enable_trigger("unit3_check");
+    }
+  }  
+
+  trigger unit4_check() {
+    if (unit_killed(DEFENDER, unit10) && unit_killed(DEFENDER, unit11) && unit_killed(DEFENDER, unit12)) {
+      disable_trigger("unit4_check");
+      enable_trigger("unit5_check");
+    }
+    else {
+      enable_trigger("unit4_check");
+    }
+  }  
+
+  trigger unit5_check() {
+    if (unit_killed(DEFENDER, unit13) && unit_killed(DEFENDER, unit14) && unit_killed(DEFENDER, unit15)) {
+      disable_trigger("unit5_check");
+      enable_trigger("barracks_bye_bye");
+      set_timer("bye_bye", 1);
+    }
+    else {
+      enable_trigger("unit5_check");
+    }
+  }  
+
+  trigger barracks_bye_bye(timer_expired("bye_bye")) {
+    if (age(1) < 4) {
+      set_object_type_max_health("barracks", 100);
+      set_object_type_max_health("stable", 100);
+      set_object_type_max_health("airbase", 100);
+    }
+    else if (age(1) >= 4 && age(1) < 6) {
+      set_object_type_max_health("barracks", 125);
+      set_object_type_max_health("stable", 125);
+      set_object_type_max_health("airbase", 125);
+    }
+    else if (age(1) >= 6 && age(1) < 8) {
+      set_object_type_max_health("barracks", 175);
+      set_object_type_max_health("stable", 175);
+      set_object_type_max_health("airbase", 175);
+    }
+    else if (age(1) == 8) {
+      set_object_type_max_health("barracks", 375);
+      set_object_type_max_health("stable", 375);
+      set_object_type_max_health("airbase", 365);
+    }
+  }
+
+  trigger unentrench(num_unit_category(DEFENDER, "Mounted") == 0 || (id1_health + id2_health < 90))  {
+    for (h = num_type_upgrade(DEFENDER, "hoplites"); h > 0; h--) {
+      unit = find_unit(DEFENDER, "hoplites");
+      if (is_entrenched(DEFENDER, unit)) {
+        x = object_position_x(DEFENDER, unit);
+        y = object_position_y(DEFENDER, unit);
+        unit_attack_to_order(DEFENDER, unit, x + 1, y);
+      }
+    }
+    disable_trigger("unentrench");
+  } 
+ 
+  trigger (timer_expired("anyoneHere")) {
+    for (n = num_military_buildings(DEFENDER); n > 0; n--) {
+      id3 = find_military_build(DEFENDER);
+      if (any_object_near_build(ATTACKER, 9, DEFENDER, id3, 13)) {
+        stop_timer("attack1");
+      }
+    }
+    set_timer("anyoneHere", 30);
+  }
+
+  trigger (timer_expired("general_entrench")) {
+    if (diff > 3) {
+      gen_ent = 0;
+      general_ability = rand_int(1,9);
+      if (general_ability < 5) {
+        general_entrench(2, general_id);
+        gen_ent = 1;
+        set_timer("general_entrench", 70);
+      }
+      else if (general_ability > 7) {
+        general_ambush(2, general_id);
+        set_timer("general_entrench", 100);
+      }
+      else if (general_ability == 6 || general_ability == 5) {
+        general_forced_march(2, general_id);
+        set_timer("general_entrench", 100);
+      }
+      else {
+        who_unit = find_unit(2, "");
+        general_decoy(2, general_id, 2, who_unit);
+        set_timer("general_entrench", 70);
+      }
+    }
+  }
+
+  trigger first_attack(timer_expired("attack1")) {
+    enable_trigger("attack");
+    if (diff == 6) {
+      set_timer("attack1", 23);
+    }
+    else if (diff == 5) {
+      set_timer("attack1", 23); 
+    }
+    else if (diff == 4) {
+      set_timer("attack1", 21);
+    }
+    else if (diff == 3) {
+      set_timer("attack1", 21);
+    }
+    else if (diff == 2) {
+      set_timer("attack1", 21);
+    }
+    else {
+      set_timer("attack1", 21);
+    }
+    enable_trigger("first_attack");
+    if (diff > 3) {
+      if (time_later_than(3)) {
+        stop_timer("attack1");  
+        disable_trigger("attack");
+      }
+    }
+    else {
+      if (time_later_than(3)) {
+        stop_timer("attack1");
+        disable_trigger("attack");
+      }
+    }
+  }
+
+  trigger player_near_barracks(any_object_near_build(1, 7, 2, rax_id, 20)) {
+    stop_timer("attack1");
+    disable_trigger("attack");
+    disable_trigger("player_near_barracks");
+  }
+
+  trigger attack() {
+    who = 2;
+    //find human army
+    who_unit = find_unit(1, "");
+    scout = find_unit(1, "scout");
+    general = find_unit(1, "general");
+    use_scout = rand_int(1,5);
+    if (use_scout < 2) who_unit = scout;
+    unit_x = object_position_x(1, who_unit);
+    unit_y = object_position_y(1, who_unit);
+    x_check = unit_x;
+    y_check = unit_y;
+
+    /*if (x_check == 0 && y_check == 0) {
+      who_unit = find_unit(1, "");
+      x_check = object_position_x(2, who_unit);
+      y_check = object_position_y(2, who_unit);
+    }*/
+    //find place spot for army
+    building_id = find_military_build(who);
+    building_x = object_position_x(who, building_id);
+    building_y = object_position_y(who, building_id);
+    x_distance = x_check - building_x;
+    y_distance = y_check - building_y;
+    x_distance_absl = absl_int(x_distance);
+    y_distance_absl = absl_int(y_distance);
+    if (x_check_absl > y_check_absl) {
+      if ((x_check - building_x) > 0) {
+        x = x_check - 20;
+        if (age(DEFENDER) >= 2) {
+          x = x - 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          x = x - 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          x = x - 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          x = x - 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          x = x_check - 25;
+        }
+      }
+      else {
+        x = x_check + 20;
+        if (age(DEFENDER) >= 2) {
+          x = x + 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          x = x + 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          x = x + 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          x = x + 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          x = x_check + 25;
+        }
+      }
+      if ((y_check - building_y) > 0) {
+        y = y_check - 15;
+        if (age(DEFENDER) >= 2) {
+          y = y - 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          y = y - 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          y = y - 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          y = y - 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          y = x_check - 20;
+        }
+      }
+      else {
+        y = y_check + 15;
+        if (age(DEFENDER) >= 2) {
+          y = y + 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          y = y + 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          y = y + 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          y = y + 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          y = y_check - 20;
+        }
+      }
+    }
+    else {
+      if ((y_check - building_y) > 0) {
+        y = y_check - 20;
+        if (age(DEFENDER) >= 2) {
+          y = y - 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          y = y - 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          y = y - 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          y = y - 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          y = y_check - 25;
+        }
+      }
+      else {
+        y = y_check + 20;
+        if (age(DEFENDER) >= 2) {
+          y = y + 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          y = y + 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          y = y + 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          y = y + 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          y = y_check + 25;
+        }
+      }
+      if ((x_check - building_x) > 0) {
+        x = x_check - 15;
+        if (age(DEFENDER) >= 2) {
+          x = x - 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          x = x - 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          x = x - 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          x = x - 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          x = x_check - 20;
+        }
+      }
+      else {
+        x = x_check + 15;
+        if (age(DEFENDER) >= 2) {
+          x = x + 5;
+        }
+        if (age(DEFENDER) >= 5) {
+          x = x + 2;
+        }
+        if (age(DEFENDER) >= 6) {
+          x = x + 2;
+        }
+        if (age(DEFENDER) >= 7) {
+          x = x + 3;
+        }
+        if (any_object_near(ATTACKER, 1, x, y, 5)) {
+          x = x_check - 20;
+        }
+      }
+    }
+    if (x < 0) x3 = 1;
+    if (y < 0) y3 = 1;
+    if (map_is_land(x,y)) {
+      if (diff == 6) {
+        if (age(who) == 0) {
+          switch (rand_int(1,5)) {
+            case 1:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 4);
+                else create_unit_upgrade(who, x, y, "hoplites", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 3);
+                else create_unit_upgrade(who, x, y, "horse archer", 4);
+              }
+              break;
+            case 2:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 2);
+                else create_unit_upgrade(who, x, y, "light horse", 3);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 4);
+                else create_unit_upgrade(who, x, y, "hoplites", 5);
+              }
+              break;
+            case 3:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 4);
+                else create_unit_upgrade(who, x, y, "hoplites", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 3);
+                else create_unit_upgrade(who, x, y, "horse archer", 4);
+              }
+              break;
+            case 4:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 2);
+                else create_unit_upgrade(who, x, y, "light horse", 3);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              }
+              break;
+            case 5:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 3);
+                else create_unit_upgrade(who, x, y, "horse archer", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 2);
+                else create_unit_upgrade(who, x, y, "light horse", 3);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              }                
+              break;
+          } 
+        }
+        else {
+          switch (rand_int(1,7)) {
+            case 1:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 4);
+                else create_unit_upgrade(who, x, y, "hoplites", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 3);
+                else create_unit_upgrade(who, x, y, "horse archer", 4);
+              }
+              break;
+            case 2:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "cataphract", 2);
+                else create_unit_upgrade(who, x, y, "cataphract", 3);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 4);
+                else create_unit_upgrade(who, x, y, "hoplites", 5);
+              }
+              break;
+            case 3:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 4);
+                else create_unit_upgrade(who, x, y, "hoplites", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "cataphract", 2);
+                else create_unit_upgrade(who, x, y, "cataphract", 3);
+              }
+              break;
+            case 4:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 3);
+                else create_unit_upgrade(who, x, y, "light horse", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              }
+              break;
+            case 5:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 3);
+                else create_unit_upgrade(who, x, y, "horse archer", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 3);
+                else create_unit_upgrade(who, x, y, "light horse", 4);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              }              
+              break;
+            case 6:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "cataphract", 2);
+                else create_unit_upgrade(who, x, y, "cataphract", 3);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 3);
+                else create_unit_upgrade(who, x, y, "light horse", 4);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 3);
+                else create_unit_upgrade(who, x, y, "horse archer", 4);
+              }
+              break;
+            case 7:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "cataphract", 2);
+                else create_unit_upgrade(who, x, y, "cataphract", 3);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              }
+              break;
+            case 8:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 4);
+                else create_unit_upgrade(who, x, y, "hoplites", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 3);
+                else create_unit_upgrade(who, x, y, "horse archer", 4);
+              }
+              break;
+          } 
+        }
+      }
+      else if (diff == 4) {
+        if (age(who) == 0) {
+          switch (rand_int(1,4)) {
+            case 1:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 3);
+                else create_unit_upgrade(who, x, y, "bowmen", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else create_unit_upgrade(who, x, y, "hoplites", 3);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              }
+              break;
+            case 2:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 3);
+                else create_unit_upgrade(who, x, y, "slingers", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else create_unit_upgrade(who, x, y, "hoplites", 3);
+              }
+              break;
+            case 3:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else create_unit_upgrade(who, x, y, "hoplites", 3);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 3);
+                else create_unit_upgrade(who, x, y, "slingers", 4);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 3);
+                else create_unit_upgrade(who, x, y, "bowmen", 4);
+              }
+              break;
+            case 4:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 3);
+                else create_unit_upgrade(who, x, y, "slingers", 4);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 3);
+                else create_unit_upgrade(who, x, y, "bowmen", 4);
+              }
+              break;
+          }
+        } else {
+          switch (rand_int(1,6)) {
+            case 1:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 3);
+                else create_unit_upgrade(who, x, y, "bowmen", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 1);
+                else create_unit_upgrade(who, x, y, "horse archer", 2);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              }
+              break;
+            case 2:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else create_unit_upgrade(who, x, y, "cataphract", 2);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 1);
+                else create_unit_upgrade(who, x, y, "horse archer", 2);
+              }
+              break;
+            case 3:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else create_unit_upgrade(who, x, y, "hoplites", 3);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 3);
+                else create_unit_upgrade(who, x, y, "slingers", 4);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 3);
+                else create_unit_upgrade(who, x, y, "bowmen", 4);
+              }
+              break;
+            case 4:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "horse archer", 1);
+                else create_unit_upgrade(who, x, y, "horse archer", 2);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 3);
+                else create_unit_upgrade(who, x, y, "bowmen", 4);
+              }              
+              break;
+            case 5:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 3);
+                else create_unit_upgrade(who, x, y, "slingers", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else create_unit_upgrade(who, x, y, "cataphract", 2);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else create_unit_upgrade(who, x, y, "hoplites", 3);
+              }
+              break;
+            case 6:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 3);
+                else create_unit_upgrade(who, x, y, "slingers", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else create_unit_upgrade(who, x, y, "cataphract", 2);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else create_unit_upgrade(who, x, y, "hoplites", 3);
+              }
+              break;
+          } 
+        }
+      } else if (diff == 5) {
+        if (age(who) == 0) {
+          switch (rand_int(1,4)) {
+            case 1:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 3);
+                else create_unit_upgrade(who, x, y, "hoplites", 4);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              }
+              break;
+            case 2:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 3);
+                else create_unit_upgrade(who, x, y, "hoplites", 4);
+              }
+              break;
+            case 3:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 3);
+                else create_unit_upgrade(who, x, y, "hoplites", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              }
+              break;
+            case 4:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              }
+              break;
+          } 
+        } else {
+          switch (rand_int(1,6)) {
+            case 1:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "cataphract", 2);
+                else create_unit_upgrade(who, x, y, "cataphract", 3);
+              } else if (attack_wave == 3) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              }
+              break;
+            case 2:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 2) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 3);
+                else create_unit_upgrade(who, x, y, "hoplites", 4);
+              }
+              break;
+            case 3:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "hoplites", 3);
+                else create_unit_upgrade(who, x, y, "hoplites", 4);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "horse archer", 2);
+                else create_unit_upgrade(who, x, y, "horse archer", 3);
+              }
+              break;
+            case 4:
+              if (attack_wave == 1) {
+                if (time_later_than(1)) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "horse archer", 2);
+                else create_unit_upgrade(who, x, y, "horse archer", 3);
+              }
+              break;
+            case 5:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "horse archer", 2);
+                else create_unit_upgrade(who, x, y, "horse archer", 3);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "cataphract", 2);
+                else create_unit_upgrade(who, x, y, "cataphract", 3);
+              }
+              break;
+            case 6:
+              if (attack_wave == 1) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "cataphract", 1);
+                else if (time_later_than(1)) create_unit_upgrade(who, x, y, "cataphract", 2);
+                else create_unit_upgrade(who, x, y, "cataphract", 3);
+              } else if (attack_wave == 2) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "slingers", 4);
+                else create_unit_upgrade(who, x, y, "slingers", 5);
+              } else if (attack_wave == 3) {
+                if (time_later_than(2)) create_unit_upgrade(who, x, y, "bowmen", 4);
+                else create_unit_upgrade(who, x, y, "bowmen", 5);
+              }
+          } 
+        }
+      } else if (diff < 3) {
+        if (time_later_than(2) && age(who) == 0) {
+          switch (rand_int(1,5)) {
+            case 1:
+              create_unit_upgrade(who, x, y, "bowmen", 1);
+              break;
+            case 2:
+              create_unit_upgrade(who, x, y, "slingers", 1);
+              break;
+            case 3:
+              create_unit_upgrade(who, x, y, "slingers", 1);
+              break;
+            case 4:
+              create_unit_upgrade(who, x, y, "slingers", 1);
+              break;
+            case 5:
+              create_unit_upgrade(who, x, y, "bowmen", 1);
+              break;
+          } 
+        } else {
+          switch (rand_int(1,7)) {
+            case 1:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "bowmen", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                if (age(who) > 0) create_unit_upgrade(who, x, y, "horse archer", 2);
+                else create_unit_upgrade(who, x, y, "slingers", 2);         
+              }       
+              break;
+            case 2:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "slingers", 3);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "light horse", 1);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 2);
+              }
+              break;
+            case 3: 
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 2) {
+                if (age(who) > 0) create_unit_upgrade(who, x, y, "horse archer", 2);
+                else create_unit_upgrade(who, x, y, "slingers", 2);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 2);
+              }
+              break;
+            case 4:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "light horse", 1);
+              } else if (attack_wave == 2) {
+                if (age(who) == 0) create_unit_upgrade(who, x, y, "slingers", 2);
+                else create_unit_upgrade(who, x, y, "cataphract", 1);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "slingers", 3);
+              }
+              break;
+            case 5:
+              if (attack_wave == 1) {
+                if (age(who) > 0) create_unit_upgrade(who, x, y, "horse archer", 2);
+                else create_unit_upgrade(who, x, y, "slingers", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "slingers", 3);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 2);
+              }
+              break;
+            case 6:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "slingers", 3);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "light horse", 1);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 2);
+              }
+              break;
+            case 7:
+              if (attack_wave == 1) {
+                if (age(who) == 0) create_unit_upgrade(who, x, y, "slingers", 2);
+                else create_unit_upgrade(who, x, y, "cataphract", 1);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "light horse", 1);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 2);
+              }
+              break;
+          } 
+        }
+      } else if (diff == 3) {
+        if (time_later_than(2) && age(who) == 0) {
+          switch (rand_int(1,6)) {
+            case 1:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "bowmen", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "slingers", 2);      
+              }      
+              break;
+            case 2:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "slingers", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "light horse", 1);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "hoplites", 2);
+              }
+              break;
+            case 3:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "hoplites", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "slingers", 2);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 2);
+              }
+              break;
+            case 4:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "bowmen", 1);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "hoplites", 2);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "slingers", 2);     
+              } 
+              break;
+            case 5:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "slingers", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "hoplites", 2);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 1);
+              }
+              break;
+            case 6:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "slingers", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "bowmen", 1);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "hoplites", 2);
+              }
+              break;
+          } 
+        } else {
+          switch (rand_int(1,7)) {
+            case 1:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "bowmen", 1);
+                create_unit_in_group(who, x, y, "slingers", 2);
+              } else if (attack_wave == 2) {
+                if (age(1) > 0) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "slingers", 3);      
+              }  
+              break;
+            case 2:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "slingers", 3);
+              } else if (attack_wave == 2) {
+                if (age(1) > 0) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                if (age(1) > 0) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else create_unit_upgrade(who, x, y, "hoplites", 3);
+              }
+              break;
+            case 3:
+              if (attack_wave == 1) {
+                if (age(1) > 0) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else create_unit_upgrade(who, x, y, "hoplites", 3);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "slingers", 3);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 3);
+              }
+              break;
+            case 4:
+              if (attack_wave == 1) {
+                if (age(1) > 0) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "hoplites", 2);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 3);
+              }        
+              break;
+            case 5:
+              if (attack_wave == 1) {
+                if (age(who) > 0) create_unit_upgrade(who, x, y, "horse archer", 1);
+                else create_unit_upgrade(who, x, y, "slingers", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "hoplites", 2);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "slingers", 3);
+              }        
+              break;
+            case 6:
+              if (attack_wave == 1) {
+                if (age(who) == 0) create_unit_upgrade(who, x, y, "slingers", 3);
+                else create_unit_upgrade(who, x, y, "cataphract", 2);
+              } else if (attack_wave == 2) {
+                create_unit_upgrade(who, x, y, "hoplites", 2);
+              } else if (attack_wave == 3) {
+                create_unit_upgrade(who, x, y, "bowmen", 3);
+              }       
+              break;
+            case 7:
+              if (attack_wave == 1) {
+                create_unit_upgrade(who, x, y, "slingers", 3);
+              } else if (attack_wave == 2) {
+                if (age(1) > 0) create_unit_upgrade(who, x, y, "light horse", 1);
+                else create_unit_upgrade(who, x, y, "light horse", 2);
+              } else if (attack_wave == 3) {
+                if (age(1) > 0) create_unit_upgrade(who, x, y, "hoplites", 2);
+                else create_unit_upgrade(who, x, y, "hoplites", 3);
+              }
+              break;
+          } 
+        }
+      }
+      group_attack_to_order(who, x_check, y_check);
+    }
+    else {
+      create_unit_upgrade(who, x, y, "bark", 1);
+      group_move_order(who, x_check, y_check);
+    }
+    //set_seen(who, 1, who_unit);
+
+    attack_wave++;
+    if (attack_wave == 4) attack_wave = 1;
+    attack_count++;
+    disable_trigger("attack");
+  }
+
+  trigger protectBuild1 (object_health(DEFENDER, id1) < id1_health) {
+    //print_game_msg("entering trigger 1");
+    pl_x = object_position_x(DEFENDER, id1);
+    pl_y = object_position_y(DEFENDER, id1);
+    //print_game_msg("group attack order");
+    group_attack_to_order(DEFENDER, pl_x, pl_y);
+    id1_health = object_health(DEFENDER, id1);
+    enable_trigger("protectBuild1");
+  }
+
+  trigger protectBuild2 (object_health(DEFENDER, id2) < id2_health) {
+    //print_game_msg("entering trigger 2");
+    for (n = num_military_units(DEFENDER); n > 0; n--) {
+      unit_name = find_military(DEFENDER);
+      unit_clear_orders(DEFENDER, unit_name);
+      add_to_group(DEFENDER, unit_name);
+      gtr = gtr + 1;
+      //print_game_msg("unit count: " + gtr);
+    }
+    pl_x = object_position_x(DEFENDER, id2);
+    pl_y = object_position_y(DEFENDER, id2);
+    //print_game_msg("group attack order");
+    group_attack_to_order(DEFENDER, pl_x, pl_y);
+    id2_health = object_health(DEFENDER, id2);
+    enable_trigger("protectBuild2");
+  }
+
+  trigger protectBuild3 (object_health(DEFENDER, id3) < id3_health) {
+    //print_game_msg("entering trigger 3");
+    for (n = num_military_units(DEFENDER); n > 0; n--) {
+      unit_name = find_military(DEFENDER);
+      unit_clear_orders(DEFENDER, unit_name);
+      add_to_group(DEFENDER, unit_name);
+      gtr = gtr + 1;
+      //print_game_msg("unit count: " + gtr);
+    }
+    pl_x = object_position_x(DEFENDER, id3);
+    pl_y = object_position_y(DEFENDER, id3);
+    //print_game_msg("group attack order");
+    group_attack_to_order(DEFENDER, pl_x, pl_y);
+    id3_health = object_health(DEFENDER, id3);
+    enable_trigger("protectBuild3");
+  }
+
+  trigger ((num_unit_category(DEFENDER, "Foot") + num_unit_category(DEFENDER, "Mounted") + num_unit_category(DEFENDER, "Mech")) == 0) {
+    if (age(ATTACKER) < 6) {
+      set_object_type_max_health("Barracks", 100);
+      set_object_type_max_health("Stable", 100);
+      set_object_type_max_health("Airbase", 100);
+    }
+    else if (age(ATTACKER) > 5) {
+      set_object_type_max_health("Barracks", 200);
+      set_object_type_max_health("Stable", 200);
+      set_object_type_max_health("Airbase", 200);
+    }
+  }
+
+  trigger (num_military_buildings(DEFENDER) == 0) {
+    victory(ATTACKER);
+  }
+
+  trigger (((num_unit_category(ATTACKER, "Foot") + num_unit_category(ATTACKER, "Mounted") + num_unit_category(ATTACKER, "Mech")) == 0) || ((num_unit_category(ATTACKER, "Foot") + num_unit_category(ATTACKER, "Mounted") + num_unit_category(ATTACKER, "Mech")) == 1 && num_type(ATTACKER, "scout") == 1)) {
+    victory(DEFENDER);
+  }
+  
+  trigger (time_later_than(time_of_end)) {
+    victory(DEFENDER);
+  }
+
+}

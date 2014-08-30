@@ -1,0 +1,49 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Robert Nicaise (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="チムー">
+	<LEADERS>
+		<LEADER>ミンチャンカモン</LEADER>
+		<LEADER>タイカナモ</LEADER>
+		<LEADER>ナイムラップ</LEADER>
+		<LEADER>Nama-tigi</LEADER>
+		<LEADER>Kunu-tigi</LEADER>
+		<LEADER>Cosijoeza</LEADER>
+		<LEADER>Cosijopii</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Chan Chan</CITY>
+		<CITY>チャン チャン 2</CITY>
+		<CITY>タワンティンスユ</CITY>
+		<CITY>チカマ</CITY>
+		<CITY>チャンカイ</CITY>
+		<CITY>グアヤキル</CITY>
+		<CITY>チャオ</CITY>
+		<CITY>チンボテ</CITY>
+		<CITY>チェペン</CITY>
+		<CITY>チクラーヨ</CITY>
+		<CITY>チョタ</CITY>
+		<CITY>チャチャポヤス</CITY>
+		<CITY>チュルカナス</CITY>
+		<CITY>モチェ</CITY>
+		<CITY>リマ</CITY>
+		<CITY>セチン アルト</CITY>
+		<CITY>パルパ</CITY>
+		<CITY>アスペロ</CITY>
+		<CITY>ワルメイ</CITY>
+		<CITY>ワリ</CITY>
+		<CITY>パラカス</CITY>
+		<CITY>トゥピサ</CITY>
+		<CITY>パリア</CITY>
+		<CITY>サンティアゴ</CITY>
+		<CITY>カタルプ</CITY>
+		<CITY>コピアポ</CITY>
+		<CITY>パチャカマク</CITY>
+		<CITY>ハウハ</CITY>
+		<CITY>トーメバンバ</CITY>
+		<CITY>タパラク</CITY>
+		<CITY>ワカ デ ロス レイエス</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+	<BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

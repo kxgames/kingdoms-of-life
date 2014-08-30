@@ -1,0 +1,26 @@
+conquest
+{
+ 
+  static int french = 1;
+  static int germans = 2;
+  
+  static int diff = get_difficulty();
+
+  static int end_time = get_time_limit();
+  int cur_time;
+  static int city_place_time = (7-diff)*5;
+  
+  run_once {
+
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) defeat(french);
+  
+  if (time_later_than(city_place_time)) {
+    building = find_build(germans, "Courtyard Fountain");
+    place_orphan_building(germans, "Small City", building);
+    city_place_time += city_place_time;
+  }
+
+}

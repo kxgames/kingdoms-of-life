@@ -1,0 +1,187 @@
+int conquest raze_city (String city_name);
+void conquest revolt_check(String build_name, String unit_name, int diff);
+
+conquest
+{
+
+  labels {
+    AMERICANS,
+    RUSSIANS,
+  }
+  
+  static int diff = get_difficulty();
+  static int low_build = 2062;
+  static int high_build = 2102;
+  static int statue[] = [2250,2253,2254,2255,2134];
+  static int fountain[] = [2133,2135,2136,2038,2251,2252,2153,2154];
+  static String darius_house[] = ["House C", "House C1", "House C2", "House C3", "House C4", "House C5"];
+  static String offices[] = ["Office A", "Office A1", "Office A2", "Office A3", "Office B", "Office B1", "Office B2", "Office B3", "Office C", "Office C1", "Office C2", "Office C3"];
+  static String apartments[] = ["Apt House A", "Apt House A1", "Apt House A2", "Apt House A3", "Apt House B", "Apt House B1", "Apt House B2", "Apt House B3", "Apt House C", "Apt House C1", "Apt House C2", "Apt House C3", "Apt House D", "Apt House D1", "Apt House D2", "Apt House D3", "Apt House E", "Apt House E1", "Apt House E2", "Apt House E3"];
+  static String spy_houses[] = ["House F", "House F1", "House F2", "House F3", "House F4", "House F5"];
+  //2084, 2094
+
+  String city_name;
+  int building;
+  int x;
+  int y;
+  int unit;
+  int unit2;
+  int unit3;
+  static String capital = find_capital(RUSSIANS);
+  static int end_time = get_time_limit();
+  int cur_time;
+
+  run_once {
+    set_timer("building_check", 1);
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) {
+    defeat(1);
+  }
+  
+  for (i = 0; i < num_type(1, "Citizen"); i++) {
+    unit = find_unit(1, "Citizen");
+    citizen_to_militia(1,unit);
+  }
+
+  if (timer_expired("building_check")) {
+    revolt_check("Courtyard Fountain", "Flamethrower", diff);
+    revolt_check("Lenin Statue", "Special Forces", diff);
+    for (i = 0; i < darius_house.length; i++) {
+      revolt_check(darius_house[i], "General", diff);
+    }
+    for (i = 0; i < spy_houses.length; i++) {
+      revolt_check(spy_houses[i], "Spy", diff);
+    }
+    for (i = 0; i < offices.length; i++) {
+      revolt_check(offices[i], "Humvee", diff);
+    }     
+    for (i = 0; i < apartments.length; i++) {
+      revolt_check(apartments[i], "Partisan", diff);
+    } 
+    set_timer("building_check", 1);   
+  }
+
+  if (num_units(AMERICANS) == 0) {
+    defeat(AMERICANS);
+  }
+
+  if (city_captured(RUSSIANS, capital)) {
+  String all_territories[];
+  String all_territories_loc[];
+    give_player_bonus_card("Political Dissidents");
+  all_territories = ["Western Africa", "Ethiopian Highlands", "Cuba", "Central America", "Northern South America", "Brazil", "Congo", "Andes", "Patagonia", "Southern Africa", "China", "Balkans", "Korea", "India", "Mexico", "Southeast Asia"];
+  all_territories_loc = [$S("Western Africa"), $S("Eastern Africa"), $S("Cuba"), $S("Central America"), $S("Northern South America"), $S("Brazil"), $S("Central Africa"), $S("Andes"), $S("Patagonia"), $S("Southern Africa"), $S("China"), $S("Balkans"), $S("Korea"), $S("India"), $S("Mexico"), $S("Southeast Asia")];
+
+  for (i = 0; i < all_territories.length; i++) {
+    if (get_territory_owner(all_territories[i]) == "Russians") {
+      ctw_give_territory(all_territories[i], "Americans", "");
+      popup_dialog(parse("As a result of our successful mission, we have gained control of $s0! We have also gained Political Dissidents Bonus Card.", all_territories_loc[i]));
+      break;
+    }
+  }
+  if (i == all_territories.length) {
+    popup_dialog(parse("As a result of our successful mission, we have collected $d0 Tribute! We have also gained a Political Dissidents Bonus Card.", 100));
+    give_ctw_tribute ("Americans", 100);
+
+  }     
+    victory(AMERICANS);
+  }
+
+  capital = find_capital(RUSSIANS);
+
+  if (city_captured(RUSSIANS, capital)) {
+    victory(AMERICANS);
+  }
+    
+
+}
+
+int conquest raze_city (String city_name)
+{
+
+  int building;
+  String building_name;
+  int build_destroyed = 0;
+  int diff = get_difficulty();
+  String build_array[] = ["Temple", "Market", "Library", "Senate", "University", "Farm", "Woodcutter's Camp", "Mine", "Granary", "Smelter", "Oil Well", "Lumber Mill"];
+  String apt_array[] = ["Apt House A", "Apt House A1", "Apt House A2", "Apt House A3", "Apt House B", "Apt House B1", "Apt House B2", "Apt House B3", "Apt House C", "Apt House C1", "Apt House C2", "Apt House C3", "Apt House D", "Apt House D1", "Apt House D2", "Apt House D3", "Apt House E", "Apt House E1", "Apt House E2", "Apt House E3", "Office A", "Office A1", "Office A2", "Office A3", "Office B", "Office B1", "Office B2", "Office B3", "Office C", "Office C1", "Office C2", "Office C3", "Lenin Statue", "Courtyard Fountain"];
+  int destroy_list[];
+
+  nation = 1;
+  
+  for (step = 1; step < build_array.length; step++) {
+
+    building_name = build_array[step];
+
+    for (n = num_city_buildings(nation, city_name, building_name, 1); n > 0; n--) {
+      building = find_build_at_city(nation, city_name, building_name, 1);
+      destroy_building(nation, building);
+      build_destroyed++;
+    }
+
+  }
+
+  for (step = 1; step < apt_array.length; step++) {
+
+    building_name = apt_array[step];
+
+    for (n = num_city_buildings_using_type_name(nation, city_name, building_name, 1); n > 0; n--) {
+      building = find_build_at_city_using_type_name(nation, city_name, building_name, 1);
+      destroy_building(nation, building);
+      build_destroyed++;
+    }
+
+  }
+
+  building = find_city_id(city_name);
+  destroy_building(nation, building);
+  build_destroyed = build_destroyed + 4;
+  if (diff > 4) build_destroyed + 2;
+
+  return build_destroyed;
+}
+
+void conquest revolt_check(String build_name, String unit_name, int diff)
+{
+
+  int building;
+  int building_id;
+  int x;
+  int y;
+
+  building = find_build_with_type_name(2, build_name);
+  building_id = find_build_with_type_name(2, build_name);
+  while (building != building_id) {      
+    if (is_infiltrated(2, building_id)) {
+      x = object_position_x(2, building_id)+2;
+      y = object_position_y(2, building_id);
+      switch_teams(1,2,building_id);
+      create_unit_upgrade(1, x, y, unit_name, 2);
+      if (unit_name == "Humvee" && diff < 3) {
+        create_unit_upgrade(1, x, y, unit_name, 1);
+      }
+      if (unit_name == "Humvee" && diff < 5) {
+        create_unit_upgrade(1, x, y, unit_name, 2);
+      }
+      if (unit_name == "Partisan") {
+        create_unit_upgrade(1, x, y, unit_name, 1);
+        if (diff < 5) {
+          create_unit_upgrade(1, x, y, unit_name, 1);
+        }      
+        if (diff < 3) {
+          create_unit_upgrade(1, x, y, unit_name, 3);
+        }
+      }
+    }
+    building_id = find_build_with_type_name(2, build_name);
+  }    
+  if (is_infiltrated(2, building)) {
+    x = object_position_x(2, building)+2;
+    y = object_position_y(2, building);
+    switch_teams(1,2,building);
+    create_unit_upgrade(1, x, y, unit_name, 1);
+  }   
+    
+ } 

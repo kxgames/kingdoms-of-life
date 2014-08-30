@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ROOT name="skirmish ">
+  <FILE hash="2857002" name="skirmish">
+    <STRING hash="10298317">King Louis XIV</STRING>
+    <STRING hash="23793468">King Vikramaditya VI</STRING>
+    <STRING hash="25431939">William the Conqueror</STRING>
+    <STRING hash="19271620">Emperor Shi Huangdi</STRING>
+    <STRING hash="13552702">Queen Chennamma</STRING>
+    <STRING hash="13952058">Emperor Napoleon</STRING>
+    <STRING hash="22289246">Emperor Ilhuicamina</STRING>
+    <STRING hash="15746088">Queen Elizabeth I</STRING>
+    <DESC>Fast-paced military action. The only buildings you can build are Redoubts, Docks, Radar Air Defenses, Woodcutter's Camps, Mines, and Oil Wells. All your units are produced at your Redoubt and your Dock. Redoubts also provide bonus resources. Destroy all your opponents' Redoubts to win.</DESC>
+  </FILE>
+</ROOT>

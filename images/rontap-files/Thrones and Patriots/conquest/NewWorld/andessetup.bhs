@@ -1,0 +1,323 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  labels {
+    ATTACKER,
+    DEFENDER,
+  }
+  
+  new_world_rules();
+  new_world_setup();
+
+  int nation;
+  int diff = get_difficulty();
+
+  set_leader_difficulty(2, diff);
+
+  if (diff > 3) {
+    set_leader_difficulty(2, diff-1);
+  }
+  //gain_next_age(red);
+  disable_tech(2, "City State");
+
+  int unit;
+  
+  disable_type("Spy");
+
+  take_good(1, "Food", 300);
+  take_good(1, "Timber", 200);
+  take_good(1, "Metal", 100);
+  take_good(1, "Knowledge", 100);
+  
+  if (diff < 5) {
+    gain_tech(1, "Science");
+  }
+  //if (diff < 3) {
+    gain_tech(1, "Science");
+  //}
+
+  //66,165
+  //171,101
+  //142,153
+  int city_x[] = [66,171,142];
+  int city_y[] = [165,101,153];
+  int rand_coord = rand_int(0,2);
+  
+  unit = create_building_near(2, city_x[rand_coord], city_y[rand_coord], "Large City", 25);
+  rand_coord++;
+  if (rand_coord == city_x.length) {
+    rand_coord = 0;
+  }
+  create_unit_upgrade(2, city_x[rand_coord], city_y[rand_coord], "Inti Macemen", diff);
+  rand_coord++;
+  if (rand_coord == city_x.length) {
+    rand_coord = 0;
+  }
+  create_unit_upgrade(2, city_x[rand_coord], city_y[rand_coord], "Inti Macemen", diff);  
+  //tumbes
+  rename_city(2, unit, $S("Tumbes"));
+
+  String def_capital = find_capital(2);
+  place_building_upgrade(DEFENDER, "senate", def_capital);
+  place_building_upgrade(DEFENDER, "woodcutter's camp", def_capital);
+  for (i = 0; i < 3; i++) {
+    place_building_upgrade(DEFENDER, "farm", def_capital);
+  }
+  place_building_upgrade(DEFENDER, "library", def_capital);
+  
+
+  switch(diff) {
+  case 1 :
+    place_building_upgrade(DEFENDER, "market", def_capital);
+    place_building_upgrade(DEFENDER, "barracks", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);  
+    break;
+  case 2 :
+    place_building_upgrade(DEFENDER, "market", def_capital);
+    place_building_upgrade(DEFENDER, "barracks", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    break;
+  case 3 :
+    place_building_upgrade(DEFENDER, "barracks", def_capital);
+    place_building_upgrade(DEFENDER, "market", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    break;
+  case 4 :
+    //place_building_upgrade(DEFENDER, "barracks", def_capital);
+    //if (age(DEFENDER) > 0) place_building_upgrade(DEFENDER, "stable", def_capital);
+    //else place_building_upgrade(DEFENDER, "barracks", def_capital);
+    place_building_upgrade(DEFENDER, "market", def_capital);
+    if (age(DEFENDER) > 0) place_building_upgrade(DEFENDER, "fort", def_capital);
+    place_building_upgrade(DEFENDER, "temple", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);    
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    //place_building_upgrade(DEFENDER, "tower", def_capital);
+    break;
+  case 5 :
+    //place_building_upgrade(DEFENDER, "barracks", def_capital);
+    //if (age(DEFENDER) > 0) place_building_upgrade(DEFENDER, "stable", def_capital);
+    //place_building_upgrade(DEFENDER, "barracks", def_capital);
+    //if (age(DEFENDER) > 0) place_building_upgrade(DEFENDER, "stable", def_capital);
+    //else place_building_upgrade(DEFENDER, "barracks", def_capital);
+    place_building_upgrade(DEFENDER, "market", def_capital);
+    if (age(DEFENDER) > 0) place_building_upgrade(DEFENDER, "fort", def_capital);
+    place_building_upgrade(DEFENDER, "temple", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    //place_building_upgrade(DEFENDER, "tower", def_capital);    
+    break;
+  case 6 :
+    //place_building_upgrade(DEFENDER, "barracks", def_capital);
+    //place_building_upgrade(DEFENDER, "barracks", def_capital);
+    place_building_upgrade(DEFENDER, "temple", def_capital);
+    place_building_upgrade(DEFENDER, "market", def_capital);
+    //if (age(DEFENDER) > 0) place_building_upgrade(DEFENDER, "stable", def_capital);
+    //else place_building_upgrade(DEFENDER, "barracks", def_capital);
+    //place_building_upgrade(DEFENDER, "barracks", def_capital);
+    //if (age(DEFENDER) > 0) place_building_upgrade(DEFENDER, "stable", def_capital);
+    if (age(DEFENDER) > 0) place_building_upgrade(DEFENDER, "fort", def_capital);
+    //if (age(DEFENDER) > 0) place_building_upgrade(DEFENDER, "fort", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    place_building_upgrade(DEFENDER, "tower", def_capital);
+    //place_building_upgrade(DEFENDER, "tower", def_capital);
+    break;
+  }
+  
+  if (age(1) == 3) {
+    disable_tech(2, "Enlightenment Age");
+  }
+  
+  set_plunder_scale(1,5);
+
+  disable_city_defeat(1);
+
+  if (find_nation(1) == "Inca") {
+    set_nation_name("Maya", $S("Araucanian"));
+    if (get_age() == 3) {
+      disable_type_by_tribe("Maya", "Eagle Balamob Slingers");
+      enable_type_by_tribe("Maya", "Elite Javelineers", "Barracks", 0, 0);
+      if (!have_tech(2, "Elite Javelineers")) {
+        gain_tech(2, "Elite Javelineers");
+      }
+    }
+    disable_type_by_tribe("Explorer", "Maya");
+  }
+  else {
+    set_nation_name("Inca", $S("Araucanian"));
+    disable_type_by_tribe("Explorer", "Inca");
+  }
+  
+  disable_type("Small City");
+  
+  disable_production_ai(2);
+
+  disable_building_attrition(1);
+  
+  int x = 72;
+  int y = 58;
+  
+  place_new_world_army(1,x,y);
+  place_new_world_army(1,x,y);
+
+  while (num_type(1, "Citizen") > 0) {
+    unit = find_unit(1, "Citizen");
+    kill_unit_anim(1, unit, 1);
+  }
+
+  group_jump_move(1, x, y, 135);
+
+
+  String unit_name[] = ["Horse Archer", "Inti Macemen", "Archers", "Light Horse", "Light Horse", "Pikemen", "Inti Macemen", "Horse Archer", "Inti Macemen", "Light Horse", "Light Horse", "Light Horse", "Light Horse", "Horse Archer", "Archers"];
+  int enemy_x[] = [73,74,117,187,158,123,185,159,129,185,170,173,175,137,127];
+  int enemy_y[] = [96,9,9,31,46,47,80,97,108,53,156,165,188,182,60];
+  int group;
+
+  //group 0
+  group = 0;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 1
+  group = 1;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 3) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 2
+  group = 2;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 3
+  group = 3;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 4
+  group = 4;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 2);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 5
+  group = 5;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 6
+  group = 6;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 2);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 7
+  group = 7;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 2);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 8
+  group = 8;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 2);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 9
+  group = 9;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 3) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 10
+  group = 10;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 3) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 11
+  group = 11;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 3) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 12
+  group = 12;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 13
+  group = 13;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  //group 14
+  group = 14;
+  create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 2);
+  if (diff > 2) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+  if (diff > 4) {
+    create_unit_upgrade(2, enemy_x[group], enemy_y[group], unit_name[group], 1);
+  }
+
+
+
+
+  for (i = 0; i < num_military_units(2); i++) {
+    unit = find_military(2);
+    unit_ignore_orders(2, unit);
+  }
+
+  int amount = diff;
+
+  if (diff > 3) {
+    set_base_rate(2, "Food", (diff-9)*amount);
+    set_base_rate(2, "Timber", (diff-9)*amount);
+    set_base_rate(2, "Wealth", (diff-9)*amount);
+    set_base_rate(2, "Metal", (diff-9)*amount);
+    set_base_rate(2, "Knowledge", (diff-9)*amount);
+  }
+
+}

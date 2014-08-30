@@ -1,0 +1,32 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Warroom (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute-->
+<TRIBE name="Bavarians" substitute="1">
+	<LEADERS>
+		<LEADER>Elector Charles Theodore</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Munich</CITY>
+		<CITY>Landshut</CITY>
+		<CITY>Ingolstadt</CITY>
+		<CITY>Rosenheim</CITY>
+		<CITY>Bad Tolz</CITY>
+		<CITY>Bad Reichenhall</CITY>
+		<CITY>Passau</CITY>
+		<CITY>Deggendorf</CITY>
+		<CITY>Kelheim</CITY>
+		<CITY>Straubing</CITY>
+		<CITY>Ebersberg</CITY>
+		<CITY>Furstenfeldbruck</CITY>
+		<CITY>Eichstatt</CITY>
+		<CITY>Miesbach</CITY>
+		<CITY>Freyung</CITY>
+		<CITY>Numberg</CITY>
+		<CITY>Wurtzburg</CITY>
+		<CITY>Bamberg</CITY>
+		<CITY>Passau</CITY>
+		<CITY>Lindau</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

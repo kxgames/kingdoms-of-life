@@ -1,0 +1,197 @@
+scenario
+{
+
+labels {
+  //Add any constant labels here in a comma separated list.
+}
+
+static int bastille_id = 0;
+static int paris_id = 0;
+
+run_once {
+  //Insert commands that should be executed only once when the script is loaded here.
+  zoom_in(88, 65);
+  disable_city_defeat(1);
+  disable_city_defeat(2);
+  disable_city_defeat(3);
+  disable_all_triggers();
+  bubble_text_hide();
+  zooming_lock();
+  scrolling_lock();
+  mouse_selection_disable();
+  hotkey_selection_disable();
+  ui_hide();
+  ui_hide_score();
+  clear_group(2);
+  clear_group(3);
+  
+  bastille_id = find_build(1, "Fort");
+  bastille_id = find_build(1, "Fort");
+  paris_id = find_city_id("Paris");
+  
+  unit_id = find_unit(1, "Napoleon");
+  general_entrench(1, unit_id);
+
+  unit_id = find_unit(1, "Napoleon");
+  general_entrench(1, unit_id);
+
+  enable_trigger("StormingBastille");
+  clear_selection();
+  add_objective_text($S("Press space bar to skip"), "skippy_id", 0);
+}
+
+if (key_down(" ")) {
+  victory(1);
+}
+
+trigger StormingBastille()
+{ 
+  clear_group(2);
+  for (i = 0; i < 15; i++) {
+    unit_id = create_unit(2, 114, 58, "Militia", 1);
+    add_to_group(2, unit_id);
+  }
+  group_attack_order(2, 1, bastille_id);
+
+  clear_group(2);
+  for (i = 0; i < 20; i++) {
+    unit_id = create_unit(2, 118, 74, "Militia", 1);
+    add_to_group(2, unit_id);
+  }
+  group_attack_order(2, 1, bastille_id);
+
+  clear_group(2);
+  for (i = 0; i < 20; i++) {
+    unit_id = create_unit(2, 110, 82, "Militia", 1);
+    add_to_group(2, unit_id);
+  }
+  group_attack_order(2, 1, bastille_id);
+
+  clear_group(2);
+  create_unit_in_group(2, 114, 58, "Minuteman", 25);
+  group_attack_order(2, 1, bastille_id);
+
+  clear_group(2);
+  create_unit_in_group(2, 118, 74, "Minuteman", 30);
+  group_attack_order(2, 1, bastille_id);
+
+  clear_group(2);
+  create_unit_in_group(2, 110, 82, "Minuteman", 30);
+  group_attack_order(2, 1, bastille_id);
+
+  clear_group(2);
+  create_unit_in_group(2, 106, 90, "Minuteman", 25);
+  group_attack_order(2, 1, bastille_id);
+
+  set_timer("Toulon", 30);
+  enable_trigger("ToulonBombard");
+}
+
+trigger ToulonBombard(timer_expired("Toulon"))
+{
+  unit_id = -1;
+  jump_camera(174, 216);
+  do {
+    unit_id = find_unit(2, "Militia");
+    kill_unit_anim(2, unit_id, 1);
+  }while (unit_id > -1);
+
+  do {
+    unit_id = find_unit(2, "Minuteman");
+    kill_unit_anim(2, unit_id, 1);
+  }while (unit_id > -1);
+
+  create_unit_in_group(3, 178, 218, "Man o' War", 6);
+  create_unit_in_group(3, 177, 218, "Sloop", 2);
+
+  enable_trigger("ParisSetup");
+}
+
+trigger ParisSetup(num_type_upgrade(3, "Man o' War") < 1 && num_type_upgrade(3, "Sloop") < 1)
+{
+  set_timer("Paris", 8);
+  enable_trigger("ParisMob");
+}
+
+trigger ParisMob(timer_expired("Paris"))
+{
+  jump_camera(65, 157);
+  x = object_position_x(1, paris_id);
+  y = object_position_y(1, paris_id);
+
+  clear_group(2);
+  create_unit_in_group(2, 82, 146, "Citizen", 13);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 90, 166, "Citizen", 13);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 90, 166, "Citizen", 13);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 86, 154, "Citizen", 13);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 86, 154, "Citizen", 13);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 90, 180, "Citizen", 19);
+  group_attack_to_order(2, x, y);
+  
+  set_timer("Wave", 3);
+  enable_trigger("SecondWave");
+}
+
+trigger SecondWave(timer_expired("Wave"))
+{
+  x = object_position_x(1, paris_id);
+  y = object_position_y(1, paris_id);
+  clear_group(2);
+  create_unit_in_group(2, 82, 146, "Citizen", 9);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 90, 166, "Citizen", 9);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 90, 166, "Citizen", 9);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 86, 154, "Citizen", 9);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 86, 154, "Citizen", 9);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 90, 180, "Citizen", 9);
+  group_attack_to_order(2, x, y);
+
+  clear_group(2);
+  create_unit_in_group(2, 90, 180, "Citizen", 14);
+  group_attack_to_order(2, x, y);
+
+  enable_trigger("VictorySetup");
+}
+
+trigger VictorySetup(num_type(2, "Citizen") < 1)
+{
+  set_timer("W", 10);
+  enable_trigger("Win");
+}
+
+trigger Win(timer_expired("W"))
+{
+  switch_player_control(1);
+  victory(1);
+}
+
+}

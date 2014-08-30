@@ -1,0 +1,650 @@
+// best build library
+
+//=================================================================
+int ai assign_idle (int who);
+
+
+//city placement
+int ai city_placement (int who) 
+{
+
+  new_city = 0;
+  
+
+  enable_trigger("city_build");
+
+  trigger city_build() {
+    if (have_tech(who, "City State") > 0) {
+      place_city_with_cost(who);
+      enable_trigger("health_check");
+    }
+    else {
+      research_tech_with_cost(who, "City State");
+      enable_trigger("city_build");
+    }
+  }
+
+  trigger health_check() {
+    if (find_inactive_build(who, "Small City")) {
+      new_city = find_inactive_build(who, "Small City");
+      if (building_started(who, new_city)) {
+        return 1;
+      }
+      else  {
+        enable_trigger("health_check");
+      }
+    }
+    else {
+      enable_trigger("city_build");
+    }
+  }
+
+  return -1;
+
+}
+
+//=================================================================
+
+//woodcutter placement
+int ai place_woodcutter (int who)
+{
+
+  int wood_camp_2 = 0;
+  int wood_camp_size_2 = 0;
+  my_capital = find_city_with_num(who, 1); 
+  my_second_city = find_city_with_num(who, 2);
+  static int min_size = 5;
+  int city_down = 1;
+  int num_check = 3;
+
+  //placing woodcutter at capital, no other spots available
+  if ((num_cities(who) == 1) && (find_inactive_build(who, "Small City") < 0)) {
+    if (place_building_with_cost(who, "Woodcutter's Camp", my_capital) > 0) { //try capital
+      wood_camp_2 = find_inactive_build(who, "Woodcutter's Camp");
+      wood_camp_size_2 = max_workers_at_building(who, wood_camp_2);
+      if ((wood_camp_size_2 < min_size) && (min_size > 3)) {
+        destroy_building(who, wood_camp_2);
+        min_size--;
+      }
+      else {
+        min_size = 5;
+        return wood_camp_size_2;
+      }
+    }
+    else if (can_pay_cost(who, "Woodcutter's Camp")) return 0;
+  }
+  //placing woodcutter at second city that is still being built
+  else if (find_inactive_build(who, "Small City") > 0) {
+    my_new_city = find_inactive_build(who, "Small City");
+    if (place_orphan_building_with_cost(who, "Woodcutter's Camp", my_new_city) > 0) { //try near city under construction
+      wood_camp_2 = find_inactive_build(who, "Woodcutter's Camp");
+      wood_camp_size_2 = max_workers_at_building(who, wood_camp_2);
+      if ((wood_camp_size_2 < min_size) && (min_size > 3)) {
+        destroy_building(who, wood_camp_2);
+        min_size--;
+      }
+      else {
+        min_size = 5;
+        return wood_camp_size_2;
+      }
+    }
+    else if (place_building_with_cost(who, "Woodcutter's Camp", my_capital) > 0) { //try capital
+      wood_camp_2 = find_inactive_build(who, "Woodcutter's Camp");
+      wood_camp_size_2 = max_workers_at_building(who, wood_camp_2);
+      if ((wood_camp_size_2 < min_size) && (min_size > 3)) {
+        destroy_building(who, wood_camp_2);
+        min_size--;
+      }
+      else {
+        min_size = 5;
+        return wood_camp_size_2;
+      }
+    }
+    else if (can_pay_cost(who, "Woodcutter's Camp")) return 0;
+  }
+  //placing woodcutter at second city that is up and running
+  else if (num_cities(who) > 1) {
+    my_second_city = find_city_with_num(who, 2);
+    if (place_building_with_cost(who, "Woodcutter's Camp", my_second_city) > 0) { //try second city
+      wood_camp_2 = find_inactive_build(who, "Woodcutter's Camp");
+      wood_camp_size_2 = max_workers_at_building(who, wood_camp_2);
+      return wood_camp_size_2;
+    }
+    else if (place_building_with_cost(who, "Woodcutter's Camp", my_capital) > 0) { //try capital
+      wood_camp_2 = find_inactive_build(who, "Woodcutter's Camp");
+      wood_camp_size_2 = max_workers_at_building(who, wood_camp_2);
+      return wood_camp_size_2;
+    }
+    else if (can_pay_cost(who, "Woodcutter's Camp") > 0) return 0;
+  }
+  return -1;
+}
+
+//=================================================================
+
+//building of needed citizens
+int ai train_unit_with_need(int who, int high_num, String what)
+{
+
+  String my_capital = find_city_with_num(who, 1);
+  String my_second_city = find_city_with_num(who, 2);
+  String my_third_city = find_city_with_num(who, 3);
+  int capital_id = find_city_id(my_capital);
+  int second_city_id = find_city_id(my_second_city);
+  int third_city_id = find_city_id(my_third_city);
+  int farms1 = 0;
+  int farms2 = 0;
+  int farms3 = 0;
+  int wood1 = 0;
+  int wood2 = 0;
+  int wood3 = 0;
+  int times = 0;
+  int one_camp = 0;
+  int two_camp = 0;
+  int three_camp = 0;
+  int aux_camp = 0;
+  int one_camp_max = 0;
+  int two_camp_max = 0;
+  int three_camp_max = 0;
+  int aux_camp_max = 0;
+  int one_camp_num = 0;
+  int two_camp_num = 0;
+  int three_camp_num = 0;
+  int aux_camp_num = 0;
+  int needed_workers_1 = 0;
+  int needed_workers_2 = 0;
+  int needed_workers_3 = 0;
+  int needed_workers_aux = 0;
+  int needed_wood_1 = 0;
+  int needed_wood_2 = 0;
+  int needed_wood_3 = 0;
+  int needed_wood_aux = 0;
+  int needed_farm_1 = 0;
+  int needed_farm_2 = 0;
+  int needed_farm_3 = 0;
+  int needed_metal_1 = 0;
+  int needed_metal_2 = 0;
+  int needed_metal_3 = 0;
+  int needed_metal_aux = 0;
+  int idle = 0;
+  int pop = 0;
+  int wc = 0;
+  int wc2 = 0;
+  int wc3 = 0;
+  int f = 0;
+  int m = 0;
+
+  for (pop = num_type_with_queued(who, what); pop < high_num; pop++) {
+    //capital check
+    idle = find_num_idle_unit(who, what);
+    needed_farm_1 = 0;
+    farms1 = num_city_buildings(who, my_capital, "Farm", 1);
+    for (f = farms1; f > 0; f--) {
+      one_farm = find_build_at_city(who, my_capital, "Farm", 0);
+      one_farm_num = num_workers_at_building(who, one_farm);
+      if (one_farm_num == 0) {
+        needed_farm_1++;
+      }
+    }
+    needed_wood_1 = 0;
+    wood1 = num_city_buildings(who, my_capital, "Woodcutter's Camp", 1);
+    for (wc = wood1; wc > 0; wc--) {
+      one_camp = find_build_at_city(who, my_capital, "Woodcutter's Camp", 1);
+      one_camp_max = max_workers_at_building(who, one_camp);
+      one_camp_num = num_workers_at_building(who, one_camp);
+      needed_wood_1 += (one_camp_max - one_camp_num);
+    }
+    needed_metal_1 = 0;
+    metal1 = num_city_buildings(who, my_capital, "Mine", 1);
+    for (m = metal1; m > 0; m--) {
+      one_mine = find_build_at_city(who, my_capital, "Mine", 1);
+      one_mine_max = max_workers_at_building(who, one_mine);
+      one_mine_num = num_workers_at_building(who, one_mine);
+      needed_metal_1 += (one_mine_max - one_mine_num);
+    }
+    needed_workers_1 = needed_wood_1 + needed_farm_1 + needed_metal_1 - num_type_queued(who, capital_id, what) - idle;
+    //second city check
+    if (num_cities(who) > 1) {
+      needed_farm_2 = 0;
+      farms2 = num_city_buildings(who, my_second_city, "Farm", 0);
+      for (f = farms2; f > 0; f--) {
+        two_farm = find_build_at_city(who, my_second_city, "Farm", 1);
+        two_farm_num = num_workers_at_building(who, two_farm);
+        if (two_farm_num == 0) {
+          needed_farm_2++;
+        }
+      }
+      needed_wood_2 = 0;
+      wood2 = num_city_buildings(who, my_second_city, "Woodcutter's Camp", 1);
+      for (wc = wood2; wc > 0; wc--) {
+        two_camp = find_build_at_city(who, my_second_city, "Woodcutter's Camp", 1);
+        two_camp_max = max_workers_at_building(who, two_camp);
+        two_camp_num = num_workers_at_building(who, two_camp);
+        needed_wood_2 += (two_camp_max - two_camp_num);
+      }
+      needed_metal_2 = 0;
+      metal2 = num_city_buildings(who, my_second_city, "Mine", 1);
+      for (m = metal2; m > 0; m--) {
+        two_mine = find_build_at_city(who, my_second_city, "Mine", 1);
+        two_mine_max = max_workers_at_building(who, two_mine);
+        two_mine_num = num_workers_at_building(who, two_mine);
+        needed_metal_2 += (two_mine_max - two_mine_num);
+      }
+      needed_workers_2 = needed_wood_2 + needed_farm_2 + needed_metal_2 - num_type_queued(who, second_city_id, what) - idle;
+    }
+    //third city check
+    if (num_cities(who) > 2) {
+      needed_farm_3 = 0;
+      farms3 = num_city_buildings(who, my_third_city, "Farm", 0);
+      for (f = farms2; f > 0; f--) {
+        three_farm = find_build_at_city(who, my_third_city, "Farm", 1);
+        three_farm_num = num_workers_at_building(who, three_farm);
+        if (three_farm_num == 0) {
+          needed_farm_3++;
+        }
+      }
+      needed_wood_3 = 0;
+      wood3 = num_city_buildings(who, my_third_city, "Woodcutter's Camp", 1);
+      for (wc = wood3; wc > 0; wc--) {
+        three_camp = find_build_at_city(who, my_third_city, "Woodcutter's Camp", 1);
+        three_camp_max = max_workers_at_building(who, three_camp);
+        three_camp_num = num_workers_at_building(who, three_camp);
+        needed_wood_3 += (three_camp_max - three_camp_num);
+      }
+      needed_metal_3 = 0;
+      metal3 = num_city_buildings(who, my_third_city, "Mine", 1);
+      for (m = metal3; m > 0; m--) {
+        three_mine = find_build_at_city(who, my_third_city, "Mine", 1);
+        three_mine_max = max_workers_at_building(who, three_mine);
+        three_mine_num = num_workers_at_building(who, three_mine);
+        needed_metal_3 += (three_mine_max - three_mine_num);
+      }
+      needed_workers_3 = needed_wood_3 + needed_farm_3 + needed_metal_3 - num_type_queued(who, third_city_id, what) - idle;
+    }
+    //any wood/mine outside of cities
+    needed_wood_aux = 0;
+    for (wc = num_type(who, "Woodcutter's Camp"); wc > 0; wc--) {
+      aux_camp = find_build(who, "Woodcutter's Camp");
+      aux_camp_max = max_workers_at_building(who, aux_camp);
+      aux_camp_num = num_workers_at_building(who, aux_camp);
+      needed_wood_aux += (aux_camp_max - aux_camp_num);
+    }
+    needed_metal_aux = 0;
+    for (m = num_type(who, "Mine"); m > 0; m--) {
+      aux_mine = find_build(who, "Mine");
+      aux_mine_max = max_workers_at_building(who, aux_mine);
+      aux_mine_num = num_workers_at_building(who, aux_mine);
+      needed_metal_aux += (aux_mine_max - aux_mine_num);
+    }
+    needed_workers_aux = needed_wood_aux + needed_metal_aux - needed_metal_3 - needed_metal_2 - needed_metal_1 - needed_wood_3 - needed_wood_2 - needed_wood_1;
+    if (needed_workers_1 > 0) {
+      train_unit_at_with_cost(who, 1, what, capital_id);
+    }
+    else if (needed_workers_2 > 0) {
+      train_unit_at_with_cost(who, 1, what, second_city_id);
+    }
+    else if (needed_workers_3 > 0) {
+      train_unit_at_with_cost(who, 1, what, third_city_id);
+    }
+    else if (needed_workers_aux > 0) {
+      train_unit_with_cost(who, 1, what);
+    }
+    else {
+      return 1;
+    }
+  }
+  if (high_num <= (num_type_with_queued(who, what))) {
+    if (idle > 0) assign_idle(who);
+    return 1;
+  }
+
+  else {
+    return -1;
+  }
+
+}
+
+//=================================================================
+
+//idle citizen assignment
+int ai assign_idle (int who)
+{
+
+  my_capital = find_city_with_num(who, 1);
+  my_second_city = find_city_with_num(who, 2);
+  int wood_camp = 0;
+  int build_new_wood_camp = 0;
+  int been_here = 0;
+
+  idle = find_idle_citizen(who);
+  if (idle != 0)
+  {
+    for (i = num_type(who, "Woodcutter's Camp"); i > 0; i--) {
+      wood_camp = find_build(who, "Woodcutter's Camp");
+      if (num_workers_at_building(who, wood_camp) < max_workers_at_building(who, wood_camp)) {
+        build_new_wood_camp = 0;
+        return 4;
+      }
+      else {
+        build_new_wood_camp = 1;
+      }
+    }
+
+    if (build_new_wood_camp == 1)
+    {
+      if (num_cities(who) >= 2) {
+        my_second_city = find_city_with_num(who, 2);
+        if(place_building_with_cost(who, "Woodcutter's Camp", my_second_city) > 0) {
+          wood_camp = find_inactive_build(who, "Woodcutter's Camp");
+          return 2;
+        }
+        else if(place_building_with_cost(who, "Woodcutter's Camp", my_capital) > 0) {
+          wood_camp = find_inactive_build(who, "Woodcutter's Camp");
+          return 1;
+        }
+        else if (can_pay_cost(who, "Woodcutter's Camp") > 0) {
+          wood_camp = -1;
+          been_here++;
+          if (been_here > 1) return 1;
+          else return 0;
+        }
+      }
+      else {
+        if(place_building_with_cost(who, "Woodcutter's Camp", my_capital) > 0) {
+          wood_camp = find_inactive_build(who, "Woodcutter's Camp");
+          return 1;
+        }
+        else if (can_pay_cost(who, "Woodcutter's Camp") > 0) {
+          wood_camp = -1;
+          return 0;
+        }
+      }
+    }
+
+    if (wood_camp >= 0) {
+      xpos = object_position_x(who, wood_camp);
+      ypos = object_position_y(who, wood_camp);
+   
+      for(idle = find_idle_citizen(who); idle > -1; idle = find_idle_citizen(who)) {
+        unit_move_order(who, idle, xpos, ypos);
+      }
+    }
+  }
+  return -1;;
+
+}
+
+//woodcutter placement ...should it be done now, and build some citizens to fill it!
+int ai woodcutter_check(int who, int max_woodcutters, int needed_workers)
+{
+
+  static int wood_check_size = 5;
+  static int wood_camp_placed = 0;
+  
+  if (((max_woodcutters <= wood_check_size) || num_cities(who) > 1 || find_inactive_build(who, "Small City") == 1) && wood_camp_placed == 0 && num_type(who, "Woodcutter's Camp") == 1) {
+    //////print_game_msg("wood camp size 1 is equal to wood check size");
+    wood_camp_size_2 = place_woodcutter(who);
+    max_woodcutters = max_woodcutters + wood_camp_size_2;
+    //needed_workers = max_woodcutters + num_type_with_queued(who, "Farm");   
+    train_unit_with_need(who, needed_workers, "Citizen");
+    wood_camp_placed = 1; 
+    return max_woodcutters;
+  }
+  else if (wood_camp_placed == 1) {
+    //////print_game_msg("wood camp, this is done");
+    return -1;
+  }
+  else {
+    //////print_game_msg("wood check size and wood camp size dont match");
+    wood_check_size++;
+    return 0;
+  }
+
+}
+
+//=================================================================
+
+//dock placement
+int ai place_dock (int who)
+//returns 1 if dock is placed
+//returns 0 if dock can't be placed but is affordable
+//returns -1 if dock can't be afforded
+{
+  my_capital = find_city_with_num(who, 1); 
+  my_second_city = find_city_with_num(who, 2);
+  my_third_city = find_city_with_num(who, 3);
+  if (have_tech(who, "Barter")) {
+    if (num_cities(who) == 1) {
+      if (place_building_with_cost(who, "Dock", my_capital) > 0) return 1;
+      else {
+        for (wc = num_city_buildings(who, my_capital, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_capital, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_capital, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_capital, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        building_cycle = find_build_at_city(who, my_capital, "Library", 1);
+        if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        if (can_pay_cost(who, "Dock") > 0) return 0;
+        else return -1;
+      }
+    }
+    else if (num_cities(who) == 2) {
+      if (place_building_with_cost(who, "Dock", my_capital) > 0) return 1;
+      else if (place_building_with_cost(who, "Dock", my_second_city) > 0) return 1;
+      else if (find_inactive_build(who, "Small City")) {
+        building_cycle = find_inactive_build(who, "Small City");
+        if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+      }
+      else {
+        for (wc = num_city_buildings(who, my_capital, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_capital, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_capital, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_capital, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        building_cycle = find_build_at_city(who, my_capital, "Library", 1);
+        if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        for (wc = num_city_buildings(who, my_second_city, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_second_city, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_second_city, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_second_city, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        if (can_pay_cost(who, "Dock") > 0) return 0;
+        else return -1;
+      }
+    }
+    else if (num_cities(who) == 3) {
+      if (place_building_with_cost(who, "Dock", my_capital) > 0) return 1;
+      else if (place_building_with_cost(who, "Dock", my_second_city) > 0) return 1;
+      else if (place_building_with_cost(who, "Dock", my_third_city) > 0) return 1;
+      else if (find_inactive_build(who, "Small City")) {
+        building_cycle = find_inactive_build(who, "Small City");
+        if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+      }
+      else {
+        for (wc = num_city_buildings(who, my_capital, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_capital, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_capital, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_capital, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        building_cycle = find_build_at_city(who, my_capital, "Library", 1);
+        if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        for (wc = num_city_buildings(who, my_second_city, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_second_city, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_second_city, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_second_city, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        for (wc = num_city_buildings(who, my_third_city, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_third_city, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_third_city, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_third_city, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Dock", building_cycle) > 0) return 1;
+        }
+        if (can_pay_cost(who, "Dock") > 0) return 0;
+        else return -1;
+      }
+    }
+  }
+  return -1;
+}
+
+//=================================================================
+
+int ai place_mine(int who)
+{
+  my_capital = find_city_with_num(who, 1); 
+  my_second_city = find_city_with_num(who, 2);
+  my_third_city = find_city_with_num(who, 3);
+
+  if (have_tech(who, "Classical Age")) {
+    if (num_cities(who) == 1) {
+      if (place_building_with_cost(who, "Mine", my_capital) > 0) return 1;
+      else {
+        for (wc = num_city_buildings(who, my_capital, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_capital, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_capital, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_capital, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        building_cycle = find_build_at_city(who, my_capital, "Library", 1);
+        if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        if (can_pay_cost(who, "Mine") > 0) return 0;
+        else return -1;
+      }
+    }
+    else if (num_cities(who) == 2) {
+      if (place_building_with_cost(who, "Mine", my_capital) > 0) return 1;
+      else if (place_building_with_cost(who, "Mine", my_second_city) > 0) return 1;
+      else if (find_inactive_build(who, "Small City")) {
+        building_cycle = find_inactive_build(who, "Small City");
+        if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+      }
+      else {
+        for (wc = num_city_buildings(who, my_capital, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_capital, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_capital, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_capital, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        building_cycle = find_build_at_city(who, my_capital, "Library", 1);
+        if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        for (wc = num_city_buildings(who, my_second_city, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_second_city, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_second_city, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_second_city, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        if (can_pay_cost(who, "Mine") > 0) return 0;
+        else return -1;
+      }
+    }
+    else if (num_cities(who) == 3) {
+      if (place_building_with_cost(who, "Mine", my_capital) > 0) return 1;
+      else if (place_building_with_cost(who, "Mine", my_second_city) > 0) return 1;
+      else if (place_building_with_cost(who, "Mine", my_third_city) > 0) return 1;
+      else if (find_inactive_build(who, "Small City")) {
+        building_cycle = find_inactive_build(who, "Small City");
+        if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+      }
+      else {
+        for (wc = num_city_buildings(who, my_capital, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_capital, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_capital, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_capital, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        building_cycle = find_build_at_city(who, my_capital, "Library", 1);
+        if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        for (wc = num_city_buildings(who, my_second_city, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_second_city, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_second_city, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_second_city, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        for (wc = num_city_buildings(who, my_third_city, "Woodcutter's Camp", 1); wc > 0; wc--) {
+          building_cycle = find_build_at_city(who, my_third_city, "Woodcutter's Camp", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        for (f = num_city_buildings(who, my_third_city, "Farm", 1); f > 0; f--) {
+          building_cycle = find_build_at_city(who, my_third_city, "Farm", 1);
+          if (place_orphan_building_with_cost(who, "Mine", building_cycle) > 0) return 1;
+        }
+        if (can_pay_cost(who, "Dock") > 0) return 0;
+        else return -1;
+      }
+    }
+  }
+  return -1;
+}
+
+//=================================================================
+
+int ai place_farm(int who)
+{
+  int max_farms = 0;
+  who_nation = find_nation(who); //get player nation
+  my_capital = find_city_with_num(who, 1); 
+  my_second_city = find_city_with_num(who, 2);
+  my_third_city = find_city_with_num(who, 3);
+
+  if ((who_nation == "Egyptians")&&(get_is_no_nation_powers() < 1)) max_farms = 7;
+  else max_farms = 5;
+
+  if (num_cities(who) == 1) {
+    if (num_city_buildings(who, my_capital, "Farm", 1) < max_farms) {
+      if (place_building_with_cost(who, "Farm", my_capital) > 0) return 1;
+    }
+    else return 0;
+  }
+  else if (num_cities(who) == 2) {
+    if (num_city_buildings(who, my_capital, "Farm", 1) < max_farms) {
+      if (place_building_with_cost(who, "Farm", my_capital) > 0) return 1;
+    }
+    else if (num_city_buildings(who, my_second_city, "Farm", 1) < max_farms) {
+      if (place_building_with_cost(who, "Farm", my_second_city) > 0) return 1;
+    }
+    else return 0;
+  }
+  else if (num_cities(who) == 3) {
+    if (num_city_buildings(who, my_capital, "Farm", 1) < max_farms) {
+      if (place_building_with_cost(who, "Farm", my_capital) > 0) return 1;
+    }
+    else if (num_city_buildings(who, my_second_city, "Farm", 1) < max_farms) {
+      if (place_building_with_cost(who, "Farm", my_second_city) > 0) return 1;
+    }
+    else if (num_city_buildings(who, my_third_city, "Farm", 1) < max_farms) {
+      if (place_building_with_cost(who, "Farm", my_third_city) > 0) return 1;
+    }
+    else return 0;
+  }
+
+  if (can_pay_cost(who, "Farm") > 0) return 0;
+
+  return -1;
+}

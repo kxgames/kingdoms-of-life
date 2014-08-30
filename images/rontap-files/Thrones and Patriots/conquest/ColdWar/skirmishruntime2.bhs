@@ -1,0 +1,107 @@
+//SKIRMISHRUNTIME.BHS
+void conquest set_resources_rate (int who);
+
+conquest
+{
+
+  labels {
+    ATTACKER,
+    DEFENDER,
+  }
+  
+  int num_forts[] = [0,0, num_type(2, "Oil Well")];
+  int building;
+  int unit;
+  int x;
+  int y;
+  int rand_num;
+  static int diff = get_difficulty();
+  static int temp_id = find_build(DEFENDER, "Temple");
+
+  static int end_time = get_time_limit();
+  int cur_time;
+
+  run_once {
+    set_timer("res_check", 1);
+    set_resources_rate(ATTACKER);
+    set_resources_rate(DEFENDER);
+    set_timer("oil_check", 1);
+    set_timer("attack_timer", 120 - diff * 10);
+    ctw_add_objective_text($S("Hint: Capture Oil Wells to raise resource gathering rates."), 1, "");
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) {
+    defeat(ATTACKER);
+  }
+
+  if (num_cities(DEFENDER) == 0) {
+    victory(ATTACKER);
+  }
+ 
+  if (timer_expired("oil_check")) {
+    set_timer("oil_check", 1);
+    for (i = 0; i < num_type(2, "Oil Well"); i++) {
+      building = find_build(2, "Oil Well");
+      if (object_health(2, building) < 50) {
+        building = switch_teams(1, 2, building);
+        set_object_health(1, building, 100);
+      }
+    }
+    for (i = 0; i < num_type(1, "Oil Well"); i++) {
+      building = find_build(1, "Oil Well");
+      if (object_health(1, building) < 50) {
+        building = switch_teams(2, 1, building);
+        set_object_health(2, building, 100);
+      }
+    }    
+  }
+
+
+  if (num_type_upgrade(ATTACKER, "Oil Well") != num_forts[ATTACKER]) {
+    set_resources_rate(ATTACKER);
+    num_forts[ATTACKER] = num_type_upgrade(ATTACKER, "Oil Well");
+  }
+  
+  if (num_type_upgrade(DEFENDER, "Oil Well") != num_forts[DEFENDER]) {
+    set_resources_rate(DEFENDER);
+    num_forts[DEFENDER] = num_type_upgrade(DEFENDER, "Oil Well");
+  }
+  
+  if (num_type_upgrade(ATTACKER, "Redoubt") == 0) {
+    defeat(ATTACKER);
+  }
+  
+}
+
+void conquest set_resources_rate (int who)
+{
+
+  String resource_types[] = ["Food", "Timber", "Metal", "Wealth", "Oil"];
+  int diff = get_difficulty();
+  int adjustment;
+  if (diff < 4 && who == 1) {
+    adjustment = 5 - diff;
+  }
+  else if (who ==  2) {
+    adjustment = 0;
+  }
+
+  int oil_rate = 25;
+
+  if (who == 2) {
+    oil_rate = diff;
+  }
+
+  int rate = oil_rate * num_type_upgrade(who, "Oil Well") + 25 * adjustment; 
+ 
+  if (rate < 0) {// || who == 2) {
+    rate = 0;
+  }
+ 
+  for (i = 0; i < resource_types.length; i++) {
+    set_base_rate(who, resource_types[i], rate);
+  }
+
+  
+}

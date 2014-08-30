@@ -1,0 +1,71 @@
+include "ctw_lib.bhs"
+
+       conquest
+{
+new_world_rules();
+new_world_setup();
+missing_allies();
+
+labels {
+}
+  diff = get_difficulty();
+  infrastructure = get_attack_terr_str();
+  x = 0;
+  y = 0;
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  force_transport_ability(2);
+
+  set_time_limit(90);
+
+  city_id = find_city_id("Williamsburg");
+  x = object_position_x(1, city_id);
+  y = object_position_y(1, city_id);
+  if (diff > 3) {
+    create_unit_upgrade(1, x, y, "Elite Javelineers", 4);
+    create_unit_upgrade(1, x, y, "Pikemen", 4);
+    create_unit_upgrade(1, x, y, "Light Cavalry", 2);
+    create_unit_upgrade(1, x, y, "Explorer", 2);
+    create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+    create_unit_upgrade(1, x, y, "General", 1);
+  }
+
+  city_id = find_city_id("Yorktown");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+  create_unit_upgrade(2, x, y, "Javelineers", diff);
+  create_unit_upgrade(2, x, y, "Hoplites", diff);
+  create_unit_upgrade(2, x, y, "Scout", 2);
+  create_unit_upgrade(2, x, y, "General", 1);
+
+  x = 274;
+  y = 166;
+  create_unit_upgrade(2, x, y, "Sloop", 4);
+
+  if (diff < 3) {
+    place_building_upgrade(2, "Tower", "Yorktown");
+  }
+  else if (diff < 6) {
+    place_building_upgrade(2, "Tower", "Yorktown");
+    place_building_upgrade(2, "Tower", "Yorktown");
+    place_building_upgrade(2, "Barracks", "Yorktown");
+    place_building_upgrade(2, "Stable", "Yorktown");
+  }
+  else {
+    place_building_upgrade(2, "Tower", "Yorktown");
+    place_building_upgrade(2, "Tower", "Yorktown");
+    place_building_upgrade(2, "Barracks", "Yorktown");
+    place_building_upgrade(2, "Stable", "Yorktown");
+    place_building_upgrade(2, "Siege Factory", "Yorktown");
+    place_building_upgrade(2, "Fort", "Yorktown");
+  }
+
+  gain_tech(2, "Military");
+  gain_tech(2, "Military");
+  gain_tech(2, "Civic");
+  gain_tech(2, "Commerce");
+  gain_tech(2, "Science");
+}

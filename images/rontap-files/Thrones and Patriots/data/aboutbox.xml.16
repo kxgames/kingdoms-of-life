@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Scott Lewis (Big Huge Games) -->
+<!-- edited with XMLSPY v5 U (http://www.xmlspy.com) by Jason Coleman (private) -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION LEGAL element (only one)-->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<ROOT>
+	<LEGAL>
+		<LINE>© 2004 Big Huge Games, Inc. Portions © &amp;  (P) 2004 Microsoft Corporation. All rights reserved. Big Huge Games is the exclusive trademark of Big Huge Games, Inc. Microsoft, Windows, DirectDraw, DirectPlay, DirectSound, DirectX, the Microsoft Game Studios logo, MSN, Rise of Nations, and Thrones and Patriots are either registered trademarks or trademarks of Microsoft Corporation in the United States and/or other countries.</LINE>
+		<LINE>© 2004 Big Huge Games, Inc. Portions © &amp;  (P) 2004 Microsoft Corporation. All rights reserved. Big Huge Games is the exclusive trademark of Big Huge Games, Inc. Microsoft, Windows, DirectDraw, DirectPlay, DirectSound, DirectX, the Microsoft Game Studios logo, MSN, Rise of Nations, and Throne and Patriots are either registered trademarks or trademarks of Microsoft Corporation in the United States and/or other countries.</LINE>
+		<LINE>This product contains software technology licensed from GameSpy Industries, Inc. (c) 1999–2004 GameSpy Industries, Inc. GameSpy and the “Powered by GameSpy” design are trademarks of GameSpy Industries, Inc. All rights reserved.</LINE>
+		<LINE>© 2003 Big Huge Games, Inc. Parti del prodotto sono © e (P) 2003 Microsoft Corporation. Tutti i diritti riservati. Big Huge Games è un marchio esclusivo di Big Huge Games, Inc. Microsoft, Windows, DirectDraw, DirectPlay, DirectSound, DirectX, il logo di Microsoft Game Studios, MSN e Rise of Nations sono marchi o marchi registrati di Microsoft Corporation negli Stati Uniti e/o negli altri paesi.</LINE>
+		<SPACE></SPACE>
+		<LINE>Questo prodotto contiene tecnologia software concessa in licenza da GameSpy Industries, Inc. (c) 1999–2003 GameSpy Industries, Inc. GameSpy e il design “Powered by GameSpy” sono marchi di GameSpy Industries, Inc. Tutti i diritti riservati.</LINE>
+		<SPACE></SPACE>
+		<LINE>Avviso: questo programma è tutelato dalle leggi sul copyright, dalle leggi sui diritti d'autore e dalle disposizioni dei trattati internazionali. La riproduzione o distribuzione non autorizzata di questo programma, o di parte di esso, sarà perseguibile civilmente e penalmente nella misura massima consentita dalla legge in vigore.</LINE>
+		<SPACE></SPACE>
+		<LINE>Prodotto concesso in licenza. Numero di serie del prodotto: $PID0</LINE>
+	</LEGAL>
+	<REG_KEY>SOFTWARE\Microsoft\Microsoft Games\RiseOfNationsExpansion\1.0</REG_KEY>
+	<REG_KEY_TRIAL>SOFTWARE\Microsoft\Microsoft Games\RiseOfNations Trial\1.0</REG_KEY_TRIAL>
+	<ABOUTBOX name="replaywin" left="0" top="0" width="480" height="480">
+		<IFACETEX name="bg0" texture="TEX_CIV" left="0" top="147" width="4" height="4"></IFACETEX>
+		<IFACETEX name="bg1" texture="TEX_CIV" left="5" top="147" width="138" height="4"></IFACETEX>
+		<IFACETEX name="bg2" texture="TEX_CIV" left="144" top="147" width="4" height="4"></IFACETEX>
+		<IFACETEX name="bg3" texture="TEX_CIV" left="0" top="174" width="4" height="21"></IFACETEX>
+		<IFACETEX name="bg4" texture="TEX_CIV" left="5" top="174" width="138" height="21"></IFACETEX>
+		<IFACETEX name="bg5" texture="TEX_CIV" left="144" top="174" width="4" height="21"></IFACETEX>
+		<IFACETEX name="bg6" texture="TEX_CIV" left="0" top="218" width="4" height="4"></IFACETEX>
+		<IFACETEX name="bg7" texture="TEX_CIV" left="5" top="218" width="138" height="4"></IFACETEX>
+		<IFACETEX name="bg8" texture="TEX_CIV" left="144" top="218" width="4" height="4"></IFACETEX>
+		<IFACETEX name="butnormal0" texture="TEX_DIPLO" left="336" top="190" width="12" height="32"></IFACETEX>
+		<IFACETEX name="butnormal1" texture="TEX_DIPLO" left="349" top="190" width="149" height="32"></IFACETEX>
+		<IFACETEX name="butnormal2" texture="TEX_DIPLO" left="499" top="190" width="12" height="32"></IFACETEX>
+		<IFACETEX name="buthighlight0" texture="TEX_DIPLO" left="336" top="157" width="12" height="32"></IFACETEX>
+		<IFACETEX name="buthighlight1" texture="TEX_DIPLO" left="349" top="157" width="149" height="32"></IFACETEX>
+		<IFACETEX name="buthighlight2" texture="TEX_DIPLO" left="499" top="157" width="12" height="32"></IFACETEX>
+		<IFACETEX name="butdown0" texture="TEX_DIPLO" left="336" top="223" width="12" height="32"></IFACETEX>
+		<IFACETEX name="butdown1" texture="TEX_DIPLO" left="349" top="223" width="149" height="32"></IFACETEX>
+		<IFACETEX name="butdown2" texture="TEX_DIPLO" left="499" top="223" width="12" height="32"></IFACETEX>
+		<STYLE NO_SET_RENDERTARGET="1" CLIENTDRAG="1" TOP="1"></STYLE>
+		<IFACERECT name="title" left="4" top="18" right_inverse="4" height="24"></IFACERECT>
+		<IFACERECT name="version" left="4" top="50" right_inverse="4" height="16"></IFACERECT>
+		<IFACERECT name="pid" left="4" top="80" right_inverse="4" height="14"></IFACERECT>
+		<IFACERECT name="stringbox_back" left="14" top="106" right_inverse="14" bottom_inverse="42"></IFACERECT>
+		<IFACEBORDER name="misc">
+			<IFACETEX name="corner0" texture="TEX_CIV" left="377" top="258" width="3" height="3"></IFACETEX>
+			<IFACETEX name="corner1" texture="TEX_CIV" left="509" top="258" width="3" height="3"></IFACETEX>
+			<IFACETEX name="corner2" texture="TEX_CIV" left="509" top="287" width="3" height="3"></IFACETEX>
+			<IFACETEX name="corner3" texture="TEX_CIV" left="337" top="287" width="3" height="3"></IFACETEX>
+			<IFACETEX name="edge0" texture="TEX_CIV" left="381" top="258" width="127" height="3"></IFACETEX>
+			<IFACETEX name="edge1" texture="TEX_CIV" left="377" top="262" width="3" height="24"></IFACETEX>
+			<IFACETEX name="edge2" texture="TEX_CIV" left="381" top="287" width="127" height="3"></IFACETEX>
+			<IFACETEX name="edge3" texture="TEX_CIV" left="509" top="262" width="3" height="24"></IFACETEX>
+		</IFACEBORDER>
+		<IFACERECT name="misc_border" left="10" top="102" right_inverse="10" bottom_inverse="38"></IFACERECT>
+		<BUTTON name="close" title="Chiudi" right_inverse="14" bottom_inverse="11" width="-112" height="-19">
+			<FONTCOLOR r="255" g="255" b="255"></FONTCOLOR>
+			<FONT size="12"></FONT>
+		</BUTTON>
+		<BUTTON name="credits" title="Riconoscimenti" right_inverse="133" bottom_inverse="11" width="-112" height="-19">
+			<FONTCOLOR r="255" g="255" b="255"></FONTCOLOR>
+			<FONT size="12"></FONT>
+		</BUTTON>
+		<STRINGBOX name="legal" left="18" top="110" right_inverse="18" bottom_inverse="45">
+			<FONTCOLOR r="255" g="255" b="255"></FONTCOLOR>
+			<FONT size="12" style=""></FONT>
+		</STRINGBOX>
+	</ABOUTBOX>
+</ROOT>

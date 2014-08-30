@@ -1,0 +1,157 @@
+  include "game_structs.bhs"
+
+int scenario init_script ()
+{
+
+  String sub_goal1;
+  String sub_goal2;
+
+  ctw_set_ally("British", "Americans");
+  ctw_set_war("Spanish", "Aztecs");
+  ctw_set_war("Spanish", "Maya");
+  ctw_set_war("Spanish", "Inca");
+
+  player = ctw_get_player_nation();
+
+  int you_native;
+
+  if (player == "Inca" || player == "Maya" || player == "Aztecs" || player == "Lakota" || player == "Iroquois") {
+    you_native = 1;
+  }
+
+  if (you_native == 1) {
+    sub_goal1 = $S("Defeat all of the European nations and conquer more territory than the other Native American nations.");
+  }
+  else if (player == "Americans") {
+    sub_goal1 = $S("Drive all of the European nations from the Western Hemisphere and conquer all of North America.");
+    if (get_ctw_int("Independent") < 1) sub_goal2 = $S("Win your independence from the British.");
+  }
+  else {
+    sub_goal1 = $S("Collect 1000 Tribute, defeat all of the Native American nations, and conquer more territory than each of the other European nations and the Americans.");
+  }
+
+  if (sub_goal1 == "") {
+    sub_goal1 = $S("Expand your influence.");
+  }
+
+  ctw_set_sub_goals(sub_goal1, sub_goal2);
+
+  set_ctw_int("Britain", 1);
+  set_ctw_int("Holland", 1);
+  set_ctw_int("Spain", 1);
+  set_ctw_int("France", 1);
+  set_ctw_int("Peru", 1);
+  set_ctw_int("Yucatan", 1);
+  set_ctw_int("Mexico", 1);
+  set_ctw_int("Dakota", 1);
+  set_ctw_int("Lakes", 1);
+  set_ctw_int("Atlantic", 1);
+  set_ctw_int("Port", 1);
+
+  if (ctw_get_player_nation() == "Americans") {
+    set_player_no_negotiate($S("You have no authority to enter into negotiations with other nations. Until you gain your independence by declaring war on the British, the Crown will decide your foreign policy for you"));
+  } 
+  if (ctw_get_player_nation() == "British") {
+    ctw_center_camera("New England");
+  }
+  
+ String nations[] = ["Nubians", "Aztecs", "Americans", "British", "French", "Inca", "Iroquois", "Maya", "Spanish", "Lakota", "Dutch"];
+
+  //no gunpowder for natives
+  ctw_disable_gunpowder("Aztecs");
+  ctw_disable_gunpowder("Inca");
+  ctw_disable_gunpowder("Iroquois");
+  ctw_disable_gunpowder("Maya");
+  ctw_disable_gunpowder("Lakota");
+  
+  for (i = 0; i < nations.length; i++) {
+    if (nations[i] != ctw_get_player_nation()) {
+      set_no_attack(nations[i], "West Indies");
+      set_no_attack(nations[i], "Amazon");
+      set_no_attack(nations[i], "Oregon");
+      set_no_attack(nations[i], "Yukon");
+      set_no_attack(nations[i], "Chile");
+    }
+  }
+  
+  if (player != "British") {
+    set_no_attack("British", "Great Lakes");
+  }
+  if (player != "Iroquois") {
+    set_no_attack("Iroquois", "Quebec");
+  }
+  if (player != "Aztecs") {
+    set_no_attack("Aztecs", "Yucatan");
+  }
+  if (player != "Maya") {
+    set_no_attack("Maya", "Mexico");
+  }
+  if (player == "Americans") {
+    set_no_attack("Spanish", "Quebec");
+    set_no_attack("Nubians", "Quebec");
+    set_no_attack("French", "Quebec");
+    set_no_attack("Dutch", "Quebec");
+    set_no_attack("Iroquois", "Quebec");
+    set_no_attack("Lakota", "Quebec");
+    set_no_attack("Aztecs", "Quebec");
+    set_no_attack("Maya", "Quebec");
+    set_no_attack("Inca", "Quebec");
+  }
+
+  //British
+  if (ctw_get_player_nation() != "British") {
+    ctw_set_leader_name("British", $S("Henry VIII"));
+  }
+
+  //Dutch
+  if (ctw_get_player_nation() != "Dutch") {
+    ctw_set_leader_name("Dutch", $S("Willem I"));
+  }
+
+  //French
+  if (ctw_get_player_nation() != "French") {
+    ctw_set_leader_name("French", $S("Louis XII"));
+  }
+
+  //Spanish
+  if (ctw_get_player_nation() != "Spanish") {
+    ctw_set_leader_name("Spanish", $S("Carlos I"));
+  }
+
+  //Nubian Portugese
+  if (ctw_get_player_nation() != "Nubians") {
+    ctw_set_leader_name("Nubians", $S("Manuel"));
+  }
+
+  //Americans
+  if (ctw_get_player_nation() != "Americans") {
+    ctw_set_leader_name("Americans", $S("Sam Adams"));
+  }
+
+  //Maya
+  if (ctw_get_player_nation() != "Maya") {
+    ctw_set_leader_name("Maya", $S("Pakal"));
+  }
+
+  //Lakota
+  if (ctw_get_player_nation() != "Lakota") {
+    ctw_set_leader_name("Lakota", $S("Red Cloud"));
+  }
+
+  //Iroquois
+  if (ctw_get_player_nation() != "Iroquois") {
+    ctw_set_leader_name("Iroquois", $S("Blacksnake"));
+  }
+
+  //Inca
+  if (ctw_get_player_nation() != "Inca") {
+    ctw_set_leader_name("Inca", $S("Atahuallpa"));
+  }
+
+  //Aztecs
+  if (ctw_get_player_nation() != "Aztecs") {
+    ctw_set_leader_name("Aztecs", $S("Montezuma"));
+  }
+    
+  return true;
+}

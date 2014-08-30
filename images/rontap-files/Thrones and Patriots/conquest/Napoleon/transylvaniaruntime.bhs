@@ -1,0 +1,526 @@
+conquest
+{
+
+  labels {
+    FRENCH,
+    VILLAGERS,
+    DRACULA,
+  }
+ 
+  static int end_time = get_time_limit();
+  int cur_time;
+  static int count_time;
+  static capital_id = 0;
+  static int diff;
+  static String capital_name;
+  static int city_two_id = 0;
+  static String city_two;
+  static int loc_x;
+  static int loc_y;
+  int unit;
+  int your_unit;
+  int y;
+  int x;
+  static int x_diff;
+  static int y_diff;
+  static int unit_x;
+  static int unit_y;
+  static int x_check;
+  static int y_check;
+  static int x_distance_absl;
+  static int y_distance_absl;
+  static int x_distance;
+  static int y_distance;
+  static int building_x;
+  static int building_y;
+  static int x_check_absl = 0;
+  static int y_check_absl = 0;
+  static int who_unit;
+  static int general;
+  static int scout;
+  static int use_scout;
+  int catapult;
+  int cat_x;
+  int cat_y;
+  static int attack_count;
+  static int build_check;
+  static int max_attack_count;
+  static int def_cap_x;
+  static int def_cap_y;
+  
+  static int council = find_unit(2, "The Despot");
+  static int vlad = find_unit(2, "The Senator");
+
+  run_once {
+    building = find_build(DRACULA, "Fort");
+    def_cap_x = object_position_x(DRACULA, building);
+    def_cap_y = object_position_y(DRACULA, building);
+    diff = get_difficulty();
+    count_time = rand_int(35,65);
+    if (diff > 3 && diff < 6) set_timer("lcav", 45);
+    if (diff > 5) set_timer("lcav", 35);
+    gain_tech(DRACULA, "The Art of War");
+    gain_tech(FRENCH, "The Art of War");
+    give_good(FRENCH, "Food", 100);
+    give_good(FRENCH, "Timber", 250);
+    give_good(FRENCH, "Metal", 100);
+    give_good(FRENCH, "Wealth", 150);
+    enable_trigger("findCity");
+    set_timer("under_attack", 20);  
+    set_timer("build_units", 70);
+    set_timer("waves", 10);
+    enable_trigger("army_of");
+    //enable_trigger("attack_waves");
+    if (diff < 3) max_attack_count = 5;
+    else if (diff == 3) max_attack_count = 6;
+    else if (diff == 4) max_attack_count = 7;
+    else if (diff == 5) max_attack_count = 8;
+    else if (diff == 6) max_attack_count = 9;
+    ctw_add_objective_text($S("Capture the Village Council's (Blue) Capital."), 1, "");
+    ctw_add_objective_text($S("Destroy Vlad Tepes's (Purple) Fort."), 2, "");
+    unit_eject_order(3, vlad);
+  }
+
+  trigger (num_cities(1) > 0) {
+    city_name = find_city_name(1);
+    set_capital(1, city_name);
+  }
+
+  trigger (num_units(DRACULA) == num_type(DRACULA, "Spy") && num_buildings(DRACULA) == 0) {
+    victory(FRENCH);
+  }
+  
+  if (num_buildings(DRACULA) == 0) {
+    //defeat(DRACULA);
+  }
+
+  for (i = 0; i < num_type(3, "Citizen"); i++) {
+    unit = find_unit(3, "Citizen");
+    citizen_to_militia(3, unit);
+  }
+
+  for (i = 2; i < num_type(2, "Citizen"); i++) {
+    unit = find_unit(2, "Citizen");
+    citizen_to_militia(2, unit);
+  }
+
+  trigger (is_seen(1, 2, council)) {
+    x = object_position_x(2, council);
+    y = object_position_y(2, council);
+    jump_camera(x+10,y);
+    if (popup_choice($S("Thank goodness an army has arrived! The terrible Lord Vlad Tepes (Purple) is threatening our village. We are afraid that if we do not get help, he will soon take us over. Will you lend us your support?"), $S("Agree"), $S("Disagree"))) {
+      make_alliance(1,2);
+      remove_objective(1);
+      //ctw_add_objective_text($S("Destroy purple's Fort"), 2, "");
+      popup_dialog($S("Thank you so much. We shall give you what little help we have to offer."));
+      for (i = 0; i < num_type(2, "Militia"); i++) {
+        unit = find_unit(2, "Militia");
+        switch_teams(1,2,unit);
+      }
+      for (i = 0; i < num_type(2, "Minuteman"); i++) {
+        unit = find_unit(2, "Minuteman");
+        switch_teams(1,2,unit);
+      }
+    }
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) defeat(FRENCH);
+
+  if (timer_expired("waves")) {
+        who = 3;
+    //find human army
+    who_unit = find_unit(1, "");
+    scout = find_unit(1, "scout");
+    general = find_unit(1, "general");
+    use_scout = rand_int(1,5);
+    if (use_scout < 2) who_unit = scout;
+    unit_x = object_position_x(1, who_unit);
+    unit_y = object_position_y(1, who_unit);
+    x_check = unit_x;
+    y_check = unit_y;
+
+    /*if (x_check == 0 && y_check == 0) {
+      who_unit = find_unit(1, "");
+      x_check = object_position_x(2, who_unit);
+      y_check = object_position_y(2, who_unit);
+    }*/
+    //find place spot for army
+    building_id = find_military_build(who);
+    building_x = object_position_x(who, building_id);
+    building_y = object_position_y(who, building_id);
+    x_distance = x_check - building_x;
+    y_distance = y_check - building_y;
+    x_distance_absl = absl_int(x_distance);
+    y_distance_absl = absl_int(y_distance);
+    if (x_check_absl > y_check_absl) {
+      if ((x_check - building_x) > 0) {
+        x = x_check - 20;
+        if (age(DRACULA) >= 2) {
+          x = x - 5;
+        }
+        if (age(DRACULA) >= 5) {
+          x = x - 2;
+        }
+        if (age(DRACULA) >= 6) {
+          x = x - 2;
+        }
+        if (age(DRACULA) >= 7) {
+          x = x - 3;
+        }
+        if (any_object_near(FRENCH, 1, x, y, 5)) {
+          x = x_check - 25;
+        }
+      }
+      else {
+        x = x_check + 20;
+        if (age(DRACULA) >= 2) {
+          x = x + 5;
+        }
+        if (age(DRACULA) >= 5) {
+          x = x + 2;
+        }
+        if (age(DRACULA) >= 6) {
+          x = x + 2;
+        }
+        if (age(DRACULA) >= 7) {
+          x = x + 3;
+        }
+        if (any_object_near(FRENCH, 1, x, y, 5)) {
+          x = x_check + 25;
+        }
+      }
+      if ((y_check - building_y) > 0) {
+        y = y_check - 15;
+        if (age(DRACULA) >= 2) {
+          y = y - 5;
+        }
+        if (age(DRACULA) >= 5) {
+          y = y - 2;
+        }
+        if (age(DRACULA) >= 6) {
+          y = y - 2;
+        }
+        if (age(DRACULA) >= 7) {
+          y = y - 3;
+        }
+        if (any_object_near(FRENCH, 1, x, y, 5)) {
+          y = x_check - 20;
+        }
+      }
+      else {
+        y = y_check + 15;
+        if (age(DRACULA) >= 2) {
+          y = y + 5;
+        }
+        if (age(DRACULA) >= 5) {
+          y = y + 2;
+        }
+        if (age(DRACULA) >= 6) {
+          y = y + 2;
+        }
+        if (age(DRACULA) >= 7) {
+          y = y + 3;
+        }
+        if (any_object_near(FRENCH, 1, x, y, 5)) {
+          y = y_check - 20;
+        }
+      }
+    }
+    else {
+      if ((y_check - building_y) > 0) {
+        y = y_check - 20;
+        if (age(DRACULA) >= 2) {
+          y = y - 5;
+        }
+        if (age(DRACULA) >= 5) {
+          y = y - 2;
+        }
+        if (age(DRACULA) >= 6) {
+          y = y - 2;
+        }
+        if (age(DRACULA) >= 7) {
+          y = y - 3;
+        }
+        if (any_object_near(FRENCH, 1, x, y, 5)) {
+          y = y_check - 25;
+        }
+      }
+      else {
+        y = y_check + 20;
+        if (age(DRACULA) >= 2) {
+          y = y + 5;
+        }
+        if (age(DRACULA) >= 5) {
+          y = y + 2;
+        }
+        if (age(DRACULA) >= 6) {
+          y = y + 2;
+        }
+        if (age(DRACULA) >= 7) {
+          y = y + 3;
+        }
+        if (any_object_near(FRENCH, 1, x, y, 5)) {
+          y = y_check + 25;
+        }
+      }
+      if ((x_check - building_x) > 0) {
+        x = x_check - 15;
+        if (age(DRACULA) >= 2) {
+          x = x - 5;
+        }
+        if (age(DRACULA) >= 5) {
+          x = x - 2;
+        }
+        if (age(DRACULA) >= 6) {
+          x = x - 2;
+        }
+        if (age(DRACULA) >= 7) {
+          x = x - 3;
+        }
+        if (any_object_near(FRENCH, 1, x, y, 5)) {
+          x = x_check - 20;
+        }
+      }
+      else {
+        x = x_check + 15;
+        if (age(DRACULA) >= 2) {
+          x = x + 5;
+        }
+        if (age(DRACULA) >= 5) {
+          x = x + 2;
+        }
+        if (age(DRACULA) >= 6) {
+          x = x + 2;
+        }
+        if (age(DRACULA) >= 7) {
+          x = x + 3;
+        }
+        if (any_object_near(FRENCH, 1, x, y, 5)) {
+          x = x_check - 20;
+        }
+      }
+    }
+    if (x < 0) x = 1;
+    if (y < 0) y = 1;
+    if (!map_is_land(x, y)) {
+      x = def_cap_x + 3;
+      y = def_cap_y;
+    }
+    //easiest, easy, moderate
+    if (diff < 4 && attack_count < 3) {
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);    
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+    }
+    else if (diff < 4 && attack_count < 5) {
+      unit = create_unit(DRACULA, x, y, "light horse", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian archers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+    }
+    else if (diff < 4 && attack_count < 7) {
+      unit = create_unit(DRACULA, x, y, "barbarian phalanx", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian phalanx", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+    }
+    //tough
+    else if (diff == 4 && attack_count < 3) {
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+    }
+    else if (diff == 4 && attack_count < 5) {
+      unit = create_unit(DRACULA, x, y, "light horse", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "light horse", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "light horse", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      if (diff == 4) {
+        unit = create_unit(DRACULA, x, y, "light horse", 1);
+        unit_attack_to_order(who, unit, x_check, y_check);
+      }
+    }
+    else if (diff == 4 && attack_count < 7) {
+      unit = create_unit(DRACULA, x, y, "barbarian phalanx", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian phalanx", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+    }
+    //tougher, toughest
+    else if (diff > 4 && attack_count < 4) {
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check); 
+    }
+    else if (diff > 4 && attack_count < 7) {
+      unit = create_unit(DRACULA, x, y, "barbarian phalanx", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian phalanx", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "barbarian javelineers", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+    }
+    else if (diff > 4 && attack_count < 9) {
+      unit = create_unit(DRACULA, x, y, "light horse", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      unit = create_unit(DRACULA, x, y, "light horse", 1);
+      unit_attack_to_order(who, unit, x_check, y_check);
+      catapult = find_unit(FRENCH, "catapult");
+      cat_x = object_position_x(FRENCH, catapult);
+      cat_y = object_position_y(FRENCH, catapult);
+      group_attack_to_order(who, cat_x, cat_y);
+    }
+
+    attack_count++;
+    set_timer("waves", 13);
+  }
+
+  trigger army_of(num_unit_category(FRENCH, "Artillery") == 0 && num_type_upgrade(FRENCH, "barbarian phalanx") == 0 && num_unit_category(FRENCH, "Mounted") == 0 && num_cities(FRENCH) == 0) {
+    unit = find_unit(FRENCH, "");
+    scout = find_unit(FRENCH, "scout");
+    who = 2;
+    if (unit == scout) unit = find_unit(FRENCH, "");
+    x = object_position_x(FRENCH, unit);
+    y = object_position_y(FRENCH, unit);
+      unit = create_unit(DRACULA, x-10, y-10, "light horse", 1);
+      unit_attack_to_order(who, unit, x,y);
+      unit = create_unit(DRACULA, x-10, y-10, "light horse", 1);
+      unit_attack_to_order(who, unit, x,y);
+      unit = create_unit(DRACULA, x-10, y-10, "light horse", 1);
+      unit_attack_to_order(who, unit, x,y);
+      unit = create_unit(DRACULA, x-10, y-10, "light horse", 1);
+      unit_attack_to_order(who, unit, x,y);
+      unit = create_unit(DRACULA, x-10, y-10, "light horse", 1);
+      unit_attack_to_order(who, unit, x,y);
+      unit = create_unit(DRACULA, x-10, y-10, "knight", 1);
+      unit_attack_to_order(who, unit, x,y);
+      unit = create_unit(DRACULA, x-10, y-10, "knight", 1);
+      unit_attack_to_order(who, unit, x,y);
+      unit = create_unit(DRACULA, x-10, y-10, "knight", 1);
+      unit_attack_to_order(who, unit, x,y);     
+    disable_trigger("army_of");
+  }
+
+  if (timer_expired("build_units")) {
+    train_unit_with_cost(DRACULA, 1, "barbarian phalanx");
+    train_unit_with_cost(DRACULA, 1, "barbarian javelineers");
+    train_unit_with_cost(DRACULA, 1, "barbarian archers");
+    train_unit_with_cost(DRACULA, 1, "light horse");
+    train_unit_with_cost(DRACULA, 1, "cataphract");
+    train_unit_with_cost(DRACULA, 1, "horse barbarian archers");
+    set_timer("build_units", 20);
+  }
+ 
+
+  if (timer_expired("under_attack")) { 
+    //if (any_object_near_build(1, 20, 2, capital_id, 5)) {
+    for (i = 0; i < 1; i++) {
+      build_check = find_build(DRACULA, "");
+      if (object_health(DRACULA, build_check) < 100) {
+        clear_group(DRACULA);
+        for (n = num_military_units(DRACULA); n > 0; n--) {
+          unit = find_military(DRACULA);
+          add_to_group(DRACULA, unit);
+        }
+        your_unit = find_military(FRENCH);
+        x = object_position_x(FRENCH, your_unit);
+        y = object_position_y(FRENCH, your_unit);
+        group_stance_order(DRACULA, "Aggressive");
+        group_attack_to_order(DRACULA, x, y);
+      }
+    }
+    set_timer("under_attack", 1);
+  }
+
+  trigger findCity(find_city_with_num(FRENCH, 1)) {
+    city_two = find_city_with_num(FRENCH, 1);
+    city_two_id = find_city_id(city_two);
+    city_assimilate(1, city_two);
+    loc_x = object_position_x(FRENCH, city_two_id);
+    loc_y = object_position_y(FRENCH, city_two_id);
+    create_unit(FRENCH, loc_x, loc_y, "citizen", 5);
+    disable_trigger("findCity");
+  }
+
+  if (timer_expired("lcav")) {
+    if (find_unit(FRENCH, "catapult")) {
+      cat = find_unit(FRENCH, "catapult");
+      x = object_position_x(FRENCH, cat);
+      y = object_position_y(FRENCH, cat);
+      x = x + (rand_int(17,24));
+      y = y + (rand_int(8,11));
+      if (age(DRACULA) >= 2) {
+        x = x + 3;
+        y = y + 1;
+      }
+      if (age(DRACULA) >= 5) {
+        x = x + 3;
+        y = y + 1;
+      }
+      if (age(DRACULA) >= 6) {
+        x = x + 3;
+        y = y + 1;
+      }
+      if (age(DRACULA) >= 7) {
+        x = x + 3;
+        y = y + 1;
+      }
+      if (x < 0) x = 1;
+      if (y < 0) y = 1;
+      if (!map_is_land(x, y)) {
+        x = def_cap_x + 3;
+        y = def_cap_y;
+      }
+      if (diff >= 2 && age(DRACULA) < 3) {
+        for (i = diff - 3; i > 0; i--) {
+          light_cav = create_unit_upgrade(DRACULA, x, y, "light horse", 1);
+          unit_attack_order(DRACULA, light_cav, FRENCH, cat);
+        }
+      }
+      else if (diff >= 2 && age(DRACULA) > 2) {
+        for (i = diff - 2; i > 0; i--) {
+          light_cav = create_unit_upgrade(DRACULA, x, y, "light horse", 1);
+          unit_attack_order(DRACULA, light_cav, FRENCH, cat);
+        }
+      }
+      count_time = rand_int(45,90);
+      set_timer("lcav", count_time);
+    }
+    else if (find_unit(FRENCH, "supply wagon")) {
+      sw = find_unit(FRENCH, "supply wagon");
+      x = object_position_x(FRENCH, sw);
+      y = object_position_y(FRENCH, sw);
+      x = x + (rand_int(17,24));
+      y = y + (rand_int(8,11));
+      if (diff >= 2) {
+        for (i = (diff - 1); i > 0; i--) {
+          light_cav = create_unit_upgrade(DRACULA, x, y, "light horse", 1);
+          unit_attack_order(DRACULA, light_cav, FRENCH, sw);
+        }
+      }
+      count_time = rand_int(45,75);
+      set_timer("lcav", 45);
+    }
+  }
+
+
+  trigger (num_military_units(FRENCH) == 0) {
+    victory(DRACULA);
+  }
+
+
+}

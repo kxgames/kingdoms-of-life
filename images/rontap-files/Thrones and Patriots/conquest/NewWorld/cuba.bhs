@@ -1,0 +1,51 @@
+include "ctw_lib.bhs"
+
+       conquest
+{
+new_world_rules();
+
+  labels {
+    ATTACKER,
+    DEFENDER,
+  }
+  
+  static int end_time = get_time_limit();
+  int cur_time;
+
+  run_once {
+
+  }
+  
+  cur_time = time_min();
+  if (cur_time >= end_time) {
+    defeat(ATTACKER);
+  }
+
+  if (!pop_cap_warning(DEFENDER)) {
+    for (n = num_type(DEFENDER, "Barracks"); n > 0; n--) {
+      building = find_build(DEFENDER, "Barracks");
+      if (num_type_queued(DEFENDER, building, "") > 0) {
+        unit = num_type_queued(DEFENDER, building, "");
+        clear_build_queue(DEFENDER, building, 0);
+        x = object_position_x(DEFENDER, building) + 2;
+        y = object_position_y(DEFENDER, building);
+        create_unit_upgrade(DEFENDER, x, y, "Tercios", unit);
+        take_good(DEFENDER, "Food", 15);
+        take_good(DEFENDER, "Metal", 15);
+      }
+    }
+    for (n = num_type(DEFENDER, "Stable"); n > 0; n--) {
+      building = find_build(DEFENDER, "Stable");
+      if (num_type_queued(DEFENDER, building, "") > 0) {
+        unit = num_type_queued(DEFENDER, building, "");
+        clear_build_queue(DEFENDER, building, 0);
+        x = object_position_x(DEFENDER, building) + 2;
+        y = object_position_y(DEFENDER, building);
+        create_unit_upgrade(DEFENDER, x, y, "Conquistador", unit);
+        take_good(DEFENDER, "Wealth", 20);
+        take_good(DEFENDER, "Timber", 20);
+      }
+    }    
+  }
+
+}

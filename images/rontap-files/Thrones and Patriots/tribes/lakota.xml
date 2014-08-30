@@ -1,0 +1,43 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Lakota">
+  <LEADERS>
+    <LEADER>Crazy Horse</LEADER>
+    <LEADER>Sitting Bull</LEADER>
+    <LEADER>Red Cloud</LEADER>
+    <LEADER>Two Strike</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Maka Sica</CITY>
+    <CITY>Mnisota</CITY>
+    <CITY>Wakpala Sapa</CITY>
+    <CITY>Shakopee</CITY>
+    <CITY>Tetonwan</CITY>
+    <CITY>Sisitonwan</CITY>
+    <CITY>Payabya</CITY>
+    <CITY>Pezhuta Zi</CITY>
+    <CITY>Oglala</CITY>
+    <CITY>Tapisleca</CITY>
+    <CITY>Kiyaksa</CITY>
+    <CITY>Wajaje</CITY>
+    <CITY>Itesica</CITY>
+    <CITY>Oyuhpe</CITY>
+    <CITY>Wagluhe</CITY>
+    <CITY>Sihasapa</CITY>
+    <CITY>Lower Sichangu</CITY>
+    <CITY>Upper Sichangu</CITY>
+    <CITY>Miniconjou</CITY>
+    <CITY>Oohenonpa</CITY>
+    <CITY>Wahghaoju</CITY>
+    <CITY>Mancato</CITY>
+    <CITY>Magatanka</CITY>
+    <CITY>Paha Sapa</CITY>
+    <CITY>Onyuwega</CITY>
+    <CITY>Mandan</CITY>
+    <CITY>Hidatsa</CITY>
+    <CITY>Mankhahto</CITY>
+    <CITY>Minneopa</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>4 Iroquois</UNIT_CONTINENT>
+  <BUILD_CONTINENT>6 Iroquois</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>6 Iroquois</BACKUP_BUILD_CONTINENT>
+</TRIBE>

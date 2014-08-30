@@ -1,0 +1,96 @@
+include "ctw_lib.bhs"
+
+conquest {
+if (get_ctw_campaign() == "Napoleon") {
+  napoleon_rules();
+}
+  labels {
+  }
+  diff = get_difficulty();
+
+  infrastructure = get_attack_terr_str();
+
+  set_time_limit(20);
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  /////////////////////////////////////////////////////
+  //create grand army
+  x = 229;
+  y = 387;
+  dir = 0;
+
+  jump_camera(x, y);
+  
+  disable_type("Small City");
+
+  create_unit_in_group(1, x, y, "Musketeers", 15);
+  create_unit_in_group(1, x, y, "Fusiliers", 15);
+  create_unit_in_group(1, x, y, "Hussar", 5);
+  create_unit_in_group(1, x, y, "Horse Guard Grenadier", 5);
+  create_unit_in_group(1, x, y, "Carabineer", 5);
+  create_unit_in_group(1, x, y, "Cannon", 10);
+  create_unit_in_group(1, x, y, "Supply Wagon", 5);
+  create_unit_in_group(1, x, y, "Explorer", 4);
+
+  //napoleon
+  create_unit_in_group(1, x, y, "Napoleon", 1);
+
+  group_jump_move(1, x, y, 5);
+  /////////////////////////////////////////////////////
+  switch (diff) {
+    case 3:
+      set_good(2, "Food", 400);
+      set_good(2, "Timber", 400);
+      set_good(2, "Metal", 400);
+      set_good(2, "Wealth", 400);
+      set_good(2, "Knowledge", 200);
+      break;
+    case 4:
+      set_good(2, "Food", 800);
+      set_good(2, "Timber", 800);
+      set_good(2, "Metal", 800);
+      set_good(2, "Wealth", 800);
+      set_good(2, "Knowledge", 400);
+      break;
+    case 5:
+      set_good(2, "Food", 1000);
+      set_good(2, "Timber", 1000);
+      set_good(2, "Metal", 1000);
+      set_good(2, "Wealth", 1000);
+      set_good(2, "Knowledge", 800);
+      break;
+    case 6:
+      set_good(2, "Food", 2000);
+      set_good(2, "Timber", 2000);
+      set_good(2, "Metal", 2000);
+      set_good(2, "Wealth", 2000);
+      set_good(2, "Knowledge", 1600);
+      break;
+    default:
+      break;
+  }
+
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Tower", "Moscow");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Tower", "Novgorod");
+    place_building_upgrade(2, "Tower", "Borodino");
+    place_building_upgrade(2, "Tower", "Smolensk");
+    place_building_upgrade(2, "Tower", "Moscow");
+    place_building_upgrade(2, "Tower", "Moscow");
+  }
+  else {
+    place_building_upgrade(2, "Tower", "Novgorod");
+    place_building_upgrade(2, "Tower", "Borodino");
+    place_building_upgrade(2, "Tower", "Smolensk");
+    place_building_upgrade(2, "Tower", "Smolensk");
+    place_building_upgrade(2, "Tower", "Moscow");
+    place_building_upgrade(2, "Tower", "Moscow");
+    place_building_upgrade(2, "Tower", "Moscow");
+  }
+  gain_tech(1, "Military");
+}

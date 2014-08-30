@@ -1,0 +1,51 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Inca">
+  <LEADERS>
+    <LEADER>Emperor Manco Capac</LEADER>
+    <LEADER>Emperor Viracocha Inca</LEADER>
+    <LEADER>Emperor Pachacuti</LEADER>
+    <LEADER>Emperor Topa Inca</LEADER>
+    <LEADER>Emperor Huayna Capac</LEADER>
+    <LEADER>Emperor Huascar</LEADER>
+    <LEADER>Emperor Atahualpa</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Cuzco</CITY>
+    <CITY>Chan Chan</CITY>
+    <CITY>Quito</CITY>
+    <CITY>Vilcashuaman</CITY>
+    <CITY>Ayaviri</CITY>
+    <CITY>Chucuito</CITY>
+    <CITY>Huanuco Pampa</CITY>
+    <CITY>Cajamarca</CITY>
+    <CITY>Cusibamba</CITY>
+    <CITY>Tumbes</CITY>
+    <CITY>Tomebamba</CITY>
+    <CITY>Machu Picchu</CITY>
+    <CITY>Pucara</CITY>
+    <CITY>Ollantaytambo</CITY>
+    <CITY>Tiahuanaco</CITY>
+    <CITY>Limatambo</CITY>
+    <CITY>Incahuasi</CITY>
+    <CITY>Pachacamac</CITY>
+    <CITY>Bombon</CITY>
+    <CITY>Huanuco</CITY>
+    <CITY>Cuenca</CITY>
+    <CITY>Pikillqta</CITY>
+    <CITY>Nazca</CITY>
+    <CITY>Azanqaro</CITY>
+    <CITY>Huamachuco</CITY>
+    <CITY>Cochabamba</CITY>
+    <CITY>Hatuncolla</CITY>
+    <CITY>Cotopachi</CITY>
+    <CITY>Raqchi</CITY>
+    <CITY>Huaraz  </CITY>
+    <CITY>Vilcaconga</CITY>
+    <CITY>Ayacucho</CITY>
+    <CITY>Jauja</CITY>
+    <CITY>Huaylas</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+  <BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,60 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Greeks">
+  <LEADERS>
+    <LEADER>Alexander of Lyncestis</LEADER>
+    <LEADER>Attalus</LEADER>
+    <LEADER>Perdiccas</LEADER>
+    <LEADER>Bardylis</LEADER>
+    <LEADER>Agathocles</LEADER>
+    <LEADER>Timotheus</LEADER>
+    <LEADER>Amyntas</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Corinth</CITY>
+    <CITY>Knossos</CITY>
+    <CITY>Argos</CITY>
+    <CITY>Chalcis</CITY>
+    <CITY>Iraklion</CITY>
+    <CITY>Lindos</CITY>
+    <CITY>Ialysus</CITY>
+    <CITY>Samos</CITY>
+    <CITY>Phocaea</CITY>
+    <CITY>Chios</CITY>
+    <CITY>Thera</CITY>
+    <CITY>Melos</CITY>
+    <CITY>Pharsalus</CITY>
+    <CITY>Paros</CITY>
+    <CITY>Thessalonica</CITY>
+    <CITY>Demetrias</CITY>
+    <CITY>Delos</CITY>
+    <CITY>Zacynthus</CITY>
+    <CITY>Elatea</CITY>
+    <CITY>Erythrae</CITY>
+    <CITY>Mantinea</CITY>
+    <CITY>Syracuse</CITY>
+    <CITY>Corcyra</CITY>
+    <CITY>Potidaea</CITY>
+    <CITY>Heraclea</CITY>
+    <CITY>Apollonia</CITY>
+    <CITY>Epidamnus</CITY>
+    <CITY>Patrai</CITY>
+    <CITY>Chalcedon</CITY>
+    <CITY>Cos</CITY>
+    <CITY>Cnidus</CITY>
+    <CITY>Priene</CITY>
+    <CITY>Colophon</CITY>
+    <CITY>Clazomenae</CITY>
+    <CITY>Teos</CITY>
+    <CITY>Samos</CITY>
+    <CITY>Mytilene</CITY>
+    <CITY>Myrina</CITY>
+    <CITY>Thasus</CITY>
+    <CITY>Samothrace</CITY>
+    <CITY>Piraeus</CITY>
+    <CITY>Zarax</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

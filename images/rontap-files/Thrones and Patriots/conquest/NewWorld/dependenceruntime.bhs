@@ -1,0 +1,37 @@
+include "ctw_lib.bhs"
+
+       conquest
+{
+new_world_rules();
+
+static int diff = get_difficulty();
+
+run_once {
+  new_world_setup();
+  ctw_add_objective_text($S("Capture the enemy capital."), "Hint_id", 0);
+  set_timer("BR", 480/diff);
+}
+
+trigger AmericanReinforcements(timer_expired("BR"))
+{
+  city_id = -1;
+  x = 8;
+  y = 9;
+
+  if (num_type_upgrade(2, "Minuteman") < diff * 4) {
+    clear_group(2);
+    create_unit_upgrade(2, x, y, "Minuteman", diff-2);
+    create_unit_upgrade(2, x, y, "Javelineers", diff-2);
+    create_unit_upgrade(2, x, y, "Supply Wagon", 1);
+    create_unit_upgrade(2, x, y, "General", 1);
+  }
+
+  enable_trigger("AmericanReinforcements");
+  set_timer("BR", 800/diff);
+}
+
+if (time() >= get_time_limit()) {
+  defeat(1);
+}
+
+}

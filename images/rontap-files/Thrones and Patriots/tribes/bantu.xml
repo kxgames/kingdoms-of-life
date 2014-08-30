@@ -1,0 +1,50 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Bantu">
+  <LEADERS>
+    <LEADER>King Shaka</LEADER>
+    <LEADER>King Cetswayo</LEADER>
+    <LEADER>King Dingane</LEADER>
+    <LEADER>Queen Nandi</LEADER>
+    <LEADER>Queen Mkabi</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Great Zimbabwe</CITY>
+    <CITY>Kilwa</CITY>
+    <CITY>Gokomere</CITY>
+    <CITY>Mabveni</CITY>
+    <CITY>Malapati</CITY>
+    <CITY>Phalaborwa</CITY>
+    <CITY>Zaka</CITY>
+    <CITY>Sofala</CITY>
+    <CITY>Matola</CITY>
+    <CITY>Khami</CITY>
+    <CITY>Dambwa</CITY>
+    <CITY>Gundu</CITY>
+    <CITY>Lubusi</CITY>
+    <CITY>Dambarare</CITY>
+    <CITY>Kalundu</CITY>
+    <CITY>Ingombe</CITY>
+    <CITY>Kapwirimbwe</CITY>
+    <CITY>Chondwe</CITY>
+    <CITY>Kipushi</CITY>
+    <CITY>Thandwe</CITY>
+    <CITY>Kansanshe</CITY>
+    <CITY>Luanzaf</CITY>
+    <CITY>Bwana Mkubwa</CITY>
+    <CITY>Mawudzu</CITY>
+    <CITY>Kapeni</CITY>
+    <CITY>Sanga</CITY>
+    <CITY>Kamnama</CITY>
+    <CITY>Nkope</CITY>
+    <CITY>Kalambo</CITY>
+    <CITY>Uvenza</CITY>
+    <CITY>Kwale</CITY>
+    <CITY>Mapungubwe</CITY>
+    <CITY>Ivuna</CITY>
+    <CITY>Manekweni</CITY>
+    <CITY>Nalatale</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>1 Arab    </UNIT_CONTINENT>
+  <BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

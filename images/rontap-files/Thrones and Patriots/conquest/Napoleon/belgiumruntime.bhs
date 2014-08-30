@@ -1,0 +1,402 @@
+ include "game_structs.bhs"
+
+ scenario
+{
+
+labels {
+  //Add any constant labels here in a comma separated list.
+}
+
+static napoleon_id = -1;
+static messenger_id = -1;
+static diff = get_difficulty();
+static fx = 234;
+static fy = 194;
+static dx = 0;
+static dy = 0;
+static bx = 0;
+static by = 0;
+static UnitGroup dudes;
+static String blue_leader = get_leader_name(2);
+static String unit_name;
+
+run_once {
+  disable_all_triggers();
+  add_visibility(2, 1);
+
+  unit_name = "Musketeers";
+
+  dudes.nation = 2;
+
+  napoleon_id = find_unit(1, "Napoleon");
+
+  city_id = find_city_id("Dunkirk");
+  dx = object_position_x(1, city_id);
+  dy = object_position_y(1, city_id);
+  jump_camera(dx, dy);
+
+  city_id = find_city_id("Brussels");
+  bx = object_position_x(8, city_id);
+  by = object_position_y(8, city_id);
+
+  ctw_add_objective_text($S("Capture the enemy's capital."), "Hint_id", 0);
+  ctw_add_objective_text(parse("Destroy all of $STRING0's (Blue) buildings.", blue_leader), "Hint2_id", 0);
+
+  enable_trigger("AustriaInit");
+  if (diff > 3) {
+    enable_trigger("Reinforcements");
+  }
+  enable_trigger("Negotiations");
+
+  set_timer("UA", 10);
+  enable_trigger("UnderAttack");
+  set_timer("BH", 10);
+  enable_trigger("BuildingHeal");
+  set_timer("GA", 920/diff);
+  enable_trigger("GoAttack");
+
+  disable_production_ai(8);
+  set_timer("BelgiansLive", 840);
+}
+
+if (timer_expired("BelgiansLive") || city_captured(8, "")) {
+  enable_production_ai(8);
+}
+
+trigger AustriaInit()
+{
+  messenger_id = find_unit(2, "General");
+  unit_move_order(2, messenger_id, dx, dy);
+}
+
+trigger Reinforcements(num_type_with_queued(2, unit_name) < 1)
+{
+  give_good(2, "Food", 600);
+  give_good(2, "Timber", 500);
+  give_good(2, "Metal", 400);
+  give_good(2, "Wealth", 400);
+  clear_group(2);
+  for (i = 0; i < num_type(2, "Barracks"); i++) {
+    if (diff < 3 && i > 1) {
+      break;
+    }
+    build_id = find_build(2, "Barracks");
+    if (num_type_with_queued(2, "Musketeers") < diff) {
+      train_unit_at(2, 1, "Musketeers", build_id);
+      train_unit_at(2, 1, "Fusiliers", build_id);
+    }
+  }
+  for (i = 0; i < num_type(2, "Stable"); i++) {
+    if (diff < 3 && i > 1) {
+      break;
+    }
+    build_id = find_build(2, "Stable");
+    if (i%2 == 0) {
+      train_unit_at(2, 1, "Hussar", build_id);
+    }
+    else {
+      train_unit_at(2, 1, "Cuirassier", build_id);
+      train_unit_at(2, 1, "Carabineer", build_id);
+    }
+  }
+  for (i = 0; i < num_type(2, "Siege Factory"); i++) {
+    if (diff < 3 && i > 1) {
+      break;
+    }
+    build_id = find_build(2, "Siege Factory");
+    if (i == 0) {
+      train_unit_at(2, 1, "Supply Wagon", build_id);
+      x = object_position_x(2, build_id);
+      y = object_position_y(2, build_id);
+      create_unit_in_group(2, x, y, "General", 1);
+    }
+    train_unit_at(2, 1, "Cannon", build_id);    
+  }
+
+  if (!city_assimilated_by(8, 1, "Brussels")) {
+    group_move_order(2, bx, by);
+  }
+
+  if (num_type(2, "Barracks") < 1) {
+    if (num_type(2, "Stable") < 1) {
+      unit_name = "Cannon";
+    }
+    else {
+      unit_name = "Hussar";
+    }
+  }
+  else {
+    unit_name = "Musketeers";
+  }
+
+  if (num_type(2, "Barracks") > 0 || num_type(2, "Stable") > 0 || num_type(2, "Siege Factory") > 0) {
+    enable_trigger("Reinforcements");
+  }
+}
+
+if (!city_assimilated_by(8, 1, "Brussels")) {
+  built_id = get_last_unit_built(2);
+  if (built_id > -1) {
+    unit_move_order(2, built_id, bx, by);
+  }
+}
+
+trigger UnderAttack(timer_expired("UA")) {
+  for (i = 0; i < num_type(2, "Barracks"); i++) {
+    build_id = find_build(2, "Barracks");
+    if (object_health(2, build_id) < 80) {
+      give_good(2, "Food", 400);
+      give_good(2, "Timber", 200);
+      give_good(2, "Metal", 200);
+      train_unit_at(2, 2, "Musketeers", build_id);
+      train_unit_at(2, 2, "Fusiliers", build_id);
+    }
+  }
+  for (i = 0; i < num_type(2, "Stable"); i++) {
+    build_id = find_build(2, "Stable");
+    if (object_health(2, build_id) < 80) {
+      give_good(2, "Food", 200);
+      give_good(2, "Timber", 400);
+      give_good(2, "Metal", 200);
+      give_good(2, "Wealth", 400);
+      train_unit_at(2, 2, "Hussar", build_id);
+      train_unit_at(2, 2, "Cuirassier", build_id);
+      train_unit_at(2, 2, "Carabineer", build_id);
+    }
+  }
+  for (i = 0; i < num_type(2, "Siege Factory"); i++) {
+    build_id = find_build(2, "Siege Factory");
+    if (object_health(2, build_id) < 80) {
+      give_good(2, "Timber", 200);
+      give_good(2, "Metal", 200);
+      train_unit_at(2, 3, "Cannon", build_id);
+    }
+  }
+
+  set_timer("UA", 10);
+  enable_trigger("UnderAttack");
+}
+
+trigger BuildingHeal(timer_expired("BH")) {
+  for (i = 0; i < num_type(2, "Barracks"); i++) {
+    build_id = find_build(2, "Barracks");
+    if (object_health(2, build_id) < 50) {
+      heal_object(2, build_id, 5);
+    }
+  }
+  for (i = 0; i < num_type(2, "Stable"); i++) {
+    build_id = find_build(2, "Stable");
+    if (object_health(2, build_id) < 50) {
+      heal_object(2, build_id, 5);
+    }
+  }
+  for (i = 0; i < num_type(2, "Siege Factory"); i++) {
+    build_id = find_build(2, "Siege Factory");
+    if (object_health(2, build_id) < 50) {
+      heal_object(2, build_id, 5);
+    }
+  }
+
+  set_timer("BH", 10);
+  enable_trigger("BuildingHeal");
+}
+
+trigger Negotiations(object_visible(1, 2, messenger_id))
+{
+  choice1 = -1;
+  choice2 = -1;
+  choice3 = -1;
+  ///austrians end up at war, peace, or ally
+  choice1 = popup_choice($S("Our scouts report that an emissary of the Austrians is approaching."), $S("Listen to him"), $S("Send him away"));
+
+  if (choice1 == 1) {
+    choice2 = popup_choice(parse("Message from the local Austrian Commander: We do not want to fight over a province that is so far away from our homeland. If you pay us 20 Tribute, we will leave this province. (You have $d0 Tribute.)", get_num_tribute("French")), $S("Pay 20"), $S("Refuse offer"));
+    if (choice2 == 1) {
+      if (get_num_tribute("French") < 20) {
+        popup_dialog($S("Unfortunately, you do not have 20 Tribute."));
+        unit_move_order(2, messenger_id, bx, by);
+      }
+      else {
+        give_ctw_tribute("french", -20);
+        choice3 = popup_choice(parse("Since we are here anyway, perhaps we can help subdue the people of this province for you. That is, if you are willing to make it worth our while. (You have $d0 Tribute.)", get_num_tribute("French")), $S("Pay 20"), $S("Decline offer"));
+        if (choice3 == 1) {
+          if (get_num_tribute("French") < 20) {
+            popup_dialog($S("Unfortunately, you do not have 20 Tribute. The Austrians are leaving."));
+            enable_trigger("AustriaLeaves");
+          }
+          else {
+            give_ctw_tribute("french", -20);
+            enable_trigger("AustriaAllies");
+          }
+        }
+        else {
+          enable_trigger("AustriaLeaves");
+        }
+      }
+      if (diff > 3) {
+        enable_production_ai(8);
+      }
+    }
+    else {
+      unit_move_order(2, messenger_id, bx, by);
+    }
+  }
+  else {
+    unit_move_order(2, messenger_id, bx, by);
+  }
+}
+
+trigger AustriaAllies()
+{
+  ctw_remove_objective("Hint2_id");
+  disable_trigger("GoAttack");
+  //enable_production_ai(8);
+  declare_war(2, 8);
+  declare_war(2, 8);
+  make_alliance(1, 2);
+  disable_trigger("Reinforcements");
+  disable_trigger("UnderAttack");
+  disable_trigger("BuildingHeal");
+}
+
+trigger AustriaLeaves()
+{
+  //enable_production_ai(8);
+  ctw_remove_objective("Hint2_id");
+  disable_trigger("GoAttack");
+  disable_trigger("Reinforcements");
+  disable_trigger("UnderAttack");
+  disable_trigger("BuildingHeal");
+  make_peace(1, 2);
+  disable_take_attrition(2);
+  build_id = -1;
+  do{
+    build_id = find_military_build(2);
+    destroy_building(2, build_id);
+  }while(build_id > -1);
+  enable_trigger("UnitsGo");
+
+  clear_group(2);
+  for (i = 0; i < num_military_units(2); i++) {
+    unit_id = find_military(2);
+    dudes.units[i] = unit_id;
+    //add_to_group(2, unit_id);
+  }
+  for (j = i; j < num_type_upgrade(2, "General")+i; j++) {
+    unit_id = find_unit(2, "General");
+    dudes.units[j] = unit_id;
+    //add_to_group(2, unit_id);
+  }
+  for (k = j; k < num_type_upgrade(2, "Supply Wagon")+j+i; k++) {
+    unit_id = find_unit(2, "Supply Wagon");
+    dudes.units[k] = unit_id;
+    //add_to_group(2, unit_id);
+  }
+  for (l = k; l < num_type_upgrade(2, "Explorer")+j+i+k; l++) {
+    unit_id = find_unit(2, "Explorer");
+    dudes.units[l] = unit_id;
+    //add_to_group(2, unit_id);
+  }
+  group_move_order(dudes, fx, fy);
+}
+
+trigger UnitsGo(any_object_near(2, 1, fx, fy, 15))
+{
+  for (i = 0; i < num_military_units(2); i++) {
+    unit_id = find_military(2);
+    if (object_near(2, unit_id, fx, fy, 15)) {
+      kill_unit_anim(2, unit_id, 1);
+      i = 0;
+    }
+  }
+  
+  for (i = 0; i < num_type_upgrade(2, "Supply Wagon"); i++) {
+    unit_id = find_unit(2, "Supply Wagon");
+    if (object_near(2, unit_id, fx, fy, 15)) {
+      kill_unit_anim(2, unit_id, 1);
+      i = 0;
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(2, "General"); i++) {
+    unit_id = find_unit(2, "General");
+    if (object_near(2, unit_id, fx, fy, 15)) {
+      kill_unit_anim(2, unit_id, 1);
+      i = 0;
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(2, "Explorer"); i++) {
+    unit_id = find_unit(2, "Explorer");
+    if (object_near(2, unit_id, fx, fy, 15)) {
+      kill_unit_anim(2, unit_id, 1);
+      i = 0;
+    }
+  }
+  
+  if (num_units(2) > 0) {
+    enable_trigger("UnitsGo");
+  }
+}
+
+if (num_buildings(2) < 1) {
+  defeat(2);
+}
+
+if (time() >= get_time_limit()) {
+  defeat(1);
+}
+
+trigger GoAttack(timer_expired("GA"))
+{
+  for (i = 0; i < num_military_units(2); i++) {
+    unit_id = find_military(2);
+    dudes.units[i] = unit_id;
+    //add_to_group(2, unit_id);
+  }
+  for (j = i; j < num_type_upgrade(2, "General")+i; j++) {
+    unit_id = find_unit(2, "General");
+    dudes.units[j] = unit_id;
+    //add_to_group(2, unit_id);
+  }
+  for (k = j; k < num_type_upgrade(2, "Supply Wagon")+j+i; k++) {
+    unit_id = find_unit(2, "Supply Wagon");
+    dudes.units[k] = unit_id;
+    //add_to_group(2, unit_id);
+  }
+  for (l = k; l < num_type_upgrade(2, "Explorer")+j+i+k; l++) {
+    unit_id = find_unit(2, "Explorer");
+    dudes.units[l] = unit_id;
+    //add_to_group(2, unit_id);
+  }
+
+  victim = rand_int(1, num_cities(1)+1);
+  string city_name = "None";
+  for (m = 0; m < victim; m++) {
+    city_name = find_city_name(1);
+  }
+  city_id = find_city_id(city_name);
+  x = object_position_x(1, city_id);
+  y = object_position_y(1, city_id);
+  group_attack_to_order(dudes, x, y);
+
+  enable_trigger("GoAttack");
+  set_timer("GA", 1000/diff);
+}
+
+switch (diff) {
+  case 5:
+    if (population_cap(8) > 150) {
+      set_population_cap(8, 150);
+    }
+    break;
+  case 6:
+    break;
+  default:
+    if (population_cap(8) > 100) {
+      set_population_cap(8, 100);
+    }
+    break;
+}
+
+}

@@ -1,0 +1,33 @@
+conquest
+{
+ 
+  static int french = 1;
+  static int enemy = 2;
+ 
+  static int end_time = get_time_limit();
+  int cur_time;
+  
+  run_once {
+    ctw_add_objective_text($S("Hint: Fish to collect Food."), 1, "");
+    set_timer("farm_check", 1);
+  }
+
+  if (timer_expired("farm_check")) {
+    set_timer("farm_check", 1);
+    building = find_inactive_build(french, "Farm");
+
+    if (building > 0) {
+      destroy_building(french, building);
+    }
+
+    building = find_build(french, "Farm");
+
+    if (building > 0) {
+      destroy_building(french, building);
+    }
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) defeat(french);
+
+}

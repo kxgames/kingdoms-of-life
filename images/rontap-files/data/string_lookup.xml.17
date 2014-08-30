@@ -1,0 +1,1152 @@
+<?xml version="1.0"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Isaac Ellis (Big Huge Games) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION: All text within STRING elements-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<ROOT>
+	<CAT hash="3920216">
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+		<STRING hash="10416096" hash_i="11226112" needed="1">チーム &amp; 国交:</STRING>
+		<STRING hash="5820335" hash_i="5803731" needed="1">ゲーム ルール:</STRING>
+		<STRING hash="4776064" hash_i="4717396" needed="1">マップ スタイル:</STRING>
+		<STRING hash="6449465" hash_i="6434995" needed="1">難易度:</STRING>
+		<STRING hash="3668910" hash_i="3610242" needed="1">マップ サイズ:</STRING>
+		<STRING hash="3098722" hash_i="3076364" needed="1">勝利条件:</STRING>
+		<STRING hash="7402063" hash_i="7387925" needed="1">脱落条件:</STRING>
+		<STRING hash="5901328" hash_i="5857444" needed="1">開始時の規模:</STRING>
+		<STRING hash="5144092" hash_i="5122650" needed="1">資源:</STRING>
+		<STRING hash="10669646" hash_i="11648524" needed="1">防御側ボーナス:</STRING>
+		<STRING hash="6056078" hash_i="6033572" needed="1">テクノロジー:</STRING>
+		<STRING hash="4190828" hash_i="4791364" needed="1">時代設定 - 開始:</STRING>
+		<STRING hash="6976133" hash_i="7903331" needed="1">防御側の時代</STRING>
+		<STRING hash="2247494" hash_i="2639534" needed="1">- 終了:</STRING>
+		<STRING hash="6319993" hash_i="6318887" needed="1">マップの公開:</STRING>
+		<STRING hash="6203405" hash_i="6182561" needed="1">人口:</STRING>
+		<STRING hash="5772019" hash_i="5749829" needed="1">早期攻撃ルール:</STRING>
+		<STRING hash="6768248" hash_i="6821576" needed="1">スローモーション:</STRING>
+		<STRING hash="10175165" hash_i="10176011" needed="1">他の民族:</STRING>
+		<STRING hash="10539490" hash_i="10491672" needed="1">最大オブザーバー数:</STRING>
+		<STRING hash="5376021" hash_i="5357137" needed="1">ゲーム スピード:</STRING>
+		<STRING hash="1420697" hash_i="1398875" needed="1">スコア:</STRING>
+		<STRING hash="5568970" hash_i="5569968" needed="1">制限時間:</STRING>
+		<STRING hash="12147140" hash_i="13031630" needed="1">椅子取りゲーム:</STRING>
+		<STRING hash="12357003" hash_i="12311769" needed="1">偉大な建造物:</STRING>
+		<STRING hash="11676407" hash_i="11763517" needed="1">領土:</STRING>
+		<STRING hash="7350754" hash_i="7364912" needed="1">所得:</STRING>
+		<STRING hash="21834034" hash_i="24498646" needed="1">征服ボーナス カード:</STRING>
+		<STRING hash="4500312" hash_i="4509124" needed="1">カスタム設定:</STRING>
+	</CAT>
+	<CAT hash="1979549">
+		<STRING hash="3518863" hash_i="3501657" needed="1">軍事</STRING>
+		<STRING hash="1325279" hash_i="1400671" needed="1">治政</STRING>
+		<STRING hash="3292351" hash_i="3367743" needed="1">経済</STRING>
+		<STRING hash="2632232" hash_i="2610410" needed="1">科学</STRING>
+		<STRING hash="659880" hash_i="644452" needed="1">歩兵</STRING>
+		<STRING hash="2102572" hash_i="2085366" needed="1">騎兵</STRING>
+		<STRING hash="5345985" hash_i="5328779" needed="1">機甲化</STRING>
+		<STRING hash="19302702" hash_i="20309678" needed="1">攻城と火砲</STRING>
+		<STRING hash="27043938" hash_i="27197386" needed="1">指令と指導力</STRING>
+		<STRING hash="43655280" hash_i="45661268" needed="1">民間人と非戦闘員</STRING>
+		<STRING hash="10111480" hash_i="10111604" needed="1">帆船</STRING>
+		<STRING hash="8580167" hash_i="8574753" needed="1">近代海軍</STRING>
+		<STRING hash="338844" hash_i="406550" needed="1">航空</STRING>
+		<STRING hash="3621047" hash_i="3606909" needed="1">経済</STRING>
+		<STRING hash="1493636" hash_i="1469282" needed="1">偉大な建造物</STRING>
+		<STRING hash="4986669" hash_i="5054375" needed="1">攻撃</STRING>
+		<STRING hash="3775778" hash_i="3761308" needed="1">防御</STRING>
+		<STRING hash="7441301" hash_i="7456903" needed="1">待機</STRING>
+		<STRING hash="679072" hash_i="657630" needed="1">奇襲</STRING>
+		<STRING hash="772144" hash_i="750702" needed="1">破壊</STRING>
+		<STRING hash="3522606" hash_i="3539644" needed="1">攻撃しない</STRING>
+		<STRING hash="1633076" hash_i="1617220" needed="1">採集</STRING>
+		<STRING hash="10032762" hash_i="10186100" needed="1">建設と採集</STRING>
+		<STRING hash="874157" hash_i="947031" needed="1">建設</STRING>
+		<STRING hash="531728" hash_i="514750" needed="1">待機中</STRING>
+		<STRING hash="5396068" hash_i="6044030" needed="1">自動制御</STRING>
+		<STRING hash="8254070" hash_i="8997984" needed="1">手動制御</STRING>
+		<STRING hash="6302470" hash_i="6411260" needed="1">自動配備</STRING>
+		<STRING hash="9187448" hash_i="9212466" needed="1">手動配備</STRING>
+		<STRING hash="2415994" hash_i="2483700" needed="1">太古</STRING>
+		<STRING hash="5055938" hash_i="5131330" needed="1">古代</STRING>
+		<STRING hash="3271147" hash_i="3253941" needed="1">中世</STRING>
+		<STRING hash="3896038" hash_i="3880182" needed="1">ルネサンス</STRING>
+		<STRING hash="8707027" hash_i="8692889" needed="1">啓蒙</STRING>
+		<STRING hash="5641758" hash_i="5624780" needed="1">産業革命</STRING>
+		<STRING hash="1495270" hash_i="1478064" needed="1">近代</STRING>
+		<STRING hash="6746924" hash_i="6729946" needed="1">現代</STRING>
+		<STRING hash="617427" hash_i="720895" needed="1">開戦!</STRING>
+		<STRING hash="1366925" hash_i="1346081" needed="1">友好</STRING>
+		<STRING hash="669166" hash_i="736872" needed="1">同盟</STRING>
+		<STRING hash="5094893" hash_i="5080423" needed="1">外交</STRING>
+		<STRING hash="28999951" hash_i="29139981" needed="1">サバイバル</STRING>
+		<STRING hash="3887577" hash_i="3955283" needed="1">標的民族を倒す</STRING>
+		<STRING hash="32811580" hash_i="33103126" needed="1">先住民族との戦い</STRING>
+		<STRING hash="3962092" hash_i="3939586" needed="1">2 民族によるチーム</STRING>
+		<STRING hash="3978471" hash_i="3955965" needed="1">3 民族によるチーム</STRING>
+		<STRING hash="3995870" hash_i="3973364" needed="1">4 民族によるチーム</STRING>
+		<STRING hash="12258848" hash_i="12277426" needed="1">外交 - チーム</STRING>
+		<STRING hash="27122274" hash_i="27313812" needed="1">外交 - ペア</STRING>
+		<STRING hash="23932259" hash_i="24028221" needed="1">サバイバル - ペア</STRING>
+		<STRING hash="16393466" hash_i="16480536" needed="1">サバイバル - ペア チーム</STRING>
+		<STRING hash="6044513" hash_i="6120673" needed="1">自由外交</STRING>
+		<STRING hash="8281712" hash_i="9118224" needed="1">カスタム (固定)</STRING>
+		<STRING hash="5097224" hash_i="5112826" needed="1">セーブしたゲーム</STRING>
+		<STRING hash="3362659" hash_i="3340837" needed="1">標準</STRING>
+		<STRING hash="1626432" hash_i="1701824" needed="1">カスタム</STRING>
+		<STRING hash="2287567" hash_i="2235461" needed="1">早期攻撃不可</STRING>
+		<STRING hash="7466821" hash_i="7487223" needed="1">サドンデス</STRING>
+		<STRING hash="6202864" hash_i="6188394" needed="1">デスマッチ</STRING>
+		<STRING hash="5502719" hash_i="5533577" needed="1">兵法</STRING>
+		<STRING hash="1150372" hash_i="1132098" needed="1">フロンティア</STRING>
+		<STRING hash="19608465" hash_i="19667523" needed="1">テクノロジー レース</STRING>
+		<STRING hash="4184613" hash_i="4201953" needed="1">ターボ ゲーム</STRING>
+		<STRING hash="13573600" hash_i="13598166" needed="1">シナリオ/スクリプト</STRING>
+		<STRING hash="1638468" hash_i="1617026" needed="1">ランダム</STRING>
+		<STRING hash="12443480" hash_i="12521400" needed="1">ランダム - 陸</STRING>
+		<STRING hash="11012901" hash_i="11063723" needed="1">ランダム - 海</STRING>
+		<STRING hash="3843874" hash_i="3770100" needed="1">旧世界</STRING>
+		<STRING hash="9418409" hash_i="9398215" needed="1">サハラ</STRING>
+		<STRING hash="16188804" hash_i="16242958" needed="1">アマゾン</STRING>
+		<STRING hash="5200590" hash_i="5182292" needed="1">ヒマラヤ</STRING>
+		<STRING hash="10802627" hash_i="10875571" needed="1">砂漠高原</STRING>
+		<STRING hash="24115318" hash_i="24350282" needed="1">アフリカの内海</STRING>
+		<STRING hash="9940214" hash_i="9923008" needed="1">地中海</STRING>
+		<STRING hash="21369198" hash_i="21496408" needed="1">オーストラリア奥地</STRING>
+		<STRING hash="6671033" hash_i="6681793" needed="1">五大湖</STRING>
+		<STRING hash="11123843" hash_i="11126259" needed="1">多島海</STRING>
+		<STRING hash="3908601" hash_i="3836205" needed="1">新世界</STRING>
+		<STRING hash="12241427" hash_i="12372987" needed="1">二大大陸</STRING>
+		<STRING hash="6061595" hash_i="6073493" needed="1">東インド諸島</STRING>
+		<STRING hash="11895988" hash_i="11909598" needed="1">東洋 vs 西洋</STRING>
+		<STRING hash="18397047" hash_i="18556061" needed="1">大西洋</STRING>
+		<STRING hash="5325479" hash_i="5348289" needed="1">ナイル川デルタ地帯</STRING>
+		<STRING hash="8499128" hash_i="8642368" needed="1">イギリス諸島</STRING>
+		<STRING hash="2394462" hash_i="2380324" needed="1">非常に簡単</STRING>
+		<STRING hash="834472" hash_i="820334" needed="1">簡単</STRING>
+		<STRING hash="3195623" hash_i="3178417" needed="1">標準</STRING>
+		<STRING hash="931728" hash_i="909222" needed="1">難しい</STRING>
+		<STRING hash="2966159" hash_i="2943653" needed="1">非常に難しい</STRING>
+		<STRING hash="699868" hash_i="677362" needed="1">最小</STRING>
+		<STRING hash="13797706" hash_i="13775884" needed="1">小 (2人)</STRING>
+		<STRING hash="15304602" hash_i="15287396" needed="1">中 (3人)</STRING>
+		<STRING hash="19705220" hash_i="19683398" needed="1">標準 (4人)</STRING>
+		<STRING hash="13700862" hash_i="13683462" needed="1">大 (6人)</STRING>
+		<STRING hash="12121526" hash_i="12103228" needed="1">特大 (8人)</STRING>
+		<STRING hash="2690747" hash_i="2739779" needed="1">最大</STRING>
+		<STRING hash="3078682" hash_i="3154074" needed="1">征服</STRING>
+		<STRING hash="1095973" hash_i="1074151" needed="1">スコア</STRING>
+		<STRING hash="4883849" hash_i="4884847" needed="1">制限時間</STRING>
+		<STRING hash="11258799" hash_i="12143289" needed="1">椅子取りゲーム</STRING>
+		<STRING hash="4264419" hash_i="4241913" needed="1">領土</STRING>
+		<STRING hash="4907690" hash_i="4884436" needed="1">テクノロジー レース</STRING>
+		<STRING hash="2694088" hash_i="2769480" needed="1">首都占領</STRING>
+		<STRING hash="23151211" hash_i="24563837" needed="1">首都占領サドンデス</STRING>
+		<STRING hash="13330612" hash_i="14035040" needed="1">村</STRING>
+		<STRING hash="5325302" hash_i="5294354" needed="1">町</STRING>
+		<STRING hash="5183670" hash_i="5157144" needed="1">都市</STRING>
+		<STRING hash="397842" hash_i="380442" needed="1">低</STRING>
+		<STRING hash="77133" hash_i="77133" needed="1">x2</STRING>
+		<STRING hash="79312" hash_i="79312" needed="1">x3</STRING>
+		<STRING hash="83574" hash_i="83574" needed="1">x5</STRING>
+		<STRING hash="583411" hash_i="583411" needed="1">x10</STRING>
+		<STRING hash="406458" hash_i="406458" needed="1">x20</STRING>
+		<STRING hash="2794072" hash_i="2777094" needed="1">無限</STRING>
+		<STRING hash="8039338" hash_i="8107588" needed="1">低 (ランダム)</STRING>
+		<STRING hash="11922177" hash_i="11992367" needed="1">中 (ランダム)</STRING>
+		<STRING hash="8650551" hash_i="8709821" needed="1">高 (ランダム)</STRING>
+		<STRING hash="11463394" hash_i="11440824" needed="1">同じ</STRING>
+		<STRING hash="14904404" hash_i="14876382" needed="1">2 倍</STRING>
+		<STRING hash="14616767" hash_i="14580709" needed="1">3 倍</STRING>
+		<STRING hash="20993156" hash_i="21020180" needed="1">4 倍</STRING>
+		<STRING hash="20865034" hash_i="20892058" needed="1">5 倍</STRING>
+		<STRING hash="10908563" hash_i="11098279" needed="1">低コスト &amp; 速い</STRING>
+		<STRING hash="1161548" hash_i="1236940" needed="1">低コスト</STRING>
+		<STRING hash="12686222" hash_i="12778140" needed="1">標準コスト &amp; 速い</STRING>
+		<STRING hash="1864760" hash_i="1846486" needed="1">標準</STRING>
+		<STRING hash="12266383" hash_i="12281573" needed="1">標準コスト &amp; 遅い</STRING>
+		<STRING hash="3876878" hash_i="3862740" needed="1">高コスト</STRING>
+		<STRING hash="17484138" hash_i="17504654" needed="1">高コスト &amp; 遅い</STRING>
+		<STRING hash="10314296" hash_i="10335014" needed="1">非常に高コスト</STRING>
+		<STRING hash="29852837" hash_i="29964251" needed="1">非常に高コスト &amp; 遅い</STRING>
+		<STRING hash="5622063" hash_i="6522291" needed="1">太古</STRING>
+		<STRING hash="8843171" hash_i="9947361" needed="1">古代</STRING>
+		<STRING hash="6818848" hash_i="7743310" needed="1">中世</STRING>
+		<STRING hash="7683271" hash_i="8696213" needed="1">ルネサンス</STRING>
+		<STRING hash="13782908" hash_i="15146344" needed="1">啓蒙時代</STRING>
+		<STRING hash="9696711" hash_i="10787533" needed="1">産業革命時代</STRING>
+		<STRING hash="4270575" hash_i="4953001" needed="1">近代</STRING>
+		<STRING hash="11109641" hash_i="12277097" needed="1">現代</STRING>
+		<STRING hash="13700477" hash_i="13723301" needed="1">すべてのテクノロジー</STRING>
+		<STRING hash="5193805" hash_i="5871995" needed="1">ランダム</STRING>
+		<STRING hash="2574263" hash_i="3086581" needed="1">同じ</STRING>
+		<STRING hash="1424530" hash_i="1747290" needed="1">+1 時代</STRING>
+		<STRING hash="1247577" hash_i="1570337" needed="1">+2 時代</STRING>
+		<STRING hash="1249756" hash_i="1572516" needed="1">+3 時代</STRING>
+		<STRING hash="1252139" hash_i="1574899" needed="1">+4 時代</STRING>
+		<STRING hash="6015289" hash_i="6498421" needed="1">同盟軍と視野を共有しない</STRING>
+		<STRING hash="2783183" hash_i="2769045" needed="1">偵察済み</STRING>
+		<STRING hash="6645813" hash_i="6669377" needed="1">すべて表示</STRING>
+		<STRING hash="216236" hash_i="216236" needed="1">50</STRING>
+		<STRING hash="58989" hash_i="58989" needed="1">75</STRING>
+		<STRING hash="631931" hash_i="631931" needed="1">100</STRING>
+		<STRING hash="227070" hash_i="227070" needed="1">125</STRING>
+		<STRING hash="471802" hash_i="471802" needed="1">150</STRING>
+		<STRING hash="543176" hash_i="543176" needed="1">200</STRING>
+		<STRING hash="383047" hash_i="383047" needed="1">250</STRING>
+		<STRING hash="543987" hash_i="543987" needed="1">300</STRING>
+		<STRING hash="36489255" hash_i="40020081" needed="1">古代まで戦闘不可</STRING>
+		<STRING hash="30793466" hash_i="32958956" needed="1">中世まで戦闘不可</STRING>
+		<STRING hash="33384663" hash_i="35729265" needed="1">ルネサンスまで戦闘不可</STRING>
+		<STRING hash="46053282" hash_i="48817826" needed="1">啓蒙時代まで戦闘不可</STRING>
+		<STRING hash="37813093" hash_i="40228831" needed="1">産業革命時代まで戦闘不可</STRING>
+		<STRING hash="24369589" hash_i="26310579" needed="1">近代まで戦闘不可</STRING>
+		<STRING hash="40894511" hash_i="43426883" needed="1">現代まで戦闘不可</STRING>
+		<STRING hash="6310670" hash_i="6248254" needed="1">攻撃不可</STRING>
+		<STRING hash="34210057" hash_i="34189213" needed="1">開始 2 分間は戦闘不可</STRING>
+		<STRING hash="34290364" hash_i="34269520" needed="1">開始 5 分間は戦闘不可</STRING>
+		<STRING hash="39249590" hash_i="39228746" needed="1">開始 10 分間は戦闘不可</STRING>
+		<STRING hash="37860339" hash_i="37839495" needed="1">開始 15 分間は戦闘不可</STRING>
+		<STRING hash="37754009" hash_i="37733165" needed="1">開始 20 分間は戦闘不可</STRING>
+		<STRING hash="37781050" hash_i="37760206" needed="1">開始 30 分間は戦闘不可</STRING>
+		<STRING hash="579008" hash_i="560734" needed="1">スローモーションなし</STRING>
+		<STRING hash="8625958" hash_i="8930594" needed="1">1 スローモーション</STRING>
+		<STRING hash="10150716" hash_i="10455352" needed="1">2 スローモーション</STRING>
+		<STRING hash="10152440" hash_i="10457076" needed="1">4 スローモーション</STRING>
+		<STRING hash="10156878" hash_i="10461514" needed="1">8 スローモーション</STRING>
+		<STRING hash="2973011" hash_i="2951189" needed="1">スキル +1</STRING>
+		<STRING hash="2267908" hash_i="2246086" needed="1">スキル +2</STRING>
+		<STRING hash="2279333" hash_i="2257511" needed="1">スキル +3</STRING>
+		<STRING hash="2291574" hash_i="2269752" needed="1">スキル +4</STRING>
+		<STRING hash="2301799" hash_i="2279977" needed="1">スキル +5</STRING>
+		<STRING hash="2312696" hash_i="2290874" needed="1">スキル +6</STRING>
+		<STRING hash="2334729" hash_i="2312907" needed="1">スキル +7</STRING>
+		<STRING hash="2346826" hash_i="2325004" needed="1">スキル +8</STRING>
+		<STRING hash="2356187" hash_i="2334365" needed="1">スキル +9</STRING>
+		<STRING hash="4120634" hash_i="4098812" needed="1">スキル +10</STRING>
+		<STRING hash="4171825" hash_i="4150003" needed="1">スキル +11</STRING>
+		<STRING hash="3380004" hash_i="3358182" needed="1">スキル +12</STRING>
+		<STRING hash="3394277" hash_i="3372455" needed="1">スキル +13</STRING>
+		<STRING hash="3409468" hash_i="3387646" needed="1">スキル +14</STRING>
+		<STRING hash="3422391" hash_i="3400569" needed="1">スキル +15</STRING>
+		<STRING hash="3436070" hash_i="3414248" needed="1">スキル +16</STRING>
+		<STRING hash="3462277" hash_i="3440455" needed="1">スキル +17</STRING>
+		<STRING hash="3477306" hash_i="3455484" needed="1">スキル +18</STRING>
+		<STRING hash="3489257" hash_i="3467435" needed="1">スキル +19</STRING>
+		<STRING hash="3415531" hash_i="3393709" needed="1">スキル +20</STRING>
+		<STRING hash="596884" hash_i="577232" needed="1">空き</STRING>
+		<STRING hash="1399797" hash_i="1475189" needed="1">エントリー済み</STRING>
+		<STRING hash="3026557" hash_i="3101949" needed="1">コンピュータ</STRING>
+		<STRING hash="32013233" hash_i="32235091" needed="1">コンピュータ (早期に攻撃)</STRING>
+		<STRING hash="32990843" hash_i="36136497" needed="1">コンピュータ (経済発展重視)</STRING>
+		<STRING hash="1239052" hash_i="1220754" needed="1">プレイヤー</STRING>
+		<STRING hash="6855043" hash_i="6930757" needed="1">プレイヤーを退場させる</STRING>
+		<STRING hash="14535148" hash_i="16570584" needed="1">すべてプレイヤー制御</STRING>
+		<STRING hash="20332051" hash_i="23137319" needed="1">すべてコンピュータ制御</STRING>
+		<STRING hash="90319" hash_i="90319" needed="1">0</STRING>
+		<STRING hash="95232" hash_i="95232" needed="1">1</STRING>
+		<STRING hash="6477" hash_i="6477" needed="1">2</STRING>
+		<STRING hash="7288" hash_i="7288" needed="1">3</STRING>
+		<STRING hash="8201" hash_i="8201" needed="1">4</STRING>
+		<STRING hash="8862" hash_i="8862" needed="1">5</STRING>
+		<STRING hash="9607" hash_i="9607" needed="1">6</STRING>
+		<STRING hash="11744" hash_i="11744" needed="1">7</STRING>
+		<STRING hash="4162022" hash_i="4136636" needed="1">超低速</STRING>
+		<STRING hash="693623" hash_i="671801" needed="1">低速</STRING>
+		<STRING hash="799468" hash_i="784040" needed="1">高速</STRING>
+		<STRING hash="5428119" hash_i="5450241" needed="1">超高速</STRING>
+		<STRING hash="1071111" hash_i="1071111" needed="1">1000</STRING>
+		<STRING hash="982356" hash_i="982356" needed="1">2000</STRING>
+		<STRING hash="983167" hash_i="983167" needed="1">3000</STRING>
+		<STRING hash="984080" hash_i="984080" needed="1">4000</STRING>
+		<STRING hash="984741" hash_i="984741" needed="1">5000</STRING>
+		<STRING hash="985486" hash_i="985486" needed="1">6000</STRING>
+		<STRING hash="987623" hash_i="987623" needed="1">7000</STRING>
+		<STRING hash="988518" hash_i="988518" needed="1">8000</STRING>
+		<STRING hash="989071" hash_i="989071" needed="1">9000</STRING>
+		<STRING hash="1624178" hash_i="1624178" needed="1">10000</STRING>
+		<STRING hash="1464049" hash_i="1464049" needed="1">15000</STRING>
+		<STRING hash="1535423" hash_i="1535423" needed="1">20000</STRING>
+		<STRING hash="5128202" hash_i="5128202" needed="1">15 分間</STRING>
+		<STRING hash="5200387" hash_i="5200387" needed="1">30 分間</STRING>
+		<STRING hash="5041171" hash_i="5041171" needed="1">45 分間</STRING>
+		<STRING hash="5202706" hash_i="5202706" needed="1">60 分間</STRING>
+		<STRING hash="5206291" hash_i="5206291" needed="1">90 分間</STRING>
+		<STRING hash="2346665" hash_i="2330683" needed="1">2 時間</STRING>
+		<STRING hash="2347476" hash_i="2331494" needed="1">3 時間</STRING>
+		<STRING hash="2348389" hash_i="2332407" needed="1">4 時間</STRING>
+		<STRING hash="5095600" hash_i="5095600" needed="1">2 分間</STRING>
+		<STRING hash="5097985" hash_i="5097985" needed="1">5 分間</STRING>
+		<STRING hash="5101762" hash_i="5101762" needed="1">8 分間</STRING>
+		<STRING hash="5288331" hash_i="5288331" needed="1">10 分間</STRING>
+		<STRING hash="5199576" hash_i="5199576" needed="1">20 分間</STRING>
+		<STRING hash="5039447" hash_i="5039447" needed="1">25 分間</STRING>
+		<STRING hash="10118651" hash_i="10140669" needed="1">1 ポイントで勝利</STRING>
+		<STRING hash="11762956" hash_i="11784974" needed="1">2 ポイントで勝利</STRING>
+		<STRING hash="11763767" hash_i="11785785" needed="1">3 ポイントで勝利</STRING>
+		<STRING hash="11764680" hash_i="11786698" needed="1">4 ポイントで勝利</STRING>
+		<STRING hash="11766086" hash_i="11788104" needed="1">6 ポイントで勝利</STRING>
+		<STRING hash="11769118" hash_i="11791136" needed="1">8 ポイントで勝利</STRING>
+		<STRING hash="13584305" hash_i="13593573" needed="1">10 ポイントで勝利</STRING>
+		<STRING hash="13417735" hash_i="13427003" needed="1">12 ポイントで勝利</STRING>
+		<STRING hash="13426223" hash_i="13435491" needed="1">16 ポイントで勝利</STRING>
+		<STRING hash="13495550" hash_i="13504818" needed="1">20 ポイントで勝利</STRING>
+		<STRING hash="13333542" hash_i="13342810" needed="1">24 ポイントで勝利</STRING>
+		<STRING hash="16707981" hash_i="16682321" needed="1">偉大な建造物による勝利なし</STRING>
+		<STRING hash="27517740" hash_i="27517740" needed="1">世界全土の 30% 占領で勝利</STRING>
+		<STRING hash="27357611" hash_i="27357611" needed="1">世界全土の 35% 占領で勝利</STRING>
+		<STRING hash="27518653" hash_i="27518653" needed="1">世界全土の 40% 占領で勝利</STRING>
+		<STRING hash="27358524" hash_i="27358524" needed="1">世界全土の 45% 占領で勝利</STRING>
+		<STRING hash="27519314" hash_i="27519314" needed="1">世界全土の 50% 占領で勝利</STRING>
+		<STRING hash="27359185" hash_i="27359185" needed="1">世界全土の 55% 占領で勝利</STRING>
+		<STRING hash="27520059" hash_i="27520059" needed="1">世界全土の 60% 占領で勝利</STRING>
+		<STRING hash="27359930" hash_i="27359930" needed="1">世界全土の 65% 占領で勝利</STRING>
+		<STRING hash="27522196" hash_i="27522196" needed="1">世界全土の 70% 占領で勝利</STRING>
+		<STRING hash="27362067" hash_i="27362067" needed="1">世界全土の 75% 占領で勝利</STRING>
+		<STRING hash="27523091" hash_i="27523091" needed="1">世界全土の 80% 占領で勝利</STRING>
+		<STRING hash="27523644" hash_i="27523644" needed="1">世界全土の 90% 占領で勝利</STRING>
+		<STRING hash="24251887" hash_i="24219249" needed="1">領土占領による勝利なし</STRING>
+		<STRING hash="20494236" hash_i="21127420" needed="1">平均収集 +100 で勝利</STRING>
+		<STRING hash="20317283" hash_i="20950467" needed="1">平均収集 +200 で勝利</STRING>
+		<STRING hash="20319462" hash_i="20952646" needed="1">平均収集 +300 で勝利</STRING>
+		<STRING hash="20321845" hash_i="20955029" needed="1">平均収集 +400 で勝利</STRING>
+		<STRING hash="20323724" hash_i="20956908" needed="1">平均収集 +500 で勝利</STRING>
+		<STRING hash="20325771" hash_i="20958955" needed="1">平均収集 +600 で勝利</STRING>
+		<STRING hash="20330602" hash_i="20963786" needed="1">平均収集 +700 で勝利</STRING>
+		<STRING hash="20332949" hash_i="20966133" needed="1">平均収集 +800 で勝利</STRING>
+		<STRING hash="20334612" hash_i="20967796" needed="1">平均収集 +900 で勝利</STRING>
+		<STRING hash="2617521" hash_i="2601665" needed="1">汎用</STRING>
+		<STRING hash="2529104" hash_i="2514966" needed="1">経済</STRING>
+		<STRING hash="11453981" hash_i="11467731" needed="1">プロファイルにセーブ</STRING>
+		<STRING hash="13283113" hash_i="13258929" needed="1">資源採集スピードアップ</STRING>
+		<STRING hash="13892810" hash_i="13908124" needed="1">民族の特性設定なし</STRING>
+		<STRING hash="11891103" hash_i="11885157" needed="1">民族独自のユニットなし</STRING>
+		<STRING hash="9660804" hash_i="11019674" needed="1">コンピュータのサポート</STRING>
+		<STRING hash="5361655" hash_i="5349067" needed="1">無制限ポーズ</STRING>
+		<STRING hash="13076813" hash_i="13099507" needed="1">トーナメントプレイ</STRING>
+		<STRING hash="11252230" hash_i="11311588" needed="1">ゲーム スピードのロック</STRING>
+		<STRING hash="22800730" hash_i="22838982" needed="1">チームはランダムに選択</STRING>
+		<STRING hash="28098967" hash_i="28204931" needed="1">民族はランダムに選択</STRING>
+		<STRING hash="24159387" hash_i="24901257" needed="1">チーム内のユニットの操作</STRING>
+		<STRING hash="7992306" hash_i="7990562" needed="1">勝利タイプ</STRING>
+		<STRING hash="3785788" hash_i="3762800" needed="1">タイム</STRING>
+		<STRING hash="4141632" hash_i="4082964" needed="1">マップ スタイル</STRING>
+		<STRING hash="3125071" hash_i="3066403" needed="1">マップ サイズ</STRING>
+		<STRING hash="3764196" hash_i="3739842" needed="1">勝者</STRING>
+		<STRING hash="5382453" hash_i="5361127" needed="1">ハイ スコア</STRING>
+		<STRING hash="24464796" hash_i="24490670" needed="1">最優秀プレイヤー</STRING>
+		<STRING hash="9378603" hash_i="9381019" needed="1">偉大な建造物スコア</STRING>
+		<STRING hash="6940560" hash_i="6913716" needed="1">トータル スコア</STRING>
+		<STRING hash="5540116" hash_i="5604794" needed="1">軍隊スコア</STRING>
+		<STRING hash="8632642" hash_i="8691442" needed="1">戦闘スコア</STRING>
+		<STRING hash="12696106" hash_i="12717590" needed="1">領土スコア</STRING>
+		<STRING hash="5548430" hash_i="5620794" needed="1">都市スコア</STRING>
+		<STRING hash="9679017" hash_i="9691649" needed="1">経済スコア</STRING>
+		<STRING hash="11483852" hash_i="11508798" needed="1">研究スコア</STRING>
+		<STRING hash="7552353" hash_i="8367475" needed="1">最大軍事ユニット数</STRING>
+		<STRING hash="6104809" hash_i="6741767" needed="1">ユニット総数</STRING>
+		<STRING hash="6884928" hash_i="6885488" needed="1">破壊したユニット数</STRING>
+		<STRING hash="5122376" hash_i="5127416" needed="1">失ったユニット数</STRING>
+		<STRING hash="11224199" hash_i="12382719" needed="1">建物総数</STRING>
+		<STRING hash="11977059" hash_i="12098103" needed="1">破壊した建物数</STRING>
+		<STRING hash="10005722" hash_i="10171228" needed="1">失った建物数</STRING>
+		<STRING hash="7262581" hash_i="8078949" needed="1">都市総数</STRING>
+		<STRING hash="12018339" hash_i="12854851" needed="1">占領した都市数</STRING>
+		<STRING hash="6244407" hash_i="6338583" needed="1">失った都市数</STRING>
+		<STRING hash="14528556" hash_i="14463250" needed="1">$GOOD0 収集</STRING>
+		<STRING hash="11480916" hash_i="11458726" needed="1">希少資源</STRING>
+		<STRING hash="8807759" hash_i="9444851" needed="1">廃墟ボーナス</STRING>
+		<STRING hash="10595342" hash_i="10617890" needed="1">献上した資源</STRING>
+		<STRING hash="17856933" hash_i="17883661" needed="1">受納した資源</STRING>
+		<STRING hash="3387135" hash_i="4149457" needed="1">$AGE0</STRING>
+		<STRING hash="15706062" hash_i="15718852" needed="1">図書館での研究</STRING>
+		<STRING hash="11988524" hash_i="11969640" needed="1">その他の研究</STRING>
+		<STRING hash="9268572" hash_i="9245444" needed="1">ユニットのアップグレード回数</STRING>
+		<STRING hash="8951821" hash_i="9514871" needed="1">最大市民数</STRING>
+		<STRING hash="10686305" hash_i="11249355" needed="1">最大隊商数</STRING>
+		<STRING hash="10230105" hash_i="10209871" needed="1">最大学者数</STRING>
+		<STRING hash="6025598" hash_i="6588648" needed="1">最大都市数</STRING>
+		<STRING hash="12557116" hash_i="12531402" needed="1">最大領土 (%)</STRING>
+		<STRING hash="7601203" hash_i="7565777" needed="1">偉大な建造物最大数</STRING>
+		<STRING hash="6122190" hash_i="6765296" needed="1">砦総数</STRING>
+		<STRING hash="7479015" hash_i="8115973" needed="1">買収されたユニット数</STRING>
+		<STRING hash="19185094" hash_i="19280018" needed="1">* 生存の有無</STRING>
+		<STRING hash="7155262" hash_i="7117826" needed="1">プレイヤー スピード</STRING>
+		<STRING hash="11546773" hash_i="11564047" needed="1">ホットキー使用回数</STRING>
+		<STRING hash="7863506" hash_i="8522460" needed="1">マウス クリック回数</STRING>
+		<STRING hash="15783004" hash_i="15953162" needed="1">ミニマップ クリック回数</STRING>
+		<STRING hash="9126305" hash_i="9296463" needed="1">マップ クリック回数</STRING>
+		<STRING hash="20963599" hash_i="21136265" needed="1">インターフェイス クリック回数</STRING>
+		<STRING hash="10925217" hash_i="10975543" needed="1">ズーム イン時間 (%)</STRING>
+		<STRING hash="13218634" hash_i="13231524" needed="1">ズーム アウト時間 (%)</STRING>
+		<STRING hash="23257213" hash_i="23555821" needed="1">ユニットのグループ化</STRING>
+		<STRING hash="34415018" hash_i="36043770" needed="1">グループ化したユニットの選択</STRING>
+		<STRING hash="514554" hash_i="490200" needed="1">敵対</STRING>
+		<STRING hash="5050203" hash_i="5123077" needed="1">博愛</STRING>
+		<STRING hash="9043730" hash_i="9029592" needed="1">熱心</STRING>
+		<STRING hash="2930177" hash_i="2914749" needed="1">友好</STRING>
+		<STRING hash="2467926" hash_i="2543318" needed="1">誠実</STRING>
+		<STRING hash="5716430" hash_i="5694608" needed="1">疑心</STRING>
+		<STRING hash="2119924" hash_i="2101626" needed="1">非友好</STRING>
+		<STRING hash="2323593" hash_i="2305295" needed="1">憎悪</STRING>
+		<STRING hash="27420273" hash_i="28034941" needed="1">$TRIBE0 絶対的服従</STRING>
+		<STRING hash="18325327" hash_i="18297647" needed="1">偉大な建造物</STRING>
+		<STRING hash="2302627" hash_i="2287199" needed="1">要塞化</STRING>
+		<STRING hash="3490332" hash_i="3468510" needed="1">妨害</STRING>
+		<STRING hash="13678753" hash_i="15286789" needed="1">$TECHCAT0 ユーリカ</STRING>
+		<STRING hash="20297186" hash_i="21838306" needed="1">豊富な $RES0 資源</STRING>
+		<STRING hash="6849444" hash_i="6832238" needed="1">傭兵</STRING>
+		<STRING hash="4610896" hash_i="4588390" needed="1">背信</STRING>
+		<STRING hash="8763179" hash_i="8738197" needed="1">偉大なる思想家</STRING>
+		<STRING hash="10266132" hash_i="10354974" needed="1">商人ギルド</STRING>
+		<STRING hash="4572512" hash_i="4555112" needed="1">兵站</STRING>
+		<STRING hash="4635510" hash_i="4614666" needed="1">パルチザン</STRING>
+		<STRING hash="19218381" hash_i="19413681" needed="1">文化的支配</STRING>
+		<STRING hash="9764900" hash_i="9791844" needed="1">輸出禁止</STRING>
+		<STRING hash="6151502" hash_i="6130658" needed="1">プロパガンダ</STRING>
+		<STRING hash="6151350" hash_i="6788062" needed="1">スキル ボーナス</STRING>
+		<STRING hash="13280387" hash_i="14624785" needed="1">標準的な都市なし</STRING>
+		<STRING hash="2675689" hash_i="2661219" needed="1">防御側</STRING>
+		<STRING hash="3507367" hash_i="3575073" needed="1">攻撃側</STRING>
+		<STRING hash="12928821" hash_i="13116435" needed="1">攻撃側による防御</STRING>
+		<STRING hash="12901459" hash_i="13828657" needed="1">防御側による攻撃</STRING>
+		<STRING hash="7217963" hash_i="7191803" needed="1">小縮尺</STRING>
+		<STRING hash="3795366" hash_i="3775714" needed="1">攻撃</STRING>
+		<STRING hash="5102533" hash_i="5175407" needed="1">先住民族</STRING>
+		<STRING hash="2615769" hash_i="2593947" needed="1">スタートアップ</STRING>
+		<STRING hash="12009942" hash_i="12048602" needed="1">始源の軟泥</STRING>
+		<STRING hash="1559393" hash_i="1542415" needed="1">インターン</STRING>
+		<STRING hash="5351983" hash_i="5331139" needed="1">プログラマー</STRING>
+		<STRING hash="2589416" hash_i="2646426" needed="1">クロマニヨン人</STRING>
+		<STRING hash="2126730" hash_i="2112260" needed="1">イルカ</STRING>
+		<STRING hash="2852636" hash_i="2920342" needed="1">アクアマン</STRING>
+		<STRING hash="11879544" hash_i="11916208" needed="1">スティーブン ホーキング</STRING>
+		<STRING hash="16654941" hash_i="16727885" needed="1">スピリチュアル マシン</STRING>
+		<STRING hash="9240505" hash_i="9898799" needed="1">ジェイソン コールマン</STRING>
+		<STRING hash="18485684" hash_i="18518894" needed="1">無限資源</STRING>
+		<STRING hash="9358844" hash_i="9323470" needed="1">シークレット ランダム</STRING>
+		<STRING hash="18006925" hash_i="18072535" needed="1">シークレット ランダム - 陸</STRING>
+		<STRING hash="16259381" hash_i="16258661" needed="1">シークレット ランダム - 海</STRING>
+		<STRING hash="1251249" hash_i="1228743" needed="1">合計</STRING>
+		<STRING hash="690095" hash_i="757801" needed="1">軍隊</STRING>
+		<STRING hash="2186557" hash_i="2261949" needed="1">戦闘</STRING>
+		<STRING hash="698409" hash_i="773801" needed="1">都市</STRING>
+		<STRING hash="3666487" hash_i="3645045" needed="1">研究</STRING>
+		<STRING hash="2228690" hash_i="2204336" needed="1">偉大な建造物</STRING>
+		<STRING hash="14253685" hash_i="14298823" needed="1">偉大な建造物最大保有数</STRING>
+		<STRING hash="1236480" hash_i="1304186" needed="1">アリーナ</STRING>
+		<STRING hash="17195067" hash_i="17173245" needed="1">小 (2-3人)</STRING>
+		<STRING hash="5917400" hash_i="5861630" needed="1">勝利なし</STRING>
+		<STRING hash="15563815" hash_i="15681431" needed="1">外交 - カスタム</STRING>
+		<STRING hash="13212921" hash_i="13271721" needed="1">サバイバル - カスタム</STRING>
+		<STRING hash="2139850" hash_i="2117344" needed="1">より難しい</STRING>
+		<STRING hash="20373797" hash_i="22048227" needed="1">オブザーバーのチャット</STRING>
+		<STRING hash="13116235" hash_i="13175035" needed="1">カスタム シナリオ</STRING>
+		<STRING hash="17135323" hash_i="17117923" needed="1">大 (5-6人)</STRING>
+		<STRING hash="15347371" hash_i="15329073" needed="1">特大 (7-8人)</STRING>
+		<STRING hash="13422297" hash_i="13431565" needed="1">14 ポイントで勝利</STRING>
+		<STRING hash="8072927" hash_i="8126255" needed="1">サバイバル - カスタム</STRING>
+		<STRING hash="15317080" hash_i="15336286" needed="1">シナリオ勝利</STRING>
+		<STRING hash="13749655" hash_i="13773761" needed="1">デスマッチ - 現代</STRING>
+		<STRING hash="11987735" hash_i="11964673" needed="1">-選択されていません-</STRING>
+		<STRING hash="3386354" hash_i="3364532" needed="1">シナリオ</STRING><STRING hash="11183579" hash_i="11195879" needed="1">セーブを無効にする</STRING></CAT>
+	<CAT hash="2001345">
+		<STRING hash="50981888" hash_i="51543922" needed="1">人口上限、攻城、砦</STRING>
+		<STRING hash="46243831" hash_i="48628873" needed="1">都市上限、国境</STRING>
+		<STRING hash="96409525" hash_i="101220031" needed="1">経済の規模、資源採集を増加させるための建物</STRING>
+		<STRING hash="87408647" hash_i="89808329" needed="1">研究スピードとコスト、視野</STRING>
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+		<STRING hash="4886119" hash_i="5054375" needed="1">攻撃</STRING>
+		<STRING hash="3720352" hash_i="3761308" needed="1">防御</STRING>
+		<STRING hash="6966019" hash_i="7456903" needed="1">待機</STRING>
+		<STRING hash="543802" hash_i="657630" needed="1">奇襲</STRING>
+		<STRING hash="657446" hash_i="750702" needed="1">破壊</STRING>
+		<STRING hash="3451374" hash_i="3539644" needed="1">攻撃しない</STRING>
+		<STRING hash="1533492" hash_i="1617220" needed="1">採集</STRING>
+		<STRING hash="8881582" hash_i="10186100" needed="1">建設 &amp; 採集</STRING>
+		<STRING hash="933873" hash_i="947031" needed="1">建設</STRING>
+		<STRING hash="560748" hash_i="514750" needed="1">待機中</STRING>
+		<STRING hash="4654856" hash_i="6044030" needed="1">自動制御</STRING>
+		<STRING hash="6609992" hash_i="8997984" needed="1">手動制御</STRING>
+		<STRING hash="6194878" hash_i="6411260" needed="1">自動配備</STRING>
+		<STRING hash="8366798" hash_i="9212466" needed="1">手動配備</STRING>
+		<STRING hash="273987" hash_i="341693" needed="1">時代</STRING>
+		<STRING hash="699868" hash_i="677362" needed="1">最小</STRING>
+		<STRING hash="1146660" hash_i="1124838" needed="1">小</STRING>
+		<STRING hash="1512996" hash_i="1495790" needed="1">中</STRING>
+		<STRING hash="3362659" hash_i="3340837" needed="1">標準</STRING>
+		<STRING hash="1005028" hash_i="987628" needed="1">大</STRING>
+		<STRING hash="553863" hash_i="535565" needed="1">特大</STRING>
+		<STRING hash="2690747" hash_i="2739779" needed="1">最大</STRING>
+		<STRING hash="180303618" hash_i="180281112" needed="1">この民族の持つ特性を自分のものにして戦闘に臨みます。</STRING>
+		<STRING hash="183688558" hash_i="186317930" needed="1">偉大な建造物をこの時代以降領土に建設します。</STRING>
+		<STRING hash="194902380" hash_i="194885174" needed="1">領土を難攻不落にします。</STRING>
+		<STRING hash="219355655" hash_i="218356809" needed="1">"要塞化" ボーナスで保護された領土の防御を撃破します。</STRING>
+		<STRING hash="100842296" hash_i="100820474" needed="1">テクノロジーの研究が進んだ段階で戦闘を開始します。</STRING>
+		<STRING hash="214321010" hash_i="214299568" needed="1">戦闘によりこの資源の生産量が 5% アップします。</STRING>
+		<STRING hash="78231022" hash_i="78303896" needed="1">援軍を得て戦闘を開始します。</STRING>
+		<STRING hash="200566579" hash_i="200550723" needed="1">要塞化されていない首都以外の領土を、戦闘せずに獲得します。</STRING>
+		<STRING hash="197341710" hash_i="197409416" needed="1">次の戦闘では研究スピードが 20% アップし、研究コストが 20% ダウンします。</STRING>
+		<STRING hash="314900243" hash_i="314980239" needed="1">アイテムの市場価格が 20% ダウンします。アイテムを購入し、戦闘中に売却すれば 20% の利益を上げられます。</STRING>
+		<STRING hash="242748025" hash_i="242726449" needed="1">戦闘中のユニットのダメージ回復スピードが 50% アップし、敵地内損耗のダメージを受けません。</STRING>
+		<STRING hash="226046937" hash_i="226029959" needed="1">進攻してきた敵軍に与える敵地内損耗によるダメージが 50% アップします。</STRING>
+		<STRING hash="202254843" hash_i="202240705" needed="1">戦闘中、敵民族は "民族の特性" を使用できません。</STRING>
+		<STRING hash="239345225" hash_i="239331087" needed="1">戦闘中、敵民族は戦略資源による利益を得ることができません。</STRING>
+		<STRING hash="180183029" hash_i="180167173" needed="1">敵民族の持つ特性を自分のものにして戦闘に臨みます。</STRING>
+		<STRING hash="486640902" hash_i="496131788" needed="1">各資源のボーナス +$NUM0 で戦闘を開始します。ボーナスの額は先住民族との戦闘での功績に比例します。</STRING>
+		<STRING hash="226159838" hash_i="226142632" needed="1">首都以外の領土の防衛力をアップします。</STRING>
+		<STRING hash="207058700" hash_i="207037258" needed="1">敵の領土の防衛力を 2 レベル ダウンさせます。</STRING>
+		<STRING hash="211089915" hash_i="211068473" needed="1">敵の領土の防衛力を 2 レベル ダウンさせます。</STRING>
+		<STRING hash="1236480" hash_i="1304186" needed="1">アリーナ</STRING>
+		<STRING hash="559909775" hash_i="561287125" needed="1">首都以外の領土を戦闘せずに獲得します。対象となるのは、プレイヤーの民族の領土に隣接し、防衛力が 4 以下の領土のみです。 </STRING>
+		<STRING hash="733441215" hash_i="738771179" needed="1">各資源に +$NUM0 のボーナスが加算された状態で戦闘が開始します。ボーナスの額は、地上戦や戦略シナリオで生き残った部隊数に比例します。</STRING>
+		<STRING hash="169090987" hash_i="169075131" needed="1">この民族の特性を自分のものにして戦闘に臨みます。</STRING>
+		<STRING hash="204222049" hash_i="204207911" needed="1">戦闘中、敵民族は "民族の特性" を使用できません。</STRING>
+		<STRING hash="249376835" hash_i="249362697" needed="1">戦闘中、敵民族は戦略資源による利益を得ることができません。</STRING>
+		<STRING hash="219151950" hash_i="226481378" needed="1">偉大な建造物を自国の領土に建設します。</STRING>
+		<STRING hash="254275421" hash_i="254253845" needed="1">1 回の戦闘に限り、ユニットのダメージの回復スピードが 2 倍になり、敵地内損耗によるダメージがなくなります。</STRING>
+	</CAT>
+	<CAT hash="2909936">
+		<STRING hash="7689646" hash_i="7757352" needed="1">成績</STRING>
+		<STRING hash="3975033" hash_i="3982495" needed="1">メイン メニュー</STRING>
+		<STRING hash="923135" hash_i="998527" needed="1">閉じる</STRING>
+		<STRING hash="686598" hash_i="670742" needed="1">ゲーム</STRING>
+		<STRING hash="1095973" hash_i="1074151" needed="1">スコア</STRING>
+		<STRING hash="3518863" hash_i="3501657" needed="1">軍事</STRING>
+		<STRING hash="771111" hash_i="756973" needed="1">経済</STRING>
+		<STRING hash="3666487" hash_i="3645045" needed="1">研究</STRING>
+		<STRING hash="1083102" hash_i="1067246" needed="1">栄光</STRING>
+		<STRING hash="821524" hash_i="799702" needed="1">スピード</STRING>
+		<STRING hash="6578330" hash_i="6593932" needed="1">スコア グラフ</STRING>
+		<STRING hash="11031296" hash_i="11120138" needed="1">軍事グラフ</STRING>
+		<STRING hash="12357488" hash_i="12444598" needed="1">領土グラフ</STRING>
+		<STRING hash="10960775" hash_i="11045381" needed="1">資源グラフ</STRING>
+		<STRING hash="5497623" hash_i="5507885" needed="1">テクノロジー グラフ</STRING>
+		<STRING hash="2721837" hash_i="2699331" needed="1">年表</STRING>
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+		<STRING hash="9586178" hash_i="9624946" needed="1">チュートリアル</STRING>
+		<STRING hash="4023686" hash_i="4034632" needed="1">シングルプレイヤー</STRING>
+		<STRING hash="14113984" hash_i="14194906" needed="1">マルチプレイヤー</STRING>
+		<STRING hash="16500687" hash_i="16535783" needed="1">オプション &amp; プロファイル</STRING>
+		<STRING hash="11006481" hash_i="11079901" needed="1">ツール &amp; その他</STRING>
+		<STRING hash="658084" hash_i="643946" needed="1">終了</STRING>
+		<STRING hash="8929486" hash_i="8999528" needed="1">チュートリアル メニュー</STRING>
+		<STRING hash="1255743" hash_i="1233921" needed="1">開始</STRING>
+		<STRING hash="935119" hash_i="1007993" needed="1">戻る</STRING>
+		<STRING hash="877696" hash_i="858044" needed="1">OK</STRING>
+		<STRING hash="10781766" hash_i="10807450" needed="1">初期設定に戻す</STRING>
+		<STRING hash="1878427" hash_i="1953819" needed="1">キャンセル</STRING>
+		<STRING hash="4690900" hash_i="4672016" needed="1">ゲーム スピード</STRING>
+		<STRING hash="13552917" hash_i="13624975" needed="1">難易度</STRING>
+		<STRING hash="19865577" hash_i="20006103" needed="1">ヘルプ メッセージの詳細度</STRING>
+		<STRING hash="14390415" hash_i="14466147" needed="1">メッセージの表示時間</STRING>
+		<STRING hash="7460361" hash_i="8108323" needed="1">市民の基本行動</STRING>
+		<STRING hash="531728" hash_i="514750" needed="1">待機中</STRING>
+		<STRING hash="874157" hash_i="947031" needed="1">建設</STRING>
+		<STRING hash="1633076" hash_i="1617220" needed="1">採集</STRING>
+		<STRING hash="13522108" hash_i="13704598" needed="1">建設と採集</STRING>
+		<STRING hash="17784693" hash_i="18566811" needed="1">基本行動に移るまでの時間</STRING>
+		<STRING hash="14885015" hash_i="15004277" needed="1">作成するユニットの基本行動</STRING>
+		<STRING hash="4986669" hash_i="5054375" needed="1">攻撃</STRING>
+		<STRING hash="3775778" hash_i="3761308" needed="1">防御</STRING>
+		<STRING hash="7441301" hash_i="7456903" needed="1">待機</STRING>
+		<STRING hash="679072" hash_i="657630" needed="1">奇襲</STRING>
+		<STRING hash="772144" hash_i="750702" needed="1">破壊</STRING>
+		<STRING hash="3522606" hash_i="3539644" needed="1">攻撃しない</STRING>
+		<STRING hash="25165512" hash_i="25745034" needed="1">拡張コマンド オプションの表示</STRING>
+		<STRING hash="14720530" hash_i="15939694" needed="1">敵と味方の色</STRING>
+		<STRING hash="26172404" hash_i="26861892" needed="1">探索兵の自動海上移動</STRING>
+		<STRING hash="27264437" hash_i="27856271" needed="1">グループで能力を使用</STRING>
+		<STRING hash="43831685" hash_i="46335511" needed="1">テクノロジーの研究状況を表示</STRING>
+		<STRING hash="12151156" hash_i="12792608" needed="1">都市名を表示</STRING>
+		<STRING hash="48669557" hash_i="48730359" needed="1">ゲーム開始時に自動的にポーズをかける</STRING>
+		<STRING hash="42710657" hash_i="42688835" needed="1">兵器を自動配備</STRING>
+		<STRING hash="12977214" hash_i="14780622" needed="1">自動的に警報を解除</STRING>
+		<STRING hash="37315318" hash_i="37383024" needed="1">同じユニットをまとめて表示</STRING>
+		<STRING hash="7848322" hash_i="7826880" needed="1">ゲームを記録</STRING>
+		<STRING hash="1492138" hash_i="1559844" needed="1">割り当て</STRING>
+		<STRING hash="1518125" hash_i="1496683" needed="1">削除</STRING>
+		<STRING hash="23696953" hash_i="24351401" needed="1">左クリックで移動先を指定</STRING>
+		<STRING hash="18230202" hash_i="18764774" needed="1">ワン クリックで駐屯</STRING>
+		<STRING hash="20751536" hash_i="21526716" needed="1">右クリックで攻撃ユニットを指定</STRING>
+		<STRING hash="44268066" hash_i="44466868" needed="1">ドラッグ時に軍事ユニットのみを選択</STRING>
+		<STRING hash="13221428" hash_i="13196224" needed="1">マップ スクロール スピード</STRING>
+		<STRING hash="1520839" hash_i="1557933" needed="1">すべてオン</STRING>
+		<STRING hash="2005644" hash_i="2042738" needed="1">すべてオフ</STRING>
+		<STRING hash="2286595" hash_i="2334949" needed="1">すべて低</STRING>
+		<STRING hash="2623229" hash_i="2667093" needed="1">すべて高</STRING>
+		<STRING hash="2954634" hash_i="3428518" needed="1">すべて自動</STRING>
+		<STRING hash="21918359" hash_i="22041921" needed="1">解像度の変更</STRING>
+		<STRING hash="10215001" hash_i="10285547" needed="1">市民の自動化</STRING>
+		<STRING hash="2517723" hash_i="2495217" needed="1">地形</STRING>
+		<STRING hash="4404155" hash_i="4386949" needed="1">山</STRING>
+		<STRING hash="5442268" hash_i="5389992" needed="1">戦雲</STRING>
+		<STRING hash="626342" hash_i="604520" needed="1">波</STRING>
+		<STRING hash="6446028" hash_i="6466796" needed="1">海底</STRING>
+		<STRING hash="1122282" hash_i="1097928" needed="1">水</STRING>
+		<STRING hash="1618712" hash_i="1597270" needed="1">川</STRING>
+		<STRING hash="1856542" hash_i="1931934" needed="1">海岸</STRING>
+		<STRING hash="1149898" hash_i="1128456" needed="1">道路</STRING>
+		<STRING hash="2209225" hash_i="2282099" needed="1">国境</STRING>
+		<STRING hash="7023317" hash_i="7008847" needed="1">その他の地形</STRING>
+		<STRING hash="2532666" hash_i="2518196" needed="1">地表アイテム</STRING>
+		<STRING hash="940914" hash_i="918408" needed="1">木</STRING>
+		<STRING hash="1041852" hash_i="1020276" needed="1">ユニット</STRING>
+		<STRING hash="3773812" hash_i="3846686" needed="1">建物</STRING>
+		<STRING hash="952899" hash_i="937043" needed="1">アイテム</STRING>
+		<STRING hash="5890470" hash_i="6441148" needed="1">死体</STRING>
+		<STRING hash="612182" hash_i="679888" needed="1">弾薬</STRING>
+		<STRING hash="2516897" hash_i="2495075" needed="1">影</STRING>
+		<STRING hash="1660727" hash_i="1638905" needed="1">嵐</STRING>
+		<STRING hash="4451578" hash_i="4430734" needed="1">粒子</STRING>
+		<STRING hash="3524623" hash_i="3504971" needed="1">オーバーレイ</STRING>
+		<STRING hash="4523674" hash_i="4502098" needed="1">アンダーレイ</STRING>
+		<STRING hash="4678862" hash_i="4661884" needed="1">インターフェイス</STRING>
+		<STRING hash="12471224" hash_i="12522762" needed="1">フレーム レートを表示</STRING>
+		<STRING hash="74339958" hash_i="74321660" needed="1">建造物背後のユニットを強調表示</STRING>
+		<STRING hash="3975861" hash_i="3891733" needed="1">効果音ボリューム</STRING>
+		<STRING hash="7842469" hash_i="7817173" needed="1">ミュージック ボリューム</STRING>
+		<STRING hash="18279455" hash_i="18981197" needed="1">サウンド チャットを再生可能にする</STRING>
+		<STRING hash="373132" hash_i="354858" needed="1">新規</STRING>
+		<STRING hash="1690123" hash_i="1668681" needed="1">名前の変更</STRING>
+		<STRING hash="1407606" hash_i="1393136" needed="1">削除</STRING>
+		<STRING hash="3070132" hash_i="3114116" needed="1">名前の追加</STRING>
+		<STRING hash="6250378" hash_i="6247700" needed="1">名前の削除</STRING>
+		<STRING hash="11773555" hash_i="11874961" needed="1">シナリオ エディタ</STRING>
+		<STRING hash="5003860" hash_i="4972912" needed="1">スキル テスト</STRING>
+		<STRING hash="13721217" hash_i="14193451" needed="1">スクリプト エディタ</STRING>
+		<STRING hash="16525213" hash_i="17090437" needed="1">ユニット バランス ツール</STRING>
+		<STRING hash="14718304" hash_i="15144794" needed="1">マップ バランス ツール</STRING>
+		<STRING hash="7311227" hash_i="7869125" needed="1">クレジットを表示</STRING>
+		<STRING hash="24604858" hash_i="24758760" needed="1">Rise of Nations のバージョン情報</STRING>
+		<STRING hash="653244" hash_i="580008" needed="1">MOTD</STRING>
+		<STRING hash="5451217" hash_i="5421247" needed="1">最新プログラム テスト</STRING>
+		<STRING hash="1911187" hash_i="1889365" needed="1">選択</STRING>
+		<STRING hash="3386354" hash_i="3364532" needed="1">シナリオ</STRING>
+		<STRING hash="1695196" hash_i="1676922" needed="1">民族</STRING>
+		<STRING hash="487294" hash_i="470088" needed="1">マップ</STRING>
+		<STRING hash="4509660" hash_i="4488218" needed="1">資源</STRING>
+		<STRING hash="5094893" hash_i="5080423" needed="1">外交</STRING>
+		<STRING hash="2881693" hash_i="2859187" needed="1">トリガ</STRING>
+		<STRING hash="752824" hash_i="735424" needed="1">ロード</STRING>
+		<STRING hash="747903" hash_i="726081" needed="1">セーブ</STRING>
+		<STRING hash="1193029" hash_i="1193029" needed="1">. . .</STRING>
+		<STRING hash="330236" hash_i="330236" needed="1">移動</STRING>
+		<STRING hash="343836" hash_i="343836" needed="1">設定</STRING>
+		<STRING hash="24222715" hash_i="24236941" needed="1">シナリオ スクリプトのロード</STRING>
+		<STRING hash="2072581" hash_i="2054307" needed="1">民族:</STRING>
+		<STRING hash="1318292" hash_i="1393684" needed="1">色:</STRING>
+		<STRING hash="2689237" hash_i="2764629" needed="1">コントロール:</STRING>
+		<STRING hash="2721230" hash_i="2701578" needed="1">オプション:</STRING>
+		<STRING hash="64830" hash_i="64830" needed="1">+</STRING>
+		<STRING hash="70786" hash_i="70786" needed="1">-</STRING>
+		<STRING hash="11587138" hash_i="11654844" needed="1">自動海上移動</STRING>
+		<STRING hash="11371302" hash_i="11354324" needed="1">人口制限を無視</STRING>
+		<STRING hash="8339564" hash_i="9510062" needed="1">AI プロダクション</STRING>
+		<STRING hash="1914920" hash_i="2457054" needed="1">AI ユニット</STRING>
+		<STRING hash="3959833" hash_i="4805223" needed="1">AI コンバット</STRING>
+		<STRING hash="4776064" hash_i="4717396" needed="1">マップ スタイル:</STRING>
+		<STRING hash="2840460" hash_i="2822186" needed="1">民族:</STRING>
+		<STRING hash="812154" hash_i="812154" needed="1">サイズ:</STRING>
+		<STRING hash="3726317" hash_i="3708917" needed="1">シードのロック</STRING>
+		<STRING hash="8046425" hash_i="8123117" needed="1">マップの生成</STRING>
+		<STRING hash="2234590" hash_i="2217190" needed="1">ロード中</STRING>
+		<STRING hash="554264" hash_i="532442" needed="1">送信</STRING>
+		<STRING hash="2311020" hash_i="2291368" needed="1">オプション</STRING>
+		<STRING hash="973370" hash_i="951928" needed="1">リセット</STRING>
+		<STRING hash="13744261" hash_i="14600789" needed="1">地形のバランス</STRING>
+		<STRING hash="2926079" hash_i="2895981" needed="1">再生成 +1</STRING>
+		<STRING hash="5146506" hash_i="5116408" needed="1">再生成 (同じ)</STRING>
+		<STRING hash="511505" hash_i="489683" needed="1">シード</STRING>
+		<STRING hash="1049392" hash_i="1027570" needed="1">セットアップ</STRING>
+		<STRING hash="3486313" hash_i="3558439" needed="1">バッチの実行</STRING>
+		<STRING hash="2831122" hash_i="2835336" needed="1">イメージのセーブ</STRING>
+		<STRING hash="813336" hash_i="888728" needed="1">チャット</STRING>
+		<STRING hash="4031707" hash_i="4641239" needed="1">同盟国とチャット</STRING>
+		<STRING hash="2851091" hash_i="3460623" needed="1">全員とチャット</STRING>
+		<STRING hash="928596" hash_i="1266708" needed="1">クリア</STRING>
+		<STRING hash="1366925" hash_i="1346081" needed="1">和平</STRING>
+		<STRING hash="669166" hash_i="736872" needed="1">同盟</STRING>
+		<STRING hash="8782237" hash_i="8805295" needed="1">スクリプト エディタ</STRING>
+		<STRING hash="3177121" hash_i="3420233" needed="1">IDE を閉じる</STRING>
+		<STRING hash="14667037" hash_i="14797045" needed="1">ファイルから開く...</STRING>
+		<STRING hash="25465449" hash_i="25489871" needed="1">ロードしたスクリプトを開く...</STRING>
+		<STRING hash="5585081" hash_i="5563259" needed="1">スクリプト...</STRING>
+		<STRING hash="10833397" hash_i="10932707" needed="1">エラー ログを表示</STRING>
+		<STRING hash="23629190" hash_i="23920104" needed="1">ゲーム スクリプト エラー ログ</STRING>
+		<STRING hash="4556849" hash_i="4632241" needed="1">クリップボード</STRING>
+		<STRING hash="15587940" hash_i="16306410" needed="1">ブレークポイントの切り替え</STRING>
+		<STRING hash="10374000" hash_i="10396824" needed="1">トリガの追加...</STRING>
+		<STRING hash="12894035" hash_i="12952249" needed="1">関数の追加...</STRING>
+		<STRING hash="8771132" hash_i="8743804" needed="1">行へ移動...</STRING>
+		<STRING hash="15933003" hash_i="15911181" needed="1">トリガに移動:</STRING>
+		<STRING hash="15509130" hash_i="15487308" needed="1">スクリプトに移動:</STRING>
+		<STRING hash="4076280" hash_i="4169652" needed="1">すぐに中断</STRING>
+		<STRING hash="6976407" hash_i="6951557" needed="1">スクリプトの停止</STRING>
+		<STRING hash="14557728" hash_i="14511312" needed="1">ウォッチ ウィンドウ...</STRING>
+		<STRING hash="13233658" hash_i="13359238" needed="1">続行</STRING>
+		<STRING hash="3897867" hash_i="3902081" needed="1">ステップ イン</STRING>
+		<STRING hash="14678941" hash_i="14693585" needed="1">トリガにステップ イン</STRING>
+		<STRING hash="3921777" hash_i="3909947" needed="1">ステップ オーバー</STRING>
+		<STRING hash="5828306" hash_i="5825648" needed="1">行の前まで実行</STRING>
+		<STRING hash="3071210" hash_i="3059380" needed="1">ステップ アウト</STRING>
+		<STRING hash="668370" hash_i="646548" needed="1">停止</STRING>
+		<STRING hash="7691436" hash_i="8249870" needed="1">変更をセーブ</STRING>
+		<STRING hash="8147677" hash_i="8218731" needed="1">スクリプトを閉じる</STRING>
+		<STRING hash="10972267" hash_i="11074429" needed="1">スクリプトをコンパイル</STRING>
+		<STRING hash="22315147" hash_i="22473363" needed="1">スクリプトのコンパイル &amp; 実行</STRING>
+		<STRING hash="18336361" hash_i="18573695" needed="1">コンパイル &amp; ステップ イン</STRING>
+		<STRING hash="13272702" hash_i="13297268" needed="1">スクリプトの選択</STRING>
+		<STRING hash="60843" hash_i="36329" needed="1">X</STRING>
+		<STRING hash="7943953" hash_i="8581341" needed="1">クイック バトル</STRING>
+		<STRING hash="39472655" hash_i="41488085" needed="1">世界征服キャンペーン</STRING>
+		<STRING hash="13452927" hash_i="13418935" needed="1">シナリオのロード</STRING>
+		<STRING hash="12083713" hash_i="12168341" needed="1">セーブしたゲームのロード</STRING>
+		<STRING hash="31467542" hash_i="31601472" needed="1">記録したゲームの再生</STRING>
+		<STRING hash="14723823" hash_i="14786869" needed="1">世界征服</STRING>
+		<STRING hash="8147586" hash_i="8573920" needed="1">新しいキャンペーン</STRING>
+		<STRING hash="15996944" hash_i="17090864" needed="1">キャンペーンの継続</STRING>
+		<STRING hash="9604089" hash_i="10166945" needed="1">キャンペーンのロード</STRING>
+		<STRING hash="5764344" hash_i="5749874" needed="1">難易度</STRING>
+		<STRING hash="8861679" hash_i="9043119" needed="1">征服ゲーム</STRING>
+		<STRING hash="18876752" hash_i="19046972" needed="1">征服インターフェイス</STRING>
+		<STRING hash="6465100" hash_i="7214134" needed="1">ボーナス カード</STRING>
+		<STRING hash="11480916" hash_i="11458726" needed="1">希少資源</STRING>
+		<STRING hash="2228690" hash_i="2204336" needed="1">偉大な建造物</STRING>
+		<STRING hash="5124546" hash_i="5120840" needed="1">ヒントの表示</STRING>
+		<STRING hash="7428115" hash_i="7453211" needed="1">世界の事件</STRING>
+		<STRING hash="4140000" hash_i="4215392" needed="1">征服</STRING>
+		<STRING hash="2845427" hash_i="2830957" needed="1">撃退</STRING>
+		<STRING hash="3536343" hash_i="3515499" needed="1">購入</STRING>
+		<STRING hash="1083042" hash_i="1158434" needed="1">カード</STRING>
+		<STRING hash="26874025" hash_i="27108063" needed="1">［世界の事件］を毎回表示する</STRING>
+		<STRING hash="37078883" hash_i="38285341" needed="1">キャンペーン結果</STRING>
+		<STRING hash="28738297" hash_i="28913881" needed="1">キャンペーン ルール</STRING>
+		<STRING hash="8419892" hash_i="8391200" needed="1">世界情勢</STRING>
+		<STRING hash="592299" hash_i="575093" needed="1">他の民族を見る</STRING>
+		<STRING hash="741820" hash_i="720378" needed="1">ランク</STRING>
+		<STRING hash="698047" hash_i="679773" needed="1">リーダー</STRING>
+		<STRING hash="1851009" hash_i="1826655" needed="1">領土 (%)</STRING>
+		<STRING hash="4264419" hash_i="4241913" needed="1">地域</STRING>
+		<STRING hash="1501062" hash_i="1568768" needed="1">軍隊</STRING>
+		<STRING hash="2517695" hash_i="2495189" needed="1">献上品</STRING>
+		<STRING hash="2042215" hash_i="2020393" needed="1">外交方針</STRING>
+		<STRING hash="2841814" hash_i="2909520" needed="1">姿勢</STRING>
+		<STRING hash="19410681" hash_i="22075293" needed="1">ボーナス カードを選択</STRING>
+		<STRING hash="161441" hash_i="123533" needed="1">OK</STRING>
+		<STRING hash="9505553" hash_i="9533545" needed="1">領土買収</STRING>
+		<STRING hash="29719515" hash_i="31111817" needed="1">和平または同盟提案</STRING>
+		<STRING hash="8129791" hash_i="8119303" needed="1">宣戦布告!</STRING>
+		<STRING hash="31838066" hash_i="31816244" needed="1">ゲーム開始時にヒントを表示</STRING>
+		<STRING hash="7427446" hash_i="7446150" needed="1">前のヒント</STRING>
+		<STRING hash="2992698" hash_i="2967292" needed="1">次のヒント</STRING>
+		<STRING hash="2214432" hash_i="2289824" needed="1">クレジット</STRING>
+		<STRING hash="6667305" hash_i="6721481" needed="1">全マップの表示</STRING>
+		<STRING hash="11591267" hash_i="11571749" needed="1">ゲームの再生</STRING>
+		<STRING hash="668857" hash_i="647711" needed="1">終了</STRING>
+		<STRING hash="13150489" hash_i="13187181" needed="1">スキル テスト メニュー</STRING>
+		<STRING hash="26131241" hash_i="26204247" needed="1">シナリオ紹介</STRING>
+		<STRING hash="16782149" hash_i="16903929" needed="1">征服シナリオ</STRING>
+		<STRING hash="874758" hash_i="947632" needed="1">スタート</STRING>
+		<STRING hash="49084535" hash_i="49280515" needed="1">GameSpy インターネット マッチング</STRING>
+		<STRING hash="85180286" hash_i="86710302" needed="1">LAN またはダイレクト インターネット</STRING>
+		<STRING hash="10817260" hash_i="11566294" needed="1">キャンペーンの開始</STRING>
+		<STRING hash="15510563" hash_i="15747603" needed="1">メイン メニューに戻る</STRING>
+		<STRING hash="1559857" hash_i="1519511" needed="1">ボーナス!</STRING>
+		<STRING hash="2928789" hash_i="3004181" needed="1">継続</STRING>
+		<STRING hash="9989659" hash_i="10095371" needed="1">シングルプレイヤー メニュー</STRING>
+		<STRING hash="15233528" hash_i="15383556" needed="1">メイン メニューに戻る</STRING>
+		<STRING hash="9102854" hash_i="9176178" needed="1">マップに戻る</STRING>
+		<STRING hash="2532464" hash_i="2517994" needed="1">敗北</STRING>
+		<STRING hash="2529104" hash_i="2514966" needed="1">経済</STRING>
+		<STRING hash="14049952" hash_i="14132502" needed="1">テクノロジー グラフ</STRING>
+		<STRING hash="24217264" hash_i="24481118" needed="1">マルチプレイヤー メニュー</STRING>
+		<STRING hash="4967471" hash_i="5066961" needed="1">仲間のリスト</STRING>
+		<STRING hash="263897" hash_i="331603" needed="1">追加</STRING>
+		<STRING hash="8716848" hash_i="8726098" needed="1">GameSpy ログイン</STRING>
+		<STRING hash="1428701" hash_i="1414563" needed="1">電子メール:</STRING>
+		<STRING hash="3917417" hash_i="3899143" needed="1">ニックネーム:</STRING>
+		<STRING hash="3686476" hash_i="3665632" needed="1">パスワード:</STRING>
+		<STRING hash="9653093" hash_i="9634111" needed="1">パスワードのセーブ</STRING>
+		<STRING hash="918190" hash_i="900790" needed="1">ログイン</STRING>
+		<STRING hash="9947770" hash_i="10014394" needed="1">プロファイルの作成</STRING>
+		<STRING hash="6627328" hash_i="6612858" needed="1">ゲーム名</STRING>
+		<STRING hash="9527755" hash_i="10337771" needed="1">チーム &amp; 国交</STRING>
+		<STRING hash="4141632" hash_i="4082964" needed="1">マップ スタイル</STRING>
+		<STRING hash="3125071" hash_i="3066403" needed="1">マップ サイズ</STRING>
+		<STRING hash="5135214" hash_i="5118610" needed="1">ゲーム ルール</STRING>
+		<STRING hash="211646" hash_i="159918" needed="1">PW</STRING>
+		<STRING hash="178280" hash_i="226484" needed="1">CT</STRING>
+		<STRING hash="189665" hash_i="143295" needed="1">TP</STRING>
+		<STRING hash="201227" hash_i="152597" needed="1">RT</STRING>
+		<STRING hash="177617" hash_i="137451" needed="1">RN</STRING>
+		<STRING hash="196599" hash_i="149033" needed="1">TR</STRING>
+		<STRING hash="166993" hash_i="127701" needed="1">FP</STRING>
+		<STRING hash="575406" hash_i="554562" needed="1">Ping</STRING>
+		<STRING hash="605846" hash_i="587980" needed="1">参加</STRING>
+		<STRING hash="1708385" hash_i="1783777" needed="1">ホスト</STRING>
+		<STRING hash="2104439" hash_i="2082997" needed="1">更新</STRING>
+		<STRING hash="1533859" hash_i="1518431" needed="1">フィルタ</STRING>
+		<STRING hash="6425006" hash_i="6531534" needed="1">ゲームの作成</STRING>
+		<STRING hash="10416096" hash_i="11226112" needed="1">チーム &amp; 国交:</STRING>
+		<STRING hash="3668910" hash_i="3610242" needed="1">マップ サイズ:</STRING>
+		<STRING hash="7799138" hash_i="7745360" needed="1">最大プレイヤー数:</STRING>
+		<STRING hash="8206992" hash_i="8260320" needed="1">スローモーション:</STRING>
+		<STRING hash="5820335" hash_i="5803731" needed="1">ゲーム ルール:</STRING>
+		<STRING hash="13283113" hash_i="13258929" needed="1">資源採集スピードアップ</STRING>
+		<STRING hash="5361655" hash_i="5349067" needed="1">無制限ポーズ</STRING>
+		<STRING hash="11072177" hash_i="11104419" needed="1">トーナメントプレイ</STRING>
+		<STRING hash="22800730" hash_i="22838982" needed="1">チームはランダムに選択</STRING>
+		<STRING hash="28098967" hash_i="28204931" needed="1">民族はランダムに選択</STRING>
+		<STRING hash="7348406" hash_i="7333936" needed="1">ゲーム名:</STRING>
+		<STRING hash="397842" hash_i="380442" needed="1">低</STRING>
+		<STRING hash="532432" hash_i="514134" needed="1">高</STRING>
+		<STRING hash="663755" hash_i="731461" needed="1">自動</STRING>
+		<STRING hash="9977569" hash_i="9959295" needed="1">通知するイベント</STRING>
+		<STRING hash="33311751" hash_i="33297613" needed="1">敵が新時代に到達</STRING>
+		<STRING hash="30345597" hash_i="30413303" needed="1">同盟国が新時代に到達</STRING>
+		<STRING hash="22575216" hash_i="22550564" needed="1">新時代に到達</STRING>
+		<STRING hash="26441069" hash_i="26425641" needed="1">未来テクノロジーの研究</STRING>
+		<STRING hash="39276789" hash_i="39258515" needed="1">核兵器の研究</STRING>
+		<STRING hash="37437771" hash_i="37419497" needed="1">核弾頭ミサイル発射</STRING>
+		<STRING hash="33446592" hash_i="33421940" needed="1">都市が攻撃されたとき</STRING>
+		<STRING hash="39532161" hash_i="39599867" needed="1">同盟国の都市が攻撃されたとき</STRING>
+		<STRING hash="22058539" hash_i="22033887" needed="1">都市を占領したとき</STRING>
+		<STRING hash="14743520" hash_i="14718868" needed="1">都市が占領されたとき</STRING>
+		<STRING hash="30755496" hash_i="30734652" needed="1">プレイヤーが偉大な建造物を着工</STRING>
+		<STRING hash="35342567" hash_i="35321723" needed="1">プレイヤーが偉大な建造物を完成</STRING>
+		<STRING hash="55195631" hash_i="55173273" needed="1">勝利へのカウントダウンの開始または終了</STRING>
+		<STRING hash="38109733" hash_i="38177439" needed="1">ハルマゲドン クロックの変更</STRING>
+		<STRING hash="29462566" hash_i="29441722" needed="1">プレイヤーがゲームを退場</STRING>
+		<STRING hash="28224454" hash_i="28203012" needed="1">援軍の到着</STRING>
+		<STRING hash="16768953" hash_i="16842595" needed="1">戦闘目標</STRING>
+		<STRING hash="44106662" hash_i="44082010" needed="1">首都が攻撃されたとき</STRING>
+		<STRING hash="51233027" hash_i="51300733" needed="1">同盟国の首都が攻撃されたとき</STRING>
+		<STRING hash="7004608" hash_i="7021768" needed="1">ロードしたファイル</STRING>
+		<STRING hash="539954" hash_i="524526" needed="1">ファイル</STRING>
+		<STRING hash="599940" hash_i="585802" needed="1">編集</STRING>
+		<STRING hash="644049" hash_i="621691" needed="1">表示</STRING>
+		<STRING hash="14761399" hash_i="14739577" needed="1">トリガに移動</STRING>
+		<STRING hash="14477187" hash_i="14455365" needed="1">スクリプトに移動</STRING>
+		<STRING hash="6683944" hash_i="6756818" needed="1">ブレークポイント</STRING>
+		<STRING hash="2062733" hash_i="2138125" needed="1">コンパイル</STRING>
+		<STRING hash="4163655" hash_i="4380539" needed="1">IDE で実行</STRING>
+		<STRING hash="1133858" hash_i="1119388" needed="1">デバッグ</STRING>
+		<STRING hash="9426433" hash_i="9380017" needed="1">ウォッチ ウィンドウ</STRING>
+		<STRING hash="50125581" hash_i="52132285" needed="1">ブレークポイントの現在のスクリプト:</STRING>
+		<STRING hash="7556300" hash_i="7513598" needed="1">スタティック変数</STRING>
+		<STRING hash="6090578" hash_i="6065088" needed="1">ローカル変数</STRING>
+		<STRING hash="8867786" hash_i="8906330" needed="1">カスタム ウォッチ</STRING>
+		<STRING hash="13855303" hash_i="13856013" needed="1">関数ウィンドウ</STRING>
+		<STRING hash="8123211" hash_i="8181425" needed="1">関数の追加</STRING>
+		<STRING hash="2084271" hash_i="2094949" needed="1">参加 (IP ｱﾄﾞﾚｽ)</STRING>
+		<STRING hash="2354080" hash_i="2334428" needed="1">観戦</STRING>
+		<STRING hash="4802900" hash_i="4909782" needed="1">観戦 (IP ｱﾄﾞﾚｽ)</STRING>
+		<STRING hash="6855043" hash_i="6930757" needed="1">プレイヤーを退場させる</STRING>
+		<STRING hash="2017618" hash_i="2000218" needed="1">開始</STRING>
+		<STRING hash="11934861" hash_i="11961859" needed="1">GameSpy フィルタ</STRING>
+		<STRING hash="6616867" hash_i="6591333" needed="1">チーム スタイル</STRING>
+		<STRING hash="4186389" hash_i="4127721" needed="1">マップ サイズ</STRING>
+		<STRING hash="5380687" hash_i="5322019" needed="1">マップ スタイル</STRING>
+		<STRING hash="7454249" hash_i="7507577" needed="1">スローモーション</STRING>
+		<STRING hash="928542" hash_i="911336" needed="1">その他</STRING>
+		<STRING hash="4920784" hash_i="5598594" needed="1">すべて選択</STRING>
+		<STRING hash="3692195" hash_i="4389945" needed="1">すべてクリア</STRING>
+		<STRING hash="6091734" hash_i="6817974" needed="1">仲間の追加</STRING>
+		<STRING hash="2047051" hash_i="2025229" needed="1">検索</STRING>
+		<STRING hash="2060752" hash_i="2133626" needed="1">仲間</STRING>
+		<STRING hash="3768021" hash_i="3778201" needed="1">ゲーム情報</STRING>
+		<STRING hash="2523146" hash_i="2502302" needed="1">プレイヤー</STRING>
+		<STRING hash="12376139" hash_i="12364509" needed="1">脱落したプレイヤーを削除する</STRING>
+		<STRING hash="27997921" hash_i="28189459" needed="1">"外交" に変更</STRING>
+		<STRING hash="76887027" hash_i="77461273" needed="1">"サバイバル" に変更</STRING>
+		<STRING hash="11242446" hash_i="12612938" needed="1">AI による代役</STRING>
+		<STRING hash="8836697" hash_i="8938103" needed="1">セーブして終了</STRING>
+		<STRING hash="8700596" hash_i="8696450" needed="1">オブジェクトの編集</STRING>
+		<STRING hash="5479162" hash_i="5482520" needed="1">マップのインポート</STRING>
+		<STRING hash="693695" hash_i="676295" needed="1">陸</STRING>
+		<STRING hash="1338397" hash_i="1318745" needed="1">海</STRING>
+		<STRING hash="1613382" hash_i="1597954" needed="1">森林</STRING>
+		<STRING hash="6897391" hash_i="6943199" needed="1">地形マップ</STRING>
+		<STRING hash="4206302" hash_i="4195712" needed="1">岩/石油</STRING>
+		<STRING hash="1456634" hash_i="1532026" needed="1">崖</STRING>
+		<STRING hash="10872930" hash_i="10829424" needed="1">地形の削除</STRING>
+		<STRING hash="1308833" hash_i="1381707" needed="1">ブラシ:</STRING>
+		<STRING hash="1674528" hash_i="1652022" needed="1">タイプ 1</STRING>
+		<STRING hash="1145995" hash_i="1123489" needed="1">タイプ 2</STRING>
+		<STRING hash="1154858" hash_i="1132352" needed="1">タイプ 3</STRING>
+		<STRING hash="1164333" hash_i="1141827" needed="1">タイプ 4</STRING>
+		<STRING hash="5038587" hash_i="5021381" needed="1">山:</STRING>
+		<STRING hash="1551515" hash_i="1534309" needed="1">変更</STRING>
+		<STRING hash="3050345" hash_i="3183347" needed="1">勝利!</STRING>
+		<STRING hash="38070161" hash_i="38480465" needed="1">戦略マップに移動</STRING>
+		<STRING hash="7975158" hash_i="8095158" needed="1">防御の開始</STRING>
+		<STRING hash="6256388" hash_i="6895270" needed="1">わいろを贈る</STRING>
+		<STRING hash="5349318" hash_i="5445046" needed="1">マップの中央に表示</STRING>
+		<STRING hash="17056293" hash_i="17166007" needed="1">スクリプト メッセージ ログ</STRING>
+		<STRING hash="696113" hash_i="771505" needed="1">コピー</STRING>
+		<STRING hash="1191316" hash_i="1266708" needed="1">クリア</STRING>
+		<STRING hash="12850141" hash_i="13856433" needed="1">チームと国交</STRING>
+		<STRING hash="7683728" hash_i="7653132" needed="1">サウンド チャットのボリューム</STRING>
+		<STRING hash="11445591" hash_i="11469029" needed="1">レンダリング コンポーネント</STRING>
+		<STRING hash="19840150" hash_i="19861634" needed="1">領土の防衛力</STRING>
+		<STRING hash="9520122" hash_i="10079232" needed="1">キャンペーンの終了</STRING>
+		<STRING hash="30596725" hash_i="30664431" needed="1">同タイプのユニットをまとめて表示</STRING>
+		<STRING hash="6911556" hash_i="6894350" needed="1">マルチプレイヤー</STRING>
+		<STRING hash="6028572" hash_i="6009688" needed="1">ゲーム スピード</STRING>
+		<STRING hash="5376021" hash_i="5357137" needed="1">ゲーム スピード: </STRING>
+		<STRING hash="2594554" hash_i="2572048" needed="1">タイルセット: </STRING>
+		<STRING hash="9528923" hash_i="9486601" needed="1">戻り値</STRING>
+		<STRING hash="1224793" hash_i="1203351" needed="1">石</STRING>
+		<STRING hash="1527171" hash_i="1600045" needed="1">低木</STRING>
+		<STRING hash="5243833" hash_i="5271977" needed="1">ランダムに追加</STRING>
+		<STRING hash="6907977" hash_i="6890811" needed="1">スクリプト</STRING>
+		<STRING hash="430053" hash_i="497759" needed="1">時代: </STRING>
+		<STRING hash="825727" hash_i="803221" needed="1">タイプ: </STRING>
+		<STRING hash="1387214" hash_i="1366370" needed="1">配置</STRING>
+		<STRING hash="27136199" hash_i="27110379" needed="1"> 民族独自ユニットの表示</STRING>
+		<STRING hash="3561299" hash_i="3561299" needed="1">up_arrow</STRING>
+		<STRING hash="5992175" hash_i="5992175" needed="1">down_arrow</STRING>
+		<STRING hash="12813964" hash_i="12778970" needed="1">資源の削除</STRING>
+		<STRING hash="22658602" hash_i="23374816" needed="1">希少資源をすべて削除</STRING>
+		<STRING hash="12036581" hash_i="12014759" needed="1">独自ﾕﾆｯﾄの表示</STRING>
+		<STRING hash="5355119" hash_i="5399103" needed="1">民族の追加</STRING>
+		<STRING hash="4527722" hash_i="5205912" needed="1">すべて削除</STRING>
+		<STRING hash="6766132" hash_i="6716418" needed="1">パスワードなし</STRING>
+		<STRING hash="514554" hash_i="490200" needed="1">敵対</STRING>
+		<STRING hash="20711732" hash_i="21018950" needed="1">ミュージックを再生する</STRING>
+		<STRING hash="12697533" hash_i="12696427" needed="1">山の削除</STRING>
+		<STRING hash="10611547" hash_i="10624665" needed="1">設定の削除</STRING>
+		<STRING hash="27568974" hash_i="27644366" needed="1">スローモーションが開始されたとき</STRING>
+		<STRING hash="14610289" hash_i="14685681" needed="1">スローモーションが終了したとき</STRING>
+		<STRING hash="13075845" hash_i="13158115" needed="1">無視するプレイヤーのリストの表示</STRING>
+		<STRING hash="6106288" hash_i="6108094" needed="1">無視するプレイヤーのリスト</STRING>
+		<STRING hash="13048688" hash_i="13105302" needed="1">リストから削除</STRING>
+		<STRING hash="585802" hash_i="585802" needed="1">編集</STRING>
+		<STRING hash="12188775" hash_i="12260271" needed="1">初期設定に戻す</STRING>
+		<STRING hash="4051612" hash_i="4060978" needed="1">地形の編集</STRING>
+		<STRING hash="8181976" hash_i="8159454" needed="1">ランダムに配置</STRING>
+		<STRING hash="12344607" hash_i="12357725" needed="1">石や低木を削除する</STRING>
+		<STRING hash="10255989" hash_i="11092501" needed="1">適用</STRING>
+		<STRING hash="14919533" hash_i="14948877" needed="1">パスワードが必要</STRING>
+		<STRING hash="79263" hash_i="79263" needed="1">.</STRING>
+		<STRING hash="8858590" hash_i="9602456" needed="1">OK</STRING>
+		<STRING hash="13076813" hash_i="13099507" needed="1">トーナメントプレイ</STRING>
+		<STRING hash="18762145" hash_i="19943443" needed="1">新しい GemeSpy アカウント</STRING>
+		<STRING hash="2338747" hash_i="2317171" needed="1">初心者</STRING>
+		<STRING hash="22170572" hash_i="22219362" needed="1">中級者</STRING>
+		<STRING hash="10381542" hash_i="10455892" needed="1">エキスパート</STRING>
+		<STRING hash="1009003" hash_i="987561" needed="1">レートあり</STRING>
+		<STRING hash="1548549" hash_i="1531149" needed="1">ロビー</STRING>
+		<STRING hash="19315732" hash_i="19482828" needed="1">無視するプレイヤーのリストを表示</STRING>
+		<STRING hash="5816999" hash_i="6475759" needed="1">ロビー チャット</STRING>
+		<STRING hash="4267693" hash_i="4832093" needed="1">ゲーム チャット</STRING>
+		<STRING hash="34184426" hash_i="34312708" needed="1">選択した関数の挿入</STRING>
+		<STRING hash="8322825" hash_i="8402131" needed="1">標高の調整</STRING>
+		<STRING hash="31074704" hash_i="31207838" needed="1">GameSpy に再接続しています</STRING>
+		<STRING hash="19323279" hash_i="19353427" needed="1">新しい GameSpy プロファイル</STRING>
+		<STRING hash="6449465" hash_i="6434995" needed="1">難易度:</STRING>
+		<STRING hash="90319" hash_i="90319" needed="1">0</STRING>
+		<STRING hash="95232" hash_i="95232" needed="1">1</STRING>
+		<STRING hash="6477" hash_i="6477" needed="1">2</STRING>
+		<STRING hash="7288" hash_i="7288" needed="1">3</STRING>
+		<STRING hash="8201" hash_i="8201" needed="1">4</STRING>
+		<STRING hash="8862" hash_i="8862" needed="1">5</STRING>
+		<STRING hash="9607" hash_i="9607" needed="1">6</STRING>
+		<STRING hash="11744" hash_i="11744" needed="1">7</STRING>
+		<STRING hash="12639" hash_i="12639" needed="1">8</STRING>
+		<STRING hash="13192" hash_i="13192" needed="1">9</STRING>
+		<STRING hash="15928688" hash_i="16050776" needed="1">最新プログラムの確認</STRING>
+		<STRING hash="39958591" hash_i="40137615" needed="1">民族をランダムに配置する</STRING>
+		<STRING hash="15111791" hash_i="16175995" needed="1">ボーナスをランダムに配置する</STRING>
+		<STRING hash="7710349" hash_i="7717177" needed="1">クイック マッチ</STRING>
+		<STRING hash="1904605" hash_i="1882783" needed="1">切り替え</STRING>
+		<STRING hash="5964316" hash_i="5938782" needed="1">チーム スタイル:</STRING>
+		<STRING hash="17286905" hash_i="17323379" needed="1">プレイヤー数:</STRING>
+		<STRING hash="13174412" hash_i="13172926" needed="1">正確な一致</STRING>
+		<STRING hash="4489210" hash_i="4466704" needed="1">チームメイト</STRING>
+		<STRING hash="7647446" hash_i="7657738" needed="1">ゲームをプレイ!</STRING>
+		<STRING hash="1513522" hash_i="1496544" needed="1">招待</STRING>
+		<STRING hash="1119028" hash_i="1101628" needed="1">クリア</STRING>
+		<STRING hash="10673505" hash_i="10651961" needed="1">設定を一致させる</STRING>
+		<STRING hash="2596232" hash_i="2571878" needed="1">ウォンバット:</STRING><STRING hash="2906296" hash_i="2881942" needed="1">ウォンバット 2:</STRING><STRING hash="2916611" hash_i="2892257" needed="1">ウォンバット 3:</STRING><STRING hash="2927640" hash_i="2903286" needed="1">ウォンバット 4:</STRING><STRING hash="28054022" hash_i="28937082" needed="1">オンライン MOTD の表示/更新</STRING><STRING hash="22416788" hash_i="22402318" needed="1">民族独自のユニットなし</STRING><STRING hash="25464586" hash_i="25450116" needed="1">民族の特性なし</STRING><STRING hash="21158210" hash_i="21225916" needed="1">ルールの上書きを許可</STRING><STRING hash="7307635" hash_i="7323343" needed="1">ゲームを検索!</STRING><STRING hash="2273775" hash_i="2251953" needed="1">ステージング</STRING><STRING hash="15491512" hash_i="15608320" needed="1">ゲームをホストしない</STRING><STRING hash="17610167" hash_i="17686127" needed="1">ゲーム中の外交</STRING></CAT>
+	<CAT hash="18830057">
+		<STRING hash="205886020" hash_i="206425258" needed="1">敵は抵抗しています。首都を奪取して勝利を収めてください。</STRING>
+		<STRING hash="435786597" hash_i="434710227" needed="1">敵はこの領土への奇襲攻撃に着手しました。敵を撃退して勝利を収めてください。</STRING>
+		<STRING hash="402322319" hash_i="400946661" needed="1">裏切った同盟国が進攻してきました。敵の首都を奪取し、なんとしてでも撤退させなくてはいけません。</STRING>
+		<STRING hash="922027410" hash_i="928783650" needed="1">抵抗勢力が予想されなかったため、遠征軍に支援部隊は含まれていません。先住民族に遭遇しました。ただちに倒さなくてはいけません。</STRING>
+		<STRING hash="1143005318" hash_i="1146834860" needed="1">遠征軍は先住民族最大の町にたどり着きました。ここを占領すれば領土が手に入ります。狡猾なリーダーが率いる先住民族軍の奇襲攻撃には要注意です。</STRING>
+		<STRING hash="789294977" hash_i="786098565" needed="1">この地域を占領するにあたって抵抗勢力には遭遇しませんでした。しかし、集結した先住民族が前哨部隊を攻撃し始めました。設定時間終了まで防衛してください。</STRING>
+		<STRING hash="577017800" hash_i="583766208" needed="1">敵は部隊を召集し、戦地での接近遭遇に備えています。シナリオを制覇するためには、敵軍を粉砕しなくてはいけません。必ず将軍を守リ抜いてください。</STRING>
+		<STRING hash="963014836" hash_i="962046504" needed="1">この領土では複数の先住民族が権力を争っています。ただし、領土を奪取し、地域における絶対的な支配力を証明することができれば、先住民族を支配下に置くことができます。</STRING>
+		<STRING hash="782757605" hash_i="781563091" needed="1">この領土では複数の先住民族が権力を争っています。外交的手腕を駆使して彼らを鎮圧し、この地域における絶対的な支配力を確保してください。</STRING>
+		<STRING hash="205285029" hash_i="205270559" needed="1">先住民族を統率し、新国家を建設させてください。</STRING>
+		<STRING hash="674269684" hash_i="673606112" needed="1">この領土の非友好的な先住民族をただちに倒さなくてはいけません。首都を奪取するか領土の大部分を占領し、勝利を収めてください。</STRING>
+		<STRING hash="699657885" hash_i="699635379" needed="1">この地域の先住民族は非力です。彼らの都市を 1 つでも奪取すれば、間違いなく屈服するはずです。</STRING>
+		<STRING hash="1053349682" hash_i="1049167724" needed="1">この地域の複数の先住民族が集結し、あなたの軍を粉砕しようとしています。幸い物資は余分にあり、先住民族は 1 時代遅れています。設定時間終了まで防衛してください。</STRING>
+		<STRING hash="430542475" hash_i="431624267" needed="1">あなたの軍隊は敵軍に接近中です。敵陣を探り出したらすべての建物を撃砕し、勝利を収めてください。</STRING>
+		<STRING hash="827198245" hash_i="833954485" needed="1">抵抗勢力が予想されなかったため、遠征軍に支援部隊は含まれていません。要塞化都市に遭遇しました。ただちに攻撃を仕掛けなくてはいけません。</STRING>
+		<STRING hash="743852416" hash_i="742761258" needed="1">敵があなたの陣地を探し出しました。シナリオを制覇するためには、建物を防御しながら敵軍を撃砕しなくてはいけません。敵に建物を撃砕されたら敗北となります。</STRING>
+		<STRING hash="443076995" hash_i="444158787" needed="1">あなたの軍隊は先住民族軍に接近中です。敵陣を探し出したらすべての建物を撃砕し、勝利を収めてください。</STRING>
+		<STRING hash="919698896" hash_i="922950814" needed="1">あなたの遠征軍は最大の敵都市にたどり着きました。ここを占領すれば領土が手に入ります。狡猾なリーダーが率いる敵軍の奇襲攻撃には要注意です。</STRING>
+		<STRING hash="447593473" hash_i="452416295" needed="1">あなたの軍隊は敵軍に接近中です。敵陣を探り出したら、すべての建物を撃砕し、勝利を収めてください。</STRING>
+		<STRING hash="460127993" hash_i="464950815" needed="1">あなたの軍隊は先住民族軍に接近中です。敵陣を探し出したらすべての建物を撃砕し、勝利を収めてください。</STRING>
+		<STRING hash="789319796" hash_i="786160832" needed="1">この地域を占領するにあたって抵抗勢力には遭遇しませんでした。しかし、集結した先住民族が前哨部隊を攻撃し始めました。設定時間終了まで防衛してください。</STRING>
+		<STRING hash="547043201" hash_i="545966831" needed="1">敵はこの領土への奇襲攻撃に着手しました。敵を撃退して首都を死守し、勝利を収めてください。</STRING>
+		<STRING hash="886320487" hash_i="884168747" needed="1">幸い、この地域を占領するにあたって抵抗勢力には遭遇しませんでした。しかし、集結した先住民族が前哨部隊を攻撃し始めました。設定時間終了まで防衛してください。</STRING>
+		<STRING hash="1041644836" hash_i="1049167724" needed="1">この地域の複数の先住民族が集結し、あなたの軍を粉砕しようとしています。幸い物資は余分にあり、先住民族は 1 時代遅れています。設定時間終了まで防衛してください。</STRING>
+		<STRING hash="1068774033" hash_i="1064758895" needed="1">この地域の先住民族は非力です。彼らの都市を 1 つでも奪取すれば、間違いなく屈服するはずです。彼らが勝利するには、あなたの民族の首都を占領しなくてはいけません。</STRING>
+		<STRING hash="951055101" hash_i="954335789" needed="1">あなたの遠征軍は最大の敵都市にたどり着きました。ここを占領すれば領土が手に入ります。狡猾なリーダーが率いる敵軍の奇襲攻撃には要注意です。</STRING>
+		<STRING hash="316863640" hash_i="314127508" needed="1">敵はあなたの軍の進攻に抵抗しています。$NUM0 分以内に敵の首都を占領しなければ、敗北してしまいます。</STRING>
+		<STRING hash="626068804" hash_i="620602416" needed="1">隣国が進攻してきました。敵の首都を占領するか攻撃を $NUM0 分間防いで、敵を撤退させてください。</STRING>
+		<STRING hash="339796965" hash_i="337129057" needed="1">敵はあなたの軍の進攻に抵抗しています。$NUM0 分以内に敵の首都を占領しなければ、敗北してしまいます。</STRING>
+		<STRING hash="657405878" hash_i="652050402" needed="1">隣国が進攻してきました。敵の首都を占領するか攻撃を $NUM0 分間防いで、敵を撤退させてください。</STRING>
+		<STRING hash="1178321956" hash_i="1164321508" needed="1">この地域の先住民族は非力です。$NUM0 分以内に彼らの都市を 1 つでも奪取すれば、間違いなく屈服するはずです。彼らが勝利するには、あなたの民族の首都を占領しなくてはいけません。</STRING>
+		<STRING hash="1081931692" hash_i="1085402682" needed="1">あなたの遠征軍は最大の敵都市にたどり着きました。120 分以内にここを占領すれば領土が手に入ります。狡猾なリーダーが率いる敵軍の奇襲攻撃には要注意です。</STRING>
+		<STRING hash="755002002" hash_i="743847024" needed="1">この領土の非友好的な先住民族をただちに倒さなくてはいけません。$NUM0 分以内に首都を奪取するか領土の大部分を占領し、勝利を収めてください。</STRING>
+		<STRING hash="1170166231" hash_i="1166423633" needed="1">この領土では複数の先住民族が権力を争っています。外交的手腕を駆使して彼らを鎮圧し、この地域における絶対的な支配力を確保してください。120 分以内に先住民族を倒してください。</STRING>
+	</CAT>
+	<CAT hash="21745476">
+		<STRING hash="3078682" hash_i="3154074" needed="1">征服</STRING>
+		<STRING hash="14272504" hash_i="15192350" needed="1">奇襲攻撃</STRING>
+		<STRING hash="3073683" hash_i="3051177" needed="1">戦術</STRING>
+		<STRING hash="1757765" hash_i="1825471" needed="1">奇襲攻撃</STRING>
+		<STRING hash="13723440" hash_i="13844484" needed="1">先住民族集結</STRING>
+		<STRING hash="7519564" hash_i="8162670" needed="1">地上戦</STRING>
+		<STRING hash="7466821" hash_i="7487223" needed="1">サドンデス</STRING>
+		<STRING hash="10112253" hash_i="10212761" needed="1">駆け引き</STRING>
+		<STRING hash="11216731" hash_i="11939433" needed="1">民族の建物</STRING>
+		<STRING hash="821127" hash_i="803921" needed="1">乱戦</STRING>
+		<STRING hash="32811580" hash_i="33103126" needed="1">先住民族との戦い</STRING>
+	</CAT>
+	<CAT hash="30698867">
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+		<STRING hash="66457806" hash_i="66439508" needed="1">敵を 15 分間撃退してください。</STRING>
+		<STRING hash="41980852" hash_i="42056244" needed="1">敵の首都を占領してください。</STRING>
+		<STRING hash="90105976" hash_i="90090548" needed="1">敵の首都を探し出し占領してください。</STRING>
+		<STRING hash="36412767" hash_i="36398297" needed="1">敵軍を撃砕してください。</STRING>
+		<STRING hash="49582913" hash_i="49658305" needed="1">先住民族の町を占領してください。</STRING>
+		<STRING hash="51377575" hash_i="51363105" needed="1">先住民族を倒してください。</STRING>
+		<STRING hash="208440775" hash_i="208516167" needed="1">勝利するには敵の首都を奪取するか、領土を占領してください。</STRING>
+		<STRING hash="164281570" hash_i="164356962" needed="1">勝利するには各民族から 1 都市奪取してください。</STRING>
+		<STRING hash="59485593" hash_i="59471123" needed="1">敵陣を撃砕してください。</STRING>
+		<STRING hash="37152612" hash_i="37138142" needed="1">進攻軍を倒してください。</STRING>
+		<STRING hash="66307671" hash_i="66289373" needed="1">敵を 30 分間撃退してください。</STRING>
+		<STRING hash="74894997" hash_i="74880527" needed="1">首都を 15 分間死守してください。</STRING>
+		<STRING hash="115951391" hash_i="115933093" needed="1">設定時間終了まで敵を阻止してください。</STRING>
+		<STRING hash="119025659" hash_i="120479815" needed="1">敵の首都を $NUM0 分以内に占領してください。</STRING>
+		<STRING hash="172875505" hash_i="175801469" needed="1">敵の首都を占領するか、敵の攻撃を $NUM0 分間防いでください。</STRING>
+		<STRING hash="137773498" hash_i="139438982" needed="1">敵の首都を $NUM0 分以内に占領してください。</STRING>
+		<STRING hash="177875231" hash_i="182163563" needed="1">敵の首都を占領するか、敵の攻撃を $NUM0 分間防いでください。</STRING>
+		<STRING hash="178310682" hash_i="178295254" needed="1">120 分以内に敵の首都を探し出し、占領してください。</STRING>
+		<STRING hash="275982086" hash_i="273091602" needed="1">勝利するには、$NUM0 分以内に敵の首都を奪取するか、領土を占領してください。</STRING>
+		<STRING hash="208496370" hash_i="205072638" needed="1">勝利するには、$NUM0 分以内に各民族から 1 都市奪取してください。</STRING>
+		<STRING hash="120889362" hash_i="120874892" needed="1">120 分以内に先住民族を倒してください。</STRING>
+	</CAT>
+	<CAT hash="5254184">
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+	</CAT>
+	<CAT hash="11815213">
+		<STRING hash="25349290" hash_i="25777580" needed="1">AI 建物の配置</STRING>
+		<STRING hash="914487" hash_i="982193" needed="1">オーディオ</STRING>
+		<STRING hash="8012543" hash_i="8180245" needed="1">建物の情報</STRING>
+		<STRING hash="1989908" hash_i="2065300" needed="1">カメラ</STRING>
+		<STRING hash="813336" hash_i="888728" needed="1">チャット</STRING>
+		<STRING hash="1509376" hash_i="1584768" needed="1">都市</STRING>
+		<STRING hash="15873493" hash_i="17148917" needed="1">比較チェック</STRING>
+		<STRING hash="64338956" hash_i="64402002" needed="1">世界征服キャンペーンのみの機能</STRING>
+		<STRING hash="11809701" hash_i="11885861" needed="1">オブジェクトの作成</STRING>
+		<STRING hash="24030927" hash_i="24138873" needed="1">オブジェクトの破壊/消滅</STRING>
+		<STRING hash="5094893" hash_i="5080423" needed="1">外交</STRING>
+		<STRING hash="8124541" hash_i="8346763" needed="1">ファイル IO (XML)</STRING>
+		<STRING hash="1137444" hash_i="1122016" needed="1">フラグ</STRING>
+		<STRING hash="16725274" hash_i="16813704" needed="1">ゲームの設定情報</STRING>
+		<STRING hash="16365690" hash_i="17302440" needed="1">全般的な AI 切り替え</STRING>
+		<STRING hash="1675743" hash_i="1659887" needed="1">グループ</STRING>
+		<STRING hash="1676239" hash_i="1657941" needed="1">ヒットポイント</STRING>
+		<STRING hash="13811062" hash_i="13921536" needed="1">キーボード、イベント</STRING>
+		<STRING hash="2946928" hash_i="2912480" needed="1">マップ情報</STRING>
+		<STRING hash="11378197" hash_i="11316849" needed="1">マップの公開</STRING>
+		<STRING hash="1674717" hash_i="1657511" needed="1">市場</STRING>
+		<STRING hash="3173306" hash_i="3156100" needed="1">メッセージ</STRING>
+		<STRING hash="9737108" hash_i="9802656" needed="1">メッセージ、ヘルプ</STRING>
+		<STRING hash="30037351" hash_i="30253031" needed="1">メッセージ、ポップアップ ダイアログ</STRING>
+		<STRING hash="41075833" hash_i="41146853" needed="1">メッセージ、資源についての警告</STRING>
+		<STRING hash="19040878" hash_i="19094028" needed="1">マウス オーバー オブジェクト</STRING>
+		<STRING hash="8808325" hash_i="8835999" needed="1">マウス、イベント</STRING>
+		<STRING hash="26160442" hash_i="26251490" needed="1">民族 &amp; プレイヤーの情報</STRING>
+		<STRING hash="13670302" hash_i="13669434" needed="1">オブジェクトの位置</STRING>
+		<STRING hash="25878700" hash_i="25879618" needed="1">目標 (シナリオ)</STRING>
+		<STRING hash="28514147" hash_i="28506173" needed="1">目標 (テンポラリ)</STRING>
+		<STRING hash="575406" hash_i="554562" needed="1">Ping</STRING>
+		<STRING hash="21955690" hash_i="23295828" needed="1">Ping &amp; 画面の矢印</STRING>
+		<STRING hash="5518284" hash_i="5497440" needed="1">人口</STRING>
+		<STRING hash="5250533" hash_i="5228711" needed="1">スクリーンショット</STRING>
+		<STRING hash="14988263" hash_i="15001001" needed="1">検索機能</STRING>
+		<STRING hash="4256969" hash_i="4235147" needed="1">選択</STRING>
+		<STRING hash="6331529" hash_i="6889279" needed="1">チームの変更</STRING>
+		<STRING hash="6736573" hash_i="7546589" needed="1">テクノロジー &amp; 時代</STRING>
+		<STRING hash="568489" hash_i="545983" needed="1">時間</STRING>
+		<STRING hash="1580487" hash_i="1557981" needed="1">タイマー</STRING>
+		<STRING hash="10447694" hash_i="11101348" needed="1">タイプのコントロール</STRING>
+		<STRING hash="8447815" hash_i="8386265" needed="1">UI、強調表示</STRING>
+		<STRING hash="24075136" hash_i="24082494" needed="1">UI、スクリーンの場所</STRING>
+		<STRING hash="9499857" hash_i="9420687" needed="1">UI、選択</STRING>
+		<STRING hash="4673620" hash_i="4594450" needed="1">UI、統計</STRING>
+		<STRING hash="3736105" hash_i="3740565" needed="1">ユニット情報</STRING>
+		<STRING hash="6222357" hash_i="6210773" needed="1">ユニットの指示</STRING>
+		<STRING hash="9172085" hash_i="9143377" needed="1">ユニットの作成</STRING>
+		<STRING hash="11180905" hash_i="11251485" needed="1">勝利/敗北</STRING>
+		<STRING hash="2881693" hash_i="2859187" needed="1">トリガ</STRING>
+		<STRING hash="21258708" hash_i="21358820" needed="1">ユーティリティ、デバッグ</STRING>
+		<STRING hash="12008190" hash_i="12075470" needed="1">ユーティリティ、数値演算</STRING>
+		<STRING hash="14923394" hash_i="14935282" needed="1">ユーティリティ、文字列</STRING>
+		<STRING hash="15336000" hash_i="15347888" needed="1">ユーティリティ、システム</STRING>
+	</CAT>
+	<CAT hash="617724">
+		<STRING hash="22740565" hash_i="23051043" needed="1">(C) 2003 Big Huge Games, Inc. Portions (C) 2003 Microsoft Corporation. All rights reserved. Big Huge Games is the exclusive trademark of Big Huge Games Inc. Microsoft Windows、Microsoft Game Studios ロゴ、および Rise of Nations は、米国 Microsoft Corporation の米国およびその他の国における登録商標または商標です。</STRING>
+	</CAT>
+	<CAT hash="44397162">
+		<STRING hash="34157738" hash_i="34133086" needed="1">勝利を収めました。</STRING>
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+	</CAT>
+	<CAT hash="38438024">
+		<STRING hash="37310381" hash_i="37285729" needed="1">敗北しました。</STRING>
+		<STRING hash="886320487" hash_i="884168747" needed="1">この地域を占領するにあたって抵抗勢力には遭遇しませんでした。しかし、集結した先住民族が前哨部隊を攻撃し始めました。設定時間終了まで防衛してください。</STRING>
+		<STRING hash="460127993" hash_i="464950815" needed="1">あなたの軍隊は先住民族軍に接近中です。敵陣を探し出したらすべての建物を撃砕し、勝利を収めてください。</STRING>
+		<STRING hash="699657885" hash_i="699635379" needed="1">この地域の先住民族は非力です。彼らの都市を 1 つでも奪取すれば、間違いなく屈服するはずです。</STRING>
+		<STRING hash="782757605" hash_i="781563091" needed="1">この領土では複数の先住民族が権力を争っています。外交的手腕を駆使して彼らを鎮圧し、この地域における絶対的な支配力を確保してください。</STRING>
+		<STRING hash="1041644836" hash_i="1049167724" needed="1">この地域の複数の先住民族が集結し、あなたの軍を粉砕しようとしています。幸い物資は余分にあり、先住民族は 1 時代遅れています。設定時間終了まで防衛してください。</STRING>
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+	</CAT>
+	<CAT hash="2960089">
+		<STRING hash="1142441" hash_i="1120619" needed="1">Snowy</STRING>
+		<STRING hash="1095411" hash_i="1080941" needed="1">Dirty</STRING>
+		<STRING hash="4125335" hash_i="4066685" needed="1">SW_Desert</STRING>
+		<STRING hash="4087849" hash_i="4040229" needed="1">GS_Desert</STRING>
+		<STRING hash="1406746" hash_i="1406746" needed="1">jungle</STRING>
+		<STRING hash="17041553" hash_i="17041553" needed="1">african_savannah</STRING>
+		<STRING hash="2260669" hash_i="2260669" needed="1">arctic</STRING>
+		<STRING hash="2952237" hash_i="2952237" needed="1">m_steppe</STRING>
+	</CAT>
+	<CAT hash="5045222">
+		<STRING hash="2054343" hash_i="2054343" needed="1">詳細は ./scenario/sample_script.bhs を参照してください</STRING>
+		<STRING hash="2044028" hash_i="2044028" needed="1">ゲーム イベントをコントロールするには、リストのトリガ関数を使ってください。 リストを表示するには［編集］メニューの［トリガ関数の挿入］をクリックしてください。</STRING>
+		<STRING hash="2660675" hash_i="2660675" needed="1">トリガの条件が真でありトリガが有効である場合に実行されるコマンドを挿入してください。</STRING>
+		<STRING hash="3935950" hash_i="3935950" needed="1">トリガがオンになる条件</STRING>
+		<STRING hash="865265" hash_i="865265" needed="1">空のトリガ ブロックを追加するには［編集］メニューの［トリガ ブロックの挿入］をクリックしてください。</STRING>
+		<STRING hash="858586" hash_i="858586" needed="1">使用可能な関数のリストから選択するには［編集］メニューの［トリガ関数の挿入］をクリックしてください。</STRING>
+		<STRING hash="852417" hash_i="852417" needed="1">それぞれのゲーム フレームのこの箇所で実行されるトリガとコマンドを追加してください。</STRING>
+		<STRING hash="1294078" hash_i="1294078" needed="1">メインのスクリプト本体</STRING>
+		<STRING hash="3549171" hash_i="3549171" needed="1">この箇所でスクリプトがロードされるときに 1 回だけ実行されるべきコマンドを挿入してください。</STRING>
+		<STRING hash="1853852" hash_i="1853852" needed="1">ここに定数ラベルをコンマで区切って追加してください。</STRING>
+	</CAT>
+	<CAT hash="14677498">
+		<STRING hash="1009003" hash_i="987561" needed="1">レートあり</STRING>
+		<STRING hash="2338747" hash_i="2317171" needed="1">レートなし</STRING>
+	</CAT>
+</ROOT>

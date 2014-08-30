@@ -1,0 +1,117 @@
+int scenario {  
+
+  labels {
+    FRENCH,
+    AUSTRIANS,
+  }
+  
+  int x = 44;
+  int y = 74;
+  int diff = get_difficulty();
+  set_object_type_max_health("Large City", 1300+diff*200);
+  set_object_type_max_health("Tower", 900+diff*50);
+  set_object_type_max_health("Fort", 2500+diff*200);
+  
+  create_unit_upgrade(FRENCH, x, y, "Supply Wagon", 1);
+  create_unit_in_group(FRENCH, x, y, "Napoleon", 1);
+  create_unit_in_group(FRENCH, x, y, "Explorer", 2);
+  create_unit_in_group(FRENCH, x, y, "Musketeers", 4);
+  create_unit_in_group(FRENCH, x, y, "Fusiliers", 3);
+  if (diff < 5) {
+    create_unit_in_group(FRENCH, x, y, "Fusiliers", 4-diff);
+    create_unit_in_group(FRENCH, x, y, "Musketeers", 5-diff);
+    if (diff == 2) {
+      create_unit_in_group(FRENCH, x, y, "Musketeers", 1);
+    }
+    create_unit_in_group(FRENCH, x, y, "Hussar", 1);
+    create_unit_in_group(FRENCH, x, y, "Cannon", 1);
+  }
+  create_unit_in_group(FRENCH, x, y, "Carabineer", 2);
+  create_unit_in_group(FRENCH, x, y, "Hussar", 2);
+  create_unit_in_group(FRENCH, x, y, "Cuirassier", 2);
+  create_unit_in_group(FRENCH, x, y, "Cannon", 3);
+  
+  group_jump_move(FRENCH, x, y, 45);
+
+  disable_type("Small City");
+
+  set_difficulty(diff);
+  disable_city_defeat(FRENCH);
+  for (i = 0; i < 7; i++) {
+    gain_tech(FRENCH, "Military");
+    gain_tech(FRENCH, "Commerce");
+    if (i < 2) {
+      gain_tech(FRENCH, "Science");
+      gain_tech(AUSTRIANS, "Science");
+      gain_tech(AUSTRIANS, "Military");
+      gain_tech(AUSTRIANS, "Civic");
+      gain_tech(AUSTRIANS, "Commerce");
+    }
+  }
+
+  //setup barbarian base
+
+  for (step = 1; step < (6 - diff); step++) {
+    switch(step) {
+      case 1 :
+        unit = find_unit(2, "Cannon");
+        kill_unit_anim(2, unit, 1);
+        unit = find_unit(2, "Royal Stratotai");
+        kill_unit_anim(2, unit, 1);
+        building = find_build(2, "Siege Factory");
+        destroy_building(2, building);
+        building = find_build(2, "Siege Factory");
+        destroy_building(2, building);
+        building = find_build(2, "Fort");
+        destroy_building(2, building);
+        building = find_build(2, "Tower");
+        destroy_building(2, building);
+        break;
+      case 2 :
+        unit = find_unit(2, "Carabineer");
+        kill_unit_anim(2, unit, 1);
+        building = find_build(2, "University");
+        destroy_building(2, building);
+        building = find_build(2, "Stable");
+        destroy_building(2, building);
+        building = find_build(2, "Barracks");
+        destroy_building(2, building);
+        building = find_build(2, "Tower");
+        destroy_building(2, building);
+        break;
+      case 3 :
+        unit = find_unit(2, "Cannon");
+        kill_unit_anim(2, unit, 1);
+        building = find_build(2, "Fort");
+        destroy_building(2, building);
+        building = find_build(2, "Barracks");
+        destroy_building(2, building);
+        building = find_build(2, "Stable");
+        destroy_building(2, building);
+        building = find_build(2, "Tower");
+        destroy_building(2, building);           
+        break;
+      case 4 :
+        building = find_build(2, "Tower");
+        destroy_building(2, building);
+        building = find_build(2, "Temple");
+        destroy_building(2, building);
+        break;
+      case 5 :
+        for (i = 0; i < num_military_units(2); i++) {
+          unit = find_military(2);
+          kill_unit_anim(2, unit, 1);
+        }
+        building = find_build(2, "Market");
+        destroy_building(2, building);
+        break;
+    }
+  }
+
+  building = find_city_id(find_capital(2));
+  x = object_position_x(2, building);
+  y = object_position_y(2, building);
+  create_unit_upgrade(2, x + 2, y, "Hussar", diff);
+
+
+}

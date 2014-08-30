@@ -1,0 +1,51 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute-->
+<TRIBE name="프랑스">
+	<LEADERS>
+		<LEADER>루이 14세</LEADER>
+		<LEADER>나폴레옹 황제</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>파리</CITY>
+		<CITY>오를레앙</CITY>
+		<CITY>랭스</CITY>
+		<CITY>투르</CITY>
+		<CITY>리옹</CITY>
+		<CITY>루앙</CITY>
+		<CITY>마르세유</CITY>
+		<CITY>보르도</CITY>
+		<CITY>낭트</CITY>
+		<CITY>릴</CITY>
+		<CITY>툴루즈</CITY>
+		<CITY>블루아</CITY>
+		<CITY>푸아티에</CITY>
+		<CITY>디종</CITY>
+		<CITY>아비뇽</CITY>
+		<CITY>트루아</CITY>
+		<CITY>브레스트</CITY>
+		<CITY>르아브르</CITY>
+		<CITY>나르본</CITY>
+		<CITY>엑상프로방스</CITY>
+		<CITY>부르주</CITY>
+		<CITY>베르사이유</CITY>
+		<CITY>수아송</CITY>
+		<CITY>아미앵</CITY>
+		<CITY>셰르부르</CITY>
+		<CITY>캉</CITY>
+		<CITY>로리앙</CITY>
+		<CITY>앙굴렘</CITY>
+		<CITY>바욘</CITY>
+		<CITY>님</CITY>
+		<CITY>툴롱</CITY>
+		<CITY>브장송</CITY>
+		<CITY>스트라스부르</CITY>
+		<CITY>칼레</CITY>
+		<CITY>불롱</CITY>
+		<CITY>방돔</CITY>
+		<CITY>물랭</CITY>
+		<CITY>리옹</CITY>
+		<CITY>오뷔송</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

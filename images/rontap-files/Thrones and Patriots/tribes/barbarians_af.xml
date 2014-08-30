@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Robert Nicaise (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Songhay">
+  <LEADERS>
+    <LEADER>King Sonni Ali</LEADER>
+    <LEADER>King Askia the Great</LEADER>
+    <LEADER>King Mohammed Ture</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Timbuktu</CITY>
+    <CITY>Gao</CITY>
+    <CITY>Jenne</CITY>
+    <CITY>Karabara</CITY>
+    <CITY>Kumbi Saleh</CITY>
+    <CITY>Tekedda</CITY>
+    <CITY>Tadmekka</CITY>
+    <CITY>Niamey</CITY>
+    <CITY>Taghaza</CITY>
+    <CITY>Tamanrasset</CITY>
+    <CITY>Takedda</CITY>
+    <CITY>Taodeni</CITY>
+    <CITY>Wadan</CITY>
+    <CITY>Niani</CITY>
+    <CITY>Kukiya</CITY>
+    <CITY>Gao-Sane</CITY>
+    <CITY>Korioume</CITY>
+    <CITY>Berakousi</CITY>
+    <CITY>Nini</CITY>
+    <CITY>Koa</CITY>
+    <CITY>Siraninkoro</CITY>
+    <CITY>Bamako</CITY>
+    <CITY>Segou</CITY>
+    <CITY>Old Segou</CITY>
+    <CITY>Sorko</CITY>
+    <CITY>Kebbi</CITY>
+    <CITY>Sunni</CITY>
+    <CITY>Shi</CITY>
+    <CITY>Ture</CITY>
+    <CITY>Askiya</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>1 Arab    </UNIT_CONTINENT>
+  <BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

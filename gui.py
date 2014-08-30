@@ -13,9 +13,11 @@ import numpy
 import operator
 import pyglet
 import random
+import vecrec
 
 from pyglet.graphics import OrderedGroup
 from kxg.tools import printf
+from vecrec import Vector
 
 class Gui (kxg.Actor):
 
@@ -72,7 +74,7 @@ class Gui (kxg.Actor):
         self.teardown_pregame()
 
         viewport = glooey.Viewport()
-        map_widget = MapWidget(self.world.map)
+        map_widget = MapWidget(self, self.world.map)
 
         self.gui.add(viewport)
         viewport.add(map_widget)
@@ -110,9 +112,10 @@ class Gui (kxg.Actor):
 
 class MapWidget (glooey.Widget):
 
-    def __init__(self, map):
+    def __init__(self, gui, map):
         super(MapWidget, self).__init__()
 
+        self.gui = gui
         self.map = map
         self.sprites = []
 
@@ -214,13 +217,14 @@ class MapWidget (glooey.Widget):
             # Right click
             col, row = self.pixel_to_index_coordinates(x, y)
             tile = self.map[row,col]
+            position = vecrec.Vector(col, row)
 
             if tile.terrain == 'land':
-                message = 'Building City at index={}'
-                print(message.format((x, y), (col, row)))
+                printf('Building City at index {}', position)
+                message = messages.CreateCity(self.gui.player, position)
+
             else:
-                message = 'Cannot build city in the {}'
-                print(message.format(tile.terrain))
+                printf('Cannot build city in the {}', tile.terrain)
 
     def pixel_to_index_coordinates(self, x, y):
         i = math.floor(x / self.tile_width)

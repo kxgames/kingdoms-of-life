@@ -1,0 +1,108 @@
+// Rise of Nations
+// Developer : Big Huge Games
+// File Name : cemicrowars.bhs
+// Oil Keeper : Doug Kaufman
+// Lead Designer : Kristine Ishii
+// Project Members : Bruce Milligan, Brian Kaiser, John Hawkins
+// Project Date : September 30, 2002
+
+/*
+Chess Exercise #5 - Tactics
+Mode : Toughest
+Setup : Standard field battle.
+Map : Tiny size Himalaya (grass tileset)
+-= Current Specs =-
+Player starts in left corner.  Enemy starts in center of map.  Forces are equal.
+*/
+
+include "ce_io_lib.bhs"
+
+void scenario {
+
+  labels {
+    HUMAN = 1,
+    COMPUTER = 2,
+  }
+
+  int round = 0;
+  int computer_army = 0;
+  int player_army = 0;
+  int units_seen = 0;
+  static int army = num_military_units(1);
+  static int score_data1;
+  static int score_data2;
+  static int score_data3;
+  String player_name1;
+  String player_name2;
+  String player_name3;
+  int alive = 0;
+  static int dead_guys = 0;
+  int units = 0;
+
+
+  run_once {
+
+    String player_name = get_player_profile_name();
+    set_leader_name(1, player_name);
+
+    field_battle_enable();
+
+    add_goal(1, "microwars", $S("Kill all enemyy troops."));
+    add_goal(1, "microwars2", $S("Keep half of your army alive."));
+    set_timer("new", 120);
+    dead_guys = army;
+    obj_message = "____________________________"; //line for presentation, no localization needed
+     high_scores = add_objective_text("_______________________", "high_score_list", "select_army.wav");   
+    high_scores = add_objective_text($S("Most Troops Alive"),     "high_score_list", "select_army.wav");
+    
+    display_results("cemicrowars", false, true);
+
+    high_scores = add_objective_text("___________________", "high_score_list", "select_army.wav"); 
+    high_scores = add_objective_text($S("Current Game"),    "high_score_list", "select_army.wav"); 
+    kill_count =  add_objective_text(parse($S("Troops Alive: $NUM0"), dead_guys), "civilian_killed", "select_army.wav"); 
+    high_scores = add_objective_text("_______________________", "high_score_list", "select_army.wav");   
+    round = 0;
+    computer_army = num_military_units(2);
+    player_army = num_military_units(1);
+    units_seen = 0;
+    seen_units = 0;
+    gain_tech(1, "Tactics");
+    gain_tech(1, "Operations");
+    gain_tech(1, "Strategy");
+    gain_tech(2, "Tactics");
+    gain_tech(2, "Operations");
+    gain_tech(2, "Strategy");
+  }
+  
+ 
+  if (num_military_units(1) < army) {
+    army = num_military_units(1);    
+    dead_guys = army;                           
+    string_var5 = parse($S("Troops Alive: $NUM0"), dead_guys);
+    obj_message = string_var5;
+    change_objective_text("civilian_killed", obj_message);     
+  }
+
+  if (num_military_units(2) == 1 && num_type(2, "commando") == 1) {
+    units = num_military_units(1);
+        save_results("cemicrowars", get_player_profile_name(), units);
+    victory(1);
+    return;
+  }
+
+  if (num_military_units(2) == 2 && num_type(2, "commando") == 2) {
+    units = num_military_units(1);
+        save_results("cemicrowars", get_player_profile_name(), units);
+    victory(1);
+    return;
+  }
+
+  if (num_military_units(2) == 0) {
+    units = dead_guys;
+        save_results("cemicrowars", get_player_profile_name(), units);
+    victory(1);
+    return;
+  }
+
+}
+

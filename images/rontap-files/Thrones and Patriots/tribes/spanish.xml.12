@@ -1,0 +1,47 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Espagnols">
+	<LEADERS>
+		<LEADER>Roi Philippe II</LEADER>
+		<LEADER>Reine Isabelle</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Madrid</CITY>
+		<CITY>Tolède</CITY>
+		<CITY>Séville</CITY>
+		<CITY>Cordoue</CITY>
+		<CITY>Cadix</CITY>
+		<CITY>Castille</CITY>
+		<CITY>Saragosse</CITY>
+		<CITY>Barcelone</CITY>
+		<CITY>Valence</CITY>
+		<CITY>Malaga</CITY>
+		<CITY>Salamanque</CITY>
+		<CITY>Valladolid</CITY>
+		<CITY>Burgos</CITY>
+		<CITY>Leon</CITY>
+		<CITY>Ciudad Real</CITY>
+		<CITY>Vigo</CITY>
+		<CITY>La Corogne</CITY>
+		<CITY>Oviedo</CITY>
+		<CITY>Bilbao</CITY>
+		<CITY>Pampelune</CITY>
+		<CITY>Murcie</CITY>
+		<CITY>Grenade</CITY>
+		<CITY>Santander</CITY>
+		<CITY>Aranjuez</CITY>
+		<CITY>Almansa</CITY>
+		<CITY>Alicante</CITY>
+		<CITY>Osuna</CITY>
+		<CITY>Algésiras</CITY>
+		<CITY>Almeria</CITY>
+		<CITY>Ségovie</CITY>
+		<CITY>Badajoz</CITY>
+		<CITY>Talavera</CITY>
+		<CITY>Vitoria</CITY>
+		<CITY>Jerez</CITY>
+		<CITY>Gijon</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

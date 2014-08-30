@@ -1,0 +1,125 @@
+scenario save_results(test_name, player_name, score)
+{
+  open_file("skilltestresults.xml");
+  file_set_category(test_name, true);
+  file_set_category("SCORE_DATA", false);
+  file_write_attrib("name", player_name);
+  file_write_attrib("score", score);
+  close_file();
+}
+
+scenario display_results(test_name, change_only, sort_descending)
+{
+  open_file("skilltestresults.xml");
+  file_set_category(test_name, true);
+  file_sort_entries("SCORE_DATA", "score", sort_descending);
+
+  //1
+  player_name = file_read_attrib("name", "--");
+  score_data = file_read_attrib("score", "0");
+  //sec_data = file_read_attrib("SEC");
+
+  string_var = parse($S("1. $NAME0: $SCORE1"), player_name, score_data);
+  if (change_only) {
+    change_objective_text("first_place", string_var);
+  } else {
+    add_objective_text(string_var, "first_place", "select_army.wav");
+  }
+  
+  //2
+  if (file_next_entry()) {
+    player_name = file_read_attrib("name", "");
+    score_data = file_read_attrib("score", "");
+  } else {
+    player_name = "--";
+    score_data = "0";
+  }
+
+  string_var = parse($S("2. $NAME0: $SCORE1"), player_name, score_data);
+  if (change_only) {
+    change_objective_text("second_place", string_var);
+  } else {
+    add_objective_text(string_var, "second_place", "select_army.wav");
+  }
+  
+  //3
+  if (file_next_entry()) {
+    player_name = file_read_attrib("name", "");
+    score_data = file_read_attrib("score", "");
+  } else {
+    player_name = "--";
+    score_data = "0";
+  }
+
+  string_var = parse($S("3. $NAME0: $SCORE1"), player_name, score_data);
+
+  if (change_only) {
+    change_objective_text("third_place", string_var);
+  } else {
+    add_objective_text(string_var, "third_place", "select_army.wav");
+  }
+  close_file();
+}
+
+scenario display_aging_results(test_name, change_only, sort_descending)
+{
+  open_file("skilltestresults.xml");
+  file_set_category(test_name, true);
+  file_sort_entries("SCORE_DATA", "score", sort_descending);
+
+  //1
+  player_name = file_read_attrib("name", "--");
+  score_data = file_read_attrib("score", "0");
+  //sec_data = file_read_attrib("SEC");
+
+  string_var = parse($S("1. $NAME0: $SCORE1"), player_name, sec_to_min(score_data));
+  if (change_only) {
+    change_objective_text("first_place", string_var);
+  } else {
+    add_objective_text(string_var, "first_place", "select_army.wav");
+  }
+  
+  //2
+  if (file_next_entry()) {
+    player_name = file_read_attrib("name", "");
+    score_data = file_read_attrib("score", "");
+  } else {
+    player_name = "--";
+    score_data = "0";
+  }
+
+  string_var = parse($S("2. $NAME0: $SCORE1"), player_name, sec_to_min(score_data));
+  if (change_only) {
+    change_objective_text("second_place", string_var);
+  } else {
+    add_objective_text(string_var, "second_place", "select_army.wav");
+  }
+  
+  //3
+  if (file_next_entry()) {
+    player_name = file_read_attrib("name", "");
+    score_data = file_read_attrib("score", "");
+  } else {
+    player_name = "--";
+    score_data = "0";
+  }
+
+  string_var = parse($S("3. $NAME0: $SCORE1"), player_name, sec_to_min(score_data));
+
+  if (change_only) {
+    change_objective_text("third_place", string_var);
+  } else {
+    add_objective_text(string_var, "third_place", "select_army.wav");
+  }
+  close_file();
+}
+
+scenario sec_to_min (int seconds) {
+  mins = (seconds / 60);
+  secs = (seconds % 60);
+  mins += ":";
+  if (secs < 10) {
+    mins += "0";
+  }
+  return mins + secs;
+}

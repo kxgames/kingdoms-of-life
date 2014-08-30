@@ -1,0 +1,16 @@
+scenario strategy (string tribe)
+{
+  if (tribe == "British") {
+    if (get_turn() < 1) {
+      ctw_ai_set_attack("British", "Quebec", "New England");
+      ctw_reject_bribes();
+      return true;
+    }
+    if (get_ctw_int("Independent") < 1 && !ctw_is_ally("British", "Americans") && !ctw_is_defeated("British")) {
+      set_ctw_int("Independent", 1);
+      ctw_ai_set_attack("British", "Pennsylvania", "Virginia");
+      ctw_reject_bribes();
+      return true;
+    }
+  }
+}

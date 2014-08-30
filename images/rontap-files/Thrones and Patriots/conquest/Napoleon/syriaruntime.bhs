@@ -1,0 +1,177 @@
+int conquest new_force( int step, int x, int y );
+int conquest destroy_city (String city_name);
+
+conquest {
+
+
+  static int french = 1;
+  static int turks = 2;
+
+  static int step = 1;
+
+  static int diff = get_difficulty();
+
+  int x;
+  int y;
+  int unit;
+  int building;
+  int dead_citizen;
+  String city_name;
+
+  static int end_time = get_time_limit();
+  int cur_time;
+
+  run_once {
+    ctw_add_objective_text($S("Hint: Bribe enemy units to join your side."), 1, "");
+    ctw_add_objective_text($S("Use plunder gained from destroying buildings to build new units."), 2, "");
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) victory(turks);
+
+  if (num_cities(turks) == 0) victory(french);
+
+  //dead_citizen = unit_type_killed(turks, "Citizen") + unit_type_killed(turks, "scholar") + unit_type_killed(turks, "merchant") + unit_type_killed(turks, "caravan");;
+
+  //for (n = dead_citizen; n > 0; n--) {
+      //unit = find_unit(french, "Napoleon");
+      //x = object_position_x(french, unit);
+      //y = object_position_y(french, unit);
+      //create_unit_upgrade(french, x, y, "militia", 1);
+      //new_force(step, x, y);
+      //step++;
+      //if (step > 10) step = 1;
+  //}
+
+  if (num_cities(french) > 0) {
+    city_name = find_city_name(french);
+    building = find_city_id(city_name);
+    x = object_position_x(french, building);
+    y = object_position_y(french, building);
+    unit = destroy_city(city_name);
+    popup_dialog(parse("Turkish militia have burned $STRING0 to the ground rather than let us have it.", city_name));
+    //create_unit_upgrade(french, x, y, "militia", (unit - 1 * 2) - diff);
+  }
+
+}
+
+int conquest new_force( int step, int x, int y ) 
+{
+
+  int french = 1;
+
+  switch(step) {
+  
+      case 1:
+        create_unit_upgrade(french, x, y, "Musketeers", 1);
+        print_game_msg($S("We have recruited a group of Musketeers"));
+        break;
+      case 2:
+        create_unit_upgrade(french, x, y, "Fusiliers", 1);
+        print_game_msg($S("We have recruited a group of Fusiliers"));
+        break;
+      case 3:
+        create_unit_upgrade(french, x, y, "Musketeers", 1);
+        print_game_msg($S("We have recruited a group of Musketeers"));
+        break;
+      case 4:
+        create_unit_upgrade(french, x, y, "Hussar", 1);
+        print_game_msg($S("We have recruited a Hussar"));
+        break;
+      case 5:
+        create_unit_upgrade(french, x, y, "Supply Wagon", 1);
+        print_game_msg($S("We have recruited a Supply Wagon"));
+        break;
+      case 6:
+        create_unit_upgrade(french, x, y, "Cuirassier", 1);
+        print_game_msg($S("We have recruited a Cuirassier"));
+        break;
+      case 7:
+        create_unit_upgrade(french, x, y, "Musketeers", 1);
+        print_game_msg($S("We have recruited a group of Musketeers"));
+        break;
+      case 8:
+        create_unit_upgrade(french, x, y, "Fusiliers", 1);
+        print_game_msg($S("We have recruited a group of Fusiliers"));
+        break;
+      case 9:
+        create_unit_upgrade(french, x, y, "Hussar", 1);
+        print_game_msg($S("We have recruited a Companion"));
+        break;
+      case 10:
+        create_unit_upgrade(french, x, y, "Cannon", 1);
+        print_game_msg($S("We have recruited a Cannon"));
+        break;
+
+  }
+
+  return 1;
+
+}
+
+//  Destroy city buildings and get a count for how big the recruited army should be
+int conquest destroy_city (String city_name)
+{
+
+  int building;
+  String building_name;
+  int build_destroyed = 0;
+  int diff = get_difficulty();
+
+  nation = 1;
+  
+  for (step = 1; step < 12; step++) {
+
+    switch(step){
+
+      case 1:
+        building_name = "Temple";
+        break;
+      case 2:
+        building_name = "Market";
+        break;
+      case 3:
+        building_name = "Library";
+        break;
+      case 4:
+        building_name = "Senate";
+        break;
+      case 5:
+        building_name = "University";
+        break;
+      case 6:
+        building_name = "Farm";
+        break;
+      case 7:
+        building_name = "Woodcutter's Camp";
+        break;
+      case 8:
+        building_name = "Mine";
+        break;
+      case 9:
+        building_name = "Granary";
+        break;
+      case 10:
+        building_name = "Smelter";
+        break;
+      case 11:
+        building_name = "Lumber Mill";
+        break;
+
+    }
+
+    for (n = num_city_buildings(nation, city_name, building_name, 1); n > 0; n--) {
+      building = find_build_at_city(nation, city_name, building_name, 1);
+      destroy_building(nation, building);
+      build_destroyed++;
+    }
+
+  }
+
+  building = find_city_id(city_name);
+  destroy_building(nation, building);
+  build_destroyed = build_destroyed + 4;
+  if (diff > 4) build_destroyed + 2;
+  
+  return build_destroyed;
+}

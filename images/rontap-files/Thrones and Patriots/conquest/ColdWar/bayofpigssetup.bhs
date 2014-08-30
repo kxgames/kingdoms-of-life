@@ -1,0 +1,131 @@
+        include "ctw_lib.bhs"
+
+conquest
+{
+coldwar_rules();
+
+labels {
+}
+  diff = get_difficulty();
+  infrastructure = get_attack_terr_str();
+  x = 0;
+  y = 0;
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  gain_tech(8, "Republic");
+  gain_tech(8, "Democracy");
+  gain_tech(8, "Capitalism");
+  
+  force_transport_ability(1);
+  force_transport_ability(2);
+  force_transport_ability(8);
+  
+  disable_city_defeat(8);
+
+  set_explored(2);
+  //disable_city_ai(2);
+
+  set_time_limit(90);
+
+  ////////////////////america's units/////////////////////
+  /////fort pierce
+  x = 112;
+  y = 30;
+  create_unit_upgrade(1, x, y, "Infantry", 2);
+  create_unit_upgrade(1, x, y, "Pikemen", 2);
+  create_unit_upgrade(1, x, y, "Armored Car", 4);
+  create_unit_upgrade(1, x, y, "Tank", 2);
+  create_unit_upgrade(1, x, y, "Explorer", 2);
+  create_unit_upgrade(1, x, y, "General", 1);
+  create_unit_upgrade(1, x, y, "Helicopter", 2);
+  create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+
+  ////guantanamo
+  x = 210;
+  y = 190;
+  create_unit_upgrade(1, x, y, "Infantry", 2);
+  create_unit_upgrade(1, x, y, "Armored Car", 4);
+  create_unit_upgrade(1, x, y, "General", 1);
+
+  //////coast of miami
+  x = 133;
+  y = 55;
+  create_unit_upgrade(1, x, y, "Cruiser", 2);
+  create_unit_upgrade(1, x, y, "Battleship", 1);
+  create_unit_upgrade(1, x, y, "Aircraft Carrier", 1);
+
+  ////////////////cuba's units//////////////////////////////
+  //////////havana
+  x = 78;
+  y = 127;
+  create_unit_upgrade(2, x, y, "Infantry", diff-1);
+  create_unit_upgrade(2, x, y, "Armored Car", diff - 2);
+  create_unit_upgrade(2, x, y, "Supply Wagon", 1);
+  create_unit_upgrade(2, x, y, "General", 1);
+
+  //southern part of island
+  x = 178;
+  y = 171;
+  create_unit_upgrade(2, x, y, "Tank", diff/2);
+  create_unit_upgrade(2, x, y, "Armored Car", diff - 2);
+  create_unit_upgrade(2, x, y, "Scout", 1);
+  create_unit_upgrade(2, x, y, "General", 1);
+
+  //bay of pigs
+  x = 104;
+  y = 129;
+  create_unit_upgrade(2, x, y, "Infantry", diff-1);
+  create_unit_upgrade(2, x, y, "Scout", 1);
+  create_unit_upgrade(2, x, y, "General", 1);
+
+  //coast of havana
+  if (diff > 2) {
+    x = 74;
+    y = 95;
+    create_unit_upgrade(2, x, y, "Destroyer", 1);
+    create_unit_upgrade(2, x, y, "Submarine", 2);
+  }
+
+  set_good(2, "Food", 500);
+  set_good(2, "Timber", 500);
+  set_good(2, "Metal", 500);
+  set_good(2, "Wealth", 500);
+  set_good(2, "Oil", 500);
+
+  set_good(8, "Food", 500);
+  set_good(8, "Timber", 500);
+  set_good(8, "Metal", 500);
+  set_good(8, "Wealth", 500);
+  set_good(8, "Oil", 500);
+
+  if (diff < 3) {
+    destroy_building_type(2, "Radar Air Defense");
+  }
+  else {
+    place_building_upgrade(2, "Fort", "Havana");
+  }
+
+  gain_tech(1, "Military");
+  gain_tech(2, "Military");
+  gain_tech(8, "Military");
+
+  set_base_rate(1, "Food", 100);
+  set_base_rate(1, "Timber", 100);
+  set_base_rate(1, "Metal", 100);
+  set_base_rate(1, "Wealth", 100);
+  set_base_rate(1, "Oil", 100);
+
+  ////cubans units
+  disable_type_by_tribe("Assault Infantry", "Lakota");
+  disable_type_by_tribe("Anti-Tank Missile", "Lakota");
+  disable_type_by_tribe("Advanced Machine Gun", "Lakota");
+
+  disable_type_by_tribe("Armored Cavalry", "Lakota");
+  disable_type_by_tribe("Main Battle Tank", "Lakota");
+
+  disable_type_by_tribe("Rocket Artillery", "Lakota");
+  disable_type_by_tribe("Anti-Aircraft Missile", "Lakota");
+}

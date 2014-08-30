@@ -1,0 +1,9 @@
+int conquest bribebonus(ref string text) {
+  
+  int value = get_ctw_int("num_bribed");
+  
+  clear_ctw_val("num_bribed");
+  
+  return 8*value;
+
+}

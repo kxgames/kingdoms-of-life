@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by XMLSPY 5 Professional Ed. Release 2 (Big Huge Games) -->
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Scott Lewis (Big Huge Games) -->
+<!-- LOCALIZATION: ROOT.name attribute-->
+<!-- LOCALIZATION: SCENARIO.title attributes -->
+<!-- LOCALIZATION: SCENARIO.subtitle attributes -->
+<!-- LOCALIZATION: SCENARIO.year attributes -->
+<!-- LOCALIZATION: INTRO elements -->
+<!-- LOCALIZATION: CONTEXT elements -->
+<!-- LOCALIZATION: CONCEPT elements -->
+<ROOT name="Tutorial" id="tutorial">
+  <!-- title, subtitle, and year attributes need to be localized -->
+  <SCENARIO title="Quick Learn" id="tut4" subtitle="Learn-As-You-Play Introduction" index="0" age="0" difficulty="-1" file=".\scenario\Tutorial5\tut5.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial5\tut5_intro.wav">
+    <CONTEXT/>
+    <CONCEPT>One-on-one battle</CONCEPT>
+    <CONCEPT>Hints and suggestions during play</CONCEPT>
+    <INTRO>This is a free-form scenario where you can play the game at your own pace.  Try to capture the barbarian Capital or conquer 70% of the map.  There will be hints and reminders to help you as you play.</INTRO>
+  </SCENARIO>
+  <SCENARIO title="Boadicea" id="tut0" subtitle="Tutorial 2" index="1" age="1" difficulty="0" file=".\scenario\Tutorial1\tut1.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial1\tut1_intro.wav" year="60">
+    <CONTEXT>Help a queen fight off the Romans to reclaim her nation.</CONTEXT>
+    <CONCEPT>Unit selection</CONCEPT>
+    <CONCEPT>Movement</CONCEPT>
+    <CONCEPT>Map scrolling</CONCEPT>
+    <CONCEPT>Help text</CONCEPT>
+    <CONCEPT>Basic combat</CONCEPT>
+    <INTRO>It is 60 A.D. The Romans have conquered Britain and collect a harsh tribute. When a queen named Boadicea inherits the leadership of Britain, the Romans are offended that they must deal with a female ruler. They march into town, flog Boadicea, and proclaim the entire kingdom theirs. Boadicea seethes for revenge, and her rebellious exploits make her a revered heroine.</INTRO>
+  </SCENARIO>
+  <SCENARIO title="Alfred the Great" id="tut1" subtitle="Tutorial 3" index="2" age="2" difficulty="0" file=".\scenario\Tutorial2\tut2.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial2\loading_intro.wav" year="878">
+    <CONTEXT>Turn back the raging Viking horde.</CONTEXT>
+    <CONCEPT>Constructing and using buildings</CONCEPT>
+    <CONCEPT>Training units</CONCEPT>
+    <CONCEPT>Minimap</CONCEPT>
+    <INTRO>800 years after Boadicea rebelled against the Romans, Britain is savaged by repeated Viking attacks. Alfred, King of Wessex, has been paying tribute to stave off the raiders, but in 878 the Vikings prepare for conquest. After a defeat, Alfred retreats to rebuild his forces and  drive the Vikings away.</INTRO>
+  </SCENARIO>
+  <SCENARIO title="The 100 Years War" id="tut2" subtitle="Tutorial 4" index="3" age="3" difficulty="1" file=".\scenario\Tutorial3\tut3.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial3\tut3_intro.wav" year="1337">
+    <CONTEXT>Invade France.</CONTEXT>
+    <CONCEPT>Library research</CONCEPT>
+    <CONCEPT>Food, Timber, and Metal gathering</CONCEPT>
+    <CONCEPT>Capturing cities</CONCEPT>
+    <CONCEPT>Repairing buildings</CONCEPT>
+    <CONCEPT>Unit combat advantages and disadvantages</CONCEPT>
+    <CONCEPT>Transporting units across water</CONCEPT>
+    <INTRO>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</INTRO>
+  </SCENARIO>
+  <SCENARIO title="Henry VIII" id="tut3" subtitle="Tutorial 5" index="4" age="4" difficulty="1" file=".\scenario\Tutorial4\tut4.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial4\tut4_intro.wav" year="1513">
+    <CONTEXT>Defend against Scottish raids.</CONTEXT>
+    <CONCEPT>City construction</CONCEPT>
+    <CONCEPT>National borders</CONCEPT>
+    <CONCEPT>Knowledge and Wealth gathering</CONCEPT>
+    <CONCEPT>Merchants and rare resources</CONCEPT>
+    <INTRO>In 1509, following a century of turmoil, England has stabilized under the rule of the legendary King Henry VIII. During his 38-year reign, he will marry six times, break with the Catholic Church, and fight several wars. Early in Henry's reign, the King of Scotland invades England. To secure his throne, Henry must master the rapidly changing nature of warfare while effectively running his country.</INTRO>
+  </SCENARIO>
+  <SCENARIO title="Battle of Britain" id="tut5" subtitle="Tutorial 6" index="5" age="5" difficulty="2" file=".\scenario\Tutorial6\tut6.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial6\tut6_intro.wav" year="1940">
+    <CONTEXT>Battle the Germans in Britain's finest hour.</CONTEXT>
+    <CONCEPT>Diplomacy</CONCEPT>
+    <CONCEPT>Air combat</CONCEPT>
+    <CONCEPT>Generals</CONCEPT>
+    <CONCEPT>Oil</CONCEPT>
+    <CONCEPT>Enhancement buildings</CONCEPT>
+    <CONCEPT>Formations</CONCEPT>
+    <INTRO>The First World War has left Europe decimated and bankrupt. In Germany, domestic upheavals trigger the rise of extreme nationalism, and the German war machine is rebuilt. When it becomes clear that Germany cannot be thwarted by diplomacy, a reluctant Britain declares war along with its ally, France. For the second time in a quarter-century, a world war erupts, one that is destined to be more terrible than the first.</INTRO>
+  </SCENARIO>
+</ROOT>

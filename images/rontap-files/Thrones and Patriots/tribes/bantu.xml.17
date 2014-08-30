@@ -1,0 +1,50 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="バンツー">
+	<LEADERS>
+		<LEADER>シャカ王</LEADER>
+		<LEADER>セテワヨ王</LEADER>
+		<LEADER>ディンガネ王</LEADER>
+		<LEADER>ナンディ女王</LEADER>
+		<LEADER>ムカビ女王</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>グレート ジンバブウェ</CITY>
+		<CITY>キルワ</CITY>
+		<CITY>ゴコメレ</CITY>
+		<CITY>マブベニ</CITY>
+		<CITY>マラパティ</CITY>
+		<CITY>ファラボルワ</CITY>
+		<CITY>ザカ</CITY>
+		<CITY>ソファラ</CITY>
+		<CITY>マトラ</CITY>
+		<CITY>カミ</CITY>
+		<CITY>ダムブワ</CITY>
+		<CITY>グンドゥ</CITY>
+		<CITY>ルブシ</CITY>
+		<CITY>ダムバラーエ</CITY>
+		<CITY>カルンドゥ</CITY>
+		<CITY>インゴンベ</CITY>
+		<CITY>カプウィリンブェ</CITY>
+		<CITY>チョンドウェ</CITY>
+		<CITY>キプシ</CITY>
+		<CITY>タンドウェ</CITY>
+		<CITY>カンサンシェ</CITY>
+		<CITY>ルアンザフ</CITY>
+		<CITY>ブワナ ムカブワ</CITY>
+		<CITY>マウヅー</CITY>
+		<CITY>カペニ</CITY>
+		<CITY>サンガ</CITY>
+		<CITY>カムナマ</CITY>
+		<CITY>ンコペ</CITY>
+		<CITY>カランボ</CITY>
+		<CITY>ウウェンザ</CITY>
+		<CITY>クワレ</CITY>
+		<CITY>マプングブウェ</CITY>
+		<CITY>イウナ</CITY>
+		<CITY>マネウェニ</CITY>
+		<CITY>ナレタリ</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>1 Arab    </UNIT_CONTINENT>
+	<BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

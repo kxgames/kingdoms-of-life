@@ -1,0 +1,15 @@
+conquest
+{
+
+static int diff = get_difficulty();
+
+run_once {
+  ctw_add_objective_text($S("Capture the enemy capital."), "Hint_id", 0);
+
+}
+
+if(time() >= get_time_limit()) {
+  defeat(1);
+}
+
+}

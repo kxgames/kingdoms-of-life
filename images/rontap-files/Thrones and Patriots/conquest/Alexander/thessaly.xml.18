@@ -1,0 +1,59 @@
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Isaac Ellis (Big Huge Games) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Thessalians" substitute="1">
+	<LEADERS>
+		<LEADER>Archon of Thessaly</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Pharsalus</CITY>
+		<CITY>Dion</CITY>
+		<CITY>Alarus</CITY>
+		<CITY>Pydna</CITY>
+		<CITY>Hatera</CITY>
+		<CITY>Petra</CITY>
+		<CITY>Phylace</CITY>
+		<CITY>Elyma</CITY>
+		<CITY>Heradeum</CITY>
+		<CITY>Carabia</CITY>
+		<CITY>Gallicum</CITY>
+		<CITY>Cyrrhus</CITY>
+		<CITY>Almana</CITY>
+		<CITY>Orhopolis</CITY>
+		<CITY>Doberus</CITY>
+		<CITY>Scydra</CITY>
+		<CITY>Pluvina</CITY>
+		<CITY>Bolbe</CITY>
+		<CITY>Gariscus</CITY>
+		<CITY>Orestia</CITY>
+		<CITY>Diwn</CITY>
+		<CITY>Philia</CITY>
+		<CITY>Menda</CITY>
+		<CITY>Sicoyne</CITY>
+		<CITY>Assa</CITY>
+		<CITY>Parthicopolis</CITY>
+		<CITY>Horma</CITY>
+		<CITY>Stubera</CITY>
+		<CITY>Stymbara</CITY>
+		<CITY>Astibus</CITY>
+		<CITY>Anavasarum</CITY>
+		<CITY>Mieza</CITY>
+		<CITY>Europus</CITY>
+		<CITY>Giannitsa</CITY>
+		<CITY>Verginia</CITY>
+		<CITY>Edessa</CITY>
+		<CITY>Serres</CITY>
+		<CITY>Drama</CITY>
+		<CITY>Veria</CITY>
+		<CITY>Pelagonia</CITY>
+		<CITY>Aigai</CITY>
+		<CITY>Aiane</CITY>
+		<CITY>Therma</CITY>
+		<CITY>Olynthos</CITY>
+		<CITY>Corcyra</CITY>
+		<CITY>Apollonia</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,64 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="ギリシャ">
+	<LEADERS>
+		<LEADER>ペリクレス</LEADER>
+		<LEADER>アレクサンドロス大王</LEADER>
+		<LEADER>リュサンドロス</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>アテネ</CITY>
+		<CITY>スパルタ</CITY>
+		<CITY>テーベ</CITY>
+		<CITY>コリント</CITY>
+		<CITY>クノッソス</CITY>
+		<CITY>アルゴス</CITY>
+		<CITY>メガラ</CITY>
+		<CITY>エレトリア</CITY>
+		<CITY>カルキス</CITY>
+		<CITY>イラクリオン</CITY>
+		<CITY>ミレトス</CITY>
+		<CITY>ハリカルナッソス</CITY>
+		<CITY>リンドス</CITY>
+		<CITY>イアリュソス</CITY>
+		<CITY>サモス</CITY>
+		<CITY>フォカイア</CITY>
+		<CITY>キオス</CITY>
+		<CITY>テラ</CITY>
+		<CITY>メロス</CITY>
+		<CITY>ファルサロス</CITY>
+		<CITY>パロス</CITY>
+		<CITY>テッサロニカ</CITY>
+		<CITY>デメトリアス</CITY>
+		<CITY>デロス</CITY>
+		<CITY>ザキントゥス</CITY>
+		<CITY>エラテア</CITY>
+		<CITY>エリュトライ</CITY>
+		<CITY>マンティネイア</CITY>
+		<CITY>シュラクサイ</CITY>
+		<CITY>コルキュラ</CITY>
+		<CITY>ビザンティウム</CITY>
+		<CITY>アレクサンドリア</CITY>
+		<CITY>ポテイダイア</CITY>
+		<CITY>ヘラクレア</CITY>
+		<CITY>アポロニア</CITY>
+		<CITY>エピダムヌス</CITY>
+		<CITY>パートレ</CITY>
+		<CITY>カルケドン</CITY>
+		<CITY>コス</CITY>
+		<CITY>クニドス</CITY>
+		<CITY>プリエネ</CITY>
+		<CITY>コロフォン</CITY>
+		<CITY>クラゾメナイ</CITY>
+		<CITY>テオース</CITY>
+		<CITY>サモス</CITY>
+		<CITY>ミティレネ</CITY>
+		<CITY>ミュリナ</CITY>
+		<CITY>タソス</CITY>
+		<CITY>サモトラキ</CITY>
+		<CITY>ピレウス</CITY>
+		<CITY>ザラクス</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute-->
+<TRIBE name="Germans">
+  <LEADERS>
+    <LEADER>Alaric the Visigoth</LEADER>
+    <LEADER>Frederick the Great</LEADER>
+    <LEADER>Otto von Bismarck</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Berlin</CITY>
+    <CITY>Vienna</CITY>
+    <CITY>Bonn</CITY>
+    <CITY>Munich</CITY>
+    <CITY>Hamburg</CITY>
+    <CITY>Koln</CITY>
+    <CITY>Leipzig</CITY>
+    <CITY>Dresden</CITY>
+    <CITY>Lubeck</CITY>
+    <CITY>Rostock</CITY>
+    <CITY>Magdeburg</CITY>
+    <CITY>Braunschweig</CITY>
+    <CITY>Erfurt</CITY>
+    <CITY>Wittenberg</CITY>
+    <CITY>Regensburg</CITY>
+    <CITY>Linz</CITY>
+    <CITY>Konstanz</CITY>
+    <CITY>Augsburg</CITY>
+    <CITY>Nurnberg</CITY>
+    <CITY>Wurzburg</CITY>
+    <CITY>Trier</CITY>
+    <CITY>Mainz</CITY>
+    <CITY>Strassburg</CITY>
+    <CITY>Luttich</CITY>
+    <CITY>Brandenburg</CITY>
+    <CITY>Koblenz</CITY>
+    <CITY>Heidelberg</CITY>
+    <CITY>Dusseldorf</CITY>
+    <CITY>Kiel</CITY>
+    <CITY>Frankfurt</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,251 @@
+include "game_structs.bhs"
+
+conquest
+{
+
+  static int french = 1;
+  static int austrians = 2;
+  static int russians = 8;
+  static int diff = get_difficulty();
+  static UnitGroup murat;
+  static UnitGroup bagration;
+  static UnitGroup constantine;
+  static UnitGroup kollowrat;
+  static UnitGroup doctorov;
+  static UnitGroup kienmaier;
+
+  static String sokolnitz_name = "Sokolnitz";
+
+  String city_name;
+  int building;
+  int unit;
+  int x;
+  int y;
+
+  String nation_name;
+  int general_id;
+  
+  static int end_time = get_time_limit();
+  int cur_time;
+  
+  static int players = num_players();
+
+
+  run_once {
+    ctw_add_objective_text($S("Capture the enemy capital(s)."), "Hint_id", 0);
+    nation_name = find_nation(austrians);
+    //Murat division
+    murat.nation = 1;
+    murat.add_to_group(83);
+    for (n = num_type(french, "Hussar"); n > 0; n--) {
+      unit = find_unit(french, "Hussar");
+      murat.add_to_group(unit);
+    }
+    for (n = num_type(french, "Carabineer"); n > 0; n--) {
+      unit = find_unit(french, "Carabineer");
+      murat.add_to_group(unit);
+    }
+
+    //Bagration division
+    bagration.nation = 8;
+    bagration.add_to_group(8);//general
+    bagration.add_to_group(25);//cuirassier
+    bagration.add_to_group(22);//carabineer
+    bagration.add_to_group(23);//don cossack
+    bagration.add_to_group(24);
+    bagration.add_to_group(43);//musketeers
+    bagration.add_to_group(46);
+    bagration.add_to_group(49);
+    bagration.add_to_group(68);
+    bagration.add_to_group(26);//fusiliers
+    bagration.add_to_group(29);
+    bagration.add_to_group(32);
+    bagration.add_to_group(38);
+    bagration.add_to_group(11);//supply wagon
+    bagration.add_to_group(13);
+    bagration.add_to_group(17);//cannon
+    bagration.add_to_group(18);
+    bagration.add_to_group(19);
+
+    //Constantine division
+    constantine.nation = 8;
+    constantine.add_to_group(7);//general
+    constantine.add_to_group(199);//cuirassier
+    constantine.add_to_group(198);//carabineer
+    constantine.add_to_group(37);//don cossack
+    constantine.add_to_group(39);
+    constantine.add_to_group(104);//musketeers
+    constantine.add_to_group(107);
+    constantine.add_to_group(110);
+    constantine.add_to_group(113);
+    constantine.add_to_group(116);
+    constantine.add_to_group(92);//fusliers
+    constantine.add_to_group(95);
+    constantine.add_to_group(98);
+    constantine.add_to_group(101);
+    constantine.add_to_group(185);
+    constantine.add_to_group(3);//supply wagon
+    constantine.add_to_group(16);//cannon
+    constantine.add_to_group(20);
+    
+    x = 114;
+    y = 103;
+
+    //Kollowrat division
+    kollowrat.nation = 8;
+    if (nation_name == "Austrians") {
+      if (diff > 4) general_id = 71;
+      else general_id = 10;
+    } else {
+      if (diff > 4) kill_unit_anim(austrians, 71, 1);
+      else general_id = kill_unit_anim(austrians, 10, 1);
+      if (nation_name == "British") {
+        general_id = create_unit(austrians, x, y, "Wellington", 1);
+      } else if (nation_name == "Ottoman Turks") {
+        general_id = create_unit(austrians, x, y, "Djezzar", 1);
+      } else if (nation_name == "Russians") {
+        general_id = create_unit(austrians, x, y, "General Kutosov", 1);
+      } else if (nation_name == "Prussians") {
+        general_id = create_unit(austrians, x, y, "General Blucher", 1);
+      } else {
+        general_id = create_unit(austrians, x, y, "General", 1);
+      }
+    }
+    kollowrat.add_to_group(general_id);//general
+    kollowrat.add_to_group(51);//cuirassier
+    kollowrat.add_to_group(41);//carabineer
+    kollowrat.add_to_group(35);//don cossack
+    kollowrat.add_to_group(36);
+    kollowrat.add_to_group(119);//musketeers
+    kollowrat.add_to_group(122);
+    kollowrat.add_to_group(210);
+    kollowrat.add_to_group(128);
+    kollowrat.add_to_group(213);
+    kollowrat.add_to_group(62);//fusilier
+    kollowrat.add_to_group(56);
+    kollowrat.add_to_group(53);
+    kollowrat.add_to_group(59);
+    kollowrat.add_to_group(65);
+    kollowrat.add_to_group(2);//supply wagon
+    kollowrat.add_to_group(14);//cannon
+    kollowrat.add_to_group(15);
+
+    //Doctorov division
+    doctorov.nation = 8;
+    doctorov.add_to_group(5);//general
+    doctorov.add_to_group(273);//cuirassier
+    doctorov.add_to_group(274);
+    doctorov.add_to_group(253);//carabineer
+    doctorov.add_to_group(254);
+    doctorov.add_to_group(255);
+    doctorov.add_to_group(258);//don cossack
+    doctorov.add_to_group(259);
+    doctorov.add_to_group(260);
+    doctorov.add_to_group(278);//musketeers
+    doctorov.add_to_group(281);
+    doctorov.add_to_group(284);
+    doctorov.add_to_group(287);
+    doctorov.add_to_group(299);
+    doctorov.add_to_group(293);
+    doctorov.add_to_group(302);
+    doctorov.add_to_group(290);
+    doctorov.add_to_group(308);
+    doctorov.add_to_group(311);
+    doctorov.add_to_group(305);
+    doctorov.add_to_group(296);
+    doctorov.add_to_group(482);//fusiliers
+    doctorov.add_to_group(476);
+    doctorov.add_to_group(473);
+    doctorov.add_to_group(479);
+    doctorov.add_to_group(491);
+    doctorov.add_to_group(503);
+    doctorov.add_to_group(497);
+    doctorov.add_to_group(485);
+    doctorov.add_to_group(488);
+    doctorov.add_to_group(494);
+    doctorov.add_to_group(506);
+    doctorov.add_to_group(500);
+    doctorov.add_to_group(553);//supply wagon
+    doctorov.add_to_group(554);
+    doctorov.add_to_group(12);//cannon
+    doctorov.add_to_group(539);    
+    doctorov.add_to_group(540);
+
+    //Kienmaier division
+    kienmaier.nation = 8;
+    kienmaier.add_to_group(4);//general
+    kienmaier.add_to_group(268);//cuirassier
+    kienmaier.add_to_group(269);
+    kienmaier.add_to_group(249);//carabineer
+    kienmaier.add_to_group(250);
+    kienmaier.add_to_group(263);//don cossack
+    kienmaier.add_to_group(264);
+    kienmaier.add_to_group(344);//musketeers
+    kienmaier.add_to_group(347);
+    kienmaier.add_to_group(350);
+    kienmaier.add_to_group(353);
+    kienmaier.add_to_group(365);
+    kienmaier.add_to_group(359);
+    kienmaier.add_to_group(356);
+    kienmaier.add_to_group(362);
+    kienmaier.add_to_group(377);
+    kienmaier.add_to_group(371);
+    kienmaier.add_to_group(368);
+    kienmaier.add_to_group(374);
+    kienmaier.add_to_group(422);//fusiliers
+    kienmaier.add_to_group(416);
+    kienmaier.add_to_group(413);
+    kienmaier.add_to_group(419);
+    kienmaier.add_to_group(434);
+    kienmaier.add_to_group(428);
+    kienmaier.add_to_group(425);
+    kienmaier.add_to_group(431);
+    kienmaier.add_to_group(446);
+    kienmaier.add_to_group(440);
+    kienmaier.add_to_group(437);
+    kienmaier.add_to_group(443);
+    kienmaier.add_to_group(0);//supply wagon
+    kienmaier.add_to_group(555);
+    kienmaier.add_to_group(556);
+    kienmaier.add_to_group(9);//cannon
+    kienmaier.add_to_group(10);
+    kienmaier.add_to_group(21);
+
+    if (diff > 2) {
+      set_timer("A1", 15);
+      set_timer("A2", 60);
+    }
+
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) defeat(french);
+
+  trigger attack_one(timer_expired("A1")) {
+    building = find_city_id(sokolnitz_name);
+    x = object_position_x(french, building);
+    y = object_position_y(french, building);
+    doctorov.group_attack_to_order(x,y);
+  }
+
+  trigger attack_two(timer_expired("A2")) {
+    unit = 75;//Lannes
+    x = object_position_x(french, unit);
+    y = object_position_y(french, unit);
+    kollowrat.group_attack_to_order(x,y);
+  }
+  
+  trigger attack_three(time_later_than(3)) {
+    building = find_city_id(sokolnitz_name);
+    x = object_position_x(french, building);
+    y = object_position_y(french, building);
+    kienmaier.group_attack_to_order(x,y);
+  }
+  
+  for (nation = players; nation > 1; nation--) {
+    if (num_cities(nation) > 0) {
+      break;
+    } else if (nation == 2 && num_cities(nation) == 0) victory(french);        
+  }
+
+}

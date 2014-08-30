@@ -1,0 +1,146 @@
+ conquest
+{
+
+  labels {
+    RUSSIANS,
+    AMERICANS,
+  }
+  
+  static int end_time = get_time_limit();
+  int cur_time;
+  String city1_name = "Kansas City";
+  String city2_name = "Omaha";
+  String city3_name = "Tulsa";
+  String city1_loc_name = $S("Kansas City");
+  String city2_loc_name = $S("Omaha");
+  String city3_loc_name = $S("Tulsa");
+  static city1_id = find_city_id(city1_name);
+  static city2_id = find_city_id(city2_name); 
+  static city3_id = find_city_id(city3_name);   
+  static kansas_city_name;
+  static omaha_name;
+  static tulsa_name;
+  int new_nukes_total;
+  int nukes_destroyed;
+  static int num_infiltrated;
+  static int super_spy = find_unit(1, "Spy");
+  static int diff = get_difficulty();
+
+  run_once {
+   set_object_type_max_health("Spy", 500);  
+   set_object_type_max_health("Supply Wagon", 200); 
+    ctw_add_objective_text($S("Infiltrate the three American cities to find the nearby Missile Silos."), "new_york", "");
+    ctw_add_objective_text($S("Destroy the enemy Missile Silos."), "bribe_subs", "");
+    set_seen(RUSSIANS, AMERICANS, city1_id);
+    set_seen(RUSSIANS, AMERICANS, city2_id);
+    set_seen(RUSSIANS, AMERICANS, city3_id);
+    set_timer("spy_heal", 1);
+  }
+
+  if (timer_expired("spy_heal")) {
+    set_timer("spy_heal", 1);
+    heal_object(1, super_spy, 4);
+    unit = find_unit(1, "Supply Wagon");
+    x = object_position_x(1, unit);
+    y = object_position_y(1, unit);
+    for (i = 0; i < num_units(1); i++) {
+      unit = find_unit(1, "");
+      if (object_near(1, unit, x, y, 10)) {
+        heal_object(1, unit, 2);
+      }
+    }
+  }   
+  
+  set_population_cap(2, 20+(diff*5));
+
+  trigger (is_infiltrated(AMERICANS, city1_id)) {
+    popup_dialog(parse("Our informers in $STRING0 have revealed the location of the nearby American Missile Silo.", city1_loc_name));
+    set_seen(RUSSIANS, AMERICANS, 2064);
+    set_seen(RUSSIANS, AMERICANS, 2065);
+    num_infiltrated++;
+  }
+  
+  trigger (is_infiltrated(AMERICANS, city2_id)) {
+    popup_dialog(parse("Our informers in $STRING0 have revealed the location of the nearby American Missile Silo.", city2_loc_name));
+    set_seen(RUSSIANS, AMERICANS, 2067);
+    num_infiltrated++;
+  }  
+
+  trigger (is_infiltrated(AMERICANS, city3_id)) {
+    popup_dialog(parse("Our informers in $STRING0 have revealed the location of the nearby American Missile Silo.", city3_loc_name));
+    set_seen(RUSSIANS, AMERICANS, 2061);
+    num_infiltrated++;
+  }
+
+  trigger (num_infiltrated == 3) {
+    objective_complete("new_york");
+  }
+
+  if (num_type(AMERICANS, "Missile Silo") == 0) {
+    if (get_total_nukes("Americans") > 0) {
+      new_nuke_total = get_total_nukes("Americans")/2;
+      nukes_destroyed = get_total_nukes("Americans") - new_nuke_total;
+      while (get_total_nukes("Americans") > new_nuke_total) {
+        if (get_num_nukes("Alaska") > 0) {
+          ctw_remove_nuke("Alaska");
+        }
+        else if (get_num_nukes("Pacific Rockies") > 0) {
+          ctw_remove_nuke("Pacific Rockies");
+        }
+        else if (get_num_nukes("Midwest") > 0) {
+          ctw_remove_nuke("Midwest");
+        }
+        else if (get_num_nukes("Gulf Coast") > 0) {
+          ctw_remove_nuke("Gulf Coast");
+        }
+        else if (get_num_nukes("Mid-Atlantic") > 0) {
+          ctw_remove_nuke("Mid-Atlantic");
+        }
+        else {
+          if (get_total_nukes("Americans") == new_nuke_total + 1) {
+            popup_dialog($S("As a result of our successful mission, we have gained 100 Tribute and 1 American Nuclear Missile has been destroyed. We also have acquired a Wonder of the World Bonus Card."));
+            give_player_bonus_card("Treachery");
+            give_player_bonus_card("Wonder of the World");
+            give_player_bonus_card("Propaganda");
+            give_player_ctw_tribute(100);
+            new_nuke_total = 100;
+            break;
+          }
+          else {
+            popup_dialog($S("As a result of our successful mission, we have gained 200 Tribute. We also have acquired a Wonder of the World Bonus Card."));
+            give_player_bonus_card("Treachery");
+            give_player_bonus_card("Wonder of the World");
+            give_player_bonus_card("Propaganda");
+            give_player_ctw_tribute(200);
+            new_nuke_total = 100;
+            break;
+          }
+        }         
+      }
+      if (get_total_nukes("Americans") == new_nuke_total) {
+        popup_dialog(parse("As a result of our successful mission, $d0 American Nuclear Missiles have been destroyed! We also have acquired a Wonder of the World Bonus Card.", nukes_destroyed));
+        give_player_bonus_card("Treachery");
+        give_player_bonus_card("Wonder of the World");
+        give_player_bonus_card("Propaganda");
+      }
+    }
+    else {
+      popup_dialog($S("As a result of our successful mission, we have gained 200 Tribute and a Wonder of the World Bonus Card."));
+      give_player_ctw_tribute(200);
+      //give_player_bonus_card("Treachery");
+      give_player_bonus_card("Wonder of the World");
+      //give_player_bonus_card("Propaganda");
+    }
+    victory(RUSSIANS);
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time || num_units(RUSSIANS) == 0) {
+    defeat(RUSSIANS);
+  }
+   
+  //if (num_type_upgrade(RUSSIANS, "Spy") == 0) {
+    //defeat(RUSSIANS);
+ // }
+
+}

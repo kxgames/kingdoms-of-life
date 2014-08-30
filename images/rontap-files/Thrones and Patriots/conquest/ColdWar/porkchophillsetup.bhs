@@ -1,0 +1,89 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  labels {
+    AMERICANS,
+    RUSSIANS,
+  }
+
+  coldwar_rules();
+
+  int diff = get_difficulty();
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  //Korea - Koreans
+  if (get_turn() < 4) {
+    set_leader_name(3, "Syngman Rhee");
+  }
+  else if (get_turn() < 9) {
+    set_leader_name(3, "Park Chung Hee");
+  }
+  else {
+    set_leader_name(3, "Chun Doo Hwan");
+  }
+
+  int x;
+  int y;
+  
+  //southeast 173,125
+  //34,124
+  int dir;
+  if (get_attack_from() == "China") {
+    dir = 270;
+    x = 173;
+    y = 125;
+    //51,48
+    if (diff < 3) {
+      kill_unit_anim(2, 48, 1);
+      kill_unit_anim(2, 51, 1);
+      kill_unit_anim(2, 47, 1);
+    }
+    if (diff < 2) {
+      kill_unit_anim(2, 45, 1);
+    }
+  }
+  else {
+    dir = 90;
+    x = 37;
+    y = 128;
+    //45,47
+    if (diff < 3) {
+      kill_unit_anim(2, 48, 1);
+      kill_unit_anim(2, 51, 1);
+      kill_unit_anim(2, 47, 1);
+    }
+    if (diff > 2) {
+      kill_unit_anim(2, 45, 1);
+    }
+  }
+  create_unit_upgrade(AMERICANS, x, y, "General", 1);
+  create_unit_in_group(AMERICANS, x, y, "Spy", 3);
+  create_unit_in_group(AMERICANS, x, y, "Marine Infantry", 8);  
+  if (get_age() == 6) {
+    create_unit_in_group(AMERICANS, x, y, "Special Forces", 3);
+    create_unit_in_group(AMERICANS, x, y, "Bazooka", 8);
+    create_unit_in_group(AMERICANS, x, y, "Heavy Machine Gun", 8);
+  }
+  else {
+    create_unit_in_group(AMERICANS, x, y, "Elite Special Forces", 3);
+    create_unit_in_group(AMERICANS, x, y, "Anti-Tank Missile", 8);
+    create_unit_in_group(AMERICANS, x, y, "Advanced Machine Gun", 8);  
+  }
+  create_unit_in_group(AMERICANS, x, y, "Armored Scout Car", 4);
+  create_unit_in_group(AMERICANS, x, y, "Tank", 3);
+  create_unit_in_group(AMERICANS, x, y, "Howitzer", 2);
+  create_unit_in_group(AMERICANS, x, y, "Anti-Aircraft Battery", 2);
+  
+  //get the proper angle
+
+
+  group_jump_move(AMERICANS, x, y, dir);  
+
+}
+
+

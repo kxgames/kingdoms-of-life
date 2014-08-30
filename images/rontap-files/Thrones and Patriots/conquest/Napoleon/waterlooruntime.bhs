@@ -1,0 +1,318 @@
+       include "game_structs.bhs"
+
+conquest
+{
+static int diff = get_difficulty();
+static UnitGroup scout_group;
+static UnitGroup first_division;
+static UnitGroup second_division;
+static UnitGroup third_division;
+static UnitGroup fourth_division;
+static UnitGroup fifth_division;
+static UnitGroup sixth_division;
+static UnitGroup first_battalion;
+static UnitGroup second_battalion;
+static UnitGroup third_battalion;
+static UnitGroup fourth_battalion;
+static ex = 0;
+static ey = 0;
+
+run_once {
+  ctw_add_objective_text($S("Take Waterloo and defeat all of the enemy armies."), "Hint_id", 0);
+  
+  scout_group.nation = 8;
+  first_division.nation = 8;
+  second_division.nation = 8;
+  third_division.nation = 8;
+  fourth_division.nation = 8;
+  fifth_division.nation = 8;
+  sixth_division.nation = 8;
+  
+  first_battalion.nation = 7;
+  second_battalion.nation = 7;
+  third_battalion.nation = 7;
+  fourth_battalion.nation = 7;
+
+  city_id = find_city_id("Waterloo");
+  ex = object_position_x(2, city_id);
+  ey = object_position_y(2, city_id);
+
+  disable_trigger("SixthDivisionMoves");
+  disable_trigger("FourthBattalionMoves");
+
+  disable_trigger("FifthDivisionMoves");
+  disable_trigger("ThirdBattalionMoves");
+}
+
+trigger (find_city_owner("Waterloo") == 1) {
+  ctw_add_objective_text($S("Build up Waterloo's defenses and defeat all of the enemy armies."), "Hint_id", 0);
+}
+
+trigger ArmiesInit()
+{
+ ////////////////////british///////////////////////////
+  unit_id = -1;
+  x = 46;
+  y = 146;
+  for (i = 0; i < diff+2; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Highlanders", 1);
+    scout_group.add_to_group(unit_id);
+  }
+  scout_group.group_jump_move(x, y, 200);
+
+  x = 90;
+  y = 98;
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Highlanders", 1);
+    first_division.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Fusiliers", 1);
+    first_division.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(8, x, y, "General", 1);
+  first_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Supply Wagon", 1);
+  first_division.add_to_group(unit_id);
+  first_division.group_jump_move(x, y, 200);
+
+  x = 86;
+  y = 74;
+  for (i = 0; i < diff+1; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Highlanders", 1);
+    second_division.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Fusiliers", 1);
+    second_division.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(8, x, y, "General", 1);
+  second_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Supply Wagon", 1);
+  second_division.add_to_group(unit_id);
+  second_division.group_jump_move(x, y, 200);
+
+  x = 54;
+  y = 82;
+  for (i = 0; i < diff+1; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Highlanders", 1);
+    third_division.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff+1; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Fusiliers", 1);
+    third_division.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(8, x, y, "General", 1);
+  third_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Supply Wagon", 1);
+  third_division.add_to_group(unit_id);
+  third_division.group_jump_move(x, y, 200);
+
+  x = 66;
+  y = 46;
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Highlanders", 1);
+    fourth_division.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff+1; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Fusiliers", 1);
+    fourth_division.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(8, x, y, "General", 1);
+  fourth_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Supply Wagon", 1);
+  fourth_division.add_to_group(unit_id);
+  fourth_division.group_jump_move(x, y, 200);
+
+  x = 170;
+  y = 30;
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Highlanders", 1);
+    fifth_division.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Fusiliers", 1);
+    fifth_division.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(8, x, y, "General", 1);
+  fifth_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Supply Wagon", 1);
+  fifth_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Cannon", 1);
+  fifth_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Cannon", 1);
+  fifth_division.add_to_group(unit_id);
+  fifth_division.group_jump_move(x, y, 200);
+
+  x = 170;
+  y = 30;
+  for (i = 0; i < diff+1; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Highlanders", 1);
+    sixth_division.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(8, x, y, "Fusiliers", 1);
+    sixth_division.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(8, x, y, "Wellington", 1);
+  sixth_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Supply Wagon", 1);
+  sixth_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Cannon", 1);
+  sixth_division.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(8, x, y, "Cannon", 1);
+  sixth_division.add_to_group(unit_id);
+  sixth_division.group_jump_move(x, y, 200);
+
+  ///////////////////prussia////////////////////////
+  x = 162;
+  y = 158;
+  for (i = 0; i < diff+2; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Musketeers", 1);
+    first_battalion.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff+1; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Fusiliers", 1);
+    first_battalion.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Cannon", 1);
+    first_battalion.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(7, x, y, "General", 1);
+  first_battalion.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(7, x, y, "Supply Wagon", 1);
+  first_battalion.add_to_group(unit_id);
+  first_battalion.group_jump_move(x, y, 240);
+
+  x = 102;
+  y = 138;
+  for (i = 0; i < diff-1; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Musketeers", 1);
+    second_battalion.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Fusiliers", 1);
+    second_battalion.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff-2; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Cannon", 1);
+    second_battalion.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(7, x, y, "General", 1);
+  second_battalion.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(7, x, y, "Supply Wagon", 1);
+  second_battalion.add_to_group(unit_id);
+  second_battalion.group_jump_move(x, y, 200);
+
+  x = 154;
+  y = 74;
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Musketeers", 1);
+    third_battalion.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Fusiliers", 1);
+    third_battalion.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Cannon", 1);
+    third_battalion.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(7, x, y, "General", 1);
+  third_battalion.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(7, x, y, "Supply Wagon", 1);
+  third_battalion.add_to_group(unit_id);
+  third_battalion.group_jump_move(x, y, 200);
+
+  x = 154;
+  y = 74;
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Musketeers", 1);
+    fourth_battalion.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Fusiliers", 1);
+    fourth_battalion.add_to_group(unit_id);
+  }
+  for (i = 0; i < diff; i++) {
+    unit_id = create_unit_upgrade(7, x, y, "Cannon", 1);
+    fourth_battalion.add_to_group(unit_id);
+  }
+  unit_id = create_unit_upgrade(7, x, y, "General Blucher", 1);
+  fourth_battalion.add_to_group(unit_id);
+  unit_id = create_unit_upgrade(7, x, y, "Supply Wagon", 1);
+  fourth_battalion.add_to_group(unit_id);
+  fourth_battalion.group_jump_move(x, y, 200);
+}
+
+trigger WaterlooCaptured(city_captured(2, "Waterloo"))
+{
+  enable_trigger("FifthDivisionMoves");
+  enable_trigger("ThirdBattalionMoves");
+  set_timer("WC1", 30);
+  set_timer("WC2", 30);
+}
+
+trigger FifthDivisionMoves(timer_expired("WC1"))
+{  
+  fifth_division.group_attack_to_order(ex, ey);
+  enable_trigger("SixthDivisionMoves");
+  set_timer("6DM", 60);
+}
+
+trigger SixthDivisionMoves(timer_expired("6DM"))
+{
+  sixth_division.group_attack_to_order(ex, ey);
+}
+
+trigger FirstBattalionMoves()
+{
+  first_battalion.group_attack_to_order(62, 150);
+}
+
+trigger ThirdBattalionMoves(timer_expired("WC2"))
+{
+  first_battalion.group_attack_to_order(ex, ey);
+  second_battalion.group_attack_to_order(ex, ey);
+  third_battalion.group_attack_to_order(ex, ey);
+  enable_trigger("FourthBattalionMoves");
+  set_timer("FBM", 60);
+}
+
+trigger FourthBattalionMoves(timer_expired("FBM"))
+{
+  fourth_battalion.group_attack_to_order(ex, ey);
+}
+
+if (find_military(7) < 0) {
+  unit_id = -1;
+  while(num_units(7) > 0) {
+    unit_id = find_unit(7, "");
+    kill_unit_anim(7, unit_id, 4);
+  }
+  defeat(7);
+}
+
+if (find_military(8) < 0) {
+  unit_id = -1;
+  while(num_units(8) > 0) {
+    unit_id = find_unit(8, "");
+    kill_unit_anim(8, unit_id, 4);
+  }
+  defeat(8);
+}
+
+if (is_defeated(2) && is_defeated(7) && is_defeated(8)) {
+  victory(1);
+}
+
+if (time() >= get_time_limit()) {
+  defeat(1);
+}
+
+if (city_captured(2, "Waterloo")) {
+  city_assimilate(1, "Waterloo");
+}
+
+}

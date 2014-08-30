@@ -1,0 +1,1781 @@
+  String[] conquest get_territory_list (String name);
+  int conquest survey();
+  int conquest is_free_state(String tribe);
+                                             
+//set battle_info_text to be the info shown when making an attack
+conquest post_turn (int turn)
+{
+
+  static int random_number_guy = get_ctw_seed() % 3;
+  String nation = ctw_get_player_nation();
+  String territory_list[];
+  String protest_territory;
+  String all_territories[];
+  static String NATO_list[] = ["West Europe", "Scandinavia", "Turkey", "Greece", "Italy", "Spain", "British Isles"];
+  static String Warsaw_list[] = ["West Central Europe", "Finland", "Balkans"];
+  static String Warsaw_list_loc[] = [$S("West Central Europe"), $S("Finland"), $S("Balkans")];
+  static String NATO_list_loc[] = [$S("West Europe"), $S("Scandinavia"), $S("Turkey"), $S("Greece"), $S("Italy"), $S("Spain"), $S("British Isles")];
+  int times;
+  int value;
+  int nato_members;
+  int warsaw_members;
+  int i = 0;
+  String other_nation;
+  if (nation == "Americans") {
+    other_nation = "Russians";
+  }
+  else {
+    other_nation = "Americans";
+  }
+  int korea_temp = get_ctw_int("lose_korea");
+  if (korea_temp < 1) {
+    korea_temp = 1;
+  }
+
+  if (nation == "Americans") {
+    set_no_attack("Russians", "Japan");
+  }
+  
+  if (turn == 3 && get_ctw_int("spy_mission") < 1 && !ctw_is_war("Americans", "Russians")) {
+    popup_dialog($S("Our Spies await orders. Click on the Espionage Mission button, located under the mini-map, to conduct an Espionage Mission. Great reward can be had, and this action can be taken in addition to attacking this turn."));
+  }
+
+  if (ctw_last_battle_victory() == 0 && get_num_times_played("Custom", "Battle of Puson") == korea_temp) {
+    korea_temp++;
+    set_ctw_int("lose_korea", korea_temp);
+    if (ctw_get_master("Koreans") == "Americans");
+    else if (!ctw_is_vassal("Koreans")) {
+      ctw_set_vassal("Russians", "Koreans");
+    }
+  }
+
+  all_territories = ["Karelia", "Greece", "North Korea", "Canada", "Greenland", "Eastern Siberia", "Finland", "Western Siberia", "Russia", "Scandinavia", "Alaska", "British Isles", "Ukraine", "West Europe", "Central Europe", "Japan", "West Central Europe", "China", "France", "Kazakhstan", "Midwest", "Pacific Rockies", "Mid-Atlantic", "Mongolia", "Italy", "Balkans", "Spain", "Korea", "Turkey", "Middle East", "Afghanistan", "Gulf Coast", "India", "Western Africa", "Mexico", "Egypt", "Southeast Asia", "Ethiopian Highlands", "Cuba", "Central America", "Colombia", "Brazil", "Congo", "Peru", "Australia", "Argentina", "South Africa"];
+
+/*
+Russia
+Ukraine
+Western Siberia
+Kazakhstan
+Eastern Siberia
+Mongolia
+
+Midwest
+Alaska
+Pacific Rockies
+Mid-Atlantic
+*/
+
+  if (get_num_times_played("Custom", "Inchon") > 0 && get_ctw_int("koreanwar") < 1) {
+    set_ctw_int("koreanwar", 1);
+  }
+
+  String pac1;
+  String pac2;
+  String pac_mover;
+  int rand_temp;
+  int num_tribute;
+
+  if (get_ctw_int("egypt_def") == 1) {
+    clear_ctw_val("egypt_def");
+    set_defcon_level(get_defcon_level()+1);
+  }
+  
+  if (get_ctw_int("china_links") == 3) {
+    set_ctw_int("china_links", 4);
+    if (nation == "Americans") {
+      pac1 = $S("NATO");
+      pac2 = $S("The Warsaw Pact");
+      rand_temp = rand_int(0, NATO_list.length-1) + random_number_guy;
+      if (rand_temp == NATO_list.length) {
+        rand_temp = 1;
+      }
+      else if (rand_temp > NATO_list.length) {
+        rand_temp = 0;
+      }      
+      pac_mover = NATO_list[rand_temp];
+      ctw_give_territory(pac_mover, "Russians", 0);
+    }
+    else {
+      pac1 = $S("The Warsaw Pact");
+      pac2 = $S("NATO");
+      rand_temp = rand_int(0, Warsaw_list.length-1) + random_number_guy;
+      if (rand_temp == Warsaw_list.length) {
+        rand_temp = 1;
+      }
+      else if (rand_temp > Warsaw_list.length) {
+        rand_temp = 0;
+      }   
+      pac_mover = Warsaw_list[rand_temp];
+      ctw_give_territory(pac_mover, "Americans", 0);
+    }
+    popup_dialog(parse("Many of our friends are disgusted by the way we ignored our agreement not to attack China. $STRING0 has left $STRING1 and joined $STRING2 rather than be accomplice to a liar.", pac_mover, pac1, pac2));
+  }
+
+  if (get_ctw_int("egypt_def") == 1) {
+    set_ctw_int("egypt_def", 2);
+    set_defcon_level(get_defcon_level());
+  }
+
+  //1945 United Nations
+
+  //1952 Greece and Turkey join the alliance. Allied Command Atlantic (based in the United States) becomes operational and Nato sets up a permanent headquarters in Paris.
+
+  //1953 The Soviet Union reveals its possession of the hydrogen bomb.
+
+  //1956 The Soviet Union crushes a revolt in Hungary
+
+  //1956 Britain and France attempt to seize the Suez canal in Egypt in the face of US opposition result in an early division between the allies.
+
+  //1961 East Germany puts up the Berlin Wall after large numbers of its citizens flee to the west.
+
+  //1961 Bay of Pigs invasion of Cuba
+
+  //1962 The Soviet Union places nuclear missiles in Cuba, the US and USSR almost go to war
+
+  //1966 The French president, General Charles de Gaulle, announces France will no longer assign its forces to Nato in protest at the dominance of US commanders. It withdraws from the integrated military structure and asks allied units to leave the country.
+
+  //1968 Nato denounces the Soviet bloc invasion of Czechoslovakia (where Alexander Dubcek had begun liberal reforms).
+
+  //1974 Greek forces withdraw from Nato's integrated military structure.
+
+  //1976 Nato rejects proposals by the Warsaw Pact to renounce first use of nuclear weapons.
+
+  //1980 Greek forces are reintegrated into Nato
+
+  if (nation == "Russians") {
+  //1, 2 - Truman
+    if (get_turn() < 1) {
+      ctw_set_leader_name ("Americans", $S("Harry Truman"));
+    }
+    //3, 4 - Eisenhower
+    else if (get_turn() < 3) {
+      ctw_set_leader_name ("Americans", $S("Dwight Eisenhower"));
+    }
+  //5 - Kennedy
+    else if (get_turn() < 4) {
+      ctw_set_leader_name ("Americans", $S("John Kennedy"));
+    }
+  //6 - Johnson
+    else if (get_turn() < 5) {
+      ctw_set_leader_name ("Americans", $S("Lyndon Johnson"));
+    }
+  //7, 8 - Nixon
+    else if (get_turn() < 7) {
+      ctw_set_leader_name ("Americans", $S("Richard Nixon"));
+    }
+  //9 - Ford
+    else if (get_turn() < 8) {
+      ctw_set_leader_name ("Americans", $S("Gerald Ford"));
+    }
+  //10 - Carter
+    else if (get_turn() < 9) {
+      ctw_set_leader_name ("Americans", $S("Jimmy Carter"));
+    }
+  //11, 12 - Reagan
+    else {
+      ctw_set_leader_name ("Americans", $S("Ronald Reagan"));
+    }
+  }
+  else {
+  //1, 2 - Stalin
+    if (get_turn() < 1) {
+      ctw_set_leader_name("Russians", $S("Josef Stalin"));
+    }
+  //3, 4, 5 - Kruschev
+    else if (get_turn() < 4) {
+      ctw_set_leader_name("Russians", $S("Nikita Kruschev"));
+    }
+  //6 , 7, 8, 9, 10 - Brezhnev
+    else if (get_turn() < 9) {
+      ctw_set_leader_name("Russians", $S("Leonid Brezhnev"));
+    }
+  //11 - Andropov
+    else if (get_turn() < 10) {
+      ctw_set_leader_name("Russians", $S("Yuri Andropov"));
+    }
+  //12 - Chernenko
+    else if (get_turn() < 11) {
+      ctw_set_leader_name("Russians", $S("Konstantin Chernenko"));
+    }
+  //13 - Gorbachev
+    else {
+      ctw_set_leader_name("Russians", $S("Mikhail Gorbachev"));
+    }
+  }
+
+  //Warsaw Pact
+  if (get_turn() < 3) {
+    ctw_set_leader_name("Germans", $S("Wilhelm Pieck"));
+  }
+  else if (get_turn() < 7) {
+    ctw_set_leader_name("Germans", $S("Walter Ulbricht"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Germans", $S("Willi Stoph"));
+  }
+  else {
+    ctw_set_leader_name("Germans", $S("Erich Honecker"));
+  }
+
+  //NATO
+  if (get_turn() < 3) {
+    ctw_set_leader_name("British", $S("Hastings Ismay"));
+  }
+  else if (get_turn() < 4) {
+    ctw_set_leader_name("British", $S("Paul-Henri Spaak"));
+  }
+  else if (get_turn() < 5) {
+    ctw_set_leader_name("British", $S("Dirk Uipko Stikker"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("British", $S("Manlio Brosio"));
+  }
+  else if (get_turn() < 11) {
+    ctw_set_leader_name("British", $S("Joseph Luns"));
+  }
+  else {
+    ctw_set_leader_name("British", $S("Peter Carrington"));
+  }
+
+  /*
+  1945 - 1
+  1948 - 2
+  1952 - 3
+  1956 - 4
+  1960 - 5
+  1963 - 6
+  1968 - 7
+  1972 - 8
+  1974 - 9
+  1976 - 10
+  1980 - 11
+  1984 - 12
+  1986 - 13
+  1987 - 14
+  */
+
+  //Afghanistan - Persian
+  if (get_turn() < 8) {
+    ctw_set_leader_name("Persian", $S("Zahir Shah"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Persian", $S("Sardar Daud Khan"));
+  }
+  else if (get_turn() < 10) {
+    ctw_set_leader_name("Persian", $S("Nur Taraki"));
+  }
+  else if (get_turn() < 11) {
+    ctw_set_leader_name("Persian", $S("Hafizullah Amin"));
+  }
+  else {
+    ctw_set_leader_name("Persian", $S("Babrak Karmal"));
+  }
+
+  //Argentina - Greeks
+  if (get_turn() < 3) {
+    ctw_set_leader_name("Greeks", $S("Juan Peron"));
+  }
+  else if (get_turn() < 5) {
+    ctw_set_leader_name("Greeks", $S("Arturo Frondizi"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("Greeks", $S("Juan Ongania"));
+  }
+  else if (get_turn() < 7) {
+    ctw_set_leader_name("Greeks", $S("Alejandro Lanusse"));
+  }
+  else if (get_turn() < 8) {
+    ctw_set_leader_name("Greeks", $S("M. E. Martinez de Peron"));
+  }
+  else if (get_turn() < 10) {
+    ctw_set_leader_name("Greeks", $S("Jorge Videla"));
+  }
+  else {
+    ctw_set_leader_name("Greeks", $S("Raul Alfonsin"));
+  }
+
+  //Brazil - Iroquois
+  if (get_turn() < 1) {
+    ctw_set_leader_name("Iroquois", $S("Eurico Durta"));
+  }
+  else if (get_turn() < 2) {
+    ctw_set_leader_name("Iroquois", $S("Getulio Vargas"));
+  }
+  else if (get_turn() < 4) {
+    ctw_set_leader_name("Iroquois", $S("Juscelino Kubitschek"));
+  }
+  else if (get_turn() < 5) {
+    ctw_set_leader_name("Iroquois", $S("Joao Goulart"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("Iroquois", $S("Costa e Silva"));
+  }
+  else if (get_turn() < 7) {
+    ctw_set_leader_name("Iroquois", $S("Emilio Medici"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Iroquois", $S("Ernesto Geisel"));
+  }
+  else if (get_turn() < 11) {
+    ctw_set_leader_name("Iroquois", $S("Joao Figueiredo"));
+  }
+  else {
+    ctw_set_leader_name("Iroquois", $S("Jose Sarney"));
+  }
+
+  //China - Chinese
+  if (get_turn() < 9) {
+    ctw_set_leader_name("Chinese", $S("Mao Tse-Tung"));
+  }
+  else {
+    ctw_set_leader_name("Chinese", $S("Deng Xiaoping"));
+  }
+
+  //Colombia - Spanish
+  if (get_turn() < 1) {
+    ctw_set_leader_name("Spanish", $S("Mariano Perez"));
+  }
+  else if (get_turn() < 2) {
+    ctw_set_leader_name("Spanish", $S("Roberto Arbelaez"));
+  }
+  else if (get_turn() < 3) {
+    ctw_set_leader_name("Spanish", $S("Gustavo Pinilla"));
+  }
+  else if (get_turn() < 4) {
+    ctw_set_leader_name("Spanish", $S("Alberto Camargo"));
+  }
+  else if (get_turn() < 5) {
+    ctw_set_leader_name("Spanish", $S("Guillermo Munoz"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("Spanish", $S("Carlos Restrepo"));
+  }
+  else if (get_turn() < 7) {
+    ctw_set_leader_name("Spanish", $S("Misael Pastrana"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Spanish", $S("Alfonso Michelsen"));
+  }
+  else if (get_turn() < 10) {
+    ctw_set_leader_name("Spanish", $S("Julio Ayala"));
+  }
+  else if (get_turn() < 11) {
+    ctw_set_leader_name("Spanish", $S("Belisario Cuartas"));
+  }
+  else {
+    ctw_set_leader_name("Spanish", $S("Virgilio Vargas"));
+  }
+
+  //Congo - Dutch
+  if (get_turn() < 4) {
+    ctw_set_leader_name("Dutch", $S("Fulbert Youlou"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("Dutch", $S("Alphonse Massamba-Debat"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Dutch", $S("Marien Ngouabi"));
+  }
+  else {
+    ctw_set_leader_name("Dutch", $S("Denis Sassou-Nguesso"));
+  }
+
+  //Cuba - Lakota
+  if (get_turn() < 1) {
+    ctw_set_leader_name("Lakota", $S("Carlos Prio Socarras"));
+  }
+  else if (get_turn() < 3) {
+    ctw_set_leader_name("Lakota", $S("Fulgencio Batista"));
+  }
+  else {
+    ctw_set_leader_name("Lakota", $S("Fidel Castro"));
+  }
+
+  if (get_turn() == 3) {
+    if (ctw_is_vassal("Lakota") && ctw_get_master("Lakota") == "Americans") {
+      if (nation == "Americans") {
+        popup_dialog($S("There has been a socialist revolution in Cuba! The new regime is not as friendly to you as the old one was. Intelligence reports that Cuba will soon become a client state of the USSR."));
+      }
+      else {
+        popup_dialog($S("There has been a socialist revolution in Cuba! Cuba has thrown off the imperialistic yoke of the capitalists."));
+      }
+      if (ctw_territory_has_army("Cuba")) {
+        ctw_remove_army("Americans", "Cuba");
+        ctw_give_army("Americans", "Gulf Coast");
+      }
+      ctw_set_peace("Americans", "Lakota");
+      ctw_remove_army("Lakota", "Cuba");
+      if (nation == "Americans") {
+        ctw_set_vassal("Russians", "Cuba");
+      }
+    }
+  }
+
+  //Central America - Maya
+  if (get_turn() < 1) {
+    ctw_set_leader_name("Maya", $S("Enrique Brin"));
+  }
+  else if (get_turn() < 2) {
+    ctw_set_leader_name("Maya", $S("Jose Cantera"));
+  }
+  else if (get_turn() < 4) {
+    ctw_set_leader_name("Maya", $S("Ernesto Navarro"));
+  }
+  else if (get_turn() < 5) {
+    ctw_set_leader_name("Maya", $S("Roberto Remon"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("Maya", $S("Arnulfo Madrid"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Maya", $S("Demetrio Lakas Bahas"));
+  }
+  else if (get_turn() < 10) {
+    ctw_set_leader_name("Maya", $S("Aristides Sanchez"));
+  }
+  else if (get_turn() < 11) {
+    ctw_set_leader_name("Maya", $S("Jorge Sibauste"));
+  }
+  else {
+    ctw_set_leader_name("Maya", $S("Eric Cohen-Henriquez"));
+  }
+
+  //Egypt - Egyptians
+  if (get_turn() < 1) {
+    ctw_set_leader_name("Egyptians", $S("Faruk I"));
+  }
+  else if (get_turn() < 2) {
+    ctw_set_leader_name("Egyptians", $S("Fu'ad II"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("Egyptians", $S("Nasir"));
+  }
+  else if (get_turn() < 10) {
+    ctw_set_leader_name("Egyptians", $S("Anwar as-Sadat"));
+  }
+  else {
+    ctw_set_leader_name("Egyptians", $S("Hosni Mubarak"));
+  }
+
+  //Ethiopia - Nubians
+
+  if (get_turn() < 8) {
+    ctw_set_leader_name("Nubians", $S("Haile Selassie I"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Nubians", $S("Tafari Benti"));
+  }
+  else {
+    ctw_set_leader_name("Nubians", $S("Mengistu Haile Mariam"));
+  }
+
+  //India - Indians
+  if (get_turn() < 1) {
+    ctw_set_leader_name("Indians", $S("Rajagopalachari"));
+  }
+  else if (get_turn() < 4) {
+    ctw_set_leader_name("Indians", $S("Prasad"));
+  }
+  else if (get_turn() < 5) {
+    ctw_set_leader_name("Indians", $S("Radhakrishnan"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("Indians", $S("Husain"));
+  }
+  else if (get_turn() < 7) {
+    ctw_set_leader_name("Indians", $S("Giri"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Indians", $S("Ahmed"));
+  }
+  else if (get_turn() < 10) {
+    ctw_set_leader_name("Indians", $S("Shri Reddy"));
+  }
+  else if (get_turn() < 12) {
+    ctw_set_leader_name("Indians", $S("Zail Singh"));
+  }
+  else {
+    ctw_set_leader_name("Indians", $S("Ramaswamy Venkataraman"));
+  }
+
+  //Japan - Japanese
+  if (get_turn() < 2) {
+    ctw_set_leader_name("Romans", $S("Shigeru Yoshida"));
+  }
+  else if (get_turn() < 3) {
+    ctw_set_leader_name ("Romans", $S("Nobusuke Kishi"));
+  }
+  else {
+    ctw_set_leader_name ("Romans", $S("Hayato Ikeda"));
+  }
+
+  //Korea - Koreans
+  ctw_set_leader_name("Japanese", $S("Kim Il-sung"));
+  if (get_turn() < 4) {
+    ctw_set_leader_name("Koreans", $S("Rhee Syng-man"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Koreans", $S("Park Chung-hee"));
+  }
+  else {
+    ctw_set_leader_name("Koreans", $S("Chun Doo-hwan"));
+  }
+
+  //Mexico - Aztecs
+  if (get_turn() < 2) {
+    ctw_set_leader_name("Aztecs", $S("Miguel Valdes"));
+  }
+  else if (get_turn() < 3) {
+    ctw_set_leader_name("Aztecs", $S("Adolfo Cortines"));
+  }
+  else if (get_turn() < 5) {
+    ctw_set_leader_name("Aztecs", $S("Adolfo Mateos"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("Aztecs", $S("Gustavo Ordaz"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Aztecs", $S("Luis Alvarez"));
+  }
+  else if (get_turn() < 10) {
+    ctw_set_leader_name("Aztecs", $S("Lopez Portillo"));
+  }
+  else {
+    ctw_set_leader_name("Aztecs", $S("Madrid Hurtado"));
+  }
+
+  //Middle East - Turks
+  ctw_set_leader_name("Turks", $S("OPEC"));
+
+  //Peru - Inca
+  if (get_turn() < 1) {
+    ctw_set_leader_name("Inca", $S("Jose Luis Bustamante"));
+  }
+  else if (get_turn() < 3) {
+    ctw_set_leader_name("Inca", $S("Manuel Odria"));
+  }
+  else if (get_turn() < 4) {
+    ctw_set_leader_name("Inca", $S("Manuel Prado y Ugarteche"));
+  }
+  else if (get_turn() < 6) {
+    ctw_set_leader_name("Inca", $S("Fernando Belaunde Terry"));
+  }
+  else if (get_turn() < 8) {
+    ctw_set_leader_name("Inca", $S("Juan Alvarado"));
+  }
+  else if (get_turn() < 10) {
+    ctw_set_leader_name("Inca", $S("Francisco Bermudez"));
+  }
+  else if (get_turn() < 11) {
+    ctw_set_leader_name("Inca", $S("Fernando Belaunde Terry"));
+  }
+  else {
+    ctw_set_leader_name("Inca", $S("Alan Garcia Perez"));
+  }
+
+  //Southeast Asia - Mongols
+  if (nation == "Americans") {
+    if (get_turn() < 6) {
+      ctw_set_leader_name("Mongols", $S("Ho Chi Minh"));
+    }
+    else if (get_turn() < 10) {
+      ctw_set_leader_name("Mongols", $S("Ton Duc Thang"));
+    }
+    else {
+      ctw_set_leader_name("Mongols", $S("Truong Chinh"));
+    }
+  }
+  else {
+    if (get_turn() < 5) {
+      ctw_set_leader_name("Mongols", $S("Ngo Dinh Diem"));
+    }
+    else {
+      ctw_set_leader_name("Mongols", $S("Nguyen Van Thieu"));
+    }
+  }
+
+  //South Africa - Bantu
+  if (get_turn() < 1) {
+    ctw_set_leader_name("Bantu", $S("Gideon Brand Van Zyl"));
+  }
+  else if (get_turn() < 3) {
+    ctw_set_leader_name("Bantu", $S("Ernest Jansen"));
+  }
+  else if (get_turn() < 5) {
+    ctw_set_leader_name("Bantu", $S("Charles Swart"));
+  }
+  else if (get_turn() < 8) {
+    ctw_set_leader_name("Bantu", $S("Jacobus Fouché"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("Bantu", $S("Nicolaas Diederichs"));
+  }
+  else if (get_turn() < 11) {
+    ctw_set_leader_name("Bantu", $S("Marais Viljoen"));
+  }
+  else {
+    ctw_set_leader_name("Bantu", $S("Pieter Botha"));
+  }
+
+  if (nation == "Russians") {
+  //1, 2 - Truman
+    if (get_turn() < 1) {
+      ctw_set_leader_name ("Americans", $S("Harry Truman"));
+    }
+    //3, 4 - Eisenhower
+    else if (get_turn() < 3) {
+      ctw_set_leader_name ("Americans", $S("Dwight Eisenhower"));
+    }
+  //5 - Kennedy
+    else if (get_turn() < 4) {
+      ctw_set_leader_name ("Americans", $S("John Kennedy"));
+    }
+  //6 - Johnson
+    else if (get_turn() < 5) {
+      ctw_set_leader_name ("Americans", $S("Lyndon Johnson"));
+    }
+  //7, 8 - Nixon
+    else if (get_turn() < 7) {
+      ctw_set_leader_name ("Americans", $S("Richard Nixon"));
+    }
+  //9 - Ford
+    else if (get_turn() < 8) {
+      ctw_set_leader_name ("Americans", $S("Gerald Ford"));
+    }
+  //10 - Carter
+    else if (get_turn() < 9) {
+      ctw_set_leader_name ("Americans", $S("Jimmy Carter"));
+    }
+  //11, 12 - Reagan
+    else {
+      ctw_set_leader_name ("Americans", $S("Ronald Reagan"));
+    }
+  }
+
+  //Mongolia - French
+  if (get_turn() < 3) {
+    ctw_set_leader_name("French", $S("Gonchigiyn Bumtsend"));
+  }
+  else if (get_turn() < 8) {
+    ctw_set_leader_name("French", $S("Sukhbaataryn Yanjmaa"));
+  }
+  else if (get_turn() < 9) {
+    ctw_set_leader_name("French", $S("Sonomyn Luvsan"));
+  }
+  else {
+    ctw_set_leader_name("French", $S("Yumjaagiyn Tsedenbal"));
+  }
+
+  //give the americans a wonder card at industrial
+  trigger (nation == "Americans" && get_turn() == 6) {
+    popup_dialog($S("Congress, desiring to demostrate our technological superiority, has appropriated the funds for a Wonder of the World. Play this Bonus Card to build the Supercollider or the Space Program."));
+    give_player_bonus_card("Wonder of the World");
+  }
+
+  int safe;
+  //static String NATO_list[] = ["West Germany", "Scandinavia", "Italy", "Spain", "Turkey", "British Isles"];
+  //static String Warsaw_list[] = ["East Germany", "Finland", "Balkans"];
+  /////European Reconstruction
+
+  if (!ctw_is_war("Americans", "Russians")) {
+    if (nation == "Americans" && get_ctw_int("nato_rebuild") < 1) {
+      ////NATO wants 3
+      if (get_turn() == 1) {
+        for (i = 0; i < NATO_list.length; i++) {
+          if (get_territory_owner(NATO_list[i]) == "Americans") {
+            if (get_territory_strength(NATO_list[i]) < 2) {
+              popup_dialog($S("Your friends in Europe are starting to complain about our lack of support. If they are not appeased soon with increased territory strength, they may do something drastic."));              
+              break;
+            }
+          }
+        }
+      }
+      else if (get_turn() > 1) {
+        if (get_turn() % 2 > 0) {
+          for (i = 0; i < NATO_list.length; i++) {
+            if (get_territory_owner(NATO_list[i]) == "Americans") {
+              if (get_territory_strength(NATO_list[i]) < 2) {
+                if (!ctw_territory_has_army(NATO_list[i]) || get_ctw_int(NATO_list[i]) == 1) {
+                  //defection
+                  ctw_give_territory(NATO_list[i], "Germans", 0);
+                  popup_dialog(parse("$s0 does not feel you have shown their people enough support. They have decided to see what the other side of the Iron Curtain looks like.", NATO_list_loc[i]));
+                  popup_dialog($S("We must make sure our remaining friends in NATO are happy by making sure their territory strength is at least 3 or by stationing an army in their territory."));
+                  //Warsaw_list.insert(NATO_list[i], 0);
+                  //NATO_list.remove_index(i);
+                  break;
+                }
+                else {
+                  popup_dialog(parse("$s0 is unhappy that you have not shown their people much support. The army stationed there is the only thing that has deterred them from defecting. However, if we do not raise their territory strength, the army will not be able to prevent a defection a second time.", NATO_list_loc[i]));
+                  set_ctw_int(NATO_list[i], 1);
+                }
+              }
+              else {
+                safe++;
+              }
+            }
+          }
+        }
+
+      }
+    }
+    if (safe == NATO_list.length) {
+      set_ctw_int("nato_rebuild", 1);
+    }
+    safe = 0;
+    if (nation == "Russians" && get_ctw_int("warsaw_rebuild") < 1) { //Russians
+      ////Warsaw wants 3
+      if (get_turn() == 1) {
+        for (i = 0; i < Warsaw_list.length; i++) {
+          if (get_territory_owner(Warsaw_list[i]) == "Russians") {
+            if (get_territory_strength(Warsaw_list[i]) < 2) {
+              //warning
+              popup_dialog($S("Your friends in Europe are starting to complain about our lack of support. If they are not appeased soon with increased territory strength, they may do something drastic."));
+              break;
+            }
+          }
+        }
+      }
+      else if (get_turn() > 1) {
+        if (get_turn() % 2 == 0) {
+          for (i = 0; i < Warsaw_list.length; i++) {
+            if (get_territory_owner(Warsaw_list[i]) == "Russians") {
+              if (get_territory_strength(Warsaw_list[i]) < 2) {
+                if (!ctw_territory_has_army(Warsaw_list[i]) || get_ctw_int(Warsaw_list[i]) == 1) {
+                  //defection
+                  ctw_give_territory(Warsaw_list[i], "British", 0);
+                  popup_dialog(parse("$s0 does not feel you have shown their people enough support. They have decided to see what the other side of the Iron Curtain looks like.", Warsaw_list_loc[i]));
+                  popup_dialog($S("We must make sure our remaining friends in the Warsaw Pact are happy by making sure their territory strength is at least 3 or by stationing an army in their territory."));
+                  //NATO_list.insert(Warsaw_list[i], 0);
+                  //Warsaw_list.remove_index(i);
+                  break;
+                }
+                else {
+                  popup_dialog(parse("$s0 is unhappy that you have not shown their people much support. The army stationed there is the only thing that has deterred them from defecting. However, if we do not raise their territory strength, the army will not be able to prevent a defection a second time.", Warsaw_list_loc[i]));
+                  set_ctw_int(Warsaw_list[i], 1);
+                }
+              }
+              else {
+                safe++;
+              }
+            }
+          }
+        }
+      }
+    }
+    if (safe == Warsaw_list.length) {
+      set_ctw_int("warsaw_rebuild", 1);
+    }
+  }
+  
+  safe = 0;
+
+  for (i = 0; i < nato_list.length; i++) {
+    if (get_territory_owner(nato_list[i]) == "Americans") {
+      nato_members++;
+      if (get_territory_strength(nato_list[i]) > 1) {
+        safe++;
+      }
+    }
+  }
+  
+  if (safe == nato_members) {
+    set_ctw_int("nato_rebuild", 1);
+  }
+  
+  safe = 0;
+
+  for (i = 0; i < Warsaw_list.length; i++) {
+    if (get_territory_owner(Warsaw_list[i]) == "Russians") {
+      warsaw_members++;
+      if (get_territory_strength(Warsaw_list[i]) > 1) {
+        safe++;
+      }
+    }
+  }
+  
+  if (safe == Warsaw_members) {
+    set_ctw_int("warsaw_rebuild", 1);
+  }
+
+  //SETTING SUB-GOALS
+  //ctw_set_sub_goals
+  int fail;
+  if (ctw_deal_accepted("korean_peace")) {
+    ctw_set_deal_accepted("korean_peace", 0);
+    set_defcon_level(1);
+  }
+  if (ctw_deal_accepted("congo_peace")) {
+    ctw_set_deal_accepted("congo_peace", 0);
+    set_defcon_level(1);
+  }
+  if (get_ctw_int("foreign_aid") == 1) {//foreign aid
+    set_ctw_int("foreign_aid", 2);
+    for (a = 0; a < all_territories.length; a++) {
+      if (get_territory_owner(all_territories[a]) == "Americans") {
+        if (get_territory_strength(all_territories[a]) == 0) {
+          fail = 1;
+          break;
+        }
+      }
+    }
+    if (fail == 0) {
+      popup_dialog($S("In response to our successful efforts to strengthen our territories, we have acquired a Great Thinker Bonus Card."));
+      give_player_bonus_card("Great Thinker");
+    }
+  }
+  if (get_ctw_int("nuke_race") == turn && turn > 0) {//nuke race
+    if (get_total_nukes("Russians") > get_total_nukes("Americans")) {
+      popup_dialog($S("Our people are rejoicing in the streets due to our newfound dominance in Nuclear Missiles. We have received an Economic Boom Bonus Card of every type."));
+      give_player_bonus_card("Food Economic Boom");
+      give_player_bonus_card("Wealth Economic Boom");
+      give_player_bonus_card("Metal Economic Boom");
+      give_player_bonus_card("Timber Economic Boom");
+      give_player_bonus_card("Knowledge Economic Boom");
+    }
+    set_ctw_int("nuke_race", 1);
+  }
+  int strength;
+  if (get_ctw_int("party_money") == turn && turn > 0) {
+    for (z = 0; z < all_territories.length; z++) {
+      if (get_territory_owner(all_territories[z]) == "Russians") {
+        strength += get_territory_strength(all_territories[z]);
+      }
+    }
+    if (strength > get_ctw_int("party_level") + 4) {
+      popup_dialog($S("It appears that the Party will stay afloat for the time being. In thanks for the money, the Party has donated Political Dissidents to be used against the Americans. We have acquired a Political Dissidents Bonus Card."));
+      give_player_bonus_card("Political Dissidents");
+    }
+    else {
+      popup_dialog($S("Unfortunately, we were unable to secure funding for the Party. The unrest caused by this has damaged Western Russia two levels of territory strength."));
+      set_territory_strength("Russia", get_territory_strength("Russia")-2);
+    }
+  }
+        
+  String sub_goal1;
+  String sub_goal2;
+  String temp;
+  int goals;
+  int times_through;
+  int step = get_ctw_seed()%3;
+  int step_length;
+  int temp_num;
+  String africa_list[] = ["Congo", "Egypt", "Western Africa", "Ethiopian Highlands", "South Africa"];
+  String america_list[] = ["Argentina", "Brazil", "Peru", "Colombia", "Central America"];
+
+  if (nation == "Americans") {
+    if (get_ctw_int("nato_rebuild") != 1) {
+      sub_goal1 = $S("Rebuild each territory of NATO to territory strength Level 3, or they may switch allegiance and join the Warsaw Pact. Station an army in a territory that has unrest to quell it for a turn.");
+      goals++;
+    }
+    if (turn == 0) {
+      if (is_free_state("koreans") && get_territory_owner("Eastern Siberia") == "Russians") {
+        temp = $S("The Soviets plan to send troops to South Korea this turn. Preemptively lead UN forces to South Korea to stop the invasion.");
+        if (goals == 0) {
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("Russians", "Korea");
+        } 
+        else if (goals == 1) {
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("Russians", "Korea");
+        }
+      }
+    } 
+    if (turn <= 1) {
+      if (ctw_get_master("Koreans") == "Americans") {
+        if (get_ctw_int("korea_upgrade") != 1) {
+          set_ctw_int("korea_upgrade", 1);
+          set_territory_strength("Korea", get_territory_strength("Korea")+2);
+          popup_dialog($S("South Korea's territory strength has gone up two levels due to the increased defenses installed there during the battle against North Korea."));
+        }
+      }
+    }
+    if (turn <= 2 && goals < 2) {//MIDDLE EAST
+      if (is_free_state("Turks")) {
+        temp = $S("The current government of the Middle East is interested in the rewards of becoming a client state, but they're taking offers from both sides!");
+        if (goals == 0) {
+          if (get_ctw_int("arab_goal_4") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("arab_goal_4", 1);
+          }
+          sub_goal1 = temp;
+          goals++;
+          set_ctw_int("mid_east", 1);
+          set_no_attack("Russians", "Middle East");
+        } 
+        else if (goals == 1) {
+          if (get_ctw_int("arab_goal_4") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("arab_goal_4", 1);
+          } 
+          sub_goal2 = temp;
+          set_ctw_int("mid_east", 1);
+          goals++;
+          set_no_attack("russians", "middle east");
+        }
+      }
+    }
+    if (turn <= 2) {//MIDDLE EAST
+      if (ctw_get_master("Turks") == "Americans" && get_ctw_int("middle_bonus") < 1 && get_ctw_int("mid_east") == 1) {
+        popup_dialog($S("We have successfully stopped the Russians from gaining control of the Middle East. An additional 50 Tribute has been given to us by the local regime. Also, in response to our greater presence in the region, the Soviets have increased Kazakhstan's territory strength by 2."));
+        give_player_ctw_tribute(50);
+        set_territory_strength("Kazakhstan", get_territory_strength("Kazakhstan")+2);
+        set_ctw_int("middle_bonus", 1);
+      }
+    }        
+    if (turn == 3 && goals < 2) {//suez
+      if (is_free_state("Egyptians")) {
+        temp = $S("Rebels in Egypt have sent word that the time to strike is now if we want their help.");
+        if (goals == 0) {
+          popup_dialog(temp);
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("russians", "Egypt");
+        } 
+        else if (goals == 1) {
+          popup_dialog(temp);
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("russians", "Egypt");
+        }
+      }
+    }
+    if (turn == 4 && goals < 2) {//cuba, castro comes to town
+      if (is_free_state("Lakota")) {
+        temp = $S("We need to put down the socialist revolt in Cuba before the Soviets take advantage of it themselves.");
+        if (goals == 0) {
+          popup_dialog(temp);
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("Russians", "Cuba");
+        } 
+        else if (goals == 1) {
+          popup_dialog(temp);
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("russians", "cuba");
+        }
+      }
+    }
+
+    if (turn == 4) {// && goals < 2) {//hungarian revolt
+      if (get_territory_owner("Central Europe") == "Russians") {
+        temp = $S("A revolt has broken out in Central Europe. Their territory strength has fallen. If we were to go there now, we would surely have support from the rebels.");
+        if (goals == 0) {
+          //popup_dialog(temp);
+          sub_goal1 = temp;
+          goals++;
+          temp_num = get_territory_strength("Central Europe") - 2;
+          if (temp_num < 0) {
+            temp_num = 0;
+          }
+          set_territory_strength("Central Europe", temp_num);
+        } 
+        else if (goals == 1) {
+          //popup_dialog(temp);
+          sub_goal2 = temp;
+          goals++;
+          temp_num = get_territory_strength("Central Europe") - 2;
+          if (temp_num < 0) {
+            temp_num = 0;
+          }
+          set_territory_strength("Central Europe", temp_num);
+        }
+      }
+    }
+    if ((turn == 5 || turn == 6) && goals < 2) {//vietnam
+      if (is_free_state("Mongols")) {
+        temp = $S("Southeast Asia is under heavy attack from Communist forces. We will have to send an army there if we wish to keep it from falling into Communist hands.");
+        if (goals == 0) {
+          if (get_ctw_int("vietnam_goal_6") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("vietnam_goal_6", 1);
+          }
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("Russians", "Southeast Asia");
+        } 
+        else if (goals == 1) {
+          if (get_ctw_int("vietnam_goal_6") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("vietnam_goal_6", 1);
+          }
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("Russians", "Southeast Asia");
+        }
+      }
+    }
+    else if (turn == 8) {// && goals < 2) {//czech reforms
+      if (get_territory_owner("Central Europe") == "Russians") {
+        temp = $S("Rebellion has broken out in part of Central Europe, counter to Soviet dogma. If we were to attack there now, we would surely have support from the rebels.");
+        if (goals == 0) {
+          //popup_dialog(temp);
+          sub_goal1 = temp;
+          goals++;
+        } 
+        else if (goals == 1) {
+          //popup_dialog(temp);
+          sub_goal2 = temp;
+          goals++;
+        }
+      }
+    }
+    //else if (turn == 8) {//congo
+      //if (get_territory_owner("Congo") == "Dutch") {
+        //temp = $S("The Soviets are planning a coup in Central Africa.
+    //}
+    if (turn >= 8 && turn <= 9 && goals < 2) {//afghan fighting
+      if (is_free_state("Persian") && get_territory_owner("Kazakhstan") == "Russians") {
+        temp = $S("The Soviets are up to something in Afghanistan. We should make an agreement with the Afghans now, or risk the Soviets moving in soon.");
+        if (goals == 0) {
+          if (get_ctw_int("afghan_goal_9") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("afghan_goal_9", 1);
+          }
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("russians", "Afghanistan");
+        } 
+        else if (goals == 1) {
+          if (get_ctw_int("afghan_goal_9") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("afghan_goal_9", 1);
+          }
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("russians", "Afghanistan");
+        }
+      }
+    }
+    //generic missions
+    step = rand_int(0,2);
+    step_length = 3;
+    while (goals < 2) {//central america
+      if (step > step_length) {
+        step = 0;
+      }
+      switch(step) {
+        case 0:
+          if (get_ctw_int("panama_russians") < 0 && turn > 2) {
+            if (is_free_state("French")) {
+              temp = $S("The Mongolians are close to signing a deal with the Soviets. Now might be our only chance to negotiate our own deal with them.");
+              if (goals == 0) {
+                popup_dialog(temp);
+                sub_goal1 = temp;
+                goals++;
+                set_ctw_int("panama_russians", turn+3);
+                set_no_attack("russians", "Mongolia");
+              } 
+              else if (goals == 1) {
+                popup_dialog(temp);
+                sub_goal2 = temp;
+                goals++;
+                set_ctw_int("panama_russians", turn+3);
+                set_no_attack("russians", "mongolia");
+              }
+            }
+          }
+          break;
+        case 1: 
+          //get_territory_list
+          if (get_ctw_int("foreign_aid") < 1) {
+            for (a = 0; a < all_territories.length; a++) {
+              if (get_territory_owner(all_territories[a]) == "Americans") {
+                if (get_territory_strength(all_territories[a]) == 0) {
+                  temp = $S("Voters at home are complaining of the deplorable state we allow our territories to fall into. We should try to make sure all territories (including your client states) are above territory strength Level 1.");
+                  if (goals == 0) {
+                    popup_dialog(temp);
+                    sub_goal1 = temp;
+                    goals++;
+                    set_ctw_int("foreign_aid", 1);
+                  } 
+                  else if (goals == 1) {
+                    popup_dialog(temp);
+                    sub_goal2 = temp;
+                    goals++;
+                    set_ctw_int("foreign_aid", 1);
+                  }
+                }
+              }
+            }
+          }
+          break;
+        default:
+          if (ctw_is_vassal("Dutch") == 0) {
+            if (ctw_get_master("Bantu") == "Russsians" || ctw_get_master("Nubians") == "Russians" || get_territory_owner("West Africa") == "Russians") {
+              temp = $S("The Congolese are being threatened by the Soviets. We should establish a client state relationship with them so that the Soviets will focus their attention elsewhere.");
+              if (goals == 0) {
+                popup_dialog(temp);
+                sub_goal1 = temp;
+                goals++;
+                set_no_attack("russians", "Congo");
+              } 
+              else if (goals == 1) {
+                popup_dialog(temp);
+                sub_goal2 = temp;
+                goals++;
+                set_no_attack("russians", "Congo");
+              }
+            }
+          }
+          break;
+      }
+      step++;
+      times_through++;
+      if (times_through > step_length) {
+        break;
+      }
+    }
+  }
+  else if (nation == "Russians") {
+    if (get_ctw_int("warsaw_rebuild") != 1) {
+      sub_goal1 = $S("Rebuild each territory of the Warsaw Pact to infrastructure level 3, or they may switch allegiance and join NATO. Station an army in a territory that has unrest to quell it for a turn.");
+      goals++;
+    }
+    if (turn <= 4) {//KOREA
+      if (is_free_state("Turks") && get_territory_owner("Kazakhstan") == "Russians") {
+        temp = $S("The Middle East is located in an area of great strategic importance. If we sent an army there soon we could prevent the Americans from reaching into South Asia for the near future.");
+        if (goals == 0) {
+          if (get_ctw_int("arab_4") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("arab_4", 1);
+          }
+          sub_goal1 = temp;
+          goals++;
+          set_ctw_int("mid_east", 1);
+          set_no_attack("americans", "middle east");
+        }
+        else if (goals == 1) {
+          if (get_ctw_int("arab_4") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("arab_4", 1);
+          }
+          sub_goal2 = temp;
+          goals++;
+          set_ctw_int("mid_east", 1);
+          set_no_attack("americans", "middle east");
+        }
+      }
+    }
+    else if (turn == 3) {
+      if (ctw_get_master("Koreans") == "Americans") {
+        set_territory_strength("Korea", get_territory_strength("Korea")+2);
+      }
+    }
+    if (turn <= 5) {//MIDDLE EAST
+      if (ctw_get_master("Turks") == "Russians" && get_ctw_int("middle_bonus") < 1) {// && get_ctw_int("mid_east") == 1) {
+        popup_dialog($S("We have successfully stopped the Americans from gaining control of the Middle East. An additional 50 Tribute was found by our troops. Also, in response to our greater presence in the region, America has increased Turkey's territory strength by 2."));
+        give_player_ctw_tribute(50);
+        set_territory_strength("Turkey", get_territory_strength("Turkey")+2);
+        set_ctw_int("middle_bonus", 1);
+      }
+    }      
+    if (turn <= 2 && goals < 2) {//KOREA
+      if (is_free_state("Koreans") && get_territory_owner("Japan") == "Americans") {
+        temp = $S("We should send troops South Korea this turn before the Americans sign an agreement with them and build up their territory strength.");
+        if (goals == 0) {
+          if (get_ctw_int("korea_2") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("korea_2", 1);
+          }
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("americans", "korea");
+          
+        } 
+        else if (goals == 1) {
+          if (get_ctw_int("korea_2") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("korea_2", 1);
+          }
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("americans", "Korea");
+         // set_ctw_int("mid_east", 1);
+        }
+      }
+    }
+
+    if (turn == 3 && goals < 2) {
+      if (is_free_state("Egyptians") && ctw_get_master("Turks") == "Russians") {
+        temp = $S("The Americans are up to something in Egypt. We should go there to investigate and while we are at it, put a more friendly regime in control.");
+        if (goals == 0) {
+          popup_dialog(temp);
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("americans", "Egypt");
+        }
+        else if (goals == 1) {
+          popup_dialog(temp);
+          sub_goals2 = temp;
+          goals++;
+          set_no_attack("americans", "Egypt");
+        }
+      }
+    }       
+    if (turn == 4 && goals < 2) {//cuba, castro comes to town
+      if (is_free_state("Lakota")) {
+        temp = $S("The Communists who recently came to power in Cuba should be easy to negotiate with if we try to do so this turn.");
+        if (goals == 0) {
+          popup_dialog(temp);
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("americans", "Cuba");
+        } 
+        else if (goals == 1) {
+          popup_dialog(temp);
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("americans", "cuba");
+        }
+      }
+    }
+    else if (turn == 4 && goals < 2) {//hungarian revolt
+      if (get_territory_owner("Central Europe") == "Russians" && get_territory_owner("scandinavia") == "Americans") {
+        temp_num = get_territory_strength("Central Europe");
+        set_ctw_int("czech", temp_num);
+        set_territory_strength("Central Europe", temp_num-2);
+        popup_dialog($S("A revolt has broken out in Central Europe that has reduced its territory strength by two levels. We should reinforce the territory strength by two levels or the Americans will take advantage of the opportunity."));
+        temp = $S("Reinforce Central Europe with armies and increased territory strength to dissuade the Americans from taking advantage of the revolt.");
+        if (goals == 0) {
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("americans", "Central europe");
+        } 
+        else if (goals == 1) {
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("americans", "central Europe");
+        }
+      }
+    }
+
+    else if ((turn == 5 || turn == 6) && goals < 2) {//vietnam
+      if (is_free_state("Mongols")) {
+        temp = $S("Rumor has it that the Americans will be sending forces to Vietnam soon. If we were to send our forces first though, they would have to stay clear.");
+        if (goals == 0) {
+          if (get_ctw_int("vietnam_6") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("vietnam_6", 1);
+          }
+          sub_goal1 = temp;
+          goals++;
+          set_ctw_int("vietnam", 1);
+          set_no_attack("americans", "Southeast asia");
+        } 
+        else if (goals == 1) {
+          if (get_ctw_int("vietnam_6") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("vietnam_6", 1);
+          }
+          sub_goal2 = temp;
+          goals++;
+          set_ctw_int("vietnam", 1);
+          set_no_attack("americans", "Southeast asia");
+        }
+      }
+    }
+    if (turn >= 6 && turn <= 7 && get_ctw_int("vietnam") == 1) {
+      if (ctw_get_master("Mongols") == "Russians") {
+        set_territory_strength("Australia", get_territory_strength("Australia")-2);
+        popup_dialog($S("Our successful salvation of Southeast Asia has left the Americans without an attack plan for the near future. In addition, Australia's territory strength has dropped by 2 due to the loss of Southeast Asia as a trading partner."));
+        clear_ctw_val("vietnam");
+      }
+    }
+    if (turn >= 6 && turn <= 7 && goals < 2) {
+      if (is_free_state("Bantu") && ctw_get_master("Dutch") == "Russians") {
+        temp = $S("Reports indicate that the Americans will soon sign a deal with the South Africans, and then use Southern Africa as a base from which to attack Central Africa.");
+        if (goals == 0) {
+          if (get_ctw_int("bantu_7") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("bantu_7", 1);
+          }
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("americans", "South africa");
+        }
+        else if (goals == 1) {
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("americans", "South africa");
+        }
+      }
+    }
+    if (turn == 8 && goals < 2) {//czech reforms
+      if (get_territory_owner("Central Europe") == "Russians" && get_territory_owner("scandinavia") == "Americans") {
+        temp_num = get_territory_strength("Central Europe");
+        set_ctw_int("czech", temp_num);
+        set_territory_strength("Central Europe", temp_num-2);
+        popup_dialog($S("Insurgents have knocked down the territory strength of Central Europe by two levels. We will have to quickly restore two levels of strength or the Americans will certainly attack there."));
+        temp = $S("Reinforce Central Europe with armies and territory strength in case the Americans decide to strike the rebel regime.");
+        if (goals == 0) {
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("americans", "Central europe");
+        } 
+        else if (goals == 1) {
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("americans", "Central europe");
+        }
+      }
+    }
+    else if ((turn == 9 || turn == 10)&& goals < 2) {//afghan fighting
+      if (is_free_state("Persian")) {
+        temp = $S("There is word of strife in Afghanistan. We should attack there now, before the Americans take advantage of it themselves.");
+        if (goals == 0) {
+          if (get_ctw_int("afghan_10") != 1) {
+            popup_dialog(temp);
+            set_ctw_int("afghan_10", 1);
+          }
+          sub_goal1 = temp;
+          goals++;
+          set_no_attack("americans", "afghanistan");
+        } 
+        else if (goals == 1) {
+          sub_goal2 = temp;
+          goals++;
+          set_no_attack("americans", "afghanistan");
+        }
+      }
+    }
+    //generic missions
+    step_length = 5;
+    step = rand_int(0,step_length);
+    while (goals < 2) {//central america
+      if (step > step_length) {
+        step = 0;
+      }
+      switch(step) {
+        case 0:
+          if (turn > 4) {
+            if (get_total_nukes("Russians") < get_total_nukes("Americans") && get_ctw_int("nuke_race") < 1) {
+              temp = $S("The people are losing spirit as we fall further behind in the nuclear arms race. If we were to pass the Americans in Nuclear Missiles within three turns the people would rejoice.");
+              if (goals == 0) {
+                popup_dialog(temp);
+                sub_goal1 = temp;
+                goals++;
+                set_ctw_int("nuke_race", turn+3);
+              } 
+              else if (goals == 1) {
+                popup_dialog(temp);
+                sub_goal2 = temp;
+                goals++;
+                set_ctw_int("nuke_race", turn+3);
+              }
+            }
+          }
+          break;
+        case 1: 
+          if (turn > 7) {
+            if (get_ctw_int("party_money") < 1 && turn > 0) {
+              temp = $S("The Communist Party is running short on funds. If we do not capture territories that total 5 territory strength, or build up 5 territory strength elsewhere, we will have to scrap some territory strength in Russia.");
+              if (goals == 0) {
+                sub_goal1 = temp;
+                goals++;
+                set_ctw_int("party_money", turn+2);
+                for (z = 0; z < all_territories.length; z++) {
+                  if (get_territory_owner(all_territories[z]) == "Russians") {
+                    strength += get_territory_strength(all_territories[z]);
+                  }
+                }
+                set_ctw_int("party_level", strength);     
+                popup_dialog(temp);           
+              } 
+              else if (goals == 1) {
+                sub_goal2 = temp;
+                goals++;
+                set_ctw_int("party_money", turn+3);
+                for (z = 0; z < all_territories.length; z++) {
+                  if (get_territory_owner(all_territories[z]) == "Russians") {
+                    strength += get_territory_strength(all_territories[z]);
+                  }
+                }
+                set_ctw_int("party_level", strength);   
+                popup_dialog(temp); 
+              }
+            }
+          }
+          break;
+        case 2:
+          if (get_ctw_int("revolutionaries") < 1 && turn > 7) {
+            if (ctw_is_vassal("Greeks") == 0 && (ctw_get_master("Iroquois") == "Russians" || ctw_get_master("Inca") == "Russians")) {
+              temp = $S("Revolutionaries in Patagonia are asking for our help. If we assist them now, they are willing to lend us their services in later battles.");
+              if (goals == 0) {
+                popup_dialog(temp);
+                sub_goal1 = temp;
+                goals++;
+                set_ctw_int("revolutionaries", turn+1);
+                set_no_attack("americans", "argentina");
+              }
+              else if (goals == 1) {
+                popup_dialog(temp);
+                sub_goal2 = temp;
+                goals++;
+                set_ctw_int("revolutionaries", turn+1);
+                set_no_attack("american", "argentina");
+              }
+            }
+          }
+          break;
+        case 3:
+          if (get_ctw_int("fund") < 1 && get_num_tribute("Russians") >= 50 && survey() == 1 && get_age() == 7) {
+            set_ctw_int("fund", 1);
+            num_tribute = get_num_tribute("Russians");
+            temp_num = popup_choice(parse("Your advisors have come up with a plan to fund Guerrilla Fighters in either South America for 40 Tribute or Africa for 50 Tribute, but not both (we have $NUM0 Tribute). They would lower the territory strength level in every country on the continent by one.", num_tribute), $S("Africa"), $S("S. America"), $S("Neither"));
+            if (temp_num == 0) {
+              popup_dialog($S("Territory strength has dropped by one all over Africa."));
+              goals++;
+              for (s = 0; s < africa_list.length; s++) {
+                temp_num = get_territory_strength(africa_list[s]) - 1;
+                if (temp_num > - 1) {
+                  set_territory_strength(africa_list[s], temp_num);
+                }
+              }
+            }
+            else if (temp_num == 1) {
+              goals++;
+              popup_dialog($S("Territory strength has dropped by one all over South America."));
+              for (s = 0; s < america_list.length; s++) {
+                temp_num = get_territory_strength(america_list[s]) - 1;
+                if (temp_num > - 1) {
+                  set_territory_strength(america_list[s], temp_num);
+                }
+              }
+            }
+          }
+          break;
+        default:
+          if (get_ctw_int("panama_russians") < 0 && turn > 6) {        
+            if (is_free_state("Maya")) {
+              temp = $S("The Panamanians are close to signing a deal with the Americans. We should attack there within the next two turns if we want to prevent this deal from happening.");
+              if (goals == 0) {
+                popup_dialog(temp);
+                sub_goal1 = temp;
+                goals++;
+                set_ctw_int("panama_russians", turn+3);
+                set_no_attack("americans", "central america");
+              } 
+              else if (goals == 1) {
+                popup_dialog(temp);
+                sub_goal2 = temp;
+                goals++;
+                set_ctw_int("panama_russians", turn+3);
+                set_no_attack("americans", "central america");
+              }
+            }
+          }
+          break;
+      }
+      step++;
+      times_through++;
+      if (times_through > step_length) {
+        break;
+      }
+    }
+  }     
+
+  if (sub_goal1 == "") {
+    sub_goal1 = $S("Expand your influence.");
+  }
+
+  ctw_set_sub_goals(sub_goal1, sub_goal2);
+
+  if (get_ctw_int("revolutionaries") == turn) {
+    set_ctw_int("revolutionaries", 1);
+    if (get_territory_owner("Argentina") == "Russians") {
+      popup_dialog($S("In gratitude for our help, the revolutionaries have provided us with two contingents of Mercenaries. We have acquired two Mercenaries Bonus Cards."));
+      give_player_bonus_card("Mercenaries");
+      give_player_bonus_card("Mercenaries");
+    }
+  }
+    
+  //problems in Central Europe
+  if (get_territory_owner("Central Europe") != "Americans" && nation == "Americans") {
+    if (turn == 4) {
+      popup_dialog($S("The Hungarians are staging a revolt in Central Europe. If we were to attack there now, we could count on their support in the battle."));
+      set_ctw_int("revolt", 1);
+    }
+    if (turn == 6) {
+      //popup_dialog($S("The Hungarian revolt has been suppressed. We will no longer be able to count on their support in Central Europe."));
+      set_ctw_int("revolt", 2);
+    }
+    if (turn == 8) {
+      popup_dialog($S("Czechoslovakia has rebelled from the Warsaw Pact. Facing increasing pressure, they are asking for our help in Central Europe. If we attack there now, we can count on their support in the battle."));
+      set_ctw_int("revolt", 3);
+    }
+    if (turn == 10) {
+      //popup_dialog($S("Czechoslovakia's reforms have been overturned. We will no longer be able to count on their support in Central Europe."));
+      set_ctw_int("revolt", 4);
+    }
+  }
+
+  
+  String nuke_list[];
+  String nuke_list2[];
+  String terr_list[] = ["Mid-Atlantic", "Gulf Coast", "Midwest", "Pacific Rockies", "Alaska", "Canada", "British Isles", "France", "Scandinavia", "Italy", "West Europe", "Turkey", "Spain", "Australia", "Greenland", "Greece", "Central Europe", "Balkans", "Finland", "West Central Europe", "Russia", "Kazakhstan", "Ukraine", "Western Siberia", "Eastern Siberia", "Karelia"];
+  //DISARMAMENT TALKS
+  int am_nukes = 2;
+  int ru_nukes = 2;
+  int step_num;
+  String nation_name;
+  if (nation == "Americans") {
+    nation_name = $S("The Soviets");
+  }
+  else {
+    nation_name = $S("The Americans");
+  }
+  if (turn == 7 && ctw_is_peace("Americans", "Russians")) {
+    if (get_total_nukes("Russians") > 1 && get_total_nukes("Americans") > 1) {
+      if (popup_choice(parse("$STRING0 have approached us to talk about disarmament. They are willing to destroy two of their Nuclear Missiles if we are willing to do the same. Doing this will lesson the chance of nuclear armageddon.", nation_name), $S("Yes"), $S("No"))) {
+        popup_dialog($S("Excellent, we are glad that we could agree upon this matter of worldwide importance."));
+        ctw_territory_list("Americans", nuke_list2, 1);
+        ctw_territory_list("Russians", nuke_list, 1);
+        for (t = 0; t < nuke_list2.length; t++) {
+          if (get_territory_owner(nuke_list2[t]) == "Americans") {
+            if (get_num_nukes(nuke_list2[t]) > 0) {
+              ctw_remove_nuke(nuke_list2[t]);
+              t--;
+              am_nukes--;
+            }
+          }
+          if (am_nukes == 0) {
+            break;
+          }
+        }
+        for (t = 0; t < nuke_list.length; t++) {
+          if (get_territory_owner(nuke_list[t]) == "Russians") {
+            if (get_num_nukes(nuke_list[t]) > 0) {
+              ctw_remove_nuke(nuke_list[t]);
+              t--;
+              ru_nukes--;
+            }
+          }
+          if (ru_nukes == 0) {
+            break;
+          }
+        }
+      }
+      else {
+        popup_dialog($S("Very well, but you might feel foolish in a few turns when we have nuclear weapons aimed at your capital."));
+      }
+    }
+  }
+
+
+  if (get_ctw_int("been_nuked") < 1) {
+    for (n = 0; n < terr_list.length; n++) {
+      if (get_territory_owner(terr_list[n]) == "") {
+        set_ctw_int("been_nuked", 1);
+      }
+    }
+  }
+  else if (get_ctw_int("been_nuked") == 1) {
+    set_ctw_int("been_nuked", 2);
+    if (popup_choice(parse("$STRING0 are sending word that they wish to end the spiral of nuclear war that we have begun before it is too late. They propose that we both agree to build no more nuclear weapons and destroy the ones we currently have.", nation_name), $S("Yes"), $S("No"))) {
+      popup_dialog($S("Neither side will threaten the world with nuclear annihilation any longer!"));
+      ctw_disable_nuke_building();
+      ctw_territory_list("Russians", nuke_list, 1);
+      while (get_total_nukes("Russians") > 0) {
+        for (z = 0; z < nuke_list.length; z++) {
+          while (get_num_nukes(nuke_list[z]) > 0) {
+            ctw_remove_nuke(nuke_list[z]);
+          }
+        }
+      }
+      ctw_territory_list("Americans", nuke_list2, 1);
+      while (get_total_nukes("Americans") > 0) {
+        for (z = 0; z < nuke_list2.length; z++) {
+          while (get_num_nukes(nuke_list2[z]) > 0) {
+            ctw_remove_nuke(nuke_list2[z]);
+          }
+        }
+      }
+    }
+    else {
+      popup_dialog(parse("$STRING0 are disappointed with our choice, but they understand our fear of defeat. They warn us to not expect them to stop building nuclear weapons either.", nation_name));
+    }
+  }
+  
+  //canada and australia don't want to go down with NATO
+  String who_involved;
+  int switch_sides = false;
+  String who2;
+  if (get_ctw_int("france") == 0 && get_territory_owner("France") == "Russians") {
+    if (get_territory_owner("Canada") == "Russians" && get_ctw_int("maple_leaf") < 1) {
+      if (get_territory_owner("Australia") == "Russians" && get_ctw_int("kangaroo") < 1) {
+        who_involved = $S("Canada and Australia refuse");
+        ctw_give_territory("Canada", "Americans", 0);
+        ctw_give_territory("Australia", "Americans", 0);
+        who2 = $S("have");
+        switch_sides = true;
+      }
+      else {
+        who_involved = $S("Canada refuses");
+        ctw_give_territory("Canada", "Americans", 0);
+        who2 = $S("has");
+        switch_sides = true;
+      }
+    }
+    else if (get_territory_owner("Australia") == "Russians" && get_ctw_int("kangaroo") < 1) {
+      who_involved = $S("Australia refuses");
+      who2 = $S("has");
+      ctw_give_territory("Australia", "Americans", 0);
+      switch_sides = true;
+    }
+    if (switch_sides == true) {
+      popup_dialog(parse("$STRING0 to submit to the Soviets and $STRING1 joined the United States rather than be absorbed by the Soviet with the rest of NATO!", who_involved, who2));
+    }
+    set_ctw_int("france", 1);
+  }
+
+  if (get_ctw_int("france") < 1) {
+    if (get_ctw_int("maple_leaf") < 1 && get_territory_owner("Canada") == "Russians") {
+      set_ctw_int("maple_leaf", 1);
+    }
+    if (get_ctw_int("kangaroo") < 1 && get_territory_owner("Australia") == "Russians") {
+      set_ctw_int("kangaroo", 1);
+    }
+  }
+
+  //Victory Conditions
+  //int your_industry_total = get_nation_income(nation);
+  //int their_industry_total = get_nation_income(other_nation);
+
+  //if (your_industry_total-their_industry_total >= 50) {
+  //  if (nation == "Americans") {
+  //    ctw_game_over(true, $S("Industrial Victory"), $S("Trickle-down? Voodoo? Who cares? Your booming economy has driven the Soviet Union into collapse! Their centralized system was no match for massive defense spending and American ingenuity. You've melted away the daily terror of cold war over the fires of industry!"));
+  //  }
+  //  else {
+  //    ctw_game_over(true, $S("Industrial Victory"), $S("The superior brawn of the proletariat has forced the American economy into collapse! The immoral capitalists believed that their bourgeois elite could outproduce the comrades of the Soviet Union, but with this victory we have proven that selfless dedication to the socialist path can overcome all obstacles!"));
+  //  }
+  //}
+  //else if (their_industry_total-your_industry_total >= 50) {
+  //  if (nation == "Americans") {
+  //    ctw_game_over(false, $S("Industrial Defeat"), $S("Trickle-down? Voodoo? It does not matter, because it did not work. Your failing economy has collapsed! The Soviets' centralized system has outlasted our massive defense spending. The daily terror of cold war has ended with our economic defeat!"));
+  //  }
+  //  else {
+  //    ctw_game_over(false, $S("Industrial Defeat"), $S("The economy of the United States has far outpaced our own! There is no hope of catching up with them. Our satellite nations have lost their faith in the socialist economy and have broken off ties with us. The Soviet Union is at an end!"));
+  //  }
+  //}
+  //else if (their_industry_total-your_industry_total >= 40) {
+  //  if (nation == "Americans") {
+  //    popup_dialog($S("The Soviet economy is growing rapidly! If we do not do something to match them, we will surely lose the Cold War."));
+  //  }
+  //  else {
+  //    popup_dialog($S("The American economy is growing rapidly! If we do not do something to match them, we will surely lose the Cold War."));
+  //  }
+  //}
+
+  ////defeat soviets/americans
+  if (nation == "Americans" && ctw_is_defeated("Russians")) {
+    ctw_game_over(true, $S("Total Victory"), $S("Through skillful planning, diplomacy, and relentless military pressure, you have defeated the Soviet Union! Avoiding a nuclear holocaust, you managed to strike into the heart of the Soviet empire and let the world know that no nation will stand in the way of freedom!"));
+  } else if (nation == "Russians" && ctw_is_defeated("Americans")) {
+    ctw_game_over(true, $S("Total Victory"), $S("No true comrade ever doubted that the struggle between bourgeois American imperialists and the noble proletariat would end in any other way. Our brave soldiers have marched to Washington and permanently ended the tiresome grunting of the capitalist pigs."));
+  }
+  //majority of world on your side
+  /*if (get_turn() == ctw_get_num_campaign_turns()-1) {
+    if (get_num_territories(nation) >= 25) {
+      if (nation == "Americans") {
+        ctw_game_over(true, $S("Marginal Victory"), $S("You have succeeded in bringing the freedom of Capitalism to much of the world, however, Communism is still lurking in the shadows. The task of ridding the world of its taint forever will now fall to future leaders."));
+      }
+      if (nation == "Americans") {
+        ctw_game_over(true, $S("Marginal Victory"), $S("You have successfully spread the brotherhood of Socialism to much of the world, however, the Capitalists still lie in waiting for the opportunity to pounce on an unsuspecting populace. Be ever vigilant, comrades!"));
+      }
+    }
+    else {
+      if (nation == "Americans") {
+        ctw_game_over(false, $S("Defeat"), $S("It is a sad day for the free world. The influence of the Soviets surpasses your own. Maybe someday the virtues of freedom and democracy will become apparant to the rest of the world, but for now you will have to struggle alone."));
+      }
+      if (nation == "Russians") {
+        ctw_game_over(false, $S("Defeat"), $S("Comrades, we have been defeated. The influence of the Americans surpasses our own. The seductive pull of frivolous luxury has spread around the globe and corrupted the pure lives of the proletariat."));
+      }
+    }
+  }*/
+
+  if (nation == "Americans") {
+    if (get_num_territories("Americans") > 3 * get_num_territories("Russians")) {
+      set_defcon_level(get_defcon_level()+1);
+    }
+  }
+  else {
+    if (get_num_territories("Russians") > 3 * get_num_territories("Americans")) {
+      set_defcon_level(get_defcon_level()+1);
+    }
+  }
+
+  if (ctw_deal_accepted("HOTLINE")) {
+    set_defcon_level(2);
+    ctw_set_deal_accepted("HOTLINE", -1);
+  }
+}
+
+String[] conquest get_territory_list (String name)
+{
+
+  String territory_list[];
+
+  if (name == "Americans") {
+    territory_list = ["Alaska", "Mid-Atlantic", "Pacific Rockies", "Midwest", "Gulf Coast"];
+  }
+  else {
+    territory_list = ["Ukraine", "Moscow", "Karelia", "Eastern Siberia", "Western Siberia", "Kazakhistan", "Mongolia"];
+  }
+
+  return territory_list;
+  
+}
+
+int conquest survey()
+{
+
+  String sa_list[] = ["Colombia", "Brazil", "Peru", "Argentina"];
+  String af_list[] = ["Congo", "South Africa", "Ethiopian Highlands", "Egypt", "Western Africa"];
+
+  for (i = 0; i < sa_list.length; i++) {
+    if (get_country_owner(sa_list[i]) == "Americans") {
+      return 1;
+    }
+  }
+
+  for (i = 0; i < af_list.length; i++) {
+    if (get_country_owner(af_list[i]) == "Americans") {
+      return 1;
+    }
+  }
+
+  String sa_tribes[] = ["Spanish", "Iroquis", "Inca", "Greeks"];
+  String af_tribes[] = ["Dutch", "Bantu", "Nubians", "Egyptians", "French"];
+
+  for (i = 0; i < sa_tribes.length; i++) {
+    if (ctw_get_master(sa_tribes[i]) == "Americans") {
+      return 1;
+    }
+  }
+
+  for (i = 0; i < af_tribes.length; i++) {
+    if (ctw_get_master(af_tribes[i]) == "Americans") {
+      return 1;
+    }
+  }
+
+  return 0;
+
+}
+
+int conquest is_free_state(String tribe)
+{
+
+  if (ctw_get_master(tribe) == "Russians") {
+    return 0;
+  }
+  else if (ctw_get_master(tribe) == "Americans") {
+    return 0;
+  }
+
+  else return 1;
+
+}
+

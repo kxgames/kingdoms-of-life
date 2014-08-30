@@ -1,0 +1,6 @@
+int conquest battlebonus {
+  start = num_units_built(1);
+  end = num_unit_category(1, "");
+
+  return end * 250 / start;
+}

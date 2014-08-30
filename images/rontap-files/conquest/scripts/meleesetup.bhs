@@ -1,0 +1,33 @@
+conquest
+{
+  labels  {
+    PLAYER,
+    BARBARIAN1,
+    BARBARIAN2,
+    BARBARIAN3,
+  }
+
+  static int amount;
+  static int diff = get_difficulty();
+
+  if (diff < 3) {
+    amount = 400;
+    amount2 = 200;
+  }
+  else if (diff > 2 && diff < 5) {
+    amount = 300;
+    amount2 = 150;
+  }
+  else {
+    amount = 0;
+    amount2 = 0;
+  }
+
+  give_good(PLAYER, "Food", amount);
+  give_good(PLAYER, "Timber", amount);
+  give_good(PLAYER, "Wealth", amount2);
+  give_good(PLAYER, "Metal", amount2);
+  give_good(PLAYER, "Knowledge", amount2);
+  give_good(PLAYER, "Oil", amount2);
+
+}

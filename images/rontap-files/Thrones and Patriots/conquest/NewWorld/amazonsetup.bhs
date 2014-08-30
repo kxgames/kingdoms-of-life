@@ -1,0 +1,166 @@
+   include "ctw_lib.bhs"
+
+       conquest
+{
+new_world_rules();
+new_world_setup();
+
+labels {
+}
+  diff = get_difficulty();
+  infrastructure = get_attack_terr_str();
+  x = 0;
+  y = 0;
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+  
+  force_transport_ability(1);
+
+  set_time_limit(90);
+
+  disable_city_ai(2);
+
+  if (get_attack_from() == "Brazil") {
+    x = 312;
+    y = 65;
+  }
+  else if (get_attack_from() == "Central Basin") {
+    x = 311;
+    y = 221;
+  }
+  else if (get_attack_from() == "Bolivia") {
+    x = 29;
+    y = 306;
+  }
+  else if (get_attack_from() == "Peru") {
+    x = 10;
+    y = 212;
+  }
+  else if (get_attack_from() == "New Granada") {
+    x = 9;
+    y = 83;
+  }
+  else if (get_attack_from() == "Venezuela") {
+    x = 91;
+    y = 5;
+  }
+  else {
+    x = 260;
+    y = 7;
+  }
+
+  create_unit_upgrade(1, x, y, "Javelineers", 2);
+  if (find_nation(1) == "Nubians") {
+    create_unit_upgrade(1, x, y, "Bandeirantes", 1);
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Pikemen", 1);
+  }
+  create_unit_upgrade(1, x, y, "Archers", 1);
+  create_unit_upgrade(1, x, y, "Light Cavalry", 3);
+  create_unit_upgrade(1, x, y, "Explorer", 2);
+  create_unit_upgrade(1, x, y, "General", 1);
+  create_unit_upgrade(1, x, y, "Citizen", 5);
+  create_unit_upgrade(1, x, y, "Bark", 2);
+
+  if (find_nation(1) == "Nubians" || find_nation(1) == "British" || find_nation(1) == "Dutch" || find_nation(1) == "French" || find_nation(1) == "Spanish" || find_nation(1) == "Americans") {
+    create_unit_upgrade(1, x, y, "Knight", 3);
+    if (find_nation(1) == "Spanish") {
+      create_unit_upgrade(1, x, y, "Conquistador", 3);
+    }
+    else if (find_nation(1) == "Nubians") {
+      if (get_age() == 3) {
+        unit = create_unit(1, x, y, "Dragoon", 3);
+        add_to_group(1, unit);
+      }
+      else {
+        unit = create_unit(1, x, y, "Carabineer", 3);
+        add_to_group(1, unit);
+      }
+    }
+    else {
+      create_unit_upgrade(1, x, y, "Horse Archer", 3);
+    }
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+  }
+
+  //get the proper angle
+  dir = get_conquest_invasion_dir();
+  dir = dir + 180;
+  if (dir >= 360) {
+    dir = dir - 360;
+  }
+  group_jump_move(1, x, y, dir);
+
+  create_unit_upgrade(1, 228, 20, "Explorer", 1);
+  create_unit_upgrade(1, 46, 36, "Explorer", 1);
+  create_unit_upgrade(1, 74, 215, "Explorer", 1);
+
+  city_id = find_city_id("Gurupa");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  create_unit_upgrade(2, x, y, "Javelineers", diff);
+  create_unit_upgrade(2, x, y, "Archers", diff);
+  create_unit_upgrade(2, x, y, "Scout", 2);
+  create_unit_upgrade(2, x, y, "General", 1);
+
+  if (diff > 2) {
+    if (infrastructure < 3) {
+      place_building_upgrade(2, "Tower", "Amazonia");
+      place_building_upgrade(2, "Tower", "Belem");
+      place_building_upgrade(2, "Tower", "El Dorado");
+    }
+    else if (infrastructure < 7) {
+      place_building_upgrade(2, "Tower", "Amazonia");
+      place_building_upgrade(2, "Tower", "Amazonia");
+      place_building_upgrade(2, "Barracks", "Amazonia");
+      place_building_upgrade(2, "Tower", "Belem");
+      place_building_upgrade(2, "Tower", "Gurupa");
+      place_building_upgrade(2, "Tower", "Macapa");
+      place_building_upgrade(2, "Tower", "Para");
+      place_building_upgrade(2, "Tower", "El Dorado");
+      place_building_upgrade(2, "Tower", "El Dorado");
+      place_building_upgrade(2, "Tower", "Manaus");
+      place_building_upgrade(2, "Tower", "Amazonas");
+      place_building_upgrade(2, "Tower", "Tabatinga");
+    }
+    else {
+      place_building_upgrade(2, "Tower", "Amazonia");
+      place_building_upgrade(2, "Tower", "Amazonia");
+      place_building_upgrade(2, "Barracks", "Amazonia");
+      place_building_upgrade(2, "Tower", "Belem");
+      place_building_upgrade(2, "Tower", "Gurupa");
+      place_building_upgrade(2, "Tower", "Gurupa");
+      place_building_upgrade(2, "Tower", "Macapa");
+      place_building_upgrade(2, "Tower", "Para");
+      place_building_upgrade(2, "Tower", "El Dorado");
+      place_building_upgrade(2, "Fort", "El Dorado");
+      place_building_upgrade(2, "Tower", "Manaus");
+      place_building_upgrade(2, "Tower", "Amazonas");
+      place_building_upgrade(2, "Tower", "Tabatinga");
+    }
+  }
+
+  set_good(1, "Food", 750);
+  set_good(1, "Timber", 750);
+  set_good(1, "Metal", 750);
+  set_good(1, "Wealth", 750);
+
+  set_good(2, "Food", 0);
+  set_good(2, "Timber", 0);
+  set_good(2, "Metal", 0);
+  set_good(2, "Wealth", 0);
+
+  gain_tech(1, "Military");
+  gain_tech(1, "Civic");
+  gain_tech(1, "Commerce");
+  gain_tech(1, "Science");
+
+  disable_building_attrition(2);
+}
+

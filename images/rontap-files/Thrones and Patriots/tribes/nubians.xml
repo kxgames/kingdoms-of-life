@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Nubians">
+  <LEADERS>
+    <LEADER>King Piankhy</LEADER>
+    <LEADER>King Shabaka</LEADER>
+    <LEADER>Queen Amanishakhete</LEADER>
+    <LEADER>King Taharka</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Napata</CITY>
+    <CITY>Axum</CITY>
+    <CITY>Meroe</CITY>
+    <CITY>Gebel Barkal</CITY>
+    <CITY>Adulis</CITY>
+    <CITY>Dongola</CITY>
+    <CITY>Coloe</CITY>
+    <CITY>Berenice</CITY>
+    <CITY>Senna</CITY>
+    <CITY>Soba</CITY>
+    <CITY>Yeha</CITY>
+    <CITY>Malao</CITY>
+    <CITY>Matara</CITY>
+    <CITY>Lalibela</CITY>
+    <CITY>Harar</CITY>
+    <CITY>Zeila</CITY>
+    <CITY>Nuri</CITY>
+    <CITY>Kawa</CITY>
+    <CITY>Avalites</CITY>
+    <CITY>Malab</CITY>
+    <CITY>Mundus</CITY>
+    <CITY>Aromaton Emporion</CITY>
+    <CITY>Nikon</CITY>
+    <CITY>Opone</CITY>
+    <CITY>Mosyllon</CITY>
+    <CITY>Sarapion</CITY>
+    <CITY>Kadero</CITY>
+    <CITY>Jebel Moya</CITY>
+    <CITY>Aidhab</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>1 Arab    </UNIT_CONTINENT>
+  <BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

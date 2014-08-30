@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v5 U (http://www.xmlspy.com) by Ilya Kreymer (private) -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION: All STRING elements.-->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<ROOT>
+  <STRING hash="1225602">Votre général a été tué ! Votre armée se désintégrera dans $NUM0 secondes</STRING>
+  <STRING hash="1345524">Vous avez tué le général ennemi ! Leur armée se désintégrera dans $NUM0 secondes</STRING>
+  <STRING hash="740506">Délai avant l'effondrement de votre armée : $NUM0 secondes</STRING>
+  <STRING hash="768556">Délai avant l'effondrement de leur armée : $NUM0 secondes</STRING>
+  <STRING hash="2527185">Vous avez tué le général ennemi. Vos troupes se sont ralliées à l'écoute de la nouvelle et continueront à se battre... finissez-les !</STRING>
+  <STRING hash="2737084">L'ennemi a tué votre général. Leurs troupes se sont ralliées et les armées sont désormais sur un pied d'égalité. C'est un combat pour la victoire.</STRING>
+</ROOT>

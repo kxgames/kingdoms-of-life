@@ -1,0 +1,205 @@
+       include "ctw_lib.bhs"
+
+void conquest Destroy_City(String city_name);
+
+        conquest
+{
+coldwar_rules();
+
+labels {
+}
+  diff = get_difficulty();
+  infrastructure = get_attack_terr_str();
+  x = 0;
+  y = 0;
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  set_time_limit(90); 
+
+  if (get_attack_from() == "Afghanistan") {
+    x = 12;
+    y = 78;
+  }
+  else { //China, Southeast Asia
+    x = 284;
+    y = 7;
+  }
+
+  create_building_upgrade(1, x, y, "Redoubt");
+  create_building_upgrade(1, x+5, y, "Barracks");
+  create_building_upgrade(1, x, y+5, "Stable");
+  create_building_upgrade(1, x+5, y+5, "Siege Factory");
+  create_building_upgrade(1, x-5, y, "Airbase");
+  x += 7;
+  y += 7;
+
+  create_unit_upgrade(1, x, y, "Infantry", 4);
+  create_unit_upgrade(1, x, y, "Pikemen", 3);
+  create_unit_upgrade(1, x, y, "Armored Car", 4);
+  create_unit_upgrade(1, x, y, "Tank", 5);
+  create_unit_upgrade(1, x, y, "Explorer", 2);
+  create_unit_upgrade(1, x, y, "Howitzer", 3);
+  create_unit_upgrade(1, x, y, "General", 1);
+  create_unit_upgrade(1, x, y, "Citizen", 5);
+  create_unit_upgrade(1, x, y, "Helicopter", 3);
+  create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+
+  //get the proper angle
+  dir = get_conquest_invasion_dir();
+  dir = dir + 180;
+  if (dir >= 360) {
+    dir = dir - 360;
+  }
+  group_jump_move(1, x, y, dir);
+
+  jump_camera(x, y);
+
+  city_id = find_city_id("New Delhi");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  create_unit_upgrade(2, x, y, "Infantry", diff);
+  create_unit_upgrade(2, x, y, "Tank", diff);
+  create_unit_upgrade(2, x, y, "Light Cavalry", diff);
+  create_unit_upgrade(2, x, y, "Supply Wagon", 1);
+  create_unit_upgrade(2, x, y, "Artillery", 2);
+  create_unit_upgrade(2, x, y, "Scout", 2);
+  create_unit_upgrade(2, x, y, "General", 1);
+
+  if (diff > 2) {
+    if (infrastructure < 3) {
+      place_building_upgrade(2, "Tower", "New Delhi");
+      place_building_upgrade(2, "Radar Air Defense", "New Delhi");
+      place_building_upgrade(2, "Radar Air Defense", "New Delhi");
+      place_building_upgrade(2, "Radar Air Defense", "New Delhi");
+      place_building_upgrade(2, "Tower", "Madras");
+      place_building_upgrade(2, "Radar Air Defense", "Madras");
+      place_building_upgrade(2, "Radar Air Defense", "Madras");
+      place_building_upgrade(2, "Radar Air Defense", "Madras");
+      place_building_upgrade(2, "Tower", "Rajasthan");
+      place_building_upgrade(2, "Tower", "Kolkata");
+    }
+    else if (infrastructure < 7) {
+      place_building_upgrade(2, "Tower", "New Delhi");
+      place_building_upgrade(2, "Tower", "New Delhi");
+      place_building_upgrade(2, "Radar Air Defense", "New Delhi");
+      place_building_upgrade(2, "Radar Air Defense", "New Delhi");
+      place_building_upgrade(2, "Radar Air Defense", "New Delhi");
+      place_building_upgrade(2, "Tower", "Madras");
+      place_building_upgrade(2, "Tower", "Madras");
+      place_building_upgrade(2, "Tower", "Rajasthan");
+      place_building_upgrade(2, "Tower", "Rajasthan");
+      place_building_upgrade(2, "Tower", "Kolkata");
+      place_building_upgrade(2, "Tower", "Mumbai");
+      place_building_upgrade(2, "Tower", "Vishakhapatnam");
+    }
+    else {
+      place_building_upgrade(2, "Tower", "New Delhi");
+      place_building_upgrade(2, "Tower", "New Delhi");
+      place_building_upgrade(2, "Barracks", "New Delhi");
+      place_building_upgrade(2, "Stable", "New Delhi");
+      place_building_upgrade(2, "Radar Air Defense", "New Delhi");
+      place_building_upgrade(2, "Radar Air Defense", "New Delhi");
+      place_building_upgrade(2, "Radar Air Defense", "New Delhi");
+      place_building_upgrade(2, "Tower", "Madras");
+      place_building_upgrade(2, "Tower", "Madras");
+      place_building_upgrade(2, "Redoubt", "Madras");
+      place_building_upgrade(2, "Radar Air Defense", "Madras");
+      place_building_upgrade(2, "Radar Air Defense", "Madras");
+      place_building_upgrade(2, "Radar Air Defense", "Madras");
+      place_building_upgrade(2, "Tower", "Rajasthan");
+      place_building_upgrade(2, "Tower", "Rajasthan");
+      place_building_upgrade(2, "Redoubt", "Rajasthan");
+      place_building_upgrade(2, "Radar Air Defense", "Rajasthan");
+      place_building_upgrade(2, "Radar Air Defense", "Rajasthan");
+      place_building_upgrade(2, "Radar Air Defense", "Rajasthan");
+      place_building_upgrade(2, "Tower", "Kolkata");
+      place_building_upgrade(2, "Tower", "Mumbai");
+      place_building_upgrade(2, "Redoubt", "Mumbai");
+      place_building_upgrade(2, "Radar Air Defense", "Mumbai");
+      place_building_upgrade(2, "Radar Air Defense", "Mumbai");
+      place_building_upgrade(2, "Radar Air Defense", "Mumbai");
+      place_building_upgrade(2, "Tower", "Vishakhapatnam");
+    }
+  }
+
+  set_good(1, "Food", 1000);
+  set_good(1, "Timber", 1000);
+  set_good(1, "Metal", 1000);
+  set_good(1, "Wealth", 1000);
+  set_good(1, "Oil", 1000);
+  
+  unit_id = find_unit(3, "Supply Wagon");
+  x = object_position_x(3, unit_id);
+  y = object_position_y(3, unit_id);
+  create_unit_upgrade(3, x, y, "Citizen", 5);
+  
+  unit_id = find_unit(4, "Supply Wagon");
+  x = object_position_x(4, unit_id);
+  y = object_position_y(4, unit_id);
+  create_unit_upgrade(4, x, y, "Citizen", 5);
+
+  gain_tech(1, "Military");
+  gain_tech(2, "Military");
+
+
+  if (infrastructure < 3) {
+    Destroy_City("Kaiga");
+    Destroy_City("Rajasthan");
+    Destroy_City("Vishakhapatnam");
+    Destroy_City("Kolkata");
+    
+    build_id = find_build_at_city(2, "New Delhi", "University", 1);
+    destroy_building(2, build_id);
+    build_id = find_build_at_city(2, "New Delhi", "Market", 1);
+    destroy_building(2, build_id);
+
+    build_id = find_build_at_city(2, "Madras", "Temple", 1);
+    destroy_building(2, build_id);
+    build_id = find_build_at_city(2, "Madras", "University", 1);
+    destroy_building(2, build_id);
+  }
+  else if (infrastructure < 7) {
+    Destroy_City("Kaiga");
+    Destroy_City("Rajasthan");
+    build_id = find_build_at_city(2, "New Delhi", "University", 1);
+    destroy_building(2, build_id);
+    build_id = find_build_at_city(2, "New Delhi", "Market", 1);
+    destroy_building(2, build_id);
+
+    build_id = find_build_at_city(2, "Madras", "Temple", 1);
+    destroy_building(2, build_id);
+    build_id = find_build_at_city(2, "Madras", "University", 1);
+    destroy_building(2, build_id);
+
+    build_id = find_build_at_city(2, "Kolkata", "University", 1);
+    destroy_building(2, build_id);
+    build_id = find_build_at_city(2, "Kolkata", "Temple", 1);
+    destroy_building(2, build_id);
+
+    build_id = find_build_at_city(2, "Vishakhapatnam", "Granary", 1);
+    destroy_building(2, build_id);
+  }
+}
+
+
+void conquest Destroy_City(String city_name) {
+  farm_id = -1;
+  do {
+    farm_id = find_build_at_city(2, city_name, "Farm", 1);
+    destroy_building(2, farm_id);
+  } while(farm_id > -1);
+
+  city_id = find_city_id(city_name);
+
+  build_id = find_build_at_city(2, city_name, "", 1);
+  build_id = find_build_at_city(2, city_name, "", 1); //because the first call gets the city id
+  do {
+    destroy_building(2, build_id);
+    build_id = find_build_at_city(2, city_name, "", 1);
+  }while(build_id > -1);
+  destroy_building(2, city_id);
+}

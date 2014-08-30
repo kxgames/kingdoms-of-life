@@ -1,0 +1,114 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+
+  int map_size = get_map_size();
+
+  int diff = get_difficulty();
+
+  int amount = diff * 25;
+
+  //Alexander
+  static int alexander = find_unit(1, "Alexander");
+
+  //get nation numbers
+  static int macedonians = 1;
+  static int athens = 5;
+  static int sparta = 3;
+  static int thebes = 4;
+  static int thessaly = 2;
+
+  int nation;
+
+  gain_tech(sparta, "Allegiance");
+  gain_tech(macedonians, "Military");
+
+  for (nation = 3; nation < 9; nation++) {
+    diplomacy_set_wait(nation);
+    set_leader_difficulty(nation, diff);
+    if (diff == 1) set_population_cap(nation, 50);
+    else if (diff == 2) set_population_cap(nation, 75);
+    else if (diff == 3) set_population_cap(nation, 100);
+    else if (diff == 4) set_population_cap(nation, 150);
+    else if (diff == 5) set_population_cap(nation, 175);
+  }
+
+  set_leader_difficulty(sparta, diff);
+  if (diff == 1) set_population_cap(sparta, 75);
+  else if (diff == 2) set_population_cap(sparta, 100);
+  else if (diff == 3) set_population_cap(sparta, 150);
+  else if (diff == 4) set_population_cap(sparta, 200);
+  else if (diff == 5) set_population_cap(sparta, 250);
+  else if (diff == 6) set_population_cap(sparta, 300);
+
+
+  disable_type_by_tribe("Chevalier", "French");
+  enable_type_by_tribe("Cataphract", "French");
+  gain_upgrade(2, "Cataphract");
+  disable_type_by_tribe("Barbarians", "Germans");
+  enable_type_by_tribe("Phalanx", "Germans");
+  gain_upgrade(4, "Phalanx");
+  disable_type_by_tribe("Armed Caravan", "Dutch");
+  enable_type_by_tribe("Caravan", "Dutch");
+  gain_upgrade(5, "Caravan");
+  disable_type_by_tribe("Armed Supply Wagon", "Dutch");
+  enable_type_by_tribe("Supply Wagon", "Dutch");
+  gain_upgrade(5, "Supply Wagon");
+  disable_type_by_tribe("Armed Merchant", "Dutch");
+  enable_type_by_tribe("Merchant", "Dutch");
+  gain_upgrade(5, "Merchant");
+  enable_type_by_tribe("Greek Mercenaries", "French", "Barracks", 0, 3);
+  gain_upgrade(2, "Greek Mercenaries");
+  disable_type_by_tribe("Horse Archer", "Germans");
+  enable_type_by_tribe("Greek Mercenaries", "Germans", "Stable", 0, 2);
+  disable_type_by_tribe("Horse Archer", "Dutch");
+  enable_type_by_tribe("Greek Mercenaries", "Dutch", "Stable", 0, 2);
+  disable_type_by_tribe("Horse Archer", "Americans");
+  enable_type_by_tribe("Greek Mercenaries", "Americans", "Stable", 0, 2);
+
+  //set nation names
+  set_nation_name("Greeks", $S("Macedonians"));
+  set_nation_name("Dutch", $S("Athenians"));
+  set_nation_name("Americans", $S("Spartans"));
+  set_nation_name("Germans", $S("Thebans"));
+  set_nation_name("French", $S("Thessalians"));
+
+
+
+
+  int unit;
+
+  for (i = diff; i < 8; i++) {
+    unit = find_inside_unit(thessaly, "Thessalian Cavalry");
+    kill_unit_anim(thessaly, unit, 1);
+  }
+
+  //dont let macedonians get defeated
+  disable_city_defeat(macedonians);
+
+  //thessalians lock down
+  set_base_rate(thessaly, "wealth", 150);
+  set_base_rate(thessaly, "metal", 150);
+
+  diplomacy_set_wait(thessaly);
+  diplomacy_set_wait(athens);
+  diplomacy_set_wait(thebes);
+  diplomacy_set_wait(sparta);
+
+  set_bonus_cap(sparta, "Food", amount);
+  set_base_rate(sparta, "Food", amount);
+  set_bonus_cap(sparta, "Timber", amount);
+  set_base_rate(sparta, "Timber", amount);
+  set_bonus_cap(sparta, "Metal", amount);
+  set_base_rate(sparta, "Metal", amount); 
+  set_bonus_cap(sparta, "Wealth", amount);
+  set_base_rate(sparta, "Wealth", amount); 
+  set_bonus_cap(sparta, "Knowledge", amount);
+  set_base_rate(sparta, "Knowledge", amount);     
+  set_population_cap(sparta, amount);
+
+
+}

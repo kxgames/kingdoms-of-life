@@ -1,0 +1,276 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+missing_allies();
+  labels {
+  }
+  diff = get_difficulty();
+
+  infrastructure = get_attack_terr_str();
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  /////////////////////////////////////////////////////
+  //create alexander's army
+  city_id = find_city_id("Alexander Opiana");
+  x = object_position_x(1, city_id);
+  y = object_position_y(1, city_id);
+
+  jump_camera(x, y);
+
+  create_unit_upgrade(1, x, y, "Catapult", 2);
+  create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+  create_unit_upgrade(1, x, y, "Scout", 1);
+  clear_group(1);
+  create_unit_upgrade(1, x, y, "Javelineers", 2);
+  create_unit_in_group(1, x, y, "Phalanx", 2);
+  create_unit_in_group(1, x, y, "Archers", 2);
+  create_unit_in_group(1, x, y, "Light Horse", 2);
+  create_unit_in_group(1, x, y, "Cataphract", 10);
+
+  place_building_upgrade(1, "Temple", "Boucephala");
+
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Ayodhya");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Temple", "Ayodhya");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Temple", "Ayodhya");
+    place_building_upgrade(2, "Tower", "Ayodhya");
+  }
+  else {
+    place_building_upgrade(2, "Temple", "Ayodhya");
+    place_building_upgrade(2, "Market", "Ayodhya");
+    place_building_upgrade(2, "Tower", "Ayodhya");
+    if (diff > 3) {
+      place_building_upgrade(2, "Tower", "Ayodhya");
+    }
+  }
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Pataliputra");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Temple", "Pataliputra");
+    place_building_upgrade(2, "Library", "Pataliputra");
+    place_building_upgrade(2, "University", "Pataliputra");
+    place_building_upgrade(2, "Senate", "Pataliputra");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Library", "Pataliputra");
+    place_building_upgrade(2, "University", "Pataliputra");
+    place_building_upgrade(2, "Temple", "Pataliputra");
+    place_building_upgrade(2, "Market", "Pataliputra");
+    place_building_upgrade(2, "Barracks", "Pataliputra");
+    place_building_upgrade(2, "Tower", "Pataliputra");
+    place_building_upgrade(2, "Senate", "Pataliputra");
+    if (diff > 3) {
+      place_building_upgrade(2, "Fort", "Pataliputra");
+    }
+  }
+  else {
+    place_building_upgrade(2, "Library", "Pataliputra");
+    place_building_upgrade(2, "University", "Pataliputra");
+    place_building_upgrade(2, "Temple", "Pataliputra");
+    place_building_upgrade(2, "Market", "Pataliputra");
+    place_building_upgrade(2, "Senate", "Pataliputra");
+    place_building_upgrade(2, "Barracks", "Pataliputra");
+    place_building_upgrade(2, "Tower", "Pataliputra");
+    if (diff > 3) {
+      place_building_upgrade(2, "Tower", "Pataliputra");
+      place_building_upgrade(2, "Tower", "Pataliputra");
+      place_building_upgrade(2, "Fort", "Pataliputra");
+      place_building_upgrade(2, "Fort", "Pataliputra");
+    }
+  }
+  create_unit(2, x, y, "Hoplites", diff-2);
+  create_unit_in_group(2, x, y, "Javelineers", diff);
+  create_unit_in_group(2, x, y, "Archers", diff-2);
+  create_unit_in_group(2, x, y, "Light Horse", diff-3);
+  create_unit_in_group(2, x, y, "Supply Wagon", 1);
+  create_unit_in_group(2, x, y, "General", 1);
+
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Rajagaha");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Market", "Rajagaha");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Market", "Rajagaha");
+    place_building_upgrade(2, "Tower", "Rajagaha");
+  }
+  else {
+    place_building_upgrade(2, "Market", "Rajagaha");
+    place_building_upgrade(2, "Tower", "Rajagaha");
+  }
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Bavikonda");
+  x = object_position_x(8, city_id);
+  y = object_position_y(8, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(8, "Temple", "Bavikonda");
+    place_building_upgrade(8, "Library", "Bavikonda");
+    place_building_upgrade(8, "University", "Bavikonda");
+    place_building_upgrade(8, "Senate", "Bavikonda");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(8, "Library", "Bavikonda");
+    place_building_upgrade(8, "University", "Bavikonda");
+    place_building_upgrade(8, "Temple", "Bavikonda");
+    place_building_upgrade(8, "Market", "Bavikonda");
+    place_building_upgrade(8, "Barracks", "Bavikonda");
+    place_building_upgrade(8, "Tower", "Bavikonda");
+    place_building_upgrade(8, "Senate", "Bavikonda");
+    if (diff > 3) {
+      place_building_upgrade(8, "Fort", "Bavikonda");
+    }
+  }
+  else {
+    place_building_upgrade(8, "Library", "Bavikonda");
+    place_building_upgrade(8, "University", "Bavikonda");
+    place_building_upgrade(8, "Temple", "Bavikonda");
+    place_building_upgrade(8, "Market", "Bavikonda");
+    place_building_upgrade(8, "Senate", "Bavikonda");
+    place_building_upgrade(8, "Barracks", "Bavikonda");
+    place_building_upgrade(8, "Tower", "Bavikonda");
+    if (diff > 3) {
+      place_building_upgrade(8, "Tower", "Bavikonda");
+      place_building_upgrade(8, "Tower", "Bavikonda");
+      place_building_upgrade(8, "Fort", "Bavikonda");
+      place_building_upgrade(8, "Fort", "Bavikonda");
+    }
+  }
+  create_unit(8, x, y, "Hoplites", diff/2);
+  create_unit_in_group(8, x, y, "Javelineers", diff);
+  create_unit_in_group(8, x, y, "Archers", diff/2);
+  create_unit_in_group(8, x, y, "Light Horse", diff/2);
+  create_unit_in_group(8, x, y, "Supply Wagon", 1);
+  create_unit_in_group(8, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Arikamedu");
+  x = object_position_x(8, city_id);
+  y = object_position_y(8, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(8, "Market", "Arikamedu");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(8, "Tower", "Arikamedu");
+  }
+  else {
+    place_building_upgrade(8, "Tower", "Arikamedu");
+    place_building_upgrade(8, "Tower", "Arikamedu");
+  }
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Dharwad");
+  x = object_position_x(8, city_id);
+  y = object_position_y(8, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(8, "Temple", "Dharwad");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(8, "Temple", "Dharwad");
+    place_building_upgrade(8, "Market", "Dharwad");
+    place_building_upgrade(8, "Tower", "Dharwad");
+  }
+  else {
+    place_building_upgrade(8, "Temple", "Dharwad");
+    place_building_upgrade(8, "Market", "Dharwad");
+    place_building_upgrade(8, "Tower", "Dharwad");
+    if (diff > 3) {
+      place_building_upgrade(8, "Tower", "Dharwad");
+    }
+  }
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Gulbarga");
+  x = object_position_x(8, city_id);
+  y = object_position_y(8, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(8, "Temple", "Gulbarga");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(8, "Temple", "Gulbarga");
+    place_building_upgrade(8, "Market", "Gulbarga");
+    place_building_upgrade(8, "Tower", "Gulbarga");
+  }
+  else {
+    place_building_upgrade(2, "Temple", "Gulbarga");
+    place_building_upgrade(2, "Market", "Gulbarga");
+    place_building_upgrade(2, "Tower", "Gulbarga");
+    if (diff > 3) {
+      place_building_upgrade(2, "Tower", "Gulbarga");
+    }
+  }
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Ujjain");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Temple", "Ujjain");
+    place_building_upgrade(2, "University", "Ujjain");
+    place_building_upgrade(2, "Library", "Ujjain");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Temple", "Ujjain");
+    place_building_upgrade(2, "Market", "Ujjain");
+    place_building_upgrade(2, "University", "Ujjain");
+    place_building_upgrade(2, "Barracks", "Ujjain");
+    place_building_upgrade(2, "Tower", "Ujjain");
+    place_building_upgrade(2, "Library", "Ujjain");
+    if (diff > 3) {
+      place_building_upgrade(2, "Tower", "Ujjain");
+    }
+  }
+  else {
+    place_building_upgrade(2, "Temple", "Ujjain");
+    place_building_upgrade(2, "Market", "Ujjain");
+    place_building_upgrade(2, "University", "Ujjain");
+    place_building_upgrade(2, "Barracks", "Ujjain");
+    place_building_upgrade(2, "Stable", "Ujjain");
+    place_building_upgrade(2, "Tower", "Ujjain");
+    place_building_upgrade(2, "Tower", "Ujjain");
+    place_building_upgrade(2, "Library", "Ujjain");
+    if (diff > 3) {
+      place_building_upgrade(2, "Fort", "Ujjain");
+    }
+  }
+  
+  /////////////////////////////////////////////////////
+
+  if (infrastructure > 6 && diff > 3) {
+    create_building_upgrade (2, 74, 66, "Fort");
+    create_building_upgrade (2, 70, 78, "Tower");
+    create_building_upgrade (2, 74, 54, "Tower");
+  }
+
+  if (diff < 3) {
+    destroy_building_type(2, "Tower");
+    destroy_building_type(2, "Fort");
+    destroy_building_type(8, "Tower");
+    destroy_building_type(8, "Fort");
+  }
+}

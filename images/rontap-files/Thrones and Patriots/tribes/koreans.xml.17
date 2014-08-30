@@ -1,0 +1,56 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="朝鮮">
+	<LEADERS>
+		<LEADER>檀君</LEADER>
+		<LEADER>広開土王</LEADER>
+		<LEADER>太祖</LEADER>
+		<LEADER>真興王</LEADER>
+		<LEADER>宣徳女王</LEADER>
+		<LEADER>真聖女王</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>ソウル</CITY>
+		<CITY>仁川</CITY>
+		<CITY>慶州 </CITY>
+		<CITY>光州</CITY>
+		<CITY>蔚山</CITY>
+		<CITY>扶余</CITY>
+		<CITY>公州</CITY>
+		<CITY>釜山</CITY>
+		<CITY>群山</CITY>
+		<CITY>平壌</CITY>
+		<CITY>元山</CITY>
+		<CITY>南浦</CITY>
+		<CITY>開城</CITY>
+		<CITY>興南</CITY>
+		<CITY>春川</CITY>
+		<CITY>三陟</CITY>
+		<CITY>水原</CITY>
+		<CITY>安東</CITY>
+		<CITY>原州</CITY>
+		<CITY>論山</CITY>
+		<CITY>馬山</CITY>
+		<CITY>麗水</CITY>
+		<CITY>南原</CITY>
+		<CITY>大田</CITY>
+		<CITY>浦項</CITY>
+		<CITY>大邱</CITY>
+		<CITY>密陽</CITY>
+		<CITY>江陵</CITY>
+		<CITY>木浦</CITY>
+		<CITY>羅州</CITY>
+		<CITY>全州</CITY>
+		<CITY>晋州</CITY>
+		<CITY>尚州  </CITY>
+		<CITY>済州</CITY>
+		<CITY>順天</CITY>
+		<CITY>昌原</CITY>
+		<CITY>天安</CITY>
+		<CITY>清州</CITY>
+		<CITY>堤川</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+	<BUILD_CONTINENT>3 Korean</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

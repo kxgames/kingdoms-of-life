@@ -1,0 +1,79 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  coldwar_rules();
+
+  
+  int diff = get_difficulty();
+  
+  create_unit_upgrade(2, 176,85, "Infantry", (int)(diff/2));
+  group_patrol_order(2, 169, 36);
+  create_unit_upgrade(2, 151, 102, "Infantry", (int)(diff/2));
+  group_patrol_order(2, 157, 63);
+
+  if (diff < 4) {
+    set_time_limit(45);
+  }
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  int building;
+  int unit;
+
+  disable_city_defeat(1);
+
+  for (i = 45; i > diff * 7; i--) {
+    building = find_military_build(2);
+    destroy_building(2, building);
+  }
+
+  for (i = 35; i > diff * 6; i--) {
+    unit = find_all_military(2);
+    kill_unit_anim(2, unit, 1);
+  }
+  
+  int amount;
+  if (diff < 3) {
+    amount = 500;
+  }
+  else if (diff < 5) {
+    amount = 250;
+  }
+  
+  give_good(1, "Food", amount);
+  give_good(1, "Timber", amount);
+  give_good(1, "Metal", amount);
+  give_good(1, "Wealth", amount);
+  give_good(1, "Oil", amount);
+  give_good(1, "Knowledge", amount);
+  
+  //8,8,6
+  //if (diff > 4) {
+    //for (i = 0; i < 2; i++) {
+      //unit = find_all_unit(1, "Red Guards Infantry");
+      //kill_unit_anim(1, unit, 1);
+      //unit = find_all_unit(1, "Bazooka");
+      //kill_unit_anim(1, unit, 1);
+      //unit = find_all_unit(1, "Heavy Machine Gun");
+      //kill_unit_anim(1, unit, 1);
+    //}
+ // }
+
+  if (diff > 3) {
+    set_time_limit(25);
+    place_building_upgrade(2, "Barracks", find_capital(2));
+  }
+  
+  int x = 135;
+  int y = 137;
+  
+  create_unit_upgrade(2, x, y, "Infantry", (int)(diff/2));
+  create_unit_upgrade(2, x, y, "Bazooka", (int)(diff/3));
+  create_unit_upgrade(2, x, y, "Armored Scout Car", (int)(diff/3));
+  
+}
+
+

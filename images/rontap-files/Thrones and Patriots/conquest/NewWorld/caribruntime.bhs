@@ -1,0 +1,593 @@
+include "ctw_lib.bhs"
+
+int conquest sum_tribute( int offerer, int offeree );
+int conquest uu_function(int up_or_down);
+int conquest set_unit_stats(String unit_name, int health, int attack, int range, int armor, int los, int up_or_down);
+void conquest status_check( int who );
+
+conquest
+{
+  
+  new_world_rules();
+
+  static int red = 1;
+  static int blue = 2;//eager young warriors
+  static int purple = 3;//unique unit health++
+  static int green = 4;//converts
+  static int yellow = 5;//share whale secret
+  static int orange = 6;//bonus wealth rate
+  static int amount;
+  
+  static int dock_id;
+  static int blue_cap;
+  static int purple_cap;
+  static int green_cap;
+  static int yellow_cap;
+  static int orange_cap;
+  static int diff = get_difficulty();
+
+  int building;
+  int unit;
+  int x;
+  int y;
+  int who;
+  String city_name;
+  String nation_name;
+  static int attitudes[] = [10,10,10,10,10,10,10];
+  static int fought[] = [0,0,0,0,0,0,0];
+  static int trade[] = [0,0,0,0,0,0,0];    
+  int nation;
+  int high_score;
+  int low_score;
+  int temp_score;
+  int temp_attitude;
+  int tribe;
+  int factor;
+  static int tribute_amount = 6000;
+  int low_nation;
+  int high_nation;
+  static int players = num_players();
+  static int ally_once;
+
+  static int end_time = get_time_limit();
+  int cur_time;
+  
+  static int cost[];
+  static int score_cost[] = [0,0,0,0,0,0,0];
+  static int temp_cost[] = [0,0,0,0,0,0,0];
+  static int cur_ally;
+  static int broken_allies;
+  
+  int new_warriors;
+
+  run_once {
+    if (diff == 1) {
+      cost = [0,0,0,0,0,0,0];
+    }
+    else if (diff == 2) {
+      cost = [0,0,100,100,100,100,100];
+    }
+    else if (diff == 3) {
+      cost = [0,0,200,200,200,200,200];
+    }
+    else if (diff == 4) {
+      cost = [0,0,400,300,300,300,300];
+    }
+    else if (diff == 5) {
+      cost = [0,0,600,400,400,400,400];
+    }
+    else if (diff == 6) {
+      cost = [0,0,700,500,500,500,500];
+    }  
+    for (i = num_players(); i > 1; i--) {
+      diplomacy_set_wait(i);
+    }
+    if (diff > 1) {
+      set_timer("random_drift", 1);
+    }
+    enable_trigger("allies");
+    set_timer("comp_ally2", rand_int(700-(diff*50), 1000-(diff*20)));
+    set_timer("set_attitudes", 120);
+    set_timer("status_check", 1); 
+    new_world_setup();
+    city_name = find_capital(blue);
+    blue_cap = find_city_id(city_name);
+    city_name = find_capital(purple);
+    purple_cap = find_city_id(city_name);
+    city_name = find_capital(green);
+    green_cap = find_city_id(city_name);
+    city_name = find_capital(yellow);
+    yellow_cap = find_city_id(city_name);
+    city_name = find_city_name(orange);
+    orange_cap = find_build(orange,"Small City");
+    set_seen(red, blue, blue_cap);
+    set_seen(red, purple, purple_cap);
+    set_seen(red, green, green_cap);
+    set_seen(red, yellow, yellow_cap);
+    set_seen(red, orange, orange_cap);
+    disable_trigger("blue_red");
+    disable_trigger("young_warriors");
+    disable_trigger("purple_red");
+    disable_trigger("green_red");
+    disable_trigger("yellow_red");
+    disable_trigger("red_green2");
+    disable_trigger("orange_red");
+    ctw_add_objective_text($S("Hint: Choose an ally. Each nation provides a different bonus. Click on a nation's capital to find out what bonus it provides."), 5, "");
+    ctw_add_objective_text($S("Hint: Sudden Death rules are on - any nation that loses a city will be defeated."), 6, "");
+  }
+
+  if (timer_expired("status_check")) {
+    set_timer("status_check",1);
+    for (a = 1; a < num_players()+1; a++) {
+      for (i = 1; i < num_players()+1; i++) {
+        if (a == i) {
+          i++;
+        }
+        if (i > num_players()) {
+          break;
+        }
+        if (have_alliance(a,i)) {
+          for (t = 1; t < num_players()+1; t++) {
+            if (t == a) {
+              t++;
+            }
+            if (t == i) {
+              t++;
+            }
+            if (t == a) {
+              t++;
+            }
+            if (t > num_players()) {
+              break;
+            }
+            if (have_peace(a,t)) {
+              if (!have_peace(i,t)) {
+                make_peace(i,t);
+              }
+            }
+            else {
+              if (have_peace(i,t)) {
+                declare_war(i,t);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  if (timer_expired("random_drift")) {
+    for (i = 2; i < cost.length; i++) {
+      cost[i] += rand_int(diff-2,diff+3);
+    }
+    set_timer("random_drift", 300);
+  }
+  
+  if (timer_expired("score_adjuster")) {
+    high_score = 0;
+    low_score = 0;
+    for (nation = players; nation > 0; nation--) {
+      temp_score = score(nation);
+      if (temp_score > high_score) high_score = temp_score;
+      else if (temp_score < low_score) low_score = temp_score;
+    }
+    if (high_score == 1) {
+      for (z = 2; z < 5; z++) {
+        score_cost[z] = (score(1) - score(z))/(160-diff*10);
+      }
+      for (z = 5; z < 7; z++) {
+        score_cost[z] = -((score(1) - score(z))/(160-diff*10));
+      }
+    } else if (low_score == 1) {
+      for (z = 2; z < 4; z++) {
+        score_cost[z] = -((score(1) - score(z))/(160-diff*10));
+      }
+      for (z = 4; z < 7; z++) {
+        score_cost[z] = (score(1) - score(z))/(160-diff*10);
+      }
+    }
+    for (nation = num_players(); nation > 1; nation--) {
+      if (fought[nation] == 0) {
+        if (have_fought(nation, 1)) {
+          fought[nation] = 1;
+        }
+      }
+      if (have_trade(nation, 1)) {
+        if (trade[nation] == 0) {
+          trade[nation] = 1;
+        }
+      } else {
+        if (trade[nation] == 1) {
+          trade[nation] = 0;
+        }
+      }
+    }
+  }
+
+  trigger allies() {
+    for (nation = players; nation > 1; nation--) {
+      if (cur_ally == nation) {
+        if (!have_alliance(nation, red)) {
+          broken_allies++;
+          cur_ally = 0;
+        }
+        else if (is_defeated(nation)) {
+         cur_ally = 0;
+        }
+      }    
+      if (have_alliance(1, nation)) {
+        cur_ally = nation;
+      }
+    }
+  } 
+
+  for (nation = players; nation > 1; nation--) {
+    for (tribe = players; tribe > 1; tribe--) {
+      if (cost[nation] <= 0) {
+        cost[nation] = 1;
+      }
+      temp_attitude = fought[nation] + broken_allies - trade[nation];
+      set_timer("diplo", rand_int(50, 250));
+      if (sum_tribute(nation,1) > 0) {
+        reject_offer(nation, 1);
+      }
+      else if (offer_made(1, nation)) {
+        tribute_amount = sum_tribute(1,nation);
+        if (is_offering_peace(1, nation) || diff == 1) {
+          temp_attitude += fought[nation];
+          peace_cost = cost[nation] + (temp_attitude * (10+diff)) + score_cost[nation]; 
+          peace_cost += -peace_cost%100;         
+          if (tribute_amount >= peace_cost) {
+            accept_offer(nation, 1);
+            temp_cost[nation] = 0; 
+            set_timer("comp_ally2", rand_int(150-(diff*10),360-(diff*10)));                
+          } else {
+            make_counter_offer(1, nation, "Food", peace_cost - tribute_amount, $S("We will need a more compelling offer from you."));
+            //attitudes[nation]--;
+          }
+        } 
+        else if (is_offering_alliance(1, nation)) {
+          temp_attitude += broken_allies - trade[nation];
+          ally_cost = (cost[nation] * 2) + (temp_attitude * (13+(diff*2))) + (score_cost[nation] * 2);
+          ally_cost += -ally_cost%100;
+          if (tribute_amount >= ally_cost || diff == 1) {
+            accept_offer(nation, 1);
+            temp_cost[nation] = 0;    
+            set_timer("comp_ally2", rand_int(30,300));
+            status_check(nation);               
+          } else {
+            make_counter_offer(1, nation, "Metal", ally_cost - tribute_amount, $S("We will need a more compelling offer from you."));
+            //attitudes[nation]--;
+          }
+        } 
+        else {//if (attitudes[nation] > 2) {
+          if (have_war(1,nation)) {
+            temp_cost[nation] += -tribute_amount;
+          }
+          else if (have_peace(1,nation)) {
+            temp_cost[nation] += -tribute_amount/2;
+          }
+          accept_offer(nation, 1);
+        } 
+      }
+    }
+  }
+
+  if (timer_expired("comp_ally2")) {
+    ally_array = [0,0,0,0,0,0,0];
+    set_timer("comp_ally", rand_int(600-(diff*50), 900-(diff*20)));
+    for (nation = players; nation > 1; nation--) {
+      if (ally_array[nation] == 0) {
+        for (tribe = players; tribe > 1; tribe--) {
+          if (tribe == nation) {
+            tribe--;
+          }
+          if (tribe == 1) {
+            break;
+          }
+          if (have_alliance(nation,tribe)) {
+            ally_array[nation] = 1;
+            ally_array[tribe] = 1;
+          }
+        }
+      }
+    }  
+    quit_out = 0;
+    for (nation = players; nation > 1; nation--) {
+      if (quit_out == 1) {
+        break;
+      }
+      if (ally_array[nation] == 0) {
+        for (tribe = players; tribe > 1; tribe--) {
+          if (ally_array[tribe] == 0) {
+            if (have_peace(nation,tribe)) {
+              for (m = 2; m < num_players()+2; m++) {
+                if (have_alliance(nation,m)) {
+                  break;
+                }
+                if (m == num_players()+1) {
+                  make_alliance(nation,tribe);
+                  quit_out = 1;
+                }
+              }
+
+            }
+            else {
+              make_peace(nation,tribe);
+              quit_out = 1;
+            }
+          }
+        }
+      }
+    }      
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) defeat(red);
+
+  if (object_selected(blue, find_city_id(find_capital(blue))) && num_objects_selected(red) == 0) {
+    bubble_text_obj($S("Ally bonus: Produces Medieval warriors for you"), blue, blue_cap);
+    clear_selection();
+  }
+
+  if (object_selected(purple, find_city_id(find_capital(purple))) && num_objects_selected(red) == 0) {
+    bubble_text_obj($S("Ally bonus: Increases the strength of your unique units"), purple, purple_cap);
+    clear_selection();
+  }
+
+  if (object_selected(yellow, find_city_id(find_capital(yellow))) && num_objects_selected(red) == 0) {
+    bubble_text_obj($S("Ally bonus: Part of their population will join your nation"), yellow, yellow_cap);
+    clear_selection();
+  }
+
+  if (object_selected(green, find_city_id(find_capital(green))) && num_objects_selected(red) == 0) {
+    bubble_text_obj($S("Ally bonus: They will share a secret with you!"), green, green_cap);
+    clear_selection();
+  }
+
+  if (object_selected(orange, find_city_id(find_capital(orange))) && num_objects_selected(red) == 0) {
+    bubble_text_obj($S("Ally bonus: They will increase your Wealth rate"), orange, orange_cap);
+    clear_selection();
+  }
+
+  //eager young warriors
+  trigger red_blue(have_alliance(red, blue)) {
+    popup_dialog($S("Message from Nepoio King (Blue): In gratitude for our new friendship, we have agreed to provide you with a constant supply of our young warriors. They will appear at your capital."));
+    enable_trigger("young_warriors");
+    enable_trigger("blue_red");
+    set_timer("yw", 1);
+  }
+
+  trigger young_warriors(timer_expired("yw")) {
+    new_warriors = 25 + num_type(red, "Inti Macemen");
+    set_timer("yw", new_warriors);
+    enable_trigger("young_warriors");
+    city_name = find_capital(red);
+    building = find_city_id(city_name);
+    x = object_position_x(red, building) + 2;
+    y = object_position_y(red, building);
+    create_unit(red, x, y, "Inti Macemen", 1);
+  }
+
+  trigger blue_red(!have_alliance(red,blue)) {
+    disable_trigger("young_warriors");
+    building = find_build(blue, "");
+    x = object_position_x(blue, building);
+    y = object_position_y(blue, building);
+    while (num_type(red, "Inti Macemen") > 0) {
+      unit = find_all_unit(red, "Inti Macemen");
+      unit = switch_teams(blue, red, unit);
+      disable_take_attrition(blue);
+      force_transport_ability(blue);
+      set_timer("blue_attrition", 30);
+      unit_attack_to_order(blue, unit, x, y);
+    }
+    popup_dialog($S("Message from Nepoio King (Blue): Since our alliance is over, our young warriors are now back under our control."));
+    enable_trigger("red_blue");
+  }
+  
+  trigger (timer_expired("blue_attrition")) {
+    enable_take_attrition(blue);
+  }
+
+  //unique unit health++
+  trigger red_purple(have_alliance(red, purple)) {
+    popup_dialog($S("Message from Carib King (Purple): As a token of our appreciation for our new allies, we will teach you how to make your unique units stronger.")); 
+    enable_trigger("purple_red");
+    uu_function(1);
+  }
+
+  trigger purple_red(!have_alliance(red, purple)) {
+    enable_trigger("red_purple");
+    uu_function(0);
+    popup_dialog($S("Message from Carib King (Purple): With our alliance ended, we no longer will provide your unique units with a bonus."));
+  }
+
+  //converts
+  trigger red_yellow(have_alliance(red, yellow)) {
+    popup_dialog($S("Message from Kapon King (Yellow): In accordance with our alliance, some of our population has agreed to join your nation."));
+    amount = num_units(yellow)/10;
+    for (n = 0; n < amount; n++) {
+      unit = find_unit(yellow, "");
+      switch_teams(red, yellow, unit);
+    }
+    if (amount == 0) {
+      unit = find_unit(yellow, "");
+      switch_teams(red, yellow, unit);
+    }      
+    enable_trigger("yellow_red");
+  }
+
+  trigger yellow_red(!have_alliance(red, yellow)) {
+    for (n = 0; n < amount; n++) {
+      unit = find_unit(red, "");
+      switch_teams(yellow, red, unit);
+    }
+    if (amount == 0) {
+      unit = find_unit(red, "");
+      switch_teams(yellow, red, unit);
+    }
+    popup_dialog($S("Message from Kapon King (Yellow): It appears as if some of your population has joined our nation in response to the ending of our alliance."));
+    enable_trigger("red_yellow");
+  }
+
+  //secret of whales
+  trigger red_green(have_alliance(red, green)) {
+    popup_dialog($S("Message from Arawak King (Green): Since you are our allies, we will share with you a great secret: in the south corner of the map you will find many Whales. As an additional gift, we have provided you a Dock near there.."));
+    dock_id = create_building_near(red, 311, 320, "Dock", 15);
+    enable_trigger("green_red");
+  }
+
+  trigger red_green2(have_alliance(red, green)) {
+    popup_dialog($S("Message from Arawak King (Green): Since you are our allies, we will share with you a great secret: Oh, wait--we already told you. We will rebuild the Dock we provided for you, though."));
+    dock_id = create_building_near(red, 311, 320, "Dock", 15);
+    enable_trigger("green_red");
+  }
+
+  trigger green_red(!have_alliance(red, green)) {
+    destroy_building(red, dock_id);
+    popup_dialog($S("Message from Arawak King (Green): We have torn down the Dock we provided you due to the end of our alliance."));
+    enable_trigger("red_green2");
+    
+  }
+
+  //wealth
+  trigger red_orange(have_alliance(red, orange)) {
+    popup_dialog($S("Message from Lakono King (Cyan): The new trade routes that will open now that we are allies will add 30 to your Wealth rate."));
+    set_base_rate(red, "Wealth", 30);
+    enable_trigger("orange_red");
+  }
+
+  trigger orange_red(!have_alliance(orange, red)) {
+    set_base_rate(red, "Wealth", 0);
+    popup_dialog($S("Message from Lakono King (Cyan): Our trade routes are closed with the end of our alliance."));
+    enable_trigger("red_orange");
+  }
+
+}
+
+int conquest sum_tribute( int offerer, int offeree )
+{
+  int total;
+  String resources[] = ["Food", "Wealth", "Metal", "Timber"];
+
+  for (z = 0; z < resources.length; z++) {
+    total += amount_offered(offerer,offeree,resources[z]);
+  }
+
+  return total;
+
+}
+
+int conquest uu_function(int up_or_down)
+{
+
+  String nation_name = find_nation(1);
+  //name, hp, attack, range, armor, los
+  if (nation_name == "Americans") {
+    set_unit_stats("Continental Marines", 150, 200, 10, 2, 11, up_or_down);
+  } else if (nation_name == "Aztecs") {
+    set_unit_stats("Xopilli Atl-Atls", 120, 130, 6, 1, 8, up_or_down);   
+  } else if (nation_name == "British") {
+    set_unit_stats("King's Yeomanry", 120, 190, 12, 0, 12, up_or_down);
+    set_unit_stats("Highlanders", 142, 200, 10, 2, 10, up_or_down);  
+  } else if (nation_name == "Dutch") {
+    set_unit_stats("Fluyt", 180, 150, 8, 2, 13, up_or_down);      
+    set_unit_stats("Clipper", 205, 180, 9, 3, 14, up_or_down);     
+    set_unit_stats("Armed Caravan", 125, 60, 8, 1, 5, up_or_down);    
+    set_unit_stats("Armed Merchant", 125, 60, 8, 1, 5, up_or_down);     
+    set_unit_stats("Armed Supply Wagon", 125, 60, 8, 1, 5, up_or_down);      
+  } else if (nation_name == "French") {
+    set_unit_stats("Horse Grenadier", 140, 180, 0, 5, 8, up_or_down);
+    set_unit_stats("Horse Guard Grenadier", 165, 190, 0, 5, 9, up_or_down);
+  } else if (nation_name == "Inca") {
+    set_unit_stats("Inti Macemen", 118, 160, 0, 2, 8, up_or_down);
+    set_unit_stats("Siege Mortar", 143, 320, 18, 0, 16, up_or_down);
+  } else if (nation_name == "Iroquois") {
+    set_unit_stats("Akweks", 80, 0, 7, 0, 10, up_or_down);
+    set_unit_stats("Okwari", 100, 0, 7, 0, 10, up_or_down);
+    set_unit_stats("Elite Mohawk Spearmen", 195, 190, 0, 4, 9, up_or_down);
+  } else if (nation_name == "Lakota") {
+    set_unit_stats("Eagle Feather Horse", 82, 150, 8, 1, 9, up_or_down);
+    set_unit_stats("Musket Horse", 97, 170, 9, 1, 9, up_or_down);
+    set_unit_stats("Repeating Rifle Horse", 114, 190, 10, 2, 11, up_or_down);
+  } else if (nation_name == "Maya") {
+    set_unit_stats("Eagle Balamob Slingers", 110, 130, 6, 1, 8, up_or_down);
+  } else if (nation_name == "Spanish") {
+    set_unit_stats("Tercios", 185, 190, 5, 4, 9, up_or_down);
+    set_unit_stats("Royal Tercios", 200, 200, 6, 4, 10, up_or_down);
+    set_unit_stats("Conquistador", 97, 200, 9, 1, 10, up_or_down);
+    set_unit_stats("Elite Conquistador", 114, 210, 10, 2, 11, up_or_down);
+  } else if (nation_name == "Nubians") {
+    set_unit_stats("Bandeirantes", 205, 200, 4, 3, 11, up_or_down);
+    set_unit_stats("Elite Bandeirantes", 210, 210, 5, 3, 12, up_or_down);
+  }
+  
+  return 1;
+  
+}
+
+int conquest set_unit_stats(String unit_name, int health, int attack, int range, int armor, int los, int up_or_down)
+{
+
+  if (up_or_down == true) {
+    health += health/10;
+    if (attack > 250) {
+      attack += 30;
+    }
+    else if (attack > 150) {
+      attack += 20;
+    }
+    else {
+      attack += 10;
+    }
+    if (range == 0);
+    else if (range > 15) {
+      range += 2;
+    }
+    else {
+      range += 1;
+    }
+    armor += 1;
+    if (los > 15) {
+      los += 2;
+    }
+    else {
+      los += 1;
+    }
+  }
+  
+  set_object_type_max_health(unit_name, health);
+  set_object_type_attack(unit_name, attack);
+  if (range > 0) {
+    set_object_type_max_range(unit_name, range);
+  }
+  set_object_type_armor(unit_name, armor);
+  set_type_line_of_sight(unit_name, los);
+
+  return 1;
+
+}
+
+void conquest status_check( int who )
+{
+
+  int macedonians = 1;
+  int nation;
+  
+  for (nation = num_players(); nation > 1; nation--) {
+    if (nation == who) {
+      nation--;;
+    }
+    if (nation == 1) {
+      break;
+    }
+    if (have_peace(macedonians, nation)) {
+      make_peace(who, nation);
+    }
+    else if (have_war(macedonians, nation)) {
+      declare_war(who, nation);
+    }
+  }
+
+}

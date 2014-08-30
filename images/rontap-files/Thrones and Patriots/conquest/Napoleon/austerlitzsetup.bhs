@@ -1,0 +1,34 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+if (get_ctw_campaign() == "Napoleon") {
+  napoleon_rules();
+}
+
+
+  static int french = 1;
+  static int austrians = 2;
+
+  int diff = get_difficulty();
+  int army_x;
+  int army_y;
+  
+  set_leader_difficulty(austrians, diff);
+
+  set_nation_name("Germans", $S("Austrians"));
+  
+  int building;
+  
+  if (diff < 3) {
+    for (i = 0; i < num_type_upgrade(austrians, "Fort"); i++) {
+      building = find_build(austrians, "Fort");
+      destroy_building(austrians, building);
+    }
+    for (i = 0; i < 2; i++) {
+      building = find_build(austrians, "Tower");
+      destroy_building(austrians, building);
+    }
+  }
+
+}

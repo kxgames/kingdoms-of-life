@@ -1,0 +1,191 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+missing_allies();
+  labels {
+  }
+  diff = get_difficulty();
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  infrastructure = get_attack_terr_str();
+
+  x = 53;
+  y = 51;
+
+  //create alexander's army
+  create_unit_upgrade(1, x, y, "Javelineers", 4);
+  create_unit_upgrade(1, x, y, "Phalanx", 4);
+  create_unit_upgrade(1, x, y, "Archers", 4);
+  create_unit_upgrade(1, x, y, "Light Horse", 4);
+  create_unit_upgrade(1, x, y, "Cataphract", 10);
+  create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+  create_unit_upgrade(1, x, y, "Scout", 1);
+  create_unit_upgrade(1, x, y, "Catapult", 2/diff);
+
+  //add in some boats
+
+  x = 61;
+  y = 112;
+  //create nectanebo's army
+  
+  create_unit_upgrade(2, x, y, "Javelineers", diff);
+  create_unit_in_group(2, x, y, "Phalanx", diff/2);
+  create_unit_in_group(2, x, y, "Archers", diff/2);
+  create_unit_in_group(2, x, y, "Light Horse", 2+diff/2);
+  create_unit_in_group(2, x, y, "Cataphract", diff/2);
+  create_unit_in_group(2, x, y, "Horse Archer", diff-1);
+  create_unit_in_group(2, x, y, "Supply Wagon", 1);
+  create_unit_in_group(2, x, y, "General", 1);
+
+  group_jump_move(2, x, y, 270);
+
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Thebes");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Temple", "Thebes");
+    place_building_upgrade(2, "Library", "Thebes");
+    place_building_upgrade(2, "University", "Thebes");
+    place_building_upgrade(2, "Senate", "Thebes");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Library", "Thebes");
+    place_building_upgrade(2, "University", "Thebes");
+    place_building_upgrade(2, "Temple", "Thebes");
+    place_building_upgrade(2, "Market", "Thebes");
+    place_building_upgrade(2, "Tower", "Thebes");
+    place_building_upgrade(2, "Barracks", "Thebes");
+    place_building_upgrade(2, "Senate", "Thebes");
+  }
+  else {
+    place_building_upgrade(2, "Library", "Thebes");
+    place_building_upgrade(2, "University", "Thebes");
+    place_building_upgrade(2, "Temple", "Thebes");
+    place_building_upgrade(2, "Market", "Thebes");
+    place_building_upgrade(2, "Senate", "Thebes");
+    place_building_upgrade(2, "Barracks", "Thebes");
+    place_building_upgrade(2, "Tower", "Thebes");
+    place_building_upgrade(2, "Tower", "Thebes");
+    place_building_upgrade(2, "Tower", "Thebes");
+  }
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Karnak");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Temple", "Karnak");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Temple", "Karnak");
+    place_building_upgrade(2, "Tower", "Karnak");
+  }
+  else {
+    place_building_upgrade(2, "Temple", "Karnak");
+    place_building_upgrade(2, "Tower", "Karnak");
+    place_building_upgrade(2, "Tower", "Karnak");
+  }
+
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Abydos");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Market", "Abydos");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Temple", "Abydos");
+    place_building_upgrade(2, "Market", "Abydos");
+    place_building_upgrade(2, "University", "Abydos");
+    place_building_upgrade(2, "Tower", "Abydos");
+  }
+  else {
+    place_building_upgrade(2, "Market", "Abydos");
+    place_building_upgrade(2, "Tower", "Abydos");
+  }
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("El-Armana");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Temple", "El-Armana");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Temple", "El-Armana");
+    place_building_upgrade(2, "Tower", "El-Armana");
+  }
+  else {
+    place_building_upgrade(2, "Temple", "El-Armana");
+    place_building_upgrade(2, "Fort", "El-Armana");
+    place_building_upgrade(2, "Tower", "El-Armana");
+    place_building_upgrade(2, "Tower", "El-Armana");
+  }
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Memphis");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Market", "Memphis");
+    place_building_upgrade(2, "Library", "Memphis");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Tower", "Memphis");
+    place_building_upgrade(2, "Temple", "Memphis");
+    place_building_upgrade(2, "Market", "Memphis");
+    place_building_upgrade(2, "Library", "Memphis");
+    place_building_upgrade(2, "University", "Memphis");
+  }
+  else {
+    place_building_upgrade(2, "Tower", "Memphis");
+    place_building_upgrade(2, "Temple", "Memphis");
+    place_building_upgrade(2, "Market", "Memphis");
+    place_building_upgrade(2, "Library", "Memphis");
+    place_building_upgrade(2, "University", "Memphis");
+    place_building_upgrade(2, "Tower", "Memphis");
+    place_building_upgrade(2, "Tower", "Memphis");
+  }
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Giza");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  if (infrastructure < 3) {
+    place_building_upgrade(2, "Temple", "Giza");
+  }
+  else if (infrastructure < 7) {
+    place_building_upgrade(2, "Temple", "Giza");
+    place_building_upgrade(2, "Market", "Giza");
+    place_building_upgrade(2, "Tower", "Giza");
+  }
+  else {
+    place_building_upgrade(2, "Temple", "Giza");
+    place_building_upgrade(2, "Market", "Giza");
+    place_building_upgrade(2, "Fort", "Giza");
+    place_building_upgrade(2, "Tower", "Giza");
+    place_building_upgrade(2, "Tower", "Giza");
+  }
+  /////////////////////////////////////////////////////
+
+  if (diff < 3) {
+    destroy_building_type(2, "Tower");
+  }
+
+  gain_tech(1, "Military");
+  gain_tech(1, "Civic");
+}

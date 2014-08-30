@@ -83,7 +83,6 @@ class CreateCity (Message):
     def check(self, world, sender):
         city = self.city
         player = city.player
-        self.price = player.get_city_price()
 
         # Make sure the right player is sending this message.
         if sender.player is not player:

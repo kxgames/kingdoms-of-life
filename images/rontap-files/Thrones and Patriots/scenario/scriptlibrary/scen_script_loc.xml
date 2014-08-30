@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by XMLSPY 5 Professional Ed. Release 2 (Big Huge Games) -->
+<ROOT name="scriptlibrary ">
+	<FILE hash="2933228" name="ctw_lib">
+		<STRING hash="536232">Lodi</STRING>
+		<STRING hash="2039021">Aztecs</STRING>
+		<STRING hash="1035240">Maya</STRING>
+		<STRING hash="1071083">Inca</STRING>
+		<STRING hash="1256409">Bantu</STRING>
+		<STRING hash="2782538">Nubians</STRING>
+		<STRING hash="1472740">Greeks</STRING>
+		<STRING hash="1846297">Romans</STRING>
+		<STRING hash="4447723">Egyptians</STRING>
+		<STRING hash="1021102">Turks</STRING>
+		<STRING hash="2344938">Spanish</STRING>
+		<STRING hash="1801297">French</STRING>
+		<STRING hash="2245385">British</STRING>
+		<STRING hash="2566969">Germans</STRING>
+		<STRING hash="3405402">Russians</STRING>
+		<STRING hash="2127023">Chinese</STRING>
+		<STRING hash="3165873">Japanese</STRING>
+		<STRING hash="2547333">Koreans</STRING>
+		<STRING hash="2226047">Mongols</STRING>
+		<STRING hash="3051219">Iroquois</STRING>
+		<STRING hash="2049155">Lakota</STRING>
+		<STRING hash="4854206">Americans</STRING>
+		<STRING hash="2506802">Indians</STRING>
+		<STRING hash="1241213">Dutch</STRING>
+		<STRING hash="3351807">Persians</STRING>
+		<STRING hash="1013259">Error</STRING>
+	</FILE>
+	<FILE hash="11332504" name="general_powers">
+		<STRING hash="6028728">+1 attack!</STRING>
+		<STRING hash="9617559">Double craft!</STRING>
+		<STRING hash="10205736">Bigger radius!</STRING>
+		<STRING hash="15908794">3x longer ambush!</STRING>
+		<STRING hash="36008525">Starts with 5 Companions!</STRING>
+		<STRING hash="20456150">Heals nearby units!</STRING>
+		<STRING hash="63043918">Entrenched units take 80% damage!</STRING>
+		<STRING hash="23681803">2x entrenchment speed</STRING>
+		<STRING hash="95068001">+3 attack to buildings when garrisoned!</STRING>
+		<STRING hash="3807325">+1 range!</STRING>
+		<STRING hash="4025243">+1 armor!</STRING>
+		<STRING hash="5553989">+1 defense!</STRING>
+		<STRING hash="12381841">Always cloaked!</STRING>
+		<STRING hash="33200321">+1 Horse Archer attack!</STRING>
+		<STRING hash="4205924">2x craft!</STRING>
+		<STRING hash="27148820">Detects cloaked units!</STRING>
+		<STRING hash="15323978">Double hit points</STRING>
+		<STRING hash="15928973">Creates 2x decoys</STRING>
+		<STRING hash="18695144">+2 attack to siege!</STRING>
+		<STRING hash="15661243">+1 range to siege!</STRING>
+		<STRING hash="20662640">Reveals all enemies!</STRING>
+		<STRING hash="9321886">Triple craft!</STRING>
+		<STRING hash="9940736">Instant snipe!</STRING>
+		<STRING hash="16983525">Instant sabotage!</STRING>
+		<STRING hash="16629125">Double hit points!</STRING>
+		<STRING hash="34436342">Enables the War Chariot!</STRING>
+		<STRING hash="40934474">Increases building plunder!</STRING>
+		<STRING hash="55043812">Gains plunder from enemy units!</STRING>
+		<STRING hash="18697323">+3 attack to siege!</STRING>
+		<STRING hash="39871215">+2 Heavy Infantry attack!</STRING>
+		<STRING hash="34115572">50% faster Forced March!</STRING>
+		<STRING hash="38372512">+1 Heavy Cavalry attack!</STRING>
+		<STRING hash="79337652">Can Entrench outside home territory!</STRING>
+		<STRING hash="68252999">+1 Line-of-Sight for ranged units!</STRING>
+		<STRING hash="19689220">Prevents attrition!</STRING>
+		<STRING hash="27064909">2x craft regeneration!</STRING>
+		<STRING hash="85068739">Increases Greek Mercenaries' attack!</STRING>
+		<STRING hash="76045622">Increases Greek Mercenaries' armor!</STRING>
+		<STRING hash="22155313">20% faster Cavalry!</STRING>
+		<STRING hash="24449544">20% faster Elephants!</STRING>
+		<STRING hash="32518717">Starts with 4 Commandos!</STRING>
+		<STRING hash="15019414">+1 siege attack!</STRING>
+	</FILE>
+</ROOT>

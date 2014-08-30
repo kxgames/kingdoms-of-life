@@ -1,0 +1,39 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  coldwar_rules();
+
+  int diff = get_difficulty();
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  if (get_ctw_int("revolt") == 1) {
+    set_nation_name("Germans", $S("Hungarians"));
+    set_leader_name(8, $S("Imre Nagy"));
+    infrastructure_setup(2, "Warsaw", "Krakow", "Prague");
+  }
+  else if (get_ctw_int("revolt") == 3) {
+    set_nation_name("Germans", $S("Czechoslovakians"));
+    set_leader_name(8, $S("Alexander Dubcek"));
+    infrastructure_setup(2, "Warsaw", "Krakow", "Budapest");
+  }
+  else {
+    infrastructure_setup(0, "Warsaw", "Krakow", "");
+    infrastructure_setup(0, "Prague", "", "");
+    infrastructure_setup(0, "Budapest", "", "");
+  }
+  
+  if (find_capital(8) == $S("Prague")) {
+    set_nation_name("Germans", $S("Czechoslovakians"));
+  }
+  else if (find_capital(8) == $S("Budapest")) {
+    set_nation_name("Germans", $S("Hungarians"));
+  }
+
+ 
+}
+
+

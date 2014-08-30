@@ -1,0 +1,135 @@
+
+
+int scenario snap_screenshot( ref int center_screen_x, ref int center_screen_y, 
+                              ref int delta_horiz_x,   ref int delta_horiz_y, 
+                              ref int delta_vert_x,    ref int delta_vert_y,
+                              ref int num_x,           ref int num_y )
+{
+  scrolling_lock();
+  zooming_lock();
+  ui_hide();
+
+  xs = world_x_size();
+  ys = world_y_size();
+
+  x_min_x = 0;
+  x_min_y = 0;
+  x_max_x = 0;
+  x_max_y = 0;
+  y_min_x = 0;
+  y_min_y = 0;
+  y_max_x = 0;
+  y_max_y = 0;
+  x_center = 0;
+  y_center = 0;
+  first_eval = true;
+
+  for( x = 0; x < xs; x++ ) {
+    for( y = 0; y < ys; y++ ) {
+      if( is_on_screen( x, y ) ) {
+        if( !first_eval ) {
+          if( x < x_min_x )  { x_min_x = x; x_min_y = y; } 
+          if( x > x_max_x )  { x_max_x = x; x_max_y = y; }
+          if( y < y_min_y )  { y_min_x = x; y_min_y = y; }
+          if( y > y_max_y )  { y_max_x = x; y_max_y = y; }
+        } else {
+          x_min_x = x;
+          x_min_y = y;
+          x_max_x = x;
+          x_max_y = y;
+          y_min_x = x;
+          y_min_y = y;
+          y_max_x = x;
+          y_max_y = y;
+          first_eval = false;
+        }
+      }
+    }
+  }
+
+  delta_horiz_x = y_min_x - x_min_x;
+  delta_horiz_y = y_min_y - x_min_y;
+
+  delta_vert_x  = y_max_x - x_min_x;
+  delta_vert_y  = y_max_y - x_min_y;
+
+  center_screen_x = get_camera_x();
+  center_screen_y = get_camera_y();
+
+  return 1;
+}
+
+
+scenario {
+  static int taking_screenshots = 0;
+  static int center_screen_x = 0;
+  static int center_screen_y = 0;
+  static int delta_horiz_x   = 0;
+  static int delta_horiz_y   = 0;
+  static int delta_vert_x    = 0;
+  static int delta_vert_y    = 0;
+  static int num_x = 3;
+  static int cur_x = 0;
+  static int num_y = 3;
+  static int cur_y = 0;
+  static int max_screen_shot_size = 5;
+  static string screenshot_name = "wide_screenshot_";
+
+  run_once {
+    print_game_msg("*Wide Screenshot Loaded*");
+    print_game_msg("- Press '1' to take the screenshot");
+    print_game_msg("- Press '2' to cycle through the size options");
+  }
+
+  trigger take_picture( key_down("1")) {
+    taking_screenshots = 1;
+    clear_game_msg();
+    snap_screenshot( center_screen_x, center_screen_y, delta_horiz_x, delta_horiz_y, delta_vert_x, delta_vert_y, num_x, num_y );
+  }
+
+  trigger set_dimensions( key_down("2") && !taking_screenshots ) {
+    if( num_x <= max_screen_shot_size ) {
+      num_x++;
+    } else {
+      num_y++;
+      num_x = 1;
+      if( num_y > max_screen_shot_size ) {
+        num_x = 2;
+        num_y = 1;
+      }
+    }
+  
+    dimensions = "x";
+    dimensions = num_x + dimensions;
+    dimensions = dimensions + num_y;
+
+    clear_game_msg();
+    print_game_msg(dimensions);
+    enable_trigger("set_dimensions");
+  }
+
+  trigger snap_shot( taking_screenshots ) {
+    string cur_screenshot = screenshot_name + cur_x;
+    cur_screenshot = cur_screenshot + cur_y;
+    take_screenshot( cur_screenshot );
+
+    cur_x = cur_x + 1;
+    if( cur_x >= num_x ) {
+      cur_y = cur_y + 1;
+      cur_x = 0;
+    }
+
+    if( cur_y < num_y ) {
+      new_camera_x = center_screen_x + delta_horiz_x * cur_x + delta_vert_x * cur_y;
+      new_camera_y = center_screen_y + delta_horiz_y * cur_x + delta_vert_y * cur_y;
+      jump_camera( new_camera_x, new_camera_y );
+      enable_trigger("snap_shot");
+    } else {
+      taking_screenshots = 0;
+      print_game_msg("Screenshot complete.");
+      scrolling_unlock();
+      zooming_unlock();
+      ui_show();
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute-->
+<TRIBE name="I TEDESCHI">
+	<LEADERS>
+		<LEADER>Alarico il Visigoto</LEADER>
+		<LEADER>Federico il Grande</LEADER>
+		<LEADER>Otto von Bismarck</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Berlino</CITY>
+		<CITY>Vienna</CITY>
+		<CITY>Bonn</CITY>
+		<CITY>Monaco di Baviera</CITY>
+		<CITY>Amburgo</CITY>
+		<CITY>Colonia</CITY>
+		<CITY>Lipsia</CITY>
+		<CITY>Dresda</CITY>
+		<CITY>Lubecca</CITY>
+		<CITY>Rostock</CITY>
+		<CITY>Magdeburgo</CITY>
+		<CITY>Braunschweig</CITY>
+		<CITY>Erfurt</CITY>
+		<CITY>Wittenberg</CITY>
+		<CITY>Regensburg</CITY>
+		<CITY>Linz</CITY>
+		<CITY>Costanza</CITY>
+		<CITY>Augusta</CITY>
+		<CITY>Norimberga</CITY>
+		<CITY>Würzburg</CITY>
+		<CITY>Treviri</CITY>
+		<CITY>Magonza</CITY>
+		<CITY>Strasburgo</CITY>
+		<CITY>Luttich</CITY>
+		<CITY>Brandeburgo</CITY>
+		<CITY>Coblenza</CITY>
+		<CITY>Heidelberg</CITY>
+		<CITY>Düsseldorf</CITY>
+		<CITY>Kiel</CITY>
+		<CITY>Francoforte</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

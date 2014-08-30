@@ -1,0 +1,224 @@
+include "game_structs.bhs"
+
+scenario
+{
+
+labels {
+  //Add any constant labels here in a comma separated list.
+}
+
+static diff = get_difficulty();
+static fx = 2;
+static fy = 90;
+static rate_guy = 0;
+static int unit_health = 0;
+static int companion_health = 0;
+static UnitGroup first_battalion;
+
+run_once {
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+  disable_all_triggers();
+  disable_city_ai(2);
+
+  first_battalion.clear_group();
+  first_battalion.nation = 1;
+
+  for (i = 0; i < num_military_units(1); i++) {
+    unit_id = find_military(1);
+    first_battalion.add_to_group(unit_id);
+  }
+
+  unit_id = find_unit(1, "Phalanx");
+  unit_health = object_max_health(1, unit_id);
+  
+  unit_id = find_unit(1, "Companion");
+  companion_health = object_max_health(1, unit_id);
+
+  enable_trigger("Ujjain_Captured");
+  enable_trigger("Gulbarga_Captured");
+  enable_trigger("Dharwad_Captured");
+  enable_trigger("Arikamedu_Captured");
+  enable_trigger("Bavikonda_Captured");
+  enable_trigger("Ayodhya_Captured");
+  enable_trigger("Rajagaha_Captured");
+  enable_trigger("PhalanxReplacer");
+
+  if (diff > 2) {
+    enable_trigger("Mutiny");
+    set_timer("MUT", rand_int(300, 480));
+  }
+}
+
+trigger Ujjain_Captured(1 == find_city_owner("Ujjain"))
+{
+  popup_dialog($S("You have gained 2000 Knowledge#ICON4 from Ujjain's Librarys."));
+  give_good(1, "Knowledge", 2000);
+}
+
+trigger Gulbarga_Captured(1 == find_city_owner("Gulbarga"))
+{
+  popup_dialog($S("In Gulbarga, one of your Generals finds a box containing detailed maps of all the provinces of India."));
+  set_explored(1, world_x_size()/2, world_y_size()/2, world_x_size());
+}
+
+trigger Dharwad_Captured(1 == find_city_owner("Dharwad"))
+{
+  //triple companion hitpoints to combat elephants
+  popup_dialog($S("In Dharwad, you discover a new training technique for horses which enables your Companions to become more effective against War Elephants."));
+  set_object_type_max_health("Companion", companion_health*3);
+}
+
+trigger Arikamedu_Captured(1 == find_city_owner("Arikamedu"))
+{
+  popup_dialog($S("By taking control of Arikamedu, you have reduced Maurya's capability to fields large armies."));
+  if (population_cap(2) > 100) {
+    set_population_cap(2, 100);
+  }
+}
+
+trigger Bavikonda_Captured(1 == find_city_owner("Bavikonda"))
+{
+  popup_dialog($S("After taking Bavikonda, Indian healers have taught your soldiers how to heal themselves."));
+  enable_trigger("Heal_Units");
+  set_timer("HU", 2);
+}
+
+trigger Heal_Units(timer_expired("HU"))
+{
+  for (i = 0; i < num_type_upgrade(1, "Javelineers"); i++) {
+    unit_id = find_unit(1, "Javelineers");
+    if (object_health(1, unit_id) < 100) {
+      heal_object(1, unit_id, 2);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Phalanx"); i++) {
+    unit_id = find_unit(1, "Phalanx");
+    if (object_health(1, unit_id) < 100) {
+      heal_object(1, unit_id, 2);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Archers"); i++) {
+    unit_id = find_unit(1, "Archers");
+    if (object_health(1, unit_id) < 100) {
+      heal_object(1, unit_id, 2);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Light Horse"); i++) {
+    unit_id = find_unit(1, "Light Horse");
+    if (object_health(1, unit_id) < 100) {
+      heal_object(1, unit_id, 2);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Companion"); i++) {
+    unit_id = find_unit(1, "Companion");
+    if (object_health(1, unit_id) < 100) {
+      heal_object(1, unit_id, 2);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Horse Archer"); i++) {
+    unit_id = find_unit(1, "Horse Archer");
+    if (object_health(1, unit_id) < 100) {
+      heal_object(1, unit_id, 2);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Catapult"); i++) {
+    unit_id = find_unit(1, "Catapult");
+    if (object_health(1, unit_id) < 100) {
+      heal_object(1, unit_id, 2);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Supply Wagon"); i++) {
+    unit_id = find_unit(1, "Supply Wagon");
+    if (object_health(1, unit_id) < 100) {
+      heal_object(1, unit_id, 2);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "General"); i++) {
+    unit_id = find_unit(1, "General");
+    if (object_health(1, unit_id) < 100) {
+      heal_object(1, unit_id, 2);
+    }
+  }
+  enable_trigger("Heal_Units");
+  set_timer("HU", 2);
+}
+
+trigger Ayodhya_Captured(1 == find_city_owner("Ayodhya"))
+{
+  //triple wealth income.
+  //large marmots in the himalayas still dig up gold bearing soil
+  popup_dialog($S("Several of your Scouts bring you a fantastic story: They have spotted little furry creatures that are digging up gold. You ride to investigate and find that the marmots of this region are burrowing beneath the sand and turning up soil filled with gold dust! Your Wealth#ICON3 gather rate and Commerce cap triples."));
+  com_cap = get_commerce_cap(1, "Wealth");
+  set_bonus_cap(1, "Wealth", com_cap*2);
+  enable_trigger("TripleWealth");
+}
+
+trigger TripleWealth(rate_guy != (gather_rate(1, "Wealth") - get_base_rate(1, "Wealth"))*2)
+{
+  if (!resource_cap_warning(1, "Wealth")) {
+    rate_guy = gather_rate(1, "Wealth") - get_base_rate(1, "Wealth");
+    if (rate_guy > 0) {
+      set_base_rate(1, "Wealth", rate_guy*2);
+    }
+    else {
+      set_base_rate(1, "Wealth", 999);
+    }
+  }
+  enable_trigger("TripleWealth");
+}
+
+
+trigger Rajagaha_Captured(1 == find_city_owner("Rajagaha"))
+{
+  popup_dialog($S("Brahmin sages in Rajagaha have shown your phalangites how to increase their endurance. Your Phalanx units are now much tougher in battle."));
+  set_object_type_max_health("Phalanx", unit_health*2);
+}
+
+trigger PhalanxReplacer()
+{
+  built_id = get_last_type_built(2, "Phalanx");
+  if (built_id > -1) {
+    x = object_position_x(2, built_id);
+    y = object_position_y(2, built_id);
+    kill_unit_anim(2, built_id, 1);
+    create_unit(2, x, y, "Hoplites", 1);
+  }
+  enable_trigger("PhalanxReplacer");
+}
+
+trigger Mutiny(timer_expired("MUT"))
+{
+  popup_dialog($S("Your soldiers are tired of fighting. They have followed you this far from Macedon but will follow you no further."));
+  first_battalion.group_move_order(fx, fy);
+  for (i = 0; i < first_battalion.units.length; i++) {
+    unit_id = first_battalion.units[i];
+    unit_ignore_orders(1, unit_id);
+  }
+  enable_trigger("Units_Leave");
+}
+
+trigger Units_Leave(any_object_near(1, 1, fx, fy, 20))
+{
+  for (i = 0; i < first_battalion.units.length; i++) {
+    unit_id = first_battalion.units[i];
+    if (object_near(1, unit_id, fx, fy, 15)) {
+      first_battalion.remove_from_group(unit_id);
+      kill_unit_anim(1, unit_id, 1);
+      //i = 0;
+    }
+  }
+
+  if (first_battalion.units.length > 0) {
+    enable_trigger("Units_Leave");
+  }
+}
+
+if(time() >= get_time_limit()) {
+  defeat(1);
+}
+
+}

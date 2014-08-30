@@ -1,0 +1,370 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by XMLSPY 5 Professional Ed. Release 2 (Big Huge Games) -->
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Isaac Ellis (Big Huge Games) -->
+<ROOT name="Alexander the Great" desc="Follow in the footsteps of Alexander the Great to conquer the known world of 336 B.C.!" intro="Alexander the Great was one of history's most brilliant generals. Alexander was thrust onto the throne at a young age after the murder of his father, the King of Macedonia, in 336 B.C. At the time of his death 13 years later, his empire spanned most of the known world from Greece to India. Follow in his footsteps or forge your own path as you attempt to CONQUER THE WORLD!" victory_conditions="Through conquest, coercion, and shrewd dealing, gain control over the entire world." minimap_continents="./art/CTW_Minimap_Overlay_02.tga" intro_image="./art/CTW_Loading_Background_02.tga" tex_width="1098" tex_height="618" map_width="2196" map_height="1236" turns_per_age="19" starting_round="1" starting_age="1" ending_age="1" allow_random_nations="0" allow_random_bonuses="0" allow_vassals="0" battle_script_file="./conquest/Alexander/alexander_battles.bhs" post_turn_script_file="./conquest/Alexander/alexander_post_turn.bhs" diplo_response_script_file="./conquest/Alexander/alexander_diplo.bhs" diplo_offer_script_file="./conquest/scripts/diplo_offer.bhs" initialization_script_file="./conquest/Alexander/alexander_init.bhs" camera_default_zoom="750" global_scale="2.2" hero_unit="Alexander" voiceover="./sounds/voiceover/alexander.wav" no_patriot="1">
+  <TEXTURE file=".\art\CTWMap_0.tga" alpha="0" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_1.tga" alpha="32" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_2.tga" alpha="64" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_3.tga" alpha="96" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_4.tga" alpha="128" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_5.tga" alpha="160" tile_ratio="5"/>
+  <CONTINENTS image_file="./art/CTW_Continent_Victory_Map_Alex.tga" image_width="441" image_height="239">
+    <CONTINENT name="Western Asia" id="West Asia" barbarian_file="alex_barbarians_wasia.xml" image_file="./art/CTW_Continent_Victory_Alex_Arabia.tga"/>
+    <CONTINENT name="Southern Asia" id="East Asia" barbarian_file="alex_barbarians_easia.xml" image_file="./art/CTW_Continent_Victory_Alex_India.tga"/>
+    <CONTINENT name="Northern Africa" id="Africa" barbarian_file="alex_barbarians_africa.xml" image_file="./art/CTW_Continent_Victory_Alex_NAfrica.tga"/>
+    <CONTINENT name="Southern Europe" id="Europe" barbarian_file="alex_barbarians_europe.xml" image_file="./art/CTW_Continent_Victory_Alex_Italy.tga"/>
+  </CONTINENTS>
+  <CONQUESTSTYLES>
+    <DEFENSIVE>
+      <STYLE title="Guerrilla Warfare" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" mapsizes="Arena" map_style="Defender Attack" setup=".\conquest\Alexander\guerillasetup.bhs" runtime=".\conquest\Alexander\guerillaruntime.bhs" objective="Destroy 25 enemy units." description="The enemy has taken several of your cities. Their morale is not very high, however if enough of their men are eliminated they will likely retreat." victory_text="You have won the battle." defeat_text="You have lost the battle." land_only="1"/>
+      <STYLE title="Conquest" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" setup=".\conquest\scripts\conquestsetup.bhs" runtime=".\conquest\scripts\conquestruntime.bhs" objective="Capture the enemy capital(s) or hold out for $NUM0 minutes." description="You are being invaded by a treacherous neighbor. Take the enemy capital(s) or hold off their assault for $NUM0 minutes to force them to withdraw." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"/>
+    </DEFENSIVE>
+    <OFFENSIVE>
+      <STYLE title="Conquest" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" setup=".\conquest\scripts\conquestsetup.bhs" runtime=".\conquest\scripts\conquestruntime.bhs" objective="Capture the enemy capital(s) in $NUM0 minutes." description="The enemy is resisting your invasion. Take their capital(s) in $NUM0 minutes or less to win." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="Supply Train" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" no_rare="1" mapsizes="Arena" map_style="Standard No City" setup=".\conquest\Alexander\supplytrainsetup.bhs" runtime=".\conquest\Alexander\supplytrainruntime.bhs" bonus=".\conquest\Alexander\supplybonus.bhs" description="The enemy army has decided that they cannot win this battle and are fleeing with all of their supplies. Destroy their supply wagons to gain these supplies for yourself, but be careful; the enemy is not totally helpless." victory_text="You have won the battle." defeat_text="You have lost the battle" land_only="1"/>
+      <STYLE title="Hideaway" eliminations="Conquest" victories="Time Limit" min_victory="30" max_victory="30" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\Alexander\hideawaysetup.bhs" runtime=".\conquest\Alexander\hideawayruntime.bhs" objective="Eliminate all enemy Generals or control 70% of the territory." description="The enemy's army is tied up elsewhere, so they have hired mercenaries. These mercenaries can survive without a City and they suffer no attrition. To find them will require some careful scouting; they are aware of your presence and will certainly set up ambushes. And beware--they will raid your homeland relentlessly." victory_text="You have rooted out the mercenaries." defeat_text="The mercenaries have overwhelmed you." land_only="1"/>
+    </OFFENSIVE>
+    <BARBARIAN>
+      <STYLE title="Melee" eliminations="Capital" victories="Time Limit" add_opponents_diff0="1" add_opponents_diff1="1" add_opponents_diff2="1" add_opponents_diff3="1" add_opponents_diff4="1" add_opponents_diff5="2" min_victory="90" max_victory="90" setup=".\conquest\scripts\meleesetup.bhs" runtime=".\conquest\scripts\meleeruntime.bhs" objective="Capture the enemy capital or defeat them by capturing territory in $NUM0 minutes." description="The barbarians in this territory are hostile and must be eliminated. Defeat them by capturing their capitals or capturing most of their territory in $NUM0 minutes." victory_text="You have won the battle." defeat_text="You have lost the battle." land_only="1"/>
+      <STYLE title="Tactics" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" map_style="Defender" setup=".\conquest\scripts\offsetup0.bhs" runtime=".\conquest\scripts\offruntime0.bhs" bonus=".\conquest\scripts\battlebonus.bhs" objective="Find and capture the enemy's capital." description="Expecting no resistance to your invasion, no support troops were included in your expeditionary force.  A fortified city has been encountered, however, and must be eliminated." victory_text="You have won the battle." defeat_text="You have lost the battle." water_only="1"/>
+      <STYLE title="Nomad" eliminations="Conquest" victories="Time Limit" add_opponents_diff0="2" add_opponents_diff1="2" add_opponents_diff2="2" add_opponents_diff3="2" add_opponents_diff4="2" add_opponents_diff5="2" min_victory="60" max_victory="60" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\scripts\nomadsetup.bhs" runtime=".\conquest\scripts\nomadruntime.bhs" description="You have successfully established a new settlement, but several nomadic tribes also claim this territory. Eliminate them in order to protect your people." victory_text="You have defeated all of the nomad tribes." defeat_text="You were unable to defeat all of the nomad tribes." land_only="1"/>
+      <STYLE title="Hideaway" eliminations="Conquest" victories="Time Limit" min_victory="30" max_victory="30" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\Alexander\hideawaysetup.bhs" runtime=".\conquest\Alexander\hideawayruntime.bhs" objective="Eliminate all enemy Generals or control 70% of the territory." description="The enemy's army is tied up elsewhere, so they have hired mercenaries. These mercenaries can survive without a City and they suffer no attrition. To find them will require some careful scouting; they are aware of your presence and will certainly set up ambushes. And beware--they will raid your homeland relentlessly." victory_text="You have rooted out the mercenaries." defeat_text="The mercenaries have overwhelmed you." land_only="1"/>
+    </BARBARIAN>
+    <CUSTOM>
+      <STYLE title="Pillage" id="Pillage" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" map_style="Custom" setup=".\conquest\Alexander\pillagesetup.bhs" runtime=".\conquest\Alexander\pillage.bhs" custom_map=".\conquest\Alexander\pillage.scx" description="Deciding that your troops deserve a break, you are relying on mercenaries that can be built from your Fort. The mercenaries gain five times as much plunder resources from destroying a building as normal troops. Stockpile enough plunder to pay the mercenaries. They will abandon you when time expires or when all enemy cities are destroyed." victory_text="You have won the battle." defeat_text="The mercenaries have abandoned you."/>
+      <STYLE title="The Siege of Tyre #ICON69" id="The Siege of Tyre" eliminations="Conquest" ai_start_x="" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\tyresetup.bhs" runtime=".\conquest\Alexander\tyre.bhs" custom_map=".\conquest\Alexander\tyre.scx" objective="Move Alexander near the Temple at Tyre or capture the enemy capital." description="The inhabitants of Tyre have fled to their island fortress, believing that their navy will protect them. You must find a way to overpower or escape the Tyrian navy and land your forces on the island of Tyre in order to capture their capital. Also, Alexander has taken sick this battle, so be careful; his health is less than normal." victory_text="You have won the battle." defeat_text="You have lost the battle." default=""/>
+      <STYLE title="The Siege of Tyre #ICON69" id="siege2" eliminations="Conquest" ai_start_x="" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\tyresetup.bhs" runtime=".\conquest\Alexander\tyre.bhs" custom_map=".\conquest\Alexander\tyre2.scx" objective="Move Alexander near the Temple at Tyre or capture the enemy capital." description="The inhabitants of Tyre have fled to their island fortress, believing that their navy will protect them. You must find a way to overpower or escape the Tyrian navy and land your forces on the island of Tyre in order to capture their capital. Also, Alexander has taken sick this battle, so be careful; his health is less than normal." victory_text="You have won the battle." defeat_text="You have lost the battle." default=""/>
+      <STYLE title="The Siege of Tyre #ICON69" id="siege3" eliminations="Conquest" ai_start_x="" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\tyresetup.bhs" runtime=".\conquest\Alexander\tyre.bhs" custom_map=".\conquest\Alexander\tyre3.scx" objective="Move Alexander near the Temple at Tyre or capture the enemy capital." description="The inhabitants of Tyre have fled to their island fortress, believing that their navy will protect them. You must find a way to overpower or escape the Tyrian navy and land your forces on the island of Tyre in order to capture their capital. Also, Alexander has taken sick this battle, so be careful; his health is less than normal." victory_text="You have won the battle." defeat_text="You have lost the battle." default=""/>
+      <STYLE title="The Riches of Persia #ICON72" no_hero="1" id="riches" eliminations="Capital" player_start_x="8" player_start_y="174" ai_start_x="212" ai_start_y="74" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\persiasetup.bhs" runtime=".\conquest\Alexander\persiaruntime.bhs" custom_map=".\conquest\Alexander\persia.scx" description="Your battle tested army has finally arrived at Persepolis and is poised for a final strike. Lead them forward and seize what is yours, the throne of Persia." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="The Riches of Persia #ICON72" no_hero="1" id="riches2" eliminations="Capital" player_start_x="203" player_start_y="53" ai_start_x="212" ai_start_y="74" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\persiasetup.bhs" runtime=".\conquest\Alexander\persiaruntime.bhs" custom_map=".\conquest\Alexander\persia2.scx" description="Your battle tested army has finally arrived at Persepolis and is poised for a final strike. Lead them forward and seize what is yours, the throne of Persia." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="Battle of the Jhelum #ICON74" id="Battle of the Hydaspes" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\jhelumsetup.bhs" runtime=".\conquest\Alexander\jhelum.bhs" custom_map=".\conquest\Alexander\jhelum.scx" description="Porus of the Pauravans rules this land through fear and force. There are certain to be dissident tribes eager to work with us. A local ally would be a great aid in unseating Porus." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Battle of the Jhelum #ICON74" id="Battle of the Hydaspes2" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\jhelumsetup.bhs" runtime=".\conquest\Alexander\jhelum.bhs" custom_map=".\conquest\Alexander\jhelum3.scx" description="Porus of the Pauravans rules this land through fear and force. There are certain to be dissident tribes eager to work with us. A local ally would be a great aid in unseating Porus." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Barbarians of Thrace #ICON64" id="Barbarians of Thrace" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\thracesetup.bhs" runtime=".\conquest\Alexander\thrace.bhs" custom_map=".\conquest\Alexander\thrace.scx" description="The Illyrian barbarians in this territory have revolted against your rule. You have allied with one of the local tribes. With their assistance, you must crush the Illyrians and all others who oppose you." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Nomad" id="Nomad" eliminations="Conquest" victories="Time Limit" add_opponents_diff0="2" add_opponents_diff1="2" add_opponents_diff2="2" add_opponents_diff3="2" add_opponents_diff4="2" add_opponents_diff5="2" min_victory="60" max_victory="60" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\scripts\nomadsetup.bhs" runtime=".\conquest\scripts\nomadruntime.bhs" description="You have successfully established a new settlement, but several nomadic tribes also claim this territory. Eliminate them in order to protect your people." victory_text="You have defeated all of the nomad tribes." defeat_text="You were unable to defeat all of the nomad tribes." land_only="1"/>
+      <STYLE title="Desert Trek" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" mapsizes="Arena" map_style="Standard No City" setup=".\conquest\Alexander\desertsetup.bhs" runtime=".\conquest\Alexander\desertruntime.bhs" objective="Hurry across the desert to the Lookout Tower before the timer runs out." bonus=".\conquest\Alexander\desertbonus.bhs" description="The desert is a harsh environment, but this one must be crossed. Get your troops to the other side before they die from exposure. A base camp has been established by advance Scouts. Head for their Lookout Post." victory_text="You have crossed the desert successfully!" defeat_text="You have perished in the sands." land_only="1"/>
+      <STYLE title="Unite the City States #ICON65" id="Unite the Greek City States" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\greece2setup.bhs" runtime=".\conquest\Alexander\greece2.bhs" custom_map=".\conquest\Alexander\greece2.scx" bonus=".\conquest\Alexander\greece2bonus.bhs" description="Greece is in revolt. You must swiftly put down the insurrection before they can accumulate any real power. You should begin by convincing the Thessalians (Blue) to join your side by sending your large army to their capital, as they may still feel some loyalty to you." victory_text="You have united Greece." defeat_text="You have failed to unite Greece."/>
+      <STYLE title="Desert Diplomacy" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\yemensetup.bhs" runtime=".\conquest\Alexander\yemen.bhs" custom_map=".\conquest\Alexander\yemen.scx" objective="Use diplomacy and force to conquer all enemies." description="There are several native tribes in this territory vying for power. Use your diplomatic skills to play them off of each other and ensure your own dominance in the area.  Defeat the barbarian tribes in $NUM0 minutes." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Low Rations" eliminations="Capital" map_style="Custom" setup=".\conquest\Alexander\barbariantacticssetup.bhs" runtime=".\conquest\Alexander\barbariantactics.bhs" custom_map=".\conquest\Alexander\barbariantactics.scx" objective="Capture the enemy capital(s) before you run out of rations." description="Your army is in desperate straits. Your enemy has control of over 80% of the territory and threatens to drive you into retreat. To make matters worse, rations are running low. You must quickly reclaim some territory and pillage the enemy cities for rations before your army dissolves from hunger. Destroy the enemy Capital(s) to bring the area under your control." victory_text="You have won the battle." defeat_text="You have lost the battle." land_only="1"/>
+      <STYLE title="Battle of the Nile #ICON70" id="Battle of the Nile" eliminations="Capital" player_start_x="50" player_start_y="50" ai_start_x="122" ai_start_y="162" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\egyptsetup.bhs" runtime=".\conquest\Alexander\egyptruntime.bhs" custom_map=".\conquest\Alexander\egypt.scx" description="You encountered scant resistance at the mouth of the Nile and were able to establish several bases. But Egypt has only recently won back its independence from Persia, and the Egyptians are unlikely to give it up without a fight!" victory_text="You have conquered Egypt." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="The Cilician Gates #ICON67" id="Battle at the Cilician Gates" eliminations="Capital" player_start_x="14" player_start_y="18" ai_start_x="158" ai_start_y="178" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\ciliciansetup.bhs" runtime=".\conquest\Alexander\cilicianruntime.bhs" custom_map=".\conquest\Alexander\ciliciangates.scx" description="To move any further east you must pass through the Cilician Gates. It is a harsh mountain pass and is heavily fortified by the Persians." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="Halicarnassus #ICON66" id="Battle at Halicarnassus" eliminations="Capital" player_start_x="58" player_start_y="6" ai_start_x="178" ai_start_y="90" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\halicarnassussetup.bhs" runtime=".\conquest\Alexander\halicarnassusruntime.bhs" custom_map=".\conquest\Alexander\halicarnassus.scx" description="The Persian supreme commander of the west, Memnon of Rhodes, has fortified the city of Halicarnassus. He hopes to buy time for Darius III to gather a large army to oppose you. Before you can march on Halicarnassus, however, it is necessary to capture the port town of Miletus in order to secure our supply lines. Beware of the Persian Anusiya unit. It attacks from a distance, but is highly effective against Cavalry. Use your Archers to defeat the Anusiya." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="The Granicus #ICON66" id="Battle at the Granicus" eliminations="Capital" player_start_x="34" player_start_y="85" ai_start_x="217" ai_start_y="214" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\granicussetup.bhs" runtime=".\conquest\Alexander\granicusruntime.bhs" custom_map=".\conquest\Alexander\granicus.scx" description="The Greek mercenary general Memnon commands an opposing army that awaits you across the Granicus river. To subdue the Persians in this territory, you must first remove this obstacle. Beware of the Persian Anusiya unit. It attacks from a distance, but is highly effective against Cavalry. Use your Archers to defeat the Anusiya." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="Battle of Issus #ICON68" id="Battle of Issus" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" setup=".\conquest\Alexander\dariussetup.bhs" runtime=".\conquest\Alexander\dariusruntime.bhs" description="The Great King Darius himself has taken the field against us! He has gathered a large army and the odds in his favor are overwhelming. Your only advantage lies in Darius' deep-seated fear of Alexander." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="Gaugamela #ICON71" id="Battle of Gaugamela" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" setup=".\conquest\Alexander\darius2setup.bhs" runtime=".\conquest\Alexander\darius2runtime.bhs" description="The Great King Darius himself has taken the field against us! He has gathered a large army and the odds in his favor are overwhelming. Your only advantage lies in Darius' deep-seated fear of Alexander." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="Samnite War" id="Samnite War" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\latiumsetup.bhs" runtime=".\conquest\Alexander\latium.bhs" custom_map=".\conquest\Alexander\latium.scx" description="Rome has been unable to unite the Italian peninsula and is embroiled in war. The Samnites have formed a league of alliance with the Etruscans and the Umbrians to oppose the Romans. While these powers squander their strength in battle, it may be possible for you to instate your own rule. You have arrived by ship in the Greek city-state of Neapolis." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Magadha" id="Magadha" player_start_x="22" player_start_y="170" ai_start_x="130" ai_start_y="74" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\magadhasetup.bhs" runtime=".\conquest\Alexander\magadha.bhs" custom_map=".\conquest\Alexander\magadha.scx" objective="Capture the enemy capital(s)." description="The Magadha are the most powerful Kingdom in India. Conquer them to bring this rich country under your boot." victory_text="You have defeated the Magadha." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="Civil War" id="Maurya and Magadha" player_start_x="22" player_start_y="170" ai_start_x="130" ai_start_y="74" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\mauryamagadhasetup.bhs" runtime=".\conquest\Alexander\mauryamagadha.bhs" custom_map=".\conquest\Alexander\mauryamagadha.scx" objective="Capture the enemy capital(s)." description="Chandragupta Maurya has started a rebellion against the ruling Nandha dynasty. Take advantage of this internal strife to conquer this land." victory_text="You have conquered India." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="Maurya" id="Maurya" player_start_x="22" player_start_y="170" ai_start_x="130" ai_start_y="74" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\mauryasetup.bhs" runtime=".\conquest\Alexander\maurya.bhs" custom_map=".\conquest\Alexander\maurya.scx" objective="Capture the enemy capital(s)." description="Chandragupta Maurya has created a new kingdom and increased India's power. You must address this new threat." victory_text="You have defeated the Maurya." defeat_text="You have lost the battle." default="1"/>
+      <STYLE title="Crazy Alexander #ICON75" id="Crazy Alexander" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Defender" setup=".\conquest\Alexander\crazyalexandersetup.bhs" runtime=".\conquest\Alexander\crazyalexander.bhs" description="Alexander has gone mad! He is charging the enemy recklessly, but must be protected until he comes to his senses. Do not let him throw away his empire in a fit of madness!" victory_text="You have protected Alexander!" defeat_text="You have failed to protect Alexander!" land_only="1"/>
+      <STYLE title="Sea Invasion" no_hero="1" id="sicily" eliminations="Capital" player_start_x="118" player_start_y="18" ai_start_x="174" ai_start_y="175" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\seainvasionsetup.bhs" runtime=".\conquest\Alexander\seainvasionruntime.bhs" custom_map=".\conquest\Alexander\sicily.scx" objective="Capture the enemy capital(s) in $NUM0 minutes." description="The enemy is fiercely resisting your invasion. Take their capital(s) in $NUM0 minutes or less to win." victory_text="You have won the battle." defeat_text="You have lost the battle." water_only="1" default="1"/>
+      <STYLE title="Sea Invasion" no_hero="1" id="sindhu" eliminations="Capital" player_start_x="35" player_start_y="215" ai_start_x="133" ai_start_y="109" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\seainvasionsetup.bhs" runtime=".\conquest\Alexander\seainvasionruntime.bhs" custom_map=".\conquest\Alexander\sindhu.scx" objective="Capture the enemy capital(s) in $NUM0 minutes." description="The enemy is fiercely resisting your invasion. Take their capital(s) in $NUM0 minutes or less to win." victory_text="You have won the battle." defeat_text="You have lost the battle." water_only="1" default="1"/>
+      <STYLE title="Sea Invasion" no_hero="1" id="libya" eliminations="Capital" player_start_x="115" player_start_y="6" ai_start_x="44" ai_start_y="113" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\seainvasionsetup.bhs" runtime=".\conquest\Alexander\seainvasionruntime.bhs" custom_map=".\conquest\Alexander\libya.scx" objective="Capture the enemy capital(s) in $NUM0 minutes." description="The enemy is fiercely resisting your invasion. Take their capital(s) in $NUM0 minutes or less to win." victory_text="You have won the battle." defeat_text="You have lost the battle." water_only="1" default="1"/>
+      <STYLE title="The Soghdian Rock #ICON73" no_hero="1" id="Soghdian Rock" eliminations="Conquest" player_start_x="250" player_start_y="250" ai_start_x="18" ai_start_y="16" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\sogdianasetup.bhs" runtime=".\conquest\Alexander\sogdiana.bhs" custom_map=".\conquest\Alexander\sogdiana.scx" description="While the Persians maintain their second capital in Bactria, they do not have the region completely under their control. On the outskirts of the capital four different warlords maintain Forts. They will produce units for us if we gain their allegiance." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Capture Darius" id="Capture Darius" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\capturedariussetup.bhs" runtime=".\conquest\Alexander\capturedarius.bhs" custom_map=".\conquest\Alexander\capturedarius.scx" description="Darius injured himself while fleeing the last battle, so he cannot move very fast. Now is your chance to capture him and force him to name you ruler of Persia. But beware—Darius's lieutenants have the same idea. Be the player with the most units around Darius to capture him. Hold him for 10 minutes and he will name you ruler of Persia. Darius can escape the battle if he makes it past the Caspian Gates. If Darius escapes you, you still must defeat his remaining forces in the region." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Barbarians of Thrace #ICON64" id="Barbarians of Illyria" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\thrace2setup.bhs" runtime=".\conquest\Alexander\thrace2.bhs" custom_map=".\conquest\Alexander\thrace2.scx" description="The Illyrian barbarians in this territory have revolted against your rule. You have allied with one of the local tribes, which is in need of your help. Crush the Illyrians and all others who oppose you." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Megale Hellas" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\mgsetup.bhs" runtime=".\conquest\Alexander\mgruntime.bhs" custom_map=".\conquest\Alexander\magnagraecia.scx" objective="Use diplomacy and force to conquer all enemies." description="Beginning in the 8th century B.C. the Greeks established colonies on the southern end of the Italian peninsula. Now these colonies are powerful city states. They are often at war and this makes them vulnerable to outside attack." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Barbarians of Thrace #ICON64" id="Thracec" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\thracesetup.bhs" runtime=".\conquest\Alexander\thrace.bhs" custom_map=".\conquest\Alexander\thracec.scx" description="The Illyrian barbarians in this territory have revolted against your rule. You have allied with one of the local tribes. With their assistance, you must crush the Illyrians and all others who oppose you." victory_text="You have won the battle." defeat_text="You have lost the battle."/>
+      <STYLE title="Unite the City States #ICON65" id="Greece2" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\greece2setup.bhs" runtime=".\conquest\Alexander\greece2.bhs" custom_map=".\conquest\Alexander\greece2c.scx" bonus=".\conquest\Alexander\greece2bonus.bhs" description="Greece is in revolt. You must swiftly put down the insurrection before they can accumulate any real power. You should begin by convincing the Thessalians (Blue) to join your side by sending your large army to their capital, as they may still feel some loyalty to you." victory_text="You have united Greece." defeat_text="You have failed to unite Greece."/>
+      <STYLE title="Unite the City States #ICON65" id="Greece3" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Alexander\greece2setup.bhs" runtime=".\conquest\Alexander\greece2.bhs" custom_map=".\conquest\Alexander\greece2d.scx" bonus=".\conquest\Alexander\greece2bonus.bhs" description="Greece is in revolt. You must swiftly put down the insurrection before they can accumulate any real power. You should begin by convincing the Thessalians (Blue) to join your side by sending your large army to their capital, as they may still feel some loyalty to you." victory_text="You have united Greece." defeat_text="You have failed to unite Greece."/>
+    </CUSTOM>
+  </CONQUESTSTYLES>
+  <COUNTRY name="Latium" id="Latium" value="0" size="2" red="238" green="84" blue="0" continent="Europe" tileset="dirty" owner="Romans" capital="1" left="18" right="145" top="18" bottom="137" x="97" y="103">
+    <LINK to="Thrace" sea="1"/>
+    <LINK to="Macedon" sea="1"/>
+    <LINK to="Megale Hellas" sea="0"/>
+    <LINK to="Sicily" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Thrace" id="Thrace" rare="Horses" supply_depot="1" value="1" red="247" green="177" blue="115" continent="Europe" tileset="dirty" left="112" right="363" top="18" bottom="119" x="270" y="62">
+    <LINK to="Latium" sea="1"/>
+    <LINK to="Macedon" sea="0"/>
+    <LINK to="Lydia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Macedon" id="Macedon" value="7" red="115" green="168" blue="247" continent="Europe" tileset="dirty" owner="Greeks" capital="1" left="182" right="291" top="79" bottom="138" x="229" y="107">
+    <LINK to="Latium" sea="1"/>
+    <LINK to="Thrace" sea="0"/>
+    <LINK to="Lydia" sea="1"/>
+    <LINK to="Megale Hellas" sea="1"/>
+    <LINK to="Greece" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Phrygia" id="Phrygia" value="2" size="3" tribute="30" red="3" green="69" blue="189" continent="West Asia" tileset="dirty" owner="Persian" left="372" right="505" top="96" bottom="219" x="436" y="160">
+    <LINK to="Armenia" sea="0"/>
+    <LINK to="Lydia" sea="0"/>
+    <LINK to="Syria" sea="0"/>
+    <LINK to="Phoenicia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Parthia" id="Parthia" value="0" size="3" card="General Spitamenes" supply_depot="1" tribute="10" red="157" green="0" blue="238" continent="East Asia" tileset="m_steppe" owner="Persian" left="646" right="777" top="100" bottom="199" x="714" y="152">
+    <LINK to="Armenia" sea="1"/>
+    <LINK to="Bactria" sea="0"/>
+    <LINK to="Media" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Armenia" id="Armenia" value="2" size="2" card="Commandeer Transport" tribute="20" red="66" green="228" blue="252" continent="West Asia" tileset="m_steppe" owner="Persian" left="494" right="621" top="106" bottom="199" x="539" y="154">
+    <LINK to="Phrygia" sea="0"/>
+    <LINK to="Parthia" sea="1"/>
+    <LINK to="Media" sea="0"/>
+    <LINK to="Mesopotamia" sea="0"/>
+    <LINK to="Syria" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Lydia" id="Lydia" value="2" size="3" supply_depot="1" tribute="30" red="178" green="128" blue="246" continent="West Asia" tileset="dirty" owner="Persian" wonder="Colossus" left="293" right="383" top="113" bottom="217" x="343" y="162">
+    <LINK to="Thrace" sea="1"/>
+    <LINK to="Macedon" sea="1"/>
+    <LINK to="Phrygia" sea="0"/>
+    <LINK to="Greece" sea="1"/>
+    <LINK to="Egypt" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Megale Hellas" id="Megale Hellas" rare="Olive Oil" value="1" tribute="10" red="252" green="219" blue="66" continent="Europe" tileset="dirty" left="104" right="177" top="114" bottom="209" x="128" y="157">
+    <LINK to="Latium" sea="0"/>
+    <LINK to="Greece" sea="1"/>
+    <LINK to="Sicily" sea="1"/>
+    <LINK to="Macedon" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Bactria" id="Bactria" value="2" size="6" red="152" green="40" blue="6" continent="East Asia" tileset="m_steppe" owner="Persian" capital="1" left="758" right="933" top="114" bottom="243" x="797" y="190">
+    <LINK to="Parthia" sea="0"/>
+    <LINK to="Media" sea="0"/>
+    <LINK to="Pauravas" sea="0"/>
+    <LINK to="Carmania" sea="0"/>
+    <LINK to="Gedrosia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Greece" id="Greece" value="2" card="Great Thinker" rare="Relics" red="115" green="247" blue="131" continent="Europe" tileset="dirty" left="202" right="272" top="128" bottom="209" x="239" y="151">
+    <LINK to="Macedon" sea="0"/>
+    <LINK to="Lydia" sea="1"/>
+    <LINK to="Megale Hellas" sea="1"/>
+    <LINK to="Libya" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Media" id="Media" value="2" size="4" card="Brigands" red="238" green="112" blue="0" continent="East Asia" tileset="dirty" owner="Persian" left="616" right="767" top="176" bottom="237" x="679" y="209">
+    <LINK to="Parthia" sea="0"/>
+    <LINK to="Armenia" sea="0"/>
+    <LINK to="Bactria" sea="0"/>
+    <LINK to="Mesopotamia" sea="0"/>
+    <LINK to="Carmania" sea="0"/>
+    <LINK to="Persia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Sicily" id="Sicily" rare="Wine" value="0" tribute="20" red="0" green="238" blue="17" continent="Europe" tileset="dirty" left="73" right="102" top="177" bottom="196" x="88" y="186">
+    <LINK to="Latium" sea="1"/>
+    <LINK to="Megale Hellas" sea="1"/>
+    <LINK to="Carthage" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Mesopotamia" id="Mesopotamia" value="2" size="5" supply_depot="1" tribute="30" red="238" green="45" blue="0" continent="West Asia" tileset="dirty" owner="Persian" left="512" right="619" top="184" bottom="264" x="555" y="222">
+    <LINK to="Armenia" sea="0"/>
+    <LINK to="Media" sea="0"/>
+    <LINK to="Syria" sea="0"/>
+    <LINK to="Persia" sea="0"/>
+    <LINK to="Northern Arabia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Carthage" id="Carthage" value="1" card="Spy Network" rare="Diamonds" red="70" green="7" blue="141" continent="Africa" tileset="GS_desert" left="18" right="155" top="190" bottom="447" x="62" y="253">
+    <LINK to="Sicily" sea="1"/>
+    <LINK to="Libya" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Syria" id="Syria" value="2" size="5" card="General Memnon" rare="Spice" red="178" green="168" blue="4" continent="West Asia" tileset="dirty" owner="Persian" left="464" right="521" top="194" bottom="271" x="498" y="228">
+    <LINK to="Phrygia" sea="0"/>
+    <LINK to="Mesopotamia" sea="0"/>
+    <LINK to="Northern Arabia" sea="0"/>
+    <LINK to="Armenia" sea="0"/>
+    <LINK to="Phoenicia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Pauravas" id="Pauravas" value="1" size="3" owner="Indians" card="General Porus" rare="Cattle" supply_depot="1" red="251" green="233" blue="77" continent="East Asia" tileset="dirty" left="828" right="969" top="196" bottom="311" x="906" y="252">
+    <LINK to="Bactria" sea="0"/>
+    <LINK to="Gedrosia" sea="0"/>
+    <LINK to="India" sea="0"/>
+    <LINK to="Sindhu" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Phoenicia" id="Phoenicia" value="2" size="4" rare="Fish" red="40" green="152" blue="6" continent="West Asia" tileset="GS_desert" owner="Persian" left="418" right="483" top="200" bottom="285" x="465" y="246">
+    <LINK to="Phrygia" sea="0"/>
+    <LINK to="Syria" sea="0"/>
+    <LINK to="Northern Arabia" sea="0"/>
+    <LINK to="Egypt" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Carmania" id="Carmania" value="4" card="Food Economic Boom" tribute="20" red="49" green="2" blue="202" continent="East Asia" tileset="dirty" owner="Persian" left="664" right="783" top="202" bottom="347" x="715" y="305">
+    <LINK to="Bactria" sea="0"/>
+    <LINK to="Media" sea="0"/>
+    <LINK to="Gedrosia" sea="0"/>
+    <LINK to="Persia" sea="0"/>
+    <LINK to="Southern Arabia" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Gedrosia" id="Gedrosia" value="3" size="1" card="Logistics" rare="Obsidian" red="215" green="29" blue="255" continent="East Asia" tileset="GS_desert" owner="Persian" left="770" right="849" top="214" bottom="368" x="804" y="284">
+    <LINK to="Bactria" sea="0"/>
+    <LINK to="Pauravas" sea="0"/>
+    <LINK to="Carmania" sea="0"/>
+    <LINK to="Sindhu" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="India" id="India" value="12" size="7" red="253" green="77" blue="53" continent="East Asia" tileset="dirty" owner="Indians" capital="1" left="862" right="1079" top="220" bottom="595" x="931" y="408">
+    <LINK to="Pauravas" sea="0"/>
+    <LINK to="Sindhu" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Persia" id="Persia" value="2" size="7" red="0" green="129" blue="250" continent="West Asia" tileset="dirty" owner="Persian" capital="1" wonder="Hanging Gardens" left="524" right="675" top="226" bottom="325" x="625" y="282">
+    <LINK to="Media" sea="0"/>
+    <LINK to="Mesopotamia" sea="0"/>
+    <LINK to="Carmania" sea="0"/>
+    <LINK to="Northern Arabia" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Libya" id="Libya" value="0" card="Cultural Dominance" rare="Salt" red="247" green="115" blue="199" continent="Africa" tileset="GS_desert" left="124" right="327" top="242" bottom="471" x="232" y="338">
+    <LINK to="Greece" sea="1"/>
+    <LINK to="Carthage" sea="0"/>
+    <LINK to="Egypt" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Arabia" id="Northern Arabia" rare="Gypsum" value="2" card="Merchant Guild" supply_depot="1" red="141" green="102" blue="7" continent="West Asia" tileset="GS_desert" left="416" right="619" top="260" bottom="423" x="511" y="334">
+    <LINK to="Mesopotamia" sea="0"/>
+    <LINK to="Syria" sea="0"/>
+    <LINK to="Phoenicia" sea="0"/>
+    <LINK to="Persia" sea="0"/>
+    <LINK to="Egypt" sea="1"/>
+    <LINK to="Southern Arabia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Egypt" id="Egypt" value="1" size="2" red="117" green="249" blue="91" continent="Africa" tileset="GS_desert" owner="Egyptians" capital="1" wonder="Pyramids" left="308" right="463" top="262" bottom="461" x="361" y="346">
+    <LINK to="Lydia" sea="1"/>
+    <LINK to="Phoenicia" sea="0"/>
+    <LINK to="Libya" sea="0"/>
+    <LINK to="Northern Arabia" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Sindhu" id="Sindhu" value="5" owner="Indians" card="Elephant Brigade" tribute="10" red="29" green="242" blue="255" continent="East Asia" tileset="dirty" left="816" right="909" top="280" bottom="411" x="867" y="338">
+    <LINK to="Pauravas" sea="0"/>
+    <LINK to="Gedrosia" sea="0"/>
+    <LINK to="India" sea="0"/>
+    <LINK to="Southern Arabia" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Sheba" id="Southern Arabia" value="2" card="Propaganda" rare="Incense" red="6" green="152" blue="40" continent="West Asia" tileset="GS_desert" left="498" right="708" top="342" bottom="523" x="590" y="432">
+    <LINK to="Carmania" sea="1"/>
+    <LINK to="Sindhu" sea="1"/>
+    <LINK to="Northern Arabia" sea="0"/>
+  </COUNTRY>
+  <BONUSCARDDECK name="$TECHCAT0 Eureka"/>
+  <BONUSCARDDECK name="$RES0 Economic Boom"/>
+  <BONUSCARDDECK name="Mercenaries"/>
+  <BONUSCARDDECK name="Treachery"/>
+  <BONUSCARDDECK name="Great Thinker"/>
+  <BONUSCARDDECK name="Merchant Guild"/>
+  <BONUSCARDDECK name="Logistics"/>
+  <BONUSCARDDECK name="Partisans"/>
+  <BONUSCARDDECK name="Cultural Dominance"/>
+  <BONUSCARDDECK name="Trade Embargo"/>
+  <BONUSCARDDECK name="Propaganda"/>
+  <BONUSCARDDECK name="Spy Network"/>
+  <TRIBES>
+    <!--ART STYLES    (BUILDING/UNIT)
+Building
+0 MED_STYLE,
+1 NEUROPE_STYLE,
+2 ASIAN_STYLE,
+3 KOREAN_STYLE,
+4 AMERICAN_STYLE,
+5 TURKISH_STYLE,
+
+Unit
+ 0 = American
+ 1 = Arab
+ 2 = European
+ 3 = Asian
+-->
+    <TRIBE>
+      <FILE>./tribes/AZTECS.XML   </FILE>
+      <KEY>aztecs   </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/MAYA.XML     </FILE>
+      <KEY>maya     </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/INCA.XML     </FILE>
+      <KEY>inca     </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/BANTU.XML    </FILE>
+      <KEY>bantu    </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/SHEBA.XML  </FILE>
+      <KEY>nubians  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/MACEDONIANS.XML  </FILE>
+      <KEY>greeks</KEY>
+      <BONUS_CARDS>
+        <CARD>General Parmenio</CARD>
+      </BONUS_CARDS>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/ROMANS.XML   </FILE>
+      <KEY>romans   </KEY>
+      <SKILL>30</SKILL>
+      <NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/EGYPTIANS.XML</FILE>
+      <KEY>egyptians</KEY>
+      <SKILL>30</SKILL>
+      <NO_ELIMINATING>1</NO_ELIMINATING>
+      <NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/PHOENICIANS.XML</FILE>
+      <KEY>turks    </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/Illyrians.XML</FILE>
+      <KEY>spanish  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/thessaly.XML</FILE>
+      <KEY>french   </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/thebans.XML</FILE>
+      <KEY>germans</KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/Agrianians.XML</FILE>
+      <KEY>british  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/RUSSIANS.XML </FILE>
+      <KEY>russians </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/CHINESE.XML  </FILE>
+      <KEY>chinese  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/JAPANESE.XML </FILE>
+      <KEY>japanese </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/KOREANS.XML  </FILE>
+      <KEY>koreans  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/MONGOLS.XML  </FILE>
+      <KEY>mongols  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/IROQUOIS.XML  </FILE>
+      <KEY>iroquois  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./tribes/LAKOTA.XML  </FILE>
+      <KEY>lakota  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/spartans.XML</FILE>
+      <KEY>americans  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/EINDIANS.XML  </FILE>
+      <KEY>indians  </KEY>
+      <SKILL>60</SKILL>
+      <NO_ELIMINATING>1</NO_ELIMINATING>
+      <NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/Athenians.XML</FILE>
+      <KEY>dutch  </KEY>
+    </TRIBE>
+    <TRIBE>
+      <FILE>./conquest/alexander/PERSIANS.XML  </FILE>
+      <KEY>persian  </KEY>
+      <SKILL>90</SKILL>
+      <NO_ELIMINATING>1</NO_ELIMINATING>
+      <NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+    </TRIBE>
+  </TRIBES>
+  <VALID_NATION owner="Greeks"/>
+  <END_GAME_IMAGES victory=".\art\CTW_Alex_Victory_Back.tga" ancient_defeat=".\art\CTW_Alex_Defeat_Back.tga" marginal_victory=".\art\CTW_Alex_Victory_Back.tga" marginal_defeat=".\art\CTW_Alex_Defeat_Back.tga" allied=".\art\CTW_Alex_Victory_Back.tga" hero_defeat=".\art\CTW_Alex_Herodeath_Back.tga"/>
+</ROOT>

@@ -1,0 +1,84 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  coldwar_rules();
+  labels {
+    RUSSIANS,
+    AMERICANS,
+  }
+
+  disable_city_defeat(RUSSIANS);
+  disable_city_defeat(AMERICANS);
+  disable_take_attrition(RUSSIANS);
+
+  set_type_line_of_sight("Transport Freighter", 12);
+  set_type_line_of_sight("Submarine", 12);
+  set_type_line_of_sight("Nuclear Missile Sub", 16);
+
+  int turn = get_turn();
+  int diff = get_difficulty();
+  
+  if (diff == 1) {
+    kill_unit_anim(2, 3, 1);
+    kill_unit_anim(2, 4, 1);
+    kill_unit_anim(2, 5, 1);
+    kill_unit_anim(2, 8, 1);
+    kill_unit_anim(2, 9, 1);
+    kill_unit_anim(2, 0, 1);
+  }
+  if (diff < 3) {
+    kill_unit_anim(2, 37, 1);
+    kill_unit_anim(2, 38, 1);
+    kill_unit_anim(2, 29, 1);
+    kill_unit_anim(2, 26, 1);//178, 57
+    kill_unit_anim(2, 7, 1);
+    kill_unit_anim(2, 6, 1);
+  }
+  if (diff < 5) {
+    kill_unit_anim(2, 4, 1);
+    kill_unit_anim(2, 8, 1);
+  }
+  
+  if (diff > 2) {
+    create_unit_upgrade(2, 178, 57, "Light Tank", 1);
+  } 
+  if (diff > 4) {
+    kill_unit_anim(2, 40, 1);
+    kill_unit_anim(2, 33, 1);
+  }
+  
+  //1, 2 - Truman
+  if (turn < 3) {
+    set_leader_name (2, $S("Harry Truman"));
+  }
+  //3, 4 - Eisenhower
+  else if (turn < 5) {
+    set_leader_name (2, $S("Dwight Eisenhower"));
+  }
+  //5 - Kennedy
+  else if (turn < 6) {
+    set_leader_name (2, $S("John Kennedy"));
+  }
+  //6, 7 - Johnson
+  else if (turn < 8) {
+    set_leader_name (2, $S("Lyndon Johnson"));
+  }
+  //8 - Nixon
+  else if (turn < 9) {
+    set_leader_name (2, $S("Richard Nixon"));
+  }
+  //9 - Ford
+  else if (turn < 10) {
+    set_leader_name (2, $S("Gerald Ford"));
+  }
+  //10 - Carter
+  else if (turn < 11) {
+    set_leader_name (2, $S("Jimmy Carter"));
+  }
+  //11, 12 - Reagan
+  else {
+    set_leader_name (2, $S("Ronald Reagan"));
+  }
+
+}

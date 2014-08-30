@@ -1,0 +1,100 @@
+      
+//return true to use only the links specified here, return false to 
+int scenario links (String tribe)
+{
+
+  static int random_number_guy = get_ctw_seed() % 3;
+  int emperor_flag = get_ctw_int("emperor");
+  
+  if (tribe == "french") {
+    if (get_ctw_int("waterloo") == 1) {
+      ctw_add_link("Paris", "Belgium");
+      return true;
+    }
+    
+////////////////quest link setting////////////////////////////////////////
+
+    if (emperor_flag < 1) {
+      //ITALY QUEST LINKS
+      int italy_quest = get_ctw_int("italy");
+      if (italy_quest == 1) {
+        if (get_ctw_int("montenotte") == 3) {
+          ctw_add_link("Marseilles", "Corsica");
+          ctw_add_link("Piedmont", "Corsica");
+        } else {
+          ctw_add_link("Piedmont", "Lombardy");
+          ctw_add_link("Savoy", "Lombardy");
+        }
+        return true;
+      } else if (italy_quest == 2) {
+        if (get_ctw_int("montenotte") == 3 || get_ctw_int("peace_lodi") == 1) {
+          ctw_add_link("Piedmont", "Tuscany");
+        } else {
+          ctw_add_link("Lombardy", "Venetia");
+        }
+        return true;
+      } 
+    
+      //FRENCH QUEST
+      int french_quest = get_ctw_int("french");
+      if (french_quest == 1) {
+        ctw_add_link("Paris", "Brittany");
+        ctw_add_link("Bourdeaux", "Brittany");
+        return true;
+      }
+      else if (french_quest == 2) {
+        ctw_add_link("Paris", "Belgium");
+        ctw_add_link("Burgundy", "Belgium");
+        return true;
+      }
+
+      if (french_quest == 0 && italy_quest == 0) {
+        ctw_add_link("Paris", "Burgundy");
+        ctw_add_link("Bourdeaux", "Burgundy");
+        ctw_add_link("Marseilles", "Piedmont");
+        return true;
+      }
+
+      //SPANISH QUEST
+      int spanish_quest = get_ctw_int("spanish");
+      if (spanish_quest == 1) {
+        ctw_add_link("Aragon", "Seville");
+        return true;
+      } else if (spanish_quest == 2) {
+        ctw_add_link("Seville", "Castile");
+        ctw_add_link("Aragon", "Castile");
+        return true;
+      }
+
+      //EGYPTIAN QUEST
+      int egyptian_quest = get_ctw_int("egyptian");
+      if (egyptian_quest == 1) {
+        ctw_add_link("Libya", "Egypt");
+        return true;
+      } else if (egyptian_quest == 2) {
+        ctw_add_link("Egypt", "Syria");
+        return true;
+      }
+
+      if ((french_quest == 3 || italy_quest == 3) && (spanish_quest == 0 && egyptian_quest == 0)) {
+        ctw_add_link("Marseilles", "Tunisia");
+        ctw_add_link("Bourdeaux", "Aragon");
+        return true;
+      }
+      if (get_ctw_int("waterloo") == 1) {
+        set_ctw_int("waterloo", 2);
+        ctw_add_link("Paris", "Belgium");
+      }
+    }
+    else {
+      if (!ctw_last_battle_victory()) {
+        ctw_remove_all_armies("French");
+        ctw_give_army("French", "Paris");
+        ctw_add_link("Paris", "Belgium");
+        return true;
+      }
+    }
+  }
+  
+  return false;
+}

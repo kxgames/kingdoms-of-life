@@ -1,0 +1,43 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+if (get_ctw_campaign() == "Napoleon") {
+  napoleon_rules();
+}
+
+  int x;
+  int y;
+  int a;
+  int unit;
+
+  for (a = num_players(); a > 2; a--) {
+    if (num_type(a, "Citizen") == 0) {
+      unit = find_unit(a, "");
+      x = object_position_x(a, unit) + 2;
+      y = object_position_y(a, unit);
+      create_unit(a, x, y, "Citizen", 5);
+    }
+  }
+
+  infrastructure_setup(2, $S("Rome"), $S("Bracciano"), $S("Tivoli"));
+
+  static int french = 1;
+  static int austrians = 2;
+
+  int diff = get_difficulty();
+  int army_x;
+  int army_y;
+  
+  set_leader_difficulty(austrians, diff);
+
+  set_nation_name("Germans", $S("Austrians"));
+
+  if (get_ctw_int("emperor") < 1) {
+    for (i = 0; i < num_type(1, "Imperial Guard"); i++) {
+      unit = find_unit(1, "Imperial Guard");
+      kill_unit_anim(1, unit, 1);
+    }
+  }
+
+}

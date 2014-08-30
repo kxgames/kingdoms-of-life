@@ -1,0 +1,73 @@
+scenario
+{
+
+labels {
+  //Add any constant labels here in a comma separated list.
+}
+
+static diff = get_difficulty();
+
+run_once {
+  disable_all_triggers();
+  
+  city_id = find_city_id("Cilician Gates");
+  set_seen(1, 2, city_id);
+
+  ctw_add_objective($S("Capture the Cilician Gates."), "Cilician_id", "");
+  enable_trigger("Fall_of_Cilicia");
+  enable_trigger("PopCapFix");
+  disable_production_ai(2);
+  set_timer("nerf", 300);
+}
+
+if (timer_expired("nerf")) {
+  enable_production_ai(2);
+}
+
+trigger Fall_of_Cilicia(city_captured(2, "Cilician Gates"))
+{
+  ctw_objective_complete("Cilician_id");
+  ctw_add_objective_text($S("Capture and hold the Persian capital(s)."), "Tarsus_id", "");
+  city_id = find_city_id("Tarsus");
+  set_seen(1, 2, city_id);
+}
+
+trigger PopCapFix()
+{
+  switch (diff) {
+    case 1:
+      if (population_cap(2) > 60) {
+        set_population_cap(2, 60);
+      }
+      break;
+    case 2:
+      if (population_cap(2) > 70) {
+        set_population_cap(2, 70);
+      }
+      break;
+    case 3:
+      if (population_cap(2) > 80) {
+        set_population_cap(2, 80);
+      }
+      break;
+    case 4:
+      if (population_cap(2) > 90) {
+        set_population_cap(2, 90);
+      }
+      break;
+    case 5:
+      if (population_cap(2) > 100) {
+        set_population_cap(2, 100);
+      }
+      break;
+    default:
+      break;
+  }
+  enable_trigger("PopCapFix");
+}
+
+if(time() >= get_time_limit()) {
+  defeat(1);
+}
+
+}

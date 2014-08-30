@@ -1,0 +1,45 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Warroom (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Romans">
+  <LEADERS>
+    <LEADER>Dictator L. Papirius Cursor</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Cumae</CITY>
+    <CITY>Antium</CITY>
+    <CITY>Brundisium</CITY>
+    <CITY>Ancona</CITY>
+    <CITY>Arretium</CITY>
+    <CITY>Rhegium</CITY>
+    <CITY>Corfinium</CITY>
+    <CITY>Luca</CITY>
+    <CITY>Genoa</CITY>
+    <CITY>Cosa</CITY>
+    <CITY>Pisae</CITY>
+    <CITY>Parma</CITY>
+    <CITY>Buxentum</CITY>
+    <CITY>Saturnia</CITY>
+    <CITY>Spoletium</CITY>
+    <CITY>Croton</CITY>
+    <CITY>Aquae Sextiae</CITY>
+    <CITY>Lugdunum</CITY>
+    <CITY>Avaricum</CITY>
+    <CITY>Aquileia</CITY>
+    <CITY>Mediolanum</CITY>
+    <CITY>Cremona</CITY>
+    <CITY>Mutina</CITY>
+    <CITY>Dyrrhachium</CITY>
+    <CITY>Perusia</CITY>
+    <CITY>Beneventum</CITY>
+    <CITY>Vindobona</CITY>
+    <CITY>Durocortorum</CITY>
+    <CITY>Colonia Agrippina</CITY>
+    <CITY>Centumcellae</CITY>
+    <CITY>Bononia</CITY>
+    <CITY>Ariminum</CITY>
+    <CITY>Cemenelum</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

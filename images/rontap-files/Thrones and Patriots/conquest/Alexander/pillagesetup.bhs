@@ -1,0 +1,90 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+
+  labels {
+    ALEXANDER,
+    ENEMY,
+  }
+
+  String inf_names[] = ["Greek Mercenaries", "Legions", "Scutari", "Barbarians"];
+  String ran_names[] = ["Immortals", "Longbowmen", "Kushite Archers", "Camel Archer", "Chariot"];
+  String cav_names[] = ["Chevalier", "Light Camel", "War Elephant"];
+  String econ_buildings[] = ["Woodcutter's Camp", "Mine", "Farm", "Smelter", "Lumbermill", "Granary"];
+  String research_buildings[] = ["University", "Library", "Temple", "Market", "Senate", "Small City", "Large City"];
+  String military_buildings[] = ["Barracks", "Stable", "Siege Factory", "Dock", "Anchorage", "Fort", "Lookout", "Tower"];  
+  int diff = get_difficulty();  
+  int health;
+  int factor = 2;
+
+  for (i = 0; i < econ_buildings.length; i++) {
+    building = find_build(ENEMY, econ_buildings[i]);
+    health = object_max_health(ENEMY, building);
+    set_object_type_max_health(econ_buildings[i], health/factor);
+  }
+  for (i = 0; i < research_buildings.length; i++) {
+    building = find_build(ENEMY, research_buildings[i]);
+    health = object_max_health(ENEMY, building);
+    set_object_type_max_health(research_buildings[i], health/factor);
+  }
+  for (i = 0; i < military_buildings.length; i++) {
+    building = find_build(ENEMY, military_buildings[i]);
+    health = object_max_health(ENEMY, building);
+    set_object_type_max_health(military_buildings[i], health/factor);
+  }    
+
+  disable_city_defeat(ENEMY);
+  disable_city_defeat(ALEXANDER);
+
+  disable_take_attrition(ALEXANDER);
+  set_difficulty(diff);
+
+  disable_city_defeat(ALEXANDER);
+  set_plunder_scale(ALEXANDER, 4);
+  if (diff == 0) {
+    give_good(ALEXANDER, "Food", 300);
+    give_good(ALEXANDER, "Timber", 300);
+    give_good(ALEXANDER, "Wealth", 400);
+    give_good(ALEXANDER, "Metal", 400);
+  }
+
+    if (diff > 3) {
+      set_time_limit(10);
+    }
+
+  for (i = 0; i < 7; i++) {
+    gain_tech(ALEXANDER, "Military");
+    if (i < 2) {
+      gain_tech(ALEXANDER, "Science");
+    }
+  }
+  disable_type_by_tribe("General", "Greeks");
+  disable_type_by_tribe("Spy", "Greeks");   
+  enable_type_by_tribe("Barbarian Javelineers", "Greeks", "Fort", 0, 0);
+  gain_upgrade(ALEXANDER, "Barbarian Javelineers");    
+  enable_type_by_tribe("Barbarian Phalanx", "Greeks", "Fort", 0, 1);
+  gain_upgrade(ALEXANDER, "Barbarian Phalanx");    
+  enable_type_by_tribe("Barbarian Archers", "Greeks", "Fort", 0, 2);
+  gain_upgrade(ALEXANDER, "Barbarian Archers");            
+  enable_type_by_tribe("Greek Mercenaries", "Greeks", "Fort", 0, 3);
+  gain_upgrade(ALEXANDER, "Greek Mercenaries");    
+    //alexander, companions, 
+    //greek mercenaries,//scutari, barbarians, legions,i
+    //heavy - chevalier, light camel war elephant, s
+    //archer - longbowmen, kushite archers, camel archer, chariot, immortals, l
+  enable_type_by_tribe("Catapult", "Greeks", "Fort", 0, 4);
+  gain_upgrade(ALEXANDER, "Catapult");  
+
+  if (diff < 5) {
+    building = find_build(2, "fort");
+    destroy_building(2, building);
+  }
+  if (diff < 3) {
+    building = find_build(2, "fort");
+    destroy_building(2, building);
+  } 
+
+}

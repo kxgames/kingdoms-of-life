@@ -1,0 +1,626 @@
+<?xml version="1.0"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Isaac Ellis (Big Huge Games) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Mark Sobota (Big Huge Games) -->
+<ROOT name="Napoleon" desc="Follow in the footsteps of Napoleon to conquer the known world of 1796!" intro="Napoleon Bonaparte was one of the greatest generals in the history of the world.  This poor Corsican officer proved that the great kings of Europe could be dethroned by a common man. Although reviled as an evil genius by many, when his armies swarmed across Europe, they left behind them the same republican ideals that had sparked the French Revolution. Follow in his footsteps or forge your own path as you attempt to CONQUER THE WORLD!" victory_conditions="Through conquest, coercion, and shrewd dealing, gain control over the entire world." intro_image="./art/CTW_Loading_Background_03.tga" turns_per_age="21" starting_round="0" starting_age="4" ending_age="4" allow_random_nations="0" allow_random_bonuses="0" allow_vassals="1" tex_width="1381" tex_height="1024" map_width="1000" map_height="741.4916" map_scale="0.7241129" battle_script_file="./conquest/Napoleon/napoleon_battles.bhs" post_turn_script_file="./conquest/Napoleon/napoleon_post_turn.bhs" diplo_response_script_file="./conquest/Napoleon/napoleon_diplo.bhs" diplo_offer_script_file="./conquest/Napoleon/napoleon_diplo_offer.bhs" links_script_file="./conquest/Napoleon/napoleon_links.bhs" initialization_script_file="./conquest/Napoleon/napoleon_init.bhs" strategy_script_file="./conquest/Napoleon/napoleon_strategy.bhs" post_ai_script_file="./conquest/Napoleon/napoleon_post_ai.bhs" hero_unit="Napoleon" camera_default_zoom="390" global_scale="1.25" camera_loc="Marseilles" voiceover="./sounds/voiceover/napoleon.wav" no_patriot="1">
+	<TEXTURE file=".\art\CTWMap_0.tga" alpha="0" tile_ratio="5"></TEXTURE>
+	<TEXTURE file=".\art\CTWMap_1.tga" alpha="32" tile_ratio="5"></TEXTURE>
+	<TEXTURE file=".\art\CTWMap_2.tga" alpha="64" tile_ratio="5"></TEXTURE>
+	<TEXTURE file=".\art\CTWMap_3.tga" alpha="96" tile_ratio="5"></TEXTURE>
+	<TEXTURE file=".\art\CTWMap_4.tga" alpha="128" tile_ratio="5"></TEXTURE>
+	<TEXTURE file=".\art\CTWMap_5.tga" alpha="160" tile_ratio="5"></TEXTURE>
+	<CONQUESTSTYLES>
+		<DEFENSIVE>
+			<STYLE title="Guerrilla Warfare" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" mapsizes="Arena" map_style="Defender Attack" setup=".\conquest\Alexander\guerillasetup.bhs" runtime=".\conquest\Alexander\guerillaruntime.bhs" objective="Destroy 25 enemy units." description="The enemy has taken several of your cities. Their morale is not very high, however if enough of their men are eliminated they will likely retreat." victory_text="You have won the battle." defeat_text="You have lost the battle." land_only="1"></STYLE>
+			<STYLE title="Conquest" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" setup=".\conquest\scripts\conquestsetup.bhs" runtime=".\conquest\scripts\conquestruntime.bhs" objective="Capture the enemy capital(s) or hold out for $NUM0 minutes." description="You are being invaded by a treacherous neighbor. Take the enemy capital(s) or hold off their assault for $NUM0 minutes to force them to withdraw." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1"></STYLE>
+		</DEFENSIVE>
+		<OFFENSIVE>
+			<STYLE title="Conquest" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" setup=".\conquest\scripts\conquestsetup.bhs" runtime=".\conquest\scripts\conquestruntime.bhs" objective="Capture the enemy capital(s) in $NUM0 minutes." description="The enemy is resisting your invasion. Take their capital(s) in $NUM0 minutes or less to win." victory_text="You have won the battle." defeat_text="You have lost the battle." default="1" reveal_buildings="1"></STYLE>
+			<STYLE title="Field Battle" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" no_rare="1" revealmaps="Explored" map_sizes="Tiny" map_style="Standard No City" setup=".\conquest\scripts\battlesetup.bhs" runtime=".\conquest\scripts\battleruntime.bhs" bonus=".\conquest\scripts\battlebonus.bhs" objective="Destroy the enemy's encampment." description="Your army is approaching the enemy's army.  Attack their encampment and destroy all their buildings in order to win." victory_text="You have won the battle." defeat_text="You have lost the battle." land_only="1"></STYLE>
+			<STYLE title="Supply Train" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" no_rare="1" mapsizes="Arena" map_style="Standard No City" setup=".\conquest\Alexander\supplytrainsetup.bhs" runtime=".\conquest\Alexander\supplytrainruntime.bhs" bonus=".\conquest\Alexander\supplybonus.bhs" description="The enemy army has decided that they cannot win this battle and are fleeing with all of their supplies. Destroy their Supply Wagons to gain these supplies for yourself, but be careful; the enemy is not totally helpless. Keep at least one of your units alive until the timer runs out to achieve victory." victory_text="You have won the battle." defeat_text="You have lost the battle" land_only="1"></STYLE>
+			<STYLE title="Hideaway" eliminations="Conquest" victories="Time Limit" min_victory="30" max_victory="30" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\Alexander\hideawaysetup.bhs" runtime=".\conquest\Alexander\hideawayruntime.bhs" objective="Eliminate all enemy Generals or control 70% of the territory." description="The enemy's army is tied up elsewhere, so they have hired mercenaries. These mercenaries can survive without a City and they suffer no attrition. To find them will require some careful scouting; they are aware of your presence and will certainly set up ambushes. And beware--they will raid your homeland relentlessly." victory_text="You have rooted out the mercenaries!" defeat_text="The mercenaries have overwhelmed you." land_only="1"></STYLE>
+		</OFFENSIVE>
+		<BARBARIAN>
+			<STYLE title="Melee" eliminations="Capital" victories="Time Limit" add_opponents_diff0="1" add_opponents_diff1="1" add_opponents_diff2="1" add_opponents_diff3="1" add_opponents_diff4="1" add_opponents_diff5="2" min_victory="90" max_victory="90" setup=".\conquest\scripts\meleesetup.bhs" runtime=".\conquest\scripts\meleeruntime.bhs" objective="Capture the enemy capital or defeat them by capturing territory in $NUM0 minutes." description="The barbarians in this territory are hostile and must be eliminated. Defeat them by capturing their capitals or capturing most of their territory in $NUM0 minutes." victory_text="You have won the battle." defeat_text="You have lost the battle."></STYLE>
+			<STYLE title="Tactics" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" map_style="Defender" setup=".\conquest\scripts\offsetup0.bhs" runtime=".\conquest\scripts\offruntime0.bhs" bonus=".\conquest\scripts\battlebonus.bhs" objective="Find and capture the enemy's capital." description="Expecting no resistance to your invasion, no support troops were included in your expeditionary force.  A fortified city has been encountered, however, and must be eliminated." victory_text="You have won the battle." defeat_text="You have lost the battle."></STYLE>
+			<STYLE title="Nomad" eliminations="Conquest" victories="Time Limit" add_opponents_diff0="2" add_opponents_diff1="2" add_opponents_diff2="2" add_opponents_diff3="2" add_opponents_diff4="2" add_opponents_diff5="2" min_victory="60" max_victory="60" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\scripts\nomadsetup.bhs" runtime=".\conquest\scripts\nomadruntime.bhs" description="You have successfully established a new settlement but several nomadic tribes also claim this territory. Eliminate them in order to protect your people." victory_text="You have defeated all of the nomad tribes." defeat_text="You were unable to defeat all of the nomad tribes." land_only="1"></STYLE>
+			<STYLE title="Hideaway" eliminations="Conquest" victories="Time Limit" min_victory="30" max_victory="30" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\Alexander\hideawaysetup.bhs" runtime=".\conquest\Alexander\hideawayruntime.bhs" objective="Eliminate all enemy Generals or control 70% of the territory." description="The enemy's army is tied up elsewhere, so they have hired mercenaries. These mercenaries can survive without a City and they suffer no attrition. To find them will require some careful scouting; they are aware of your presence and will certainly set up ambushes. And beware--they will raid your homeland relentlessly." victory_text="You have rooted out the mercenaries." defeat_text="The mercenaries have overwhelmed you." land_only="1"></STYLE>
+		</BARBARIAN>
+		<CUSTOM>
+			<STYLE title="Field Battle" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" no_rare="1" revealmaps="Explored" map_sizes="Tiny" map_style="Standard No City" setup=".\conquest\scripts\battlesetup.bhs" runtime=".\conquest\scripts\battleruntime.bhs" bonus=".\conquest\scripts\battlebonus.bhs" objective="Destroy the enemy's encampment." description="Your army is approaching the enemy's army.  Attack their encampment and destroy all their buildings in order to win." victory_text="You have won the battle." defeat_text="You have lost the battle." land_only="1"></STYLE>
+			<STYLE title="Battle of Stockholm" id="Battle of Stockholm" eliminations="Capital" player_start_x="52" player_start_y="251" ai_start_x="17" ai_start_y="19" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\swedensetup.bhs" runtime=".\conquest\Napoleon\swedenruntime.bhs" objective="Caputre the enemy capital(s)." custom_map=".\conquest\Napoleon\sweden.scx" description="Your troops may be able to tolerate the harsh winter climate of this region. The weather, however, makes farming impossible. Fortunately the seas are full of Fish, which you will have to rely on for Food." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1" default="1"></STYLE>
+			<STYLE title="Battle of Montenotte #ICON108" id="New Montenotte" eliminations="Capital" victories="Time Limit" min_victory="15" max_victory="15" map_style="Custom" setup=".\conquest\Napoleon\newmontenottesetup.bhs" runtime=".\conquest\Napoleon\newmontenotte.bhs" objective="Capture the city of Montenotte." custom_map=".\conquest\Napoleon\newmontenotte.scx" description="Napoleon has arrived near the city of Montenotte to begin his first command. Using limited resource income from the Directorate, you will have to try to capture the city of Montenotte. Your gather rate for all resources will incrase for each enemy unit you kill, and decrease for each unit that you lose." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="The Ruins of Montenotte" id="Montenotte4" eliminations="Conquest" player_start_x="22" player_start_y="55" ai_start_x="164" ai_start_y="66" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\montenotte4setup.bhs" runtime=".\conquest\Napoleon\montenotte4runtime.bhs" objective="Capture the enemy capital(s)." custom_map=".\conquest\Napoleon\montenotte4.scx" description="The Papal States have recently conquered this region from the Austrians and Sardinians. They have left Montenotte and other towns in ruins. There are rumors of an abandoned Austrian garrison that is still in the area that might be able to assist you if you can find their leader Commander Schwarzenberg." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="Transylvania" id="Transylvania" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" map_style="Custom" setup=".\conquest\Napoleon\transylvaniasetup.bhs" runtime=".\conquest\Napoleon\transylvaniaruntime.bhs" custom_map=".\conquest\Napoleon\transylvania.scx" description="A Small City is being terrorized by a castle across the river. We will have to destroy the castle and eliminate the enemy forces in order to safeguard the innocent Citizens." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="Battle of Copenhagen" id="Battle of Copenhagen" eliminations="Capital" player_start_x="239" player_start_y="263" ai_start_x="246" ai_start_y="41" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\scansetup.bhs" runtime=".\conquest\Napoleon\scanruntime.bhs" objective="Capture the enemy capital(s)." custom_map=".\conquest\Napoleon\scandanavia2.scx" description="The enemy is resisting your invasion. Take their capital(s) in $NUM0 minutes or less to win." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1" default="1"></STYLE>
+			<STYLE title="Battle of Rome" id="Battle of Tivoli" eliminations="Capital" player_start_x="87" player_start_y="26" ai_start_x="209" ai_start_y="106" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\romesetup.bhs" runtime=".\conquest\Napoleon\romeruntime.bhs" objective="Capture the enemy capital(s)." custom_map=".\conquest\Napoleon\rome.scx" description="Any other European leader would be afraid to march his army towards the Vatican. You, however, have realized how crucial this historic land is to the conquest of Europe, and so you have sent your army there to pacify the region." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1" default="1"></STYLE>
+			<STYLE title="Battle of Rome" id="Battle of Tivoli2" eliminations="Capital" player_start_x="87" player_start_y="26" ai_start_x="209" ai_start_y="106" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\romesetup.bhs" runtime=".\conquest\Napoleon\romeruntime.bhs" objective="Capture the enemy capital(s)." custom_map=".\conquest\Napoleon\rome2.scx" description="Any other European leader would be afraid to march his army towards the Vatican. You, however, have realized how crucial this historic land is to the conquest of Europe, and so you have sent your army there to pacify the region." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1" default="1"></STYLE>
+			<STYLE title="Battle of Ulm" id="Battle of Ulm" eliminations="Capital" player_start_x="35" player_start_y="114" ai_start_x="172" ai_start_y="156" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\ulmsetup.bhs" runtime=".\conquest\Napoleon\ulmruntime.bhs" objective="Capture the enemy capital(s)." custom_map=".\conquest\Napoleon\ulm.scx" description="Your army has reached the vast Black Forest. You will have to find your way through the maze of trees in order to locate and then destroy the enemy." victory_text="You have won the battle." defeat_text="You have lost the battle." no_hero="1" default="1"></STYLE>
+			<STYLE title="Battle for Portugal" id="Battle for Portugal" eliminations="Capital" player_start_x="113" player_start_y="28" ai_start_x="76" ai_start_y="195" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\lisbonsetup.bhs" runtime=".\conquest\Napoleon\lisbonruntime.bhs" objective="Capture the enemy capital(s)." custom_map=".\conquest\Napoleon\lisbon.scx" description="The enemy is resisting your invasion. Take their capital in $NUM0 minutes or less to win." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" default="1"></STYLE>
+			<STYLE title="Battle of Istanbul" id="Istanbul" eliminations="Capital" player_start_x="282" player_start_y="114" ai_start_x="37" ai_start_y="179" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\turkeysetup.bhs" runtime=".\conquest\Napoleon\turkeyruntime.bhs" objective="Capture the enemy capital(s)." custom_map=".\conquest\Napoleon\turkey.scx" description="The enemy has much power in this region. You will find it a hard battle to win. Capture enemy cities in order to gain bonuses which will help you win." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1" default="1"></STYLE>
+			<STYLE title="Battle of Ankara" id="Ankara" eliminations="Capital" player_start_x="37" player_start_y="179" ai_start_x="282" ai_start_y="114" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\turkeysetup.bhs" runtime=".\conquest\Napoleon\turkeyruntime.bhs" objective="Capture the enemy capital(s)." custom_map=".\conquest\Napoleon\turkey2.scx" description="The enemy has much power in this region. You will find it a hard battle to win. Capture enemy cities in order to gain bonuses which will help you win." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1" default="1"></STYLE>
+			<STYLE title="Royalist Battle" id="Battle" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" no_rare="1" mapsizes="Tiny" map_style="Standard No City" setup=".\conquest\scripts\battlesetup.bhs" runtime=".\conquest\scripts\battleruntime.bhs" objective="Destroy the enemy's encampment." bonus=".\conquest\scripts\battlebonus.bhs" description="Your army is approaching the enemy's army.  Attack their encampment and destroy all their buildings in order to win." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" revealmaps="Explored" land_only="1"></STYLE>
+			<STYLE title="Royalist Revolt" id="Revolt" eliminations="Sudden Death Capital" victories="Time Limit" min_victory="15" max_victory="15" map_style="Defender" setup=".\conquest\scripts\defsetup0.bhs" runtime=".\conquest\scripts\defruntime0.bhs" objective="Defend your capital for 15 minutes." description="Your enemy has launched a surprise attack on this territory. Hold off the attackers and defend your capital to achieve victory." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" revealmaps="Explored" land_only="1"></STYLE>
+			<STYLE title="Battle of Austerlitz #ICON108" id="Austerlitz" eliminations="Conquest" player_start_x="7" player_start_y="125" ai_start_x="186" ai_start_y="54" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\austerlitzsetup.bhs" runtime=".\conquest\Napoleon\austerlitzruntime.bhs" custom_map=".\conquest\Napoleon\austerlitz.scx" description="The lines of battle have been drawn. You must take command of the battle and defeat the enemy. The Archduke Charles, brother of Emperor Franz I, has brought his own army to battle." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="Battle of Austerlitz #ICON108" id="Austerlitz2" eliminations="Conquest" player_start_x="7" player_start_y="125" ai_start_x="186" ai_start_y="54" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\austerlitzsetup.bhs" runtime=".\conquest\Napoleon\austerlitzruntime.bhs" custom_map=".\conquest\Napoleon\austerlitz2.scx" description="The lines of battle have been drawn. You must take command of the battle and defeat the enemy. The Archduke Charles, brother of Emperor Franz I, has brought his own army to battle." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="Battle of Leipzig #ICON108" id="Leipzig" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\leipzigsetup.bhs" runtime=".\conquest\Napoleon\leipzig.bhs" custom_map=".\conquest\Napoleon\leipzig.scx" objective="Win the battle." description="Your army has been forced into confrontation near the town of Leipzig. Enemy reinforcements from many different countries have been spotted heading this way. This gigantic encounter is surely a &quot;battle of nations&quot; if ever there was one. Overcome their superior numbers with your military prowess." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1"></STYLE>
+			<STYLE title="Battle of Jena #ICON108" id="Jena" eliminations="Conquest" victories="Time Limit" min_victory="30" max_victory="30" map_style="Custom" runtime=".\conquest\Napoleon\jena.bhs" custom_map=".\conquest\Napoleon\jena.scx" objective="Destroy all enemy cities." description="Marshal Lannes has forced a confrontation with General Hohenloe near the town of Jena. You arrive with reinforcements double the size of the enemy army. To exploit this advantage, you must force the engagement onto open field and overcome the chaotic state your army is in." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1"></STYLE>
+			<STYLE title="Battle of Eylau #ICON108" id="Eylau" eliminations="Conquest" victories="Time Limit" min_victory="15" max_victory="15" map_style="Custom" setup=".\conquest\Napoleon\eylausetup.bhs" runtime=".\conquest\Napoleon\eylauruntime.bhs" custom_map=".\conquest\Napoleon\eylau.scx" description="The Russian army has been spotted near the Prussian village of Eylau. Even though there is a raging snowstorm you have to take the offensive. Be wary, a Prussian army is known to be in the area." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1"></STYLE>
+			<STYLE title="Battle of Wagram #ICON108" id="Wagram" eliminations="Conquest" player_start_x="170" player_start_y="288" ai_start_x="86" ai_start_y="99" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\wagramsetup.bhs" runtime=".\conquest\Napoleon\wagramruntime.bhs" custom_map=".\conquest\Napoleon\wagram.scx" description="After easily taking the Austrian capital of Vienna, Napoleon has landed on the other side of the Danube River from the capital city." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1" default="1"></STYLE>
+			<STYLE title="Journey to Acre #ICON108" id="Syria" eliminations="Conquest" player_start_x="177" player_start_y="192" ai_start_x="186" ai_start_y="10" victories="Time Limit" min_victory="20" max_victory="20" map_style="Custom" setup=".\conquest\Napoleon\syriasetup.bhs" runtime=".\conquest\Napoleon\syriaruntime.bhs" custom_map=".\conquest\Napoleon\syria.scx" objective="Destroy all enemy cities." description="Seeking a great victory, Napoleon has come to Syria. You have a small army, but you have brought many Spies with you in order to bribe enemy units. Capture the enemy capital to win." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="Battle of Mantua #ICON108" id="Mantua" eliminations="Conquest" player_start_x="18" player_start_y="154" ai_start_x="72" ai_start_y="89" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\mantuasetup.bhs" runtime=".\conquest\Napoleon\mantuaruntime.bhs" custom_map=".\conquest\Napoleon\mantua.scx" objective="Capture and hold the enemy capital." description="As the main Austrian stronghold in Italy, the Capital of Mantua will not be easy to take. We will have a tough time assaulting it directly. We should instead concentrate on expanding elsewhere and destroying other Austrian settlements until we have a large enough force to assault Mantua." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1" default="1"></STYLE>
+			<STYLE title="The Siege of Malta #ICON108" id="Malta" eliminations="Conquest" player_start_x="10" player_start_y="10" ai_start_x="190" ai_start_y="190" victories="Time Limit" min_victory="15" max_victory="15" map_style="Custom" setup=".\conquest\Napoleon\maltasetup.bhs" runtime=".\conquest\Napoleon\maltaruntime.bhs" objective="Capture the enemy capital." custom_map=".\conquest\Napoleon\malta.scx" description="While on his way to Egypt, Napoleon stops at the island of Malta. The Knights of Malta have fortified their island and have not lost it in 500 years. Can you succeed where others have failed?" victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="Battle of Lodi #ICON108" id="Lodi" eliminations="Capital" player_start_x="53" player_start_y="176" ai_start_x="114" ai_start_y="118" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\lodisetup.bhs" runtime=".\conquest\Napoleon\lodiruntime.bhs" custom_map=".\conquest\Napoleon\lodi.scx" objective="Capture and hold the enemy capital." description="The people of Lombardy have already heard great things about you. If you bring a large enough army to Milan, the capital, we might intimidate them into joining our side without a fight. A Persian Merchant is also in the south, if we decide we need some help." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="Battle of Marengo #ICON108" id="Lodi2" eliminations="Capital" player_start_x="53" player_start_y="176" ai_start_x="123" ai_start_y="90" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\lodi2setup.bhs" runtime=".\conquest\Napoleon\lodi2runtime.bhs" custom_map=".\conquest\Napoleon\lodi2.scx" objective="Capture and hold the enemy capital." description="The Papal States have recently swooped in and taken over much of this territory. The Milanese refuse to submit and ask for our help. We must protect their capital from falling. A Persian Merchant is also in the north, if we decide we need some help." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="Battle of Friedland #ICON108" id="Friedland" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\friedlandsetup.bhs" runtime=".\conquest\Napoleon\friedlandruntime.bhs" custom_map=".\conquest\Napoleon\friedland.scx" description="Near the Prussian town of Friedland one of your marshals has spotted a Russian army that has come to the aid of the weakened Prussians. You must hold the advancing Russians until Napoleon arrives with the rest of the French army." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1"></STYLE>
+			<STYLE title="Battle of Corsica" id="Corsica" eliminations="Conquest" victories="Time Limit" min_victory="30" max_victory="30" map_style="Custom" setup=".\conquest\Napoleon\corsicasetup.bhs" runtime=".\conquest\Napoleon\corsicaruntime.bhs" custom_map=".\conquest\Napoleon\corsica.scx" description="Napoleon has returned to his homeland! Great Britain has removed its forces and there is little organized resistance in this territory, but the Corsican patriot, Pascale di Paoli, will not submit quietly." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1"></STYLE>
+			<STYLE title="Keeping the Peace" id="Keeping the Peace" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" runtime=".\conquest\Napoleon\Burgundy.bhs" custom_map=".\conquest\Napoleon\Burgundy.scx" description="The cities in Burgundy are still unsettled. Men with dangerous ideas and deep pockets threaten the revolution. Hold the area together until things settle down so that you can turn your attention to world affairs. Beware of revolts from disaffected peasants." victory_text="Most of the revolts have subsided. Your power is intact." defeat_text="You have lost the battle." reveal_buildings="1"></STYLE>
+			<STYLE title="Battle of Lisbon" id="Portugal" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" mapsizes="Arena" setup=".\conquest\Napoleon\portugalsetup.bhs" runtime=".\conquest\Napoleon\portugalruntime.bhs" objective="Capture the enemy capital(s) in $NUM0 minutes." description="The enemy is resisting your invasion. Take their capital(s) in $NUM0 minutes or less to win." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" default="1"></STYLE>
+			<STYLE title="Battle of Madrid" id="Madrid" eliminations="Capital" victories="Time Limit" min_victory="90" max_victory="90" setup=".\conquest\Napoleon\madridsetup.bhs" runtime=".\conquest\Napoleon\madridruntime.bhs" objective="Capture the enemy capital(s) in $NUM0 minutes." description="The enemy is resisting your invasion. Take their capital(s) in $NUM0 minutes or less to win." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" default="1"></STYLE>
+			<STYLE title="Battle of Brittany" id="Brittany" eliminations="Conquest" player_start_x="232" player_start_y="103" ai_start_x="68" ai_start_y="54" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\brittanysetup.bhs" runtime=".\conquest\Napoleon\brittanyruntime.bhs" custom_map=".\conquest\Napoleon\brittany.scx" description="We must drive the British off of the Continent. Their very existence on the sacred ground of Brittany is an insult to all Frenchmen!" victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" default="1"></STYLE>
+			<STYLE title="Battle of Brussels" id="Belgium" eliminations="Conquest" player_start_x="22" player_start_y="70" ai_start_x="126" ai_start_y="70" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\belgiumsetup.bhs" runtime=".\conquest\Napoleon\belgiumruntime.bhs" custom_map=".\conquest\Napoleon\belgium.scx" description="The Austrians provide military support to this province but are uneasy about its proximity to France." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" default="1"></STYLE>
+			<STYLE title="Waterloo #ICON108" id="Waterloo" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\waterloosetup.bhs" runtime=".\conquest\Napoleon\waterlooruntime.bhs" custom_map=".\conquest\Napoleon\waterloo.scx" description="The major powers of Europe have declared Napoleon Bonaparte an outlaw. They have gathered an enormous army to oppose you. The Anglo-Allied army, commanded by the Duke of Wellington, has been spotted near the small village of Waterloo. Crushing him will deal a crucial blow to the European Coalition. Be careful, though, as there is a Prussian army led by Field Marshal Blucher also reported to be in the area." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1"></STYLE>
+			<STYLE title="Battle of Great Britain" id="Great Britain" eliminations="Capital" player_start_x="250" player_start_y="270" ai_start_x="234" ai_start_y="198" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\britainsetup.bhs" runtime=".\conquest\Napoleon\britainruntime.bhs" custom_map=".\conquest\Napoleon\greatbritain.scx" description="Great Britain's strength comes from its Royal Navy. We must strike quickly and gain a foothold on their island before they can bring their ships into the fight." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" default="1"></STYLE>
+			<STYLE title="Guerrilla Bases" id="Guerrilla Bases" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\Napoleon\guerillabasessetup.bhs" runtime=".\conquest\Napoleon\guerillabasesruntime.bhs" objective="Destroy the guerrilla encampments." description="Root out the guerrilla forces in this province to quash all resistance and gain control of the land." victory_text="You have won the battle." defeat_text="You have lost the battle." land_only="1"></STYLE>
+			<STYLE title="Battle of the Pyramids #ICON108" id="pyramids" eliminations="Capital" player_start_x="7" player_start_y="128" ai_start_x="274" ai_start_y="104" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\pyramidssetup.bhs" runtime=".\conquest\Napoleon\pyramidsruntime.bhs" custom_map=".\conquest\Napoleon\pyramids.scx" description="Rather than try to march through the harsh desert into Egypt, you have taken to the sea. Now you must sneak your boats past the Mameluke patrol boats, and land your army near Alexandria." victory_text="You have won the battle." defeat_text="You have lost the battle." reveal_buildings="1" no_hero="1"></STYLE>
+			<STYLE title="March to Moscow #ICON108" id="Russia" eliminations="Conquest" victories="Time Limit" min_victory="90" max_victory="90" map_style="Custom" setup=".\conquest\Napoleon\russiasetup.bhs" runtime=".\conquest\Napoleon\russiaruntime.bhs" custom_map=".\conquest\Napoleon\russia.scx" description="Russia's weather can be more dangerous than her armies. That is why Russian soldiers say their best general is &quot;General Winter.&quot; Capture Moscow before your army succumbs to the Russian winter." victory_text="You have won the battle." defeat_text="You have lost the battle."></STYLE>
+			<STYLE title="Hideaway" id="Hideaway" eliminations="Conquest" victories="Time Limit" min_victory="30" max_victory="30" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\Alexander\hideawaysetup.bhs" runtime=".\conquest\Alexander\hideawayruntime.bhs" objective="Kill all enemy Generals or capture 70% of the territory." description="The enemy's army is tied up elsewhere, so they have hired mercenaries. These mercenaries require no City and suffer no attrition. To find them will require some careful scouting; they are aware of your presence and will certainly set up ambushes. They will raid your homeland relentlessly." victory_text="You have rooted out the mercenaries." defeat_text="The mercenaries have overwhelmed you." reveal_buildings="1" land_only="1"></STYLE>
+			<STYLE title="Royalist Hideaway" id="Royalist Hideaway" eliminations="Conquest" victories="Time Limit" min_victory="30" max_victory="30" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\Alexander\hideawaysetup.bhs" runtime=".\conquest\Alexander\hideawayruntime.bhs" objective="Kill all enemy Generals or capture 70% of the territory." description="The royalists have employed mercenaries to harass us. These mercenaries require no City and suffer no attrition. To find them will require some careful scouting; they are aware of your presence and will certainly set up ambushes. They will raid your homeland relentlessly." victory_text="You have rooted out the mercenaries." defeat_text="The mercenaries have overwhelmed you." reveal_buildings="1" land_only="1"></STYLE>
+			<STYLE title="Nomad" id="Nomad" eliminations="Conquest" victories="Time Limit" add_opponents_diff0="2" add_opponents_diff1="2" add_opponents_diff2="2" add_opponents_diff3="2" add_opponents_diff4="2" add_opponents_diff5="2" min_victory="60" max_victory="60" mapsizes="Arena" map_style="Standard Player City" setup=".\conquest\scripts\nomadsetup.bhs" runtime=".\conquest\scripts\nomadruntime.bhs" description="You have successfully established a new settlement but several nomadic tribes also claim this territory. Eliminate them in order to protect your people." victory_text="You have defeated all of the nomad tribes." defeat_text="You were unable to defeat all of the nomad tribes." land_only="1"></STYLE>
+			<STYLE title="Low Rations" id="rationsr" eliminations="Capital" map_style="Custom" setup=".\conquest\Napoleon\lowrationsrusssetup.bhs" runtime=".\conquest\Napoleon\lowrationsruss.bhs" custom_map=".\conquest\Napoleon\lowrationsruss.scx" objective="Capture the enemy capital(s) before you run out of rations." description="Your army is in desperate straits. Your enemy has control of 80% of the territory and threatens to drive you into retreat. To make matters worse, rations are running low. You must quickly reclaim some territory and pillage the enemy cities for rations before your army dissolves from hunger. Destroy the enemy Capital(s) to bring the area under your control." victory_text="You have won the battle." defeat_text="You have lost the battle." land_only="1"></STYLE>
+			<STYLE title="Low Rations" id="rationst" eliminations="Capital" map_style="Custom" setup=".\conquest\Napoleon\lowrationsturksetup.bhs" runtime=".\conquest\Napoleon\lowrationsturk.bhs" custom_map=".\conquest\Napoleon\lowrationsturk.scx" objective="Capture the enemy capital(s) before you run out of rations." description="Your army is in desperate straits. Your enemy has control of 80% of the territory and threatens to drive you into retreat. To make matters worse, rations are running low. You must quickly reclaim some territory and pillage the enemy cities for rations before your army dissolves from hunger. Destroy the enemy Capital(s) to bring the area under your control." victory_text="You have won the battle." defeat_text="You have lost the battle." land_only="1"></STYLE>
+		</CUSTOM>
+	</CONQUESTSTYLES>
+	<COUNTRY name="Great Britain" size="7" owner="british" capital="1" tileset="snowy" value="40" red="6" green="133" blue="152" id="Great Britain" left="195" right="454" top="0" bottom="295" x="384" y="242">
+		<LINK to="Norway and Denmark" sea="1"></LINK>
+		<LINK to="Paris" sea="1"></LINK>
+		<LINK to="Brittany" sea="1"></LINK>
+		<LINK to="Portugal" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Norway and Denmark" size="1" owner="dutch" tileset="arctic" value="55" rare="Fish" red="255" green="93" blue="5" card="Continental System" id="Norway and Denmark" left="565" right="695" top="0" bottom="220" x="625" y="196">
+		<LINK to="Great Britain" sea="1"></LINK>
+		<LINK to="Sweden" sea="1"></LINK>
+		<LINK to="Hanover" sea="0"></LINK>
+		<LINK to="Holland" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Sweden" size="0" owner="maya" capital="1" tileset="arctic" value="40" red="5" green="165" blue="35" id="Sweden" left="668" right="823" top="0" bottom="171" x="730" y="87">
+		<LINK to="Norway and Denmark" sea="1"></LINK>
+		<LINK to="Russia" sea="1"></LINK>
+		<LINK to="Pomerania" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Russia" size="7" owner="russians" capital="1" tileset="snowy" value="40" red="107" green="206" blue="16" wonder="Kremlin" id="Russia" left="869" right="1380" top="0" bottom="330" x="1073" y="175">
+		<LINK to="Sweden" sea="1"></LINK>
+		<LINK to="East Prussia" sea="0"></LINK>
+		<LINK to="Poland" sea="0"></LINK>
+		<LINK to="Ukraine" sea="0"></LINK>
+		<LINK to="Hungary" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="East Prussia" size="2" owner="germans" tileset="snowy" value="150" rare="Furs" card="Timber Economic Boom" red="178" green="57" blue="4" id="East Prussia" left="832" right="900" top="153" bottom="235" x="869" y="201">
+		<LINK to="Russia" sea="0"></LINK>
+		<LINK to="Poland" sea="0"></LINK>
+		<LINK to="West Prussia" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Poland" size="0" owner="koreans" capital="1" tileset="snowy" value="40" red="74" green="247" blue="247" id="Poland" left="753" right="935" top="165" bottom="352" x="852" y="280">
+		<LINK to="Russia" sea="0"></LINK>
+		<LINK to="East Prussia" sea="0"></LINK>
+		<LINK to="Pomerania" sea="0"></LINK>
+		<LINK to="West Prussia" sea="0"></LINK>
+		<LINK to="Brandenburg" sea="0"></LINK>
+		<LINK to="Silesia" sea="0"></LINK>
+		<LINK to="Hungary" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Pomerania" tribute="20" size="2" owner="germans" tileset="snowy" value="110" rare="Obsidian" red="165" green="43" blue="5" id="Pomerania" left="687" right="809" top="186" bottom="246" x="758" y="224">
+		<LINK to="Sweden" sea="1"></LINK>
+		<LINK to="Poland" sea="0"></LINK>
+		<LINK to="West Prussia" sea="0"></LINK>
+		<LINK to="Hanover" sea="0"></LINK>
+		<LINK to="Brandenburg" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="West Prussia" card="Military Eureka" tribute="40" supply_depot="1" size="2" owner="germans" tileset="snowy" value="90" red="249" green="232" blue="91" id="West Prussia" left="788" right="840" top="186" bottom="233" x="811" y="212">
+		<LINK to="East Prussia" sea="0"></LINK>
+		<LINK to="Poland" sea="0"></LINK>
+		<LINK to="Pomerania" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Hanover" card="Merchant Guild" tribute="60" supply_depot="1" size="1" owner="british" tileset="snowy" value="90" red="238" green="196" blue="0" id="Hanover" left="565" right="712" top="204" bottom="327" x="630" y="268">
+		<LINK to="Norway and Denmark" sea="0"></LINK>
+		<LINK to="Pomerania" sea="0"></LINK>
+		<LINK to="Holland" sea="0"></LINK>
+		<LINK to="Brandenburg" sea="0"></LINK>
+		<LINK to="Saxony" sea="0"></LINK>
+		<LINK to="Hesse" sea="0"></LINK>
+		<LINK to="Westphalia" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Holland" size="2" owner="dutch" capital="1" tileset="dirty" value="40" red="91" green="249" blue="165" id="Holland" left="497" right="642" top="213" bottom="276" x="568" y="244">
+		<LINK to="Norway and Denmark" sea="0"></LINK>
+		<LINK to="Hanover" sea="0"></LINK>
+		<LINK to="Belgium" sea="0"></LINK>
+		<LINK to="Hesse" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Brandenburg" size="2" owner="germans" capital="1" tileset="snowy" value="40" red="198" green="244" blue="198" id="Brandenburg" left="664" right="774" top="229" bottom="287" x="697" y="261">
+		<LINK to="Poland" sea="0"></LINK>
+		<LINK to="Pomerania" sea="0"></LINK>
+		<LINK to="Hanover" sea="0"></LINK>
+		<LINK to="Saxony" sea="0"></LINK>
+		<LINK to="Bohemia" sea="0"></LINK>
+		<LINK to="Silesia" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Ukraine" supply_depot="1" size="2" owner="russians" tileset="snowy" value="160" rare="Gems" red="206" green="231" blue="99" id="Ukraine" left="975" right="1380" top="251" bottom="522" x="1228" y="364">
+		<LINK to="Russia" sea="0"></LINK>
+		<LINK to="Hungary" sea="0"></LINK>
+		<LINK to="Walachia" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Saxony" size="3" owner="aztecs" capital="1" tileset="snowy" value="40" red="91" green="147" blue="249" id="Saxony" left="671" right="741" top="267" bottom="338" x="708" y="304">
+		<LINK to="Hanover" sea="0"></LINK>
+		<LINK to="Brandenburg" sea="0"></LINK>
+		<LINK to="Westphalia" sea="0"></LINK>
+		<LINK to="Bohemia" sea="0"></LINK>
+		<LINK to="Bavaria" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Belgium" card="Advisor Fouche" tribute="20" size="2" owner="greeks" tileset="dirty" value="40" red="239" green="99" blue="148" id="Belgium" supply_depot="1" left="457" right="585" top="274" bottom="393" x="526" y="320">
+		<LINK to="Holland" sea="0"></LINK>
+		<LINK to="Hesse" sea="0"></LINK>
+		<LINK to="Wurttemberg" sea="0"></LINK>
+		<LINK to="Paris" sea="0"></LINK>
+		<LINK to="Burgundy" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Hesse" card="Political Dissidents" tribute="50" size="1" owner="greeks" tileset="snowy" value="40" red="159" green="77" blue="251" id="Hesse" left="543" right="609" top="274" bottom="359" x="575" y="314">
+		<LINK to="Hanover" sea="0"></LINK>
+		<LINK to="Holland" sea="0"></LINK>
+		<LINK to="Belgium" sea="0"></LINK>
+		<LINK to="Westphalia" sea="0"></LINK>
+		<LINK to="Wurttemberg" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Silesia" card="Propaganda" tribute="20" size="2" owner="germans" tileset="snowy" value="40" red="162" green="252" blue="66" id="Silesia" left="743" right="836" top="280" bottom="353" x="797" y="310">
+		<LINK to="Poland" sea="0"></LINK>
+		<LINK to="Brandenburg" sea="0"></LINK>
+		<LINK to="Bohemia" sea="0"></LINK>
+		<LINK to="Hungary" sea="0"></LINK>
+		<LINK to="Moravia" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Bohemia" card="Civic Eureka" tribute="20" size="2" owner="greeks" tileset="snowy" value="40" red="28" green="0" blue="238" id="Bohemia" left="687" right="788" top="288" bottom="379" x="730" y="346">
+		<LINK to="Brandenburg" sea="0"></LINK>
+		<LINK to="Saxony" sea="0"></LINK>
+		<LINK to="Silesia" sea="0"></LINK>
+		<LINK to="Moravia" sea="0"></LINK>
+		<LINK to="Bavaria" sea="0"></LINK>
+		<LINK to="Austria" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Westphalia" card="Traitors" tribute="60" supply_depot="1" size="1" owner="greeks" tileset="snowy" value="90" red="245" green="226" blue="209" id="Westphalia" left="606" right="683" top="290" bottom="351" x="644" y="325">
+		<LINK to="Hanover" sea="0"></LINK>
+		<LINK to="Saxony" sea="0"></LINK>
+		<LINK to="Hesse" sea="0"></LINK>
+		<LINK to="Bavaria" sea="0"></LINK>
+		<LINK to="Wurttemberg" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Paris" size="4" owner="french" capital="1" tileset="dirty" value="170" wonder="Versailles" red="1" green="12" blue="225" id="Paris" left="347" right="487" top="291" bottom="429" x="410" y="378">
+		<LINK to="Great Britain" sea="1"></LINK>
+		<LINK to="Belgium" sea="0"></LINK>
+		<LINK to="Brittany" sea="0"></LINK>
+		<LINK to="Burgundy" sea="0"></LINK>
+		<LINK to="Bourdeaux" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Hungary" size="3" owner="greeks" tileset="dirty" value="40" card="Food Economic Boom" red="148" green="148" blue="57" id="Hungary" left="758" right="1027" top="311" bottom="552" x="848" y="450">
+		<LINK to="Russia" sea="0"></LINK>
+		<LINK to="Poland" sea="0"></LINK>
+		<LINK to="Ukraine" sea="0"></LINK>
+		<LINK to="Silesia" sea="0"></LINK>
+		<LINK to="Moravia" sea="0"></LINK>
+		<LINK to="Austria" sea="0"></LINK>
+		<LINK to="Walachia" sea="0"></LINK>
+		<LINK to="Transylvania" sea="0"></LINK>
+		<LINK to="Illyrian Provinces" sea="0"></LINK>
+		<LINK to="Balkans" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Moravia" tribute="70" supply_depot="1" size="2" owner="greeks" tileset="dirty" value="200" rare="Dye" red="220" green="251" blue="77" id="Moravia" left="743" right="816" top="322" bottom="389" x="782" y="359">
+		<LINK to="Bohemia" sea="0"></LINK>
+		<LINK to="Silesia" sea="0"></LINK>
+		<LINK to="Hungary" sea="0"></LINK>
+		<LINK to="Austria" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Burgundy" owner="persian" capital="1" tileset="dirty" value="40" red="138" green="104" blue="248" tribute="20" id="Burgundy" left="397" right="573" top="330" bottom="534" x="492" y="430">
+		<LINK to="Belgium" sea="0"></LINK>
+		<LINK to="Wurttemberg" sea="0"></LINK>
+		<LINK to="Paris" sea="0"></LINK>
+		<LINK to="Bourdeaux" sea="0"></LINK>
+		<LINK to="Switzerland" sea="0"></LINK>
+		<LINK to="Savoy" sea="0"></LINK>
+		<LINK to="Marseilles" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Bavaria" size="0" owner="bantu" capital="1" tileset="dirty" value="40" red="152" green="232" blue="244" id="Bavaria" left="608" right="711" top="338" bottom="491" x="652" y="414">
+		<LINK to="Saxony" sea="0"></LINK>
+		<LINK to="Westphalia" sea="0"></LINK>
+		<LINK to="Bohemia" sea="0"></LINK>
+		<LINK to="Austria" sea="0"></LINK>
+		<LINK to="Wurttemberg" sea="0"></LINK>
+		<LINK to="Switzerland" sea="0"></LINK>
+		<LINK to="Illyrian Provinces" sea="0"></LINK>
+		<LINK to="Lombardy" sea="0"></LINK>
+		<LINK to="Venetia" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Brittany" card="Advisor Talleyrand" tribute="40" size="2" owner="british" tileset="dirty" value="40" red="148" green="206" blue="156" id="Brittany" left="270" right="702" top="339" bottom="538" x="336" y="386">
+		<LINK to="Great Britain" sea="1"></LINK>
+		<LINK to="Paris" sea="0"></LINK>
+		<LINK to="Bourdeaux" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Wurttemberg" card="Commandeer Transport" tribute="30" size="1" owner="greeks" tileset="dirty" value="150" rare="Papyrus" red="244" green="198" blue="243" id="Wurttemberg" left="560" right="612" top="347" bottom="437" x="587" y="415">
+		<LINK to="Belgium" sea="0"></LINK>
+		<LINK to="Hesse" sea="0"></LINK>
+		<LINK to="Westphalia" sea="0"></LINK>
+		<LINK to="Burgundy" sea="0"></LINK>
+		<LINK to="Bavaria" sea="0"></LINK>
+		<LINK to="Switzerland" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Austria" size="5" owner="greeks" capital="1" tileset="dirty" value="40" red="224" green="0" blue="250" id="Austria" left="688" right="777" top="371" bottom="502" x="736" y="424">
+		<LINK to="Bohemia" sea="0"></LINK>
+		<LINK to="Hungary" sea="0"></LINK>
+		<LINK to="Bavaria" sea="0"></LINK>
+		<LINK to="Moravia" sea="0"></LINK>
+		<LINK to="Illyrian Provinces" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Walachia" tribute="40" size="2" owner="turks" tileset="dirty" value="40" red="123" green="231" blue="231" id="Walachia" left="929" right="1124" top="399" bottom="577" x="994" y="552">
+		<LINK to="Ukraine" sea="0"></LINK>
+		<LINK to="Hungary" sea="0"></LINK>
+		<LINK to="Transylvania" sea="0"></LINK>
+		<LINK to="Balkans" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Bourdeaux" size="2" owner="french" tileset="dirty" value="70" rare="Wine" red="111" green="248" blue="104" id="Bourdeaux" left="302" right="429" top="401" bottom="589" x="368" y="526">
+		<LINK to="Paris" sea="0"></LINK>
+		<LINK to="Burgundy" sea="0"></LINK>
+		<LINK to="Brittany" sea="0"></LINK>
+		<LINK to="Marseilles" sea="0"></LINK>
+		<LINK to="Aragon" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Switzerland" owner="iroquois" capital="1" tileset="snowy" value="500" red="1" green="225" blue="212" id="Switzerland" left="525" right="617" top="435" bottom="493" x="583" y="456">
+		<LINK to="Burgundy" sea="0"></LINK>
+		<LINK to="Bavaria" sea="0"></LINK>
+		<LINK to="Wurttemberg" sea="0"></LINK>
+		<LINK to="Savoy" sea="0"></LINK>
+		<LINK to="Lombardy" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Transylvania" card="Partisans" tribute="20" size="2" owner="greeks" tileset="dirty" value="110" rare="Amber" red="255" green="148" blue="0" id="Transylvania" left="919" right="1038" top="436" bottom="540" x="966" y="478">
+		<LINK to="Hungary" sea="0"></LINK>
+		<LINK to="Walachia" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Illyrian Provinces" card="Commander Schwarzenberg" tribute="40" size="3" owner="greeks" tileset="dirty" value="40" red="53" green="253" blue="67" id="Illyrian Provinces" left="667" right="830" top="457" bottom="579" x="759" y="519">
+		<LINK to="Hungary" sea="0"></LINK>
+		<LINK to="Bavaria" sea="0"></LINK>
+		<LINK to="Austria" sea="0"></LINK>
+		<LINK to="Venetia" sea="0"></LINK>
+		<LINK to="Balkans" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Savoy" tribute="50" owner="mongols" tileset="dirty" value="40" red="61" green="5" blue="165" id="Savoy" left="497" right="585" top="473" bottom="527" x="540" y="502">
+		<LINK to="Burgundy" sea="0"></LINK>
+		<LINK to="Switzerland" sea="0"></LINK>
+		<LINK to="Lombardy" sea="0"></LINK>
+		<LINK to="Marseilles" sea="0"></LINK>
+		<LINK to="Piedmont" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Lombardy" tribute="80" supply_depot="1" size="4" owner="greeks" tileset="dirty" value="90" red="206" green="250" blue="0" id="Lombardy" left="578" right="647" top="481" bottom="534" x="614" y="514">
+		<LINK to="Bavaria" sea="0"></LINK>
+		<LINK to="Switzerland" sea="0"></LINK>
+		<LINK to="Savoy" sea="0"></LINK>
+		<LINK to="Venetia" sea="0"></LINK>
+		<LINK to="Piedmont" sea="0"></LINK>
+		<LINK to="Tuscany" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Venetia" card="Commerce Eureka" tribute="100" size="5" owner="greeks" tileset="dirty" value="90" red="178" green="65" blue="4" id="Venetia" left="634" right="703" top="482" bottom="532" x="665" y="503">
+		<LINK to="Bavaria" sea="0"></LINK>
+		<LINK to="Illyrian Provinces" sea="0"></LINK>
+		<LINK to="Lombardy" sea="0"></LINK>
+		<LINK to="Tuscany" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Castile" size="5" owner="spanish" capital="1" tileset="dirty" value="40" red="40" green="65" blue="254" id="Castile" left="103" right="269" top="486" bottom="702" x="189" y="613">
+		<LINK to="Aragon" sea="0"></LINK>
+		<LINK to="Portugal" sea="0"></LINK>
+		<LINK to="Seville" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Marseilles" supply_depot="1" size="2" owner="french" tileset="dirty" value="90" red="66" green="140" blue="252" id="Marseilles" left="416" right="525" top="487" bottom="590" x="482" y="545">
+		<LINK to="Burgundy" sea="0"></LINK>
+		<LINK to="Bourdeaux" sea="0"></LINK>
+		<LINK to="Savoy" sea="0"></LINK>
+		<LINK to="Piedmont" sea="0"></LINK>
+		<LINK to="Corsica" sea="1"></LINK>
+		<LINK to="Tunisia" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Balkans" size="2" owner="turks" tileset="dirty" value="150" rare="Horses" card="Cultural Dominance" red="206" green="173" blue="231" id="Balkans" left="746" right="1112" top="509" bottom="833" x="924" y="638">
+		<LINK to="Hungary" sea="0"></LINK>
+		<LINK to="Walachia" sea="0"></LINK>
+		<LINK to="Illyrian Provinces" sea="0"></LINK>
+		<LINK to="Turkey" sea="1"></LINK>
+		<LINK to="Kingdom of Naples" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Piedmont" tribute="90" size="2" owner="mongols" tileset="dirty" value="40" red="255" green="64" blue="5" id="Piedmont" left="520" right="618" top="524" bottom="576" x="546" y="546">
+		<LINK to="Savoy" sea="0"></LINK>
+		<LINK to="Lombardy" sea="0"></LINK>
+		<LINK to="Marseilles" sea="0"></LINK>
+		<LINK to="Tuscany" sea="0"></LINK>
+		<LINK to="Corsica" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Aragon" size="2" owner="spanish" tileset="dirty" value="40" card="Metal Economic Boom" red="244" green="163" blue="152" id="Aragon" left="243" right="424" top="530" bottom="693" x="309" y="612">
+		<LINK to="Bourdeaux" sea="0"></LINK>
+		<LINK to="Castile" sea="0"></LINK>
+		<LINK to="Seville" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Tuscany" size="0" owner="romans" capital="1" tileset="dirty" value="40" wonder="Colosseum" red="254" green="206" blue="40" id="Tuscany" left="604" right="700" top="532" bottom="670" x="649" y="611">
+		<LINK to="Lombardy" sea="0"></LINK>
+		<LINK to="Venetia" sea="0"></LINK>
+		<LINK to="Piedmont" sea="0"></LINK>
+		<LINK to="Corsica" sea="1"></LINK>
+		<LINK to="Kingdom of Naples" sea="0"></LINK>
+		<LINK to="Sardina" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Portugal" size="0" owner="inca" capital="1" tileset="dirty" value="40" red="100" green="250" blue="0" id="Portugal" left="51" right="165" top="541" bottom="724" x="85" y="637">
+		<LINK to="Great Britain" sea="1"></LINK>
+		<LINK to="Castile" sea="0"></LINK>
+		<LINK to="Seville" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Corsica" owner="british" tileset="dirty" value="40" red="245" green="141" blue="227" card="Commander Paoli" id="Corsica" left="559" right="591" top="600" bottom="659" x="574" y="632">
+		<LINK to="Marseilles" sea="1"></LINK>
+		<LINK to="Piedmont" sea="1"></LINK>
+		<LINK to="Tuscany" sea="1"></LINK>
+		<LINK to="Sardina" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Turkey" size="7" owner="turks" capital="1" tileset="dirty" value="40" wonder="Colossus" red="253" green="53" blue="194" id="Turkey" left="1036" right="1380" top="600" bottom="834" x="1166" y="734">
+		<LINK to="Balkans" sea="1"></LINK>
+		<LINK to="Syria" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Kingdom of Naples" owner="romans" tileset="dirty" value="150" rare="Sulphur" red="26" green="215" blue="1" card="Spy Academy" id="Kingdom of Naples" left="652" right="827" top="604" bottom="828" x="740" y="677">
+		<LINK to="Balkans" sea="1"></LINK>
+		<LINK to="Tuscany" sea="0"></LINK>
+		<LINK to="Sardina" sea="1"></LINK>
+		<LINK to="Tunisia" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Seville" size="2" owner="spanish" tileset="dirty" value="40" card="Wealth Economic Boom" red="249" green="251" blue="77" id="Seville" left="97" right="320" top="670" bottom="774" x="221" y="725">
+		<LINK to="Castile" sea="0"></LINK>
+		<LINK to="Aragon" sea="0"></LINK>
+		<LINK to="Portugal" sea="0"></LINK>
+		<LINK to="Algiers" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Sardinia" owner="mongols" capital="1" tileset="dirty" value="40" red="2" green="106" blue="202" id="Sardina" left="541" right="588" top="678" bottom="759" x="564" y="719">
+		<LINK to="Tuscany" sea="1"></LINK>
+		<LINK to="Corsica" sea="1"></LINK>
+		<LINK to="Kingdom of Naples" sea="1"></LINK>
+		<LINK to="Tunisia" sea="1"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Algiers" owner="turks" tileset="GS_Desert" value="150" rare="Salt" red="17" green="255" blue="185" card="Spy Network" id="Algiers" left="0" right="537" top="776" bottom="1023" x="385" y="828">
+		<LINK to="Seville" sea="1"></LINK>
+		<LINK to="Tunisia" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Syria" size="2" owner="turks" tileset="GS_Desert" value="55" rare="Incense" card="Colony Blockade" red="126" green="3" blue="189" id="Syria" left="1270" right="1380" top="782" bottom="944" x="1309" y="873">
+		<LINK to="Turkey" sea="0"></LINK>
+		<LINK to="Egypt" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Tunisia" capital="1" card="Logistics" tribute="30" size="3" owner="americans" tileset="GS_Desert" value="40" red="185" green="141" blue="245" id="Tunisia" left="522" right="799" top="792" bottom="1023" x="564" y="817">
+		<LINK to="Marseilles" sea="1"></LINK>
+		<LINK to="Sardina" sea="1"></LINK>
+		<LINK to="Kingdom of Naples" sea="1"></LINK>
+		<LINK to="Algiers" sea="0"></LINK>
+		<LINK to="Libya" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Libya" owner="turks" tileset="GS_Desert" value="40" red="155" green="248" blue="104" id="Libya" left="780" right="1107" top="886" bottom="1023" x="890" y="920">
+		<LINK to="Tunisia" sea="0"></LINK>
+		<LINK to="Egypt" sea="0"></LINK>
+	</COUNTRY>
+	<COUNTRY name="Egypt" size="3" owner="egyptians" capital="1" tileset="GS_Desert" value="40" wonder="Pyramids" tribute="20" red="215" green="152" blue="1" id="Egypt" left="1096" right="1380" top="935" bottom="1023" x="1167" y="957">
+		<LINK to="Syria" sea="0"></LINK>
+		<LINK to="Libya" sea="0"></LINK>
+	</COUNTRY>
+	<BONUSCARDDECK name="$TECHCAT0 Eureka"></BONUSCARDDECK>
+	<BONUSCARDDECK name="$RES0 Economic Boom"></BONUSCARDDECK>
+	<BONUSCARDDECK name="Mercenaries"></BONUSCARDDECK>
+	<BONUSCARDDECK name="Great Thinker"></BONUSCARDDECK>
+	<BONUSCARDDECK name="Merchant Guild"></BONUSCARDDECK>
+	<BONUSCARDDECK name="Logistics"></BONUSCARDDECK>
+	<BONUSCARDDECK name="Partisans"></BONUSCARDDECK>
+	<BONUSCARDDECK name="Cultural Dominance"></BONUSCARDDECK>
+	<BONUSCARDDECK name="Trade Embargo"></BONUSCARDDECK>
+	<BONUSCARDDECK name="Propaganda"></BONUSCARDDECK>
+	<BONUSCARDDECK name="Spy Network"></BONUSCARDDECK>
+	<TRIBES>
+		<!--ART STYLES    (BUILDING/UNIT)
+Building
+0 MED_STYLE,
+1 NEUROPE_STYLE,
+2 ASIAN_STYLE,
+3 KOREAN_STYLE,
+4 AMERICAN_STYLE,
+5 TURKISH_STYLE,
+
+Unit
+ 0 = American
+ 1 = Arab
+ 2 = European
+ 3 = Asian
+-->
+		<TRIBE>
+			<FILE>./conquest/Napoleon/SAXONY.XML   </FILE>
+			<KEY>aztecs   </KEY>
+			<SKILL>10</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/SWEDISH.XML</FILE>
+			<KEY>maya     </KEY>
+			<SKILL>10</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/PORTUGUESE.XML</FILE>
+			<KEY>inca     </KEY>
+			<SKILL>10</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/BAVARIA.XML</FILE>
+			<KEY>bantu    </KEY>
+			<SKILL>10</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./tribes/NUBIANS.XML  </FILE>
+			<KEY>nubians  </KEY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/AUSTRIANS.XML</FILE>
+			<KEY>greeks</KEY>
+			<SKILL>60</SKILL>
+			<NO_ELIMINATING>1</NO_ELIMINATING>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/PAPAL.XML</FILE>
+			<KEY>romans   </KEY>
+			<SKILL>60</SKILL>
+			<NO_ELIMINATING>1</NO_ELIMINATING>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/MAMELUKES.XML</FILE>
+			<KEY>egyptians</KEY>
+			<SKILL>10</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/OTTOMANTURKS.XML    </FILE>
+			<KEY>turks    </KEY>
+			<SKILL>30</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/SPANISH.XML  </FILE>
+			<KEY>spanish  </KEY>
+			<SKILL>30</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/FRENCH.XML   </FILE>
+			<KEY>french   </KEY>
+			<END_GAME_IMAGES victory=".\art\CTW_Napoleon_Victory_Back.tga" ancient_defeat=".\art\CTW_Napoleon_Defeat_Back.tga" marginal_victory=".\art\CTW_Napoleon_Victory_Back.tga" marginal_defeat=".\art\CTW_Napoleon_Defeat_Back.tga" allied=".\art\CTW_Napoleon_Victory_Back.tga" hero_defeat=".\art\CTW_Alex_Herodeath_Back.tga"></END_GAME_IMAGES>
+			<BONUS_CARDS>
+				<CARD>Mercenaries</CARD>
+			</BONUS_CARDS>
+			<UNIQUE_UNIT>Imperial Guard</UNIQUE_UNIT>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/BRITISH.XML  </FILE>
+			<KEY>british  </KEY>
+			<SKILL>90</SKILL>
+			<NO_ELIMINATING>1</NO_ELIMINATING>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/PRUSSIANS.XML   </FILE>
+			<KEY>germans</KEY>
+			<SKILL>60</SKILL>
+			<NO_ELIMINATING>1</NO_ELIMINATING>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/RUSSIANS.XML </FILE>
+			<KEY>russians </KEY>
+			<SKILL>90</SKILL>
+			<NO_ELIMINATING>1</NO_ELIMINATING>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./tribes/CHINESE.XML  </FILE>
+			<KEY>chinese  </KEY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./tribes/JAPANESE.XML </FILE>
+			<KEY>japanese </KEY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/POLISH.XML</FILE>
+			<KEY>koreans  </KEY>
+			<SKILL>10</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/SARDINIANS.XML</FILE>
+			<KEY>mongols  </KEY>
+			<SKILL>10</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/SWISS.XML  </FILE>
+			<KEY>iroquois  </KEY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./tribes/LAKOTA.XML  </FILE>
+			<KEY>lakota  </KEY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/KNIGHTS.XML</FILE>
+			<KEY>americans  </KEY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./tribes/EINDIANS.XML  </FILE>
+			<KEY>indians  </KEY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/DUTCH.XML  </FILE>
+			<KEY>dutch  </KEY>
+			<SKILL>30</SKILL>
+			<NO_PROPOSE_ALLY>1</NO_PROPOSE_ALLY>
+		</TRIBE>
+		<TRIBE>
+			<FILE>./conquest/Napoleon/FRENCHROYALISTS.XML  </FILE>
+			<KEY>persian  </KEY>
+		</TRIBE>
+	</TRIBES>
+	<INSTRUCTIONS name="INSTRUCTIONS">You are Napoleon Bonaparte, a young officer in the French army. Previously unknown, after your last victory you have been offered a choice of two commands by the Directorate, the council that governs France. Chose wisely, as the one you do not pick will be given to another ambitious officer.<BULLET></BULLET>The Army of the West - take command of the army based in Paris and attack the French Royalists who have revolted in Burgundy.<BULLET></BULLET>The Army of Italy - take command of the army based in Marseilles and attack the Sardinians, vassals of the Austrians, in Piedmont.</INSTRUCTIONS>
+	<END_GAME_IMAGES victory=".\art\CTW_Napoleon_Victory_Back.tga" ancient_defeat=".\art\CTW_Napoleon_Defeat_Back.tga" marginal_victory=".\art\CTW_Napoleon_Victory_Back.tga" marginal_defeat=".\art\CTW_Napoleon_Defeat_Back.tga" allied=".\art\CTW_Napoleon_Victory_Back.tga" hero_defeat=".\art\CTW_Alex_Herodeath_Back.tga"></END_GAME_IMAGES>
+	<!--Make sure to keep the colonies in alphabetical order-->
+	<COLONY name="Tahiti" id="Tahiti" tribute="5" value="70">
+		<RARE type="silver"></RARE>
+		<RARE type="whales"></RARE>
+		<RARE type="marble"></RARE>
+	</COLONY>
+	<COLONY name="South Africa" owner="british" id="South Africa" tribute="6" value="280">
+		<RARE type="diamonds"></RARE>
+		<RARE type="gold"></RARE>
+	</COLONY>
+	<COLONY name="Peru" owner="spanish" id="Peru" tribute="4" value="80">
+		<RARE type="relics"></RARE>
+	</COLONY>
+	<COLONY name="Mexico" owner="spanish" id="Mexico" tribute="4" value="50" wonder="Temple of Tikal">
+		<RARE type="copper"></RARE>
+	</COLONY>
+	<COLONY name="Madagascar" id="Madagascar" tribute="3" value="45">
+		<RARE type="olive oil"></RARE>
+	</COLONY>
+	<COLONY name="Macao" owner="inca" id="Macao" tribute="4" value="200" wonder="Porcelain Tower">
+		<RARE type="silk"></RARE>
+	</COLONY>
+	<COLONY name="Louisiana" owner="spanish" id="Louisiana" tribute="4" value="120">
+		<RARE type="bison"></RARE>
+		<RARE type="citrus"></RARE>
+	</COLONY>
+	<COLONY name="India" owner="british" id="Far East" tribute="5" value="305" wonder="Red Fort">
+		<RARE type="wool"></RARE>
+		<RARE type="cattle"></RARE>
+		<RARE type="sugar"></RARE>
+	</COLONY>
+	<COLONY name="Haiti" id="Haiti" tribute="6" value="140">
+		<RARE type="maize"></RARE>
+	</COLONY>
+	<COLONY name="Guyana" owner="dutch" id="Guyana" tribute="4" value="90">
+		<RARE type="rum"></RARE>
+	</COLONY>
+	<COLONY name="Ceylon" owner="dutch" id="Ceylon" tribute="4" value="220" wonder="Angkor Wat">
+		<RARE type="peacocks"></RARE>
+		<RARE type="coffee"></RARE>
+	</COLONY>
+	<COLONY name="Canada" owner="british" id="Canada" tribute="6" value="120">
+		<RARE type="beaver pelts"></RARE>
+		<RARE type="huskies"></RARE>
+	</COLONY>
+	<COLONY name="Brazil" owner="inca" id="Brazil" tribute="4" value="170">
+		<RARE type="bananas"></RARE>
+	</COLONY>
+	<COLONY name="Alaska" owner="russians" id="Alaska" tribute="5" value="260">
+		<RARE type="salmon"></RARE>
+		<RARE type="iron ore"></RARE>
+	</COLONY>
+	<VALID_NATION owner="French"></VALID_NATION>
+</ROOT>

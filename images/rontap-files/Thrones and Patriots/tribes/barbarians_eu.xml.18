@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Robert Nicaise (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="바이킹">
+	<LEADERS>
+		<LEADER>카누트 대왕</LEADER>
+		<LEADER>오라프 백왕</LEADER>
+		<LEADER>에리크 블로됙세왕</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>옐링</CITY>
+		<CITY>로스킬레</CITY>
+		<CITY>스키링살</CITY>
+		<CITY>오덴세</CITY>
+		<CITY>리베</CITY>
+		<CITY>트론헤임</CITY>
+		<CITY>헤데비</CITY>
+		<CITY>노네바켄</CITY>
+		<CITY>로데코핑게</CITY>
+		<CITY>룬드</CITY>
+		<CITY>웁살라</CITY>
+		<CITY>웨스트네스</CITY>
+		<CITY>요빅</CITY>
+		<CITY>휘트비</CITY>
+		<CITY>서켈비</CITY>
+		<CITY>케텔호프</CITY>
+		<CITY>그리미스타</CITY>
+		<CITY>이비스터</CITY>
+		<CITY>카우펑</CITY>
+		<CITY>누아르무티에</CITY>
+		<CITY>브라타리드</CITY>
+		<CITY>비르카</CITY>
+		<CITY>스타라야 라도가</CITY>
+		<CITY>홀름가르드</CITY>
+		<CITY>세베르순드</CITY>
+		<CITY>웁파크라</CITY>
+		<CITY>노브고로드</CITY>
+		<CITY>하이타부</CITY>
+		<CITY>고로디쉐</CITY>
+		<CITY>더비</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

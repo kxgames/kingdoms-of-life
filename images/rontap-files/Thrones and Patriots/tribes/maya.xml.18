@@ -1,0 +1,46 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="마야">
+	<LEADERS>
+		<LEADER>파칼</LEADER>
+		<LEADER>차크 발람</LEADER>
+		<LEADER>치암</LEADER>
+		<LEADER>아모크</LEADER>
+		<LEADER>바카키</LEADER>
+		<LEADER>난찬칸</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>마야판</CITY>
+		<CITY>티칼</CITY>
+		<CITY>치첸 이트사</CITY>
+		<CITY>치빌차툰</CITY>
+		<CITY>약스하</CITY>
+		<CITY>아칸세</CITY>
+		<CITY>참포톤</CITY>
+		<CITY>알툰 하</CITY>
+		<CITY>이치파툰</CITY>
+		<CITY>이스쿤</CITY>
+		<CITY>라마나이</CITY>
+		<CITY>코판</CITY>
+		<CITY>치민 칵스</CITY>
+		<CITY>슈푸힐</CITY>
+		<CITY>약스나</CITY>
+		<CITY>욱스말</CITY>
+		<CITY>티푸</CITY>
+		<CITY>우카날</CITY>
+		<CITY>베칸</CITY>
+		<CITY>카미날리</CITY>
+		<CITY>시칼란고</CITY>
+		<CITY>스코챠</CITY>
+		<CITY>치빌노칵</CITY>
+		<CITY>츄티스티오스</CITY>
+		<CITY>우악삭툰</CITY>
+		<CITY>타야살</CITY>
+		<CITY>자쿠레우</CITY>
+		<CITY>이심체</CITY>
+		<CITY>아칼란</CITY>
+		<CITY>툴룸</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+	<BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

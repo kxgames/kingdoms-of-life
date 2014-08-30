@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<ROOT>
+  <STRING hash="452842599">Uccidi 100 unità civili, cittadini, mercanti e carovane, in 10 minuti. Le carovane valgono il triplo.</STRING>
+  <STRING hash="7744951">Partita corrente</STRING>
+  <STRING hash="27709193">Civili uccisi: $NUM0</STRING>
+  <STRING hash="39893562">Altri nomadi si uniscono all'orda.</STRING>
+  <STRING hash="8432464">Nuovo scenario</STRING>
+  <STRING hash="7702239">Gengis Khan</STRING>
+  <STRING hash="32395306">Viracocha Inca</STRING>
+  <STRING hash="12644398">Mandukhai</STRING>
+  <STRING hash="19791536">Alessandro il Grande</STRING>
+  <STRING hash="10599152">Giulio Cesare</STRING>
+  <STRING hash="4441544">Karakorum</STRING>
+  <STRING hash="2758229">Gokomere</STRING>
+  <STRING hash="1296581">Kilwa</STRING>
+  <STRING hash="2602105">Mawudzu</STRING>
+  <STRING hash="1566727">Kapeni</STRING>
+  <STRING hash="5515712">Chutixtiox</STRING>
+  <STRING hash="3011625">Tayasal</STRING>
+  <STRING hash="4287922">Champoton</STRING>
+  <STRING hash="1895061">Wonsan</STRING>
+  <STRING hash="978183">Jinju</STRING>
+  <STRING hash="764522">Naju</STRING>
+  <STRING hash="560387">Roma</STRING>
+  <STRING hash="3978337">Corfinium</STRING>
+  <STRING hash="471626519">Per vincere devi uccidere 100 unità civili (cittadini, mercanti e carovane) in 10 minuti (le carovane valgono il triplo).</STRING>
+  <STRING hash="5006799">Numero max. nemici uccisi</STRING>
+</ROOT>

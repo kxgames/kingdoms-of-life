@@ -1,0 +1,968 @@
+//offensive sudden death scenario runtime
+
+conquest
+{
+  labels {
+    ATTACKER,
+    DEFENDER1,
+    DEFENDER2,
+    DEFENDER3,
+  }
+
+  static time_limit = 90;
+  static int defender = 0;
+  static city_name = "blah";
+  static int city_id = 0;
+  static int under_siege = 0;
+  static int under_attack = 0;
+  static int x_pos = 0;
+  static int y_pos = 0;
+  static int diff = 0;
+  static int lost_cities = 0;
+  static int lost_city1_taken = 0;
+  static int lost_city2_taken = 0;
+  static int lost_city3_taken = 0;
+  static int lost_city4_taken = 0;
+  static int lost_city5_taken = 0;
+  static int lost_city6_taken = 0;
+  static int lost_city7_taken = 0;
+  static int lost_city8_taken = 0;
+  static int lost_city9_taken = 0;
+  static int lost_city10_taken = 0;
+  static int lost_city11_taken = 0;
+  static int lost_city12_taken = 0;
+  static String lost_city1 = "";
+  static String lost_city2 = "";
+  static String lost_city3 = "";
+  static String lost_city4 = "";
+  static String lost_city5 = "";
+  static String lost_city6 = "";
+  static String lost_city7 = "";
+  static String lost_city8 = "";
+  static String lost_city9 = "";
+  static String lost_city10 = "";  
+  static String lost_city11 = "";
+  static String lost_city12 = "";
+  static int city_count = num_cities(ATTACKER);
+  static int inactive_id = 0;
+  static int team1 = 0;
+  static int team2 = 0;
+  static int this_is_done = 0;
+
+  run_once {
+    time_limit = get_time_limit();
+    enable_trigger("defeated"); 
+    //enable_trigger("check_health");
+    enable_trigger("lostCities");
+    enable_trigger("cityCaptured");
+    /*if (diff > 4) {
+      enable_trigger("defeated1");
+      enable_trigger("defeated2");
+      enable_trigger("defeated3");
+    }*/
+    defender = 2;
+    for (defender = 4; defender > 2; defender--) {
+      if (num_cities(defender) == 0) {
+        new_x = get_starting_loc_x(2);
+        new_y = get_starting_loc_y(2);
+        create_unit_upgrade(defender, new_x, new_y, "citizen", 4);
+        create_unit_upgrade(defender, new_x, new_y, "hoplites", 2);
+        create_unit_upgrade(defender, new_x, new_y, "bowmen", 2);
+        create_unit_upgrade(defender, new_x, new_y, "slingeres", 2);
+        give_good(defender, "Food", 100);
+        give_good(defender, "Timber", 100);
+      }
+    }
+  }
+
+  cur_time = time();
+  
+  trigger (cur_time >= time_limit) {
+    defeat_attacker_and_allies();
+  }
+
+  /*trigger check_health() {
+    for (i = num_cities(defender); i > 0; i--) {
+      city_name = find_city(defender);
+      city_id = find_city_id(city_name);
+      if ((under_siege == city_id) && (under_attack == defender)) {
+        if (object_health(under_attack, under_siege) > 50) {
+          if (timer_expired("damage_check")) {
+            under_attack = 0;
+            under_siege = 0;
+          }
+        }  
+      }      
+      else if (object_health(defender, city_id) <= 50) {
+        diff = get_difficulty();
+        x_pos = object_position_x(defender, city_id) + 3;
+        y_pos = object_position_y(defender, city_id) + 3;
+        create_unit_upgrade(defender, x_pos, y_pos, "hoplites", diff);
+        under_siege = city_id;
+        under_attack = defender;
+        set_timer("damage_check", 60);
+      }
+    }
+    set_timer("health_check", 10);
+  }  
+
+  if (timer_expired("health_check")) {
+    defender = defender + 1;
+    if (defender == 5) {
+      defender = 2;
+    }
+    enable_trigger("check_health");
+  }   */  
+
+  trigger defeated() {
+    for(defender = 4; defender > 1; defender--) {
+      if (city_captured_by(defender, ATTACKER, "")) {
+        kill_unit_type(defender, "Citizen");
+        kill_unit_type(defender, "Scout");
+        kill_unit_type(defender, "Merchant");
+        kill_unit_type(defender, "Caravan");
+        kill_unit_type(defender, "flamethrower");
+        kill_unit_type(defender, "Scholar");
+        kill_unit_type(defender, "Slingers");
+        kill_unit_type(defender, "Hoplites");
+        kill_unit_type(defender, "Bowmen");
+        kill_unit_type(defender, "Light Horse");
+        kill_unit_type(defender, "Cataphract");
+        kill_unit_type(defender, "Horse Archer");
+        kill_unit_type(defender, "Catapult");
+        kill_unit_type(defender, "Supply Wagon");
+        kill_unit_type(defender, "V2 Rocket");
+        kill_unit_type(defender, "Biplane");
+        kill_unit_type(defender, "Zeppelin");
+        kill_unit_type(defender, "Helicopter");
+        kill_unit_type(defender, "Nuclear Missile");
+        kill_unit_type(defender, "Anti-air Gun");
+        kill_unit_type(defender, "Trireme");
+        kill_unit_type(defender, "Dromon");
+        kill_unit_type(defender, "Fishermen");
+        kill_unit_type(defender, "Bomb Vessel");
+        kill_unit_type(defender, "Fireship");
+        kill_unit_type(defender, "Submarine");
+        kill_unit_type(defender, "Aircraft Carrier");
+        defeat(defender);
+        enable_trigger("lostCities");
+      }
+    }
+    enable_trigger("defeated");
+  }
+
+  trigger defeated1(is_defeated(2)) {
+    if (is_defeated(3)) {
+      give_good(4, "Food", 250);
+      give_good(4, "Timber", 250);
+      give_good(4, "Metal", 250);
+      give_good(4, "Wealth", 250);
+      give_good(4, "Oil", 250);
+      give_good(4, "Knowledge", 250);   
+      give_good(4, "Food", 250);
+      give_good(4, "Timber", 250);
+      give_good(4, "Metal", 250);
+      give_good(4, "Wealth", 250);
+      give_good(4, "Oil", 250);
+      give_good(4, "Knowledge", 250);   
+    }
+    else if (is_defeated(4)) {
+      give_good(3, "Food", 250);
+      give_good(3, "Timber", 250);
+      give_good(3, "Metal", 250);
+      give_good(3, "Wealth", 250);
+      give_good(3, "Oil", 250);
+      give_good(3, "Knowledge", 250);
+      give_good(3, "Food", 250);
+      give_good(3, "Timber", 250);
+      give_good(3, "Metal", 250);
+      give_good(3, "Wealth", 250);
+      give_good(3, "Oil", 250);
+      give_good(3, "Knowledge", 250);
+    }
+    else {
+      give_good(3, "Food", 250);
+      give_good(3, "Timber", 250);
+      give_good(3, "Metal", 250);
+      give_good(3, "Wealth", 250);
+      give_good(3, "Oil", 250);
+      give_good(3, "Knowledge", 250);
+      give_good(4, "Food", 250);
+      give_good(4, "Timber", 250);
+      give_good(4, "Metal", 250);
+      give_good(4, "Wealth", 250);
+      give_good(4, "Oil", 250);
+      give_good(4, "Knowledge", 250);   
+    }
+    disable_trigger("defeated1");
+  }
+
+  trigger defeated2(is_defeated(4)) {
+    if (is_defeated(2)) {
+      give_good(3, "Food", 250);
+      give_good(3, "Timber", 250);
+      give_good(3, "Metal", 250);
+      give_good(3, "Wealth", 250);
+      give_good(3, "Oil", 250);
+      give_good(3, "Knowledge", 250);
+      give_good(3, "Food", 250);
+      give_good(3, "Timber", 250);
+      give_good(3, "Metal", 250);
+      give_good(3, "Wealth", 250);
+      give_good(3, "Oil", 250);
+      give_good(3, "Knowledge", 250);
+    }
+    else if (is_defeated(3)) {
+      give_good(2, "Food", 250);
+      give_good(2, "Timber", 250);
+      give_good(2, "Metal", 250);
+      give_good(2, "Wealth", 250);
+      give_good(2, "Oil", 250);
+      give_good(2, "Knowledge", 250);   
+      give_good(2, "Food", 250);
+      give_good(2, "Timber", 250);
+      give_good(2, "Metal", 250);
+      give_good(2, "Wealth", 250);
+      give_good(2, "Oil", 250);
+      give_good(2, "Knowledge", 250);   
+    }
+    else {
+      give_good(3, "Food", 250);
+      give_good(3, "Timber", 250);
+      give_good(3, "Metal", 250);
+      give_good(3, "Wealth", 250);
+      give_good(3, "Oil", 250);
+      give_good(3, "Knowledge", 250);
+      give_good(2, "Food", 250);
+      give_good(2, "Timber", 250);
+      give_good(2, "Metal", 250);
+      give_good(2, "Wealth", 250);
+      give_good(2, "Oil", 250);
+      give_good(2, "Knowledge", 250); 
+    }  
+    disable_trigger("defeated2");
+  }
+
+  trigger defeated3(is_defeated(3)) {
+    if (is_defeated(4)) {
+      give_good(2, "Food", 250);
+      give_good(2, "Timber", 250);
+      give_good(2, "Metal", 250);
+      give_good(2, "Wealth", 250);
+      give_good(2, "Oil", 250);
+      give_good(2, "Knowledge", 250);
+      give_good(2, "Food", 250);
+      give_good(2, "Timber", 250);
+      give_good(2, "Metal", 250);
+      give_good(2, "Wealth", 250);
+      give_good(2, "Oil", 250);
+      give_good(2, "Knowledge", 250);
+    }
+    else if (is_defeated(2)) {
+      give_good(4, "Food", 250);
+      give_good(4, "Timber", 250);
+      give_good(4, "Metal", 250);
+      give_good(4, "Wealth", 250);
+      give_good(4, "Oil", 250);
+      give_good(4, "Knowledge", 250);   
+      give_good(4, "Food", 250);
+      give_good(4, "Timber", 250);
+      give_good(4, "Metal", 250);
+      give_good(4, "Wealth", 250);
+      give_good(4, "Oil", 250);
+      give_good(4, "Knowledge", 250);   
+    }
+    else {
+      give_good(2, "Food", 250);
+      give_good(2, "Timber", 250);
+      give_good(2, "Metal", 250);
+      give_good(2, "Wealth", 250);
+      give_good(2, "Oil", 250);
+      give_good(2, "Knowledge", 250);
+      give_good(4, "Food", 250);
+      give_good(4, "Timber", 250);
+      give_good(4, "Metal", 250);
+      give_good(4, "Wealth", 250);
+      give_good(4, "Oil", 250);
+      give_good(4, "Knowledge", 250);  
+    }  
+    disable_trigger("defeated3");
+  }
+
+  trigger (find_inactive_build(ATTACKER, "Small City")) {
+    enable_trigger("cityBuilt");
+    inactive_id = find_inactive_build(ATTACKER, "Small City");
+  }
+
+  trigger cityBuilt(building_active(ATTACKER, inactive_id)) {
+    enable_trigger("lostCities");
+  }
+
+  trigger lostCities(city_count < num_cities(ATTACKER)) {
+    if (num_cities(ATTACKER) == 12) {
+      step = 1;
+    }
+    else if (num_cities(ATTACKER) == 11) {
+      step = 2;
+    }
+    else if (num_cities(ATTACKER) == 10) {
+      step = 3;
+    }
+    else if (num_cities(ATTACKER) == 9) {
+      step = 4;
+    }
+    else if (num_cities(ATTACKER) == 8) {
+      step = 5;
+    }
+    else if (num_cities(ATTACKER) == 7) {
+      step = 6;
+    }
+    else if (num_cities(ATTACKER) == 6) {
+      step = 7;
+    }
+    else if (num_cities(ATTACKER) == 5) {
+      step = 8;
+    }
+    else if (num_cities(ATTACKER) == 4) {
+      step = 9;
+    }
+    else if (num_cities(ATTACKER) == 3) {
+      step = 10;
+    }
+    else if (num_cities(ATTACKER) == 2) {
+      step = 11;
+    }
+    else if (num_cities(ATTACKER) == 1) {
+      step = 12;
+    }
+    switch(step) {
+      case 1:
+        lost_city12 = find_city_with_num(ATTACKER, 12);   
+        step++;
+        break;
+      case 2:
+        lost_city11 = find_city_with_num(ATTACKER, 11);   
+        step++;
+        break;
+      case 3:
+        lost_city10 = find_city_with_num(ATTACKER, 10);  
+        step++;
+        break; 
+      case 4:
+        lost_city9 = find_city_with_num(ATTACKER, 9);   
+        step++;
+        break;
+      case 5:
+        lost_city8 = find_city_with_num(ATTACKER, 8);  
+        step++;
+        break; 
+      case 6:
+        lost_city7 = find_city_with_num(ATTACKER, 7);   
+        step++;
+        break;
+      case 7:
+        lost_city6 = find_city_with_num(ATTACKER, 6);  
+        step++;
+        break; 
+      case 8:
+        lost_city5 = find_city_with_num(ATTACKER, 5);  
+        step++;
+        break; 
+      case 9:
+        lost_city4 = find_city_with_num(ATTACKER, 4);    
+        step++;
+        break;     
+      case 10:
+        lost_city3 = find_city_with_num(ATTACKER, 3);   
+        step++;
+        break;
+      case 11:
+        lost_city2 = find_city_with_num(ATTACKER, 2); 
+        step++;
+        break;  
+      case 12:
+        lost_city1 = find_city_with_num(ATTACKER, 1);  
+        step++;
+        break; 
+    }
+  }
+
+  trigger cityCaptured() {
+    for (n = num_cities(ATTACKER); n > 0; n--) {
+      if (lost_cities == 0) {
+        if (city_captured(ATTACKER, lost_city1)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 1) {
+        if (city_captured(ATTACKER, lost_city2)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 2) {
+        if (city_captured(ATTACKER, lost_city3)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 3) {
+        if (city_captured(ATTACKER, lost_city4)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 4) {
+        if (city_captured(ATTACKER, lost_city5)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 5) {
+        if (city_captured(ATTACKER, lost_city6)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 6) {
+        if (city_captured(ATTACKER, lost_city7)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 7) {
+        if (city_captured(ATTACKER, lost_city8)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 8) {
+        if (city_captured(ATTACKER, lost_city9)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 9) {
+        if (city_captured(ATTACKER, lost_city10)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 10) {
+        if (city_captured(ATTACKER, lost_city11)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+      else if (lost_cities == 11) {
+        if (city_captured(ATTACKER, lost_city12)) {
+          lost_cities++;
+          enable_trigger("lostCityCheck");
+        }
+      }
+    }
+    enable_trigger("cityCaptured");
+  }
+
+  trigger lostCityCheck() {  
+    for (defender = 4; defender > 1; defender--) {
+      if (city_assimilated_by(ATTACKER, defender, lost_city1)) {
+        lost_city1_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city2)) {
+        lost_city2_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city3)) {
+        lost_city3_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city4)) {
+        lost_city4_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city5)) {
+        lost_city5_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city6)) {
+        lost_city6_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city7)) {
+        lost_city7_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city8)) {
+        lost_city8_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city9)) {
+        lost_city9_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city10)) {
+        lost_city10_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city11)) {
+        lost_city11_taken = defender;
+        enable_trigger("takeBack");
+      }
+      else if (city_assimilated_by(ATTACKER, defender, lost_city12)) {
+        lost_city12_taken = defender;
+        enable_trigger("takeBack");
+      }
+    }
+  }
+
+  trigger takeBack() {
+    if (find_city_owner(lost_city1) == 1) {
+      defender = lost_city1_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city1_taken);
+      lost_city1_taken = 0;
+      lost_city1 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city2) == 1) {
+      defender = lost_city2_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city2_taken);
+      lost_city2_taken = 0;
+      lost_city2 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city3) == 1) {
+      defender = lost_city3_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city3_taken);
+      lost_city3_taken = 0;
+      lost_city3 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city4) == 1) {
+      defender = lost_city4_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city4_taken);
+      lost_city4_taken = 0;
+      lost_city4 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city5) == 1) {
+      defender = lost_city5_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city5_taken);
+      lost_city5_taken = 0;
+      lost_city5 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city6) == 1) {
+      defender = lost_city6_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city6_taken);
+      lost_city6_taken = 0;
+      lost_city6 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city7) == 1) {
+      defender = lost_city7_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city7_taken);
+      lost_city7_taken = 0;
+      lost_city7 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city8) == 1) {
+      defender = lost_city8_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city8_taken);
+      lost_city8_taken = 0;
+      lost_city8 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city9) == 1) {
+      defender = lost_city9_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city9_taken);
+      lost_city9_taken = 0;
+      lost_city9 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city10) == 1) {
+      defender = lost_city10_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city10_taken);
+      lost_city10_taken = 0;
+      lost_city10 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city11) == 1) {
+      defender = lost_city11_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city11_taken);
+      lost_city11_taken = 0;
+      lost_city11 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }
+    else if (find_city_owner(lost_city12) == 1) {
+      defender = lost_city12_taken;
+      kill_unit_type(defender, "Citizen");
+      kill_unit_type(defender, "Scout");
+      kill_unit_type(defender, "Merchant");
+      kill_unit_type(defender, "Caravan");
+      kill_unit_type(defender, "Scholar");
+      kill_unit_type(defender, "Slingers");
+      kill_unit_type(defender, "Hoplites");
+      kill_unit_type(defender, "Bowmen");
+      kill_unit_type(defender, "flamethrower");
+      kill_unit_type(defender, "Light Horse");
+      kill_unit_type(defender, "Cataphract");
+      kill_unit_type(defender, "Horse Archer");
+      kill_unit_type(defender, "Catapult");
+      kill_unit_type(defender, "Supply Wagon");
+      kill_unit_type(defender, "V2 Rocket");
+      kill_unit_type(defender, "Biplane");
+      kill_unit_type(defender, "Zeppelin");
+      kill_unit_type(defender, "Helicopter");
+      kill_unit_type(defender, "Nuclear Missile");
+      kill_unit_type(defender, "Anti-air Gun");
+      kill_unit_type(defender, "Trireme");
+      kill_unit_type(defender, "Dromon");
+      kill_unit_type(defender, "Fishermen");
+      kill_unit_type(defender, "Bomb Vessel");
+      kill_unit_type(defender, "Fireship");
+      kill_unit_type(defender, "Submarine");
+      kill_unit_type(defender, "Aircraft Carrier");
+      defeat(lost_city12_taken);
+      lost_city12_taken = 0;
+      lost_city12 = "";
+      if (lost_city1_taken + lost_city2_taken + lost_city3_taken + lost_city4_taken + lost_city5_taken + lost_city6_taken + lost_city7_taken + lost_city8_taken + lost_city9_taken + lost_city10_taken + lost_city12_taken + lost_city11_taken == 0) {
+        disable_trigger("takeBack");
+        disable_trigger("lostCityCheck");
+      }
+    }    
+  }
+
+}

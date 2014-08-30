@@ -1,0 +1,64 @@
+conquest
+{
+
+  static int french = 1;
+  static int knights = 2;
+  
+  static int diff = get_difficulty();
+  static int napoleon = find_all_unit(french, "Napoleon");
+  
+  int army_x;
+  int army_y;
+  int x;
+  int y;
+  int unit;
+  int building;
+
+  static int end_time = get_time_limit();
+  int cur_time;
+  
+  static String capital_name = find_capital(knights);
+  
+  run_once {
+    set_timer("malta_defense", 60);
+  }
+  
+  cur_time = time_min();
+  if (cur_time >= end_time) defeat(french);
+  
+  if (city_captured(knights, capital_name)) victory(french);
+
+  if (timer_expired("malta_defense")) {
+    for (n = num_type(knights, "Stable"); n > 0; n--) {
+      building = find_build(knights, "Stable");
+      army_x = object_position_x(knights, building) + 2;
+      army_y = object_position_y(knights, building);
+      x = object_position_x(french, napoleon);
+      y = object_position_y(french, napoleon);    
+      if (diff < 3) {
+        building = 5 + diff * 3;
+      }
+      else if (diff < 5) {
+        building = 6 * diff - 2;
+      }
+      else {
+        building = 8+diff*2;
+      }
+      if (num_type(knights, "cuirassier") < building) {
+        unit = create_unit_upgrade(knights, army_x, army_y, "cuirassier", 1);
+        unit_attack_to_order(knights, unit, x, y);
+      }
+    }
+    if (diff < 3) {
+      building = 1;
+    }
+    else if (diff < 5) {
+      building = 2;
+    }
+    else {
+      building = 3;
+    }
+    set_timer("malta_defense", 25 - building);
+  }
+
+}

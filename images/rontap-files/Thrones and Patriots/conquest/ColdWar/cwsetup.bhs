@@ -1,0 +1,102 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  coldwar_rules();
+  labels {
+  }
+  diff = get_difficulty();
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  declare_war(2, 3);
+
+  disable_type_by_tribe("Armored Scout Car", "Aztecs");
+  disable_type_by_tribe("Armored Cavalry", "Aztecs");  
+  enable_type_by_tribe("Patrol Jeep", "Aztecs", "Stable", 0, 0);
+  disable_type_by_tribe("Infantry", "Aztecs");
+  disable_type_by_tribe("Assault Infantry", "Aztecs");
+  enable_type_by_tribe("Guerilla Fighters", "Aztecs", "Barracks", 0, 0);
+  disable_type_by_tribe("Howitzer", "Aztecs");
+  disable_type_by_tribe("Rocket Artillery", "Aztecs");
+  enable_type_by_tribe("Artillery", "Aztecs");
+  disable_type_by_tribe("Anti-Aircraft Battery", "Aztecs");
+  disable_type_by_tribe("Anti-Aircraft Missile", "Aztecs");
+  enable_type_by_tribe("Anti-Aircraft Gun", "Aztecs");
+  disable_type_by_tribe("Missile Silo", "Aztecs");
+
+  if (!have_tech(3, "Guerilla Fighters")) {
+    gain_upgrade(3, "Guerilla Fighters");
+  }
+  if (!have_tech(3, "Artillery")) {
+    gain_upgrade(3, "Artillery");
+  }
+  if (!have_tech(3, "Anti-Aircraft Gun")) {
+    gain_upgrade(3, "Anti-Aircraft Gun");
+  }
+  
+  x = 0;
+  y = 0;
+  unit_id = -1;
+  city_name = "None";
+  city_id = -1;
+  
+  if (find_nation(1) == "Americans") {
+    city_name = find_capital(1);
+    city_id = find_city_id(city_name);
+    x = object_position_x(1, city_id)+5;
+    y = object_position_y(1, city_id)+5;
+    create_unit_upgrade(1, x, y, "Patrol Jeep", 2);
+    while(num_type_upgrade(1, "Armored Scout Car") > 0) {
+      unit_id = find_unit(1, "Armored Scout Car");
+      kill_unit_anim(1, unit_id, 1);
+    }
+  }
+  
+
+  /////////////////////////////////////////////////////
+  //create player's army
+  /*city_name = find_capital(1);
+  city_id = find_city_id(city_name);
+  x = object_position_x(1, city_id);
+  y = object_position_y(1, city_id);
+
+  create_unit_upgrade(1, x, y, "Infantry", 2);
+  create_unit_upgrade(1, x, y, "Bazooka", 2);
+  create_unit_upgrade(1, x, y, "Tank", 2);
+  if (find_nation(1) == "Americans") {
+    create_unit_upgrade(1, x, y, "Patrol Jeep", 4);
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Armored Car", 4);
+  }
+  create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+  create_unit_upgrade(1, x, y, "General", 1);
+  create_unit_upgrade(1, x, y, "Scout", 1);
+*/
+
+  /////////////////////////////////////////////////////
+  city_name = find_capital(2);
+  city_id = find_city_id(city_name);
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  create_unit_upgrade(2, x, y, "Guerilla Fighters", 2*diff);
+  create_unit_in_group(2, x, y, "Patrol Jeep", diff/2);
+  create_unit_in_group(2, x, y, "Supply Wagon", 1);
+  create_unit_in_group(2, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+
+  city_name = find_capital(3);
+  city_id = find_city_id(city_name);
+  x = object_position_x(3, city_id);
+  y = object_position_y(3, city_id);
+
+  create_unit_upgrade(3, x, y, "Guerilla Fighters", 2*diff);
+  create_unit_in_group(3, x, y, "Patrol Jeep", diff/2);
+  create_unit_in_group(3, x, y, "Supply Wagon", 1);
+  create_unit_in_group(3, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+}

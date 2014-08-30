@@ -1,0 +1,83 @@
+scenario post_ai ()
+{
+  String nation = ctw_get_player_nation();
+  String other_nation;
+  if (nation == "Americans") {
+    other_nation = "Russians";
+  } else {
+    other_nation = "Americans";
+  }
+
+  //Victory Conditions
+  int your_industry_total = get_nation_income(nation);
+  int their_industry_total = get_nation_income(other_nation);
+  String territories[];
+  String territory;
+  int strength;
+  int num;
+
+  if (your_industry_total-their_industry_total >= 50 && get_ctw_int("NoInd") != 1) {
+    choice = popup_choice($S("Your nation's economy has far outpaced the enemy's! Would you like to end the game and declare Industrial Victory?"), $S("Yes"), $S("No"));
+    if (choice == 1) {
+      if (nation == "Americans") {
+        ctw_game_over(true, $S("Industrial Victory"), $S("Trickle-down? Voodoo? Who cares? Your booming economy has driven the Soviet Union into collapse! Their centralized system was no match for massive defense spending and American ingenuity. You've melted away the daily terror of cold war over the fires of industry!"));
+      }
+      else {
+        ctw_game_over(true, $S("Industrial Victory"), $S("The superior brawn of the proletariat has forced the American economy into collapse! The immoral capitalists believed that their bourgeois elite could outproduce the comrades of the Soviet Union, but with this victory we have proven that selfless dedication to the socialist path can overcome all obstacles!"));
+      }
+    }
+    else {
+      set_ctw_int("NoInd", 1);
+    }
+  }
+  else if (their_industry_total-your_industry_total >= 50) {
+    if (nation == "Americans") {
+      ctw_game_over(false, $S("Industrial Defeat"), $S("Trickle-down? Voodoo? It does not matter, because it did not work. Your failing economy has collapsed! The Soviets' centralized system has outlasted our massive defense spending. The daily terror of cold war has ended with our economic defeat!"));
+    } else {
+      ctw_game_over(false, $S("Industrial Defeat"), $S("The economy of the United States has far outpaced our own! There is no hope of catching up with them. Our satellite nations have lost their faith in the socialist economy and have broken off ties with us. The Soviet Union is at an end!"));
+    }
+  }
+  else if (their_industry_total-your_industry_total >= 40) {
+    if (nation == "Americans") {
+      popup_dialog($S("The Soviet economy is growing rapidly! If we do not do something to match them, we will surely lose the Cold War. Claim client states through police actions and diplomacy or upgrade your territory strength!"));
+    } else {
+      popup_dialog($S("The American economy is growing rapidly! If we do not do something to match them, we will surely lose the Cold War. Claim client states through police actions and diplomacy or upgrade your territory strength!"));
+    }
+  }
+  //else if (your_industry_total-their_industry_total >= 40) { //little easy for the Americans to econ victory (if needed)
+    //if (nation == "Americans") {
+      //ctw_territory_list("Russians", territories, 1);
+      //territory = territories[rand_int(0, territories.length-1)];
+      //strength = get_territory_strength(territory);
+      //while (strength > 6) {
+        //territory = territories[num];
+        //num++;
+        //if (territories.length == num) {
+          //break;
+        //}
+        //strength = get_territory_strength(territory);      
+      //}
+      //if (strength < 7) {
+        //set_territory_strength(territory, strength+1);
+      //}
+   // }
+  //}      
+
+  //defeat soviets/americans
+  if (nation == "Americans" && ctw_is_defeated("Russians")) {
+    ctw_game_over(true, $S("Total Victory"), $S("Through skillful planning, diplomacy, and relentless military pressure, you have defeated the Soviet Union! Avoiding a nuclear holocaust, you managed to strike into the heart of the Soviet empire and let the world know that no nation will stand in the way of freedom!"));
+  } else if (nation == "Russians" && ctw_is_defeated("Americans")) {
+    ctw_game_over(true, $S("Total Victory"), $S("No true comrade ever doubted that the struggle between bourgeois American imperialists and the noble proletariat would end in any other way. Our brave soldiers have marched to Washington and permanently ended the tiresome grunting of the capitalist pigs."));
+  }
+  
+
+  if (nation == "Americans") {
+    if (get_num_territories("Americans") > 3 * get_num_territories("Russians")) {
+      set_defcon_level(get_defcon_level()+1);
+    }
+  } else {
+    if (get_num_territories("Russians") > 3 * get_num_territories("Americans")) {
+      set_defcon_level(get_defcon_level()+1);
+    }
+  }
+}

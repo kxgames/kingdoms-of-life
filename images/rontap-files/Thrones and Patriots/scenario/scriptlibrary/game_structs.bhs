@@ -1,0 +1,43 @@
+//===================================
+//Game Structs
+//===================================
+
+//All Standard Game Structs for scripts go here
+
+struct Vector
+{
+  float x;
+  float y;
+  float z;
+};
+
+
+struct UnitGroup
+{
+  int nation;
+  int[] units;
+};
+
+struct ConquestDiploOffer
+{  
+  string tribe;
+  string tribe2;
+  
+  int accepted;
+  int counter_offer;
+  int tribe_trib;
+  int tribe2_trib;
+  int disable_counter_offer;
+  
+  string[] tribe_terr;  
+  string[] tribe2_terr;
+  string[] tribe_col;
+  string[] tribe2_col;
+  string[] tribe_cards;
+  string[] tribe2_cards;
+
+  string offer_type;  
+  string response;
+
+  string id;
+};

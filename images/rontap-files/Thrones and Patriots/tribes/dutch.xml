@@ -1,0 +1,49 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by XMLSPY 5 Professional Ed. Release 2 (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute-->
+<TRIBE name="Dutch">
+  <LEADERS>
+    <LEADER>Beatrix Wilhelmina Armgard</LEADER>
+    <LEADER>William of Orange</LEADER>
+    <LEADER>Louis Bonaparte</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>The Hague</CITY>
+    <CITY>Amsterdam</CITY>
+    <CITY>Haarlem</CITY>
+    <CITY>Delft</CITY>
+    <CITY>Leiden</CITY>
+    <CITY>Gouda</CITY>
+    <CITY>Rotterdam</CITY>
+    <CITY>Gorkum</CITY>
+    <CITY>Schiedam</CITY>
+    <CITY>Schoonhoven</CITY>
+    <CITY>Briel</CITY>
+    <CITY>Alkmaar</CITY>
+    <CITY>Hoorn</CITY>
+    <CITY>Edam</CITY>
+    <CITY>Woerden</CITY>
+    <CITY>Oudewater</CITY>
+    <CITY>Heusden</CITY>
+    <CITY>Worckum</CITY>
+    <CITY>Naarden</CITY>
+    <CITY>Muiden</CITY>
+    <CITY>Weest</CITY>
+    <CITY>Vianen</CITY>
+    <CITY>Leerdam</CITY>
+    <CITY>Asperen</CITY>
+    <CITY>Vlaardingen</CITY>
+    <CITY>Schagen</CITY>
+    <CITY>Clundert</CITY>
+    <CITY>Utrecht</CITY>
+    <CITY>Amersfoort</CITY>
+    <CITY>Arnhem</CITY>
+    <CITY>Breda</CITY>
+    <CITY>Deventer</CITY>
+    <CITY>Groningen</CITY>
+    <CITY>Kampen</CITY>
+    <CITY>Middelburg</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

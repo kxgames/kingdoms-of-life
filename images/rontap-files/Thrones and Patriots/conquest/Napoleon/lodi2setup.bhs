@@ -1,0 +1,136 @@
+ include "ctw_lib.bhs"
+
+conquest {
+if (get_ctw_campaign() == "Napoleon") {
+  napoleon_rules();
+}
+  int french = 1;
+  int austrians = 8;
+  int merchants = 7;
+  int romans = 2;
+  
+  infrastructure_setup(2, $S("Lodi"), $S("Lonato"), $S("Piacenza"));
+  infrastructure_setup(8, $S("Milan"), "", "");
+
+  int diff = get_difficulty();
+  
+  set_leader_difficulty(austrians, diff);
+  set_leader_difficulty(romans, diff);
+
+  set_nation_name("Germans", $S("Milanese"));
+  set_nation_name("Greeks", $S("Milanese"));
+  set_nation_name("Persian", $S("Persian Merchants"));
+  set_nation_name("Roman", $S("Papal States"));
+
+  disable_give_attrition(merchants);
+  add_visibility(french,merchants);
+  add_visibility(austrians,merchants);
+  add_visibility(romans,merchants);
+  set_leader_name(8, $S("Archduke Charles"));
+
+  int nation;
+  String nation_name;
+  int unit;
+  int x;
+  int y;
+
+  for (a = num_players(); a > 2; a--) {
+    if (num_type(a, "Citizen") == 0) {
+      unit = find_unit(a, "");
+      x = object_position_x(a, unit) + 2;
+      y = object_position_y(a, unit);
+      create_unit(a, x, y, "Citizen", 5);
+    }
+  }
+
+  for (nation = 1; nation < 9; nation++) {
+    if (nation == 7) nation++;
+    if (!have_peace(nation, merchants)) {
+      make_peace(merchants, nation);
+    }
+  }
+
+  if (get_ctw_campaign() == "Napoleon") {
+    for (nation = 2; nation < 9; nation++) {
+      nation_name = find_nation(nation);
+      if (nation_name == "Turks") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "Djezzar", 1);
+        create_unit_upgrade(nation, x + 1, y, "Musketeers", 2);
+        if (diff > 1) {
+          create_unit_upgrade(nation, x + 1, y, "Musketters", 2);
+          create_unit_upgrade(nation, x, y + 1, "Hussar", 1);
+          create_unit_upgrade(nation, x, y + 1, "Supply Wagon", 1);
+        }
+        if (diff > 2) {
+          create_unit_upgrade(nation, x, y + 2, "Musketeers", 2);
+          create_unit_upgrade(nation, x + 2, y, "Horse Archer", 1);
+          create_unit_upgrade(nation, x + 2, y, "Hussar", 1);
+        }
+        if (diff > 4) {
+          create_unit_upgrade(nation, x, y + 2, "Fusiliers", 1);
+        }
+      } else if (nation_name == "British") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "Wellington", 1);
+      } else if (nation_name == "Greeks") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "Archduke Charles", 1);
+      } else if (nation_name == "Germans") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "General Blucher", 1);
+      } else if (nation_name == "Russians") {
+        if (num_cities(nation) == 0) {
+          unit = find_unit(nation, "");
+          x = object_position_x(nation, unit);
+          y = object_position_y(nation, unit);
+        } else {
+          city_name = find_capital(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building) + 2;
+          y = object_position_y(nation, building);
+        }
+        create_unit(nation, x, y, "General Kutosov", 1);
+      }
+    }
+  }
+
+
+
+}

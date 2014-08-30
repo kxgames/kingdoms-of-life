@@ -1,0 +1,206 @@
+      scenario
+{
+
+labels {
+  //Add any constant labels here in a comma separated list.
+}
+
+static alexander_id = 0;
+static memnon_id = 0;
+static fx = 0;
+static fy = 0;
+static diff = get_difficulty();
+static raiders_of_memnon = 0;
+
+run_once {
+  disable_all_triggers();
+  disable_city_defeat(7);
+  
+  alexander_id = find_unit(1, "Alexander");
+  memnon_id = find_unit(7, "Memnon");
+  x = object_position_x(7, memnon_id);
+  y = object_position_y(7, memnon_id);
+  add_reveal_point(1, x, y, 15);
+  ping_object(1, 1, 7, memnon_id);
+  
+  switch(diff) {
+    case 3:
+      set_timer("MR", 1500);
+      enable_trigger("Memnon_Reinforcements");
+      raiders_of_memnon = 450;
+      set_timer("Raiders", raiders_of_memnon);
+      enable_trigger("Memnon_Raids");
+      break;
+    case 4:
+      set_timer("MR", 1200);
+      enable_trigger("Memnon_Reinforcements");
+      raiders_of_memnon = 390;
+      set_timer("Raiders", raiders_of_memnon);
+      enable_trigger("Memnon_Raids");
+      break;
+    case 5:
+      set_timer("MR", 900);
+      enable_trigger("Memnon_Reinforcements");
+      raiders_of_memnon = 320;
+      set_timer("Raiders", raiders_of_memnon);
+      enable_trigger("Memnon_Raids");
+      break;
+    case 6:
+      set_timer("MR", 600);
+      enable_trigger("Memnon_Reinforcements");
+      raiders_of_memnon = 270;
+      set_timer("Raiders", raiders_of_memnon);
+      enable_trigger("Memnon_Raids");
+      break;
+    default:
+      set_timer("Memnon", 600);
+      break;
+  }
+
+  ctw_add_objective($S("Defeat Memnon's army (White)."), "Mem_id", "");
+
+  enable_trigger("Memnon_Init");
+  enable_trigger("Memnon_Fall_Back");
+  enable_trigger("PopCapFix");
+  enable_trigger("VisoGone");
+  set_timer("viso", 300);
+}
+
+trigger VisoGone(timer_expired("viso"))
+{
+  clear_reveal_points(1);
+}
+
+trigger PopCapFix()
+{
+  switch (diff) {
+    case 1:
+      if (population_cap(2) > 90) {
+        set_population_cap(2, 90);
+      }
+      break;
+    case 2:
+      if (population_cap(2) > 105) {
+        set_population_cap(2, 105);
+      }
+      break;
+    case 3:
+      if (population_cap(2) > 110) {
+        set_population_cap(2, 110);
+      }
+      break;
+    case 4:
+      if (population_cap(2) > 115) {
+        set_population_cap(2, 115);
+      }
+      break;
+    case 5:
+      if (population_cap(2) > 120) {
+        set_population_cap(2, 120);
+      }
+      break;
+    default:
+      break;
+  }
+  enable_trigger("PopCapFix");
+}
+
+trigger Memnon_Init()
+{
+  clear_group(7);
+  add_to_group(7, memnon_id);
+  unit_id = find_unit(7, "Supply Wagon");
+  group_guard_order(7, 7, unit_id);
+  clear_group(7);
+  add_to_group(7, unit_id);
+  for (i = 0; i < num_military_units(7); i++) {
+    unit_id = find_military(7);
+    add_to_group(7, unit_id);
+  }
+}
+
+trigger Memnon_Fall_Back(num_military_units(7) < 5 || object_health(7, memnon_id) < 80)
+{
+  ctw_objective_complete("Mem_id");
+  ctw_add_objective_text($S("Capture and hold the Persian capital(s)."), "Per_id", "");
+  city_name = find_capital(2);
+  city_id = find_city_id(city_name);
+  set_seen(1, 2, city_id);
+  city_name = find_capital(2);
+  city_id = find_city_id(city_name);
+  set_seen(1, 2, city_id);
+  clear_reveal_points(1);
+  x = world_x_size()-5;
+  y = world_y_size()-5;
+  unit_move_order(7, memnon_id, x, y);
+  unit_id = find_unit(7, "Supply Wagon");
+  kill_unit_anim(7, unit_id, 2);
+}
+
+trigger Memnon_Reinforcements(timer_expired("MR"))
+{
+  x = world_x_size()-5;
+  y = world_y_size()-5;
+  unit_move_order(7, memnon_id, x, y);
+
+  unit_id = -1;
+  clear_group(7);
+  for (i = 0; i < diff+8; i++) {
+    unit_id = create_unit(7, x, y, "Greek Mercenaries", 1);
+    add_to_group(7, unit_id);
+  }
+  create_unit_in_group(7, x, y, "Archers", diff-2);
+  create_unit_in_group(7, x, y, "Light Horse", diff);
+  create_unit_in_group(7, x, y, "Cataphract", diff);
+  create_unit_in_group(7, x, y, "Catapult", diff);
+  create_unit_in_group(7, x, y, "Supply Wagon", 1);
+  add_to_group(7, memnon_id);
+  x = 97;
+  y = 30;
+  group_attack_to_order(7, x, y);
+  enable_trigger("MemnonDeath");
+}
+
+trigger MemnonDeath(find_military(7)) {
+  kill_unit_anim(7, memnon_id, 1);
+}
+
+trigger Memnon_Raids(timer_expired("Raiders"))
+{
+  x = world_x_size()-5;
+  y = world_y_size()-5;
+
+  unit_id = -1;
+  clear_group(7);
+  for (i = 0; i < diff-1; i++) {
+    unit_id = create_unit(7, x, y, "Greek Mercenaries", 1);
+    add_to_group(7, unit_id);
+  }
+  create_unit_in_group(7, x, y, "Light Horse", 1+diff);
+  create_unit_in_group(7, x, y, "Cataphract", diff);
+  group_stance_order(7, "Raid");
+  x = 97;
+  y = 30;
+  group_attack_to_order(7, x, y);
+
+  set_timer("Raiders", raiders_of_memnon);
+  enable_trigger("Memnon_Raids");
+}
+
+if (unit_killed(7, memnon_id)) {
+  disable_trigger("Memnon_Fall_Back");
+  disable_trigger("Memnon_Reinforcements");
+  disable_trigger("Memnon_Raids");
+  //show_notice($S("Memnon has been killed!"), "defeat_notice", 7);
+  defeat(7);
+}
+
+if (is_defeated(2)) {
+  defeat(7);
+}
+
+if(time() >= get_time_limit()) {
+  defeat(1);
+}
+
+}

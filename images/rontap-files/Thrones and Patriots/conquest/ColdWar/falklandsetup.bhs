@@ -1,0 +1,92 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  labels {
+    AMERICANS,
+    RUSSIANS,
+  }
+
+  coldwar_rules();
+
+  int diff = get_difficulty();
+  set_leader_difficulty (2, diff);
+
+  String city_name = find_capital(AMERICANS);
+  int building = find_city_id(city_name);
+  building = switch_teams(RUSSIANS, AMERICANS, building);
+  int x = object_position_x(RUSSIANS, building) + 2;
+  int y = object_position_y(RUSSIANS, building);
+  create_unit_upgrade(RUSSIANS, x, y, "Infantry", 4+diff);
+  create_unit_upgrade(RUSSIANS, x, y, "Bazooka", 4+diff);
+  create_unit_upgrade(RUSSIANS, x, y, "Anti-Aircraft Battery", diff);
+  create_unit_upgrade(RUSSIANS, x, y, "Armored Car", diff);
+  building = find_city_id("San Carlos");
+  building = switch_teams(RUSSIANS, AMERICANS, building);
+  x = object_position_x(RUSSIANS, building) + 2;
+  y = object_position_y(RUSSIANS, building);
+  create_unit_upgrade(RUSSIANS, x, y, "Infantry", 4+diff);
+  create_unit_upgrade(RUSSIANS, x, y, "Bazooka", 4+diff);
+  create_unit_upgrade(RUSSIANS, x, y, "Anti-Aircraft Battery", diff);
+  create_unit_upgrade(RUSSIANS, x, y, "Armored Car", diff);
+  building = find_city_id("Goose Green");
+  building = switch_teams(RUSSIANS, AMERICANS, building);
+  x = object_position_x(RUSSIANS, building) + 2;
+  y = object_position_y(RUSSIANS, building);
+  create_unit_upgrade(RUSSIANS, x, y, "Infantry", 4+diff);
+  create_unit_upgrade(RUSSIANS, x, y, "Bazooka", 4+diff);
+  create_unit_upgrade(RUSSIANS, x, y, "Anti-Aircraft Battery", diff);
+  create_unit_upgrade(RUSSIANS, x, y, "Armored Car", diff);
+
+  //133,113
+  //141,141
+  
+  x = 255;
+  y = 130;
+  create_unit_upgrade(RUSSIANS, x, y, "Destroyer", diff+1);
+  create_unit_in_group(RUSSIANS, x, y, "Dreadnought", diff+1);
+  
+  x = 149;
+  y = 131;
+  create_unit_upgrade(AMERICANS, x, y, "Cruiser", 7-diff);
+  create_unit_in_group(AMERICANS, x, y, "Battleship", 7-diff);
+  create_unit_in_group(AMERICANS, x, y, "Submarine", 7-diff);
+  
+  group_jump_move(AMERICANS, x, y, 135);
+  
+  x = 139;
+  y = 113;  
+  create_unit_upgrade(AMERICANS, x, y, "Infantry", 11-diff);
+  create_unit_in_group(AMERICANS, x, y, "Bazooka", 11-diff);
+  create_unit_in_group(AMERICANS, x, y, "General", 1);
+  create_unit_in_group(AMERICANS, x, y, "Supply Wagon", 1);
+  create_unit_in_group(AMERICANS, x, y, "Anti-Aircraft Battery", diff);
+  create_unit_in_group(AMERICANS, x, y, "Tank", diff);
+  create_unit_in_group(AMERICANS, x, y, "Armored Car", diff);
+  create_unit_in_group(AMERICANS, x, y, "Special Forces", 1);
+  create_unit_in_group(AMERICANS, x, y, "Howitzer", 2);
+  if (diff < 5) {
+    create_unit_in_group(AMERICANS, x, y, "Special Forces", 1);
+    create_unit_in_group(AMERICANS, x, y, "Supply Wagon", 1);
+    create_unit_in_group(AMERICANS, x, y, "Howitzer", 1);
+  }  
+  if (diff < 3) {
+    create_unit_in_group(AMERICANS, x, y, "Special Forces", 1);
+    create_unit_in_group(AMERICANS, x, y, "Supply Wagon", 1);
+    create_unit_in_group(AMERICANS, x, y, "Howitzer", 1);
+  }
+  
+  group_jump_move(AMERICANS, x, y, 90);
+
+  set_preq("Battleship", "Modern Age", "The Art of War");
+  set_preq("Cruiser", "Modern Age", "The Art of War");
+  for (i = 0; i < 7; i++) {
+    lose_tech(2, "Military");
+  }
+  disable_tech(2, "The Art of War");
+  set_population_cap(2, 200);
+
+}
+
+

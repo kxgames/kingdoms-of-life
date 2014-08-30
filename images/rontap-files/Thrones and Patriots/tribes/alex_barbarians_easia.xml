@@ -1,0 +1,49 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Iranians">
+  <LEADERS>
+    <LEADER>Satibarzanes</LEADER>
+    <LEADER>Chorienes</LEADER>
+    <LEADER>Abulites</LEADER>
+    <LEADER>Peucestas</LEADER>
+    <LEADER>Bhadrabahu</LEADER>
+    <LEADER>Paropamisus</LEADER>
+    <LEADER>Chanakya</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Susia</CITY>
+    <CITY>Hecatompylus</CITY>
+    <CITY>Rhagae</CITY>
+    <CITY>Ecbatana</CITY>
+    <CITY>Ispahan</CITY>
+    <CITY>Opis</CITY>
+    <CITY>Farah</CITY>
+    <CITY>Prophthasia</CITY>
+    <CITY>Pura</CITY>
+    <CITY>Harmozia</CITY>
+    <CITY>Artacoana</CITY>
+    <CITY>Salmous</CITY>
+    <CITY>Rhambacia</CITY>
+    <CITY>Karachi</CITY>
+    <CITY>Pattala</CITY>
+    <CITY>Quetta</CITY>
+    <CITY>Shikapur</CITY>
+    <CITY>Ghazni</CITY>
+    <CITY>Drapsaca</CITY>
+    <CITY>Nautaca</CITY>
+    <CITY>Maracanda</CITY>
+    <CITY>Cyripolis</CITY>
+    <CITY>Bukhara</CITY>
+    <CITY>Zariaspa</CITY>
+    <CITY>Gwadar</CITY>
+    <CITY>Aornus</CITY>
+    <CITY>Massaga</CITY>
+    <CITY>Khawak</CITY>
+    <CITY>Khushan</CITY>
+    <CITY>Khyber</CITY>
+    <CITY>Mulla</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>5 EIndian</UNIT_CONTINENT>
+  <BUILD_CONTINENT>8 EIndian</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>8 EIndian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

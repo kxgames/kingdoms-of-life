@@ -1,0 +1,128 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+
+  //nation ID numbers
+  static int macedonians = 1;
+  static int agrianians = 2;
+  static int illyrians = 3;
+  static int athenians = 6;
+  static int getae = 4; //thracian horse nomads
+  static int triballians = 5; 
+
+  int nation;
+
+  for (nation = 3; nation < 7; nation++) {
+    diplomacy_set_wait(nation);
+  }
+
+  static int diff = get_difficulty();
+  
+  if (diff > 4) {
+    set_time_limit(45);
+  }
+  else if (diff > 2) {
+    set_time_limit(60);
+  }
+
+  disable_building_attrition(getae);
+
+  int unit_cap;
+  int x;
+  int y;
+  int building;
+  int unit;
+
+  int amount = diff * 3;
+
+  if (diff < 4) {
+    amount = 0;
+  }
+
+  //set nation names
+  set_nation_name("Greeks", $S("Macedonians"));
+  set_nation_name("British", $S("Agrianians"));
+  set_nation_name("Spanish", $S("Illyrians"));
+  set_nation_name("Mongols", $S("Scythians"));
+  set_nation_name("Germans", $S("Getae"));
+
+  disable_type_by_tribe("Longbowmen", "British");
+  enable_type_by_tribe("Barbarian Archers", "British", "Barracks", 0, 2);
+  gain_upgrade(2, "Barbarian Archers");
+  disable_type_by_tribe("Phalanx", "British");
+  enable_type_by_tribe("Barbarian Phalanx", "British", "Barracks", 0, 1);
+  gain_upgrade(2, "Barbarian Phalanx");
+  disable_type_by_tribe("Javelineers", "British");
+  enable_type_by_tribe("Barbarian Javelineers", "British", "Barracks", 0, 0);
+  gain_upgrade(2, "Barbarian Javelineers");
+  disable_type_by_tribe("Scutari", "Spanish");
+  enable_type_by_tribe("Barbarian Phalanx", "Spanish", "Barracks", 0, 1);
+  gain_upgrade(3, "Barbarian Phalanx");
+  gain_upgrade(5, "Barbarian Phalanx");
+  disable_type_by_tribe("Javelineers", "Spanish");
+  enable_type_by_tribe("Barbarian Javelineers", "Spanish", "Barracks", 0, 0);
+  gain_upgrade(3, "Barbarian Javelineers");
+  gain_upgrade(5, "Barbarian Javelineers");
+  disable_type_by_tribe("Archers", "Spanish");
+  enable_type_by_tribe("Barbarian Archers", "Spanish", "Barracks", 0, 2);
+  gain_upgrade(3, "Barbarian Archers");
+  gain_upgrade(5, "Barbarian Archers");
+  disable_type_by_tribe("Barbarians", "Germans");
+  disable_type_by_tribe("Cataphract", "British");
+  disable_type_by_tribe("Cataphract", "Spanish");
+  disable_type_by_tribe("Cataphract", "Russians");
+
+  for (nation = 2; nation < 9; nation++) {
+    set_leader_difficulty(nation, diff);
+  }
+
+  //disable_take_attrition(getae);
+
+  disable_city_defeat(getae);
+  
+    disable_city_defeat(triballians);
+    disable_city_defeat(athenians);
+    gain_upgrade(triballians, "Light Horse");
+    research_tech_with_cost(triballians, "Light Horse");
+
+    gain_upgrade(triballians, "Light Horse");
+    research_tech_with_cost(triballians, "Light Horse");
+
+  //set thracian population caps
+  if (diff > 4) unit_cap = 40;
+  else if (diff > 2 && diff < 5) unit_cap = 35;
+  else if (diff < 3) unit_cap = 25;
+
+  set_population_cap(getae, unit_cap);
+  set_population_cap(illyrians, (unit_cap * 5));
+
+  //set thracian building hit points
+  if (diff > 4) {
+    set_object_type_max_health("Barracks", 2400);
+    set_object_type_max_health("Stable", 2400);
+  } else if (diff > 2 && diff < 5) {
+    set_object_type_max_health("Barracks", 1800);
+    set_object_type_max_health("Stable", 1800);
+  }
+  
+    create_building(getae, 258, 62, "Stable");
+    create_building(getae, 270, 110, "Stable");
+    create_building(getae, 230, 54, "Stable");
+    create_unit_upgrade(getae, 272, 112, "Light Horse", 2);
+
+  set_bonus_cap(illyrians, "Food", amount);
+  set_base_rate(illyrians, "Food", amount);
+  set_bonus_cap(illyrians, "Timber", amount);
+  set_base_rate(illyrians, "Timber", amount);
+  set_bonus_cap(illyrians, "Metal", amount);
+  set_base_rate(illyrians, "Metal", amount); 
+  set_bonus_cap(illyrians, "Wealth", amount);
+  set_base_rate(illyrians, "Wealth", amount); 
+  set_bonus_cap(illyrians, "Knowledge", amount);
+  set_base_rate(illyrians, "Knowledge", amount);     
+  set_population_cap(illyrians, amount);
+}
+

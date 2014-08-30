@@ -1,0 +1,25 @@
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Isaac Ellis (Big Huge Games) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Thebans" substitute="1">
+  <LEADERS>
+    <LEADER>Phoenix</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Phocaea</CITY>
+    <CITY>Chios</CITY>
+    <CITY>Elatea</CITY>
+    <CITY>Heraclea</CITY>
+    <CITY>Zarax</CITY>
+    <CITY>Plataea</CITY>
+    <CITY>Coronea</CITY>
+    <CITY>Tanagra</CITY>
+    <CITY>Bulis</CITY>
+    <CITY>Opus</CITY>
+    <CITY>Askra</CITY>
+    <CITY>Koroneia</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

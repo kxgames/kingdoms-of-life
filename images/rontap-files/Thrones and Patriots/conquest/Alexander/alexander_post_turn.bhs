@@ -1,0 +1,484 @@
+ 
+//set battle_info_text to be the info shown when making an attack
+scenario post_turn (int turn)
+{
+
+  static int random_number_guy = get_ctw_seed() % 3;
+
+  static int num_owned = 0;
+
+  String sub_goal1;
+  String sub_goal2;
+  int diff = get_difficulty();
+
+  int strength;
+  int tribute = get_num_tribute("Greeks");
+
+  String str1;
+  String str2;
+  String str3;
+  String str4;
+  String str5;
+  
+  //QUESTS
+  //give_player_bonus_card("Koreans Oath of Fealty");
+  //<BONUSCARDDECK name="Sabotage"/>
+  //<BONUSCARDDECK name="$TECHCAT0 Eureka"/>
+  //<BONUSCARDDECK name="$RES0 Economic Boom"/>
+  //<BONUSCARDDECK name="Mercenaries"/>
+  //<BONUSCARDDECK name="Treachery"/>
+  //<BONUSCARDDECK name="Great Thinker"/>
+  //<BONUSCARDDECK name="Merchant Guild"/>
+  //<BONUSCARDDECK name="Logistics"/>
+  //<BONUSCARDDECK name="Partisans"/>
+  //<BONUSCARDDECK name="Cultural Dominance"/>
+  //<BONUSCARDDECK name="Trade Embargo"/>
+  //<BONUSCARDDECK name="Propaganda"/>
+
+  set_no_attack("Persian", "Syria");
+
+  if (turn < 1 + random_number_guy) {
+    set_no_attack("Persian", "Greece");
+    set_no_attack("Egyptians", "Greece");
+    set_no_attack("Romans", "Greece");
+  }
+  set_no_attack("Persian", "Pauravas");
+  set_no_attack("Indians", "Pauravas");
+  if (turn < 10 - random_number_guy) {
+    set_no_attack("Persian", "Southern Arabia");
+    set_no_attack("Indians", "Southern Arabia");
+    set_no_attack("Egyptians", "Southern Arabia");
+  }
+  if (turn < 5 + random_number_guy) {
+    if (get_num_times_played("Custom", "Barbarians of Thrace") == 0) set_no_attack("Persian", "Thrace");
+    if (get_num_times_played("Custom", "Barbarians of Thrace") == 0) set_no_attack("Romans", "Thrace");
+    set_no_attack("Romans", "Megale Hellas");
+    set_no_attack("Persian", "Megale Hellas");
+    set_no_attack("Egyptians", "Megale Hellas");
+  }
+
+  int merc_trib = 25;
+
+  if (get_ctw_int("greek_mercs") < 1) {
+    if (get_territory_owner("Phrygia") == "Greeks") {
+      if (tribute >= merc_trib) {
+        if (popup_choice(parse("A group a Greek Mercenaries has offered their services for $NUM0 Tribute. They are heavy infantry, who are not as powerful as Hoplites, but cost much less to train. If you accept, they will be available to train at your Barracks.", merc_trib), $S("Accept"), $S("Decline"))) {
+          give_player_ctw_tribute(-merc_trib);
+          set_ctw_int("greek_mercs", 1);
+        }
+        else {
+          set_ctw_int("greek_mercs", 2);
+        }
+      }
+    }
+  }
+  else if (get_ctw_int("greek_mercs") == 1 && get_ctw_int("greek_mercs2") < 1) {
+    if (get_territory_owner("Sindhu") == "Greeks" || get_territory_owner("Pauravas") == "Greeks") {
+      if (tribute >= merc_trib) {
+        if (popup_choice(parse("Your Greek Mercenaries are getting restless. Unless you pay them another $NUM0 Tribute, they will leave your service.", merc_trib), $S("Agree"), $S("Refuse"))) {
+          give_player_ctw_tribute(-merc_trib);
+          set_ctw_int("greek_mercs2", 1);
+        }
+        else {
+          set_ctw_int("greek_mercs", 2);
+        }
+      }
+    }
+  }
+
+  //Unite your father's realm
+  if (get_ctw_int("father") == 0) {
+    set_ctw_int("father",1);
+  }
+  
+  if (get_ctw_int("father") == 1) {
+    if (get_country_owner("Greece") == "Greeks" && get_country_owner("Thrace") == "Greeks") {
+      popup_dialog($S("Congratulations on reuniting your father's realm! General Ptolemy has decided to join your empire as a result."));
+      give_player_bonus_card("General Ptolemy");
+      set_ctw_int("father",2);
+      //set_ctw_int("greek_turn", turn);
+    }
+  }
+  
+  //Unite all Greeks
+  if (get_ctw_int("greeks_stuff") == 0 && get_country_owner("Greece") == "Greeks") {
+    set_ctw_int("greek_turn", turn);
+    set_ctw_int("greeks_stuff", 1);
+  }
+  
+  if (get_ctw_int("greeks_stuff") == 1) {
+    num_owned = 0;
+    if (get_country_owner("Lydia") == "Greeks") num_owned++;
+    if (get_country_owner("Phrygia") == "Greeks") num_owned++;
+    if (get_country_owner("Megale Hellas") == "Greeks") num_owned++;
+    if (get_country_owner("Sicily") == "Greeks") num_owned++;
+  }
+
+  if (get_country_owner("Lydia") == "Greeks" && get_country_owner("Phrygia") == "Greeks" && get_country_owner("Megale Hellas") == "Greeks" && get_country_owner("Sicily") == "Greeks" && get_ctw_int("greeks_stuff") == 1) {
+    set_ctw_int("greeks_stuff", 3);
+    popup_dialog($S("In gratitude for uniting Lydia, Phrygia, Megale Hellas and Sicily, the Greeks have given you the services of General Antipater."));
+    give_player_bonus_card("General Antipater");
+  }
+
+  if (get_ctw_int("greeks_stuff") == 1 && (turn > get_ctw_int("greek_turn") + 3 + random_number_guy) || get_ctw_int("greeks_stuff") == 1 && num_owned == 3) {
+    if (get_ctw_int("father") != 1 && get_ctw_int("egypt_quest") != 1 && get_ctw_int("phoe_navy") != 1) {
+      set_ctw_int("do_greeks", 1);
+    } else if (get_ctw_int("phoe_navy") != 1 && get_ctw_int("egypt_quest") != 1 && get_ctw_int("father") == 1) {
+      set_ctw_int("do_greeks", 1);
+    } else if (get_ctw_int("phoe_navy") == 1 && get_ctw_int("egypt_quest") != 1 && get_ctw_int("father") != 1) {
+      set_ctw_int("do_greeks", 1);
+    } else if (get_ctw_int("phoe_navy") != 1 && get_ctw_int("egypt_quest") == 1 && get_ctw_int("father") != 1) {
+      set_ctw_int("do_greeks", 1);
+    }
+    if (get_ctw_int("do_greeks") == 1) {
+      clear_ctw_val("greek_turn");
+      set_ctw_int("greeks_stuff", 2);
+      set_ctw_int("greeks_turn", turn+10-diff);
+      clear_ctw_val("do_greeks");
+      if (get_country_owner("Lydia") == "Greeks") {
+        if (get_country_owner("Phrygia") == "Greeks") {
+          if (get_country_owner("Sicily") == "Greeks") {
+            popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by uniting splinter Greek colonies in Megale Hellas back with their homeland."));
+          } else if (get_country_owner("Megale Hellas") == "Greeks") {
+            popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by uniting splinter Greek colonies in Sicily back with their homeland."));
+          } else {
+            popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by uniting splinter Greek colonies in Megale Hellas and Sicily back with their homeland."));
+          }
+        } else {
+          if (get_country_owner("Sicily") == "Greeks") {
+            if (get_country_owner("Megale Hellas") == "Greeks") {
+              popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Phrygia from Darius' rule."));
+            } else {
+              popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Phrygia from Darius' rule, and by uniting splinter Greek colonies in Megale Hellas back with their homeland."));
+            }
+          } else if (get_country_owner("Megale Hellas") == "Greeks") {
+            popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Phrygia from Darius' rule, and by uniting splinter Greek colonies in Sicily back with their homeland."));
+          } else {
+            popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Phrygia from Darius' rule, and by uniting splinter Greek colonies in Megale Hellas and Sicily back with their homeland."));
+          }
+        }
+      } else if (get_country_owner("Phrygia") == "Greeks") {
+        if (get_country_owner("Sicily") == "Greeks") {
+          if (get_country_owner("Megale Hellas") == "Greeks") {
+            popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Lydia from Darius' rule."));
+          } else {
+            popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Lydia from Darius' rule, and by uniting splinter Greek colonies in Megale Hellas back with their homeland."));
+          }
+        } else if (get_country_owner("Megale Hellas") == "Greeks") {
+          popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Lydia from Darius' rule, and by uniting splinter Greek colonies in Sicily back with their homeland."));
+        } else {
+          popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Lydia from Darius' rule, and by uniting splinter Greek colonies in Megale Hellas and Sicily back with their homeland."));
+        }
+      } else if (get_country_owner("Sicily") == "Greeks") {
+        if (get_country_owner("Megale Hellas") == "Greeks") {
+          popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Lydia and Phrygia from Darius' rule."));
+        } else {
+          popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Lydia and Phrygia from Darius' rule, and by uniting splinter Greek colonies in Megale Hellas back with their homeland."));
+        }
+      } else if (get_country_owner("Megale Hellas") == "Greeks") {
+        popup_dialog($S("The Greeks are getting restless with your rule. Perhaps we can appease them by freeing the Greeks in Lydia and Phrygia from Darius' rule, and by uniting splinter Greek colonies in Sicily back with their homeland."));
+      }
+    }
+  }
+  
+  if (get_ctw_int("greeks_stuff") == 2) {
+    if (get_country_owner("Lydia") == "Greeks" && get_country_owner("Sicily") == "Greeks" && get_country_owner("Megale Hellas") == "Greeks" && get_country_owner("Phrygia") == "Greeks") {      
+      popup_dialog($S("You have been gloriously successful in uniting the Greeks. This will quiet those back home who question your genius. In gratitude, the Greeks have given you the services of General Antipater."));
+      give_player_bonus_card("General Antipater");
+      set_ctw_int("greeks_stuff",3);
+    } 
+    //else if (get_ctw_int("greeks_turn") == turn) {
+      //if (diff < 4) {
+        //popup_dialog($S("The Greeks are furious that you have not united them with their brothers yet. A few rebellious Greeks have set a fire in Greece, lowering its territory strength."));
+        //temp = get_territory_strength("Greece") - diff;
+        //if (temp < 0) {
+          //temp = 0;
+        //}  
+        //set_territory_strength("Greece", temp);
+        //set_ctw_int("greeks_stuff", 3);
+      //}
+      //else {
+        //popup_dialog($S("The Greeks are outraged by your continued negligence in uniting them with their brothers. They have rebelled from your control, and now must be reconquered."));
+        //ctw_give_territory("Greece", "", 0);
+        //set_ctw_int("greeks_stuff", 3);
+      //}
+    //}
+  }
+  
+  //Phoenicia navy blockade
+  if (get_ctw_int("phoe_navy") == 0) {
+    if (get_ctw_int("father") != 1 && get_ctw_int("egypt_quest") != 1 && get_ctw_int("greeks_stuff") != 1) {
+      if (get_country_owner("Lydia") == "Greeks") {
+        if (popup_choice($S("Since we have crossed the Hellespont into the Persian Empire, perhaps we should disband our navy and gain 200 Tribute. Of course, this means that the Persians can use their Phoenician navy to block us from receiving our strategic resources in battle."), $S("Disband the navy"), $S("Preserve navy"))) {
+          give_player_ctw_tribute(200);
+          popup_dialog($S("We have gained 200 Tribute from disbanding your navy, but lost our strategic resources in battle. We will need to capture the territory of Phoenicia to regain them."));
+          disable_strategic_rares("Greeks");
+          set_ctw_int("phoe_navy",1);
+        } else {
+          set_ctw_int("phoe_navy",2);
+        }
+      }
+    } else if (get_ctw_int("father") != 1 && get_ctw_int("egypt_quest") != 1 && get_ctw_int("greeks_stuff") == 1) {
+      if (get_country_owner("Lydia") == "Greeks") {
+        if (popup_choice($S("Since we have crossed the Hellespont into the Persian Empire, perhaps we should disband our navy and gain 200 Tribute. Of course, this means that the Persians can use their Phoenician navy to block us from receiving our strategic resources in battle."), $S("Disband the navy"), $S("Preserve navy"))) {
+          give_player_ctw_tribute(200);
+          popup_dialog($S("We have gained 200 Tribute from the disbanding your navy, but lost our strategic resources in battle. We will need to capture the territory of Phoenicia to regain them."));
+          disable_strategic_rares("Greeks");
+          set_ctw_int("phoe_navy",1);
+        } else {
+          set_ctw_int("phoe_navy",2);
+        }
+      }
+    } else if (get_ctw_int("father") == 1 && get_ctw_int("egypt_quest") != 1 && get_ctw_int("greeks_stuff") != 1) {
+      if (get_country_owner("Lydia") == "Greeks") {
+        if (popup_choice($S("Since we have crossed the Hellespont into the Persian Empire, perhaps we should disband our navy and gain 200 Tribute. Of course, this means that the Persians can use their Phoenician navy to block us from receiving our strategic resources in battle."), $S("Disband the navy"), $S("Preserve navy"))) {
+          give_player_ctw_tribute(200);
+          popup_dialog($S("We have gained 200 Tribute from the disbanding your navy, but lost our strategic resources in battle. We will need to capture the territory of Phoenicia to regain them."));
+          disable_strategic_rares("Greeks");
+          set_ctw_int("phoe_navy",1);
+        } else {
+          set_ctw_int("phoe_navy",2);
+        }
+      }
+    } else if (get_ctw_int("father") != 1 && get_ctw_int("egypt_quest") == 1 && get_ctw_int("greeks_stuff") != 1) {
+      if (get_country_owner("Lydia") == "Greeks") {
+        if (popup_choice($S("Since we have crossed the Hellespont into the Persian Empire, perhaps we should disband our navy and gain 200 Tribute. Of course, this means that the Persians can use their Phoenician navy to block us from receiving our strategic resources in battle."), $S("Disband the navy"), $S("Preserve navy"))) {
+          give_player_ctw_tribute(200);
+          popup_dialog($S("We have gained 200 Tribute from the disbanding your navy, but lost our strategic resources in battle. We will need to capture the territory of Phoenicia to regain them."));
+          disable_strategic_rares("Greeks");
+          set_ctw_int("phoe_navy",1);
+        } else {
+          set_ctw_int("phoe_navy",2);
+        }
+      }
+    }
+  }
+
+  //pay up to tyre
+  //if (get_ctw_int("tyre") == 1) {
+  //  give_player_ctw_tribute(-300);
+  //  clear_ctw_val("tyre");
+  //} else if (get_ctw_int("tyre") == 2) {
+  //  give_player_ctw_tribute(-150);
+  //  clear_ctw_val("tyre");
+  //}
+  
+  if (get_ctw_int("phoe_navy") == 1) {
+    if (get_country_owner("Phoenicia") == "Greeks") {
+      popup_dialog($S("Now that we have sacked the Phoenician capital, their navies will no longer blockade our strategic resources in battle."));
+      set_ctw_int("phoe_navy",3);
+      enable_strategic_rares("Greeks");
+    }
+  }
+  
+  //Big bad Carthage
+  //if ((turn >= get_ctw_int("father")) && get_ctw_int("carthage_tribe") == 1) {
+  //popup_dialog($S("The survivors of Phoenicia have settled in Carthage and helped to found a new nation! Since we had no navy, there was no way for us to stop them. They could proove to be a large threat in the west."));
+  //set_ctw_int("carthage_tribe", 0);
+  //}
+  
+  //Egyptian help quest
+  if (get_country_owner("egypt") == "Persian" && get_ctw_int("egypt_quest") == 0) {
+    if (get_ctw_int("father") != 1 && get_ctw_int("egypt_quest") != 1 && get_ctw_int("greeks_stuff") != 1) {
+      popup_dialog($S("A message has come from the Egyptians: We have been conquered by the Persians. They do not care about us, only our riches. Your father was a great friend of Egypt. Perhaps that friendship carries on with his son? Please come help us; there will be great reward."));
+      if (get_country_owner("Lydia") == "Greeks") set_ctw_int("egypt_quest",1);
+      else set_ctw_int("egypt_quest",2);
+    } else if (get_ctw_int("phoe_navy") != 1 && get_ctw_int("father") != 1 && get_ctw_int("greeks_stuff") == 1) {
+      popup_dialog($S("A message has come from the Egyptians: We have been conquered by the Persians. They do not care about us, only our riches. Your father was a great friend of Egypt. Perhaps that friendship carries on with his son? Please come help us; there will be great reward."));
+      if (get_country_owner("Lydia") == "Greeks") set_ctw_int("egypt_quest",1);
+      else set_ctw_int("egypt_quest",2);
+    } else if (get_ctw_int("phoe_navy") == 1 && get_ctw_int("father") != 1 && get_ctw_int("greeks_stuff") != 1) {
+      popup_dialog($S("A message has come from the Egyptians: We have been conquered by the Persians. They do not care about us, only our riches. Your father was a great friend of Egypt. Perhaps that friendship carries on with his son? Please come help us; there will be great reward."));
+      if (get_country_owner("Lydia") == "Greeks") set_ctw_int("egypt_quest",1);
+      else set_ctw_int("egypt_quest",2);
+    } else if (get_ctw_int("phoe_navy") != 1 && get_ctw_int("father") == 1 && get_ctw_int("greeks_stuff") != 1) {
+      popup_dialog($S("A message has come from the Egyptians: We have been conquered by the Persians. They do not care about us, only our riches. Your father was a great friend of Egypt. Perhaps that friendship carries on with his son? Please come help us; there will be great reward."));
+      if (get_country_owner("Lydia") == "Greeks") set_ctw_int("egypt_quest",1);
+      else set_ctw_int("egypt_quest",2);
+    }
+  }
+  
+  if (get_ctw_int("egypt_quest") == 1) {
+    if (get_country_owner("egypt") == "Greeks") {
+      popup_dialog($S("Message from the Egyptians: You have freed us, great Alexander. We will be your loyal subjects for all eternity. You receive a Food Economic Boom bonus card as your reward."));
+      give_player_bonus_card("Food Economic Boom");
+      set_ctw_int("egypt_quest",3);
+    }
+  }  
+
+  //Persian Customs
+  //if (get_country_owner("persia") == "Greeks" && !get_country_owner("bactria") == "Greeks" && get_ctw_int("customs") == 0) {
+    //if (popup_choice($S("Now that we have control of Persia, it may be prudent to adopt the Persian style of dress and court etiquette to smooth over relations with your new subjects. Be careful though, as it may cause tension with your non-Persian subjects. What is your decision?"), $S("Adopt them"), $S("Don't adopt them")) == 1) { 
+      //popup_dialog($S("
+    //} else {
+      //popup_dialog($S("Message from you advisor: 
+    //}
+    //set_ctw_int("customs", 1);
+  //}  
+
+  //susa mass marriages
+  //if (get_country_owner("persia") == "Greeks" && get_country_owner("bactria") == "Greeks" && get_ctw_int("customs") == 1) {
+    //if (popup_choice($S("Your troops are growing more wary of fighting each day. Perhaps we could marry them to some local Persian women so that their thoughts will not be concentrated on getting back to Europe. The soldiers might be angry with being forced into marriage, but they cannot disobey the law and will learn to accept things. What is your decision?"), $S("Marry them"), $S("Don't marry them")) == 1) {
+      //popup_dialog($S("Message from your advisor:
+    //} else {
+      //popup_dialog($S("Message from your advisor:
+    //}
+    //set_ctw_int("customs", 2);
+  //}
+
+  if (get_ctw_int("papy_card") == 1) {
+    give_player_bonus_card("Wealth Economic Boom");
+    clear_ctw_val("papy_card");
+  }
+  if (get_ctw_int("papy_killed") == 2) {
+    clear_ctw_val("papy_killed");
+    popup_dialog($S("Message from the Scythian Merchant: I am grateful for the business in Thrace. I was able to use that money to make a fortune. Here is 30 Tribute as a token of my appreciation."));
+    give_player_ctw_tribute(30);
+  }
+
+  if (get_ctw_int("tyre") == 1) {
+    clear_ctw_val("tyre");
+    popup_dialog($S("Message from the Phoenicians: We are glad we could resolve our differences peacefully. Here is your 75 Tribute, as promised."));
+    give_player_ctw_tribute(75);
+  } else if (get_ctw_int("tyre") == 2) {
+    clear_ctw_val("tyre");
+    popup_dialog($S("Message from the Phoenicians: We have come to collect our 100 Tribute. We hope you rule well."));
+    give_player_ctw_tribute(-100);
+  }
+
+  if (turn == 8) {
+    if (get_country_owner("India") == "indians") {
+      popup_dialog($S("Message from Greek merchants in India: The Magadha kingdom has come under attack by other Indian factions led by Chandragupta Maurya. Maurya has taken the outlying provinces and is pressuring the very capital of the Magadha!"));
+    }
+  }
+  if (turn == 11) {
+    if (get_country_owner("India") == "indians") {
+      popup_dialog($S("Message from Greek merchants in India: Chandragupta Maurya has taken the Magadhan capital and executed the ruler. India is now ruled by the powerful Mauryans."));
+      ctw_set_leader_name("Indians", $S("Chandragupta Maurya"));
+    }
+  }
+
+  if (get_ctw_int("atrocity") == 1 && turn > 2) {
+    set_ctw_int("atrocity", 2);
+    popup_dialog($S("It appears that the survivors of the former Greek city state of Thebes have torched our capital during the night. The territory strength in Macedon has fallen to a 1!"));
+    //strength = get_territory_strength("Macedon");
+    set_territory_strength("Macedon", 0);
+  }
+
+  if (get_ctw_int("darius_yours") > 0) {
+    if (get_ctw_int("darius_yours") == 1) {
+      ctw_give_territory("Bactria", "Greeks", 1);
+    } else if (get_ctw_int("darius_yours") == 2) {
+      ctw_set_leader_name($S("Persian"), $S("Artaxerxes"));
+      set_ctw_int("artaxerxes", 1);
+    } else if (get_ctw_int("darius_yours") == 3) {
+      ctw_set_leader_name("Persian", $S("Spitamenes I"));
+      set_ctw_int("spitamenes", 1);
+    } else {
+      popup_dialog($S("Upon Darius' death, Bessus ascended to the Persian throne. He now styles himself Artaxerxes, and all Persian territories now follow him."));
+      ctw_set_leader_name("Persian", $S("Artaxerxes"));
+      set_ctw_int("artaxerxes", 1);
+    }
+    clear_ctw_val("darius_yours");
+  }
+
+
+  //sub-quest information
+  if (get_ctw_int("father") < 2) {
+    if (get_country_owner("Thrace") != "Greeks" && get_country_owner("Greece") != "Greeks") {
+      sub_goal1 = $S("Stop the rebellions in Thrace and Greece.");
+    } else if (get_country_owner("Thrace") != "Greeks") {
+      sub_goal1 = $S("Stop the rebellion in Thrace.");
+    } else if (get_country_owner("Greece") != "Greeks") {
+      sub_goal1 = $S("Stop the rebellion in Greece.");
+    }
+    if (get_ctw_int("greeks_stuff") == 2) {
+      if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks" && get_country_owner("Sicily") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Lydia and Phrygia and conquering Megale Hellas and Sicily.");
+      } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Lydia and Phrygia and conquering Megale Hellas.");
+      } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Sicily") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Lydia and Phrygia and conquering Sicily.");
+      } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Lydia and conquering Megale Hellas and Sicily.");
+      } else if (get_country_owner("Sicily") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Phrygia and conquering Megale Hellas and Sicily.");
+      } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Lydia and Phrygia.");
+      } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by conquering Megale Hellas and Sicily.");
+      } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Lydia and conquering Megale Hellas.");
+      } else if (get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Phrygia and conquering Megale Hellas.");
+      } else if (get_country_owner("Sicily") != "Greeks"&& get_country_owner("Lydia") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Lydia and conquering Sicily.");
+      } else if (get_country_owner("Sicily") != "Greeks" && get_country_owner("Phrygia") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Phrygia and conquering Sicily.");
+      } else if (get_country_owner("Lydia") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Lydia.");
+      } else if (get_country_owner("Phrygia") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Phrygia.");
+      } else if (get_country_owner("Megale Hellas") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Megale Hellas.");
+      } else if (get_country_owner("Sicily") != "Greeks") {
+        sub_goal2 = $S("Appease the Greeks by reclaiming Sicily.");
+      }
+    } else if (get_ctw_int("phoe_navy") == 1) {
+      sub_goal2 = $S("Break the Phoenician naval blockade of our strategic resources by conquering Phoenicia.");
+    } else if (get_ctw_int("egypt_quest") == 1) {
+      sub_goal2 = $S("Free the Egyptians from the oppressive rule of the Persians.");
+    }
+  } else if (get_ctw_int("greeks_stuff") == 1) {
+    if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks" && get_country_owner("Sicily") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Lydia and Phrygia and conquering Megale Hellas and Sicily.");
+    } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Lydia and Phrygia and conquering Megale Hellas.");
+    } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Sicily") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Lydia and Phrygia and conquering Sicily.");
+    } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Lydia and conquering Megale Hellas and Sicily.");
+    } else if (get_country_owner("Sicily") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Phrygia and conquering Megale Hellas and Sicily.");
+    } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Lydia and Phrygia.");
+    } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by conquering Megale Hellas and Sicily.");
+    } else if (get_country_owner("Lydia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Lydia and conquering Megale Hellas.");
+    } else if (get_country_owner("Phrygia") != "Greeks" && get_country_owner("Megale Hellas") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Phrygia and conquering Megale Hellas.");
+    } else if (get_country_owner("Sicily") != "Greeks"&& get_country_owner("Lydia") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Lydia and conquering Sicily.");
+    } else if (get_country_owner("Sicily") != "Greeks" && get_country_owner("Phrygia") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Phrygia and conquering Sicily.");
+    } else if (get_country_owner("Lydia") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Lydia.");
+    } else if (get_country_owner("Phrygia") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Phrygia.");
+    } else if (get_country_owner("Megale Hellas") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Megale Hellas.");
+    } else if (get_country_owner("Sicily") != "Greeks") {
+      sub_goal1 = $S("Appease the Greeks by reclaiming Sicily.");
+    }
+    if (get_ctw_int("phoe_navy") == 1) {
+      sub_goal2 = $S("Break the Phoenician naval blockade of your strategic resources by conquering Phoenicia.");
+    } else if (get_ctw_int("egypt") == 1 || get_ctw_int("egypt") == 2) {
+      sub_goal2 = $S("Free the Egyptians from the oppressive rule of the Persians.");
+    }
+  } else if (get_ctw_int("phoe_navy") == 1) {
+    sub_goal1 = $S("Break the Phoenician naval blockade of your strategic resources by conquering Phoenicia.");
+    if (get_ctw_int("egypt_quest") == 1) {
+      sub_goal2 = $S("Free the Egyptians from the oppressive rule of the Persians.");
+    }
+  } else if (get_ctw_int("egypt") == 1 || get_ctw_int("egypt") == 2) {
+    sub_goal1 = $S("Free the Egyptians from the oppressive rule of the Persians.");
+  }
+
+  if (sub_goal1 == "") {
+    sub_goal1 = $S("Expand your influence.");
+  }
+
+  ctw_set_sub_goals(sub_goal1, sub_goal2);
+
+}

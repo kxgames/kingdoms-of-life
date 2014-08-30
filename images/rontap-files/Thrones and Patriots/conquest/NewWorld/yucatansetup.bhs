@@ -1,0 +1,143 @@
+ include "ctw_lib.bhs"
+
+       conquest
+{
+new_world_rules();
+new_world_setup();
+missing_allies();
+labels {
+}
+  diff = get_difficulty();
+  infrastructure = get_attack_terr_str();
+  x = 0;
+  y = 0;
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  set_time_limit(90);
+
+  disable_city_ai(2);
+
+  force_transport_ability(1);
+
+  if (get_attack_from() == "Mexico") {
+    x = 6;
+    y = 122;
+  }
+  else if (get_attack_from() == "Cuba") {
+    x = 226;
+    y = 10;
+  }
+  else {
+    x = 234;
+    y = 190;
+  }
+
+  create_unit_upgrade(1, x, y, "Javelineers", 2);
+  if (find_nation(1) == "Nubians") {
+    create_unit_upgrade(1, x, y, "Bandeirantes", 1);
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Pikemen", 1);
+  }
+  create_unit_upgrade(1, x, y, "Archers", 1);
+  create_unit_upgrade(1, x, y, "Light Cavalry", 3);
+  create_unit_upgrade(1, x, y, "Explorer", 2);
+  create_unit_upgrade(1, x, y, "General", 1);
+  create_unit_upgrade(1, x, y, "Citizen", 5);
+
+  if (find_nation(1) == "Nubians" || find_nation(1) == "British" || find_nation(1) == "Dutch" || find_nation(1) == "French" || find_nation(1) == "Spanish" || find_nation(1) == "Americans") {
+    create_unit_upgrade(1, x, y, "Knight", 3);
+    if (find_nation(1) == "Spanish") {
+      create_unit_upgrade(1, x, y, "Conquistador", 5);
+    }
+    else if (find_nation(1) == "Nubians") {
+      if (get_age() == 3) {
+        unit = create_unit(1, x, y, "Dragoon", 3);
+        add_to_group(1, unit);
+      }
+      else {
+        unit = create_unit(1, x, y, "Carabineer", 3);
+        add_to_group(1, unit);
+      }
+    }
+    else {
+      create_unit_upgrade(1, x, y, "Horse Archer", 4);
+    }
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Javelineers", 2);
+    create_unit_upgrade(1, x, y, "Archers", 1);
+    create_unit_upgrade(1, x, y, "Pikemen", 2);
+    create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+  }
+
+  //get the proper angle
+  dir = get_conquest_invasion_dir();
+  dir = dir + 180;
+  if (dir >= 360) {
+    dir = dir - 360;
+  }
+  group_jump_move(1, x, y, dir);
+
+  city_id = find_city_id("Mayapan");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  create_unit_upgrade(2, x, y, "Archers", diff);
+  create_unit_upgrade(2, x, y, "Scout", 2);
+  create_unit_upgrade(2, x, y, "General", 1);
+
+  if (diff > 2) {
+    if (infrastructure < 3) {
+      place_building_upgrade(2, "Tower", "Mayapan");
+      place_building_upgrade(2, "Tower", "Copan");
+      place_building_upgrade(2, "Tower", "Palenque");
+    }
+    else if (infrastructure < 7) {
+      place_building_upgrade(2, "Tower", "Mayapan");
+      place_building_upgrade(2, "Tower", "Mayapan");
+      place_building_upgrade(2, "Barracks", "Mayapan");
+      place_building_upgrade(2, "Tower", "Tikal");
+      place_building_upgrade(2, "Tower", "Uxmal");
+      place_building_upgrade(2, "Tower", "Chichen Itza");
+      place_building_upgrade(2, "Tower", "Copan");
+      place_building_upgrade(2, "Tower", "Copan");
+      place_building_upgrade(2, "Tower", "Palenque");
+      place_building_upgrade(2, "Tower", "Palenque");
+    }
+    else {
+      place_building_upgrade(2, "Tower", "Mayapan");
+      place_building_upgrade(2, "Tower", "Mayapan");
+      place_building_upgrade(2, "Fort", "Mayapan");
+      place_building_upgrade(2, "Siege Factory", "Mayapan");
+      place_building_upgrade(2, "Barracks", "Mayapan");
+      place_building_upgrade(2, "Tower", "Tikal");
+      place_building_upgrade(2, "Tower", "Uxmal");
+      place_building_upgrade(2, "Tower", "Chichen Itza");
+      place_building_upgrade(2, "Tower", "Copan");
+      place_building_upgrade(2, "Tower", "Copan");
+      place_building_upgrade(2, "Fort", "Copan");
+      place_building_upgrade(2, "Tower", "Palenque");
+      place_building_upgrade(2, "Fort", "Palenque");
+    }
+  }
+
+  set_good(1, "Food", 750);
+  set_good(1, "Timber", 750);
+  set_good(1, "Metal", 750);
+  set_good(1, "Wealth", 750);
+
+  set_good(2, "Food", 0);
+  set_good(2, "Timber", 0);
+  set_good(2, "Metal", 0);
+  set_good(2, "Wealth", 0);
+
+  if (diff < 3) {
+    destroy_building_type(2, "Fort");
+    disable_type_by_tribe("Fort", "Maya");
+  }
+}
+

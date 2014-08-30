@@ -1,0 +1,36 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Panamanians">
+  <LEADERS>
+    <LEADER>Enrique Adolfo Jimenez Brin</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Panama City</CITY>
+    <CITY>Bocas del Toro</CITY>
+    <CITY>David</CITY>
+    <CITY>Santiago</CITY>
+    <CITY>Chitre</CITY>
+    <CITY>Coco Solo</CITY>
+    <CITY>El Porvenir</CITY>
+    <CITY>Balboa</CITY>
+    <CITY>Vacamonte</CITY>
+    <CITY>La Palma</CITY>
+    <CITY>Yaviza</CITY>
+    <CITY>Nargana</CITY>
+    <CITY>La Plama</CITY>
+    <CITY>Colon</CITY>
+    <CITY>Portobelo</CITY>
+    <CITY>Las Tablas</CITY>
+    <CITY>Los Pozos</CITY>
+    <CITY>Aguadulce</CITY>
+    <CITY>Penonome</CITY>
+    <CITY>Puerto Armuelles</CITY>
+    <CITY>Dolega</CITY>
+    <CITY>Bajo Boquete</CITY>
+    <CITY>Changuinola</CITY>
+    <CITY>Concepcion</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+  <BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

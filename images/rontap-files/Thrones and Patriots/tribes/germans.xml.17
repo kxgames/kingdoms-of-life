@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute-->
+<TRIBE name="ドイツ">
+	<LEADERS>
+		<LEADER>アラリック 1 世</LEADER>
+		<LEADER>フリードリヒ 2 世</LEADER>
+		<LEADER>ビスマルク</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>ベルリン</CITY>
+		<CITY>ウィーン</CITY>
+		<CITY>ボン</CITY>
+		<CITY>ミュンヘン</CITY>
+		<CITY>ハンブルク</CITY>
+		<CITY>ケルン</CITY>
+		<CITY>ライプツィヒ</CITY>
+		<CITY>ドレスデン</CITY>
+		<CITY>リューベック</CITY>
+		<CITY>ロストック</CITY>
+		<CITY>マグデブルク</CITY>
+		<CITY>ブラウンシュヴァイク</CITY>
+		<CITY>エルフルト</CITY>
+		<CITY>ウィッテンベルク</CITY>
+		<CITY>レーゲンスブルク</CITY>
+		<CITY>リンツ</CITY>
+		<CITY>コンスタンツ</CITY>
+		<CITY>アウクスブルク</CITY>
+		<CITY>ニュルンベルク</CITY>
+		<CITY>ウュルツブルク</CITY>
+		<CITY>トリーア</CITY>
+		<CITY>マインツ</CITY>
+		<CITY>ストラスブルグ</CITY>
+		<CITY>リエージュ</CITY>
+		<CITY>ブランデンブルク</CITY>
+		<CITY>コブレンツ</CITY>
+		<CITY>ハイデルベルク</CITY>
+		<CITY>デュッセルドルフ</CITY>
+		<CITY>キール</CITY>
+		<CITY>フランクフルト</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

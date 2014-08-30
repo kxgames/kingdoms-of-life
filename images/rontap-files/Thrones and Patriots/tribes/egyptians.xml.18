@@ -1,0 +1,48 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="이집트">
+	<LEADERS>
+		<LEADER>클레오파트라 여왕</LEADER>
+		<LEADER>네페르티티 여왕</LEADER>
+		<LEADER>하트솁수트 여왕</LEADER>
+		<LEADER>람세스 2세</LEADER>
+		<LEADER>쿠푸왕</LEADER>
+		<LEADER>아멘호테프 3세</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>테베</CITY>
+		<CITY>멤피스</CITY>
+		<CITY>피 람세스</CITY>
+		<CITY>엘 리슈트</CITY>
+		<CITY>엘 아마르나</CITY>
+		<CITY>에드푸</CITY>
+		<CITY>엘레판티네</CITY>
+		<CITY>아슈트</CITY>
+		<CITY>사카라</CITY>
+		<CITY>기자</CITY>
+		<CITY>사이스</CITY>
+		<CITY>부토</CITY>
+		<CITY>라코테</CITY>
+		<CITY>부바스티스</CITY>
+		<CITY>타니스</CITY>
+		<CITY>헬리오폴리스</CITY>
+		<CITY>카르낙</CITY>
+		<CITY>룩소르</CITY>
+		<CITY>스페르메루</CITY>
+		<CITY>아트피흐</CITY>
+		<CITY>카훈</CITY>
+		<CITY>셰</CITY>
+		<CITY>하와라</CITY>
+		<CITY>에즈벳 루시디</CITY>
+		<CITY>메르</CITY>
+		<CITY>아크흐밈</CITY>
+		<CITY>아비도스</CITY>
+		<CITY>세세비</CITY>
+		<CITY>아마라</CITY>
+		<CITY>엘 세부아</CITY>
+		<CITY>헤라클레오폴리스</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 Europe    </UNIT_CONTINENT>
+	<BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

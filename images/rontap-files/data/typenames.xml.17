@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v5 U (http://www.xmlspy.com) by John the man FitzGerald (Big Huge Games) -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION: All STRING elements.-->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<ROOT>
+	<AGES>
+		<STRING hash="8843171" needed="0">古代</STRING>
+		<STRING hash="6818848" needed="0">中世</STRING>
+		<STRING hash="7683271" needed="0">ルネサンス</STRING>
+		<STRING hash="13782908" needed="0">啓蒙時代</STRING>
+		<STRING hash="9696711" needed="0">産業革命時代</STRING>
+		<STRING hash="4270575" needed="0">近代</STRING>
+		<STRING hash="11109641" needed="0">現代</STRING>
+	</AGES>
+	<TECHS>
+		<STRING hash="7422563" needed="0">文字</STRING>
+		<STRING hash="7558886" needed="0">数学</STRING>
+		<STRING hash="4209181" needed="0">化学</STRING>
+		<STRING hash="10931720" needed="0">自然科学</STRING>
+		<STRING hash="7436541" needed="0">電気学</STRING>
+		<STRING hash="7373131" needed="0">電子工学</STRING>
+		<STRING hash="12979145" needed="0">コンピュータ</STRING>
+		<STRING hash="1692249" needed="0">物々交換</STRING>
+		<STRING hash="2317946" needed="0">貨幣制度</STRING>
+		<STRING hash="1055307" needed="0">交易</STRING>
+		<STRING hash="8189112" needed="0">商業</STRING>
+		<STRING hash="2772098" needed="0">金融</STRING>
+		<STRING hash="8662151" needed="0">組立ライン</STRING>
+		<STRING hash="10212836" needed="0">グローバリゼーション</STRING>
+		<STRING hash="5616641" needed="0">市政</STRING>
+		<STRING hash="1455381" needed="0">帝政</STRING>
+		<STRING hash="4168087" needed="0">封建制</STRING>
+		<STRING hash="7124203" needed="0">神権政治</STRING>
+		<STRING hash="7851435" needed="0">憲法</STRING>
+		<STRING hash="6478898" needed="0">帝国主義</STRING>
+		<STRING hash="17211729" needed="0">国際法</STRING>
+		<STRING hash="10578054" needed="0">兵法</STRING>
+		<STRING hash="6849444" needed="0">傭兵</STRING>
+		<STRING hash="8563678" needed="0">正規軍</STRING>
+		<STRING hash="8048945" needed="0">徴兵制</STRING>
+		<STRING hash="10185392" needed="0">義勇兵</STRING>
+		<STRING hash="10290156" needed="0">軍事国家</STRING>
+		<STRING hash="16302664" needed="0">志願兵制</STRING>
+	</TECHS>
+	<MISC>
+		<STRING hash="9426192" needed="0">ミサイル防衛網</STRING>
+		<STRING hash="30604825" needed="0">人工知能</STRING>
+		<STRING hash="16526569" needed="0">世界的繁栄</STRING>
+		<STRING hash="13424671" needed="0">世界政府</STRING>
+		<STRING hash="3073683" needed="0">戦術</STRING>
+		<STRING hash="5502441" needed="0">作戦</STRING>
+		<STRING hash="3277741" needed="0">戦略</STRING>
+		<STRING hash="2820121" needed="0">宗教</STRING>
+		<STRING hash="4969036" needed="0">一神教</STRING>
+		<STRING hash="10952500" needed="0">実存主義</STRING>
+		<STRING hash="3410006" needed="0">徴税</STRING>
+		<STRING hash="4575496" needed="0">忠誠</STRING>
+		<STRING hash="14255071" needed="0">契約</STRING>
+		<STRING hash="5809773" needed="0">所得税</STRING>
+		<STRING hash="9957886" needed="0">築城術</STRING>
+		<STRING hash="6780593" needed="0">射石砲</STRING>
+		<STRING hash="17966690" needed="0">戦略予備</STRING>
+		<STRING hash="5757926" needed="0">忠誠心</STRING>
+		<STRING hash="10825577" needed="0">絶対的服従</STRING>
+		<STRING hash="5321711" needed="0">愛国心</STRING>
+		<STRING hash="6842975" needed="0">ナショナリズム</STRING>
+		<STRING hash="8429887" needed="0">建設</STRING>
+		<STRING hash="8406841" needed="0">建築学</STRING>
+		<STRING hash="5867465" needed="0">エンジニアリング</STRING>
+		<STRING hash="6504674" needed="0">薬草学</STRING>
+		<STRING hash="3060060" needed="0">医学</STRING>
+		<STRING hash="14777164" needed="0">薬学</STRING>
+		<STRING hash="1660645" needed="0">飼料</STRING>
+		<STRING hash="1722154" needed="0">供給</STRING>
+		<STRING hash="4572512" needed="0">兵站業務</STRING>
+		<STRING hash="4346421" needed="0">木工</STRING>
+		<STRING hash="13894977" needed="0">林業</STRING>
+		<STRING hash="3938041" needed="0">製紙</STRING>
+		<STRING hash="6797357" needed="0">農業</STRING>
+		<STRING hash="9608007" needed="0">輪作</STRING>
+		<STRING hash="9355065" needed="0">食品産業</STRING>
+		<STRING hash="3959017" needed="0">識字</STRING>
+		<STRING hash="10082689" needed="0">印刷機</STRING>
+		<STRING hash="15111817" needed="0">科学的方法</STRING>
+		<STRING hash="29708143" needed="0">研究機関</STRING>
+		<STRING hash="11227186" needed="0">スーパーコンピュータ</STRING>
+		<STRING hash="7771103" needed="0">合金</STRING>
+		<STRING hash="7639625" needed="0">冷間鋳造法</STRING>
+		<STRING hash="895218" needed="0">鋼鉄</STRING>
+	</MISC>
+	<GOODS>
+		<STRING hash="564640" needed="0">食料</STRING>
+		<STRING hash="1799276" needed="0">木材</STRING>
+		<STRING hash="1700464" needed="0">財貨</STRING>
+		<STRING hash="3520419" needed="0">知識</STRING>
+		<STRING hash="1211192" needed="0">金属</STRING>
+		<STRING hash="336002" needed="0">石油</STRING>
+		<STRING hash="583548" needed="0">魚</STRING>
+		<STRING hash="1922011" needed="0">遺跡</STRING>
+		<STRING hash="578117" needed="0">ワイン</STRING>
+		<STRING hash="2616402" needed="0">パピルス</STRING>
+		<STRING hash="333260" needed="0">染料</STRING>
+		<STRING hash="593963" needed="0">絹</STRING>
+		<STRING hash="1194455" needed="0">香辛料</STRING>
+		<STRING hash="790674" needed="0">塩</STRING>
+		<STRING hash="1583615" needed="0">馬</STRING>
+		<STRING hash="2037823" needed="0">ゴム</STRING>
+		<STRING hash="2346145" needed="0">硫黄</STRING>
+		<STRING hash="1137060" needed="0">琥珀</STRING>
+		<STRING hash="1571768" needed="0">銀</STRING>
+		<STRING hash="3502615" needed="0">タバコ</STRING>
+		<STRING hash="1865394" needed="0">大理石</STRING>
+		<STRING hash="683830" needed="0">毛皮</STRING>
+		<STRING hash="1622088" needed="0">綿</STRING>
+		<STRING hash="978052" needed="0">バイソン</STRING>
+		<STRING hash="1536898" needed="0">銅</STRING>
+		<STRING hash="3880631" needed="0">クジャク</STRING>
+		<STRING hash="1690721" needed="0">オレンジ</STRING>
+		<STRING hash="1249341" needed="0">砂糖</STRING>
+		<STRING hash="3076733" needed="0">ダイヤモンド</STRING>
+		<STRING hash="619184" needed="0">宝石</STRING>
+		<STRING hash="3029794" needed="0">アルミニウム</STRING>
+		<STRING hash="1713625" needed="0">クジラ</STRING>
+		<STRING hash="3383353" needed="0">黒曜石</STRING>
+		<STRING hash="642149" needed="0">羊毛</STRING>
+		<STRING hash="788789" needed="0">石炭</STRING>
+		<STRING hash="2481507" needed="0">ウラン</STRING>
+		<STRING hash="3274537" needed="0">チタン</STRING>
+	</GOODS>
+	<BUILDS>
+		<STRING hash="5143517" needed="0">村</STRING>
+		<STRING hash="5001885" needed="0">町</STRING>
+		<STRING hash="5116697" needed="0">都市</STRING>
+		<STRING hash="756488" needed="0">畑</STRING>
+		<STRING hash="15948114" needed="0">伐採所</STRING>
+		<STRING hash="560225" needed="0">採鉱所</STRING>
+		<STRING hash="5428677" needed="0">学問所</STRING>
+		<STRING hash="2882524" needed="0">油田</STRING>
+		<STRING hash="8028649" needed="0">海洋油田</STRING>
+		<STRING hash="2914764" needed="0">穀倉</STRING>
+		<STRING hash="6179481" needed="0">製材所</STRING>
+		<STRING hash="2188528" needed="0">精錬所</STRING>
+		<STRING hash="3001744" needed="0">精油所</STRING>
+		<STRING hash="3868075" needed="0">兵舎</STRING>
+		<STRING hash="1932724" needed="0">厩舎</STRING>
+		<STRING hash="5642409" needed="0">車両工場</STRING>
+		<STRING hash="10083382" needed="0">武器工場</STRING>
+		<STRING hash="2802178" needed="0">兵器工場</STRING>
+		<STRING hash="815783" needed="0">港</STRING>
+		<STRING hash="4309085" needed="0">造船所</STRING>
+		<STRING hash="3296260" needed="0">大型造船所</STRING>
+		<STRING hash="2939733" needed="0">図書館</STRING>
+		<STRING hash="1674717" needed="0">市場</STRING>
+		<STRING hash="1445184" needed="0">神殿</STRING>
+		<STRING hash="1009206" needed="0">やぐら</STRING>
+		<STRING hash="568153" needed="0">塔</STRING>
+		<STRING hash="3366022" needed="0">防御塔</STRING>
+		<STRING hash="1515894" needed="0">強化防御塔</STRING>
+		<STRING hash="672063" needed="0">砦</STRING>
+		<STRING hash="1618681" needed="0">城</STRING>
+		<STRING hash="3070364" needed="0">要塞</STRING>
+		<STRING hash="2703085" needed="0">軍事基地</STRING>
+		<STRING hash="2736903" needed="0">航空基地</STRING>
+		<STRING hash="7207851" needed="0">ミサイル基地</STRING>
+		<STRING hash="2382931" needed="0">見張り所</STRING>
+		<STRING hash="14303594" needed="0">監視塔</STRING>
+		<STRING hash="10963680" needed="0">防空施設</STRING>
+		<STRING hash="14036329" needed="0">レーダー防空施設</STRING>
+		<STRING hash="15017895" needed="0">地対空ミサイル基地</STRING>
+		<STRING hash="3155697" needed="0">ピラミッド</STRING>
+		<STRING hash="3202471" needed="0">ロードスの巨像</STRING>
+		<STRING hash="14090616" needed="0">兵馬俑</STRING>
+		<STRING hash="4006251" needed="0">コロシアム</STRING>
+		<STRING hash="11789295" needed="0">ティカル大寺院</STRING>
+		<STRING hash="12394052" needed="0">陶塔</STRING>
+		<STRING hash="5629591" needed="0">アンコールワット</STRING>
+		<STRING hash="5275053" needed="0">ベルサイユ宮殿</STRING>
+		<STRING hash="4734371" needed="0">タージマハル</STRING>
+		<STRING hash="2136242" needed="0">クレムリン宮殿</STRING>
+		<STRING hash="16071921" needed="0">自由の女神</STRING>
+		<STRING hash="7396078" needed="0">エッフェル塔</STRING>
+		<STRING hash="8960296" needed="0">超衝突型加速器</STRING>
+		<STRING hash="9900249" needed="0">宇宙計画</STRING>
+	</BUILDS>
+	<UNITS>
+		<STRING hash="2221484" needed="0">市民</STRING>
+		<STRING hash="2751620" needed="0">学者</STRING>
+		<STRING hash="2501488" needed="0">将軍</STRING>
+		<STRING hash="423174" needed="0">スパイ</STRING>
+		<STRING hash="3026652" needed="0">隊商</STRING>
+		<STRING hash="3634926" needed="0">商人</STRING>
+		<STRING hash="8123947" needed="0">補給車</STRING>
+		<STRING hash="2580139" needed="0">民兵</STRING>
+		<STRING hash="4398051" needed="0">民兵 (マスケット銃装備)</STRING>
+		<STRING hash="3574192" needed="0">パルチザン</STRING>
+		<STRING hash="1234467" needed="0">探索兵</STRING>
+		<STRING hash="2971245" needed="0">斥候兵</STRING>
+		<STRING hash="3152264" needed="0">コマンド隊</STRING>
+		<STRING hash="11414320" needed="0">特殊部隊</STRING>
+		<STRING hash="23496102" needed="0">精鋭特殊部隊</STRING>
+		<STRING hash="2912095" needed="0">投石兵</STRING>
+		<STRING hash="6271876" needed="0">投槍兵</STRING>
+		<STRING hash="15379376" needed="0">精鋭投槍兵</STRING>
+		<STRING hash="3046598" needed="0">アステカ投槍兵</STRING>
+		<STRING hash="10143002" needed="0">ロイヤル アステカ投槍兵</STRING>
+		<STRING hash="12984243" needed="0">ツォピィリ投槍兵</STRING>
+		<STRING hash="14124675" needed="0">バラモブ投石兵</STRING>
+		<STRING hash="28279121" needed="0">ロイヤル バラモブ投石兵</STRING>
+		<STRING hash="27980832" needed="0">イーグル バラモブ投石兵</STRING>
+		<STRING hash="7858530" needed="0">インカこん棒戦士</STRING>
+		<STRING hash="8149328" needed="0">インカ鎚矛戦士</STRING>
+		<STRING hash="3556822" needed="0">アンパカティ</STRING>
+		<STRING hash="17413041" needed="0">ヤンゴンビ アンパカティ</STRING>
+		<STRING hash="597681" needed="0">ズールー族戦士</STRING>
+		<STRING hash="7117550" needed="0">火槍兵</STRING>
+		<STRING hash="16497142" needed="0">重装火槍兵</STRING>
+		<STRING hash="8091119" needed="0">火縄銃兵</STRING>
+		<STRING hash="5030159" needed="0">マスケット銃兵</STRING>
+		<STRING hash="2732698" needed="0">ライフル銃兵</STRING>
+		<STRING hash="3448211" needed="0">歩兵</STRING>
+		<STRING hash="14910540" needed="0">突撃歩兵</STRING>
+		<STRING hash="21046206" needed="0">紅衛兵</STRING>
+		<STRING hash="11409132" needed="0">強襲兵</STRING>
+		<STRING hash="12198643" needed="0">擲弾兵</STRING>
+		<STRING hash="13274171" needed="0">ジャガー歩兵</STRING>
+		<STRING hash="32427586" needed="0">ジャガー突撃兵</STRING>
+		<STRING hash="6809974" needed="0">親衛隊</STRING>
+		<STRING hash="16843832" needed="0">精鋭親衛隊</STRING>
+		<STRING hash="6459227" needed="0">高地連隊兵</STRING>
+		<STRING hash="7818082" needed="0">ブラック ウォッチ連隊</STRING>
+		<STRING hash="15712841" needed="0">清軍マスケット銃兵</STRING>
+		<STRING hash="11637510" needed="0">清軍ライフル銃兵</STRING>
+		<STRING hash="13245267" needed="0">清軍歩兵</STRING>
+		<STRING hash="6205127" needed="0">機関銃</STRING>
+		<STRING hash="15720375" needed="0">重機関銃</STRING>
+		<STRING hash="22252131" needed="0">機関砲</STRING>
+		<STRING hash="337164" needed="0">MG42 機関銃</STRING>
+		<STRING hash="7851322" needed="0">火炎放射兵</STRING>
+		<STRING hash="2939856" needed="0">装甲歩兵</STRING>
+		<STRING hash="2839030" needed="0">ファランクス</STRING>
+		<STRING hash="2060855" needed="0">槍兵</STRING>
+		<STRING hash="8221659" needed="0">精鋭槍兵</STRING>
+		<STRING hash="3904621" needed="0">フュージリア銃兵</STRING>
+		<STRING hash="11535451" needed="0">対戦車ライフル</STRING>
+		<STRING hash="2792777" needed="0">バズーカ砲</STRING>
+		<STRING hash="15231344" needed="0">対戦車ミサイル</STRING>
+		<STRING hash="10089468" needed="0">無反動砲</STRING>
+		<STRING hash="14498849" needed="0">ドラゴン対戦車ミサイル</STRING>
+		<STRING hash="2215527" needed="0">レギオン</STRING>
+		<STRING hash="13400324" needed="0">ローマ レギオン</STRING>
+		<STRING hash="16529548" needed="0">近衛軍</STRING>
+		<STRING hash="2749055" needed="0">スクタリ</STRING>
+		<STRING hash="10541371" needed="0">ロイヤル スクタリ</STRING>
+		<STRING hash="2565159" needed="0">テルシオ</STRING>
+		<STRING hash="9826501" needed="0">ロイヤル テルシオ</STRING>
+		<STRING hash="2218110" needed="0">ソルドゥーリ</STRING>
+		<STRING hash="6341588" needed="0">長剣戦士</STRING>
+		<STRING hash="2664093" needed="0">バンダル</STRING>
+		<STRING hash="8305918" needed="0">ランツクネヒト</STRING>
+		<STRING hash="16097864" needed="0">足軽</STRING>
+		<STRING hash="925380" needed="0">精鋭足軽</STRING>
+		<STRING hash="5811238" needed="0">武士</STRING>
+		<STRING hash="2729576" needed="0">精鋭武士</STRING>
+		<STRING hash="7334482" needed="0">鉄砲武士</STRING>
+		<STRING hash="1519671" needed="0">弓兵</STRING>
+		<STRING hash="2437686" needed="0">射手</STRING>
+		<STRING hash="6749852" needed="0">石弓兵</STRING>
+		<STRING hash="9426064" needed="0">重装射手</STRING>
+		<STRING hash="12128397" needed="0">クシテ射手</STRING>
+		<STRING hash="24712871" needed="0">ロイヤル クシテ射手</STRING>
+		<STRING hash="13971934" needed="0">アパデマク射手</STRING>
+		<STRING hash="5363679" needed="0">大弓兵</STRING>
+		<STRING hash="16003280" needed="0">英国大弓兵</STRING>
+		<STRING hash="13018015" needed="0">義勇農騎兵団</STRING>
+		<STRING hash="2678272" needed="0">ファラン</STRING>
+		<STRING hash="9766582" needed="0">中装ファラン</STRING>
+		<STRING hash="10138104" needed="0">ロイヤル ファラン</STRING>
+		<STRING hash="21703388" needed="0">エリート ロイヤル ファラン</STRING>
+		<STRING hash="7633946" needed="0">弓騎兵</STRING>
+		<STRING hash="17605544" needed="0">精鋭弓騎兵</STRING>
+		<STRING hash="2394210" needed="0">竜騎兵</STRING>
+		<STRING hash="5553487" needed="0">銃騎兵</STRING>
+		<STRING hash="7702055" needed="0">ラクダ射手</STRING>
+		<STRING hash="17790409" needed="0">重装ラクダ射手</STRING>
+		<STRING hash="7609557" needed="0">ラクダ突撃兵</STRING>
+		<STRING hash="6206627" needed="0">ラクダ兵団</STRING>
+		<STRING hash="2454520" needed="0">戦闘馬車</STRING>
+		<STRING hash="9451088" needed="0">大型戦闘馬車</STRING>
+		<STRING hash="2937285" needed="0">マムルーク</STRING>
+		<STRING hash="10638089" needed="0">ロイヤル マムルーク</STRING>
+		<STRING hash="1150372" needed="0">モンゴル軽騎馬射手</STRING>
+		<STRING hash="7707478" needed="0">ステッペ モンゴル軽騎馬射手</STRING>
+		<STRING hash="862803" needed="0">モンゴル重装騎馬射手</STRING>
+		<STRING hash="6839153" needed="0">エリート モンゴル重装騎馬射手</STRING>
+		<STRING hash="5968353" needed="0">軽装乗馬兵</STRING>
+		<STRING hash="10061941" needed="0">軽騎兵</STRING>
+		<STRING hash="21080609" needed="0">精鋭軽騎兵</STRING>
+		<STRING hash="1970399" needed="0">ハザーエ</STRING>
+		<STRING hash="6153218" needed="0">軽ラクダ騎兵</STRING>
+		<STRING hash="9578409" needed="0">ラクダ戦士</STRING>
+		<STRING hash="20573215" needed="0">精鋭ラクダ戦士</STRING>
+		<STRING hash="6265708" needed="0">装甲車</STRING>
+		<STRING hash="16327071" needed="0">装甲偵察車</STRING>
+		<STRING hash="13171980" needed="0">新鋭装甲車</STRING>
+		<STRING hash="10673820" needed="0">駆逐戦車</STRING>
+		<STRING hash="6111439" needed="0">タンク キラー</STRING>
+		<STRING hash="10023222" needed="0">ラシニー槍騎兵</STRING>
+		<STRING hash="2960039" needed="0">コサック</STRING>
+		<STRING hash="7454192" needed="0">ドン コサック</STRING>
+		<STRING hash="6673410" needed="0">鎖鎧兵</STRING>
+		<STRING hash="1501480" needed="0">騎士</STRING>
+		<STRING hash="7437672" needed="0">重装騎士</STRING>
+		<STRING hash="5367551" needed="0">胸甲騎兵</STRING>
+		<STRING hash="4210523" needed="0">ギリシャ騎士</STRING>
+		<STRING hash="12568111" needed="0">ロイヤル ギリシャ騎士</STRING>
+		<STRING hash="5879341" needed="0">ストラティオタイ</STRING>
+		<STRING hash="15547751" needed="0">ロイヤル ストラティオタイ</STRING>
+		<STRING hash="4090116" needed="0">シュヴァリエ</STRING>
+		<STRING hash="12238222" needed="0">重装シュヴァリエ</STRING>
+		<STRING hash="11767956" needed="0">擲弾騎兵</STRING>
+		<STRING hash="24262978" needed="0">近衛擲弾騎兵</STRING>
+		<STRING hash="5341897" needed="0">軽戦車</STRING>
+		<STRING hash="745334" needed="0">戦車</STRING>
+		<STRING hash="14352003" needed="0">主力戦車</STRING>
+		<STRING hash="5324692" needed="0">ティーガー</STRING>
+		<STRING hash="8175683" needed="0">レオパルド</STRING>
+		<STRING hash="3395554" needed="0">T80</STRING>
+		<STRING hash="3504308" needed="0">投石機</STRING>
+		<STRING hash="4578313" needed="0">強化型投石機</STRING>
+		<STRING hash="2715057" needed="0">射石砲</STRING>
+		<STRING hash="1686578" needed="0">大砲</STRING>
+		<STRING hash="4044681" needed="0">榴弾砲</STRING>
+		<STRING hash="3111150" needed="0">自走榴弾砲</STRING>
+		<STRING hash="13748366" needed="0">ロケット弾発射システム</STRING>
+		<STRING hash="1960398" needed="0">臼砲</STRING>
+		<STRING hash="8133644" needed="0">攻城臼砲</STRING>
+		<STRING hash="15499797" needed="0">バシリカ射石砲</STRING>
+		<STRING hash="13031479" needed="0">バシリカ大砲</STRING>
+		<STRING hash="13144786" needed="0">カチューシャ ロケット砲</STRING>
+		<STRING hash="8864040" needed="0">火矢</STRING>
+		<STRING hash="19698416" needed="0">強化型火矢</STRING>
+		<STRING hash="16156158" needed="0">自走対空機関砲</STRING>
+		<STRING hash="26524171" needed="0">自走高射砲</STRING>
+		<STRING hash="24835168" needed="0">自走対空ミサイル</STRING>
+		<STRING hash="2398355" needed="0">複葉機</STRING>
+		<STRING hash="2132227" needed="0">戦闘機</STRING>
+		<STRING hash="5994736" needed="0">ジェット戦闘機</STRING>
+		<STRING hash="13153657" needed="0">高性能戦闘機</STRING>
+		<STRING hash="7313136" needed="0">ホーク戦闘機</STRING>
+		<STRING hash="8335340" needed="0">コンドル戦闘機</STRING>
+		<STRING hash="1787274" needed="0">爆撃機</STRING>
+		<STRING hash="14414589" needed="0">戦略爆撃機</STRING>
+		<STRING hash="10788607" needed="0">ステルス爆撃機</STRING>
+		<STRING hash="14502340" needed="0">ランカスター爆撃機</STRING>
+		<STRING hash="10487415" needed="0">戦闘爆撃機</STRING>
+		<STRING hash="17403956" needed="0">ジェット戦闘爆撃機</STRING>
+		<STRING hash="5425090" needed="0">ヘリコプター</STRING>
+		<STRING hash="22818152" needed="0">輸送ヘリコプター</STRING>
+		<STRING hash="4278905" needed="0">V2 ロケット</STRING>
+		<STRING hash="9875698" needed="0">巡航ミサイル</STRING>
+		<STRING hash="12012826" needed="0">核弾頭ミサイル</STRING>
+		<STRING hash="6979733" needed="0">ICBM</STRING>
+		<STRING hash="3749364" needed="0">漁船</STRING>
+		<STRING hash="10196653" needed="0">商船</STRING>
+		<STRING hash="24371934" needed="0">近代商船</STRING>
+		<STRING hash="11981198" needed="0">輸送船</STRING>
+		<STRING hash="15736732" needed="0">ガリオン型輸送船</STRING>
+		<STRING hash="19043523" needed="0">輸送船</STRING>
+		<STRING hash="1570178" needed="0">荷物船</STRING>
+		<STRING hash="2557314" needed="0">小型帆船</STRING>
+		<STRING hash="1007218" needed="0">スループ型帆船</STRING>
+		<STRING hash="4093348" needed="0">駆逐艦</STRING>
+		<STRING hash="2223053" needed="0">巡洋艦</STRING>
+		<STRING hash="11534641" needed="0">ミサイル巡洋艦</STRING>
+		<STRING hash="4250328" needed="0">焼討いかだ</STRING>
+		<STRING hash="12110344" needed="0">大型焼討いかだ</STRING>
+		<STRING hash="2833092" needed="0">焼討船</STRING>
+		<STRING hash="10129818" needed="0">大型焼討船</STRING>
+		<STRING hash="4315997" needed="0">潜水艦</STRING>
+		<STRING hash="15367664" needed="0">攻撃型潜水艦</STRING>
+		<STRING hash="2070876" needed="0">三段オール ガレー船</STRING>
+		<STRING hash="1714725" needed="0">ガレー船</STRING>
+		<STRING hash="3072219" needed="0">武装商船</STRING>
+		<STRING hash="2423170" needed="0">フリゲート艦</STRING>
+		<STRING hash="5606523" needed="0">戦列艦</STRING>
+		<STRING hash="6438890" needed="0">臼砲艦</STRING>
+		<STRING hash="5692558" needed="0">ボムケッチ</STRING>
+		<STRING hash="6451385" needed="0">ドレッドノート級戦艦</STRING>
+		<STRING hash="5072733" needed="0">超弩級戦艦</STRING>
+		<STRING hash="20101660" needed="0">最新鋭戦艦</STRING>
+		<STRING hash="14244592" needed="0">航空母艦</STRING>
+		<STRING hash="3462612" needed="0">野鳥</STRING>
+		<STRING hash="4754137" needed="0">鳥群</STRING>
+		<STRING hash="3519784" needed="0">カモメ</STRING>
+		<STRING hash="2879048" needed="0">飼豚</STRING>
+		<STRING hash="7757665" needed="0">飼鶏</STRING>
+		<STRING hash="4834015" needed="0">馬群</STRING>
+		<STRING hash="4679109" needed="0">羊群</STRING>
+		<STRING hash="4802943" needed="0">バイソン群</STRING>
+		<STRING hash="4049688" needed="0">熊群</STRING>
+		<STRING hash="3575160" needed="0">魚群</STRING>
+		<STRING hash="6586501" needed="0">鯨群</STRING>
+		<STRING hash="9185103" needed="0">クジャク群</STRING>
+		<STRING hash="16545078" needed="0">攻撃型ヘリコプター</STRING><STRING hash="731698" needed="0">バーク船</STRING><STRING hash="2968518" needed="0">コルベット艦</STRING><STRING hash="3819158" needed="0">ボウディッカ</STRING></UNITS>
+	<ITEMS>
+		<STRING hash="3776560" needed="0">ボーナス ポイント</STRING>
+	</ITEMS>
+	<SPELLS>
+		<STRING hash="1152079" needed="0">買収</STRING>
+		<STRING hash="14621965" needed="0">資源横領</STRING>
+		<STRING hash="20104467" needed="0">対敵諜報活動</STRING>
+		<STRING hash="5394599" needed="0">併合</STRING>
+		<STRING hash="1583434" needed="0">集結!</STRING>
+		<STRING hash="9664256" needed="0">おとりの作成</STRING>
+		<STRING hash="1757765" needed="0">奇襲攻撃</STRING>
+		<STRING hash="8696396" needed="0">強行軍</STRING>
+		<STRING hash="3342997" needed="0">塹壕掘り</STRING>
+		<STRING hash="13981346" needed="0">備品補充</STRING>
+		<STRING hash="2895784" needed="0">諜報活動</STRING>
+		<STRING hash="3490332" needed="0">破壊活動</STRING>
+		<STRING hash="1529192" needed="0">狙撃兵</STRING>
+		<STRING hash="5373519" needed="0">ブロー スレッド</STRING>
+		<STRING hash="4842857" needed="0">レーダー電波妨害</STRING>
+		<STRING hash="3362543" needed="0">パラシュート降下</STRING>
+		<STRING hash="15084354" needed="0">研究プロジェクト</STRING>
+		<STRING hash="772144" needed="0">破壊</STRING>
+		<STRING hash="15272294" needed="0">ここに首都を移転</STRING>
+		<STRING hash="4301527" needed="0">閉門</STRING>
+		<STRING hash="6744513" needed="0">開門</STRING>
+		<STRING hash="4376064" needed="0">輸送船</STRING>
+		<STRING hash="957551" needed="0">梱包</STRING>
+		<STRING hash="1652836" needed="0">配備</STRING>
+		<STRING hash="3291885" needed="0">民間人</STRING>
+		<STRING hash="2217284" needed="0">武装化</STRING>
+		<STRING hash="11354781" needed="0">航空機製造</STRING>
+		<STRING hash="956773" needed="0">変形</STRING>
+		<STRING hash="2330416" needed="0">アップグレード</STRING>
+		<STRING hash="2688591" needed="0">消滅</STRING>
+		<STRING hash="7293826" needed="0">宣戦布告</STRING>
+		<STRING hash="13168313" needed="0">同盟解消</STRING>
+	</SPELLS>
+</ROOT>

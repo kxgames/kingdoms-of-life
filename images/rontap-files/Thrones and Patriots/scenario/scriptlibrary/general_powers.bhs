@@ -1,0 +1,241 @@
+scenario general_powers ()
+{  
+  int player = 1;
+  int cur_time = time_sec();
+  static int counter = 0;
+  
+  run_once {
+    set_timer("pop", 5);
+  }
+
+  static int alexander = 0;
+  static int napoleon = 0;
+  static int parmenio = 0;
+  static int antipater = 0;
+  static int ptolemy = 0;
+  static int darius = 0;
+  static int memnon = 0;
+  static int spitamenes = 0;
+  static int maurya = 0;
+  static int porus = 0;
+  static int fouche = 0;
+  static int schwarzenberg = 0;
+  static int paoli = 0;
+  
+  int o = -1;
+  if (timer_expired("pop")) {  
+    set_timer("pop", 2);
+    string bubble;      
+    //if (num_objects_selected(player) == 1) {      
+    if ((alexander > 0 && alexander < 4) || (alexander == 0 && object_type_selected(player, "Alexander"))) {              
+      switch (alexander % 4) {
+      case 0 :
+        bubble = $S("+1 attack!");
+        break;          
+      case 1 :
+        bubble = $S("+2 Heavy Infantry attack!");
+        break;
+      case 2 :
+        bubble = $S("Double craft!");
+        break;
+      case 3 :
+        bubble = $S("50% faster Forced March!");
+        break;
+      }
+      o = find_unit(1, "Alexander");
+      alexander++;
+    } else if ((napoleon > 0 && napoleon < 4) || (napoleon == 0 && object_type_selected(player, "napoleon"))) {
+      switch (napoleon % 4) {
+      case 0 :
+        bubble = $S("+3 attack to siege!");
+        break;          
+      case 1 :
+        bubble = $S("+1 range to siege!");
+        break;
+      case 2 :
+        bubble = $S("Double craft!");
+        break;
+      case 3 :
+        bubble = $S("50% faster Forced March!");
+        break;
+      }
+      o = find_unit(1, "Napoleon");
+      napoleon++;
+    } else if ((parmenio > 0 && parmenio < 4) || (parmenio == 0 && object_type_selected(player, "parmenio"))) {
+      switch (parmenio % 4) {
+      case 0 :
+        bubble = $S("+1 Heavy Cavalry attack!");
+        break;
+      case 1 :
+        bubble = $S("Bigger radius!");
+        break;
+      case 2 :
+        bubble = $S("3x longer ambush!");
+        break;        
+      case 3 :
+        bubble = $S("Starts with 5 Companions!");
+        break;
+      }
+      o = find_unit(1, "parmenio");
+      parmenio++;
+    } else if ((antipater > 0 && antipater < 5) || (antipater == 0 && object_type_selected(player, "antipater"))) {        
+      switch (antipater % 5) {
+      case 0 :
+        bubble = $S("Heals nearby units!");
+        break;
+      case 1 :
+        bubble = $S("Entrenched units take 80% damage!");
+        break;
+      case 2 :
+        bubble = $S("Can Entrench outside home territory!");
+        break;
+      case 3 :
+        bubble = $S("2x entrenchment speed");
+        break;
+      case 4 :
+        bubble = $S("+3 attack to buildings when garrisoned!");
+        break;
+      }
+      o = find_unit(1, "antipater");
+      antipater++;
+    } else if ((ptolemy > 0 && ptolemy < 4) || (ptolemy == 0 && object_type_selected(player, "ptolemy"))) {
+      switch (ptolemy % 4) {
+      case 0 :
+        bubble = $S("+1 range!");
+        break;
+      case 1 :
+        bubble = $S("+1 Line-of-Sight for ranged units!");
+        break;
+      case 2 :
+        bubble = $S("+1 siege attack!");
+        break;
+      case 3 :
+        bubble = $S("+1 armor!");
+        break;
+      }
+      o = find_unit(1, "ptolemy");
+      ptolemy++;
+    } else if ((darius > 0 && darius < 3) || (darius == 0 && object_type_selected(player, "darius"))) {
+      switch (darius % 3) {
+      case 0 :
+        bubble = $S("+1 defense!");
+        break;
+      case 1 :
+        bubble = $S("Prevents attrition!");
+        break;
+      case 2 :
+        bubble = $S("Enables the War Chariot!");
+        break;
+      }
+      o = find_unit(1, "darius");
+      darius++;
+    } else if ((memnon > 0 && memnon < 4) || (memnon == 0 && object_type_selected(player, "memnon"))) {
+      switch (memnon % 4) {
+      case 0 :
+        bubble = $S("Always cloaked!");
+        break;
+      case 1 :
+        bubble = $S("2x craft regeneration!");
+        break;
+      case 2 :
+        bubble = $S("Increases Greek Mercenaries' attack!");
+        break;
+      case 3 :
+        bubble = $S("Increases Greek Mercenaries' armor!");
+        break;
+      }
+      o = find_unit(1, "memnon");
+      memnon++;
+    } else if ((spitamenes > 0 && spitamenes < 4) || (spitamenes == 0 && object_type_selected(player, "spitamenes"))) {
+      switch (spitamenes % 4) {
+      case 0 :
+        bubble = $S("+1 Horse Archer attack!");
+        break;
+      case 1 :
+        bubble = $S("20% faster Cavalry!");
+        break;
+      case 2 :
+        bubble = $S("Increases building plunder!");
+        break;
+      case 3 :
+        bubble = $S("Gains plunder from enemy units!");
+        break;
+      }
+      o = find_unit(1, "spitamenes");
+      spitamenes++;
+    } else if ((maurya > 0 && maurya < 2) || (maurya == 0 && object_type_selected(player, "Chandragupta Maurya"))) {
+      switch (maurya % 2) {
+      case 0 :
+        bubble = $S("2x craft!");
+        break;     
+      case 1 :
+        bubble = $S("Prevents attrition!");
+        break;     
+      }
+      o = find_unit(1, "chandragupta maurya");
+      maurya++;
+    } else if ((porus > 0 && porus < 4) || (porus == 0 && object_type_selected(player, "porus"))) {
+      switch (porus % 3) {
+      case 0 :
+        bubble = $S("Detects cloaked units!");
+        break;
+      case 1 :
+        bubble = $S("Double hit points");
+        break;
+      case 2 :
+        bubble = $S("Creates 2x decoys");
+        break;
+      case 3 :
+        bubble = $S("20% faster Elephants!");
+        break;
+      }
+      o = find_unit(1, "porus");
+      porus++;
+    } else if ((fouche > 0 && fouche < 2) || (fouche == 0 && object_type_selected(player, "fouche"))) {
+      switch (fouche % 2) {
+      case 0 :
+        bubble = $S("Reveals all enemies!");
+        break;
+      case 1 :
+        bubble = $S("Triple craft!");
+        break;
+      }
+      o = find_unit(1, "fouche");
+      fouche++;
+    } else if ((paoli > 0 && paoli < 3) || (paoli == 0 && object_type_selected(player, "paoli"))) {
+      switch (paoli % 3) {
+      case 0 :
+        bubble = $S("Instant snipe!");
+        break;
+      case 1 :
+        bubble = $S("Instant sabotage!");
+        break;
+      case 2 :
+        bubble = $S("Double craft!");
+        break;
+      }
+      o = find_unit(1, "paoli");
+      paoli++;
+    } else if ((schwarzenberg > 0 && schwarzenberg < 3) || (schwarzenberg == 0 && object_type_selected(player, "schwarzenberg"))) {
+      switch (schwarzenberg % 3) {
+      case 0 :
+        bubble = $S("Double hit points!");
+        break;
+      case 1 :
+        bubble = $S("Double craft!");
+        break;
+      case 2 :
+        bubble = $S("Starts with 4 Commandos!");
+        break;
+      }
+      o = find_unit(1, "schwarzenberg");
+      schwarzenberg++;
+    }
+    
+
+    if (length(bubble) > 0) {
+      
+      bubble_text_obj(bubble, player, o);
+    }
+  }
+}

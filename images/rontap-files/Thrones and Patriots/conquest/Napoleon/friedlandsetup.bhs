@@ -1,0 +1,85 @@
+include "ctw_lib.bhs"
+
+conquest {
+if (get_ctw_campaign() == "Napoleon") {
+  napoleon_rules();
+}
+
+labels {
+}
+  force_transport_ability(1);
+  force_transport_ability(2);
+  force_transport_ability(8);
+
+  disable_city_ai(2);
+  disable_city_ai(8);
+
+  disable_city_defeat(1);
+  disable_city_defeat(8);  
+
+  set_nation_name("Germans", $S("Prussians"));
+
+  diff = get_difficulty();
+
+  set_time_limit(10);
+
+  disable_city_ai(2);
+  disable_production_ai(2);
+  disable_city_ai(8);
+  disable_production_ai(8);
+
+  set_explored(8);
+
+  //get starting location
+  x = 42;
+  y = 82;
+
+  create_unit_in_group(1, x, y, "Musketeers", 7);
+  create_unit_in_group(1, x, y, "Fusiliers", 4);
+  create_unit_in_group(1, x, y, "Horse Guard Grenadier", 2);
+  create_unit_in_group(1, x, y, "Cannon", 2);
+  unit_id = create_unit_in_group(1, x, y, "General", 1);
+  create_unit_in_group(1, x, y, "Supply Wagon", 1);
+  group_jump_move(1, x, y, 63);
+
+  clear_group(1);
+  x = 42;
+  y = 106;
+
+  create_unit_in_group(1, x, y, "Musketeers", 7);
+  create_unit_in_group(1, x, y, "Fusiliers", 4);
+  create_unit_in_group(1, x, y, "Horse Guard Grenadier", 2);
+  create_unit_in_group(1, x, y, "Cannon", 2);
+  unit_id = create_unit_in_group(1, x, y, "General", 1);
+  create_unit_in_group(1, x, y, "Supply Wagon", 1);
+  group_jump_move(1, x, y, 63);
+
+  clear_group(1);
+  x = 26;
+  y = 94;
+
+  create_unit_in_group(1, x, y, "Musketeers", 6);
+  create_unit_in_group(1, x, y, "Fusiliers", 6);
+  create_unit_in_group(1, x, y, "Horse Guard Grenadier", 6);
+  create_unit_in_group(1, x, y, "Explorer", 4);
+  create_unit_in_group(1, x, y, "Supply Wagon", 1);
+  group_jump_move(1, x, y, 63);
+  zoom_out(x, y);
+
+  city_id = find_city_id("Friedland");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+  create_unit_in_group(2, x+5, y+5, "Musketeers", diff);
+  create_unit_in_group(2, x+5, y+5, "Fusiliers", diff);
+  create_unit_in_group(2, x+5, y+5, "General Blucher", 1);
+
+  set_good(1, "Food", 2000);
+  set_good(1, "Timber", 2000);
+  set_good(1, "Metal", 2000);
+  set_good(1, "Wealth", 2000);
+
+  gain_tech(1, "Military");
+  gain_tech(1, "Military");
+  gain_tech(1, "Military");
+  gain_tech(1, "Military");
+}

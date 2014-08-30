@@ -1,0 +1,6 @@
+      
+//return true to use only the links specified here, return false to 
+int scenario links (String tribe)
+{
+  return false;
+}

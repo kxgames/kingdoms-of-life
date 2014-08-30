@@ -1,0 +1,66 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  coldwar_rules();
+
+  int diff = get_difficulty();
+
+  set_leader_difficulty (2, diff);
+
+  rename_type("Minuteman", "Patriot");
+
+  infrastructure_setup(2, "Atlanta", "New Orleans", "Tampa");
+
+  String city_name = find_capital(1);
+  int building = find_city_id(city_name);
+  int x = object_position_x(1, building) + 2;
+  int y = object_position_y(1, building);
+
+  gain_tech(1, "Military");
+
+  create_unit_upgrade(1, x, y, "Infantry", 4);
+  create_unit_upgrade(1, x, y, "Pikemen", 3);
+  if (find_nation(1) == "Americans") {
+    create_unit_upgrade(1, x, y, "Armored Scout Car", 4);
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Armored Car", 4);
+  }
+  create_unit_upgrade(1, x, y, "Tank", 5);
+  create_unit_upgrade(1, x, y, "Explorer", 2);
+  create_unit_upgrade(1, x, y, "Howitzer", 3);
+  create_unit_upgrade(1, x, y, "The Citizen", 1);
+  create_unit_upgrade(1, x, y, "Citizen", 5);
+  if (find_nation(1) == "Russians" && get_age() == 7) {
+    create_unit_upgrade(1, x, y, "Mi-24 Hind", 3);
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Helicopter", 3);
+  }
+  create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+
+  //get the proper angle
+  dir = get_conquest_invasion_dir();
+  dir = dir + 180;
+  if (dir >= 360) {
+    dir = dir - 360;
+  }
+  group_jump_move(1, x, y, dir);
+
+  city_name = find_capital(2);
+  building = find_city_id(city_name);
+  x = object_position_x(2, building);
+  y = object_position_y(2, building) + 2;
+
+  create_unit_upgrade(2, x, y, "Infantry", diff);
+  create_unit_upgrade(2, x, y, "Tank", diff);
+  create_unit_upgrade(2, x, y, "Light Cavalry", diff);
+  create_unit_upgrade(2, x, y, "Supply Wagon", 1);
+  create_unit_upgrade(2, x, y, "Artillery", 2);
+  create_unit_upgrade(2, x, y, "Scout", 2);
+  create_unit_upgrade(2, x, y, "General", 1);
+
+}
+
+

@@ -1,0 +1,259 @@
+      scenario
+{
+
+labels {
+  //Add any constant labels here in a comma separated list.
+}
+
+static diff = get_difficulty();
+static london_id = 0;
+static edinburgh_id = 0;
+static dublin_id = 0;
+static senate_build_time = 0;
+static barracks1 = -1;
+static barracks2 = -1;
+static barracks3 = -1;
+static barracks4 = -1;
+static barracks1_flag = 1;
+static barracks2_flag = 1;
+static barracks3_flag = 1;
+static barracks4_flag = 1;
+
+run_once {
+  disable_all_triggers();
+
+  london_id = find_city_id("London");
+  edinburgh_id = find_city_id("Edinburgh");
+  dublin_id = find_city_id("Dublin");
+  senate_build_time = type_build_time("Senate");
+  ctw_add_objective_text($S("Capture the enemy's capital."), "Hint_id", 0);
+  set_seen(1, 2, london_id);
+
+  if (num_type(1, "Bomb Ketch") > 0) {
+    popup_dialog($S("Your admirals have gathered your Grand Navy and are ready for your assault on London. They await you near Calais."));
+    ping(1, 1, 238, 246);
+  }
+
+  x = 170;
+  y = 118;
+  barracks1 = create_building_upgrade(2, x, y, "Barracks");
+
+  x = 212;
+  y = 110;
+  barracks2 = create_building_upgrade(2, x, y, "Barracks");
+
+  x = 142;
+  y = 30;
+  barracks3 = create_building_upgrade(2, x, y, "Barracks");
+
+  x = 170;
+  y = 30;
+  barracks4 = create_building_upgrade(2, x, y, "Barracks");
+
+  enable_trigger("CapitalMoveLondon");
+  enable_trigger("PissedOffScotsman");
+  enable_trigger("ScotlandFalls");
+
+  enable_trigger("Barracks1Gone");
+  enable_trigger("Barracks2Gone");
+  enable_trigger("Barracks3Gone");
+  enable_trigger("Barracks4Gone");
+  if (diff > 4) {
+    set_timer("Lib", 460);
+  }
+}
+
+if (time() >= get_time_limit()) {
+  defeat(1);
+}
+
+trigger (timer_expired("Lib")) {
+  disable_type_by_tribe("Library", "Aztecs");
+  destroy_building_type(2, "Library");
+}
+
+trigger Barracks1Gone(building_destroyed(2, barracks1))
+{
+  barracks1_flag = 0;
+}
+
+trigger Barracks2Gone(building_destroyed(2, barracks2))
+{
+  barracks2_flag = 0;
+}
+
+trigger Barracks3Gone(building_destroyed(2, barracks3))
+{
+  barracks3_flag = 0;
+}
+
+trigger Barracks4Gone(building_destroyed(2, barracks4))
+{
+  barracks4_flag = 0;
+}
+
+///movin capital
+trigger CapitalMoveLondon(object_health(2, london_id) < 70)
+{
+  x = 0;
+  y = 0;
+  city_id = 0;
+  build_id = find_build(2, "Senate");
+  if (find_city_owner("Edinburgh") == 2) {
+    edinburgh_id = find_city_id("Edinburgh");
+    if (object_health(2, edinburgh_id) > 60) {
+      x = get_camera_x();
+      y = get_camera_y();
+      show_notice($S("The British government is fleeing north to Scotland!"), "capital_notice", 1);
+      destroy_building(2, build_id);
+
+      place_building_upgrade(2, "Senate", "Edinburgh");
+      set_type_build_time("Senate", 1);
+      if (diff > 2) {
+        enable_trigger("CapitalMoveEdinburgh");
+      }
+    }
+  }
+  else if (find_city_owner("Dublin") == 2) {
+    dublin_id = find_city_id("Dublin");
+    if (object_health(2, dublin_id) > 60) {
+      x = get_camera_x();
+      y = get_camera_y();
+      show_notice($S("The British government is fleeing west to Ireland!"), "capital_notice", 1);
+      destroy_building(2, build_id);
+
+      place_building_upgrade(2, "Senate", "Dublin");
+      set_type_build_time("Senate", 1);
+      if (diff > 2) {
+        enable_trigger("CapitalMoveDublin");
+      }
+    }
+  }
+  enable_trigger("BuildTimeReset");
+}
+
+trigger CapitalMoveEdinburgh(object_health(2, edinburgh_id) < 70)
+{
+  x = 0;
+  y = 0;
+  city_id = 0;
+  build_id = find_build(2, "Senate");
+  if (find_city_owner("Dublin") == 2) {
+    dublin_id = find_city_id("Dublin");
+    if (object_health(2, dublin_id) > 60) {
+      x = get_camera_x();
+      y = get_camera_y();
+      show_notice($S("The British government is fleeing west to Ireland!"), "capital_notice", 1);
+      destroy_building(2, build_id);
+
+      place_building_upgrade(2, "Senate", "Dublin");
+      set_type_build_time("Senate", 1);
+      enable_trigger("CapitalMoveDublin");
+    }
+  }
+  else if (find_city_owner("London") == 2) {
+    london_id = find_city_id("London");
+    if (object_health(2, london_id) > 60) {
+      x = get_camera_x();
+      y = get_camera_y();
+      show_notice($S("The British government is fleeing back to England!"), "capital_notice", 1);
+      destroy_building(2, build_id);
+
+      place_building_upgrade(2, "Senate", "London");
+      set_type_build_time("Senate", 1);
+      enable_trigger("CapitalMoveLondon");
+    }
+  }
+  enable_trigger("BuildTimeReset");
+}
+
+trigger CapitalMoveDublin(object_health(2, dublin_id) < 70)
+{
+  x = 0;
+  y = 0;
+  city_id = 0;
+  build_id = find_build(2, "Senate");
+  if (find_city_owner("Edinburgh") == 2) {
+    edinburgh_id = find_city_id("Edinburgh");
+    if (object_health(2, edinburgh_id) > 60) {
+      x = get_camera_x();
+      y = get_camera_y();
+      show_notice($S("The British government is fleeing north to Scotland!"), "capital_notice", 1);
+      destroy_building(2, build_id);
+
+      place_building_upgrade(2, "Senate", "Edinburgh");
+      set_type_build_time("Senate", 1);
+      enable_trigger("CapitalMoveEdinburgh");
+    }
+  }
+  else if (find_city_owner("London") == 2) {
+    london_id = find_city_id("London");
+    if (object_health(2, london_id) > 60) {
+      x = get_camera_x();
+      y = get_camera_y();
+      show_notice($S("The British government is fleeing back to England!"), "capital_notice", 1);
+      destroy_building(2, build_id);
+
+      place_building_upgrade(2, "Senate", "London");
+      set_type_build_time("Senate", 1);
+      enable_trigger("CapitalMoveLondon");
+    }
+  }
+  enable_trigger("BuildTimeReset");
+}
+
+trigger BuildTimeReset(find_inactive_build(2, "Senate") < 0)
+{
+  set_type_build_time("Senate", senate_build_time);
+}
+
+trigger ScotlandFalls(city_captured(2, "Glasgow") || city_captured(2, "Edinburgh"))
+{
+  disable_trigger("PissedOffScotsman");
+}
+
+trigger PissedOffScotsman(city_captured(2, "Manchester") && timer_expired("POS") != 0)
+{
+  x = get_camera_x();
+  y = get_camera_y();
+
+  num_spawn = diff-1;
+  if (num_spawn < 1) {
+    num_spawn = 1;
+  }
+
+  if (barracks1_flag > 0) {
+    x = 170;
+    y = 118;
+    create_unit_in_group(2, x, y, "Highlanders", num_spawn);
+  }
+
+  if (barracks2_flag > 0) {
+    x = 212;
+    y = 110;
+    create_unit_in_group(2, x, y, "Highlanders", num_spawn);
+  }
+
+  if (barracks3_flag > 0) {
+    x = 142;
+    y = 30;
+    create_unit_in_group(2, x, y, "Highlanders", num_spawn);
+  }
+
+  if (barracks4_flag > 0) {
+    x = 170;
+    y = 30;
+    create_unit_in_group(2, x, y, "Highlanders", num_spawn);
+  }
+
+  city_id = find_city_id("Manchester");
+  x = object_position_x(1, city_id);
+  y = object_position_y(1, city_id);
+
+  group_attack_to_order(2, x, y);
+
+  enable_trigger("PissedOffScotsman");
+  set_timer("POS", 540/diff);
+}
+
+}

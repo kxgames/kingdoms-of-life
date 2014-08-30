@@ -1,0 +1,214 @@
+scenario
+{
+  static int macedonians = 1;
+  static int tyrians = 2;
+  
+  static int old_docks;
+  int dock;
+  int in_docks;
+  static int old_in_docks;
+  int times;
+
+  static int x_coords[] = [228, 159, 198, 195, 184, 156, 188, 99, 135, 184, 172, 131, 15, 113, 225, 32, 28, 31, 22, 86, 20, 170, 164, 184, 231, 168];
+  static int y_coords[] = [45, 27, 94, 223, 155, 7, 77, 10, 12, 65, 122, 230, 14, 98, 222, 127, 229, 12, 74, 217, 137, 170, 78, 38, 44, 57];
+ 
+  int x;
+  int y;
+  int building;
+  String city_name = "Tyre";
+  static int tyre_temple = find_build_at_city(tyrians, city_name, "Temple", 0);
+  static int temp_x = object_position_x(tyrians, building);
+  static int temp_y = object_position_y(tyrians, building);
+  static int alex = find_unit(macedonians, "Alexander");
+  int unit;
+
+  static int diff = get_difficulty();
+
+  String mace_name = find_capital(macedonians);
+  static int mace_cap = find_city_id(mace_name);
+
+  static int cur_time = time_min();
+
+  static int end_time = get_time_limit();
+
+  static int tribute = get_num_tribute("Greeks");
+
+  static int noble;
+  static int noble_x;
+  static int noble_y;
+
+  static int check = 1;
+  static String old_tyre = "Old Tyre";
+
+  run_once {
+
+    ctw_add_objective_text($S("Hint: Capture the nearby city of Old Tyre before assaulting the capital."), 8, "");
+    building = find_city_id(old_tyre);
+    set_seen(macedonians, tyrians, building);
+
+    popup_dialog($S("We have arrived here during the time of the god Melkart's great annual festival in Tyre. If you, as a royal descendant of the god Heracles, were to visit the Temple in Tyre and make a sacrifice to Melkart, the Tyrians would have no choice but to acknowledge you as their king."));
+
+    set_seen(1, 2, tyre_temple);
+    ping(1, 2, 2, tyre_temple);
+
+    disable_trigger("friend_navy");
+
+    if (get_ctw_int("phoe_navy") == 2) {
+      enable_trigger("friend_navy");
+      set_timer("navy_friend", rand_int(300,600));
+    }
+
+  }
+  
+  trigger (unit_killed(1, alex)) {
+    alex = -1;
+  }
+  
+  trigger (city_captured(2, old_tyre)) {
+    ctw_objective_complete(8);
+  }
+
+  cur_time = time_min();
+
+  if (cur_time >= end_time) defeat(1);
+
+  trigger (time_min() == 5 && get_num_times_played("Custom", "Tyre") < 1) {
+    if (tribute >= 100) {
+      building = popup_choice(parse("Message from the Phoenicians: Greetings, great Alexander. We have no desire to fight. We are willing to follow you for 100 Tribute, or we will give you 75 Tribute if you leave. (You have $NUM0 Tribute.)", tribute), $S("Pay 100"), $S("Take 75"), $S("Pay 0"));
+      if (building == 0) {
+        if (tribute >= 100) {
+          set_ctw_int("tyre", 2);
+          victory(macedonians);
+        } else {
+          popup_dialog($S("Unfortunately, you do not have enough Tribute for this."));
+        }
+      } else if (building == 1) {
+        //if (tribute >= 150) {
+          set_ctw_int("tyre", 1);
+          defeat(macedonians);
+        //} else {
+        //  popup_dialog($S("Unfortunately, you do not have enough tribute for this."));
+        //}
+      }
+    }
+  }
+
+  if (find_inactive_build(macedonians, "Dock") > 0 && diff > 2) {
+
+    building = find_inactive_build(macedonians, "Dock");
+
+    for (in_docks = 1; in_docks < 10; in_docks++) {
+      dock = find_inactive_build(macedonians, "Dock");
+      if (dock == building) {
+        break;
+      }
+    }
+  } else in_docks = 0;
+   
+  if (diff > 2 && (old_docks < num_type(macedonians, "Dock") || old_in_docks < in_docks) && num_type(macedonians, "Dock") < 1) {
+    times = in_docks - old_in_docks;
+    for (t = times; t > 0; t--) {
+      building = find_inactive_build(macedonians, "Dock");
+      x = object_position_x(macedonians, building) - 16;
+      y = object_position_y(macedonians, building) - 16;
+      while (map_is_land(x, y)) {
+        if (rand_int(1,2) == 1) {
+          x = x - rand_int(0, 30);
+          y = y - rand_int(0, 30);
+        } else {
+          x = x - rand_int(0, 30);
+          y = y + rand_int(0, 30);
+        }
+      }
+      create_unit_upgrade(tyrians, x, y, "Galley", diff);
+      group_attack_order(tyrians, macedonians, building);
+    }
+
+    times = num_type(macedonians, "Dock") - old_docks;
+    for (t = times; t > 0; t--) {
+      building = find_build(macedonians, "Dock");
+      x = object_position_x(macedonians, building) - 18;
+      y = object_position_y(macedonians, building) - 18;
+      while (map_is_land(x, y)) {
+        if (rand_int(1,2) == 1) {
+          x = x - rand_int(0, 30);
+          y = y - rand_int(0, 30);
+        } else {
+          x = x - rand_int(0, 30);
+          y = y + rand_int(0, 30);
+        }
+      }
+      if (diff < 3) {
+        create_unit_upgrade(tyrians, x, y, "Galley", diff);
+      }
+      else if (diff > 2 && diff < 5) {
+        create_unit_upgrade(tyrians, x, y, "Galley", diff + 2);
+      }
+      else {
+        create_unit_upgrade(tyrians, x, y, "Galley", diff * 2);
+      }
+      group_attack_order(tyrians, macedonians, building);
+    }
+  }
+
+  old_in_docks = in_docks;
+  old_docks = num_type(macedonians, "Dock");
+
+  //send out the tyrian marines!
+ // if (timer_expired("marines")) {
+    //for (n = 0; n < (diff - 3) * 2; n++) {
+     // unit = find_military(tyrians);
+     // city_name = find_capital(macedonians);
+     // building = find_city_id(city_name);
+     // x = object_position_x(macedonians, building);
+     // y = object_position_y(macedonians, building);
+     // unit_attack_to_order(tyrians, unit, x, y);
+    //}  
+    //if (time_earlier_than(10)) set_timer("marines", 240);
+  //}  
+
+  trigger (object_near_build(macedonians, alex, tyrians, tyre_temple, 3)) {
+    popup_dialog($S("Message from you Advisor: Now that you have visited the Tyrians' Temple, they have no choice but to proclaim you King."));
+    victory(macedonians);
+  }
+
+  trigger friend_navy(timer_expired("navy_friend")) {
+    create_unit_upgrade(macedonians, 175, 15, "galley", diff);
+    create_unit_in_group(macedonians, 175, 15, "bark", diff);
+    create_unit_in_group(macedonians, 175, 15, "fire raft", diff);
+    ping(1,1,175,17);
+    popup_dialog($S("Our naval forces have finally arrived to join us. Let us drive the Phoenicians from the sea."));
+  }
+
+  trigger idle_boats(time_later_than(check)) {
+    for (n = num_type(tyrians, "Galley"); n > 0; n--) {
+      unit = find_unit(tyrians, "Galley");
+      if (is_idle(tyrians, unit)) {
+        building = rand_int(0, x_coords.length - 1);
+        x = x_coords[building];
+        y = y_coords[building];
+        unit_patrol_order(tyrians, unit, x, y);
+      }
+    }
+    for (n = num_type(tyrians, "Bark"); n > 0; n--) {
+      unit = find_unit(tyrians, "Galley");
+      if (is_idle(tyrians, unit)) {
+        building = rand_int(0, x_coords.length - 1);
+        x = x_coords[building];
+        y = y_coords[building];
+        unit_patrol_order(tyrians, unit, x, y);
+      }
+    }
+    for (n = num_type(tyrians, "Fire Raft"); n > 0; n--) {
+      unit = find_unit(tyrians, "Galley");
+      if (is_idle(tyrians, unit)) {
+        building = rand_int(0, x_coords.length - 1);
+        x = x_coords[building];
+        y = y_coords[building];
+        unit_patrol_order(tyrians, unit, x, y);
+      }
+    }
+    check++;
+  }
+
+}

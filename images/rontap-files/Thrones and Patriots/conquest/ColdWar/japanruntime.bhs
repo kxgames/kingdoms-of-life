@@ -1,0 +1,25 @@
+ conquest
+{
+
+  static int diff = get_difficulty();
+  static int end_time = get_time_limit();
+  int cur_time;
+
+run_once {
+}
+
+  cur_time = time_min();
+  if (cur_time >= end_time) {
+    defeat(1);
+  }
+
+  trigger (num_cities(1) > 0) {
+    city_name = find_city_name(1);
+    set_capital(1, city_name);
+  }
+
+  if (num_units(1) == 0) {
+    defeat(1);
+  }
+
+}

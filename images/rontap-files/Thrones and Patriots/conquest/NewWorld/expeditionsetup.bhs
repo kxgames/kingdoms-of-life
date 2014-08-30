@@ -1,0 +1,153 @@
+ include "ctw_lib.bhs"
+
+       conquest
+{
+if (get_ctw_campaign() == "The New World") {
+  new_world_rules();
+  new_world_setup();
+}
+else if (get_ctw_campaign() == "The Entire World") {
+  if (get_age() < 3) {
+    barbarian_rules();
+  }
+}
+
+labels {
+}
+  diff = get_difficulty();
+  infrastructure = get_attack_terr_str();
+  x = get_starting_loc_x(1);
+  y = get_starting_loc_y(1);
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  set_time_limit(90);
+
+  add_visibility(2, 1);
+
+  set_type_line_of_sight("Light Horse", 0);
+  set_type_line_of_sight("Horse Archer", 0);
+  set_type_line_of_sight("Cataphract", 0);
+  set_type_line_of_sight("Arquebusiers", 0);
+  set_type_line_of_sight("Pikemen", 0);
+  set_type_line_of_sight("Archers", 0);
+  set_type_line_of_sight("Bombard", 0);
+  set_type_line_of_sight("Supply Wagon", 0);
+  set_type_line_of_sight("General", 0);
+  set_type_line_of_sight("Citizen", 0);
+  set_type_line_of_sight("The Despot", 0);
+  set_type_line_of_sight("The Senator", 0);
+  set_type_line_of_sight("The Monarch", 0);
+  set_type_line_of_sight("The President", 0);
+  set_type_line_of_sight("The Citizen", 0);
+  set_type_line_of_sight("The CEO", 0);
+  set_type_line_of_sight("Merchant", 2);
+  set_type_line_of_sight("Caravan", 2);
+  set_type_line_of_sight("Armed Caravan", 2);
+  set_type_line_of_sight("Armed Merchant", 2);
+  //unique
+  String unique_units[] = ["Heavy Mohawk Spearmen", "Heavy Archers", "Armed Supply Wagon", "Xopilli Atl-Atls", "Eagle Balamob Slingers", "Inti Macemen", "Highlanders", "Continental Marines", "Tercios", "Royal Tercios", "Elite Mohawk Spearmen", "King's Yeomanry", "Eagle Feather Horse", "Musket Horse", "Repeating Rifle Horse", "Horse Grenadier", "Horse Guard Grenadier", "Conquistador", "Elite Conquistador"];
+  for (i = 0; i < unique_units.length; i++) {
+    set_type_line_of_sight(unique_units[i], 0);
+  }
+
+  set_type_line_of_sight("Small City", 2);
+  set_type_line_of_sight("Farm", 2);
+  set_type_line_of_sight("Senate", 2);
+  set_type_line_of_sight("Library", 2);
+  set_type_line_of_sight("University", 2);
+  set_type_line_of_sight("Woodcutter's Camp", 2);
+  set_type_line_of_sight("Mine", 2);
+  set_type_line_of_sight("Lumbermill", 2);
+  set_type_line_of_sight("Granary", 2);
+  set_type_line_of_sight("Smelter", 2);
+  set_type_line_of_sight("Barracks", 2);
+  set_type_line_of_sight("Stable", 2);
+  set_type_line_of_sight("Siege Factory", 2);
+  set_type_line_of_sight("Dock", 2);
+  set_type_line_of_sight("Temple", 2);
+  set_type_line_of_sight("Market", 2);
+
+  create_unit_upgrade(1, x, y, "Javelineers", 1);
+  if (find_nation(1) == "Nubians") {
+    create_unit_upgrade(1, x, y, "Bandeirantes", 1);
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Pikemen", 1);
+  }
+  create_unit_upgrade(1, x, y, "Light Horse", 1);
+  if (find_nation(1) == "Spanish") {
+    create_unit_upgrade(1, x, y, "Conquistador", 2);
+  }
+  else if (find_nation(1) == "Nubians") {
+    if (get_age() == 3) {
+      unit = create_unit(1, x, y, "Dragoon", 3);
+      add_to_group(1, unit);
+    }
+    else {
+      unit = create_unit(1, x, y, "Carabineer", 3);
+      add_to_group(1, unit);
+    }
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Horse Archer", 1);
+  }
+  create_unit_upgrade(1, x, y, "Explorer", 1);
+  create_unit_upgrade(1, x, y, "General", 1);
+
+  //get the proper angle
+  dir = get_conquest_invasion_dir();
+  dir = dir + 180;
+  if (dir >= 360) {
+    dir = dir - 360;
+  }
+  group_jump_move(1, x, y, dir);
+
+  x = get_starting_loc_x(2);
+  y = get_starting_loc_y(2);
+  if (get_ctw_campaign() != "The New World") {
+    if (get_age() > 2) {
+      create_unit_upgrade(2, x, y, "Slingers", 1);
+      create_unit_upgrade(2, x, y, "Hoplites", 2);
+    }
+    else {
+      create_unit(2, x, y, "Barbarian Javelineers", 1);
+      create_unit(2, x, y, "Barbarian Phalanx", 2);
+    }
+    create_unit_upgrade(2, x, y, "Light Horse", 2);
+    create_unit_upgrade(2, x, y, "Horse Archer", 1);
+    //create_unit_upgrade(1, x, y, "Explorer", 1);
+    create_unit_upgrade(2, x, y, "General", 1);
+  }
+  else {
+    create_unit_upgrade(2, x, y, "Javelineers", 1);
+    if (find_nation(2) == "Nubians") {
+      create_unit_upgrade(2, x, y, "Bandeirantes", 1);
+    }
+    else {
+      create_unit_upgrade(2, x, y, "Pikemen", 1);
+    }
+    create_unit_upgrade(2, x, y, "Light Horse", 1);
+    if (find_nation(2) == "Spanish") {
+      create_unit_upgrade(2, x, y, "Conquistador", 2);
+    }
+    else if (find_nation(2) == "Nubians") {
+      if (get_age() == 3) {
+        unit = create_unit(2, x, y, "Dragoon", 3);
+        add_to_group(2, unit);
+      }
+      else {
+        unit = create_unit(2, x, y, "Carabineer", 3);
+        add_to_group(2, unit);
+      }
+    }
+    else {
+      create_unit_upgrade(2, x, y, "Horse Archer", 1);
+    }
+    create_unit_upgrade(2, x, y, "Explorer", 1);
+    create_unit_upgrade(2, x, y, "General", 1);
+  }
+}
+  

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Scott Lewis (Big Huge Games) -->
+<!-- LOCALIZATION: ROOT.name attribute-->
+<!-- LOCALIZATION: SCENARIO.title attributes -->
+<!-- LOCALIZATION: SCENARIO.subtitle attributes -->
+<!-- LOCALIZATION: SCENARIO.year attributes -->
+<!-- LOCALIZATION: INTRO elements -->
+<!-- LOCALIZATION: CONTEXT elements -->
+<!-- LOCALIZATION: CONCEPT elements -->
+<ROOT name="연습 게임" id="tutorial">
+	<!-- title, subtitle, and year attributes need to be localized -->
+	<SCENARIO title="Quick Learn" id="tut4" subtitle="Learn-As-You-Play Introduction" index="0" age="0" difficulty="-1" file=".\scenario\Tutorial5\tut5.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial5\tut5_intro.wav">
+		<CONTEXT/>
+		<CONCEPT>One-on-one battle</CONCEPT>
+		<CONCEPT>Hints and suggestions during play</CONCEPT>
+		<INTRO>This is a free-form scenario where you can play the game at your own pace.  Try to capture the barbarian Capital or conquer 70% of the map.  There will be hints and reminders to help you as you play.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="Boadicea" id="tut0" subtitle="Tutorial 2" index="1" age="1" difficulty="0" file=".\scenario\Tutorial1\tut1.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial1\tut1_intro.wav" year="60">
+		<CONTEXT>Help a queen fight off the Romans to reclaim her nation.</CONTEXT>
+		<CONCEPT>Unit selection</CONCEPT>
+		<CONCEPT>Movement</CONCEPT>
+		<CONCEPT>Map scrolling</CONCEPT>
+		<CONCEPT>Help text</CONCEPT>
+		<CONCEPT>Basic combat</CONCEPT>
+		<INTRO>It is 60 A.D. The Romans have conquered Britain and collect a harsh tribute. When a queen named Boadicea inherits the leadership of Britain, the Romans are offended that they must deal with a female ruler. They march into town, flog Boadicea, and proclaim the entire kingdom theirs. Boadicea seethes for revenge, and her rebellious exploits make her a revered heroine.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="Alfred the Great" id="tut1" subtitle="Tutorial 3" index="2" age="2" difficulty="0" file=".\scenario\Tutorial2\tut2.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial2\loading_intro.wav" year="878">
+		<CONTEXT>Turn back the raging Viking horde.</CONTEXT>
+		<CONCEPT>Constructing and using buildings</CONCEPT>
+		<CONCEPT>Training units</CONCEPT>
+		<CONCEPT>Minimap</CONCEPT>
+		<INTRO>800 years after Boadicea rebelled against the Romans, Britain is savaged by repeated Viking attacks. Alfred, King of Wessex, has been paying tribute to stave off the raiders, but in 878 the Vikings prepare for conquest. After a defeat, Alfred retreats to rebuild his forces and  drive the Vikings away.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="The 100 Years War" id="tut2" subtitle="Tutorial 4" index="3" age="3" difficulty="1" file=".\scenario\Tutorial3\tut3.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial3\tut3_intro.wav" year="1337">
+		<CONTEXT>Invade France.</CONTEXT>
+		<CONCEPT>Library research</CONCEPT>
+		<CONCEPT>Food, Timber, and Metal gathering</CONCEPT>
+		<CONCEPT>Capturing cities</CONCEPT>
+		<CONCEPT>Food, timber, and metal gathering</CONCEPT>
+		<CONCEPT>Unit combat advantages and disadvantages</CONCEPT>
+		<CONCEPT>Repairing buildings</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<CONCEPT>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom. With the death of the French King Charles, the crown of France should legally pass to the king of England. The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim. The English decide to seize their holdings in France by force. The French resist.</CONCEPT>
+		<INTRO>Almost 500 years after Alfred defeats and absorbs the Vikings, Britain is a true united kingdom.  With the death of the French king Charles, the crown of France should legally pass to the king of England.  The French, understandably upset about this turn of events, dig up an obscure law that denies the English claim.  The English decide to seize their holdings in France by force.  The French resist.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="Henry VIII" id="tut3" subtitle="Tutorial 5" index="4" age="4" difficulty="1" file=".\scenario\Tutorial4\tut4.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial4\tut4_intro.wav" year="1513">
+		<CONTEXT>Defend against Scottish raids.</CONTEXT>
+		<CONCEPT>City construction</CONCEPT>
+		<CONCEPT>National borders</CONCEPT>
+		<CONCEPT>Knowledge and Wealth gathering</CONCEPT>
+		<CONCEPT>Merchants and rare resources</CONCEPT>
+		<INTRO>In 1509, following a century of turmoil, England has stabilized under the rule of the legendary King Henry VIII. During his 38-year reign, he will marry six times, break with the Catholic Church, and fight several wars. Early in Henry's reign, the King of Scotland invades England. To secure his throne, Henry must master the rapidly changing nature of warfare while effectively running his country.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="Battle of Britain" id="tut5" subtitle="Tutorial 6" index="5" age="5" difficulty="2" file=".\scenario\Tutorial6\tut6.scx" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial6\tut6_intro.wav" year="1940">
+		<CONTEXT>Battle the Germans in Britain's finest hour.</CONTEXT>
+		<CONCEPT>Diplomacy</CONCEPT>
+		<CONCEPT>Air combat</CONCEPT>
+		<CONCEPT>Generals</CONCEPT>
+		<CONCEPT>Oil</CONCEPT>
+		<CONCEPT>Enhancement buildings</CONCEPT>
+		<CONCEPT>Formations</CONCEPT>
+		<INTRO>The First World War has left Europe decimated and bankrupt. In Germany, domestic upheavals trigger the rise of extreme nationalism, and the German war machine is rebuilt. When it becomes clear that Germany cannot be thwarted by diplomacy, a reluctant Britain declares war along with its ally, France. For the second time in a quarter-century, a world war erupts, one that is destined to be more terrible than the first.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="게임의 기초" id="tut4" subtitle="기초 연습 게임" index="0" age="0" difficulty="-1" file=".\scenario\Tutorial5\tut5.sce" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial5\tut5_intro.wav">
+		<CONTEXT/>
+		<CONCEPT>일대일 전투</CONCEPT>
+		<CONCEPT>게임 중의 힌트와 제안</CONCEPT>
+		<INTRO>Rise of Nations의 기본적인 게임 진행 방법을 배울 수 있는 자유로운 형태의 시나리오입니다. 바바리안의 수도를 점령하거나 지도의 70% 이상을 정복하십시오. 게임 중에 여러 가지 도움말과 힌트를 드리겠습니다.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="부디카" id="tut0" subtitle="연습 게임 2" index="1" age="1" difficulty="0" file=".\scenario\Tutorial1\tut1.sce" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial1\tut1_intro.wav" year="60">
+		<CONTEXT>여왕과 함께 로마와 싸워 조국을 되찾으십시오.</CONTEXT>
+		<CONCEPT>유닛 선택</CONCEPT>
+		<CONCEPT>이동</CONCEPT>
+		<CONCEPT>지도 스크롤</CONCEPT>
+		<CONCEPT>도움말</CONCEPT>
+		<CONCEPT>기본 전투</CONCEPT>
+		<INTRO>때는 A.D. 60년. 브리튼을 복속한 로마 제국은 가혹한 조공을 거두고 있었다. 그러나 부디카 여왕이 왕위를 계승하자 로마 제국은 여왕과의 관계에 불편한 심기를 드러낸다. 이에 로마 제국은 군대를 파견해 부디카를 폐위시키고 브리튼이 로마의 영토임을 선포한다. 부디카는 복수의 칼날을 세우고 반로마 항쟁을 벌이며 브리튼의 구세주로 떠올랐다.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="알프레드 대왕" id="tut1" subtitle="연습 게임 3" index="2" age="2" difficulty="0" file=".\scenario\Tutorial2\tut2.sce" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial2\loading_intro.wav" year="878">
+		<CONTEXT>난폭한 바이킹족을 퇴각시키십시오.</CONTEXT>
+		<CONCEPT>건물 건설 및 사용</CONCEPT>
+		<CONCEPT>유닛 훈련</CONCEPT>
+		<CONCEPT>미니맵</CONCEPT>
+		<INTRO>부디카 여왕이 로마 제국에 반기를 들고 봉기한 지 800년이 지난 후 브리튼은 바이킹의 계속되는 약탈에 시달리고 있었다. 웨섹스의 왕 알프레드는 약탈을 막기 위해 공물을 바쳤지만 서기 878년 결국 바이킹은 침공을 시작한다. 첫 전투에서 패해 퇴각한 알프레드는 군대를 정비하고 반격의 기회를 노린다.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="백년 전쟁" id="tut2" subtitle="연습 게임 4" index="3" age="3" difficulty="1" file=".\scenario\Tutorial3\tut3.sce" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial3\tut3_intro.wav" year="1337">
+		<CONTEXT>프랑스를 침공하십시오.</CONTEXT>
+		<CONCEPT>라이브러리 연구</CONCEPT>
+		<CONCEPT>식량, 목재 및 금속 수집</CONCEPT>
+		<CONCEPT>도시 점령</CONCEPT>
+		<CONCEPT>건물 수리</CONCEPT>
+		<CONCEPT>유닛의 전투 우위와 열세</CONCEPT>
+		<CONCEPT>해상로를 통해 유닛 수송</CONCEPT>
+		<INTRO>알프레드 대왕이 바이킹을 물리친 지 500년이 지나서야 브리튼은 진정한 연합 왕국의 모습을 갖추기 시작한다. 프랑스의 국왕 샤를 4세가 죽자 영국은 프랑스의 왕권을 물려받을 권리가 있음을 주장한다. 이에 프랑스는 이미 사문화된 법률을 근거로 들며 영국의 주장에 강하게 반발한다. 이에 영국이 무력으로 프랑스 내 영지를 지키려 하면서 프랑스와의 전쟁이 시작된다.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="헨리 8세" id="tut3" subtitle="연습 게임 5" index="4" age="4" difficulty="1" file=".\scenario\Tutorial4\tut4.sce" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial4\tut4_intro.wav" year="1513">
+		<CONTEXT>스코틀랜드인의 습격을 막아내십시오.</CONTEXT>
+		<CONCEPT>도시 건설</CONCEPT>
+		<CONCEPT>국경</CONCEPT>
+		<CONCEPT>지식과 재화 축적</CONCEPT>
+		<CONCEPT>상인과 희귀 자원</CONCEPT>
+		<INTRO>백년 전쟁으로 혼돈에 휩싸였던 잉글랜드는 서기1509년 헨리 8세가 왕위에 오르면서 차차 안정을 회복한다. 헨리 8세는 38년 간의 재위 기간 중에 가톨릭과 결별하고 여섯 번의 결혼을 했으며 수 차례의 전쟁을 치렀다. 재임 초기에는 스코틀랜드의 왕이 잉글랜드를 침략해 왔다. 헨리 8세는 빠르게 변해가는 전술에 적응하여 자신의 국가를 지켜 내야만 한다.</INTRO>
+	</SCENARIO>
+	<SCENARIO title="영국 본토 항공전" id="tut5" subtitle="연습 게임 6" index="5" age="5" difficulty="2" file=".\scenario\Tutorial6\tut6.sce" image=".\art\wrapper_pieces_04.tga" sound=".\scenario\Tutorial6\tut6_intro.wav" year="1940">
+		<CONTEXT>최전성기의 영국을 지휘하여 독일과 전투를 벌이십시오.</CONTEXT>
+		<CONCEPT>외교</CONCEPT>
+		<CONCEPT>공중전</CONCEPT>
+		<CONCEPT>장군</CONCEPT>
+		<CONCEPT>석유</CONCEPT>
+		<CONCEPT>생산 보조 건물</CONCEPT>
+		<CONCEPT>대형</CONCEPT>
+		<INTRO>제1차 세계대전은 유럽 전체에 막대한 인명과 재산 피해를 입힌 채 막을 내렸다. 그러나 극단적인 민족주의 물결에 휩싸인 독일은 다시 한번 전쟁을 일으키려 하고 있었다. 외교적으로 독일을 설득할 수 없다고 판단한 영국은 프랑스와 함께 독일에 선전포고를 하게 된다. 불과 사반 세기도 지나지 않아 다시 일어난 세계대전이지만 전보다 훨씬 끔찍한 결과를 가져올 것이라는 점만은 분명했다.</INTRO>
+	</SCENARIO>
+</ROOT>

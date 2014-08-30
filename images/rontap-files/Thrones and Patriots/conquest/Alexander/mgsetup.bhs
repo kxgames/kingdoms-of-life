@@ -1,0 +1,125 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+
+  labels {
+  }
+  diff = get_difficulty();
+
+  for (i = 2; i < 9; i++) {
+    place_building_upgrade(i, "Senate", find_capital(i));
+    disable_type_by_tribe("Senate", find_nation(i));
+  }
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  set_nation_name("Russians", $S("Greeks"));
+
+  set_good(1, "Metal", 500);
+
+  /////////////////////////////////////////////////////
+  //create alexander's army
+  city_id = find_city_id("Apollonia");
+  x = object_position_x(1, city_id);
+  y = object_position_y(1, city_id);
+
+  create_unit_upgrade(1, x, y, "Javelineers", 4);
+  create_unit_upgrade(1, x, y, "Phalanx", 4);
+  create_unit_upgrade(1, x, y, "Archers", 6);
+  create_unit_upgrade(1, x, y, "Light Horse", 4);
+  create_unit_upgrade(1, x, y, "Cataphract", 15);
+  create_unit_upgrade(1, x, y, "Catapult", 2);
+  create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+  create_unit_upgrade(1, x, y, "Alexander", 1);
+  create_unit_upgrade(1, x, y, "Scout", 1);
+
+  create_unit_upgrade(1, x-30, y-15, "Galley", 2);
+  create_unit_in_group(1, x-30, y-15, "Dromon", 4);
+  /////////////////////////////////////////////////////
+  city_id = find_city_id("Taras");
+  x = object_position_x(2, city_id);
+  y = object_position_y(2, city_id);
+
+  create_unit_upgrade(2, x, y, "Javelineers", 2*diff);
+  create_unit_in_group(2, x, y, "Light Horse", diff/2);
+  create_unit_in_group(2, x, y, "Supply Wagon", 1);
+  create_unit_in_group(2, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Metapontion");
+  x = object_position_x(3, city_id);
+  y = object_position_y(3, city_id);
+
+  create_unit_in_group(3, x, y, "Archers", 2*diff);
+  create_unit_in_group(3, x, y, "Horse Archer", diff/2);
+  create_unit_in_group(3, x, y, "Supply Wagon", 1);
+  create_unit_in_group(3, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Herakleia");
+  x = object_position_x(4, city_id);
+  y = object_position_y(4, city_id);
+
+  create_unit_in_group(4, x, y, "Phalanx", 2*diff);
+  create_unit_in_group(4, x, y, "Cataphract", diff/2);
+  create_unit_in_group(4, x, y, "Supply Wagon", 1);
+  create_unit_in_group(4, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Syrus");
+  x = object_position_x(5, city_id);
+  y = object_position_y(5, city_id);
+
+  create_unit_in_group(5, x, y, "Archers", 2*diff);
+  create_unit_in_group(5, x, y, "Light Horse", diff/2);
+  create_unit_in_group(5, x, y, "Supply Wagon", 1);
+  create_unit_in_group(5, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Kroton");
+  x = object_position_x(6, city_id);
+  y = object_position_y(6, city_id);
+
+  create_unit_in_group(6, x, y, "Phalanx", 2*diff);
+  create_unit_in_group(6, x, y, "Horse Archer", diff/2);
+  create_unit_in_group(6, x, y, "Supply Wagon", 1);
+  create_unit_in_group(6, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Pandosia");
+  x = object_position_x(7, city_id);
+  y = object_position_y(7, city_id);
+
+  create_unit_in_group(7, x, y, "Javelineers", 2*diff);
+  create_unit_in_group(7, x, y, "Cataphract", diff/2);
+  create_unit_in_group(7, x, y, "Supply Wagon", 1);
+  create_unit_in_group(7, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+
+  city_id = find_city_id("Lokroi");
+  x = object_position_x(8, city_id);
+  y = object_position_y(8, city_id);
+
+  create_unit_upgrade(8, x, y, "Javelineers", 2*diff);
+  create_unit_in_group(8, x, y, "Cataphract", diff/2);
+  create_unit_in_group(8, x, y, "Supply Wagon", 1);
+  create_unit_in_group(8, x, y, "General", 1);
+  /////////////////////////////////////////////////////
+
+  gain_tech(1, "Military");
+
+  if (diff < 4) {
+    destroy_building_type(2, "Tower");
+    destroy_building_type(3, "Tower");
+    destroy_building_type(4, "Tower");
+    destroy_building_type(5, "Tower");
+    destroy_building_type(6, "Tower");
+    destroy_building_type(7, "Tower");
+    destroy_building_type(8, "Tower");
+  }
+}

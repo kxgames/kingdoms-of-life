@@ -1,0 +1,201 @@
+ conquest
+{
+
+  labels {
+    AMERICANS,
+    COLOMBIANS,
+    REBELS = 7,
+  }
+
+  static int diff = get_difficulty();
+  static int end_time = get_time_limit();
+  int cur_time;
+  static int who;
+  static int num_merchants = num_type(REBELS, "Merchant");
+  static int value = 25;
+  int num_build;
+  static int unit_cap = 200;
+
+  run_once {
+    unit_cap = 200 - (6-diff)*20;
+    add_objective_text(parse("Rebel Merchant Huts remaining: $NUM0", num_merchants), 1, "");
+    if (num_type(REBELS, "Barracks") > 0) {
+      set_timer("infantry", (int)(value/num_type(REBELS, "Barracks")));
+    }
+    if (num_type(REBELS, "Stable") > 0) {
+      set_timer("jeep", (int)(value/num_type(REBELS, "Stable")));
+    }
+    if (num_type(REBELS, "Siege Factory") > 0) {
+      set_timer("anti-air", (int)(value/num_type(REBELS, "Siege Factory")));
+    }
+    if (num_type(REBELS, "Airbase") > 0) {
+      set_timer("heli", (int)(value/num_type(REBELS, "Airbase")));
+    }
+    if (num_type_upgrade(REBELS, "Dock") > 0) {
+      set_timer("boat", (int)(value/num_type_upgrade(REBELS, "Dock")));
+    }
+    if (num_type_upgrade(REBELS, "Fort") > 0) {
+      set_timer("militia", (int)(value/num_type_upgrade(REBELS, "Fort")));
+    }
+    diplomacy_set_wait(REBELS);
+    set_timer("no_cities", 1);
+    set_timer("part_attack", ((7-diff)*10)+120);
+    set_timer("idle_sweeper", 10);
+  }
+
+  set_population_cap(REBELS, unit_cap);
+  
+  if (timer_expired("idle_sweepeer")) {
+    set_timer("idle_sweeper", 10);
+    for (i = 0; i < num_units(REBELS); i++) {
+      unit = find_unit(REBELS, "");
+      if (unit_category(REBELS, unit) != "Air") {
+        if (is_idle(REBELS, unit)) {
+          building = find_build(REBELS, "");
+          x = object_position_x(REBELS, building);
+          y = object_position_y(REBELS, building);
+          unit_patrol_order(REBELS, unit, x, y);
+        }
+      }
+    }
+  }
+  
+  if (timer_expired("part_attack")) {
+    set_timer("part_attack", 45-diff);
+    for (i = 0; i < num_buildings(REBELS); i++) {
+      if (num_units(REBELS) < unit_cap) {
+        building = find_build(REBELS, "");
+        x = object_position_x(REBELS, building) + 2;
+        y = object_position_y(REBELS, building);
+        unit = create_unit_upgrade(REBELS, x, y, "Partisan", 1);
+        building = find_build(REBELS, "");
+        x = object_position_x(REBELS, building);
+        y = object_position_y(REBELS, building);
+        unit_patrol_order(REBELS, unit, x, y);
+      }
+    }
+  }
+
+  if (is_defeated(COLOMBIANS)) {
+    defeat(AMERICANS);
+  }
+  
+  if (timer_expired("no_cities")) {
+    set_timer("no_cities", 1);
+    building = find_inactive_build(REBELS, "Small City");
+    if (building > 0) {
+      destroy_building(REBELS, building);
+    }
+  }
+    
+
+  if (offer_made(AMERICANS, REBELS)) {
+    reject_offer(REBELS, AMERICANS);
+  }
+  
+  trigger guerilla(timer_expired("infantry")) {
+    num_build = num_type_upgrade(REBELS, "Barracks");
+    if (num_build > 0) {
+      set_timer("infantry", (int)(value/num_build));
+      enable_trigger("guerilla");
+      for (i = 0; i < num_build; i++) {
+        building = find_build(REBELS, "Barracks");
+        //x = object_position_x(REBELS, building) + 2;
+        //y = object_position_y(REBELS, building);
+        train_unit_at_with_cost(REBELS, 1, "Recoiless Missile", building);
+      }
+    }
+  }
+  
+  trigger patrol_jeep(timer_expired("jeep")) {
+    num_build = num_type_upgrade(REBELS, "Stable");
+    if (num_build > 0) {
+      set_timer("jeep", (int)(value/num_build));
+      enable_trigger("patrol_jeep");
+      for (i = 0; i < num_build; i++) {
+        building = find_build(REBELS, "Stable");
+       // x = object_position_x(REBELS, building) + 2;
+        //y = object_position_y(REBELS, building);
+        train_unit_at_with_cost(REBELS, 1, "Humvee", building);
+      }
+    }
+  }  
+  
+  trigger missile(timer_expired("anti-air")) {
+    num_build = num_type_upgrade(REBELS, "Siege Factory");
+    if (num_build > 0) {
+      set_timer("anti-air", (int)(value/num_build));
+      enable_trigger("missile");
+      for (i = 0; i < num_build; i++) {
+        building = find_build(REBELS, "Siege Factory");
+        //x = object_position_x(REBELS, building) + 2;
+        //y = object_position_y(REBELS, building);
+        train_unit_at_with_cost(REBELS, 1, "Anti-Air Missile", building);
+      }
+    }
+  }  
+  
+  trigger copter(timer_expired("heli")) {
+    num_build = num_type(REBELS, "Airbase");
+    if (num_build > 0) {
+      set_timer("heli", (int)(value/num_build));
+      enable_trigger("copter");
+      for (i = 0; i < num_build; i++) {
+        building = find_build(REBELS, "Airbase");
+        //x = object_position_x(REBELS, building) + 2;
+        //y = object_position_y(REBELS, building);
+        train_unit_at_with_cost(REBELS, 1, "Helicopter", building);
+      }
+    }
+  }  
+  
+  trigger patrol_boat(timer_expired("boat")) {
+    num_build = num_type_upgrade(REBELS, "Dock");
+    if (num_build > 0) {
+      set_timer("boat", (int)(value/num_build));
+      enable_trigger("patrol_boat");
+      for (i = 0; i < num_build; i++) {
+        building = find_build(REBELS, "Dock");
+        //x = object_position_x(REBELS, building);
+        //y = object_position_y(REBELS, building) - 2;
+        train_unit_at_with_cost(REBELS, 1, "Patrol Boat", building);
+      }
+    }
+  }  
+  
+  trigger angryness(timer_expired("militia")) {
+    num_build = num_type_upgrade(REBELS, "Fort");
+    if (num_build > 0) {
+      set_timer("militia", (int)(value/num_build));
+      enable_trigger("angryness");
+      for (i = 0; i < num_build; i++) {
+        building = find_build(REBELS, "Fort");
+       //x = object_position_x(REBELS, building) + 2;
+        //y = object_position_y(REBELS, building);
+        train_unit_at_with_cost(REBELS,1, "Militia", building);
+      }
+    }
+  }  
+
+  cur_time = time_min();
+  if (cur_time >= end_time) {
+    defeat(AMERICANS);
+  }
+  
+  for (i = 0; i < num_type(REBELS, "Citizen"); i++) {
+    unit = find_unit(REBELS, "Citizen");
+    citizen_to_militia(REBELS, unit);
+  }
+  
+  if (num_type(REBELS, "Merchant") < num_merchants) {
+    num_merchants = num_type(REBELS, "Merchant");
+    change_objective_text(1, parse("Rebel Merchant Huts remaining: $NUM0", num_merchants));
+    if (num_type(REBELS, "Merchant") == 0) {
+      victory(AMERICANS);
+    }
+    
+  }
+  
+  
+
+}

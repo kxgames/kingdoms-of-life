@@ -1,0 +1,143 @@
+include "ctw_lib.bhs"
+
+String conquest capitalize_it(String nation);
+
+conquest
+{
+
+  labels {
+    PLAYER,
+    ENEMY,
+    TRAPPERS = 8,
+  }
+  
+  new_world_rules();
+
+  static int fur_trappers[] = [-1,-1,-1,-1,-1];
+
+  static int diff = get_difficulty();
+
+  static int end_time = get_time_limit();
+  int cur_time;
+  
+  static int fur_contact;
+  static String nation_name = find_nation(PLAYER);
+  static int num_food = 500;
+  
+  run_once {
+    if (diff < 3) {
+      num_food = 300;
+    }
+    new_world_setup();
+    for (i = 0; i < fur_trappers.length; i++) {
+      fur_trappers[i] = find_unit(TRAPPERS, "Merchant");
+    }      
+    disable_trigger("ask_again");
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) defeat(PLAYER);
+
+  if (is_defeated(2)) {
+    victory(1);
+  }
+  
+  trigger fur_seen() {
+    for (i = 0; i < fur_trappers.length; i++) {
+      if (is_seen(PLAYER, TRAPPERS, fur_trappers[i])) {
+        fur_contact = 1;
+      }
+    }
+    if (fur_contact == 0) {
+      enable_trigger("fur_seen");
+    }
+  }
+
+  trigger fur_guy(fur_contact == 1) {
+    fur_contact = popup_choice(parse("We have made contact with a group of Merchants, the Yukon Traders. They are able to brave this cold climate and would like to offer their services for the price of $NUM0 Food.", num_food), $S("Pay"), $S("No thanks"));
+    if (fur_contact == 1) {
+      if (num_type(1, "Food") >= num_food) {
+        enable_type_by_tribe("Merchant", nation_name, "Market", 0, 1);
+        gain_upgrade(PLAYER, "Merchant");
+        take_good(1, "Food", num_food);
+        //enable_type_by_tribe("Merchant", nation_name, "Large City", 0, 1);
+        popup_dialog($S("We are now able to train Yukon Traders at our Markets."));
+      }
+      else {
+        popup_dialog($S("Unfortunately you do not have enough Food at present. However, once you do, select one of the Yukon Traders and he will offer you their service again."));
+        enable_trigger("ask_again");
+        clear_selection();
+      }
+    }
+    else {
+      popup_dialog($S("If you change your mind, select one of the Yukon Traders and he will offer you their service again."));
+      enable_trigger("ask_again");
+      clear_selection();
+    }
+  }
+
+  trigger ask_again(object_selected(TRAPPERS, fur_trappers[4]) || object_selected(TRAPPERS, fur_trappers[3]) || object_selected(TRAPPERS, fur_trappers[0]) || object_selected(TRAPPERS, fur_trappers[1]) || object_selected(TRAPPERS, fur_trappers[2])) {
+    fur_contact = popup_choice(parse("We have made contact with a group of Merchants, the Yukon Traders. They are able to brave this cold climate and would like to offer their services for the price of $NUM0 Food.", num_food), $S("Pay"), $S("No thanks"));
+    if (fur_contact == 1) {
+      if (num_type(1, "Food") >= num_food) {
+        nation_name = capitalize_it(nation_name);
+        enable_type_by_tribe("Merchant", nation_name, "Market", 0, 1);
+        gain_upgrade(PLAYER, "Merchant");
+        take_good(1, "Food", num_food);
+        //enable_type_by_tribe("Merchant", nation_name, "Large City", 0, 1);
+        popup_dialog($S("We are now able to train Yukon Traders at our Markets."));
+      }
+      else {
+        popup_dialog($S("Unfortunately you do not have enough Food at present. However, once you do, select one of the Yukon Traders and he will offer you their service again."));
+        enable_trigger("ask_again");
+        clear_selection();
+      }
+    }
+    else {
+      popup_dialog($S("If you change your mind, select one of the Yukon Traders and he will offer you their service again."));
+      enable_trigger("ask_again");
+      clear_selection();
+    }
+  }
+
+}
+
+String conquest capitalize_it(String nation)
+{
+  if (nation == "Aztecs") {
+    return "Aztecs";
+  }
+  else if (nation == "Maya") {
+    return "Maya";
+  }
+  else if (nation == "Inca") {
+    return "Inca";
+  }
+  else if (nation == "Nubians") {
+    return "Portuguese";
+  }
+  else if (nation == "Spanish") {
+    return "Spanish";
+  }
+  else if (nation == "French") {
+    return "French";
+  }
+  else if (nation == "British") {
+    return "British";
+  }
+  else if (nation == "Iroquois") {
+    return "Iroquois";
+  }
+  else if (nation == "Lakota") {
+    return "Lakota";
+  }
+  else if (nation == "Americans") {
+    return "Americans";
+  }
+  else if (nation == "Dutch") {
+    return "Dutch";
+  }
+  else {
+    return "Error";
+  }
+}

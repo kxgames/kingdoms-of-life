@@ -1,0 +1,553 @@
+scenario
+{
+
+  static int diff = get_difficulty();
+  
+  static String ag_name = "Agrianian";
+
+  //nation ID numbers
+  static int macedonians = 1;
+  static int agrianians = 2;
+  static int illyrians = 3;
+  static int autaratians = 5;
+  static int getae = 4; //thracian horse nomads
+  static int triballians = 6; 
+  
+  static int getae_cost = 100 + diff * 100;
+  
+  static int no_ill = 0;
+ 
+  String ag_cap = find_capital(agrianians);
+  static int capital_id = find_city_id(ag_cap);
+
+
+  String mace = find_capital(macedonians);
+  static int mace_cap = find_city_id(mace);
+
+  String mace2 = find_city_with_num(macedonians, 2);
+  static int mace_two = find_city_id(mace2);
+
+  static int whole_sale = find_unit(triballians, "Merchant");
+
+  static int map_size = get_map_size();
+
+  //thracian resource collection variables  
+  int citizens;
+  int food_prod;
+  int timber_prod;
+  int wealth_prod;
+  static int rate = 10;
+  static int num_stables = num_type(getae, "Stables");
+  
+  static int papy_merchant = find_unit(triballians, "Merchant");
+  static int papy_x = object_position_x(triballians, papy_merchant);
+  static int papy_y = object_position_y(triballians, papy_merchant);
+
+  //thracian birthrate variables
+  static float birth_rate;
+  static int babies;
+
+  //thracian building variables
+  static String build_this;
+
+  //thracian unit variables
+  String pop_unit;
+  int rand_unit;
+
+  //thracian idle variables
+  int nomad_var;
+
+  //thracian boundaries
+  //static int get_x_high = map_size;
+  //static int get_x_low = 298;
+  //static int get_y_high = 26;
+  //static int get_y_low = 0;
+  static int get_x_high = 67;
+  static int get_x_low = 2;
+  static int get_y_high = 278;
+  static int get_y_low = 2;
+
+  int nation;
+  int unit;
+  int building;
+  String city_name;
+  int x;
+  int y;
+  int income;
+
+  static int unit_cap = 20;
+  static int max_military_build_get = num_military_buildings(getae);
+
+  static int cur_time = time_min();
+
+  static int end_time = get_time_limit();
+  static String agr_name = "Agrianian";
+
+  run_once {
+    //disable_production_ai(autaratians);
+    //disable_all_unit_ai(autaratians);
+    disable_combat_ai(autaratians);
+    enable_all_triggers();
+    //enable_trigger("checks");
+
+    enable_trigger("destroy_get_build");
+    enable_trigger("new_babies");
+    enable_trigger("new_thrace");
+
+    disable_trigger("ag_troops_go");
+    disable_trigger("papy");
+    disable_trigger("pay_papy");
+    disable_trigger("get_maps");
+    disable_trigger("bye_merchant");
+    disable_trigger("add_merchant");
+    disable_trigger("try_to_pay");
+    disable_trigger("papy_dead");
+
+    //set thracian birth rates
+    //set thracian birth rates
+    if (diff >= 5) birth_rate = 0.7;
+    else if (diff <= 4) birth_rate = 0.5;
+    else if (diff <= 2) birth_rate = 0.3;
+
+    //set thracian nation powers timers
+    set_timer("thrace_babies", 235);
+    set_timer("thrace_resources", 240);
+    set_timer("thrace_building", 270);
+    set_timer("thrace_units", 255);
+    set_timer("thrace_idle_orders", 215);
+
+    set_timer("check_up", 240);
+    if (diff < 4) {
+      set_timer("ill_raid", 360);
+    }
+
+    disable_take_attrition(triballians);
+    disable_trigger("count_stables");
+
+    ctw_add_objective($S("Free the Agrianians (Blue) capital of Agrianian from the Queen Teuta (Yellow)."), "free_agry", "");
+    ctw_add_objective($S("Destroy the rebel King Cleitus (Purple)."), "destroy_illy", "");
+
+    for (nation = 3; nation < 6; nation++) {
+      city_name = find_capital(nation);
+      building = find_city_id(city_name);
+      set_seen(macedonians, nation, building);
+      ping_object(macedonians, nation, nation, building);
+    }
+    no_ill = 1;
+
+  }
+
+  trigger (city_captured_by(autaratians, macedonians, agr_name)) {
+    building = find_city_id(agr_name);
+    building = switch_teams(autaratians, macedonians, building);
+    switch_teams(agrianians, autaratians, building);
+    ctw_objective_complete("free_agry");
+  }
+
+  cur_time = time_min();
+
+  if (cur_time >= end_time) defeat(1);
+ 
+  if (timer_expired("ill_raid") && !is_defeated(illyrians) && !is_defeated(agrianians)) {
+    if (diff < 3) {
+      if (population(illyrians) < 60) {
+        set_timer("ill_raid", rand_int(75,120));
+      }
+    } else if (diff < 5) {
+      if (population(illyrians) < 70) {
+        set_timer("ill_raid", rand_int(60, 120));
+      }
+    } else {
+      if (population(illyrians) < 80) {
+        set_timer("ill_raid", rand_int(45, 100));
+      }
+    }
+    city_name = find_capital(illyrians);
+    building = find_city_id(city_name);
+    x = object_position_x(illyrians, building);
+    y = object_position_y(illyrians, building);
+    create_unit_upgrade(illyrians, x - 2, y, "barbarian javelineers", 2);
+    create_unit_in_group(illyrians, x - 2, y, "barbarian archers", 2);
+    create_unit_in_group(illyrians, x - 2, y, "barbarian phalanx", 2);
+    if (!is_defeated(agrianians)) {
+      x = object_position_x(agrianians, capital_id);
+      y = object_position_y(agrianians, capital_id);
+      group_attack_to_order(illyrians, x, y);
+    }
+    else {
+      x = object_position_x(macedonians, mace_cap);
+      y = object_position_y(macedonians, mace_cap);
+      group_attack_to_order(illyrians, x, y);
+    }
+    set_timer("help_us", 103);
+  }
+
+  trigger (have_contact(macedonians, getae) || is_defeated(illyrians) && is_defeated(autaratians)) {
+    popup_dialog($S("You have encountered Getae (Green) horse nomads. The only way to eliminate them is to destroy their Stables. Find their Stables, and destroy them."));
+    num_stables = num_type(getae, "Stable");
+    ctw_add_objective(parse("Find the $NUM0 Getae (Green) Stables and destroy them.", num_stables), "kill_get", "");
+    enable_trigger("add_merchant")
+    building = rand_int(120,240);
+    set_timer("papy_add", building);
+    enable_trigger("count_stables");
+  }
+  
+  trigger count_stables(num_stables > num_type(getae, "Stable")) {
+    num_stables = num_type(getae, "Stable");
+    ctw_change_objective_text("kill_get", parse("Find the $NUM0 Getae (Green) Stables and destroy them.", num_stables));
+    enable_trigger("count_stables");  
+  }
+  
+  trigger add_merchant(timer_expired("papy_add")) {
+    force_transport_ability(triballians);
+    unit = create_unit(triballians, 274, 154, "Merchant", 1);
+    city_name = find_city_with_num(macedonians, 2);
+    building = find_city_id(city_name);
+    x = 217; // object_position_x(macedonians, building) + 3;
+    y = 128; //object_position_y(macedonians, building);
+    whole_sale = unit;
+    unit_move_order(triballians, unit, x, y);
+    enable_trigger("papy")    
+  }
+
+  if (num_units(getae) == 0 && num_buildings(getae) > 0) {
+    for (n = num_buildings(getae); n > 0; n--) {
+      building = find_build(getae, "Stable");
+      x = object_position_x(getae, building);
+      y = object_position_y(getae, building);
+      if (num_units(getae) < diff*10) {
+        create_unit_upgrade(getae, x + 2, y, "light horse", 1);
+      }
+    }
+  }
+
+  trigger papy(object_near_build(triballians, whole_sale, macedonians, mace_two, 7)) {
+    center_camera_on(macedonians, mace_two);
+    building = popup_choice(parse("A Scythian Merchant says he can secure peace with the Getae for us for $NUM0 Wealth. What should we do: pay him, tell him to wait, or just kill him and take his goods?", getae_cost), $S("Pay him"), $S("Wait"), $S("Kill him"));
+    if (building == 0) {
+      enable_trigger("pay_papy");
+      set_timer("pay_up", 1);
+    } else if (building == 1) {
+      popup_dialog($S("Message from the Merchant: Don't have enough Wealth? That is okay, I will wait near Amphipolis. Just select me to talk to me."));
+      clear_selection();
+      enable_trigger("try_to_pay");
+    } else {
+      declare_war(macedonians, triballians);
+      enable_trigger("papy_dead");
+    }
+  }
+
+  trigger pay_papy(timer_expired("pay_up")) {
+    if (num_type(macedonians, "Wealth") >= getae_cost) {
+      take_good(macedonians, "Wealth", getae_cost);
+      print_game_msg(parse("You have given the Scythian Merchant $NUM0 Wealth!", getae_cost));
+      popup_dialog($S("Message from the Merchant: It was a pleasure doing business with you. May your new friendship bring you glory."));
+      //unit_move_order(triballians, whole_sale, 274, 154);
+      enable_trigger("bye_merchant");
+      set_timer("die_merchant", 60);
+      make_peace(macedonians, getae);
+      make_peace(agrianians, getae);
+      disable_take_attrition(getae);
+      ctw_remove_objective("kill_get");
+      set_ctw_int("papy_killed", 2);
+      disable_trigger("papy_dead");
+    } else {
+      popup_dialog($S("Message from the Merchant: It does not seem like you have enough Wealth to pay me. That is okay, I will wait here at Amphipolis while you find enough to pay me. Just select me to talk to me."));
+      clear_selection();
+      enable_trigger("try_to_pay");
+    }
+  }
+
+  trigger bye_merchant(is_object_at(triballians, whole_sale, 274, 154) || timer_expired("die_merchant")) {
+    kill_unit_anim(triballians, whole_sale, 1);
+    //defeat(triballians);
+  }
+
+  trigger try_to_pay(object_selected(triballians, whole_sale)) {
+    building = popup_choice(parse("A Scythian Merchant says he can secure an alliance with the Getae for us for $NUM0 Wealth. What should we do: pay him, tell him to wait, or just kill him and take his goods?", getae_cost), $S("Pay him"), $S("Wait"), $S("Kill him"));
+    if (building == 0) {
+      enable_trigger("pay_papy");
+      set_timer("pay_up", 1);
+    } else if (building == 1) {
+      popup_dialog($S("Message from the Merchant: Don't have enough Wealth? That is okay, I will wait nearby Amphipolis while you find enough to pay me. Just select me to talk to me."));
+      clear_selection();
+      //unit_clear_orders(triballians, whole_sale);
+      //unit_move_order(triballians, whole_sale, 55, 33);
+      enable_trigger("try_to_pay");
+    } else {
+      declare_war(macedonians, triballians);
+      enable_trigger("papy_dead");
+    }   
+  } 
+
+  trigger papy_dead(unit_killed(triballians, papy_merchant) || num_units(triballians) == 0) {
+    enable_trigger("get_maps");
+    set_timer("find_maps", 3);
+  }
+
+  trigger get_maps(timer_expired("find_maps")) {
+    popup_dialog($S("We have found documents that will give us a Food Economic Boom and a Wealth Economic Boom."));
+    set_ctw_int("papy_killed", 1);
+    set_ctw_int("papy_card", 1);
+  }
+
+  trigger destroy_get_build(max_military_build_get < num_military_buildings(getae)) {
+    unit_cap = unit_cap - (unit_cap/5);
+    set_population_cap(getae, unit_cap);
+    max_military_build_get = num_military_buildings(getae);
+    if (num_military_buildings(getae) > 0) enable_trigger("destroy_get_build");
+  }      
+
+  trigger (is_defeated(getae)) disable_trigger("new_thrace");
+
+  trigger new_thrace(num_type(getae, "Food") > 90 && num_type(getae, "Timber") > 80) {
+    building = find_build(getae, "Stable");
+    x = object_position_x(getae, building) + 2;
+    y = object_position_y(getae, building);
+    create_unit(getae, x, y, "light horse", 1);
+    take_good(getae, "Food", 90);
+    take_good(getae, "Timber", 80);
+    enable_trigger("new_thrace");
+  }
+
+  trigger new_babies(timer_expired("thrace_babies")) {
+
+    if (!is_defeated(getae)) enable_trigger("new_babies");
+
+    //reset birth rates
+    if (population(getae) < unit_cap) {
+      if (have_war(getae, macedonians)) {
+        if (diff == 6) babies = 2;
+        else if (diff == 5) babies = 2;
+        else if (diff == 4) babies = 1;
+        else if (diff == 3) babies = 1;
+        else if (diff == 2) babies = 1;
+        else if (diff == 1) babies = 1;
+        if (time_later_than(end_time/3)) {
+          if (diff > 3) {
+            babies = 2;
+          }
+        }
+        if (time_later_than(end_time/2)) {
+          if (diff > 3) {
+            babies = 2;
+          }
+          if (diff == 6) {
+            babies = 3;
+          }
+        }
+      } else {
+        babies = 1;
+      }
+      if (x < 0) x = 1;
+    }
+    for (i = 0; i < babies; i++) {
+      unit = find_build(getae, "Stable");
+      x = object_position_x(getae, unit) + 2;
+      y = object_position_y(getae, unit);
+      if (num_units(getae) < diff*10 && num_units(getae) < num_units(macedonians)+diff*2) {
+        create_unit_upgrade(getae, x, y, "Light Horse", 1);
+      }
+    }
+    
+    //set timer for next birth
+    if (have_war(getae, macedonians)) {
+      if (time_earlier_than(20)) {
+        if (diff < 3) set_timer("thrace_babies", 65 - ((diff - 3) * 5));
+        else if (diff < 6 && diff > 3) set_timer("thrace_babies", 55 - ((diff - 3) * 5));
+        else set_timer("thrace_babies", 40 - ((diff - 3) * 3));
+      } else {
+        if (diff < 3) set_timer("thrace_babies", 60 - ((diff - 3) * 3));
+        else if (diff < 6 && diff > 3) set_timer("thrace_babies", 50 - ((diff - 3) * 5));
+        else set_timer("thrace_babies", 35 - ((diff - 3) * 3));
+      }
+    } else {
+      set_timer("thrace_babies", 50);
+    }
+
+    //give thracian tribes resources
+  
+    //find resource collection rate
+    if (have_war(getae, macedonians)) {
+      income = num_units(getae) * rate;
+    } else {
+      income = num_units(getae) * rate/2;
+    }
+
+    //give resources collected
+    give_good(getae, "Food", income);
+    give_good(getae, "Timber", income);
+    give_good(getae, "Wealth", (income/2));
+
+
+    //set resource collection timer rate
+
+    //have the thracians try to create units
+
+    //try to create the best unit to use with your most popular unit  
+
+ 
+    //find idle thracian units
+
+    idle_units = find_num_idle_unit(getae, "light horse");
+
+    for (i = idle_units; i > 0; i--) {
+
+      //find idle military and give them move order in barbarian lands     
+
+      unit = find_idle_military(getae);
+      building = find_military_build(getae);
+      x = rand_int(get_x_low, get_x_high);
+      y = rand_int(get_y_low, get_y_high);
+      while (!map_is_passable(x, y) || !map_is_land(x,y)) {
+        x = rand_int(get_x_low, get_x_high);
+        y = rand_int(get_y_low, get_y_high);
+      }
+
+      unit_stance_order(getae, unit, "Raid");
+
+      unit_attack_to_order(getae, unit, x, y);
+
+    }
+
+
+  }
+
+  //trigger checks (timer_expired("check_up")) {
+    //for (n = num_cities(agrianians); n > 0; n--) {
+     // city_name = find_city_with_num(agrianians, n);
+     // building = find_city_id(city_name);
+     // if (object_health(agrianians, building) < 75) {
+     //   popup_dialog($S("We are under attack by the Illyrian tribes! Please send help immediately so that we can destroy the barbarians."));
+     ////   if (no_ill == 0) {
+     //     add_objective($S("Destroy the Illyrian tribes to the west"), "kill_ill", "");
+     //     disable_trigger("contact_ill");
+      //  }
+     //   break;
+     // }
+     // else {
+      //  set_timer("check_up", 60);
+     //   enable_trigger("checks");
+     // }
+    //}
+  //}   
+
+  //thracian unit cap stables
+  trigger (time_later_than(10)) {
+    unit_cap = unit_cap + 5;
+  }
+
+  trigger (time_later_than(15)) {
+    unit_cap = unit_cap + 5;
+  }
+
+  trigger (time_later_than(20)) {
+    unit_cap = unit_cap + 5;
+  }
+
+  trigger (time_later_than(25)) {
+    unit_cap = unit_cap + 5;
+  }
+
+  trigger thrace_stables(num_stables < num_type(getae, "Stables")) {
+    num_stables = num_type(getae, "Stables");
+    unit_cap = unit_cap - 5;
+    if (!is_defeated(getae)) enable_trigger("thrace_stables");
+  }
+
+
+  trigger (num_cities(autaratians) == 0) {
+    defeat(autaratians);
+  }
+  
+  trigger (num_type(getae, "Stable") == 0) {
+    if (!is_defeated(autaratians) || !is_defeated(illyrians)) popup_dialog($S("All of the Getae (Green) horse nomads are fleeing the area! Our cavalry commanders have learned much by fighting them, and as a result the Companion and Horse Archer lines are now available to us at our Stables."));
+    else popup_dialog($S("All of the Getae (Green) horse nomads are fleeing the area!"));
+    for (n = 8; n > 0; n--) {
+      gain_tech(macedonians, "military");
+    }
+    gain_upgrade(macedonians, "Companion");
+    ctw_objective_complete("kill_get");
+    defeat(getae);
+  }
+
+  trigger (find_city_owner(ag_name) == agrianians) {
+    set_capital(agrianians, ag_name);
+    ctw_objective_complete("free_agry");
+    if (diff < 3) {
+      gain_tech(agrianians, "commerce");
+      gain_tech(agrianians, "civics");
+      gain_tech(agrianians, "military");
+      gain_tech(agrianians, "science");
+      give_good(agrianians, "Food", 500);
+      give_good(agrianians, "Timber", 500);
+      give_good(agrianians, "Metal", 500);
+      give_good(agrianians, "Wealth", 500);
+      give_good(agrianians, "Knowledge", 500);
+      set_base_rate(agrianians, "Food", 100);
+      set_base_rate(agrianians, "Timber", 100);
+      set_base_rate(agrianians, "Wealth", 100);
+      set_base_rate(agrianians, "Metal", 100);
+      set_base_rate(agrianians, "Knowledge", 100);
+    } else if (diff == 3) {
+      give_good(agrianians, "Food", 100);
+      give_good(agrianians, "Timber", 100);
+      give_good(agrianians, "Metal", 100);
+      give_good(agrianians, "Wealth", 100);
+      give_good(agrianians, "Knowledge", 100);
+      set_base_rate(agrianians, "Food", 50);
+      set_base_rate(agrianians, "Timber", 50);
+      set_base_rate(agrianians, "Wealth", 50);
+      set_base_rate(agrianians, "Metal", 50);
+      set_base_rate(agrianians, "Knowledge", 50);
+    }
+    popup_dialog($S("Message from the Agrianians (Blue): Thank you for the help with our enemy, Queen Teuta (Yellow). Now that we are free of those brutes, we can help you defeat your other enemies."));
+    enable_trigger("ag_troops_go");
+  }
+
+  trigger ag_troops_go() {
+    city_name = find_capital(illyrians);
+    building = find_city_id(city_name);
+    x = object_position_x(illyrians, building);
+    y = object_position_y(illyrians, building);
+    
+    unit = find_military(agrianians);
+    unit_attack_to_order(agrianians, unit, x, y);
+ 
+    enable_trigger("ag_troops_go");
+  }
+
+  trigger (is_defeated(illyrians)) {
+    popup_dialog($S("We have overthrown King Cleitus (Purple)!"));
+    ctw_objective_complete("destroy_illy");
+    stop_timer("ill_raid");
+    disable_trigger("ag_troops_go");
+  }
+
+  //trigger (is_defeated(athenians)) {
+    //popup_dialog($S("Our naval forces have beat the great Athenian navy! We were able to salvage the wreckage of their navy, gaining us many valuable resources."));
+    //print_game_msg($S("Gain 100 Wealth!"));
+    //print_game_msg($S("Gain 100 Timber!"));
+    //give_good(macedonians, "Timber", 100);
+   // give_good(macedonians, "Wealth", 100);
+    //defeat(athenians);
+  //}
+
+  if (is_defeated(illyrians) && is_defeated(autaratians)) {
+    if (is_defeated(getae) || !have_war(getae, macedonians)) {
+      victory(macedonians);
+    }
+  }
+
+  if (is_defeated(illyrians) && have_alliance(getae, macedonians) && is_defeated(autaratians)) {
+    victory(macedonians);
+  }
+
+  for (nation = 3; nation < 7; nation++) {
+    if (offer_made(macedonians, nation)) {
+      reject_offer(nation, macedonians);
+    }
+  }
+
+}
+

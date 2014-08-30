@@ -1,0 +1,51 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute-->
+<TRIBE name="Franceses">
+	<LEADERS>
+		<LEADER>Rey Luis XIV</LEADER>
+		<LEADER>Emperador Napoleón</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>París</CITY>
+		<CITY>Orleans</CITY>
+		<CITY>Reims</CITY>
+		<CITY>Tours</CITY>
+		<CITY>Lyón</CITY>
+		<CITY>Ruán</CITY>
+		<CITY>Marsella</CITY>
+		<CITY>Burdeos</CITY>
+		<CITY>Nantes</CITY>
+		<CITY>Lille</CITY>
+		<CITY>Toulouse</CITY>
+		<CITY>Blois</CITY>
+		<CITY>Poitiers</CITY>
+		<CITY>Dijon</CITY>
+		<CITY>Avignon</CITY>
+		<CITY>Troyes</CITY>
+		<CITY>Brest</CITY>
+		<CITY>El Havre</CITY>
+		<CITY>Narbona</CITY>
+		<CITY>Aix-en-Provence</CITY>
+		<CITY>Bourges</CITY>
+		<CITY>Versalles</CITY>
+		<CITY>Soissons</CITY>
+		<CITY>Amiens</CITY>
+		<CITY>Cherburgo</CITY>
+		<CITY>Caén</CITY>
+		<CITY>Lorient</CITY>
+		<CITY>Angulema</CITY>
+		<CITY>Bayona</CITY>
+		<CITY>Nimes</CITY>
+		<CITY>Toulon</CITY>
+		<CITY>Besancon</CITY>
+		<CITY>Estrasburgo</CITY>
+		<CITY>Calais</CITY>
+		<CITY>Boulogne</CITY>
+		<CITY>Vendome</CITY>
+		<CITY>Moulins</CITY>
+		<CITY>Riom</CITY>
+		<CITY>Aubusson</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

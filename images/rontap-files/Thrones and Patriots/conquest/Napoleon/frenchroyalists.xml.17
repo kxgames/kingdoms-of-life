@@ -1,0 +1,55 @@
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Scott Lewis (Big Huge Games) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Andy Clark (Big Huge Games) -->
+<TRIBE name="Royalists" substitute="1">
+	<LEADERS>
+		<LEADER>Louis de Bourbon-Conde</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Paris</CITY>
+		<CITY>Orleans</CITY>
+		<CITY>Rheims</CITY>
+		<CITY>Tours</CITY>
+		<CITY>Lyons</CITY>
+		<CITY>Rouen</CITY>
+		<CITY>Marseilles</CITY>
+		<CITY>Bordeaux</CITY>
+		<CITY>Nantes</CITY>
+		<CITY>Lille</CITY>
+		<CITY>Toulouse</CITY>
+		<CITY>Blois</CITY>
+		<CITY>Poitiers</CITY>
+		<CITY>Dijon</CITY>
+		<CITY>Avignon</CITY>
+		<CITY>Troyes</CITY>
+		<CITY>Brest</CITY>
+		<CITY>Le Havre</CITY>
+		<CITY>Narbonne</CITY>
+		<CITY>Aix-en-Provence</CITY>
+		<CITY>Bourges</CITY>
+		<CITY>Versailles</CITY>
+		<CITY>Soissons</CITY>
+		<CITY>Amiens</CITY>
+		<CITY>Cherbourg</CITY>
+		<CITY>Caen</CITY>
+		<CITY>Lorient</CITY>
+		<CITY>Angoulême</CITY>
+		<CITY>Angouleme</CITY>
+		<CITY>Nîmes</CITY>
+		<CITY>Bayonne</CITY>
+		<CITY>Besançon</CITY>
+		<CITY>Nimes</CITY>
+		<CITY>Toulon</CITY>
+		<CITY>Besancon</CITY>
+		<CITY>Vendôme</CITY>
+		<CITY>Strasbourg</CITY>
+		<CITY>Calais</CITY>
+		<CITY>Boulogne</CITY>
+		<CITY>Vendome</CITY>
+		<CITY>Moulins</CITY>
+		<CITY>Riom</CITY>
+		<CITY>Aubusson</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>1 NEuro</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,85 @@
+#MOTD
+^********New Crag********
+^
+^Cheat Key overview- W to win selected scenario, L to lose, 
+^                     + to gain territory strength at moused over country, - to lose a level,
+^                     if not moused over a country, +/- give and take tribute from the player- NEW**
+^                     B before a scenario to select which barbarian scenario it will be if you attack a barbarian
+^                     O show country owner
+^                     T show country name
+^                     U show end of game screen
+^
+^
+^ 11.15.02 - CTW Sandbox game is in.  This launches when you start a new campaign.
+^ 11.13.02 - AI diplo in.. should declare war, propose peace, demand/offer tribute
+^
+^Bringing back other barbarian scenario types
+
+^All difficulties work for barbarian city assault.
+^Toned down barbarian city assault scenario.  It's set as the only barbarian scenario option for now.
+^Please try it at various difficulties and give feedback.
+^WEEK BEGINNING 10.7.02
+^
+^Click tactical cards to select them for play.  The choices are confirmed at the play card screen.
+^Drag strategic bonus cards onto the map to play them
+^Your territories 'level up' every age instead of every turn
+^New interface art in progress
+^WEEK BEGINNING 9.30.2002
+^
+^New interface for attacking and moving.  No arrows are shown on the map until you pick up a piece.  
+^Drag a piece onto an enemy territory to set up the invasion.  Click Start to begin the scenario.
+^
+^Removed the Turns Per Age combo from the setup.  That's now determined by the map.
+^
+WEEK BEGINNING 9.23.2002 - ABOVE
+^
+^Incorporated Tim's feedback on the field battle scenario
+^Armies that have already moved don't count for overrun or reinforcements
+^
+^Can't play bonus cards on barbarian scenarios now
+^
+^WEEK BEGINNING 9.16.2002 - ABOVE
+^
+^Field Battle now fully visible
+^Updated 'Surprise Attack' scenario
+^No more having to transport in shady ways in barbarian scenarios
+^
+^Army Movement Rules
+^ -Each army is allowed to move one space per turn in lieu of making an attack
+^ -Armies that have moved DO participate in battles as support armies if their move puts them in position
+^ -If you move all your armies or your moves make further moves or attacks impossible, the turn ends
+^ -After your army has moved, it turns away from you to signify that it can make no more moves
+^
+^Overrun outmatched territories!
+^ -If you can maneuver your armies so that you have two more armies than your opponent in support of a battle,
+^  you automatically win and get another chance to attack
+^
+^Reentrance victory problem fixed
+^Save game works again
+^
+^Reinforcements will arrive if you have supporting armies near your attack
+^
+^Added additional starting build level
+^ -You may start with additional cities at the beginning of scenarios
+^
+^Armies do even more things
+^ -Your main army gives you units to start out with... supporting armies coming soon
+^ -In Barbarian scenarios, you may start with different #'s of units, but you'll always have your army.
+^ -Armies retreat when defeated... but if they're boxed in, they're destroyed
+^  -Ability to choose your retreat coming soon
+^Building Chings
+^ -For each turn that you've owned a territory, you start with more buildings in your city
+^ -4 different levels in at the moment
+^ -Additional cities coming soon
+^
+^WEEK BEGINNING 9.10.2002 - ABOVE
+^
+^Armies that do things
+^ -Attacking is possible only from areas with armies
+^ -Armies can be moved anywhere in friendly territory for now
+^ -Capture supply depots to get armies.  If you have an option, it prompts you for placement.
+^ -Advancing / Retreating doesn't really work
+^9.5- Interim checkin- There are now pieces on the board, but the old game is mostly intact
+^
+^The conquest game is under heavy construction right now... enter at your own risk.
+^9.3.2002 - Welcome to the Conquer The World MOTD

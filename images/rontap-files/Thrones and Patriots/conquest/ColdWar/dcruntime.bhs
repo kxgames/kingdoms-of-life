@@ -1,0 +1,28 @@
+ conquest
+{
+
+static int diff = get_difficulty();
+static int who;
+
+run_once {
+  ctw_add_objective_text($S("Capture the enemy capital."), "Hint_id", 0);
+
+  x = 185;
+  y = 116;
+  clear_group(2);
+  for (i = 0; i < num_military_units(2); i++) {
+    unit_id = find_military(2);
+    unit_attack_to_order(2, unit_id, x, y);
+  }
+  unit_id = find_unit(2, "Supply Wagon");
+  unit_attack_to_order(2, unit_id, x, y);
+
+  unit_id = find_unit(2, "General");
+  unit_attack_to_order(2, unit_id, x, y);
+}
+
+if(time() >= get_time_limit()) {
+  victory(1);
+}
+
+}

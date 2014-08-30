@@ -1,0 +1,51 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="中国">
+	<LEADERS>
+		<LEADER>始皇帝</LEADER>
+		<LEADER>武帝</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>北京</CITY>
+		<CITY>上海</CITY>
+		<CITY>成都</CITY>
+		<CITY>長安</CITY>
+		<CITY>長春</CITY>
+		<CITY>広州</CITY>
+		<CITY>済南</CITY>
+		<CITY>西安</CITY>
+		<CITY>哈爾浜</CITY>
+		<CITY>洛陽</CITY>
+		<CITY>蘭州</CITY>
+		<CITY>太原</CITY>
+		<CITY>象州</CITY>
+		<CITY>銅川</CITY>
+		<CITY>坦州</CITY>
+		<CITY>竜興富</CITY>
+		<CITY>福州</CITY>
+		<CITY>南寧</CITY>
+		<CITY>武漢</CITY>
+		<CITY>烏魯木斉</CITY>
+		<CITY>南京</CITY>
+		<CITY>江陰</CITY>
+		<CITY>昆明</CITY>
+		<CITY>杭州</CITY>
+		<CITY>新郷</CITY>
+		<CITY>天津</CITY>
+		<CITY>香港</CITY>
+		<CITY>重慶</CITY>
+		<CITY>瀋陽</CITY>
+		<CITY>武宿</CITY>
+		<CITY>旅大</CITY>
+		<CITY>七夕</CITY>
+		<CITY>南昌</CITY>
+		<CITY>長沙</CITY>
+		<CITY>合肥</CITY>
+		<CITY>貴陽</CITY>
+		<CITY>沁陽</CITY>
+		<CITY>青島</CITY>
+		<CITY>衡陽</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+	<BUILD_CONTINENT>2 Asian</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

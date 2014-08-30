@@ -1,0 +1,72 @@
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Isaac Ellis (Big Huge Games) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by XMLSPY 5 Professional Ed. Release 2 (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Shebans" substitute="1">
+  <LEADERS>
+    <LEADER>Queen of Sheba</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Hareeb</CITY>
+    <CITY>Yaleet</CITY>
+    <CITY>Al-Oyoom</CITY>
+    <CITY>Saud Kharaba</CITY>
+    <CITY>Maeen</CITY>
+    <CITY>Gharyoon</CITY>
+    <CITY>Al-Mash'had</CITY>
+    <CITY>Al-Haz</CITY>
+    <CITY>Baihan</CITY>
+    <CITY>Sahreeb-Shamaal</CITY>
+    <CITY>Takhti-solomon</CITY>
+    <CITY>Al-Baraber</CITY>
+    <CITY>Khanlan</CITY>
+    <CITY>Sheiba</CITY>
+    <CITY>Al-Jamhalih</CITY>
+    <CITY>Zaqab-al-Hajjar</CITY>
+    <CITY>Same-horam</CITY>
+    <CITY>Zagoras</CITY>
+    <CITY>Al-Jawf</CITY>
+    <CITY>Wadi Girdan</CITY>
+    <CITY>Amadiyah</CITY>
+    <CITY>Maifa'ah</CITY>
+    <CITY>Nagran</CITY>
+    <CITY>Aden</CITY>
+    <CITY>Sana'a</CITY>
+    <CITY>Taiz</CITY>
+    <CITY>Mukallah</CITY>
+    <CITY>Ibb</CITY>
+    <CITY>Kaukaban</CITY>
+    <CITY>Jibla</CITY>
+    <CITY>Hajjah</CITY>
+    <CITY>Qana</CITY>
+    <CITY>Shem</CITY>
+    <CITY>Azal</CITY>
+    <CITY>Al Sawa</CITY>
+    <CITY>Juha</CITY>
+    <CITY>Al Janad</CITY>
+    <CITY>Khaisa</CITY>
+    <CITY>Bandar Yakoub</CITY>
+    <CITY>Seiyun</CITY>
+    <CITY>Shibam</CITY>
+    <CITY>Ad-Dumna</CITY>
+    <CITY>Safra'a</CITY>
+    <CITY>Al-Qutn</CITY>
+    <CITY>Al-Hodeidah</CITY>
+    <CITY>Lahj</CITY>
+    <CITY>Al-Houta</CITY>
+    <CITY>Markha</CITY>
+    <CITY>Rada'a</CITY>
+    <CITY>Joban</CITY>
+    <CITY>Baynoun</CITY>
+    <CITY>Nafaqan</CITY>
+    <CITY>Dhamar</CITY>
+    <CITY>Baraqish</CITY>
+    <CITY>Ja'ar</CITY>
+    <CITY>Shuqra</CITY>
+    <CITY>Al-Maharah</CITY>
+    <CITY>Al-Mahwit</CITY>
+    <CITY>Hazm Al-Jawf</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>1 Arab</UNIT_CONTINENT>
+  <BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

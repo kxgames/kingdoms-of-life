@@ -1,0 +1,47 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Mark Sobota (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="South Koreans">
+  <LEADERS>
+    <LEADER>Syngman Rhee</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Daegu</CITY>
+    <CITY>Kwangju</CITY>
+    <CITY>Seongnam</CITY>
+    <CITY>Ulsan</CITY>
+    <CITY>Pucheon</CITY>
+    <CITY>Suweon</CITY>
+    <CITY>Anyang</CITY>
+    <CITY>Cheongju</CITY>
+    <CITY>Koyang</CITY>
+    <CITY>Ansan</CITY>
+    <CITY>Changwon</CITY>
+    <CITY>Pohang</CITY>
+    <CITY>Masan</CITY>
+    <CITY>Kwangmyeong</CITY>
+    <CITY>Buyeo</CITY>
+    <CITY>Gunsan</CITY>
+    <CITY>Chuncheon</CITY>
+    <CITY>Samcheok</CITY>
+    <CITY>Andong</CITY>
+    <CITY>Wonju</CITY>
+    <CITY>Nonsan</CITY>
+    <CITY>Yeosu</CITY>
+    <CITY>Namwon</CITY>
+    <CITY>Daejeon</CITY>
+    <CITY>Miryang</CITY>
+    <CITY>Gangneung</CITY>
+    <CITY>Mokpu</CITY>
+    <CITY>Naju</CITY>
+    <CITY>Jeonju</CITY>
+    <CITY>Jinju</CITY>
+    <CITY>Sangju</CITY>
+    <CITY>Jeju</CITY>
+    <CITY>Sucheon</CITY>
+    <CITY>Cheonan</CITY>
+    <CITY>Jecheon</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+  <BUILD_CONTINENT>3 Korean</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,232 @@
+conquest
+{
+
+static int diff = get_difficulty();
+static int unit_countdown = 26;
+
+static int e1_factory = 2018;
+static int e2_factory = 2019;
+static int e3_auto = 2020;
+static int e4_auto = 2021;
+static int e5_barracks = 2022;
+static int e6_barracks = 2023;
+
+static int w1_factory = 2017;
+static int w2_auto = 2013;
+static int w3_auto = 2014;
+static int w4_barracks = 2016;
+static int w5_barracks = 2015;
+static int w6_air = 2011;
+static int w7_air = 2012;
+
+static int n1_factory = 2029;
+static int n2_factory = 2030;
+static int n3_auto = 2028;
+static int n4_auto = 2027;
+static int n5_barracks = 2026;
+static int n6_barracks = 2024;
+static int n7_barracks = 2025;
+
+run_once {
+  ctw_add_objective_text(parse("Destroy $d0 more units.", unit_countdown), "Unit_Obj", 0);
+
+  //starts in west goes to east
+  x = 32;
+  y = 172;
+  clear_group(2);
+  create_unit_in_group(2, x, y, "Infantry", 2);
+  create_unit_in_group(2, x, y, "Bazooka", 1);
+  group_patrol_order(2, 165, 32);
+
+  //starts in east goes to west
+  x = 165;
+  y = 32;
+  clear_group(2);
+  create_unit_in_group(2, x, y, "Infantry", 2);
+  create_unit_in_group(2, x, y, "Bazooka", 1);
+  if (diff > 2) {
+    create_unit_in_group(2, x, y, "Armored Car", 2);
+  }
+  group_patrol_order(2, 32, 172);
+
+  //starts in north goes to west
+  x = 33;
+  y = 33;
+  clear_group(2);
+  create_unit_in_group(2, x, y, "Infantry", 2);
+  create_unit_in_group(2, x, y, "Bazooka", 1);
+  group_patrol_order(2, 32, 172);
+
+  //starts in north goes to east
+  x = 33;
+  y = 33;
+  clear_group(2);
+  create_unit_in_group(2, x, y, "Infantry", 2);
+  create_unit_in_group(2, x, y, "Bazooka", 1);
+  create_unit_in_group(2, x, y, "Tank", 1);
+  group_patrol_order(2, 165, 32);
+  
+  set_base_rate(1, "Food", 90/diff);
+  set_base_rate(1, "Timber", 90/diff);
+  set_base_rate(1, "Metal", 90/diff);
+  set_base_rate(1, "Oil", 90/diff);
+  set_base_rate(1, "Wealth", 90/diff);
+
+  set_base_rate(2, "Food", 100);
+  set_base_rate(2, "Timber", 100);
+  set_base_rate(2, "Metal", 100);
+  set_base_rate(2, "Oil", 100);
+  set_base_rate(2, "Wealth", 100);
+
+  if (diff == 1) {
+    set_base_rate(1, "Food", 90);
+    set_base_rate(1, "Timber", 20);
+    set_base_rate(1, "Metal", 100);
+    set_base_rate(1, "Oil", 50);
+    set_base_rate(1, "Wealth", 50);
+  }
+  else if (diff == 2) { 
+    set_base_rate(1, "Food", 50);
+    set_base_rate(1, "Timber", 10);
+    set_base_rate(1, "Metal", 60);
+    set_base_rate(1, "Oil", 30);
+    set_base_rate(1, "Wealth", 30);
+  }
+  else if (diff == 3) {
+    set_base_rate(1, "Food", 25);
+    set_base_rate(1, "Timber", 5);
+    set_base_rate(1, "Metal", 30);
+    set_base_rate(1, "Oil", 15);
+    set_base_rate(1, "Wealth", 15);
+  }
+  else if (diff == 4) {
+    set_base_rate(1, "Food", 25);
+    set_base_rate(1, "Timber", 5);
+    set_base_rate(1, "Metal", 30);
+    set_base_rate(1, "Oil", 15);
+    set_base_rate(1, "Wealth", 15);
+  }
+  else { 
+    set_base_rate(1, "Food", 15);
+    set_base_rate(1, "Timber", 5);
+    set_base_rate(1, "Metal", 20);
+    set_base_rate(1, "Oil", 10);
+    set_base_rate(1, "Wealth", 10);
+  }
+
+  set_timer("PATROL", 30);
+}
+
+if (timer_expired("PATROL")) {
+
+  //new north patrol
+  give_good(2, "Food", 600);
+  give_good(2, "Timber", 200);
+  give_good(2, "Metal", 200);
+  give_good(2, "Oil", 200);
+  unit_id = train_unit_at(2, 1, "Infantry", n5_barracks);
+  unit_patrol_order(2, unit_id, 165, 32);
+  unit_id = train_unit_at(2, 1, "Bazooka", n6_barracks);
+  unit_patrol_order(2, unit_id, 165, 32);
+  //unit_id = train_unit_at(2, 1, "Armored Scout Car", n3_auto);
+  //unit_patrol_order(2, unit_id, 165, 32);
+
+  //new east patrol
+  give_good(2, "Food", 600);
+  give_good(2, "Timber", 200);
+  give_good(2, "Metal", 200);
+  give_good(2, "Oil", 200);
+  unit_id = train_unit_at(2, 1, "Infantry", e5_barracks);
+  unit_patrol_order(2, unit_id, 33, 33);
+  //unit_id = train_unit_at(2, 1, "Bazooka", e6_barracks);
+  //unit_patrol_order(2, unit_id, 33, 33);
+  if (diff > 2) {
+    unit_id = train_unit_at(2, 1, "Armored Scout Car", e3_auto);
+    unit_patrol_order(2, unit_id, 33, 33);
+  }
+
+  //new west patrol
+  give_good(2, "Food", 600);
+  give_good(2, "Timber", 200);
+  give_good(2, "Metal", 200);
+  give_good(2, "Oil", 200);
+  unit_id = train_unit_at(2, 1, "Infantry", w4_barracks);
+  unit_patrol_order(2, unit_id, 33, 33);
+  unit_id = train_unit_at(2, 1, "Bazooka", w5_barracks);
+  unit_patrol_order(2, unit_id, 33, 33);
+  //unit_id = train_unit_at(2, 1, "Armored Scout Car", w2_auto);
+  //unit_patrol_order(2, unit_id, 33, 33);
+
+  //new east patrol
+  give_good(2, "Food", 600);
+  give_good(2, "Timber", 200);
+  give_good(2, "Metal", 200);
+  give_good(2, "Oil", 200);
+  unit_id = train_unit_at(2, 1, "Infantry", e5_barracks);
+  unit_patrol_order(2, unit_id, 33, 33);
+  //unit_id = train_unit_at(2, 1, "Bazooka", e6_barracks);
+  //unit_patrol_order(2, unit_id, 33, 33);
+  if (diff > 2) {
+    unit_id = train_unit_at(2, 1, "Tank", e3_auto);
+    unit_patrol_order(2, unit_id, 33, 33);
+  }
+
+  set_rally(2, w6_air, 106, 86);
+  set_rally(2, w7_air, 106, 86);
+
+  if (diff > 2) {
+    give_good(2, "Wealth", 400);
+    give_good(2, "Oil", 400);
+    train_unit_at(2, 2, "Fighter", w6_air);
+    train_unit_at(2, 2, "Fighter", w7_air);
+  }
+
+  set_timer("PATROL", 30*diff);
+}
+
+unit_id = find_idle_military(2);
+if (unit_id > -1) {
+  unit_patrol_order(2, unit_id, 87, 87);
+}
+
+trigger MDK(unit_any_killed(2))
+{
+  unit_countdown--;
+  if (unit_countdown == 1) {
+    ctw_change_objective_text("Unit_Obj", parse("Destroy $d0 more unit.", unit_countdown));
+  }
+  else {
+    ctw_change_objective_text("Unit_Obj", parse("Destroy $d0 more units.", unit_countdown));
+  }
+  enable_trigger("MDK");
+}
+
+if (unit_countdown < 1) {
+  String all_territories[];
+
+  all_territories = ["Cuba", "Central America", "Colombia", "Brazil", "Peru", "Argentina", "Mexico"];
+
+  for (i = 0; i < all_territories.length; i++) {
+    if (get_territory_owner(all_territories[i]) == "Americans") {
+      ctw_give_territory(all_territories[i], "Russians", "");
+      popup_dialog(parse("As a result of our successful mission, we have gained a Mercenaries Bonus Card and control of $s0!", all_territories[i]));
+      break;
+    }
+  }
+  if (i == all_territories.length) {
+    popup_dialog(parse("As a result of our successful mission, we gained a Mercenaries Bonus Card and $d0 Tribute!", 100));
+    give_ctw_tribute ("Russians", 100);
+  }
+  give_player_bonus_card("Mercenaries");
+  victory(1);
+}
+
+if (num_units(1) < 1 && num_buildings(1) < 1) {
+  defeat(1);
+}
+
+if (time() >= get_time_limit()) {
+  defeat(1);
+}
+
+}

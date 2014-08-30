@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v5 U (http://www.xmlspy.com) by Ilya Kreymer (private) -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION: All STRING elements.-->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<ROOT>
+  <STRING hash="1225602">将軍が倒されました! 自軍は $NUM0 秒後に崩壊します。</STRING>
+  <STRING hash="1345524">敵の将軍を倒しました! 敵軍は $NUM0 秒後に崩壊します。</STRING>
+  <STRING hash="740506">自軍崩壊までの残り時間: $NUM0 秒</STRING>
+  <STRING hash="768556">敵軍崩壊までの残り時間: $NUM0 秒</STRING>
+  <STRING hash="2527185">敵の将軍を倒しました! 一報を聞きつけ集結した自軍の部隊が戦闘を続けるでしょう... さあ敵を全滅させてください!</STRING>
+  <STRING hash="2737084">将軍が敵に倒されました! 敵部隊が集結し、双方の軍隊の規模は互角になりました。さあ、決着をつけるべく戦ってください!</STRING>
+</ROOT>

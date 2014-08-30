@@ -1,0 +1,17 @@
+ conquest
+{
+
+  static int diff = get_difficulty();
+  static int end_time = get_time_limit();
+  int cur_time;
+
+run_once {
+}
+
+  cur_time = time_min();
+  if (cur_time >= end_time) {
+    defeat(1);
+  }
+
+
+}

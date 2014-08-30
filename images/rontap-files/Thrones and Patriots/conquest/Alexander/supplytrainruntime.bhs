@@ -1,0 +1,318 @@
+    scenario
+{
+
+labels {
+}
+
+static int fx = 0;
+static int fy = 0;
+static int quad = 0;
+static int x = 0;
+static int y = 0;
+static int xx = 0;
+static int yy = 0;
+
+static int supply_wagons_killed = 0;
+
+static int diff = get_difficulty();
+
+run_once {
+  set_ctw_int("sw_killed", 0);
+  disable_all_triggers();
+  disable_city_defeat(1);
+  disable_city_defeat(2);
+  
+  force_transport_ability(1);
+  force_transport_ability(2);
+
+  add_visibility(1, 3);
+  declare_war(2, 3);
+  make_peace(2, 3);
+  make_peace(1, 3);
+
+  diplomacy_set_wait(2);
+  diplomacy_set_wait(3);
+
+  //get starting quadrant
+  x = get_starting_loc_x (2);
+  y = get_starting_loc_y (2);
+  
+  //quad 1
+  if (x < world_x_size() / 2) {
+    if (y < world_y_size() / 2) {
+      quad = 2;
+    }
+    else {
+      quad = 3;
+    }
+  }
+  else {
+    if (y < world_y_size() / 2) {
+      quad = 1;
+    }
+    else {
+      quad = 4;
+    }
+  }
+  
+  enable_trigger("Kill_Message");
+  enable_trigger("Supply_Train");
+  set_timer("ST", 5);
+
+  counter = 0;
+
+  tx = world_x_size()/2;
+  ty = world_y_size()/2;
+  while(!map_is_buildable (tx, ty) && counter < 6) {
+    tx++;
+    ty++;
+    counter++;
+  }
+  create_building(3, tx, ty, "Lookout");
+
+  tx = world_x_size()/4;
+  ty = world_y_size()/4;
+  counter = 0;
+  while(!map_is_buildable (tx, ty) && counter < 6) {
+    tx++;
+    ty++;
+    counter++;
+  }
+  create_building(3, tx, ty, "Lookout");
+
+  tx = 3*world_x_size()/4;
+  ty = 3*world_y_size()/4;
+  counter = 0;
+  while(!map_is_buildable (tx, ty) && counter < 6) {
+    tx++;
+    ty++;
+    counter++;
+  }
+  create_building(3, tx, ty, "Lookout");
+
+  tx = world_x_size()/4;
+  ty = 3*world_y_size()/4;
+  
+  counter = 0;
+  while(!map_is_buildable (tx, ty) && counter < 6) {
+    tx++;
+    ty++;
+    counter++;
+  }
+  create_building(3, tx, ty, "Lookout");
+
+  tx = 3*world_x_size()/4;
+  ty = world_y_size()/4;
+  counter = 0;
+  while(!map_is_buildable (tx, ty) && counter < 6) {
+    tx++;
+    ty++;
+    counter++;
+  }
+  create_building(3, tx, ty, "Lookout");
+
+  if (num_type_upgrade(3, "Lookout") > 0) {
+    ctw_add_objective_text($S("Use the lookouts built by our Scouts to set up ambushes."), "Hint_Obj", 0);
+  }
+  add_objective_text(parse("$s0 Supply Wagons killed.", supply_wagons_killed), "SW_Obj", 0);
+}
+
+trigger Kill_Message(unit_type_killed(2, "Supply Wagon") || unit_type_killed(2, "Armed Supply Wagon"))
+{
+  supply_wagons_killed++;
+  if (supply_wagons_killed == 1) {
+    change_objective_text("SW_Obj", parse("$s0 Supply Wagon killed.", supply_wagons_killed));
+  }
+  else {
+    change_objective_text("SW_Obj", parse("$s0 Supply Wagons killed.", supply_wagons_killed));
+  }
+
+  set_ctw_int("sw_killed", supply_wagons_killed);
+
+  enable_trigger("Kill_Message");
+}
+
+//every 20 secs a supply wagon+escort pops up and trundles off
+trigger Supply_Train(timer_expired("ST"))
+{
+  supply_id = -1;
+  
+  do {
+    side = rand_int(1, 3);
+    if (quad == 1) {
+      if (side < 2) {
+        x = rand_int(world_x_size() / 2, world_x_size() - 5);
+        y = 5;
+      }
+      else {
+        x = world_x_size() - 5;
+        y = rand_int(5, world_y_size() / 2);
+      }
+      fx = 5;
+      fy = world_y_size() - 5;
+    }
+    else if (quad == 2) {
+      if (side < 2) {
+        x = rand_int(5, world_x_size() / 2);
+        y = 5;
+      }
+      else {
+        x = 5;
+        y = rand_int(5, world_y_size() / 2);
+      }
+      fx = world_x_size() - 5;
+      fy = world_y_size() - 5;
+    }
+    else if (quad == 3) {
+      if (side < 2) {
+        x = rand_int(5, world_x_size() / 2);
+        y = world_y_size() - 5;
+      }
+      else {
+        x = world_x_size() - 5;
+        y = rand_int(world_y_size() / 2, world_y_size() - 5);
+      }
+      fx = world_x_size() - 5;
+      fy = 5;
+    }
+    else {
+      if (side < 2) {
+        x = rand_int(world_x_size() / 2, world_x_size() - 5);
+        y = world_y_size() - 5;
+      }
+      else {
+        x = world_x_size() - 5;
+        y = rand_int(world_y_size() / 2, world_y_size() - 5);
+      }
+      fx = 5;
+      fy = 5;
+    }
+  }while(!map_is_land(x, y));
+  xx = fx;
+  yy = fy;
+
+  clear_group(2);
+  num_wagons = rand_int(1, 5);
+
+  //cycle fx, fy
+  if (num_wagons < 3) {
+    if (fx < 10) {
+      fx += 50;
+    }
+    else {
+      fx -= 50;
+    }
+  }
+  else {
+    if (fy < 10) {
+      fy += 50;
+    }
+    else {
+      fy -= 50;
+    }
+  }
+
+  if (find_nation(2) == "Dutch") {
+    supply_id = create_unit(2, x, y, "Armed Supply Wagon", num_wagons);
+  }
+  else {
+    supply_id = create_unit(2, x, y, "Supply Wagon", num_wagons);
+  }
+  
+  group_move_order(2, fx, fy);
+  clear_group(2);
+  create_unit_upgrade(2, x, y, "Javelineers", diff/2+1);
+  create_unit_in_group(2, x, y, "Phalanx", diff/2+1);
+  create_unit_in_group(2, x, y, "Archers", diff/2+1);
+  
+  //if (unit_id > -1) {
+    //group_guard_order(2, 2, unit_id);
+  //}
+  //else {
+    group_guard_order(2, 2, supply_id);
+  //}
+  
+  set_timer("ST", 20);
+  enable_trigger("Supply_Train");
+}
+
+if(any_object_near(2, 1, xx+50, yy, 18) || any_object_near(2, 1, xx-50, yy, 18) || any_object_near(2, 1, xx, yy+50, 18) || any_object_near(2, 1, xx, yy-50, 18))
+{
+  for (i = 0; i < num_military_units(2); i++) {
+    unit_id = find_military(2);
+    if (object_near(2, unit_id, xx+50, yy, 18)) {
+      kill_unit_anim(2, unit_id, 1);
+    }
+    if (object_near(2, unit_id, xx-50, yy, 18)) {
+      kill_unit_anim(2, unit_id, 1);
+    }
+    if (object_near(2, unit_id, xx, yy+50, 18)) {
+      kill_unit_anim(2, unit_id, 1);
+    }
+    if (object_near(2, unit_id, xx, yy-50, 18)) {
+      kill_unit_anim(2, unit_id, 1);
+    }
+  }
+  
+  unit_id = find_unit(2, "Supply Wagon");
+  if (object_near(2, unit_id, xx+50, yy, 10)) {
+    kill_unit_anim(2, unit_id, 1);
+    supply_wagons_killed--;
+  }
+  if (object_near(2, unit_id, xx-50, yy, 10)) {
+    kill_unit_anim(2, unit_id, 1);
+    supply_wagons_killed--;
+  }
+  if (object_near(2, unit_id, xx, yy+50, 10)) {
+    kill_unit_anim(2, unit_id, 1);
+    supply_wagons_killed--;
+  }
+  if (object_near(2, unit_id, xx, yy-50, 10)) {
+    kill_unit_anim(2, unit_id, 1);
+    supply_wagons_killed--;
+  }
+
+  unit_id = find_unit(2, "Armed Supply Wagon");
+  if (object_near(2, unit_id, xx+50, yy, 10)) {
+    kill_unit_anim(2, unit_id, 1);
+    supply_wagons_killed--;
+  }
+  if (object_near(2, unit_id, xx-50, yy, 10)) {
+    kill_unit_anim(2, unit_id, 1);
+    supply_wagons_killed--;
+  }
+  if (object_near(2, unit_id, xx, yy+50, 10)) {
+    kill_unit_anim(2, unit_id, 1);
+    supply_wagons_killed--;
+  }
+  if (object_near(2, unit_id, xx, yy-50, 10)) {
+    kill_unit_anim(2, unit_id, 1);
+    supply_wagons_killed--;
+  }
+
+  for (i = 0; i < num_type(2, "Transport"); i++) {
+    unit_id = find_unit(2, "Transport");
+    if (object_near(2, unit_id, xx+50, yy, 18)) {
+      kill_unit_anim(2, unit_id, 1);
+    }
+    if (object_near(2, unit_id, xx-50, yy, 18)) {
+      kill_unit_anim(2, unit_id, 1);
+    }
+    if (object_near(2, unit_id, xx, yy+50, 18)) {
+      kill_unit_anim(2, unit_id, 1);
+    }
+    if (object_near(2, unit_id, xx, yy-50, 18)) {
+      kill_unit_anim(2, unit_id, 1);
+    }
+  }
+}
+
+if (time() >= get_time_limit()) {
+  victory(1);
+}
+
+if (num_units(1) < 1) {
+  defeat(1);
+}
+
+}

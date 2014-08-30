@@ -1,0 +1,79 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  labels {
+    PLAYER,
+    ENEMY,
+  }
+  
+  new_world_rules();
+  new_world_setup();
+
+  make_peace(1,8);
+  make_peace(2,8);
+
+  int nation;
+  int diff = get_difficulty();
+
+  for (nation = 2; nation < 7; nation++) {
+    set_leader_difficulty(nation, diff);
+  }
+  
+  int x = 237;
+  int y = 246;
+  place_new_world_army(1,x,y);
+
+  //get the proper angle
+  dir = get_conquest_invasion_dir();
+  dir = dir + 180;
+  if (dir >= 360) {
+    dir = dir - 360;
+  }
+  group_jump_move(PLAYER, x, y, dir);
+
+  disable_type_by_tribe("Caravan", find_nation(1));
+  disable_type_by_tribe("Merchant", find_nation(1));
+  disable_type_by_tribe("Armed Merchant", find_nation(1));
+  disable_type_by_tribe("Armed Caravan", find_nation(1));
+  disable_type_by_tribe("Caravan", find_nation(2));
+  disable_type_by_tribe("Merchant", find_nation(2));
+
+  set_nation_name("Germans", $S("Yukon Traders"));
+  
+  if (find_nation(1) == "Lakota") {
+    set_nation_name("Iroquois", $S("Yellowknives"));
+    if (get_age() == 3) {
+      disable_type_by_tribe("Iroquois", "Elite Mohawk Spearmen");
+      enable_type_by_tribe("Iroquois", "Elite Pikemen", "Barracks", 0, 1);
+      if (!have_tech(2, "Elite Pikemen")) {
+        gain_tech(2, "Elite Pikemen");
+      }
+      disable_type_by_tribe("Irqouois", "Pioneer");
+      enable_type_by_tribe("Iroquois", "Explorer", "Barracks", 0, 4);
+      if (!have_tech(2, "Explorer")) {
+        gain_tech(2, "Explorer");
+      }
+    }
+    else {
+      disable_type_by_tribe("Iroquois", "Ranger");
+      enable_type_by_tribe("Iroquois", "Explorer", "Barracks", 0, 4);
+      if (!have_tech(2, "Explorer")) {
+        gain_tech(2, "Explorer");
+      }
+    }
+  }
+  else {
+    set_nation_name("Lakota", $S("Yellowknives"));
+    if (get_age() == 4) {
+      disable_type_by_tribe("Lakota", "Repeating Rifle Horse");
+      enable_type_by_tribe("Lakota", "Carabineer", "Barracks", 0, 2);
+      if (!have_tech(2, "Carabineer")) {
+        gain_tech(2, "Carabineer");
+      }
+    }      
+  }
+  rename_type("Merchant", $S("Yukon Trader"));
+
+}

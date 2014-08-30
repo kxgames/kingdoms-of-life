@@ -1,0 +1,515 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  coldwar_rules();
+
+  labels {
+    ATTACKER,
+    DEFENDER,
+  }
+
+  for (i = 1; i < 3; i++) {
+    gain_tech(i, "Taxation");
+    gain_tech(i, "Vassalage");
+    gain_tech(i, "Social Contract");
+    gain_tech(i, "Income Tax");
+  }
+
+  String am_mod_units[] = ["Marine Infantry", "Bazooka", "Heavy Machine Gun", "Howitzer", "Special Forces", "Armored Scout Car", "Tank", "Anti-Aircraft Battery", "General", "Spy", "Supply Wagon", "Citizen", "Merchant", "Helicopter"];
+  String am_inf_units[] = ["Assault Marines", "Anti-Tank Missile", "Advanced Machine Gun", "Rocket Artillery", "Elite Special Forces", "Armored Cavalry", "Main Battle Tank", "Anti-Aircraft Missile", "General", "Spy", "Supply Wagon", "Citizen", "Merchant", "Attack Helicopter"];
+  String ru_mod_units[] = ["Red Guards Infantry", "Bazooka", "Heavy Machine Gun", "Katyusha Rocket", "Special Forces", "Armored Scout Car", "Tank", "Anti-Aircraft Battery", "General", "Spy", "Supply Wagon", "Partisan", "Merchant", "Helicopter"];
+  String ru_inf_units[] = ["Shock Infantry", "Anti-Tank Missile", "Advanced Machine Gun", "Katyusha Rocket", "Elite Special Forces", "Armored Cavalry", "T80 Tank", "Anti-Aircraft Missile", "General", "Spy", "Supply Wagon", "Partisan", "Merchant", "Mi-24 Hind"];
+
+  int time;
+  int div_time = 3;
+
+  if (get_age() == 6) {
+    for (i = 0; i < am_mod_units.length; i++) {
+      time = type_build_time(am_mod_units[i]);
+      set_type_build_time(am_mod_units[i], (int)(time/div_time));
+    }
+    for (i = 0; i < ru_mod_units.length; i++) {
+      time = type_build_time(ru_mod_units[i]);
+      set_type_build_time(ru_mod_units[i], (int)(time/div_time));
+    }
+    disable_type("Anti-Aircraft Missile");
+    disable_type("Attack Helicopter");
+  }
+  else {
+    for (i = 0; i < am_mod_units.length; i++) {
+      time = type_build_time(am_inf_units[i]);
+      set_type_build_time(am_inf_units[i], (int)(time/div_time));
+    }
+    for (i = 0; i < ru_mod_units.length; i++) {
+      time = type_build_time(ru_inf_units[i]);
+      set_type_build_time(ru_inf_units[i], (int)(time/div_time));
+    }
+  }
+
+  int row_pos;
+  int col_pos;
+
+  int cur_age = age(ATTACKER);
+  int nation;
+  String tribe;
+  static build_time;
+  int diff = get_difficulty();
+  String building_list[] = ["Redoubt", "Anchorage", "Woodcutter's Camp", "Mine", "Oil Well", "Oil Platform", "Fort"];
+  
+  for (i = 0; i < building_list.length; i++) {
+    build_time = type_build_time(building_list[i]);
+    set_type_build_time(building_list[i], 2 * build_time/5);
+  }
+ 
+  gain_tech(ATTACKER, "Science");
+  gain_tech(ATTACKER, "Science");
+  gain_tech(DEFENDER, "Science");
+  gain_tech(DEFENDER, "Science");
+  for (i = 7; i > 0; i--) {
+    gain_tech(ATTACKER, "Military");
+    gain_tech(DEFENDER, "Military");
+    gain_tech(ATTACKER, "Commerce");
+    gain_tech(DEFENDER, "Commerce");    
+  }
+  gain_tech(ATTACKER, "Global Prosperity");
+  gain_tech(DEFENDER, "Global Prosperity");
+  
+  for (i = 1; i < 3; i++) {
+    gain_tech(i, "Tactics");
+    gain_tech(i, "Operations");
+    gain_tech(i, "Strategy");
+    gain_tech(i, "Fortification");
+    gain_tech(i, "Bombardment");
+    gain_tech(i, "Strategic Reserves");
+  }
+
+  //disable buildings for ALL
+  disable_type("Tower");
+  disable_type("Radar Air Defense");
+  disable_type("Smelter");
+  disable_type("Granary");
+  disable_type("Lumber Mill");
+  disable_type("Stable");
+  disable_type("Siege Factory");
+  disable_type("Missile Silo");
+  disable_type("Small City");
+  disable_type("Barracks");
+  disable_type("Auto Plant");
+  disable_type("Factory");
+  disable_type("Airbase");
+  disable_type("Farm");
+  disable_type("Temple");
+  disable_type("Senate");
+  disable_type("Market");
+  disable_type("Library");
+  disable_type("University");
+  disable_type("Refinery");
+
+  set_population_cap(ATTACKER, 200);
+  set_population_cap(DEFENDER, 200);
+
+  for (nation = 1; nation < 3; nation++) {
+    give_good(nation, "Food", 50*(7-diff));
+    give_good(nation, "Timber", 50*(7-diff));
+    give_good(nation, "Wealth", 50*(7-diff));
+    give_good(nation, "Oil", 50*(7-diff));
+    give_good(nation, "Metal", 50*(7-diff));
+  }
+  
+  for (i = 3; i < 7; i++) {
+    give_good(nation, "Food", 100);
+    give_good(nation, "Timber", 100);
+    give_good(nation, "Wealth", 100);
+    give_good(nation, "Oil", 100);
+    give_good(nation, "Metal", 100);  
+  }
+
+  //insert Redoubts for all
+
+  int x;
+  int y;
+  int unit;
+  int dir;
+  int go_times;
+
+  //insert units and redoubt for both
+  for (nation = 1; nation < 3; nation++) {
+    tribe = find_nation(nation);
+    force_transport_ability(nation);
+    disable_city_defeat(nation);
+    x = get_starting_loc_x(nation);
+    y = get_starting_loc_y(nation);
+    create_building_near(nation, x, y, "Redoubt", 15);
+    go_times = diff;
+    if (nation == 1) {
+      go_times = 1;
+    }
+    //if (diff > 2) {
+    create_unit(nation, x + 2, y, "Citizen", 5);
+   // }      
+    if (diff > 2) {
+    create_unit(nation, x + 2, y, "Citizen", 5);
+    }         
+    for (z = 0; z < go_times; z++) {
+
+    create_unit(nation, x + 2, y, "General", 1);
+    
+    create_unit(nation, x + 2, y, "Supply Wagon", 1); 
+    if (cur_age == 6) {
+      create_unit(nation, x + 2, y, "Bazooka", 3);
+      //for just Americans
+      create_unit(nation, x + 2, y, "Heavy Machine Gun", 1);
+      create_unit(nation, x + 2, y, "Armored Scout Car", 2);    
+      if (find_nation(nation) == "Americans") {
+        create_unit(nation, x + 2, y, "Marines Infantry", 3);
+        create_unit(nation, x + 2, y, "Heavy Machine Gun", 1);
+        create_unit(nation, x + 2, y, "Armored Scout Car", 2);
+        create_unit(nation, x + 2, y, "Tank", 2);
+        create_unit(nation, x + 2, y, "Howitzer", 3);
+      }
+      else if (find_nation(nation) == "Russians") {
+        create_unit(nation, x + 2, y, "Red Guards Infantry", 3);
+        create_unit(nation, x + 2, y, "Heavy Machine Gun", 1);
+        create_unit(nation, x + 2, y, "Armored Scout Car", 2);
+        create_unit(nation, x + 2, y, "Tank", 2);
+        create_unit(nation, x + 2, y, "Katyusha Rocket", 1);
+      }
+    }
+    else if (cur_age == 7) {
+      create_unit(nation, x + 2, y, "Advanced Machine Gun", 1);
+      create_unit(nation, x + 2, y, "Armored Cavalry", 2);        
+      create_unit(nation, x + 2, y, "Anti-Tank Rifle", 3);
+      if (find_nation(nation) == "Americans") {
+        create_unit(nation, x + 2, y, "Assualt Marines", 3);
+        create_unit(nation, x + 2, y, "Main Battle Tank", 2);
+        create_unit(nation, x + 2, y, "Rocket Artillery", 3);
+      }
+      else if (find_nation(nation) == "Russians") {
+        create_unit(nation, x + 2, y, "Shock Infantry", 3);
+        create_unit(nation, x + 2, y, "T80 Tank", 2);
+        create_unit(nation, x + 2, y, "Rocket Artillery", 3);
+      }
+    }
+    }
+    //position right
+    for (u = num_units(nation); u > 0; u--) {
+      unit = find_unit(nation, "");
+      add_to_group(nation, unit);
+    }
+    
+    //get the proper angle
+    dir = get_conquest_invasion_dir();
+    dir = dir + 180;
+    if (dir >= 360) {
+      dir = dir - 360;
+    }
+
+    group_jump_move(nation, x, y, dir);
+
+    disable_type_by_tribe("General", tribe);
+    disable_type_by_tribe("Spy", tribe);
+
+    //modern age
+    if (cur_age == 6) {
+      //light-inf
+      if (tribe == "Americans") {
+        disable_type_by_tribe("Marine Infantry", "Americans");
+        enable_type_by_tribe("Marine Infantry", "Americans", "Redoubt", 0, 0);
+        if (!have_tech(nation, "Marine Infantry")) {
+          gain_upgrade(nation, "Marine Infantry");
+        }        
+      }
+      else if (tribe == "Russians") {
+        disable_type_by_tribe("Red Guards Infantry", "Russians");
+        enable_type_by_tribe("Red Guards Infantry", "Russians", "Redoubt", 0, 0);
+        if (!have_tech(nation, "Red Guards Infantry")) {
+          gain_upgrade(nation, "Red Guards Infantry");
+        }        
+      }
+      else {
+        disable_type_by_tribe("Infantry", tribe);
+        enable_type_by_tribe("Infantry", tribe, "Redoubt", 0, 0);
+        if (!have_tech(nation, "Infantry")) {
+          gain_upgrade(nation, "Infantry");
+        }        
+      }
+      //heavy-inf
+      disable_type_by_tribe("Bazooka", tribe);
+      enable_type_by_tribe("Bazooka", tribe, "Redoubt", 0, 1);
+      if (!have_tech(nation, "Bazooka")) {
+        gain_upgrade(nation, "Bazooka");
+      }      
+      //machine gun
+      disable_type_by_tribe("Heavy Machine Gun", tribe);
+      enable_type_by_tribe("Heavy Machine Gun", tribe, "Redoubt", 0, 2);
+      if (!have_tech(nation, "Heavy Machine Gun")) {
+        gain_upgrade(nation, "Heavy Machine Gun");
+      }        
+      //flame
+      disable_type_by_tribe("Flamethrower", tribe);
+      enable_type_by_tribe("Flamethrower", tribe, "Redoubt", 0, 3);
+      if (!have_tech(nation, "Flamethrower")) {
+        gain_upgrade(nation, "Flamethrower");
+      }   
+      //special forces
+      disable_type_by_tribe("Special Forces", tribe);
+      enable_type_by_tribe("Special Forces", tribe, "Redoubt", 0, 4);
+      if (!have_tech(nation, "Special Forces")) {
+        gain_upgrade(nation, "Special Forces");
+        }
+      //cars
+      disable_type_by_tribe("Armored Scout Car", tribe);
+      enable_type_by_tribe("Armored Scout Car", tribe, "Redoubt", 1, 0);
+      if (!have_tech(nation, "Armored Scout Car")) {
+        gain_upgrade(nation, "Armored Scout Car");
+      }
+      if (tribe == "Americans") {
+      //tanks
+        disable_type_by_tribe("Tank", tribe);
+        enable_type_by_tribe_with_type_name("SHERMAN", tribe, "Redoubt", 1, 1);
+        if (!have_tech(nation, "Tank")) {
+          gain_upgrade(nation, "Tank");
+        }
+      }
+      else if (tribe == "Russians") {
+        disable_type_by_tribe("Tank", tribe);
+        enable_type_by_tribe_with_type_name("T34", tribe, "Redoubt", 1, 1);
+        if (!have_tech(nation, "Tank")) {
+          gain_upgrade(nation, "Tank");
+        }
+      }
+      else {
+        disable_type_by_tribe("Tank", tribe);
+        enable_type_by_tribe("Tank", tribe, "Redoubt", 1, 1);
+        if (!have_tech(nation, "Tank")) {
+          gain_upgrade(nation, "Tank");
+        }
+      }
+      //siege
+      if (tribe == "Russians") {
+        disable_type_by_tribe("Katyusha Rocket", "Russians");
+        enable_type_by_tribe("Katyusha Rocket", "Russians", "Redoubt", 1, 2);
+        if (!have_tech(nation, "Katyusha Rocket")) {
+          gain_upgrade(nation, "Katyusha Rocket");
+        }        
+      }
+      else {
+        disable_type_by_tribe("Howitzer", tribe);
+        enable_type_by_tribe("Howitzer", tribe, "Redoubt", 1, 2);
+        if (!have_tech(nation, "Howitzer")) {
+          gain_upgrade(nation, "Howitzer");
+        }        
+      }
+      //anti-air
+      disable_type_by_tribe("Anti-Aircraft Battery", tribe);
+      enable_type_by_tribe("Anti-Aircraft Battery", tribe, "Redoubt", 1, 3);
+      if (!have_tech(nation, "Anti-Aircraft Battery")) {
+        gain_upgrade(nation, "Anti-Aircraft Battery");
+      }
+      //helicopter
+      disable_type_by_tribe("Helicopter", tribe);
+      enable_type_by_tribe("Helicopter", tribe, "Redoubt", 1, 4);
+      if (!have_tech(nation, "Helicopter")) {
+        gain_upgrade(nation, "Helicopter");
+      }
+      //spy
+      //disable_type_by_tribe("Spy", tribe);
+      //enable_type_by_tribe("Spy", tribe, "Redoubt", 1, 4);
+      //if (!have_tech(nation, "Spy")) {
+      //  gain_upgrade(nation, "Spy");
+      //}
+      //citizen
+      disable_type_by_tribe("Citizen", tribe);
+      enable_type_by_tribe("Citizen", tribe, "Redoubt", 2, 0);
+      if (!have_tech(nation, "Citizen")) {
+        gain_upgrade(nation, "Citizen");
+      }
+      //General
+      disable_type_by_tribe("General", tribe);
+      enable_type_by_tribe("General", tribe, "Redoubt", 2, 1);
+      if (!have_tech(nation, "General")) {
+        gain_upgrade(nation, "General");
+      }      
+      //supply wagon
+      if (tribe == "Russians") {
+        disable_type_by_tribe("Supply Wagon", "Russians");
+        enable_type_by_tribe("Supply Wagon", "Russians", "Redoubt", 2, 2);
+        if (!have_tech(nation, "Supply Wagon")) {
+          gain_upgrade(nation, "Supply Wagon");
+        }
+      }
+      else {
+        disable_type_by_tribe("Supply Wagon", tribe);
+        enable_type_by_tribe("Supply Wagon", tribe, "Redoubt", 2, 2);
+        if (!have_tech(nation, "Supply Wagon")) {
+          gain_upgrade(nation, "Supply Wagon");
+        }
+      }
+
+    }
+    else if (cur_age == 7) {
+      //light-inf
+      if (tribe == "Americans") {
+        disable_type_by_tribe("Assault Marines", "Americans");
+        enable_type_by_tribe("Assault Marines", "Americans", "Redoubt", 0, 0);
+        if (!have_tech(nation, "Assault Marines")) {
+          gain_upgrade(nation, "Assault Marines");
+        }        
+      }
+      else if (tribe == "Russians") {
+        disable_type_by_tribe("Shock Infantry", "Russians");
+        enable_type_by_tribe("Shock Infantry", "Russians", "Redoubt", 0, 0);
+        if (!have_tech(nation, "Shock Infantry")) {
+          gain_upgrade(nation, "Shock Infantry");
+        }        
+      }
+      else {
+        disable_type_by_tribe("Assault Infantry", tribe);
+        enable_type_by_tribe("Assault Infantry", tribe, "Redoubt", 0, 0);
+        if (!have_tech(nation, "Assault Infantry")) {
+          gain_upgrade(nation, "Assault Infantry");
+        }        
+      }
+      //heavy-inf
+      disable_type_by_tribe("Anti-Tank Missile", tribe);
+      enable_type_by_tribe("Anti-Tank Missile", tribe, "Redoubt", 0, 1);
+      if (!have_tech(nation, "Anti-Tank Missile")) {
+        gain_upgrade(nation, "Anti-Tank Missile");
+      }      
+      //machine gun
+      disable_type_by_tribe("Advanced Machine Gun", tribe);
+      enable_type_by_tribe("Advanced Machine Gun", tribe, "Redoubt", 0, 2);
+      if (!have_tech(nation, "Advanced Machine Gun")) {
+        gain_upgrade(nation, "Advanced Machine Gun");
+      }    
+      //flame
+      disable_type_by_tribe("Flamethrower", tribe);
+      enable_type_by_tribe("Flamethrower", tribe, "Redoubt", 0, 3);
+      if (!have_tech(nation, "Flamethrower")) {
+        gain_upgrade(nation, "Flamethrower");
+      }             
+
+      //special forces
+      disable_type_by_tribe("Elite Special Forces", tribe);
+      enable_type_by_tribe("Elite Special Forces", tribe, "Redoubt", 0, 4);
+      if (!have_tech(nation, "Elite Special Forces")) {
+        gain_upgrade(nation, "Elite Special Forces");
+        }
+      //cars
+      if (tribe == "Russians") {
+        disable_type_by_tribe("Armored Cavalry", tribe);
+        enable_type_by_tribe("Armored Cavalry", tribe, "Redoubt", 1, 0);
+        if (!have_tech(nation, "Armored Cavalry")) {
+          gain_upgrade(nation, "Armored Cavalry");
+        }
+      }
+      else {
+        disable_type_by_tribe("Armored Cavalry", tribe);
+        enable_type_by_tribe("Armored Cavalry", tribe, "Redoubt", 1, 0);
+        if (!have_tech(nation, "Armored Cavalry")) {
+          gain_upgrade(nation, "Armored Cavalry");
+        }
+      }
+      //tanks
+      if (tribe == "Russians") {
+        disable_type_by_tribe("T80 Tank", tribe);
+        enable_type_by_tribe("T80 Tank", tribe, "Redoubt", 1, 1);
+        if (!have_tech(nation, "T80 Tank")) {
+          gain_upgrade(nation, "T80 Tank");
+        }
+      }
+      else if (tribe == "Americans") {
+        disable_type_by_tribe("Main Battle Tank", tribe);
+        enable_type_by_tribe_with_type_name("ABRAM", tribe, "Fort", 1, 1);
+        if (!have_tech(nation, "Main Battle Tank")) {
+          gain_upgrade(nation, "Main Battle Tank");
+        }
+      }
+      else {
+        disable_type_by_tribe("Main Battle Tank", tribe);
+        enable_type_by_tribe("Main Battle Tank", tribe, "Redoubt", 1, 1);
+        if (!have_tech(nation, "Main Battle Tank")) {
+          gain_upgrade(nation, "Main Battle Tank");
+        }
+      }
+      //siege
+      if (tribe == "Russians") {
+        disable_type_by_tribe("Rocket Artillery", "Russians");
+        enable_type_by_tribe("Rocket Artillery", "Russians", "Redoubt", 1, 2);
+        if (!have_tech(nation, "Rocket Artillery")) {
+          gain_upgrade(nation, "Rocket Artillery");
+        }        
+      }
+      else {
+        disable_type_by_tribe("Rocket Artillery", tribe);
+        enable_type_by_tribe("Rocket Artillery", tribe, "Redoubt", 1, 2);
+        if (!have_tech(nation, "Rocket Artillery")) {
+          gain_upgrade(nation, "Rocket Artillery");
+        }        
+      }      
+      //anti-air
+      disable_type_by_tribe("Anti-Aircraft Missile", tribe);
+      enable_type_by_tribe("Anti-Aircraft Missile", tribe, "Redoubt", 1, 3);
+      if (!have_tech(nation, "Anti-Aircraft Missile")) {
+        gain_upgrade(nation, "Anti-Aircraft Missile");
+      }
+      //helicopter
+      disable_type_by_tribe("Attack Helicopter", tribe);
+      enable_type_by_tribe("Attack Helicopter", tribe, "Redoubt", 1, 4);
+      if (!have_tech(nation, "Attack Helicopter")) {
+        gain_upgrade(nation, "Attack Helicopter");
+      }
+      //spy
+      //disable_type_by_tribe("Spy", tribe);
+      //enable_type_by_tribe("Spy", tribe, "Redoubt", 1, 4);
+      //if (!have_tech(nation, "Spy")) {
+      // // gain_upgrade(nation, "Spy");
+      //}
+      //citizen
+      disable_type_by_tribe("Citizen", tribe);
+      enable_type_by_tribe("Citizen", tribe, "Redoubt", 2, 0);
+      if (!have_tech(nation, "Citizen")) {
+        gain_upgrade(nation, "Citizen");
+      }
+      //General
+      disable_type_by_tribe("General", tribe);
+      enable_type_by_tribe("General", tribe, "Redoubt", 2, 1);
+      if (!have_tech(nation, "General")) {
+        gain_upgrade(nation, "General");
+      }      
+      //merchant
+      //if (tribe == "Russians") {
+      //  disable_type_by_tribe("Merchant", "Russians");
+      //  enable_type_by_tribe("Merchant", "Russians", "Redoubt", 2, 1);
+       // if (!have_tech(nation, "Merchant")) {
+       //   gain_upgrade(nation, "Merchant");
+      //  }
+      //}
+      //else {
+       // disable_type_by_tribe("Merchant", tribe);
+        //enable_type_by_tribe("Merchant", tribe, "Redoubt", 2, 1);
+       // if (!have_tech(nation, "Merchant")) {
+       //   gain_upgrade(nation, "Merchant");
+       // }
+      //}
+      //supply wagon
+      if (tribe == "Russians") {
+        disable_type_by_tribe("Supply Wagon", "Russians");
+        enable_type_by_tribe("Supply Wagon", "Russians", "Redoubt", 2, 2);
+        if (!have_tech(nation, "Supply Wagon")) {
+          gain_upgrade(nation, "Supply Wagon");
+        }
+      }
+      else {
+        disable_type_by_tribe("Supply Wagon", tribe);
+        enable_type_by_tribe("Supply Wagon", tribe, "Redoubt", 2, 2);
+        if (!have_tech(nation, "Supply Wagon")) {
+          gain_upgrade(nation, "Supply Wagon");
+        }
+      }
+
+    }
+  }
+
+}

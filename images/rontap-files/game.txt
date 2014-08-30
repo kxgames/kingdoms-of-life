@@ -1,0 +1,21 @@
+
+
+#PLAYERPROFILE_NAME
+#xs 320
+#caption Welcome!
+#editbox
+#itemlist
+Please enter a player name:
+
+#PROFILEALREADY
+#xs 320
+That profile name is already taken.
+
+#NOT_IMPLEMENTED
+#xs 320
+#caption Not Implemented
+This feature has not yet been implemented.
+
+
+
+# ; This line must remain at end of file

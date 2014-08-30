@@ -1,0 +1,546 @@
+scenario
+{
+
+labels {
+}
+
+static int x1 = 0;
+static int y1 = 0;
+static int x2 = 0;
+static int y2 = 0;
+static int x3 = 0;
+static int y3 = 0;
+static int x4 = 0;
+static int y4 = 0;
+static int quad = 0;
+static int x = 0;
+static int y = 0;
+static int fx = 0;
+static int fy = 0;
+static int ax = 0;
+static int ay = 0;
+static int alexander_id = 0;
+static int units_escaped = 0;
+static int units_killed = 0;
+static int num_guys = 2;
+static int totalguys = 29;
+
+static int diff = get_difficulty();
+
+run_once {
+  set_ctw_int("units_left", 0);
+  disable_all_triggers();
+  disable_city_defeat(1);
+  disable_city_defeat(2);
+
+  add_visibility(2, 1);
+  
+  switch (diff) {
+    case 1:
+      set_neutral_attrition(1, 14);
+      break;
+    case 2:
+      set_neutral_attrition(1, 12);
+      break;
+    case 3:
+      set_neutral_attrition(1, 8);
+      break;
+    case 4:
+      set_neutral_attrition(1, 6);
+      break;
+    case 5:
+      set_neutral_attrition(1, 5);
+      break;
+    case 6:
+      set_neutral_attrition(1, 4);
+      break;
+  }
+
+  set_neutral_attrition(1, 17 - diff);
+
+  num_guys = diff / 2;
+
+  //get starting quadrant
+  x = get_starting_loc_x (1);
+  y = get_starting_loc_y (1);
+  
+  //quad 1
+  if (x < world_x_size() / 2) {
+    if (y < world_y_size() / 2) {
+      quad = 2;
+      fx = world_x_size() - 5;
+      fy = world_y_size() - 5;
+    }
+    else {
+      quad = 3;
+      fx = world_x_size() - 5;
+      fy = 5;
+    }
+  }
+  else {
+    if (y < world_y_size() / 2) {
+      quad = 1;
+      fx = 5;
+      fy = world_y_size() - 5;
+    }
+    else {
+      quad = 4;
+      fx = 5;
+      fy = 5;
+    }
+  }
+  x = fx;
+  y = fy;
+  while(!map_is_buildable(x, y)) {
+    if (x > 35) {
+      x--;
+    }
+    else {
+      x++;
+    }
+    if (y > 35) {
+      y--;
+    }
+    else {
+      y++;
+    }
+  }
+  create_building(1, x, y, "Lookout");
+  ping(1, 1, x, y);
+
+///////////setup healing points///////////////////
+  do{
+    x1 = rand_int(15, world_x_size()/2-20);
+    y1 = rand_int(15, world_y_size()/2-20);
+  }while(!map_is_buildable(x1, y1) || object_type_near(2, "Tower", 1, x1, y1, 15));
+  create_building(1, x1, y1, "Temple");
+  set_attrition_free_point(1, x1, y1, 14);
+
+  do{
+    x2 = rand_int(world_x_size()/2+20, world_x_size() - 15);
+    y2 = rand_int(15, world_y_size()/2-20);
+  }while(!map_is_buildable(x2, y2) || object_type_near(2, "Tower", 1, x2, y2, 15));
+  create_building(1, x2, y2, "Temple");
+  set_attrition_free_point(1, x2, y2, 14);
+
+  do{
+    x3 = rand_int(15, world_x_size()/2-20);
+    y3 = rand_int(world_y_size()/2+20, world_y_size() - 15);
+  }while(!map_is_buildable(x3, y3) || object_type_near(2, "Tower", 1, x3, y3, 15));
+  create_building(1, x3, y3, "Temple");
+  set_attrition_free_point(1, x3, y3, 14);
+
+  do{
+    x4 = rand_int(world_x_size()/2+20, world_x_size() - 15);
+    y4 = rand_int(world_y_size()/2+20, world_y_size() - 15);
+  }while(!map_is_buildable(x4, y4) || object_type_near(2, "Tower", 1, x4, y4, 15));
+  create_building(1, x4, y4, "Temple");
+  set_attrition_free_point(1, x4, y4, 14);
+////////////////////////////////////////////////////
+  if (get_ctw_campaign() == "Alexander the Great") {
+    alexander_id = find_unit(1, "Alexander");
+  }
+  else if (get_ctw_campaign() == "Napoleon") {
+    alexander_id = find_unit(1, "Napoleon");
+  }
+  else {
+    alexander_id = find_unit(1, "General");
+  }
+
+  ctw_add_objective_text($S("Use the Temples to heal."), "Temple_Obj", 0);
+  add_objective_text(parse("$s0 units escaped.", units_escaped), "UE_Obj", 0);
+  add_objective_text(parse("$s0 units lost.", units_killed), "UK_Obj", 0);
+  add_objective_text(parse("$s0 units left.", num_units(1)), "UL_Obj", 0);
+  
+  enable_trigger("SafeHaven1");
+  enable_trigger("SafeHaven2");
+  enable_trigger("SafeHaven3");
+  enable_trigger("SafeHaven4");
+  enable_trigger("UnitPull");
+  enable_trigger("Kill_Message");
+  set_timer("UP", 30);
+
+  x = world_x_size() / 2;
+  y = world_y_size() / 2;
+  while(!map_is_buildable(x, y)) {
+    x++;
+    y--;
+  }
+  create_building(2, x, y, "Tower");
+  set_timer("GATO", 3);
+
+  totalguys = num_units(1);
+}
+
+ax = object_position_x(1, alexander_id);
+ay = object_position_y(1, alexander_id);
+
+if (ctw_reinforcements_arrived(1)) {
+  unit_id = find_unit(1, "Supply Wagon");
+  kill_unit_anim(1, unit_id, 1);
+  totalguys += 10;
+}
+
+trigger Kill_Message(unit_any_killed(1))
+{
+  units_killed++;
+  if (units_escaped + units_killed + num_units(1) > totalguys) {
+    units_killed--;
+  }
+  if (units_killed == 1) {
+    change_objective_text("UK_Obj", parse("$s0 unit lost.", units_killed));
+  }
+  else {
+    change_objective_text("UK_Obj", parse("$s0 units lost.", units_killed));
+  }
+
+  num_decoys = 0;
+  for (i = 0; i < num_units(1); i++) {
+    unit_id = find_unit(1, "");
+    if (is_decoy(1, unit_id)) {
+      num_decoys++;
+    }
+  }
+  xnum_guys = num_units(1) - num_decoys;
+
+  if (xnum_guys == 1) {
+    change_objective_text("UL_Obj", parse("$s0 unit left.", xnum_guys));
+  }
+  else {
+    change_objective_text("UL_Obj", parse("$s0 units left.", xnum_guys));
+  }
+
+  enable_trigger("Kill_Message");
+}
+
+trigger UnitPull(timer_expired("UP"))
+{
+  x = world_x_size() / 2;
+  y = world_y_size() / 2;
+  
+  build_id = -1;
+
+  num_tower_guy = rand_int(1, num_type(2, "Tower"));
+
+  for (i = 0; i < num_tower_guy; i++) {
+    build_id = find_build(2, "Tower");
+  }
+  x = object_position_x(2, build_id);
+  y = object_position_y(2, build_id);
+  
+  create_unit_in_group(2, x, y, "Light Horse", num_guys);
+  create_unit_in_group(2, x, y, "Horse Archer", num_guys);
+  group_attack_order(2, 1, alexander_id);
+  
+  num_guys++;
+
+  enable_trigger("UnitPull");
+  set_timer("UP", 180/diff);
+}
+
+trigger SafeHaven1(any_object_near(1, 1, x1, y1, 14) && timer_expired("SH1") != 0)
+{
+  for (i = 0; i < num_type_upgrade(1, "Javelineers"); i++) {
+    unit_id = find_unit(1, "Javelineers");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x1, y1, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Phalanx"); i++) {
+    unit_id = find_unit(1, "Phalanx");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x1, y1, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Archers"); i++) {
+    unit_id = find_unit(1, "Archers");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x1, y1, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Light Horse"); i++) {
+    unit_id = find_unit(1, "Light Horse");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x1, y1, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Companion"); i++) {
+    unit_id = find_unit(1, "Companion");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x1, y1, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Horse Archer"); i++) {
+    unit_id = find_unit(1, "Horse Archer");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x1, y1, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Scout"); i++) {
+    unit_id = find_unit(1, "Scout");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x1, y1, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  if (object_health(1, alexander_id) < 100 && object_near(1, alexander_id, x1, y1, 14)) {
+    heal_object(1, alexander_id, 5);
+  }
+  enable_trigger("SafeHaven1");
+  set_timer("SH1", 2);
+}
+
+trigger SafeHaven2(any_object_near(1, 1, x2, y2, 14) && timer_expired("SH2") != 0)
+{
+  for (i = 0; i < num_type_upgrade(1, "Javelineers"); i++) {
+    unit_id = find_unit(1, "Javelineers");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x2, y2, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Phalanx"); i++) {
+    unit_id = find_unit(1, "Phalanx");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x2, y2, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Archers"); i++) {
+    unit_id = find_unit(1, "Archers");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x2, y2, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Light Horse"); i++) {
+    unit_id = find_unit(1, "Light Horse");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x2, y2, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Companion"); i++) {
+    unit_id = find_unit(1, "Companion");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x2, y2, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Horse Archer"); i++) {
+    unit_id = find_unit(1, "Horse Archer");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x2, y2, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Scout"); i++) {
+    unit_id = find_unit(1, "Scout");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x2, y2, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  if (object_health(1, alexander_id) < 100 && object_near(1, alexander_id, x2, y2, 14)) {
+    heal_object(1, alexander_id, 5);
+  }
+  enable_trigger("SafeHaven2");
+  set_timer("SH2", 2);
+}
+
+trigger SafeHaven3(any_object_near(1, 1, x3, y3, 14) && timer_expired("SH3") != 0)
+{
+  for (i = 0; i < num_type_upgrade(1, "Javelineers"); i++) {
+    unit_id = find_unit(1, "Javelineers");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x3, y3, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Phalanx"); i++) {
+    unit_id = find_unit(1, "Phalanx");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x3, y3, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Archers"); i++) {
+    unit_id = find_unit(1, "Archers");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x3, y3, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Light Horse"); i++) {
+    unit_id = find_unit(1, "Light Horse");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x3, y3, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Companion"); i++) {
+    unit_id = find_unit(1, "Companion");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x3, y3, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Horse Archer"); i++) {
+    unit_id = find_unit(1, "Horse Archer");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x3, y3, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Scout"); i++) {
+    unit_id = find_unit(1, "Scout");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x3, y3, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  if (object_health(1, alexander_id) < 100 && object_near(1, alexander_id, x3, y3, 14)) {
+    heal_object(1, alexander_id, 5);
+  }
+  enable_trigger("SafeHaven3");
+  set_timer("SH3", 2);
+}
+
+trigger SafeHaven4(any_object_near(1, 1, x4, y4, 14) && timer_expired("SH4") != 0)
+{
+  for (i = 0; i < num_type_upgrade(1, "Javelineers"); i++) {
+    unit_id = find_unit(1, "Javelineers");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x4, y4, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Phalanx"); i++) {
+    unit_id = find_unit(1, "Phalanx");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x4, y4, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Archers"); i++) {
+    unit_id = find_unit(1, "Archers");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x4, y4, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Light Horse"); i++) {
+    unit_id = find_unit(1, "Light Horse");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x4, y4, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Companion"); i++) {
+    unit_id = find_unit(1, "Companion");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x4, y4, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+  for (i = 0; i < num_type_upgrade(1, "Horse Archer"); i++) {
+    unit_id = find_unit(1, "Horse Archer");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x4, y4, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  for (i = 0; i < num_type_upgrade(1, "Scout"); i++) {
+    unit_id = find_unit(1, "Scout");
+    if (object_health(1, unit_id) < 100 && object_near(1, unit_id, x4, y4, 14)) {
+      heal_object(1, unit_id, 5);
+    }
+  }
+
+  if (object_health(1, alexander_id) < 100 && object_near(1, alexander_id, x4, y4, 14)) {
+    heal_object(1, alexander_id, 5);
+  }
+  enable_trigger("SafeHaven4");
+  set_timer("SH4", 2);
+}
+
+if(any_object_near(1, 1, fx, fy, 10))
+{
+  for (i = 0; i < num_military_units(1); i++) {
+    unit_id = find_military(1);
+    if (object_near(1, unit_id, fx, fy, 10) && !is_decoy(1, unit_id)) {
+      kill_unit_anim(1, unit_id, 1);
+      units_escaped++;
+      i = 0;
+    }
+  }
+
+  for (i = 0; i < num_type(1, "Scout"); i++) {
+    unit_id = find_unit(1, "Scout");
+    if (object_near(1, unit_id, fx, fy, 10) && !is_decoy(1, unit_id)) {
+      kill_unit_anim(1, unit_id, 1);
+      units_escaped++;
+      i = 0;
+    }
+  }
+
+  if (units_escaped == 1) {
+    change_objective_text("UE_Obj", parse("$s0 unit escaped.", units_escaped));
+  }
+  else {
+    change_objective_text("UE_Obj", parse("$s0 units escaped.", units_escaped));
+  }
+
+  num_decoys = 0;
+  for (i = 0; i < num_units(1); i++) {
+    unit_id = find_unit(1, "");
+    if (is_decoy(1, unit_id)) {
+      num_decoys++;
+    }
+  }
+  xnum_guys = num_units(1) - num_decoys;
+
+  if (xnum_guys == 1) {
+    change_objective_text("UL_Obj", parse("$s0 unit left.", xnum_guys));
+  }
+  else {
+    change_objective_text("UL_Obj", parse("$s0 units left.", xnum_guys));
+  }
+
+  set_ctw_int("units_escaped", units_escaped);
+}
+
+if (num_military_units(1) < 2 && object_near(1, alexander_id, fx, fy, 10)) {
+  units_escaped++;
+  if (units_escaped == 1) {
+    change_objective_text("UE_Obj", parse("$s0 unit escaped.", units_escaped));
+  }
+  else {
+    change_objective_text("UE_Obj", parse("$s0 units escaped.", units_escaped));
+  }
+
+  num_decoys = 0;
+  for (i = 0; i < num_units(1); i++) {
+    unit_id = find_unit(1, "");
+    if (is_decoy(1, unit_id)) {
+      num_decoys++;
+    }
+  }
+  xnum_guys = num_units(1) - num_decoys;
+  xnum_guys--;
+
+  if (xnum_guys == 1) {
+    change_objective_text("UL_Obj", parse("$s0 unit left.", xnum_guys));
+  }
+  else {
+    change_objective_text("UL_Obj", parse("$s0 units left.", xnum_guys));
+  }
+  
+  set_ctw_int("units_escaped", units_escaped);
+  victory(1);
+}
+
+if (timer_expired("GATO")) {
+  group_attack_to_order(2, ax, ay);
+  set_timer("GATO", 3);
+}
+
+if(time() >= get_time_limit()) {
+  defeat(1);
+}
+
+if (num_units(1) < 1) {
+  defeat(1);
+}
+
+}

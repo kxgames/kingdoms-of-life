@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Warroom (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute-->
+<TRIBE name="Warsaw Pact">
+  <LEADERS>
+    <LEADER>Walter Ulbricht</LEADER>
+    <LEADER>Erich Honecker</LEADER>
+    <LEADER>Nicolae Ceauşescu</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Berlin</CITY>
+    <CITY>Budapest</CITY>
+    <CITY>Warsaw</CITY>
+    <CITY>Prague</CITY>
+    <CITY>Bucharest</CITY>
+    <CITY>Sofia</CITY>
+    <CITY>Belgrade</CITY>
+    <CITY>Debrecen</CITY>
+    <CITY>Miskolc</CITY>
+    <CITY>Pecs</CITY>
+    <CITY>Lodz</CITY>
+    <CITY>Krakow</CITY>
+    <CITY>Wroclaw</CITY>
+    <CITY>Gdansk</CITY>
+    <CITY>Brno</CITY>
+    <CITY>Ostrava</CITY>
+    <CITY>Olomouc</CITY>
+    <CITY>Timisoara</CITY>
+    <CITY>Constanta</CITY>
+    <CITY>Brasov</CITY>
+    <CITY>Plovdiv</CITY>
+    <CITY>Varna</CITY>
+    <CITY>Burgas</CITY>
+    <CITY>Sliven</CITY>
+    <CITY>Prishtina</CITY>
+    <CITY>Nish</CITY>
+    <CITY>Kragujevac</CITY>
+    <CITY>Szeged</CITY>
+    <CITY>Szolnok</CITY>
+    <CITY>Hradec Kralove</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

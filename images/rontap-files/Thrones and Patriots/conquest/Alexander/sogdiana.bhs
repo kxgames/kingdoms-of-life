@@ -1,0 +1,769 @@
+
+int scenario thebes_falls(int who);
+int scenario sum_tribute( int offerer, int offeree );
+int scenario sum_goods( int who );
+
+scenario
+{
+
+  labels {
+    MACEDONIANS,
+    PERSIANS,
+    BARON1 = 8,//elephants
+    BARON2 = 7,//cataphracts
+    BARON3 = 5,//horse archers
+    BARON4 = 6,//anuyisa
+  }
+  
+  static int num_cat = 20;
+  static int food_gather = 2000;
+  static int wood_rate = 1;
+  
+  static int baron1_fort = find_build(BARON1, "Fort");
+  static int baron2_fort = find_build(BARON2, "Fort");
+  static int baron3_fort = find_build(BARON3, "Fort");
+  static int baron4_fort = find_build(BARON4, "Fort");
+  
+  static String damage_per;
+  static int damage_am;
+  
+  static int num_allies;
+  
+  static int diff = get_difficulty();
+  
+  static int attack_time = rand_int(6,15);
+  static int trib_time = rand_int(6,15);
+  static int farm_time = rand_int(2,5);
+  static String khan_name = $S("Al Khanoum");
+
+  int temp_trib;
+  int food_amount;
+  int timber_amount;
+  int metal_amount;
+  int wealth_amount;
+  int amount;
+
+  String leader_name;
+  
+  static int mace_status;
+  static int pers_status;
+  
+  static int skip_tribe[] = [0,0,0,0,0,0,0,0,0];
+  
+  static int pers_trib = diff * 200;
+  static int mace_trib = 800+diff*200;
+  static String farm_city = find_city_name(PERSIANS);
+  static String farm_city2 = find_capital(MACEDONIANS);
+  
+  int who;
+  int unit;
+  int building;
+  int x;
+  int y;
+  String city_name;
+
+  static int end_time = get_time_limit();
+  int cur_time;
+  int nation;
+
+  static int max_pop[] = [0,0,0,0,0,25, 30, 35, 40];
+  static int broken_sword[] = [0,0,0,0,0,0,0,0,0];
+
+  run_once {
+    if (farm_city == find_capital(PERSIANS)) {
+      farm_city = find_city_name(PERSIANS);
+    }
+    while (num_city_buildings(PERSIANS, farm_city, "Farm", 1) == 0) {
+      farm_city = find_city_name(PERSIANS);
+    }    
+    damage_am = 70 - diff * 10;
+    if (diff == 1) {
+      damage_per = $S("60%");
+      max_pop[BARON1] = 3;
+      max_pop[BARON2] = 5;
+      max_pop[BARON3] = 8;
+      max_pop[BARON4] = 7;
+    }
+    else if (diff == 2) {
+      damage_per = $S("50%");
+      max_pop[BARON1] = 4;
+      max_pop[BARON2] = 7;
+      max_pop[BARON3] = 10;
+      max_pop[BARON4] = 9;
+    }
+    else if (diff == 3) {
+      damage_per = $S("40%");
+      max_pop[BARON1] = 6;
+      max_pop[BARON2] = 11;
+      max_pop[BARON3] = 14;
+      max_pop[BARON4] = 13;
+    }
+    else if (diff == 4) {
+      damage_per = $S("30%");
+      max_pop[BARON1] = 8;
+      max_pop[BARON2] = 15;
+      max_pop[BARON3] = 18;
+      max_pop[BARON4] = 17;
+    }
+    else if (diff == 5) {
+      damage_per = $S("20%");
+      max_pop[BARON1] = 11;
+      max_pop[BARON2] = 20;
+      max_pop[BARON3] = 24;
+      max_pop[BARON4] = 23;
+    }
+    else if (diff == 6) {
+      damage_per = $S("10%");
+      max_pop[BARON1] = 14;
+      max_pop[BARON2] = 27;
+      max_pop[BARON3] = 30;
+      max_pop[BARON4] = 29;
+    }
+    set_seen(MACEDONIANS, BARON1, baron1_fort);
+    set_seen(MACEDONIANS, BARON2, baron2_fort);
+    set_seen(MACEDONIANS, BARON3, baron3_fort);
+    set_seen(MACEDONIANS, BARON4, baron4_fort);
+    ctw_add_objective_text($S("Capture the enemy capital(s)."), 1, "");
+    ctw_add_objective_text($S("Ally with or defeat the 4 nations in Forts."), 3, "");
+    ctw_add_objective_text($S("Hint: Click on the Forts to find out how to ally with them."), 2, "");
+    set_timer("new_units", 90 - diff * 10);
+    set_timer("barons_attack", rand_int(300,600));
+    disable_trigger("break_alliance1");
+    disable_trigger("break_alliance2");
+    disable_trigger("break_alliance3");
+    disable_trigger("break_alliance4");
+    enable_trigger("baron1_reject");
+    enable_trigger("baron3_reject");
+    enable_trigger("baron4_reject");
+    diplomacy_set_wait(2);
+  }
+ 
+  trigger (is_defeated(PERSIANS)) {
+    popup_dialog($S("The Persians have been defeated! Unfortunately the barons now have delusions of granduer, and each now dream of ruling this land. We will have to defeat them all if we want to conquer this province."));
+    for (nation = 5; nation < 9; nation++) {
+      for (tribe = 1; tribe < 9; tribe++) {
+        if (have_alliance(nation, tribe)) {
+          declare_war(nation, tribe);
+        }
+        if (!have_war(nation, tribe)) {
+          declare_war(nation, tribe);
+        }
+      }
+      for (z = 0; z < num_type(MACEDONIANS, "War Elephant"); z++) {
+        unit = find_all_unit(MACEDONIANS, "War Elephants");
+        switch_teams(BARON1, MACEDONIANS, unit);
+      }
+      for (z = 0; z < num_type(MACEDONIANS, "Cataphract"); z++) {
+        unit = find_all_unit(MACEDONIANS, "Cataphract");
+        switch_teams(BARON2, MACEDONIANS, unit);
+      }
+      for (z = 0; z < num_type(MACEDONIANS, "Horse Archer"); z++) {
+        unit = find_all_unit(MACEDONIANS, "Horse Archer");
+        switch_teams(BARON3, MACEDONIANS, unit);
+      }      
+      for (z = 0; z < num_type(MACEDONIANS, "Anusiya"); z++) {
+        unit = find_all_unit(MACEDONIANS, "Anusiya");
+        switch_teams(BARON4, MACEDONIANS, unit);
+      }        
+      for (i = 5; i < 9; i++) {
+        diplomacy_set_wait(i);
+      }
+      stop_timer("B1");
+      stop_timer("B2");
+      stop_timer("B3");
+      stop_timer("B4");
+      set_timer("new_units", 15 - (5 * diff) - (5 * num_allies));
+      set_timer("barons_attack", rand_int(30,90));
+      ctw_remove_objective(2);
+      ctw_remove_objective(3);
+      ctw_objective_complete(1);
+      
+    }
+    ctw_add_objective_text($S("Destroy the enemy Fort(s)."), 4, "");
+    remove_objective(1);
+  }
+ 
+  if (timer_expired("B1")) {
+    if (population(MACEDONIANS) < population_cap(MACEDONIANS)) {
+      if (num_type(MACEDONIANS, "War Elephant") < max_pop[BARON1]) {
+        building = find_build(BARON1, "Fort");
+        x = object_position_x(BARON1, building) + 2;
+        y = object_position_y(BARON1, building);
+        create_unit(MACEDONIANS, x, y, "War Elephant", 1);
+      }
+    }
+    if (building > 0) {
+      set_timer("B1", 30+diff*5);
+    }
+  }
+
+  if (timer_expired("B2")) {
+    building = find_build(BARON2, "Fort");
+    if (population(MACEDONIANS) < population_cap(MACEDONIANS)) {
+      if (num_type(MACEDONIANS, "Cataphract") < max_pop[BARON2]) {
+        x = object_position_x(BARON2, building) + 2;
+        y = object_position_y(BARON2, building);
+        create_unit(MACEDONIANS, x, y, "Cataphract", 1);
+      }
+    }
+    if (building > 0) {
+      set_timer("B2", 30+diff*5);
+    }  
+  }
+  
+  if (timer_expired("B3")) {
+    if (population(MACEDONIANS) < population_cap(MACEDONIANS)) {
+      if (num_type(MACEDONIANS, "Horse Archer") < max_pop[BARON3]) {
+        building = find_build(BARON3, "Fort");
+        x = object_position_x(BARON3, building) + 2;
+        y = object_position_y(BARON3, building);
+        create_unit(MACEDONIANS, x, y, "Horse Archer", 1);
+      }
+    }
+    if (building > 0) {
+      set_timer("B3", 30+diff*5);
+    }  
+  }  
+
+  if (timer_expired("B4")) {
+    if (population(MACEDONIANS) < population_cap(MACEDONIANS)) {
+      if (num_type(MACEDONIANS, "Anusiya") < max_pop[BARON4]) {
+        building = find_build(BARON4, "Fort");
+        x = object_position_x(BARON4, building) + 2;
+        y = object_position_y(BARON4, building);
+        create_unit(MACEDONIANS, x, y, "Anusiya", 1);
+      }
+    }
+    if (building > 0) {
+      set_timer("B4", 30+diff*5);
+    }  
+  }
+  
+  trigger (have_alliance(MACEDONIANS, BARON1)) {
+    for (i = 0; i < num_units(BARON1); i++) {
+      unit = find_unit(BARON1, "");
+      switch_teams(MACEDONIANS, BARON1, unit);
+    }
+    for (i = 6; i < 9; i++) {
+      if (have_alliance(i, MACEDONIANS)) {
+        make_alliance(BARON1, i);
+      }
+    }
+    for (i = 0; i < num_cities(BARON1); i++) {
+      building = find_city_id(find_city_name(BARON1));
+      switch_teams(MACEDONIANS, BARON1, building);
+    }
+    set_timer("B1", 30+diff*5);
+    num_allies++;
+  }
+
+  trigger (have_alliance(MACEDONIANS, BARON2)) {
+    for (i = 0; i < num_units(BARON1); i++) {
+      unit = find_unit(BARON2, "");
+      switch_teams(MACEDONIANS, BARON2, unit);
+    }   
+    for (i = 5; i < 9; i++) {
+      if (i == 6) {
+        i++;
+      }
+      if (have_alliance(i, MACEDONIANS)) {
+        make_alliance(BARON1, i);
+      }
+    }
+    for (i = 0; i < num_cities(BARON1); i++) {
+      building = find_city_id(find_city_name(BARON1));
+      switch_teams(MACEDONIANS, BARON1, building);
+    }
+    set_timer("B2", 30+diff*5);
+    num_allies++;
+  }
+
+  trigger (have_alliance(MACEDONIANS, BARON3)) {
+    for (i = 0; i < num_units(BARON1); i++) {
+      unit = find_unit(BARON3, "");
+      switch_teams(MACEDONIANS, BARON3, unit);
+    } 
+    for (i = 5; i < 9; i++) {
+      if (i == 7) {
+        i++;
+      }
+      if (have_alliance(i, MACEDONIANS)) {
+        make_alliance(BARON1, i);
+      }
+    }
+    for (i = 0; i < num_cities(BARON1); i++) {
+      building = find_city_id(find_city_name(BARON1));
+      switch_teams(MACEDONIANS, BARON1, building);
+    }        
+    set_timer("B3", 30+diff*5);
+    num_allies++;
+  }
+
+  trigger (have_alliance(MACEDONIANS, BARON4)) {
+    for (i = 0; i < num_units(BARON1); i++) {
+      unit = find_unit(BARON4, "");
+      switch_teams(MACEDONIANS, BARON4, unit);
+    }  
+    for (i = 5; i < 8; i++) {
+      if (have_alliance(i, MACEDONIANS)) {
+        make_alliance(BARON1, i);
+      }
+    }
+    for (i = 0; i < num_cities(BARON1); i++) {
+      building = find_city_id(find_city_name(BARON1));
+      switch_teams(MACEDONIANS, BARON1, building);
+    }      
+    set_timer("B4", 30+diff*5);
+    num_allies++;
+  }
+
+  trigger baron1_reject(offer_made(MACEDONIANS, BARON1)) {
+    if (!have_alliance(MACEDONIANS, BARON1)) {
+      reject_offer(BARON1, MACEDONIANS);
+      enable_trigger("baron1_reject");
+    }
+    else {
+      diplomacy_set_auto(BARON1);
+    }
+  }
+
+  trigger baron2_reject(offer_made(MACEDONIANS, BARON2)) {
+    if (!have_alliance(MACEDONIANS, BARON2)) {
+      reject_offer(BARON2, MACEDONIANS);
+      enable_trigger("baron2_reject");
+    }
+    else {
+      diplomacy_set_auto(BARON2);
+    }
+  }
+
+  trigger baron3_reject(offer_made(MACEDONIANS, BARON3)) {
+    if (!have_alliance(MACEDONIANS, BARON3)) {
+      reject_offer(BARON3, MACEDONIANS);
+      enable_trigger("baron3_reject");
+    }
+    else {
+      diplomacy_set_auto(BARON3);
+    }
+  }
+
+  trigger baron4_reject(offer_made(MACEDONIANS, BARON4)) {
+    if (!have_alliance(MACEDONIANS, BARON4)) {
+      reject_offer(BARON4, MACEDONIANS);
+      enable_trigger("baron4_reject");
+    }
+    else {
+      diplomacy_set_auto(BARON4);
+    }
+  }
+
+  if (timer_expired("new_units")) {
+    set_timer("new_units", 60 - (5 * diff) - (5 * num_allies));
+    for (nation = 5; nation < 9; nation++) {
+      if (num_units(nation) < (max_pop[nation]+diff*num_allies) && have_alliance(MACEDONIANS, nation) == 0) {
+        building = find_build(nation, "Fort");
+        x = object_position_x(nation, building) + 2;
+        y = object_position_y(nation, building);
+        if (nation == BARON1) create_unit(nation, x, y, "War Elephant", 1);
+        else if (nation == BARON2) create_unit(nation, x, y, "Cataphract", 1);
+        else if (nation == BARON3) create_unit(nation, x, y, "Horse Archer", 1);
+        else if (nation == BARON4) create_unit(nation, x, y, "Anusiya", 1);
+      }
+    }
+  }
+
+  if (timer_expired("barons_attack")) {
+    set_timer("barons_attack", rand_int(30,90));
+    for (n = 0; n < skip_tribe.length; n++) {
+      skip_tribe[n] = 0;
+    }
+    for (nation = 1; nation < 3; nation++) {
+      for (tribe = 5; tribe < 9; tribe++) {
+        if (have_war(tribe, nation) && skip_tribe[tribe] == 0) {
+          city_name = find_city_name(nation);
+          building = find_city_id(city_name);
+          x = object_position_x(nation, building);
+          y = object_position_y(nation, building);
+          unit = find_idle_military(tribe);
+         // unit_clear_orders(tribe, unit);
+          unit_attack_to_order(tribe, unit, x, y);
+          skip_tribe[tribe] = 1;
+        }
+      }
+    }
+  }
+
+  cur_time = time_min();
+  if (cur_time >= end_time) defeat(MACEDONIANS);
+  
+  trigger baron1_bubble(object_selected(BARON1, baron1_fort) && !is_defeated(PERSIANS)) {
+    clear_selection();
+    if (have_alliance(MACEDONIANS, BARON1)) bubble_text_obj($S("He is already your ally."), BARON1, baron1_fort);
+    else if (broken_sword[BARON1] == 1) bubble_text_obj($S("He does not ally with oathbreakers."), BARON1, baron1_fort);
+    else bubble_text_obj(parse("Reduce his Fort's hit points to $STRING0.", damage_per), BARON1, baron1_fort);
+    enable_trigger("baron1_bubble");
+  }
+  
+  trigger baron2_bubble(object_selected(BARON2, baron2_fort) && !is_defeated(PERSIANS)) {
+    clear_selection();
+    if (have_alliance(MACEDONIANS, BARON2)) bubble_text_obj($S("He is already your ally."), BARON2, baron2_fort);
+    else if (broken_sword[BARON2] == 1) bubble_text_obj($S("He does not ally with oathbreakers."), BARON2, baron2_fort);
+    else bubble_text_obj(parse("Save $NUM0 Food.", food_gather), BARON2, baron2_fort);  
+    enable_trigger("baron2_bubble");
+  } 
+  
+  trigger baron3_bubble(object_selected(BARON3, baron3_fort) && !is_defeated(PERSIANS)) {
+    clear_selection();
+    if (have_alliance(PERSIANS, BARON3)) bubble_text_obj($S("He will not end his alliance with Bessus."), BARON3, baron3_fort);
+    else if (broken_sword[BARON3] == 1) bubble_text_obj($S("He does not ally with oathbreakers."), BARON3, baron3_fort);
+    else if (have_alliance(MACEDONIANS, BARON3)) bubble_text_obj($S("He is already your ally."), BARON3, baron3_fort);
+    else bubble_text_obj(parse("Drive the Timber sell rate down to $NUM0.", wood_rate), BARON3, baron3_fort); 
+    enable_trigger("baron3_bubble"); 
+  } 
+  
+  trigger baron4_bubble(object_selected(BARON4, baron4_fort) && !is_defeated(PERSIANS)) {
+    clear_selection();
+    if (have_alliance(PERSIANS, BARON4)) bubble_text_obj($S("He will not end his alliance with Bessus."), BARON4, baron4_fort);
+    else if (broken_sword[BARON4] == 1) bubble_text_obj($S("He does not ally with oathbreakers."), BARON4, baron4_fort);
+    else if (have_alliance(MACEDONIANS, BARON4)) bubble_text_obj($S("He is already your ally."), BARON4, baron4_fort);
+    else bubble_text_obj(parse("Assemble an army of $NUM0 Companions.", num_cat), BARON4, baron4_fort);  
+   
+    enable_trigger("baron4_bubble");
+  }    
+
+  trigger (have_alliance(MACEDONIANS, BARON1)) {
+    enable_trigger("break_alliance1");
+  }
+
+  trigger break_alliance1(!have_alliance(MACEDONIANS, BARON1)) {
+    broken_sword[BARON1] = 1;
+  }
+
+  trigger (have_alliance(MACEDONIANS, BARON2)) {
+    enable_trigger("break_alliance2");
+  }
+
+  trigger break_alliance2(!have_alliance(MACEDONIANS, BARON2)) {
+    broken_sword[BARON2] = 1;
+  }
+
+  trigger (have_alliance(MACEDONIANS, BARON3)) {
+    enable_trigger("break_alliance3");
+  }
+
+  trigger break_alliance3(!have_alliance(MACEDONIANS, BARON3)) {
+    broken_sword[BARON3] = 1;
+  }
+
+  trigger (have_alliance(MACEDONIANS, BARON4)) {
+    enable_trigger("break_alliance4");
+  }
+
+  trigger break_alliance4(!have_alliance(MACEDONIANS, BARON4)) {
+    broken_sword[BARON4] = 1;
+  }
+  
+  //BARON 1 STUFF
+  
+  trigger (object_health(BARON1, baron1_fort) <= damage_am && !is_defeated(PERSIANS) && !is_defeated(BARON1)) {
+    x = object_position_x(BARON1, baron1_fort);
+    y = object_position_y(BARON1, baron1_fort);
+    if (any_object_near(MACEDONIANS, 1, x, y, 25) > any_object_near(PERSIANS, 1, x, y, 25)) {
+      leader_name = get_leader_name(BARON1);
+      popup_dialog(parse("You have beaten $STRING0 (Orange) into submission.", leader_name));
+      make_alliance(MACEDONIANS, BARON1);
+      declare_war(BARON1, PERSIANS);
+    for (i = 5; i < 9; i++) {
+      if (have_alliance(MACEDONIANS, i)) {
+        make_alliance(BARON1, i);
+      }
+    }      
+    } 
+    set_object_health(BARON1, baron1_fort, 100);
+  }
+  
+  //BARON 2 STUFF
+  
+  trigger (num_type(MACEDONIANS, "Food") >= food_gather && !is_defeated(PERSIANS) && !is_defeated(BARON2)) {
+    popup_dialog(parse("$STRING0 (White) has agreed to an alliance due to our ability to save our Food.", get_leader_name(BARON2)));
+    make_alliance(BARON2, MACEDONIANS);
+    declare_war(BARON2, PERSIANS);
+    for (i = 5; i < 9; i++) {
+      if (have_alliance(MACEDONIANS, i)) {
+        make_alliance(BARON2, i);
+      }
+    }
+  }
+  //BARON 3 STUFF
+  
+  trigger (find_sell_price(MACEDONIANS, "Timber") == 1 && !is_defeated(PERSIANS) && !is_defeated(BARON3)) {
+    leader_name = get_leader_name(BARON3);
+    popup_dialog(parse("$STRING0 (Yellow) has signed an alliance with you in thanks for your help driving down Timber prices.", leader_name));
+    make_alliance(BARON3, MACEDONIANS);
+    declare_war(BARON3, PERSIANS);
+    for (i = 5; i < 9; i++) {
+      if (have_alliance(MACEDONIANS, i)) {
+        make_alliance(BARON3, i);
+      }
+    }    
+  }
+  
+  //BARON 4 STUFF
+  
+  trigger (num_type(MACEDONIANS, "Companion") >= num_cat && !is_defeated(PERSIANS) && !is_defeated(BARON4)) {
+    leader_name = get_leader_name(BARON4);
+      popup_dialog(parse("Impressed by your Companions, $STRING 0 (Cyan) has agreed to an alliance with you.", leader_name));
+      make_alliance(MACEDONIANS, BARON4);
+      declare_war(BARON4, PERSIANS);
+    for (i = 5; i < 9; i++) {
+      if (have_alliance(MACEDONIANS, i)) {
+        make_alliance(BARON4, i);
+      }
+    }      
+  }
+    
+  trigger (num_type(BARON1, "Fort") == 0) {
+    while (num_units(BARON1) > 0) {
+      unit = find_all_unit(BARON1, "");
+      if (is_garrisoned(BARON1, unit)) {
+        unit_eject_order(BARON1, unit);
+      }
+      kill_unit_anim(BARON1, unit, 2);
+    }
+    thebes_falls(BARON1);
+    defeat(BARON1);
+  }
+  trigger (num_type(BARON2, "Fort") == 0) {
+    while (num_units(BARON2) > 0) {
+      unit = find_all_unit(BARON2, "");
+      if (is_garrisoned(BARON2, unit)) {
+        unit_eject_order(BARON2, unit);
+      }
+      kill_unit_anim(BARON2, unit, 2);
+    }
+    thebes_falls(BARON2);
+    defeat(BARON2);
+  }
+  trigger (num_type(BARON3, "Fort") == 0) {
+    while (num_units(BARON3) > 0) {
+      unit = find_all_unit(BARON3, "");
+      if (is_garrisoned(BARON3, unit)) {
+        unit_eject_order(BARON3, unit);
+      }
+      kill_unit_anim(BARON3, unit, 2);
+    }
+    thebes_falls(BARON3);
+    defeat(BARON3);
+  }
+  trigger (num_type(BARON4, "Fort") == 0) {
+    while (num_units(BARON4) > 0) {
+      unit = find_all_unit(BARON4, "");
+      if (is_garrisoned(BARON4, unit)) {
+        unit_eject_order(BARON4, unit);
+      }
+      kill_unit_anim(BARON4, unit, 2);
+    }
+    thebes_falls(BARON4);
+    defeat(BARON4);
+  }
+}
+
+int scenario thebes_falls(int who) {
+
+  int new_team = 1;
+  int cur_team = who;
+  int unit_id = 0;
+  int build_id = 0;
+  int ally_guy = 0;
+  int hidden = find_inside_unit(who, "");
+
+  while (hidden > -1) {
+    kill_unit_anim(who, hidden, 1);
+    hidden = find_inside_unit(who, "");
+  }
+
+
+  for(cur_team = who; cur_team < who+1; cur_team++) {
+    if (cur_team != ally_guy && !is_defeated(cur_team) && cur_team != new_team) {
+      //////civilian/////////
+      do {
+        unit_id = find_all_unit(cur_team, "Citizen");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+
+      do {
+        unit_id = find_all_unit(cur_team, "Scholar");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+
+      do {
+        unit_id = find_all_unit(cur_team, "Caravan");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+
+      do {
+        unit_id = find_all_unit(cur_team, "Merchant");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      ///////////////////////////
+
+      //////////Castle/Special
+      /*do {
+        unit_id = find_all_unit(cur_team, "General");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);*/
+      do {
+        unit_id = find_all_unit(cur_team, "Transport");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Merchant Fleet");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      ///////////////////////////
+
+      ///////barracks////////////
+      do {
+        unit_id = find_all_unit(cur_team, "Javelineers");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Phalanx");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Archers");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Scout");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      ///////////////////////////
+
+      ///////////Stable/////////
+      do {
+        unit_id = find_all_unit(cur_team, "Light Horse");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Cataphract");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Horse Archer");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      //////////////////////////
+
+      /////////Siege//////////
+      do {
+        unit_id = find_all_unit(cur_team, "Catapult");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Supply Wagon");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      /////////////////////
+
+      ///////Dock////////////
+      do {
+        unit_id = find_all_unit(cur_team, "Dromon");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Galley");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Fire Raft");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      do {
+        unit_id = find_all_unit(cur_team, "Fishermen");
+        switch_teams(new_team, cur_team, unit_id);
+      } while(unit_id > -1);
+      ///////////////////////////
+
+      ////tower, fort, observation post/////
+      do {
+        build_id = find_build(cur_team, "Tower");
+        switch_teams(new_team, cur_team, build_id);
+      } while(build_id > -1);
+      do {
+        build_id = find_build(cur_team, "Fort");
+        switch_teams(new_team, cur_team, build_id);
+      } while(build_id > -1);
+      do {
+        build_id = find_build(cur_team, "Lookout");
+        switch_teams(new_team, cur_team, build_id);
+      } while(build_id > -1);
+
+      ////barracks, stable, siege factory, dock/////////
+      do {
+        build_id = find_build(cur_team, "Barracks");
+        switch_teams(new_team, cur_team, build_id);
+      } while(build_id > -1);
+      do {
+        build_id = find_build(cur_team, "Stable");
+        switch_teams(new_team, cur_team, build_id);
+      } while(build_id > -1);
+      do {
+        build_id = find_build(cur_team, "Siege Factory");
+        switch_teams(new_team, cur_team, build_id);
+      } while(build_id > -1);
+      do {
+        build_id = find_build(cur_team, "Dock");
+        switch_teams(new_team, cur_team, build_id);
+      } while(build_id > -1);
+
+      /////woodcutter's camp, mine///////////
+      do {
+        build_id = find_build(cur_team, "Woodcutter's Camp");
+        switch_teams(new_team, cur_team, build_id);
+      } while(build_id > -1);
+      do {
+        build_id = find_build(cur_team, "Mine");
+        switch_teams(new_team, cur_team, build_id);
+      } while(build_id > -1);
+
+      ///////City////////////
+      number_of_cities = num_cities(cur_team);
+      for (i = 1; i <= number_of_cities; i++) {
+        city_name = find_city_name(cur_team);
+        city_id = find_city_id(city_name);
+        switch_teams(new_team, cur_team, city_id);
+        city_assimilate(new_team, city_name);
+        city_id = find_city_id(city_name);
+        set_object_health (new_team, city_id, 100);
+      }
+      ///////////////////////////
+    }
+  }
+
+}
+
+int scenario sum_tribute( int offerer, int offeree )
+{
+  int total;
+  String resources[] = ["Food", "Wealth", "Metal", "Timber"];
+
+  for (z = 0; z < resources.length; z++) {
+    total += amount_offered(offerer,offeree,resources[z]);
+  }
+  
+  //total = total * -1;
+
+  return total;
+
+}
+
+int scenario sum_goods( int who )
+{
+  
+  int total = num_type(who, "Food") + num_type(who, "Timber") + num_type(who, "Wealth") + num_type(who, "Metal");
+  
+  return total;
+
+}

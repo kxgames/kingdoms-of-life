@@ -1,0 +1,54 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Japanese">
+  <LEADERS>
+    <LEADER>Queen Himiko</LEADER>
+    <LEADER>Masakado Taira</LEADER>
+    <LEADER>Shogun Yoritomo Minamoto</LEADER>
+    <LEADER>Shogun Takauji Ashikaga</LEADER>
+    <LEADER>Nobunaga Oda</LEADER>
+    <LEADER>Shogun Ieyasu Tokugawa</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Kyoto</CITY>
+    <CITY>Nara</CITY>
+    <CITY>Nagoya</CITY>
+    <CITY>Osaka</CITY>
+    <CITY>Fushimi</CITY>
+    <CITY>Himeji</CITY>
+    <CITY>Hirado</CITY>
+    <CITY>Hiraizumi</CITY>
+    <CITY>Hirosaki</CITY>
+    <CITY>Ise</CITY>
+    <CITY>Izumo</CITY>
+    <CITY>Kanazawa</CITY>
+    <CITY>Kokura</CITY>
+    <CITY>Kobe</CITY>
+    <CITY>Kumamoto</CITY>
+    <CITY>Matsue</CITY>
+    <CITY>Matsumoto</CITY>
+    <CITY>Matsuyama</CITY>
+    <CITY>Mito</CITY>
+    <CITY>Miyakonojo</CITY>
+    <CITY>Niigata</CITY>
+    <CITY>Noshiro</CITY>
+    <CITY>Odawara</CITY>
+    <CITY>Ogaki</CITY>
+    <CITY>Otsu</CITY>
+    <CITY>Sakai</CITY>
+    <CITY>Sendai</CITY>
+    <CITY>Shimoda</CITY>
+    <CITY>Shimonoseki</CITY>
+    <CITY>Takamatsu</CITY>
+    <CITY>Tokushima</CITY>
+    <CITY>Uraga</CITY>
+    <CITY>Uwajima</CITY>
+    <CITY>Yamaguchi</CITY>
+    <CITY>Yokohama</CITY>
+    <CITY>Yonago</CITY>
+    <CITY>Yonezawa</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+  <BUILD_CONTINENT>2 Asian</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

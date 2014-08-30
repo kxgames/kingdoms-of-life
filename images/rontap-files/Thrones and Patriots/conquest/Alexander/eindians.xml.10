@@ -1,0 +1,37 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Indians">
+	<LEADERS>
+		<LEADER>Dhana Nanda</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Harappa</CITY>
+		<CITY>Mohenjo-daro</CITY>
+		<CITY>Dabar Kot</CITY>
+		<CITY>Judeirjo-Daro</CITY>
+		<CITY>Kalibangan</CITY>
+		<CITY>Banawali</CITY>
+		<CITY>Rakhigarhi</CITY>
+		<CITY>Naru Waro Daro</CITY>
+		<CITY>Kot Dijii</CITY>
+		<CITY>Chanhujo-Daro</CITY>
+		<CITY>Amri</CITY>
+		<CITY>Dholavira</CITY>
+		<CITY>Surkotada</CITY>
+		<CITY>Lothai</CITY>
+		<CITY>Rangour</CITY>
+		<CITY>Alamgirpur</CITY>
+		<CITY>Jalilpur</CITY>
+		<CITY>Kirta</CITY>
+		<CITY>Lurewala-Ther</CITY>
+		<CITY>Gangeriwala</CITY>
+		<CITY>Nagor</CITY>
+		<CITY>Kotda Timba</CITY>
+		<CITY>Telod</CITY>
+		<CITY>Gop</CITY>
+		<CITY>Phala</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>5 EIndian</UNIT_CONTINENT>
+	<BUILD_CONTINENT>8 EIndian</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>8 EIndian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

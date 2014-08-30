@@ -1,0 +1,148 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  coldwar_rules();
+
+  labels {
+    AMERICANS,
+    RUSSIANS,
+  }
+
+  disable_city_defeat(AMERICANS);
+  disable_take_attrition(AMERICANS);
+  disable_type("Airbase");
+  disable_city_defeat(RUSSIANS);
+
+  if (age(2) == 6) {
+    disable_tech(2, "Information Age");
+  }
+  
+  disable_type("Tank");
+  disable_type("Main Battle Tank");
+  
+
+  int turn = get_turn();
+
+  //1, 2 - Stalin
+  //if (turn < 3) {
+    set_leader_name(2, $S("Council"));
+  //}
+
+  disable_type("Oil Platform");
+  disable_type("Small City");
+  disable_type("Temple");
+  disable_type("University");
+  disable_type("Woodcutter's Camp");
+  disable_type("Farm");
+  disable_type("Mine");
+  disable_type("Oil Well");
+  disable_type("Smelter");
+  disable_type("Granary");
+  disable_type("Lumber Mill");
+  disable_type("Refinery");
+  disable_type("Market");
+  disable_type("Library");
+  disable_type("Senate");
+  disable_type("Barracks");
+  disable_type("Stable");
+  disable_type("Siege Factory");
+  disable_type("Fort");
+  disable_type("Lookout");
+  disable_type("Tower");
+  disable_type("Airbase");
+  disable_type("Missile Silo");
+  disable_type("Dock");
+
+  set_object_type_max_health("Small City", 400);
+  set_object_type_max_health("Large City", 1000);
+  set_object_type_max_health("Major City", 2500);
+  
+  gain_tech(1, "Tactics");
+  gain_tech(1, "Operations");
+  gain_tech(1, "Strategy");
+  
+  int diff = get_difficulty();
+  set_leader_difficulty(2, diff-1);
+  if (diff > 2) {
+    place_building_upgrade(2, "Tower", find_capital(2));
+  }
+  if (diff > 3) {
+    for (i = 0; i < 4; i++) {
+      place_building_upgrade(2, "Tower", find_city_name(2));
+    }
+  }
+  
+  set_leader_difficulty(2, diff-1);
+  disable_building_attrition(1);
+  
+  int x = 181;
+  int y = 177;
+  int dir = 315;
+  
+  create_unit_upgrade(1, x, y, "Spy", 7-diff);
+  if (diff > 4) {
+    create_unit_in_group(1, x, y, "Special Forces", 7-diff);
+  }
+  
+  group_jump_move(1,x,y,dir);
+  
+  //102,87-96,36
+  x = 102;
+  y = 87;
+  create_unit_upgrade(2,x,y,"Infantry",1);
+  create_unit_in_group(2,x,y,"Armored Scout Car", 1);
+  create_unit_in_group(2,x,y,"Commando",1);
+  if (diff > 2) {
+    create_unit_in_group(2,x,y,"Infantry",1);
+  }
+  if (diff > 4) {
+    create_unit_in_group(2,x,y,"Armored Scout Car",1);
+  }
+  group_patrol_order(2,96,36);  
+  //116,95 -158,94
+  x = 116;
+  y = 95;
+  create_unit_upgrade(2,x,y,"Infantry",1);
+  create_unit_in_group(2,x,y,"Armored Scout Car", 1);
+  create_unit_in_group(2,x,y,"Commando",1);
+  if (diff > 2) {
+    create_unit_in_group(2,x,y,"Infantry",1);
+  }
+  if (diff > 4) {
+    create_unit_in_group(2,x,y,"Armored Scout Car",1);
+  }
+  group_patrol_order(2,158,94);    
+  //99,112-100,138
+  x = 99;
+  y = 112;
+  create_unit_upgrade(2,x,y,"Infantry",1);
+  create_unit_in_group(2,x,y,"Armored Scout Car", 1);
+  create_unit_in_group(2,x,y,"Commando",1);
+  if (diff > 2) {
+    create_unit_in_group(2,x,y,"Infantry",1);
+  }
+  if (diff > 4) {
+    create_unit_in_group(2,x,y,"Armored Scout Car",1);
+  }
+  group_patrol_order(2,100,138);    
+  //85,101-47,101
+  x = 85;
+  y = 101;
+  create_unit_upgrade(2,x,y,"Infantry",1);
+  create_unit_in_group(2,x,y,"Armored Scout Car", 1);
+  create_unit_in_group(2,x,y,"Commando",1);
+  if (diff > 2) {
+    create_unit_in_group(2,x,y,"Infantry",1);
+  }
+  if (diff > 4) {
+    create_unit_in_group(2,x,y,"Armored Scout Car",1);
+  }
+  group_patrol_order(2,47,101);  
+  
+  for (i = 0; i < num_military_units(2); i++) {
+    unit = find_military(2);
+    unit_ignore_orders(2, unit);
+  }
+
+}

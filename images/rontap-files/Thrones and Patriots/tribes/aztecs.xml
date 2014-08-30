@@ -1,0 +1,59 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Aztecs">
+  <LEADERS>
+    <LEADER>Emperor Acamapichtli</LEADER>
+    <LEADER>Emperor Huitzilihuitl</LEADER>
+    <LEADER>Emperor Chimalpopoca</LEADER>
+    <LEADER>Emperor Itzcoatl</LEADER>
+    <LEADER>Emperor Ilhuicamina</LEADER>
+    <LEADER>Emperor Axayacatl</LEADER>
+    <LEADER>Emperor Tizoc</LEADER>
+    <LEADER>Emperor Ahuitzotl</LEADER>
+    <LEADER>Emperor Ahuizotl</LEADER>
+    <LEADER>Emperor Moctezuma</LEADER>
+    <LEADER>Emperor Cuitlahuac</LEADER>
+    <LEADER>Emperor Cuauhtemoc</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Tenochtitlan</CITY>
+    <CITY>Teotihuacan</CITY>
+    <CITY>Tlaxcala</CITY>
+    <CITY>Azcapotzalco</CITY>
+    <CITY>Tlacopan</CITY>
+    <CITY>Texcoco</CITY>
+    <CITY>Tlatelolco</CITY>
+    <CITY>Calixtlahuaca</CITY>
+    <CITY>Tula</CITY>
+    <CITY>Tzintzuntzan</CITY>
+    <CITY>Tamuin</CITY>
+    <CITY>Teayo</CITY>
+    <CITY>Xochicalco</CITY>
+    <CITY>Coyoacan</CITY>
+    <CITY>Huitzilopochco</CITY>
+    <CITY>Ixtapalapa</CITY>
+    <CITY>Xochimilco</CITY>
+    <CITY>Mixquic</CITY>
+    <CITY>Coatepec</CITY>
+    <CITY>Chiconautla</CITY>
+    <CITY>Tepexpan</CITY>
+    <CITY>Tepetlaoxtoc</CITY>
+    <CITY>Zitlaltepec</CITY>
+    <CITY>Huehuetoca</CITY>
+    <CITY>Tequixquiac</CITY>
+    <CITY>Jilotzingo</CITY>
+    <CITY>Tezoyucaf</CITY>
+    <CITY>Amecameca</CITY>
+    <CITY>Mitla</CITY>
+    <CITY>Yagul</CITY>
+    <CITY>Xoconocho</CITY>
+    <CITY>Cempoala</CITY>
+    <CITY>Cacaxtla</CITY>
+    <CITY>Cholula</CITY>
+    <CITY>Teotitlan</CITY>
+    <CITY>Malinalco</CITY>
+    <CITY>Apatzingan</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+  <BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

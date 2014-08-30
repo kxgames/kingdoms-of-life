@@ -1,0 +1,687 @@
+<ROOT>
+  <!-- LOCALIZATION: All STRING elements under ALTERNATENAMES/EPOCHTYPE and ALTERNATENAMES2/EPOCHTYPE-->
+  <ALTERNATENAMES>
+    <EPOCHTYPE name="Written Word">
+      <STRING>문자</STRING>
+      <STRING>교육</STRING>
+      <STRING>연역법</STRING>
+      <STRING>생물학</STRING>
+      <STRING>해부학</STRING>
+      <STRING>열역학</STRING>
+      <STRING>통계학</STRING>
+      <STRING>핵물리학</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Mathematics">
+      <STRING>관개</STRING>
+      <STRING>수학</STRING>
+      <STRING>시간 계측</STRING>
+      <STRING>경험주의</STRING>
+      <STRING>기계 에너지</STRING>
+      <STRING>전자기</STRING>
+      <STRING>음향학</STRING>
+      <STRING>유전학</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Chemistry">
+      <STRING>천문 관측</STRING>
+      <STRING>수력</STRING>
+      <STRING>연금술</STRING>
+      <STRING>과학적 방법론</STRING>
+      <STRING>미적분법</STRING>
+      <STRING>약리학</STRING>
+      <STRING>상대성 이론</STRING>
+      <STRING>양자 역학</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Laws of Nature">
+      <STRING>지렛대</STRING>
+      <STRING>온도</STRING>
+      <STRING>원예학</STRING>
+      <STRING>자연 법칙</STRING>
+      <STRING>지질학</STRING>
+      <STRING>면역</STRING>
+      <STRING>미생물학</STRING>
+      <STRING>마이크로칩</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Electricity">
+      <STRING>역법</STRING>
+      <STRING>풍력</STRING>
+      <STRING>천문학</STRING>
+      <STRING>방언</STRING>
+      <STRING>전기</STRING>
+      <STRING>항공학</STRING>
+      <STRING>항생물학</STRING>
+      <STRING>천체물리학</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Electronics">
+      <STRING>도량형</STRING>
+      <STRING>점성술</STRING>
+      <STRING>기계</STRING>
+      <STRING>과학 문헌</STRING>
+      <STRING>식물학</STRING>
+      <STRING>전자 공학</STRING>
+      <STRING>기상학</STRING>
+      <STRING>레이저 기술</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Computerization">
+      <STRING>열 전도</STRING>
+      <STRING>자연 치유</STRING>
+      <STRING>광학</STRING>
+      <STRING>물리학</STRING>
+      <STRING>진화</STRING>
+      <STRING>수력 발전</STRING>
+      <STRING>전산화</STRING>
+      <STRING>광섬유</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Barter">
+      <STRING>물물교환</STRING>
+      <STRING>도로</STRING>
+      <STRING>작도법</STRING>
+      <STRING>나침반</STRING>
+      <STRING>경도</STRING>
+      <STRING>재정 지표</STRING>
+      <STRING>민영 기업</STRING>
+      <STRING>초고속 통신망</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Coinage">
+      <STRING>사역 가축</STRING>
+      <STRING>화폐 주조</STRING>
+      <STRING>천문 항해술</STRING>
+      <STRING>위도</STRING>
+      <STRING>중앙은행</STRING>
+      <STRING>전신 전화</STRING>
+      <STRING>미디어</STRING>
+      <STRING>재정 조례</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Trade">
+      <STRING>장인 정신</STRING>
+      <STRING>탐험</STRING>
+      <STRING>교역</STRING>
+      <STRING>지리학</STRING>
+      <STRING>철도</STRING>
+      <STRING>증권 거래소</STRING>
+      <STRING>대외 지급 준비</STRING>
+      <STRING>위성 통신</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Mercantilism">
+      <STRING>컨테이너</STRING>
+      <STRING>필기구</STRING>
+      <STRING>지폐</STRING>
+      <STRING>중상주의</STRING>
+      <STRING>우편 제도</STRING>
+      <STRING>반독점법</STRING>
+      <STRING>광고</STRING>
+      <STRING>재생 기술</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Finance">
+      <STRING>방직</STRING>
+      <STRING>형교</STRING>
+      <STRING>거리 측량</STRING>
+      <STRING>측량술</STRING>
+      <STRING>금융</STRING>
+      <STRING>무전</STRING>
+      <STRING>정밀 기술</STRING>
+      <STRING>자유 무역</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Assembly Line">
+      <STRING>차량 수송</STRING>
+      <STRING>주판</STRING>
+      <STRING>언어학</STRING>
+      <STRING>운하</STRING>
+      <STRING>회계</STRING>
+      <STRING>공장 자동화</STRING>
+      <STRING>텔레비전</STRING>
+      <STRING>인터넷</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Globalization">
+      <STRING>감독</STRING>
+      <STRING>종이 및 양피지</STRING>
+      <STRING>공물</STRING>
+      <STRING>환전</STRING>
+      <STRING>보호 관세</STRING>
+      <STRING>사진 및 필름</STRING>
+      <STRING>세계화</STRING>
+      <STRING>무선 기술</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="City State">
+      <STRING>도시 국가</STRING>
+      <STRING>행정부</STRING>
+      <STRING>주권</STRING>
+      <STRING>정치학</STRING>
+      <STRING>인권</STRING>
+      <STRING>입헌 군주제</STRING>
+      <STRING>인민주의</STRING>
+      <STRING>시민권</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Empire">
+      <STRING>전통 의례</STRING>
+      <STRING>제국</STRING>
+      <STRING>저장고</STRING>
+      <STRING>식민주의</STRING>
+      <STRING>연방주의</STRING>
+      <STRING>협정 및 동맹</STRING>
+      <STRING>내부 수익</STRING>
+      <STRING>도시 재개발</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Feudalism">
+      <STRING>포고문</STRING>
+      <STRING>의회</STRING>
+      <STRING>봉건제</STRING>
+      <STRING>치안</STRING>
+      <STRING>세력 균형</STRING>
+      <STRING>법치주의</STRING>
+      <STRING>예산 관리</STRING>
+      <STRING>정부 윤리</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Divine Right">
+      <STRING>조상 숭배</STRING>
+      <STRING>행정부</STRING>
+      <STRING>공무 행정</STRING>
+      <STRING>왕권신수설</STRING>
+      <STRING>권리장전</STRING>
+      <STRING>현실 정책</STRING>
+      <STRING>보통 선거권</STRING>
+      <STRING>여론</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Constitution">
+      <STRING>집권 의회</STRING>
+      <STRING>법학</STRING>
+      <STRING>정치력</STRING>
+      <STRING>관료제</STRING>
+      <STRING>헌법</STRING>
+      <STRING>국제 연맹</STRING>
+      <STRING>뉴딜 정책</STRING>
+      <STRING>양당정치</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Great Power">
+      <STRING>시민법</STRING>
+      <STRING>입법</STRING>
+      <STRING>사법권</STRING>
+      <STRING>정부 분과</STRING>
+      <STRING>선거권</STRING>
+      <STRING>절대 권력</STRING>
+      <STRING>국제 연합</STRING>
+      <STRING>환경 보호</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="International Law">
+      <STRING>민사 기록</STRING>
+      <STRING>윤리</STRING>
+      <STRING>전제 정치</STRING>
+      <STRING>혁명</STRING>
+      <STRING>정당 정치</STRING>
+      <STRING>지역주의</STRING>
+      <STRING>국제법</STRING>
+      <STRING>신세계 질서</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="The Art of War">
+      <STRING>전술 게임</STRING>
+      <STRING>장교단</STRING>
+      <STRING>징집 부대</STRING>
+      <STRING>화력</STRING>
+      <STRING>사관학교</STRING>
+      <STRING>참모</STRING>
+      <STRING>군사 첩보</STRING>
+      <STRING>군산 복합체</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Mercenaries">
+      <STRING>군사 기술</STRING>
+      <STRING>용병</STRING>
+      <STRING>무장 병사</STRING>
+      <STRING>총포공</STRING>
+      <STRING>국가 방위</STRING>
+      <STRING>연합 전술</STRING>
+      <STRING>심리전</STRING>
+      <STRING>반란 진압</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Standing Army">
+      <STRING>군대</STRING>
+      <STRING>통솔력</STRING>
+      <STRING>상비군</STRING>
+      <STRING>탄도학</STRING>
+      <STRING>보급 부대</STRING>
+      <STRING>교란</STRING>
+      <STRING>레이더 및 소나</STRING>
+      <STRING>징병제</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Conscription">
+      <STRING>훈련</STRING>
+      <STRING>모병</STRING>
+      <STRING>기사도 및 문장학</STRING>
+      <STRING>징병</STRING>
+      <STRING>국지전</STRING>
+      <STRING>참호전</STRING>
+      <STRING>유도 무기</STRING>
+      <STRING>통합 사령부</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Levee en Masse">
+      <STRING>규율</STRING>
+      <STRING>대전략</STRING>
+      <STRING>장갑판</STRING>
+      <STRING>연대 체제</STRING>
+      <STRING>국민 총동원령</STRING>
+      <STRING>침투 전술</STRING>
+      <STRING>유격전</STRING>
+      <STRING>정밀 무기</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Nation-in-Arms">
+      <STRING>대형</STRING>
+      <STRING>병참부</STRING>
+      <STRING>교전 법규</STRING>
+      <STRING>사기 및 단결</STRING>
+      <STRING>통신대</STRING>
+      <STRING>전시 체제</STRING>
+      <STRING>연합 작전</STRING>
+      <STRING>전자전</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Selective Service">
+      <STRING>군사 훈련</STRING>
+      <STRING>선동</STRING>
+      <STRING>군사 협약</STRING>
+      <STRING>비밀주의</STRING>
+      <STRING>총력전</STRING>
+      <STRING>전격전</STRING>
+      <STRING>선발 징병</STRING>
+      <STRING>국가 안보</STRING>
+    </EPOCHTYPE>
+  </ALTERNATENAMES>
+  <ALTERNATENAMES2>
+    <EPOCHTYPE name="Tactics">
+      <STRING>전술</STRING>
+      <STRING>전술</STRING>
+      <STRING>전술</STRING>
+      <STRING>전술</STRING>
+      <STRING>전술</STRING>
+      <STRING>전술</STRING>
+      <STRING>전술</STRING>
+      <STRING>전술</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Operations">
+      <STRING>작전</STRING>
+      <STRING>작전</STRING>
+      <STRING>작전</STRING>
+      <STRING>작전</STRING>
+      <STRING>작전</STRING>
+      <STRING>작전</STRING>
+      <STRING>작전</STRING>
+      <STRING>작전</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Strategy">
+      <STRING>전략</STRING>
+      <STRING>전략</STRING>
+      <STRING>전략</STRING>
+      <STRING>전략</STRING>
+      <STRING>전략</STRING>
+      <STRING>전략</STRING>
+      <STRING>전략</STRING>
+      <STRING>전략</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Religion">
+      <STRING>종교</STRING>
+      <STRING>종교</STRING>
+      <STRING>종교</STRING>
+      <STRING>종교 개혁</STRING>
+      <STRING>종교 개혁</STRING>
+      <STRING>신권</STRING>
+      <STRING>신권</STRING>
+      <STRING>신권</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Monotheism">
+      <STRING>신성 문서</STRING>
+      <STRING>신성 문서</STRING>
+      <STRING>일신교</STRING>
+      <STRING>일신교</STRING>
+      <STRING>선교사</STRING>
+      <STRING>선교사</STRING>
+      <STRING>세속주의</STRING>
+      <STRING>세속주의</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Existentialism">
+      <STRING>성직자</STRING>
+      <STRING>성직자</STRING>
+      <STRING>종교 분파</STRING>
+      <STRING>종교 분파</STRING>
+      <STRING>실존주의</STRING>
+      <STRING>실존주의</STRING>
+      <STRING>실존주의</STRING>
+      <STRING>실존주의</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Taxation">
+      <STRING>조세</STRING>
+      <STRING>조세</STRING>
+      <STRING>조세</STRING>
+      <STRING>조세</STRING>
+      <STRING>조세</STRING>
+      <STRING>조세</STRING>
+      <STRING>조세</STRING>
+      <STRING>조세</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Vassalage">
+      <STRING>봉신</STRING>
+      <STRING>봉신</STRING>
+      <STRING>봉신</STRING>
+      <STRING>봉신</STRING>
+      <STRING>공물</STRING>
+      <STRING>공물</STRING>
+      <STRING>공물</STRING>
+      <STRING>공물</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Social Contract">
+      <STRING>사회 계약</STRING>
+      <STRING>사회 계약</STRING>
+      <STRING>사회 계약</STRING>
+      <STRING>사회 계약</STRING>
+      <STRING>사회 계약</STRING>
+      <STRING>사회 계약</STRING>
+      <STRING>사회 계약</STRING>
+      <STRING>사회 계약</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Income Tax">
+      <STRING>종주권</STRING>
+      <STRING>종주권</STRING>
+      <STRING>종주권</STRING>
+      <STRING>조세 수입</STRING>
+      <STRING>조세 수입</STRING>
+      <STRING>조세 수입</STRING>
+      <STRING>조세 수입</STRING>
+      <STRING>조세 수입</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Fortification">
+      <STRING>요새화</STRING>
+      <STRING>요새화</STRING>
+      <STRING>요새화</STRING>
+      <STRING>요새화</STRING>
+      <STRING>요새화</STRING>
+      <STRING>요새화</STRING>
+      <STRING>요새화</STRING>
+      <STRING>요새화</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Bombardment">
+      <STRING>포격</STRING>
+      <STRING>포격</STRING>
+      <STRING>포격</STRING>
+      <STRING>포격</STRING>
+      <STRING>포격</STRING>
+      <STRING>포격</STRING>
+      <STRING>포격</STRING>
+      <STRING>포격</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Strategic Reserves">
+      <STRING>군사 공학</STRING>
+      <STRING>군사 공학</STRING>
+      <STRING>군사 공학</STRING>
+      <STRING>군사 공학</STRING>
+      <STRING>전략적 예비 병력</STRING>
+      <STRING>전략적 예비 병력</STRING>
+      <STRING>전략적 예비 병력</STRING>
+      <STRING>전략적 예비 병력</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Allegiance">
+      <STRING>충성의 다짐</STRING>
+      <STRING>충성의 다짐</STRING>
+      <STRING>충성의 다짐</STRING>
+      <STRING>충성의 다짐</STRING>
+      <STRING>충성의 다짐</STRING>
+      <STRING>충성의 다짐</STRING>
+      <STRING>충성의 다짐</STRING>
+      <STRING>충성의 다짐</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Oath of Fealty">
+      <STRING>충성의 맹세</STRING>
+      <STRING>충성의 맹세</STRING>
+      <STRING>충성의 맹세</STRING>
+      <STRING>충성의 맹세</STRING>
+      <STRING>시민권</STRING>
+      <STRING>시민권</STRING>
+      <STRING>시민권</STRING>
+      <STRING>시민권</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Patriotism">
+      <STRING>조국</STRING>
+      <STRING>조국</STRING>
+      <STRING>조국</STRING>
+      <STRING>애국심</STRING>
+      <STRING>애국심</STRING>
+      <STRING>애국심</STRING>
+      <STRING>애국심</STRING>
+      <STRING>애국심</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Nationalism">
+      <STRING>국적</STRING>
+      <STRING>국적</STRING>
+      <STRING>국적</STRING>
+      <STRING>국적</STRING>
+      <STRING>민족주의</STRING>
+      <STRING>민족주의</STRING>
+      <STRING>민족주의</STRING>
+      <STRING>민족주의</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Construction">
+      <STRING>시공 기술</STRING>
+      <STRING>시공 기술</STRING>
+      <STRING>시공 기술</STRING>
+      <STRING>시공 기술</STRING>
+      <STRING>시공 기술</STRING>
+      <STRING>시공 기술</STRING>
+      <STRING>시공 기술</STRING>
+      <STRING>시공 기술</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Architecture">
+      <STRING>건축술</STRING>
+      <STRING>건축술</STRING>
+      <STRING>건축술</STRING>
+      <STRING>건축술</STRING>
+      <STRING>건축술</STRING>
+      <STRING>건축술</STRING>
+      <STRING>건축술</STRING>
+      <STRING>건축술</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Engineering">
+      <STRING>공학</STRING>
+      <STRING>공학</STRING>
+      <STRING>공학</STRING>
+      <STRING>공학</STRING>
+      <STRING>공학</STRING>
+      <STRING>공학</STRING>
+      <STRING>공학</STRING>
+      <STRING>공학</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Herbal Lore">
+      <STRING>약초학</STRING>
+      <STRING>약초학</STRING>
+      <STRING>약초학</STRING>
+      <STRING>약초학</STRING>
+      <STRING>동종 요법</STRING>
+      <STRING>동종 요법</STRING>
+      <STRING>동종 요법</STRING>
+      <STRING>동종 요법</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Medicine">
+      <STRING>약품</STRING>
+      <STRING>약품</STRING>
+      <STRING>약품</STRING>
+      <STRING>약품</STRING>
+      <STRING>약품</STRING>
+      <STRING>예방약</STRING>
+      <STRING>예방약</STRING>
+      <STRING>예방약</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Pharmaceuticals">
+      <STRING>약제사</STRING>
+      <STRING>약제사</STRING>
+      <STRING>약제사</STRING>
+      <STRING>제약 기술</STRING>
+      <STRING>제약 기술</STRING>
+      <STRING>제약 기술</STRING>
+      <STRING>제약 기술</STRING>
+      <STRING>제약 기술</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Forage">
+      <STRING>주조</STRING>
+      <STRING>주조</STRING>
+      <STRING>주조</STRING>
+      <STRING>주조</STRING>
+      <STRING>주조</STRING>
+      <STRING>주조</STRING>
+      <STRING>주조</STRING>
+      <STRING>주조</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Supply">
+      <STRING>보급</STRING>
+      <STRING>보급</STRING>
+      <STRING>보급</STRING>
+      <STRING>보급</STRING>
+      <STRING>보급</STRING>
+      <STRING>보급</STRING>
+      <STRING>보급</STRING>
+      <STRING>보급</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Logistics">
+      <STRING>물류</STRING>
+      <STRING>물류</STRING>
+      <STRING>물류</STRING>
+      <STRING>물류</STRING>
+      <STRING>물류</STRING>
+      <STRING>물류</STRING>
+      <STRING>물류</STRING>
+      <STRING>물류</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Carpentry">
+      <STRING>목공술</STRING>
+      <STRING>목공술</STRING>
+      <STRING>목공술</STRING>
+      <STRING>목공술</STRING>
+      <STRING>목공술</STRING>
+      <STRING>산림 관리</STRING>
+      <STRING>산림 관리</STRING>
+      <STRING>산림 관리</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Logging Industry">
+      <STRING>고급 목공술</STRING>
+      <STRING>고급 목공술</STRING>
+      <STRING>선반</STRING>
+      <STRING>벌목 산업</STRING>
+      <STRING>벌목 산업</STRING>
+      <STRING>벌목 산업</STRING>
+      <STRING>벌목 산업</STRING>
+      <STRING>개혁</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Papermill">
+      <STRING>제지</STRING>
+      <STRING>제지</STRING>
+      <STRING>제지</STRING>
+      <STRING>제지</STRING>
+      <STRING>제지</STRING>
+      <STRING>제지 산업</STRING>
+      <STRING>제지 산업</STRING>
+      <STRING>제지 산업</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Agriculture">
+      <STRING>경작 기술</STRING>
+      <STRING>경작 기술</STRING>
+      <STRING>경작 기술</STRING>
+      <STRING>경작 기술</STRING>
+      <STRING>경작 기술</STRING>
+      <STRING>농경학</STRING>
+      <STRING>농경학</STRING>
+      <STRING>농경학</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Crop Rotation">
+      <STRING>제분</STRING>
+      <STRING>제분</STRING>
+      <STRING>제분</STRING>
+      <STRING>윤작</STRING>
+      <STRING>윤작</STRING>
+      <STRING>토양 보존</STRING>
+      <STRING>토양 보존</STRING>
+      <STRING>토양 보존</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Food Industry">
+      <STRING>식량 보존</STRING>
+      <STRING>식량 보존</STRING>
+      <STRING>식량 보존</STRING>
+      <STRING>식량 산업</STRING>
+      <STRING>식량 산업</STRING>
+      <STRING>식량 산업</STRING>
+      <STRING>냉장</STRING>
+      <STRING>냉장</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Literacy">
+      <STRING>인문학</STRING>
+      <STRING>인문학</STRING>
+      <STRING>인문학</STRING>
+      <STRING>인문학</STRING>
+      <STRING>합리성</STRING>
+      <STRING>합리성</STRING>
+      <STRING>합리성</STRING>
+      <STRING>합리성</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Printing Press">
+      <STRING>필사자</STRING>
+      <STRING>필사자</STRING>
+      <STRING>인쇄기</STRING>
+      <STRING>인쇄기</STRING>
+      <STRING>학술 문서</STRING>
+      <STRING>학술 문서</STRING>
+      <STRING>학술 문서</STRING>
+      <STRING>학술 문서</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Scientific Method">
+      <STRING>문답 교수법</STRING>
+      <STRING>문답 교수법</STRING>
+      <STRING>문답 교수법</STRING>
+      <STRING>과학적 방법론</STRING>
+      <STRING>과학적 방법론</STRING>
+      <STRING>과학적 방법론</STRING>
+      <STRING>과학적 방법론</STRING>
+      <STRING>과학적 방법론</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Institutional Research">
+      <STRING>장학금</STRING>
+      <STRING>장학금</STRING>
+      <STRING>장학금</STRING>
+      <STRING>장학금</STRING>
+      <STRING>장학금</STRING>
+      <STRING>장학금</STRING>
+      <STRING>학술</STRING>
+      <STRING>학술</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Supercomputers">
+      <STRING>아카데미아</STRING>
+      <STRING>아카데미아</STRING>
+      <STRING>아카데미아</STRING>
+      <STRING>아카데미아</STRING>
+      <STRING>아카데미아</STRING>
+      <STRING>아카데미아</STRING>
+      <STRING>슈퍼컴퓨터</STRING>
+      <STRING>슈퍼컴퓨터</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Metal Alloys">
+      <STRING>합금</STRING>
+      <STRING>합금</STRING>
+      <STRING>합금</STRING>
+      <STRING>야금학</STRING>
+      <STRING>야금학</STRING>
+      <STRING>야금학</STRING>
+      <STRING>야금학</STRING>
+      <STRING>야금학</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Cold Casting">
+      <STRING>가마</STRING>
+      <STRING>가마</STRING>
+      <STRING>냉연 주조</STRING>
+      <STRING>냉연 주조</STRING>
+      <STRING>용광로</STRING>
+      <STRING>용광로</STRING>
+      <STRING>용접</STRING>
+      <STRING>용접</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Steel">
+      <STRING>야금술</STRING>
+      <STRING>야금술</STRING>
+      <STRING>놋쇠</STRING>
+      <STRING>놋쇠</STRING>
+      <STRING>철강</STRING>
+      <STRING>철강</STRING>
+      <STRING>철강</STRING>
+      <STRING>철강</STRING>
+    </EPOCHTYPE>
+  </ALTERNATENAMES2>
+</ROOT>

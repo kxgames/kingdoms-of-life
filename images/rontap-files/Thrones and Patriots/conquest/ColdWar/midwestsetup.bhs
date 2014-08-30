@@ -1,0 +1,31 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  coldwar_rules();
+
+  infrastructure_setup(2, "St. Louis", "Kansas City", "Minneapolis");
+
+  int diff = get_difficulty();
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+  
+  rename_type("Minuteman", "Patriot");//31,139
+  
+  int x= 31;
+  int y = 139;
+  create_unit_upgrade(1, x, y, "General", 1);
+  create_unit_in_group(1, x, y, "Special Forces", 1);
+  create_unit_in_group(1, x, y, "Supply Wagon", 1);
+  create_unit_in_group(1, x, y, "Infantry", 3);
+  create_unit_in_group(1, x, y, "Bazooka", 1);
+  create_unit_in_group(1, x, y, "Armored Scout Car", 2);
+  create_unit_in_group(1, x, y, "Tank", 1);
+  
+  group_jump_move(1, x, y, 135);
+
+}
+
+

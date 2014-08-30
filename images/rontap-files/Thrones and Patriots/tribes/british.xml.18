@@ -1,0 +1,50 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="영국">
+	<LEADERS>
+		<LEADER>헨리 8세</LEADER>
+		<LEADER>사자왕 리처드</LEADER>
+		<LEADER>리처드 3세</LEADER>
+		<LEADER>헨리 5세</LEADER>
+		<LEADER>정복자 윌리엄</LEADER>
+		<LEADER>엘리자베스 1세</LEADER>
+		<LEADER>메리 여왕</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>런던</CITY>
+		<CITY>에든버러</CITY>
+		<CITY>요크</CITY>
+		<CITY>솔즈베리</CITY>
+		<CITY>뉴캐슬</CITY>
+		<CITY>캔터베리</CITY>
+		<CITY>노팅엄</CITY>
+		<CITY>레스터</CITY>
+		<CITY>노위치</CITY>
+		<CITY>링컨</CITY>
+		<CITY>체스터</CITY>
+		<CITY>더럼</CITY>
+		<CITY>배스</CITY>
+		<CITY>옥스포드</CITY>
+		<CITY>사우스햄튼</CITY>
+		<CITY>캠브리지</CITY>
+		<CITY>휘트비</CITY>
+		<CITY>헥섬</CITY>
+		<CITY>러니미드</CITY>
+		<CITY>윈저</CITY>
+		<CITY>엑스터</CITY>
+		<CITY>랭카스터</CITY>
+		<CITY>칼라일</CITY>
+		<CITY>애버딘</CITY>
+		<CITY>글래스고</CITY>
+		<CITY>브리스틀</CITY>
+		<CITY>리치먼드</CITY>
+		<CITY>버밍엄</CITY>
+		<CITY>맨체스터</CITY>
+		<CITY>포츠머스</CITY>
+		<CITY>리버풀</CITY>
+		<CITY>윈체스터</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

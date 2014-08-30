@@ -1,0 +1,406 @@
+include "ctw_lib.bhs"
+
+int conquest closest_city(int who, int unit_id);
+int conquest destroy_township(String city_name);
+
+conquest
+{
+  new_world_rules();
+
+  labels {
+    HUMAN = 1,
+    PIRATES = 2,
+  }
+
+  int z;
+  int i;
+  int b;
+  int x;
+  int y;
+  int building;
+  int unit;
+  int who;
+  int dock;
+  int dx;
+  int dy;
+  int random;
+  int capital = find_city_id(find_capital(HUMAN));
+  int spawn_toggle;
+  String city_name;
+
+  static int num_ports = num_type(PIRATES, "anchorage");
+  static int diff = get_difficulty();
+  static int diff_mod = (diff + 1)/2;
+  static int time = 5;
+  static int map_size = get_map_size();
+  static int ports[];
+  static int ports_health[];
+  static int ports_toggle = 1;
+
+  run_once {
+    new_world_setup();
+    for (b = 0; b < 12; b++) ports[b] = find_build(PIRATES, "anchorage");
+    for (b = 0; b < 12; b++) {
+      dock = ports[b];
+      ports_health[b] = object_health(PIRATES, dock);
+    }
+    force_transport_ability(PIRATES);
+    set_timer("ps", 1);//pirate_ships
+    set_timer("pl", 60);//pirate_landing
+    set_timer("psail", 60);//pirate_sailing
+    set_timer("pr", 90);//pirate_raiding
+    set_timer("ph", 90);
+    add_objective_text(parse("There are $d0 ports remaining.", num_ports), "counter_obj", "");
+    enable_all_triggers();
+    //for (i = 0; i < num_units(PIRATES); i++) {
+    //  unit = find_unit(PIRATES, "");
+    //  while (unit_category(PIRATES, unit) == "Sail") {
+    //    unit = find_unit(PIRATES, "");
+    //    i++;
+    //    if (i == num_units(PIRATES)) break;
+    //  }
+    //  disable_unit_transport(PIRATES, unit);
+    //}
+  } // run_once
+
+// *******************************
+// Have pirates defend their ports
+  for (b = 0; b < 12; b++) {
+    dock = ports[b];
+    if (0 < object_health(PIRATES, dock) < ports_health[b]) {
+      ports_health[b] = object_health(PIRATES, dock);
+      if (ports_toggle == 1) {
+        for (i = 0; i < diff; i++) {
+          unit = find_unit(PIRATES, "");
+          z = 0;
+          while (unit_category(PIRATES, unit) != "Sail") {
+            unit = find_unit(PIRATES, "");
+            z++;
+            if (z > 5) break;
+          }
+          if (unit_category(PIRATES, unit) == "Sail") unit_attack_to_order(PIRATES, unit, object_position_x(PIRATES, dock), object_position_y(PIRATES, dock));
+        } // for (i = 0
+        ports_toggle = 0;
+        set_timer("ports_tmr", 30);
+        enable_trigger ("ports_reset");
+      } // if (ports_toggle
+    } // if (object_health
+  } // for (b = 0
+  //popup_dialog($S("blah"));
+  trigger ports_reset(timer_expired("ports_tmr")) ports_toggle = 1;
+
+// **************************************************************************
+// Creates pirate raiders and boats at docks to attack player cities
+  if (timer_expired("ph")) {
+    city_name = find_city_name(HUMAN);
+    building = find_city_id(city_name);
+    x = object_position_x(HUMAN, building);
+    y = object_position_y(HUMAN, building);
+    //enable_trigger("pirates_ho");
+    set_timer("ph", 135 - 5*diff);
+    dock = find_build(PIRATES, "anchorage");
+    dx = object_position_x(PIRATES, dock);
+    dy = object_position_y(PIRATES, dock);
+    spawn_toggle = rand_int(0,1);
+    random = rand_int(1, 3);
+    switch (spawn_toggle) {
+      case 0:
+        switch (random) {
+          case 1:
+          case 2:
+            for (i = 0; i < 20; i++) {
+              if (!map_is_land(dx, dy)) {
+                dx = rand_int (dx - 5, dx + 5);
+                dy = rand_int (dy - 5, dy + 5);
+              }
+              else break;
+            } // for (i = 0
+            break;
+          case 3:
+            dx = 10;
+            dy = 390;
+            break;
+        } // switch (random
+        if (diff > 2) {
+          for (i = 0; i < diff_mod + 4; i++) {
+            clear_group(PIRATES);
+            unit = create_unit_upgrade(PIRATES, dx, dy, "Slingers", 1);
+            unit_attack_to_order(PIRATES, unit, x, y);
+            unit = create_unit_upgrade(PIRATES, dx, dy, "Hoplites", 1);
+            unit_attack_to_order(PIRATES, unit, x, y);
+          }
+        }
+        break;
+      case 1:
+        switch (random) {
+          case 1:
+            for (i = 0; i < 20; i++) {
+              if (map_is_land(dx, dy)) {
+                dx = rand_int (dx - 5, dx + 5);
+                dy = rand_int (dy - 5, dy + 5);
+              }
+              else break;
+            } // for (i = 0
+            break;
+          case 2:
+            dx = 3;
+            dy = 3;
+            break;
+          case 3:
+            dx = 5;
+            dy = map_size - 6;
+            break;
+        } // switch (random
+        for (i = 0; i < diff_mod; i++) {
+          if (diff_mod == 1) {
+            clear_group(PIRATES);
+            create_unit_upgrade(PIRATES, dx, dy, "Trireme", 1);
+            unit_attack_to_order(PIRATES, unit, x, y);
+          }
+          if (diff_mod == 2) {
+            clear_group(PIRATES);
+            create_unit_upgrade(PIRATES, dx, dy, "Trireme", 2);
+            create_unit_in_group(PIRATES, dx, dy, "Bark", 1);
+            group_attack_to_order(PIRATES, x, y);
+          }
+          if (diff_mod == 3) {
+            clear_group(PIRATES);
+            unit = create_unit_upgrade(PIRATES, dx, dy, "Bomb Ketch", (diff + 3)/ 4);
+            unit_attack_to_order(PIRATES, unit, x, y);
+            clear_group(PIRATES);
+            create_unit_upgrade(PIRATES, dx, dy, "Trireme", 3);
+            create_unit_in_group(PIRATES, dx, dy, "Bark", 2);
+            group_guard_order(PIRATES, PIRATES, unit);
+          }
+        } // for (i = 0
+        break;
+    } // switch (spawn_toggle
+  } // trigger pirates_ho
+
+// **********************************************************************
+// If pirates capture a city, give it back since they just want phat lewt
+  trigger city_plunder(object_health(HUMAN, capital) < 15) {
+    set_object_health(HUMAN, capital, 50);
+    print_msg($S("The pirates have plundered your city and are escaping with their loot!"));
+    destroy_township(find_city_name(HUMAN));
+    x = object_position_x(PIRATES, capital);
+    y = object_position_y(PIRATES, capital);
+    dock = find_build(PIRATES, "anchorage");
+    dx = object_position_x(PIRATES, dock);
+    dy = object_position_y(PIRATES, dock);
+    clear_group(PIRATES);
+    for (n = num_units(PIRATES); n > 0; n--) {
+      unit = find_unit(PIRATES, "");
+      if (object_near(PIRATES, unit, x, y, 30)) unit_flee_order(PIRATES, unit, dx, dy);
+    }
+    set_timer("city_plunder", 45);
+    enable_trigger ("city_plunder1");
+  } // trigger city_plunder
+
+  trigger city_plunder1(timer_expired("city_plunder")) {
+    enable_trigger ("city_plunder");
+  } // trigger city_plunder1
+
+// ***********************
+// Create new pirate ships
+  if (timer_expired("ps")) {
+    clear_group(PIRATES);
+    //enable_trigger("pirate_ships");
+    set_timer("ps", 80 - 4*diff);
+    dock = find_build(PIRATES, "anchorage");
+    dx = object_position_x(PIRATES, dock);
+    dy = object_position_y(PIRATES, dock);
+    for (i = 0; i < 20; i++) {
+      if (map_is_land(dx, dy)) {
+        dx = rand_int (dx - 5, dx + 5);
+        dy = rand_int (dy - 5, dy + 5);
+      }
+      else break;
+    } // for (i = 0
+    random = rand_int(1,3);
+    switch (random) {
+      case 1:
+      case 2:
+        create_unit_upgrade(PIRATES, dx, dy, "Trireme", diff_mod);
+        if (diff > 2) create_unit_in_group(PIRATES, dx, dy, "Bark", diff_mod);
+        side = rand_int(0, 3);
+        switch (side) {
+          case 0 :
+            x = 1;
+            y = rand_int(1, get_map_size() - 1);
+            break;
+          case 1 :
+            x = get_map_size() - 1;
+            y = rand_int(1, get_map_size() - 1);
+            break;
+          case 2 :
+            x = rand_int(1, get_map_size() - 1);
+            y = 1;
+            break;
+          case 3 :
+            x = rand_int(1, get_map_size() - 1);
+            y = get_map_size() - 1;
+            break;
+        } // switch (side
+        group_patrol_order(PIRATES, x, y);
+        break;
+      case 3:
+        if (diff > 4) unit = create_unit_upgrade(PIRATES, dx, dy, "fire raft", diff_mod);
+        unit_attack_to_order(PIRATES, unit, 30, 80);
+        break;
+    } // switch (random
+  } // trigger pirate_ships
+
+// ******************************************************
+// Idle pirates will loot and plunder the player towns
+   if (timer_expired("pr")) {
+    //enable_trigger("pirates_raid");
+    set_timer("pr", 45);
+    for (n = num_units(PIRATES); n > 0; n--) {
+      unit = find_unit(PIRATES, "");
+      while (unit_category(PIRATES, unit) == "Sail") {
+        if (is_idle(PIRATES, unit)) {
+          side = rand_int(0, 3);
+          switch (side) {
+            case 0 :
+              x = 1;
+              y = rand_int(1, get_map_size() - 1);
+              break;
+            case 1 :
+              x = get_map_size() - 1;
+              y = rand_int(1, get_map_size() - 1);
+              break;
+            case 2 :
+              x = rand_int(1, get_map_size() - 1);
+              y = 1;
+              break;
+            case 3 :
+              x = rand_int(1, get_map_size() - 1);
+              y = get_map_size() - 1;
+              break;
+          } // switch (side
+          unit_patrol_order(PIRATES, unit, x, y);
+        } // if (is_idle(PIRATES
+        unit = find_unit(PIRATES, "");
+        n--;
+        if (n == 0) break;
+      } // while (unit_category
+      if (is_idle(PIRATES, unit)) {
+        building = closest_city(PIRATES, unit);
+        unit_stance_order(PIRATES, unit, "Raid");
+        x = object_position_x(HUMAN, building);
+        y = object_position_y(HUMAN, building);
+        unit_attack_to_order(PIRATES, unit, x, y);
+      }
+    } // for (n = num_units
+  } // trigger pirates_raid
+
+// *******************
+// Small bonus for fun
+  if (num_type(PIRATES, "anchorage") < num_ports) {
+    num_ports = num_type(PIRATES, "anchorage");
+    change_objective_text("counter_obj", parse("There are $d0 ports remaining.", num_ports));
+    //enable_trigger ("buried_treasure");
+    random = rand_int (1, 10);
+    switch (random) {
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+        break;
+      case 6:
+      case 7:
+        print_msg($S("Your men have found a treasure map at the port and discovered 300 Wealth!"));
+        print_game_msg($S("Received 300 wealth from treasure map!"));
+        bubble_text($S("TREASURE MAP!"), get_camera_x(), get_camera_y());
+        give_good(HUMAN, "wealth", 300);
+        break;
+      case 8:
+      case 9:
+        print_msg($S("A pirate captain has revealed the location of his booty in exchange for his life.  You've gained 100 of each resource!"));
+        print_game_msg($S("Received 100 Food from pirate booty!"));
+        print_game_msg($S("Received 100 Timber from pirate booty!"));
+        print_game_msg($S("Received 100 Metal from pirate booty!"));
+        print_game_msg($S("Received 100 Wealth from pirate booty!"));
+        bubble_text($S("PIRATE BOOTY!"), get_camera_x(), get_camera_y());
+        give_good(HUMAN, "food", 100);
+        give_good(HUMAN, "timber", 100);
+        give_good(HUMAN, "metal", 100);
+        give_good(HUMAN, "wealth", 100);
+        break;
+      case 10:
+        print_msg($S("You've discovered naval charts within the ruined port!"));
+        print_game_msg($S("The naval charts have made the map explored for us!"));
+        bubble_text($S("NAVAL CHARTS!"), get_camera_x(), get_camera_y());
+        set_explored(HUMAN);
+        break;
+    } // switch (random
+  } // trigger buried_treasure
+
+// ***********************************************
+// Human wins if there ain't no more pirate ports
+  if (num_ports < 1) {
+    victory(HUMAN);
+  } // trigger docks_victory
+
+// *****************************
+// Human defeat if time runs out
+  if (time_later_than(30)) {
+    defeat(HUMAN);
+  } // trigger time_defeat
+} // conquest
+
+// ***********************************************
+// Return the closest city to the unit in question
+int conquest closest_city(int who, int unit_id) {
+  int x = object_position_x(who, unit_id);
+  int y = object_position_y(who, unit_id);
+  int who2 = 1;
+  int cx;//x of current city being checked
+  int cy;
+  int ex;//difference between unit and current city
+  int ey;
+  int fx = 500;//closest difference
+  int fy = 500;
+  int building;
+  int f_building;//final building
+  for (n = num_cities(who2); n > 0; n--) {
+    city_name = find_city_name(who2);
+    building = find_city_id(city_name);
+    cx = object_position_x(who2, building);
+    cy = object_position_y(who2, building);
+    if (x > cx) ex = x - cx;
+    else ex = cx - x;
+    if (y > cy) ey = y - cy;
+    else ey = cy - y;
+    if (ex + ey < fx + fy) {
+      fx = ex;
+      fy = ey;
+      f_building = building;
+    }
+  } // for (n = num_cities(who2
+  return f_building;
+} // int conquest closest_city
+
+// **********************************
+// Destroy some buildings at the town
+int conquest destroy_township(String city_name) {
+  String build_names[] = ["Library", "Temple", "Market", "University", "Woodcutter's Camp", "Farm", "Mine", "Anchorage", "Lumber Mill", "Granary", "Smelter", "Senate"];
+  int diff = get_difficulty();
+  int num_destroyed;
+  int toggle;
+  for (b = 0; b < 12; b++) {
+    for (n = num_city_buildings(2, city_name, build_names[b], 1); n > 0; n--) {
+      building = find_build_at_city(2, city_name, build_names[b], 1);
+      if (building > 0) {
+        toggle = rand_int(1, 7 - diff);
+        if (toggle == 1) {
+          destroy_building(2, building);
+          num_destroyed++;
+        }
+      } // if (building > 0
+    } // for (n = num_city_buildings
+  } // for (b = 0
+  return num_destroyed;
+} // int conquest destroy_township

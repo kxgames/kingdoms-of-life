@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Robert Nicaise (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Vikings">
+  <LEADERS>
+    <LEADER>King Canute the Great</LEADER>
+    <LEADER>King Olaf the White</LEADER>
+    <LEADER>King Eric Bloodaxe</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Jelling</CITY>
+    <CITY>Roskilde</CITY>
+    <CITY>Skiringssal</CITY>
+    <CITY>Odense</CITY>
+    <CITY>Ribe</CITY>
+    <CITY>Trondheim</CITY>
+    <CITY>Hedeby</CITY>
+    <CITY>Nonnebakken</CITY>
+    <CITY>Loddekopinge</CITY>
+    <CITY>Lund</CITY>
+    <CITY>Uppsala</CITY>
+    <CITY>Westness</CITY>
+    <CITY>Jorvik</CITY>
+    <CITY>Whitby</CITY>
+    <CITY>Thurkelby</CITY>
+    <CITY>Kettlethorpe</CITY>
+    <CITY>Grimista</CITY>
+    <CITY>Isbister</CITY>
+    <CITY>Kaupang</CITY>
+    <CITY>Noirmoutier</CITY>
+    <CITY>Brattahlid</CITY>
+    <CITY>Birka</CITY>
+    <CITY>Staraja Ladoga</CITY>
+    <CITY>Holmgard</CITY>
+    <CITY>Sebbersund</CITY>
+    <CITY>Uppakra</CITY>
+    <CITY>Novgorod</CITY>
+    <CITY>Haithabu</CITY>
+    <CITY>Gorodische</CITY>
+    <CITY>Derby</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

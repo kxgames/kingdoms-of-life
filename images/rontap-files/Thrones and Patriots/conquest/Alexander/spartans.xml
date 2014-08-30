@@ -1,0 +1,27 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Spartans" substitute="1">
+  <LEADERS>
+    <LEADER>King Agis III</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Argos</CITY>
+    <CITY>Phocaea</CITY>
+    <CITY>Chios</CITY>
+    <CITY>Zacynthus</CITY>
+    <CITY>Mantinea</CITY>
+    <CITY>Heraclea</CITY>
+    <CITY>Nemea</CITY>
+    <CITY>Elis</CITY>
+    <CITY>Philus</CITY>    
+    <CITY>Troezen</CITY>
+    <CITY>Sicyon</CITY>
+    <CITY>Pylos</CITY>
+    <CITY>Sphacteria</CITY>
+    <CITY>Messene</CITY>
+    <CITY>Cyllene</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+	<CAT hash="587613">
+		<STRING hash="11685233" hash_i="11756429" needed="0">一般的な資源</STRING>
+		<STRING hash="20489380" hash_i="20551444" needed="0">希少資源 (食料)</STRING>
+		<STRING hash="147467286" hash_i="156441532" needed="0">研究とアップグレードにかかる時間が $NUMBER0% 短縮されます。</STRING>
+		<STRING hash="113202238" hash_i="120574496" needed="0">ユニットのアップグレード コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="180822180" hash_i="192662692" needed="0">#ICON27 科学の研究コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="172749797" hash_i="187362279" needed="0">#ICON25 治政の研究コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="182561711" hash_i="193954395" needed="0">#ICON26 経済の研究コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="87506613" hash_i="93518609" needed="0">隊商の財貨の獲得率が $NUMBER0% アップします。</STRING>
+		<STRING hash="127701008" hash_i="136619784" needed="0">兵舎でのユニット作成コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="108052760" hash_i="115154366" needed="0">厩舎でのユニット作成コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="132453351" hash_i="141713909" needed="0">車両工場でのユニット作成コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="166713158" hash_i="178869008" needed="0">攻城/火砲ユニット作成コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="178361967" hash_i="190646447" needed="0">市場での売値が +$NUMBER0 アップし、買値が -$NUMBER1 ダウンします。</STRING>
+		<STRING hash="165161095" hash_i="176196279" needed="0">#ICON23 時代進化コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="179338198" hash_i="190089704" needed="0">市民による建造物 (偉大な建造物を含む) の建設スピードが $NUMBER0% アップします。</STRING>
+		<STRING hash="112820383" hash_i="120189315" needed="0">偉大な建造物の建設コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="183793237" hash_i="193611755" needed="0">#ICON24 軍事の研究コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="223947293" hash_i="223468201" needed="0">兵舎、厩舎、港でのユニット作成スピードが $NUMBER0% アップします。</STRING>
+		<STRING hash="122452978" hash_i="130056882" needed="0">穀倉での研究コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="171072432" hash_i="178172594" needed="0">兵器工場と港で作成するユニットのヒットポイントが +$NUMBER0% アップします。</STRING>
+		<STRING hash="94163552" hash_i="96831316" needed="0">#ICON20 人口の上限が +$NUMBER0% アップします。</STRING>
+		<STRING hash="69993360" hash_i="69971538" needed="0">海上の船舶のダメージが自動的に回復します。</STRING>
+		<STRING hash="76521631" hash_i="82031785" needed="0">すべての食料コストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="117828710" hash_i="126659822" needed="0">#ICON21 経済の規模が +$NUMBER0% アップします。</STRING>
+		<STRING hash="42031216" hash_i="46557986" needed="0">国境が +$NUMBER0% 広がります。</STRING>
+		<STRING hash="219551962" hash_i="224074346" needed="0">航空機ユニットの作成コストが $NUMBER0% ダウンし、飛行速度が $NUMBER1% アップします。</STRING>
+		<STRING hash="104712415" hash_i="111694881" needed="0">帆船の速度が $NUMBER0% アップします。</STRING>
+		<STRING hash="177991301" hash_i="192101669" needed="0">射手、やぐら、砦、都市の攻撃力が +$NUMBER1 アップします。</STRING>
+		<STRING hash="172156159" hash_i="185192517" needed="0">市民ユニットの作成スピードが $NUMBER0% アップし、作成コストが $NUMBER1% ダウンします。</STRING>
+		<STRING hash="126026323" hash_i="135826793" needed="0">すべての #ICON2 木材によるコストが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="172570610" hash_i="184862394" needed="0">核弾頭ミサイルの作成スピードが $NUMBER0% アップし、作成コストが $NUMBER1% ダウンします。</STRING>
+		<STRING hash="162975423" hash_i="173047229" needed="0">敵地内損耗によるダメージが $NUMBER0% ダウンします。</STRING>
+		<STRING hash="39526173" hash_i="44052943" needed="0">国境が +$NUMBER0% 広がります。</STRING></CAT>
+	<CAT hash="5799388">
+		<STRING hash="0" hash_i="0" needed="0"/>
+		<STRING hash="18235975" hash_i="18298039" needed="0">希少資源 (食料)</STRING>
+		<STRING hash="48316772" hash_i="48424200" needed="0">研究およびアップグレードのスピードアップ</STRING>
+		<STRING hash="20180700" hash_i="20289892" needed="0">ユニット アップグレードのコストダウン</STRING>
+		<STRING hash="28254149" hash_i="30066889" needed="0">科学研究ボーナス</STRING>
+		<STRING hash="23093140" hash_i="24722438" needed="0">治政研究ボーナス</STRING>
+		<STRING hash="30961383" hash_i="32991505" needed="0">経済研究ボーナス</STRING>
+		<STRING hash="9549012" hash_i="10503438" needed="0">隊商ボーナス</STRING>
+		<STRING hash="30587098" hash_i="32405312" needed="0">兵舎ユニット作成のコストダウン</STRING>
+		<STRING hash="22163518" hash_i="23519296" needed="0">厩舎ユニット作成のコストダウン</STRING>
+		<STRING hash="32968667" hash_i="34925325" needed="0">車両工場ユニット作成のコストダウン</STRING>
+		<STRING hash="49316992" hash_i="52418960" needed="0">攻城/火砲ユニット作成のコストダウン</STRING>
+		<STRING hash="17709399" hash_i="19040397" needed="0">市場価格ボーナス</STRING>
+		<STRING hash="20242399" hash_i="22000635" needed="0">時代進化のコストダウン</STRING>
+		<STRING hash="24055863" hash_i="25267355" needed="0">建設スピードアップ</STRING>
+		<STRING hash="11828830" hash_i="12706172" needed="0">偉大な建造物建設のコストダウン</STRING>
+		<STRING hash="31187895" hash_i="33125419" needed="0">軍事研究ボーナス</STRING>
+		<STRING hash="55849638" hash_i="56475694" needed="0">歩兵、騎兵、船舶作成のスピードアップ</STRING>
+		<STRING hash="34474051" hash_i="36338081" needed="0">穀倉での研究のコストダウン</STRING>
+		<STRING hash="35489584" hash_i="36208990" needed="0">船舶/火砲のヒットポイント</STRING>
+		<STRING hash="26362468" hash_i="28232524" needed="0">人口上限ボーナス</STRING>
+		<STRING hash="15177844" hash_i="16318806" needed="0">海上船舶のダメージ回復</STRING>
+		<STRING hash="17531243" hash_i="18134095" needed="0">食料のコストダウン</STRING>
+		<STRING hash="10397967" hash_i="11466707" needed="0">経済ボーナス</STRING>
+		<STRING hash="36183080" hash_i="40709850" needed="0">国境を +$NUMBER0 拡大</STRING>
+		<STRING hash="43631754" hash_i="44994796" needed="0">航空機のコストダウンとスピードアップ</STRING>
+		<STRING hash="22178329" hash_i="22313841" needed="0">船舶のスピードアップ</STRING>
+		<STRING hash="9048116" hash_i="9994856" needed="0">射手ボーナス</STRING>
+		<STRING hash="85845041" hash_i="89559069" needed="0">民間人ユニット作成のスピードアップとコストダウン</STRING>
+		<STRING hash="19809197" hash_i="20628375" needed="0">木材コストの半減</STRING>
+		<STRING hash="24772106" hash_i="26275680" needed="0">核兵器ユニットのコストダウン</STRING>
+		<STRING hash="15485697" hash_i="16296777" needed="0">敵地内損耗によるダメージのダウン</STRING>
+		<STRING hash="22234203" hash_i="23009365" needed="0">木材のコストダウン</STRING>
+	</CAT>
+</ROOT>

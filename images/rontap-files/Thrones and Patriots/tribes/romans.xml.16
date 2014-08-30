@@ -1,0 +1,61 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="I ROMANI">
+	<LEADERS>
+		<LEADER>Giulio Cesare</LEADER>
+		<LEADER>Augusto </LEADER>
+		<LEADER>Traiano</LEADER>
+		<LEADER>Marco Aurelio</LEADER>
+		<LEADER>Adriano</LEADER>
+		<LEADER>Claudio</LEADER>
+		<LEADER>Costantino</LEADER>
+		<LEADER>Giustiniano</LEADER>
+		<LEADER>Teodora</LEADER>
+		<LEADER>Livia</LEADER>
+		<LEADER>Vibia Sabina</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Roma</CITY>
+		<CITY>Costantinopoli</CITY>
+		<CITY>Cumae</CITY>
+		<CITY>Antium</CITY>
+		<CITY>Caesaraugusta</CITY>
+		<CITY>Veii</CITY>
+		<CITY>Brundisium</CITY>
+		<CITY>Ancona</CITY>
+		<CITY>Arretium</CITY>
+		<CITY>Rhegium</CITY>
+		<CITY>Neapolis</CITY>
+		<CITY>Corfinium</CITY>
+		<CITY>Luca</CITY>
+		<CITY>Genua</CITY>
+		<CITY>Cosa</CITY>
+		<CITY>Pisae</CITY>
+		<CITY>Parma</CITY>
+		<CITY>Buxentum</CITY>
+		<CITY>Saturnia</CITY>
+		<CITY>Spoletium</CITY>
+		<CITY>Crotone</CITY>
+		<CITY>Aquae Sextiae</CITY>
+		<CITY>Lugdunum</CITY>
+		<CITY>Avaricum</CITY>
+		<CITY>Aquileia</CITY>
+		<CITY>Mediolanum</CITY>
+		<CITY>Cremona</CITY>
+		<CITY>Mutina</CITY>
+		<CITY>Dyrrhachium</CITY>
+		<CITY>Perusia</CITY>
+		<CITY>Beneventum</CITY>
+		<CITY>Emerita Augusta</CITY>
+		<CITY>Vindobona</CITY>
+		<CITY>Durocortorum</CITY>
+		<CITY>Colonia Agrippina</CITY>
+		<CITY>Centumcellae</CITY>
+		<CITY>Bononia</CITY>
+		<CITY>Ariminum</CITY>
+		<CITY>Cemenelum</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

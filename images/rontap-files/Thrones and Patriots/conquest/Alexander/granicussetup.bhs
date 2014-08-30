@@ -1,0 +1,53 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+missing_allies();
+  labels {
+  }
+  x = 43;
+  y = 76;
+  diff = get_difficulty();
+  disable_city_defeat(7);
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  set_time_limit(90);
+
+  //create alexander's army
+  create_unit_upgrade(1, x, y, "Javelineers", 2);
+  create_unit_upgrade(1, x, y, "Phalanx", 2);
+  create_unit_upgrade(1, x, y, "Archers", 3);
+  create_unit_upgrade(1, x, y, "Light Horse", 4);
+  create_unit_upgrade(1, x, y, "Cataphract", 10);
+  create_unit_upgrade(1, x, y, "Supply Wagon", 1);
+  create_unit_upgrade(1, x, y, "Scout", 1);
+
+  x = 131;
+  y = 34;
+  //create memnon's army
+  for (i = 0; i < diff+7; i++) {
+    unit_id = create_unit(7, x, y, "Greek Mercenaries", 1);
+    add_to_group(7, unit_id);
+  }
+  create_unit_in_group(7, x, y, "Archers", diff-2);
+  create_unit_in_group(7, x, y, "Light Horse", diff-2);
+  create_unit_in_group(7, x, y, "Cataphract", diff-3);
+  create_unit_in_group(7, x, y, "Supply Wagon", 1);
+  create_unit_in_group(7, x, y, "Memnon", 1);
+
+  group_jump_move(7, x, y, 270);
+
+  place_building_upgrade(2, "Senate", "Sardes");
+
+  if (diff < 4) {
+    destroy_building_type(2, "Tower");
+    destroy_building_type(3, "Tower");
+    destroy_building_type(2, "Fort");
+    destroy_building_type(3, "Fort");
+  }
+}

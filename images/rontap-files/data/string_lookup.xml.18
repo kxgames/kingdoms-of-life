@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Isaac Ellis (Big Huge Games) -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION: All text within STRING elements-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<!-- LOCALIZATION-->
+<ROOT>
+	<CAT hash="3920216">
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+		<STRING hash="10416096" hash_i="11226112" needed="1">팀 및 동맹:</STRING>
+		<STRING hash="5820335" hash_i="5803731" needed="1">게임 규칙:</STRING>
+		<STRING hash="4776064" hash_i="4717396" needed="1">지도 유형:</STRING>
+		<STRING hash="6449465" hash_i="6434995" needed="1">난이도:</STRING>
+		<STRING hash="3668910" hash_i="3610242" needed="1">지도 크기:</STRING>
+		<STRING hash="3098722" hash_i="3076364" needed="1">승리 조건:</STRING>
+		<STRING hash="7402063" hash_i="7387925" needed="1">탈락 조건:</STRING>
+		<STRING hash="5901328" hash_i="5857444" needed="1">게임 시작 설정:</STRING>
+		<STRING hash="5144092" hash_i="5122650" needed="1">자원:</STRING>
+		<STRING hash="10669646" hash_i="11648524" needed="1">방어자 보너스:</STRING>
+		<STRING hash="6056078" hash_i="6033572" needed="1">기술:</STRING>
+		<STRING hash="4190828" hash_i="4791364" needed="1">시작 시대:</STRING>
+		<STRING hash="6976133" hash_i="7903331" needed="1">방어자 시대 설정:</STRING>
+		<STRING hash="2247494" hash_i="2639534" needed="1">최종 시대:</STRING>
+		<STRING hash="6319993" hash_i="6318887" needed="1">지도 표시:</STRING>
+		<STRING hash="6203405" hash_i="6182561" needed="1">인구:</STRING>
+		<STRING hash="5772019" hash_i="5749829" needed="1">러시 규칙:</STRING>
+		<STRING hash="6768248" hash_i="6821576" needed="1">시간 지연:</STRING>
+		<STRING hash="10175165" hash_i="10176011" needed="1">다른 국가:</STRING>
+		<STRING hash="10539490" hash_i="10491672" needed="1">최대 관전자 수:</STRING>
+		<STRING hash="5376021" hash_i="5357137" needed="1">게임 속도:</STRING>
+		<STRING hash="1420697" hash_i="1398875" needed="1">승리 점수:</STRING>
+		<STRING hash="5568970" hash_i="5569968" needed="1">제한 시간:</STRING>
+		<STRING hash="12147140" hash_i="13031630" needed="1">타이머:</STRING>
+		<STRING hash="12357003" hash_i="12311769" needed="1">점수 차이:</STRING>
+		<STRING hash="11676407" hash_i="11763517" needed="1">영토 획득:</STRING>
+		<STRING hash="7350754" hash_i="7364912" needed="1">목표 수입:</STRING>
+		<STRING hash="21834034" hash_i="24498646" needed="1">정복 보너스 카드</STRING>
+		<STRING hash="4500312" hash_i="4509124" needed="1">Mods 게임:</STRING>
+	</CAT>
+	<CAT hash="1979549">
+		<STRING hash="3518863" hash_i="3501657" needed="1">군사</STRING>
+		<STRING hash="1325279" hash_i="1400671" needed="1">도시</STRING>
+		<STRING hash="3292351" hash_i="3367743" needed="1">상업</STRING>
+		<STRING hash="2632232" hash_i="2610410" needed="1">과학</STRING>
+		<STRING hash="659880" hash_i="644452" needed="1">보병</STRING>
+		<STRING hash="2102572" hash_i="2085366" needed="1">기병 유닛</STRING>
+		<STRING hash="5345985" hash_i="5328779" needed="1">기계화 유닛</STRING>
+		<STRING hash="19302702" hash_i="20309678" needed="1">공성 및 포병 유닛</STRING>
+		<STRING hash="27043938" hash_i="27197386" needed="1">특수 능력 사용 유닛</STRING>
+		<STRING hash="43655280" hash_i="45661268" needed="1">비전투 유닛</STRING>
+		<STRING hash="10111480" hash_i="10111604" needed="1">범선</STRING>
+		<STRING hash="8580167" hash_i="8574753" needed="1">현대 해군</STRING>
+		<STRING hash="338844" hash_i="406550" needed="1">공군</STRING>
+		<STRING hash="3621047" hash_i="3606909" needed="1">경제</STRING>
+		<STRING hash="1493636" hash_i="1469282" needed="1">불가사의</STRING>
+		<STRING hash="4986669" hash_i="5054375" needed="1">공격</STRING>
+		<STRING hash="3775778" hash_i="3761308" needed="1">방어</STRING>
+		<STRING hash="7441301" hash_i="7456903" needed="1">위치 사수</STRING>
+		<STRING hash="679072" hash_i="657630" needed="1">습격</STRING>
+		<STRING hash="772144" hash_i="750702" needed="1">파괴</STRING>
+		<STRING hash="3522606" hash_i="3539644" needed="1">대기</STRING>
+		<STRING hash="1633076" hash_i="1617220" needed="1">수집</STRING>
+		<STRING hash="10032762" hash_i="10186100" needed="1">건설 및 수집</STRING>
+		<STRING hash="874157" hash_i="947031" needed="1">건설</STRING>
+		<STRING hash="531728" hash_i="514750" needed="1">대기</STRING>
+		<STRING hash="5396068" hash_i="6044030" needed="1">자동 특수 능력 사용</STRING>
+		<STRING hash="8254070" hash_i="8997984" needed="1">수동 특수 능력 사용</STRING>
+		<STRING hash="6302470" hash_i="6411260" needed="1">자동 배치</STRING>
+		<STRING hash="9187448" hash_i="9212466" needed="1">수동 배치</STRING>
+		<STRING hash="2415994" hash_i="2483700" needed="1">고대</STRING>
+		<STRING hash="5055938" hash_i="5131330" needed="1">고전</STRING>
+		<STRING hash="3271147" hash_i="3253941" needed="1">중세</STRING>
+		<STRING hash="3896038" hash_i="3880182" needed="1">화약</STRING>
+		<STRING hash="8707027" hash_i="8692889" needed="1">계몽</STRING>
+		<STRING hash="5641758" hash_i="5624780" needed="1">산업</STRING>
+		<STRING hash="1495270" hash_i="1478064" needed="1">현대</STRING>
+		<STRING hash="6746924" hash_i="6729946" needed="1">정보화</STRING>
+		<STRING hash="617427" hash_i="720895" needed="1">전쟁!</STRING>
+		<STRING hash="1366925" hash_i="1346081" needed="1">평화 상태</STRING>
+		<STRING hash="669166" hash_i="736872" needed="1">동맹</STRING>
+		<STRING hash="5094893" hash_i="5080423" needed="1">외교</STRING>
+		<STRING hash="28999951" hash_i="29139981" needed="1">개인전</STRING>
+		<STRING hash="3887577" hash_i="3955283" needed="1">숙적 제거</STRING>
+		<STRING hash="32811580" hash_i="33103126" needed="1">바바리안의 침략</STRING>
+		<STRING hash="3962092" hash_i="3939586" needed="1">2:2.. 게임</STRING>
+		<STRING hash="3978471" hash_i="3955965" needed="1">3:3 게임</STRING>
+		<STRING hash="3995870" hash_i="3973364" needed="1">4:4 게임</STRING>
+		<STRING hash="12258848" hash_i="12277426" needed="1">팀 외교</STRING>
+		<STRING hash="27122274" hash_i="27313812" needed="1">협력 외교</STRING>
+		<STRING hash="23932259" hash_i="24028221" needed="1">생존 협력</STRING>
+		<STRING hash="16393466" hash_i="16480536" needed="1">팀 협력</STRING>
+		<STRING hash="6044513" hash_i="6120673" needed="1">사용자 지정 열기</STRING>
+		<STRING hash="8281712" hash_i="9118224" needed="1">사용자 지정 닫기</STRING>
+		<STRING hash="5097224" hash_i="5112826" needed="1">저장된 게임</STRING>
+		<STRING hash="3362659" hash_i="3340837" needed="1">표준</STRING>
+		<STRING hash="1626432" hash_i="1701824" needed="1">사용자 지정</STRING>
+		<STRING hash="2287567" hash_i="2235461" needed="1">러시 금지</STRING>
+		<STRING hash="7466821" hash_i="7487223" needed="1">단판 승부</STRING>
+		<STRING hash="6202864" hash_i="6188394" needed="1">데스매치</STRING>
+		<STRING hash="5502719" hash_i="5533577" needed="1">전술 게임</STRING>
+		<STRING hash="1150372" hash_i="1132098" needed="1">이주 단계</STRING>
+		<STRING hash="19608465" hash_i="19667523" needed="1">시대 발전 게임</STRING>
+		<STRING hash="4184613" hash_i="4201953" needed="1">빠른 게임</STRING>
+		<STRING hash="13573600" hash_i="13598166" needed="1">시나리오/스크립트</STRING>
+		<STRING hash="1638468" hash_i="1617026" needed="1">랜덤</STRING>
+		<STRING hash="12443480" hash_i="12521400" needed="1">랜덤 육지 맵</STRING>
+		<STRING hash="11012901" hash_i="11063723" needed="1">랜덤 섬 맵</STRING>
+		<STRING hash="3843874" hash_i="3770100" needed="1">판게아</STRING>
+		<STRING hash="9418409" hash_i="9398215" needed="1">사하라 사막</STRING>
+		<STRING hash="16188804" hash_i="16242958" needed="1">아마존 열대우림</STRING>
+		<STRING hash="5200590" hash_i="5182292" needed="1">히말라야 산맥</STRING>
+		<STRING hash="10802627" hash_i="10875571" needed="1">메사 남서부</STRING>
+		<STRING hash="24115318" hash_i="24350282" needed="1">아프리카의 샘</STRING>
+		<STRING hash="9940214" hash_i="9923008" needed="1">지중해</STRING>
+		<STRING hash="21369198" hash_i="21496408" needed="1">호주 미개척지</STRING>
+		<STRING hash="6671033" hash_i="6681793" needed="1">오대호</STRING>
+		<STRING hash="11123843" hash_i="11126259" needed="1">전국 시대</STRING>
+		<STRING hash="3908601" hash_i="3836205" needed="1">신세계</STRING>
+		<STRING hash="12241427" hash_i="12372987" needed="1">식민지 시대</STRING>
+		<STRING hash="6061595" hash_i="6073493" needed="1">동인도 제도</STRING>
+		<STRING hash="11895988" hash_i="11909598" needed="1">문명 충돌</STRING>
+		<STRING hash="18397047" hash_i="18556061" needed="1">대서양 제해권</STRING>
+		<STRING hash="5325479" hash_i="5348289" needed="1">나일 삼각주</STRING>
+		<STRING hash="8499128" hash_i="8642368" needed="1">영국 제도</STRING>
+		<STRING hash="2394462" hash_i="2380324" needed="1">가장 쉽게</STRING>
+		<STRING hash="834472" hash_i="820334" needed="1">쉽게</STRING>
+		<STRING hash="3195623" hash_i="3178417" needed="1">보통</STRING>
+		<STRING hash="931728" hash_i="909222" needed="1">어렵게</STRING>
+		<STRING hash="2966159" hash_i="2943653" needed="1">가장 어렵게</STRING>
+		<STRING hash="699868" hash_i="677362" needed="1">가장 작게</STRING>
+		<STRING hash="13797706" hash_i="13775884" needed="1">아주 작게</STRING>
+		<STRING hash="15304602" hash_i="15287396" needed="1">작게</STRING>
+		<STRING hash="19705220" hash_i="19683398" needed="1">보통</STRING>
+		<STRING hash="13700862" hash_i="13683462" needed="1">크게</STRING>
+		<STRING hash="12121526" hash_i="12103228" needed="1">아주 크게</STRING>
+		<STRING hash="2690747" hash_i="2739779" needed="1">가장 크게</STRING>
+		<STRING hash="3078682" hash_i="3154074" needed="1">국가 정복</STRING>
+		<STRING hash="1095973" hash_i="1074151" needed="1">점수</STRING>
+		<STRING hash="4883849" hash_i="4884847" needed="1">시간 제한</STRING>
+		<STRING hash="11258799" hash_i="12143289" needed="1">생존 경쟁</STRING>
+		<STRING hash="4264419" hash_i="4241913" needed="1">영토</STRING>
+		<STRING hash="4907690" hash_i="4884436" needed="1">시대 발전 게임</STRING>
+		<STRING hash="2694088" hash_i="2769480" needed="1">수도 함락</STRING>
+		<STRING hash="23151211" hash_i="24563837" needed="1">수도 단판 승부</STRING>
+		<STRING hash="13330612" hash_i="14035040" needed="1">정착 단계</STRING>
+		<STRING hash="5325302" hash_i="5294354" needed="1">소도시</STRING>
+		<STRING hash="5183670" hash_i="5157144" needed="1">대도시</STRING>
+		<STRING hash="397842" hash_i="380442" needed="1">소량</STRING>
+		<STRING hash="77133" hash_i="77133" needed="1">x2</STRING>
+		<STRING hash="79312" hash_i="79312" needed="1">x3</STRING>
+		<STRING hash="83574" hash_i="83574" needed="1">x5</STRING>
+		<STRING hash="583411" hash_i="583411" needed="1">x10</STRING>
+		<STRING hash="406458" hash_i="406458" needed="1">x20</STRING>
+		<STRING hash="2794072" hash_i="2777094" needed="1">무한</STRING>
+		<STRING hash="8039338" hash_i="8107588" needed="1">자원량 서로 다르게(소량)</STRING>
+		<STRING hash="11922177" hash_i="11992367" needed="1">자원량 서로 다르게(표준)</STRING>
+		<STRING hash="8650551" hash_i="8709821" needed="1">자원량 서로 다르게(다량)</STRING>
+		<STRING hash="11463394" hash_i="11440824" needed="1">자원량 같게</STRING>
+		<STRING hash="14904404" hash_i="14876382" needed="1">자원량 두 배로</STRING>
+		<STRING hash="14616767" hash_i="14580709" needed="1">자원량 세 배로</STRING>
+		<STRING hash="20993156" hash_i="21020180" needed="1">자원량 네 배로</STRING>
+		<STRING hash="20865034" hash_i="20892058" needed="1">자원량 다섯 배로</STRING>
+		<STRING hash="10908563" hash_i="11098279" needed="1">비용 적음/속도 빠름</STRING>
+		<STRING hash="1161548" hash_i="1236940" needed="1">비용 적음</STRING>
+		<STRING hash="12686222" hash_i="12778140" needed="1">비용 보통/속도 빠름</STRING>
+		<STRING hash="1864760" hash_i="1846486" needed="1">보통</STRING>
+		<STRING hash="12266383" hash_i="12281573" needed="1">비용 보통/속도 느림</STRING>
+		<STRING hash="3876878" hash_i="3862740" needed="1">비용 많음</STRING>
+		<STRING hash="17484138" hash_i="17504654" needed="1">비용 많음/속도 느림</STRING>
+		<STRING hash="10314296" hash_i="10335014" needed="1">비용 매우 많음</STRING>
+		<STRING hash="29852837" hash_i="29964251" needed="1">비용 매우 많음/속도 느림</STRING>
+		<STRING hash="5622063" hash_i="6522291" needed="1">고대 시대</STRING>
+		<STRING hash="8843171" hash_i="9947361" needed="1">고전 시대</STRING>
+		<STRING hash="6818848" hash_i="7743310" needed="1">중세 시대</STRING>
+		<STRING hash="7683271" hash_i="8696213" needed="1">화약 시대</STRING>
+		<STRING hash="13782908" hash_i="15146344" needed="1">계몽 시대</STRING>
+		<STRING hash="9696711" hash_i="10787533" needed="1">산업 시대</STRING>
+		<STRING hash="4270575" hash_i="4953001" needed="1">현대 시대</STRING>
+		<STRING hash="11109641" hash_i="12277097" needed="1">정보화 시대</STRING>
+		<STRING hash="13700477" hash_i="13723301" needed="1">모든 기술</STRING>
+		<STRING hash="5193805" hash_i="5871995" needed="1">랜덤 시대</STRING>
+		<STRING hash="2574263" hash_i="3086581" needed="1">같은 시대</STRING>
+		<STRING hash="1424530" hash_i="1747290" needed="1">+1 시대</STRING>
+		<STRING hash="1247577" hash_i="1570337" needed="1">+2 시대</STRING>
+		<STRING hash="1249756" hash_i="1572516" needed="1">+3 시대</STRING>
+		<STRING hash="1252139" hash_i="1574899" needed="1">+4 시대</STRING>
+		<STRING hash="6015289" hash_i="6498421" needed="1">연구 후 동맹과 시야 공유</STRING>
+		<STRING hash="2783183" hash_i="2769045" needed="1">지형 표시</STRING>
+		<STRING hash="6645813" hash_i="6669377" needed="1">모두 표시</STRING>
+		<STRING hash="216236" hash_i="216236" needed="1">50</STRING>
+		<STRING hash="58989" hash_i="58989" needed="1">75</STRING>
+		<STRING hash="631931" hash_i="631931" needed="1">100</STRING>
+		<STRING hash="227070" hash_i="227070" needed="1">125</STRING>
+		<STRING hash="471802" hash_i="471802" needed="1">150</STRING>
+		<STRING hash="543176" hash_i="543176" needed="1">200</STRING>
+		<STRING hash="383047" hash_i="383047" needed="1">250</STRING>
+		<STRING hash="543987" hash_i="543987" needed="1">300</STRING>
+		<STRING hash="36489255" hash_i="40020081" needed="1">고전 시대까지 금지</STRING>
+		<STRING hash="30793466" hash_i="32958956" needed="1">중세 시대까지 금지</STRING>
+		<STRING hash="33384663" hash_i="35729265" needed="1">화약 시대까지 금지</STRING>
+		<STRING hash="46053282" hash_i="48817826" needed="1">계몽 시대까지 금지</STRING>
+		<STRING hash="37813093" hash_i="40228831" needed="1">산업 시대까지 금지</STRING>
+		<STRING hash="24369589" hash_i="26310579" needed="1">현대 시대까지 금지</STRING>
+		<STRING hash="40894511" hash_i="43426883" needed="1">정보화 시대까지 금지</STRING>
+		<STRING hash="6310670" hash_i="6248254" needed="1">공격 금지</STRING>
+		<STRING hash="34210057" hash_i="34189213" needed="1">처음 2분 동안 금지</STRING>
+		<STRING hash="34290364" hash_i="34269520" needed="1">처음 5분 동안 금지</STRING>
+		<STRING hash="39249590" hash_i="39228746" needed="1">처음 10분 동안 금지</STRING>
+		<STRING hash="37860339" hash_i="37839495" needed="1">처음 15분 동안 금지</STRING>
+		<STRING hash="37754009" hash_i="37733165" needed="1">처음 20분 동안 금지</STRING>
+		<STRING hash="37781050" hash_i="37760206" needed="1">처음 30분 동안 금지</STRING>
+		<STRING hash="579008" hash_i="560734" needed="1">사용 안 함</STRING>
+		<STRING hash="8625958" hash_i="8930594" needed="1">시간 지연 1회</STRING>
+		<STRING hash="10150716" hash_i="10455352" needed="1">시간 지연 2회</STRING>
+		<STRING hash="10152440" hash_i="10457076" needed="1">시간 지연 4회</STRING>
+		<STRING hash="10156878" hash_i="10461514" needed="1">시간 지연 8회</STRING>
+		<STRING hash="2973011" hash_i="2951189" needed="1">핸디캡 +1</STRING>
+		<STRING hash="2267908" hash_i="2246086" needed="1">핸디캡 +2</STRING>
+		<STRING hash="2279333" hash_i="2257511" needed="1">핸디캡 +3</STRING>
+		<STRING hash="2291574" hash_i="2269752" needed="1">핸디캡 +4</STRING>
+		<STRING hash="2301799" hash_i="2279977" needed="1">핸디캡 +5</STRING>
+		<STRING hash="2312696" hash_i="2290874" needed="1">핸디캡 +6</STRING>
+		<STRING hash="2334729" hash_i="2312907" needed="1">핸디캡 +7</STRING>
+		<STRING hash="2346826" hash_i="2325004" needed="1">핸디캡 +8</STRING>
+		<STRING hash="2356187" hash_i="2334365" needed="1">핸디캡 +9</STRING>
+		<STRING hash="4120634" hash_i="4098812" needed="1">핸디캡 +10</STRING>
+		<STRING hash="4171825" hash_i="4150003" needed="1">핸디캡 +11</STRING>
+		<STRING hash="3380004" hash_i="3358182" needed="1">핸디캡 +12</STRING>
+		<STRING hash="3394277" hash_i="3372455" needed="1">핸디캡 +13</STRING>
+		<STRING hash="3409468" hash_i="3387646" needed="1">핸디캡 +14</STRING>
+		<STRING hash="3422391" hash_i="3400569" needed="1">핸디캡 +15</STRING>
+		<STRING hash="3436070" hash_i="3414248" needed="1">핸디캡 +16</STRING>
+		<STRING hash="3462277" hash_i="3440455" needed="1">핸디캡 +17</STRING>
+		<STRING hash="3477306" hash_i="3455484" needed="1">핸디캡 +18</STRING>
+		<STRING hash="3489257" hash_i="3467435" needed="1">핸디캡 +19</STRING>
+		<STRING hash="3415531" hash_i="3393709" needed="1">핸디캡 +20</STRING>
+		<STRING hash="596884" hash_i="577232" needed="1">열기</STRING>
+		<STRING hash="1399797" hash_i="1475189" needed="1">닫기</STRING>
+		<STRING hash="3026557" hash_i="3101949" needed="1">컴퓨터</STRING>
+		<STRING hash="32013233" hash_i="32235091" needed="1">컴퓨터(공격형과 습격형)</STRING>
+		<STRING hash="32990843" hash_i="36136497" needed="1">컴퓨터(방어형과 건설형)</STRING>
+		<STRING hash="1239052" hash_i="1220754" needed="1">플레이어</STRING>
+		<STRING hash="6855043" hash_i="6930757" needed="1">플레이어 추방</STRING>
+		<STRING hash="14535148" hash_i="16570584" needed="1">모두 플레이어가 지휘</STRING>
+		<STRING hash="20332051" hash_i="23137319" needed="1">모두 컴퓨터가 지휘</STRING>
+		<STRING hash="90319" hash_i="90319" needed="1">0</STRING>
+		<STRING hash="95232" hash_i="95232" needed="1">1</STRING>
+		<STRING hash="6477" hash_i="6477" needed="1">2</STRING>
+		<STRING hash="7288" hash_i="7288" needed="1">3</STRING>
+		<STRING hash="8201" hash_i="8201" needed="1">4</STRING>
+		<STRING hash="8862" hash_i="8862" needed="1">5</STRING>
+		<STRING hash="9607" hash_i="9607" needed="1">6</STRING>
+		<STRING hash="11744" hash_i="11744" needed="1">7</STRING>
+		<STRING hash="4162022" hash_i="4136636" needed="1">매우 느리게</STRING>
+		<STRING hash="693623" hash_i="671801" needed="1">느리게</STRING>
+		<STRING hash="799468" hash_i="784040" needed="1">빠르게</STRING>
+		<STRING hash="5428119" hash_i="5450241" needed="1">매우 빠르게</STRING>
+		<STRING hash="1071111" hash_i="1071111" needed="1">1000</STRING>
+		<STRING hash="982356" hash_i="982356" needed="1">2000</STRING>
+		<STRING hash="983167" hash_i="983167" needed="1">3000</STRING>
+		<STRING hash="984080" hash_i="984080" needed="1">4000</STRING>
+		<STRING hash="984741" hash_i="984741" needed="1">5000</STRING>
+		<STRING hash="985486" hash_i="985486" needed="1">6000</STRING>
+		<STRING hash="987623" hash_i="987623" needed="1">7000</STRING>
+		<STRING hash="988518" hash_i="988518" needed="1">8000</STRING>
+		<STRING hash="989071" hash_i="989071" needed="1">9000</STRING>
+		<STRING hash="1624178" hash_i="1624178" needed="1">10000</STRING>
+		<STRING hash="1464049" hash_i="1464049" needed="1">15000</STRING>
+		<STRING hash="1535423" hash_i="1535423" needed="1">20000</STRING>
+		<STRING hash="5128202" hash_i="5128202" needed="1">15분</STRING>
+		<STRING hash="5200387" hash_i="5200387" needed="1">30분</STRING>
+		<STRING hash="5041171" hash_i="5041171" needed="1">45분</STRING>
+		<STRING hash="5202706" hash_i="5202706" needed="1">60분</STRING>
+		<STRING hash="5206291" hash_i="5206291" needed="1">90분</STRING>
+		<STRING hash="2346665" hash_i="2330683" needed="1">2시간</STRING>
+		<STRING hash="2347476" hash_i="2331494" needed="1">3시간</STRING>
+		<STRING hash="2348389" hash_i="2332407" needed="1">4시간</STRING>
+		<STRING hash="5095600" hash_i="5095600" needed="1">2분</STRING>
+		<STRING hash="5097985" hash_i="5097985" needed="1">5분</STRING>
+		<STRING hash="5101762" hash_i="5101762" needed="1">8분</STRING>
+		<STRING hash="5288331" hash_i="5288331" needed="1">10분</STRING>
+		<STRING hash="5199576" hash_i="5199576" needed="1">20분</STRING>
+		<STRING hash="5039447" hash_i="5039447" needed="1">25분</STRING>
+		<STRING hash="10118651" hash_i="10140669" needed="1">불가사의 점수 1점 차</STRING>
+		<STRING hash="11762956" hash_i="11784974" needed="1">불가사의 점수 2점 차</STRING>
+		<STRING hash="11763767" hash_i="11785785" needed="1">불가사의 점수 3점 차</STRING>
+		<STRING hash="11764680" hash_i="11786698" needed="1">불가사의 점수 4점 차</STRING>
+		<STRING hash="11766086" hash_i="11788104" needed="1">불가사의 점수 6점 차</STRING>
+		<STRING hash="11769118" hash_i="11791136" needed="1">불가사의 점수 8점 차</STRING>
+		<STRING hash="13584305" hash_i="13593573" needed="1">불가사의 점수 10점 차</STRING>
+		<STRING hash="13417735" hash_i="13427003" needed="1">불가사의 점수 12점 차</STRING>
+		<STRING hash="13426223" hash_i="13435491" needed="1">불가사의 점수 16점 차</STRING>
+		<STRING hash="13495550" hash_i="13504818" needed="1">불가사의 점수 20점 차</STRING>
+		<STRING hash="13333542" hash_i="13342810" needed="1">불가사의 점수 24점 차</STRING>
+		<STRING hash="16707981" hash_i="16682321" needed="1">불가사의 승리 금지</STRING>
+		<STRING hash="27517740" hash_i="27517740" needed="1">세계 영토 중 30%</STRING>
+		<STRING hash="27357611" hash_i="27357611" needed="1">세계 영토 중 35%</STRING>
+		<STRING hash="27518653" hash_i="27518653" needed="1">세계 영토 중 40%</STRING>
+		<STRING hash="27358524" hash_i="27358524" needed="1">세계 영토 중 45%</STRING>
+		<STRING hash="27519314" hash_i="27519314" needed="1">세계 영토 중 50%</STRING>
+		<STRING hash="27359185" hash_i="27359185" needed="1">세계 영토 중 55%</STRING>
+		<STRING hash="27520059" hash_i="27520059" needed="1">세계 영토 중 60%</STRING>
+		<STRING hash="27359930" hash_i="27359930" needed="1">세계 영토 중 65%</STRING>
+		<STRING hash="27522196" hash_i="27522196" needed="1">세계 영토 중 70%</STRING>
+		<STRING hash="27362067" hash_i="27362067" needed="1">세계 영토 중 75%</STRING>
+		<STRING hash="27523091" hash_i="27523091" needed="1">세계 영토 중 80%</STRING>
+		<STRING hash="27523644" hash_i="27523644" needed="1">세계 영토 중 90%</STRING>
+		<STRING hash="24251887" hash_i="24219249" needed="1">영토 승리 금지</STRING>
+		<STRING hash="20494236" hash_i="21127420" needed="1">평균 수입률 +100</STRING>
+		<STRING hash="20317283" hash_i="20950467" needed="1">평균 수입률 +200</STRING>
+		<STRING hash="20319462" hash_i="20952646" needed="1">평균 수입률 +300</STRING>
+		<STRING hash="20321845" hash_i="20955029" needed="1">평균 수입률 +400</STRING>
+		<STRING hash="20323724" hash_i="20956908" needed="1">평균 수입률 +500</STRING>
+		<STRING hash="20325771" hash_i="20958955" needed="1">평균 수입률 +600</STRING>
+		<STRING hash="20330602" hash_i="20963786" needed="1">평균 수입률 +700</STRING>
+		<STRING hash="20332949" hash_i="20966133" needed="1">평균 수입률 +800</STRING>
+		<STRING hash="20334612" hash_i="20967796" needed="1">평균 수입률 +900</STRING>
+		<STRING hash="2617521" hash_i="2601665" needed="1">유전학</STRING>
+		<STRING hash="2529104" hash_i="2514966" needed="1">경제</STRING>
+		<STRING hash="11453981" hash_i="11467731" needed="1">프로필 저장</STRING>
+		<STRING hash="13283113" hash_i="13258929" needed="1">자원 빨리 수집하기</STRING>
+		<STRING hash="13892810" hash_i="13908124" needed="1">국가 특성 사용 안 함</STRING>
+		<STRING hash="11891103" hash_i="11885157" needed="1">특수 유닛 사용 안 함</STRING>
+		<STRING hash="9660804" hash_i="11019674" needed="1">인공지능과 협력</STRING>
+		<STRING hash="5361655" hash_i="5349067" needed="1">일시 중지 중 명령 허용</STRING>
+		<STRING hash="13076813" hash_i="13099507" needed="1">토너먼트 플레이</STRING>
+		<STRING hash="11252230" hash_i="11311588" needed="1">게임 속도 고정</STRING>
+		<STRING hash="22800730" hash_i="22838982" needed="1">랜덤 팀 편성</STRING>
+		<STRING hash="28098967" hash_i="28204931" needed="1">랜덤 국가 선택</STRING>
+		<STRING hash="24159387" hash_i="24901257" needed="1">팀 유닛 공유</STRING>
+		<STRING hash="7992306" hash_i="7990562" needed="1">승리 유형</STRING>
+		<STRING hash="3785788" hash_i="3762800" needed="1">게임 시간</STRING>
+		<STRING hash="4141632" hash_i="4082964" needed="1">지도 유형</STRING>
+		<STRING hash="3125071" hash_i="3066403" needed="1">지도 크기</STRING>
+		<STRING hash="3764196" hash_i="3739842" needed="1">승자</STRING>
+		<STRING hash="5382453" hash_i="5361127" needed="1">최고 득점</STRING>
+		<STRING hash="24464796" hash_i="24490670" needed="1">최우수 플레이어</STRING>
+		<STRING hash="9378603" hash_i="9381019" needed="1">불가사의 점수</STRING>
+		<STRING hash="6940560" hash_i="6913716" needed="1">총점</STRING>
+		<STRING hash="5540116" hash_i="5604794" needed="1">군대 점수</STRING>
+		<STRING hash="8632642" hash_i="8691442" needed="1">전투 점수</STRING>
+		<STRING hash="12696106" hash_i="12717590" needed="1">영토 점수</STRING>
+		<STRING hash="5548430" hash_i="5620794" needed="1">도시 점수</STRING>
+		<STRING hash="9679017" hash_i="9691649" needed="1">경제 점수</STRING>
+		<STRING hash="11483852" hash_i="11508798" needed="1">연구 점수</STRING>
+		<STRING hash="7552353" hash_i="8367475" needed="1">생존 병력</STRING>
+		<STRING hash="6104809" hash_i="6741767" needed="1">유닛 생산</STRING>
+		<STRING hash="6884928" hash_i="6885488" needed="1">유닛 제거</STRING>
+		<STRING hash="5122376" hash_i="5127416" needed="1">유닛 손실</STRING>
+		<STRING hash="11224199" hash_i="12382719" needed="1">건물 건설</STRING>
+		<STRING hash="11977059" hash_i="12098103" needed="1">건물 파괴</STRING>
+		<STRING hash="10005722" hash_i="10171228" needed="1">건물 손실</STRING>
+		<STRING hash="7262581" hash_i="8078949" needed="1">도시 건설</STRING>
+		<STRING hash="12018339" hash_i="12854851" needed="1">도시 점령</STRING>
+		<STRING hash="6244407" hash_i="6338583" needed="1">도시 손실</STRING>
+		<STRING hash="14528556" hash_i="14463250" needed="1">$GOOD0</STRING>
+		<STRING hash="11480916" hash_i="11458726" needed="1">희귀 자원</STRING>
+		<STRING hash="8807759" hash_i="9444851" needed="1">보너스</STRING>
+		<STRING hash="10595342" hash_i="10617890" needed="1">보낸 자원</STRING>
+		<STRING hash="17856933" hash_i="17883661" needed="1">받은 자원</STRING>
+		<STRING hash="3387135" hash_i="4149457" needed="1">$AGE0시대</STRING>
+		<STRING hash="15706062" hash_i="15718852" needed="1">라이브러리 연구</STRING>
+		<STRING hash="11988524" hash_i="11969640" needed="1">기타 연구</STRING>
+		<STRING hash="9268572" hash_i="9245444" needed="1">업그레이드</STRING>
+		<STRING hash="8951821" hash_i="9514871" needed="1">생존 시민</STRING>
+		<STRING hash="10686305" hash_i="11249355" needed="1">생존 캐러밴</STRING>
+		<STRING hash="10230105" hash_i="10209871" needed="1">생존 학자</STRING>
+		<STRING hash="6025598" hash_i="6588648" needed="1">생존 도시</STRING>
+		<STRING hash="12557116" hash_i="12531402" needed="1">%영토 획득</STRING>
+		<STRING hash="7601203" hash_i="7565777" needed="1">불가사의</STRING>
+		<STRING hash="6122190" hash_i="6765296" needed="1">요새 건설</STRING>
+		<STRING hash="7479015" hash_i="8115973" needed="1">유닛 매수</STRING>
+		<STRING hash="19185094" hash_i="19280018" needed="1">*생존 여부</STRING>
+		<STRING hash="7155262" hash_i="7117826" needed="1">컨트롤</STRING>
+		<STRING hash="11546773" hash_i="11564047" needed="1">바로가기키</STRING>
+		<STRING hash="7863506" hash_i="8522460" needed="1">마우스</STRING>
+		<STRING hash="15783004" hash_i="15953162" needed="1">미니맵</STRING>
+		<STRING hash="9126305" hash_i="9296463" needed="1">지도</STRING>
+		<STRING hash="20963599" hash_i="21136265" needed="1">인터페이스</STRING>
+		<STRING hash="10925217" hash_i="10975543" needed="1">%확대</STRING>
+		<STRING hash="13218634" hash_i="13231524" needed="1">%축소</STRING>
+		<STRING hash="23257213" hash_i="23555821" needed="1">그룹 생성</STRING>
+		<STRING hash="34415018" hash_i="36043770" needed="1">그룹 활성</STRING>
+		<STRING hash="514554" hash_i="490200" needed="1">전쟁 상태</STRING>
+		<STRING hash="5050203" hash_i="5123077" needed="1">매우 복종적</STRING>
+		<STRING hash="9043730" hash_i="9029592" needed="1">복종적</STRING>
+		<STRING hash="2930177" hash_i="2914749" needed="1">매우 우호적</STRING>
+		<STRING hash="2467926" hash_i="2543318" needed="1">우호적</STRING>
+		<STRING hash="5716430" hash_i="5694608" needed="1">의심스러움</STRING>
+		<STRING hash="2119924" hash_i="2101626" needed="1">적대적</STRING>
+		<STRING hash="2323593" hash_i="2305295" needed="1">매우 적대적</STRING>
+		<STRING hash="27420273" hash_i="28034941" needed="1">$TRIBE0식 충성의 맹세</STRING>
+		<STRING hash="18325327" hash_i="18297647" needed="1">불가사의</STRING>
+		<STRING hash="2302627" hash_i="2287199" needed="1">요새화</STRING>
+		<STRING hash="3490332" hash_i="3468510" needed="1">방해 공작</STRING>
+		<STRING hash="13678753" hash_i="15286789" needed="1">$TECHCAT0 유레카</STRING>
+		<STRING hash="20297186" hash_i="21838306" needed="1">$RES0 경제 호황</STRING>
+		<STRING hash="6849444" hash_i="6832238" needed="1">용병</STRING>
+		<STRING hash="4610896" hash_i="4588390" needed="1">배반</STRING>
+		<STRING hash="8763179" hash_i="8738197" needed="1">석학</STRING>
+		<STRING hash="10266132" hash_i="10354974" needed="1">상인 길드</STRING>
+		<STRING hash="4572512" hash_i="4555112" needed="1">병참학</STRING>
+		<STRING hash="4635510" hash_i="4614666" needed="1">민병대</STRING>
+		<STRING hash="19218381" hash_i="19413681" needed="1">선진 문명</STRING>
+		<STRING hash="9764900" hash_i="9791844" needed="1">교역 금지</STRING>
+		<STRING hash="6151502" hash_i="6130658" needed="1">선전</STRING>
+		<STRING hash="6151350" hash_i="6788062" needed="1">숙련도 보너스</STRING>
+		<STRING hash="13280387" hash_i="14624785" needed="1">도시 금지 표준</STRING>
+		<STRING hash="2675689" hash_i="2661219" needed="1">방어자</STRING>
+		<STRING hash="3507367" hash_i="3575073" needed="1">공격자</STRING>
+		<STRING hash="12928821" hash_i="13116435" needed="1">공격자 방어</STRING>
+		<STRING hash="12901459" hash_i="13828657" needed="1">방어자 공격</STRING>
+		<STRING hash="7217963" hash_i="7191803" needed="1">소규모</STRING>
+		<STRING hash="3795366" hash_i="3775714" needed="1">공격적</STRING>
+		<STRING hash="5102533" hash_i="5175407" needed="1">바바리안</STRING>
+		<STRING hash="2615769" hash_i="2593947" needed="1">시작</STRING>
+		<STRING hash="12009942" hash_i="12048602" needed="1">원시 습지</STRING>
+		<STRING hash="1559393" hash_i="1542415" needed="1">억류</STRING>
+		<STRING hash="5351983" hash_i="5331139" needed="1">프로그래머</STRING>
+		<STRING hash="2589416" hash_i="2646426" needed="1">크로마뇽인</STRING>
+		<STRING hash="2126730" hash_i="2112260" needed="1">돌고래</STRING>
+		<STRING hash="2852636" hash_i="2920342" needed="1">잠수부</STRING>
+		<STRING hash="11879544" hash_i="11916208" needed="1">스티븐 호킹</STRING>
+		<STRING hash="16654941" hash_i="16727885" needed="1">정신 감응 기계</STRING>
+		<STRING hash="9240505" hash_i="9898799" needed="1">제이슨 콜맨</STRING>
+		<STRING hash="18485684" hash_i="18518894" needed="1">무한 자원</STRING>
+		<STRING hash="9358844" hash_i="9323470" needed="1">숨겨진 랜덤 맵</STRING>
+		<STRING hash="18006925" hash_i="18072535" needed="1">숨겨진 랜덤 육지 맵</STRING>
+		<STRING hash="16259381" hash_i="16258661" needed="1">숨겨진 랜덤 섬 맵</STRING>
+		<STRING hash="1251249" hash_i="1228743" needed="1">총계</STRING>
+		<STRING hash="690095" hash_i="757801" needed="1">군대</STRING>
+		<STRING hash="2186557" hash_i="2261949" needed="1">전투</STRING>
+		<STRING hash="698409" hash_i="773801" needed="1">도시</STRING>
+		<STRING hash="3666487" hash_i="3645045" needed="1">연구</STRING>
+		<STRING hash="2228690" hash_i="2204336" needed="1">불가사의</STRING>
+		<STRING hash="14253685" hash_i="14298823" needed="1">총 불가사의 보유 수</STRING>
+		<STRING hash="1236480" hash_i="1304186" needed="1">아주 작게</STRING>
+		<STRING hash="17195067" hash_i="17173245" needed="1">작게</STRING>
+		<STRING hash="5917400" hash_i="5861630" needed="1">승리 없음</STRING>
+		<STRING hash="15563815" hash_i="15681431" needed="1">사용자 지정 외교</STRING>
+		<STRING hash="13212921" hash_i="13271721" needed="1">사용자 지정 서바이벌</STRING>
+		<STRING hash="2139850" hash_i="2117344" needed="1">아주 어렵게</STRING>
+		<STRING hash="20373797" hash_i="22048227" needed="1">관전자 채팅 참여</STRING>
+		<STRING hash="13116235" hash_i="13175035" needed="1">사용자 지정 시나리오</STRING>
+		<STRING hash="17135323" hash_i="17117923" needed="1">크게</STRING>
+		<STRING hash="15347371" hash_i="15329073" needed="1">아주 크게</STRING>
+		<STRING hash="13422297" hash_i="13431565" needed="1">불가사의 점수 14점 차</STRING>
+		<STRING hash="8072927" hash_i="8126255" needed="1">사용자 지정 팀</STRING>
+		<STRING hash="15317080" hash_i="15336286" needed="1">시나리오 승리</STRING>
+		<STRING hash="13749655" hash_i="13773761" needed="1">정보화 시대 데스매치</STRING>
+		<STRING hash="11987735" hash_i="11964673" needed="1">-선택 사항 없음-</STRING>
+		<STRING hash="3386354" hash_i="3364532" needed="1">시나리오</STRING><STRING hash="11183579" hash_i="11195879" needed="1">저장 금지</STRING></CAT>
+	<CAT hash="2001345">
+		<STRING hash="50981888" hash_i="51543922" needed="1">인구 한계치, 공성 무기, 요새</STRING>
+		<STRING hash="46243831" hash_i="48628873" needed="1">도시 건설 한계치, 국경</STRING>
+		<STRING hash="96409525" hash_i="101220031" needed="1">상업 한계치, 수집, 생산 강화 건물</STRING>
+		<STRING hash="87408647" hash_i="89808329" needed="1">연구 속도와 비용, 시야</STRING>
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+		<STRING hash="4886119" hash_i="5054375" needed="1">공격</STRING>
+		<STRING hash="3720352" hash_i="3761308" needed="1">방어</STRING>
+		<STRING hash="6966019" hash_i="7456903" needed="1">위치 사수</STRING>
+		<STRING hash="543802" hash_i="657630" needed="1">습격</STRING>
+		<STRING hash="657446" hash_i="750702" needed="1">파괴</STRING>
+		<STRING hash="3451374" hash_i="3539644" needed="1">대기</STRING>
+		<STRING hash="1533492" hash_i="1617220" needed="1">수집</STRING>
+		<STRING hash="8881582" hash_i="10186100" needed="1">건설 및 수집</STRING>
+		<STRING hash="933873" hash_i="947031" needed="1">건설</STRING>
+		<STRING hash="560748" hash_i="514750" needed="1">대기</STRING>
+		<STRING hash="4654856" hash_i="6044030" needed="1">자동 특수 능력 사용</STRING>
+		<STRING hash="6609992" hash_i="8997984" needed="1">수동 특수 능력 사용</STRING>
+		<STRING hash="6194878" hash_i="6411260" needed="1">자동 배치</STRING>
+		<STRING hash="8366798" hash_i="9212466" needed="1">수동 배치</STRING>
+		<STRING hash="273987" hash_i="341693" needed="1">시대</STRING>
+		<STRING hash="699868" hash_i="677362" needed="1">가장 작게</STRING>
+		<STRING hash="1146660" hash_i="1124838" needed="1">작게</STRING>
+		<STRING hash="1512996" hash_i="1495790" needed="1">조금 작게</STRING>
+		<STRING hash="3362659" hash_i="3340837" needed="1">표준</STRING>
+		<STRING hash="1005028" hash_i="987628" needed="1">조금 크게</STRING>
+		<STRING hash="553863" hash_i="535565" needed="1">크게</STRING>
+		<STRING hash="2690747" hash_i="2739779" needed="1">가장 크게</STRING>
+		<STRING hash="180303618" hash_i="180281112" needed="1">전투를 진행할 때 이 국가의 국가 특성을 사용합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="183688558" hash_i="186317930" needed="1">보유하고 있는 영토 가운데 어느 곳에라도 현 시대와 맞는 불가사의 1개를 건설할 수 있습니다.</STRING>
+		<STRING hash="194902380" hash_i="194885174" needed="1">보유하고 있는 영토라면 어디든지 상관없이 한 곳을 무적 상태로 만듭니다.</STRING>
+		<STRING hash="219355655" hash_i="218356809" needed="1">선택한 영토에 적용되어 있는 "요새화" 방어 보너스를 제거합니다.</STRING>
+		<STRING hash="100842296" hash_i="100820474" needed="1">기술 수준이 향상된 상태에서 전투를 시작합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="214321010" hash_i="214299568" needed="1">전투를 진행할 때 이 자원의 생산량이 5% 증가하게 됩니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="78231022" hash_i="78303896" needed="1">추가 부대를 받고 전투를 시작합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="200566579" hash_i="200550723" needed="1">요새화되지 않았으면서 수도가 아닌 영토를 전투를 벌이지 않고 얻습니다.</STRING>
+		<STRING hash="197341710" hash_i="197409416" needed="1">전투를 진행할 때 모든 연구의 진행 속도가 20% 향상되고 관련 비용도 20% 저렴해 집니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="314900243" hash_i="314980239" needed="1">전투를 진행할 때 시장에서 자원을 20% 싸게 사고 20% 비싸게 팔 수 있습니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="242748025" hash_i="242726449" needed="1">전투를 진행할 때 유닛이 50% 빠르게 회복되고 추가 데미지를 입지 않습니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="226046937" hash_i="226029959" needed="1">전투를 진행할 때 영토를 침공한 적군이 입는 추가 데미지 수준이 50% 더 높아집니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="202254843" hash_i="202240705" needed="1">전투를 진행할 때 적 국가가 국가 특성을 사용하지 못하게 합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="239345225" hash_i="239331087" needed="1">전투를 진행할 때 적 국가가 전략 자원 혜택을 얻을 수 없도록 합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="180183029" hash_i="180167173" needed="1">전투를 진행할 때 적의 국가 특성을 사용할 수 있습니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="486640902" hash_i="496131788" needed="1">각 자원의 수집량이 기본 설정치에 비해 $NUM0씩 더 늘어난 상태에서 전투를 시작합니다. 늘어나는 양은 바바리안과의 전투에서 얻어낸 성과에 비례합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="226159838" hash_i="226142632" needed="1">수도가 아닌 점유 중인 영토를 무적 상태로 만듭니다.</STRING>
+		<STRING hash="207058700" hash_i="207037258" needed="1">적진의 영토 방위력을 두 단계 낮춥니다.</STRING>
+		<STRING hash="211089915" hash_i="211068473" needed="1">적진의 영토 방위력을 두 단계 낮춥니다.</STRING>
+		<STRING hash="1236480" hash_i="1304186" needed="1">아주 작게</STRING>
+		<STRING hash="559909775" hash_i="561287125" needed="1">전투를 벌이지 않고도 적이 보유한 영토 중에서 수도가 아닌 곳을 한 군데 얻을 수 있습니다. 목표가 되는 영토는 반드시 플레이어의 국가에 인접하고 있어야 하며 영토 방위력이 4 이하여야만 합니다.</STRING>
+		<STRING hash="733441215" hash_i="738771179" needed="1">자원 수집량이 기본 설정치에 비해 $NUM0씩 더 늘어난 상태에서 전투를 시작합니다. 늘어나는 양은 야전이나 전술 시나리오에서 존속한 부대 수에 비례합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="169090987" hash_i="169075131" needed="1">이 국가의 특수 능력을 전투에 적용합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="204222049" hash_i="204207911" needed="1">전투를 진행할 때 적 국가가 국가 특성을 사용하지 못하게 합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="249376835" hash_i="249362697" needed="1">전투를 진행할 때 적 국가가 전략 자원 혜택을 얻을 수 없도록 합니다. 사용 기회는 한 번 뿐입니다.</STRING>
+		<STRING hash="219151950" hash_i="226481378" needed="1">보유하고 있는 영토 중 어느 곳이든지 해당 시대 또는 그 이전 시대에라도 불가사의를 건설합니다.</STRING>
+		<STRING hash="254275421" hash_i="254253845" needed="1">유닛에 적용되는 치료 속도가 100% 더 빠르고 {추가 데미지}의 영향을 받지 않습니다. 사용 기회는 한 번 뿐입니다.</STRING>
+	</CAT>
+	<CAT hash="2909936">
+		<STRING hash="7689646" hash_i="7757352" needed="1">전적</STRING>
+		<STRING hash="3975033" hash_i="3982495" needed="1">주 메뉴</STRING>
+		<STRING hash="923135" hash_i="998527" needed="1">닫기</STRING>
+		<STRING hash="686598" hash_i="670742" needed="1">게임</STRING>
+		<STRING hash="1095973" hash_i="1074151" needed="1">점수</STRING>
+		<STRING hash="3518863" hash_i="3501657" needed="1">군사</STRING>
+		<STRING hash="771111" hash_i="756973" needed="1">경제</STRING>
+		<STRING hash="3666487" hash_i="3645045" needed="1">연구</STRING>
+		<STRING hash="1083102" hash_i="1067246" needed="1">번영</STRING>
+		<STRING hash="821524" hash_i="799702" needed="1">컨트롤</STRING>
+		<STRING hash="6578330" hash_i="6593932" needed="1">점수 그래프</STRING>
+		<STRING hash="11031296" hash_i="11120138" needed="1">군사 그래프</STRING>
+		<STRING hash="12357488" hash_i="12444598" needed="1">영토 그래프</STRING>
+		<STRING hash="10960775" hash_i="11045381" needed="1">자원 그래프</STRING>
+		<STRING hash="5497623" hash_i="5507885" needed="1">기술 그래프</STRING>
+		<STRING hash="2721837" hash_i="2699331" needed="1">시간대별 전적</STRING>
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+		<STRING hash="9586178" hash_i="9624946" needed="1">게임 배우기</STRING>
+		<STRING hash="4023686" hash_i="4034632" needed="1">싱글 플레이 게임</STRING>
+		<STRING hash="14113984" hash_i="14194906" needed="1">멀티 플레이 게임</STRING>
+		<STRING hash="16500687" hash_i="16535783" needed="1">옵션 및 프로필</STRING>
+		<STRING hash="11006481" hash_i="11079901" needed="1">도구 및 기타</STRING>
+		<STRING hash="658084" hash_i="643946" needed="1">끝내기</STRING>
+		<STRING hash="8929486" hash_i="8999528" needed="1">연습 게임 메뉴</STRING>
+		<STRING hash="1255743" hash_i="1233921" needed="1">시작</STRING>
+		<STRING hash="935119" hash_i="1007993" needed="1">뒤로</STRING>
+		<STRING hash="877696" hash_i="858044" needed="1">확인</STRING>
+		<STRING hash="10781766" hash_i="10807450" needed="1">기본값 재설정</STRING>
+		<STRING hash="1878427" hash_i="1953819" needed="1">취소</STRING>
+		<STRING hash="4690900" hash_i="4672016" needed="1">게임 속도</STRING>
+		<STRING hash="13552917" hash_i="13624975" needed="1">난이도 수준</STRING>
+		<STRING hash="19865577" hash_i="20006103" needed="1">도움말 상세도</STRING>
+		<STRING hash="14390415" hash_i="14466147" needed="1">메시지 지속 시간</STRING>
+		<STRING hash="7460361" hash_i="8108323" needed="1">자동 임무 수행</STRING>
+		<STRING hash="531728" hash_i="514750" needed="1">대기</STRING>
+		<STRING hash="874157" hash_i="947031" needed="1">건설</STRING>
+		<STRING hash="1633076" hash_i="1617220" needed="1">수집</STRING>
+		<STRING hash="13522108" hash_i="13704598" needed="1">건설 및 수집</STRING>
+		<STRING hash="17784693" hash_i="18566811" needed="1">임무 수행 대기 시간</STRING>
+		<STRING hash="14885015" hash_i="15004277" needed="1">태세 지정</STRING>
+		<STRING hash="4986669" hash_i="5054375" needed="1">공격</STRING>
+		<STRING hash="3775778" hash_i="3761308" needed="1">방어</STRING>
+		<STRING hash="7441301" hash_i="7456903" needed="1">위치 사수</STRING>
+		<STRING hash="679072" hash_i="657630" needed="1">습격</STRING>
+		<STRING hash="772144" hash_i="750702" needed="1">파괴</STRING>
+		<STRING hash="3522606" hash_i="3539644" needed="1">대기</STRING>
+		<STRING hash="25165512" hash_i="25745034" needed="1">고급 옵션 표시</STRING>
+		<STRING hash="14720530" hash_i="15939694" needed="1">아군/적군 색</STRING>
+		<STRING hash="26172404" hash_i="26861892" needed="1">정찰병 자동 수송</STRING>
+		<STRING hash="27264437" hash_i="27856271" needed="1">그룹 단위로 특수 능력 사용</STRING>
+		<STRING hash="43831685" hash_i="46335511" needed="1">연구 진행률 표시</STRING>
+		<STRING hash="12151156" hash_i="12792608" needed="1">도시 이름 표시</STRING>
+		<STRING hash="48669557" hash_i="48730359" needed="1">일시 중지 상태에서 시작</STRING>
+		<STRING hash="42710657" hash_i="42688835" needed="1">배치 준비 상태</STRING>
+		<STRING hash="12977214" hash_i="14780622" needed="1">자동 작업 복귀</STRING>
+		<STRING hash="37315318" hash_i="37383024" needed="1">항상 유닛 종류별로 묶기</STRING>
+		<STRING hash="7848322" hash_i="7826880" needed="1">게임 기록</STRING>
+		<STRING hash="1492138" hash_i="1559844" needed="1">지정</STRING>
+		<STRING hash="1518125" hash_i="1496683" needed="1">제거</STRING>
+		<STRING hash="23696953" hash_i="24351401" needed="1">왼쪽 클릭 인터페이스</STRING>
+		<STRING hash="18230202" hash_i="18764774" needed="1">바로 배치</STRING>
+		<STRING hash="20751536" hash_i="21526716" needed="1">오른쪽 클릭 실행</STRING>
+		<STRING hash="44268066" hash_i="44466868" needed="1">끌기 선택 시 군사 유닛에 우선권</STRING>
+		<STRING hash="13221428" hash_i="13196224" needed="1">지도 스크롤 속도</STRING>
+		<STRING hash="1520839" hash_i="1557933" needed="1">모두 사용</STRING>
+		<STRING hash="2005644" hash_i="2042738" needed="1">모두 사용 안 함</STRING>
+		<STRING hash="2286595" hash_i="2334949" needed="1">모두 낮음</STRING>
+		<STRING hash="2623229" hash_i="2667093" needed="1">모두 높음</STRING>
+		<STRING hash="2954634" hash_i="3428518" needed="1">모두 자동</STRING>
+		<STRING hash="21918359" hash_i="22041921" needed="1">해상도 변경</STRING>
+		<STRING hash="10215001" hash_i="10285547" needed="1">자동 경작</STRING>
+		<STRING hash="2517723" hash_i="2495217" needed="1">지형</STRING>
+		<STRING hash="4404155" hash_i="4386949" needed="1">산</STRING>
+		<STRING hash="5442268" hash_i="5389992" needed="1">전운</STRING>
+		<STRING hash="626342" hash_i="604520" needed="1">파도</STRING>
+		<STRING hash="6446028" hash_i="6466796" needed="1">대양저</STRING>
+		<STRING hash="1122282" hash_i="1097928" needed="1">바다</STRING>
+		<STRING hash="1618712" hash_i="1597270" needed="1">강</STRING>
+		<STRING hash="1856542" hash_i="1931934" needed="1">해안</STRING>
+		<STRING hash="1149898" hash_i="1128456" needed="1">도로</STRING>
+		<STRING hash="2209225" hash_i="2282099" needed="1">경계</STRING>
+		<STRING hash="7023317" hash_i="7008847" needed="1">데코레이션</STRING>
+		<STRING hash="2532666" hash_i="2518196" needed="1">기본 객체</STRING>
+		<STRING hash="940914" hash_i="918408" needed="1">나무</STRING>
+		<STRING hash="1041852" hash_i="1020276" needed="1">유닛</STRING>
+		<STRING hash="3773812" hash_i="3846686" needed="1">건물</STRING>
+		<STRING hash="952899" hash_i="937043" needed="1">유물</STRING>
+		<STRING hash="5890470" hash_i="6441148" needed="1">시체</STRING>
+		<STRING hash="612182" hash_i="679888" needed="1">탄약</STRING>
+		<STRING hash="2516897" hash_i="2495075" needed="1">그림자</STRING>
+		<STRING hash="1660727" hash_i="1638905" needed="1">폭풍</STRING>
+		<STRING hash="4451578" hash_i="4430734" needed="1">파티클</STRING>
+		<STRING hash="3524623" hash_i="3504971" needed="1">오버레이</STRING>
+		<STRING hash="4523674" hash_i="4502098" needed="1">언더레이</STRING>
+		<STRING hash="4678862" hash_i="4661884" needed="1">인터페이스</STRING>
+		<STRING hash="12471224" hash_i="12522762" needed="1">프레임 속도 표시</STRING>
+		<STRING hash="74339958" hash_i="74321660" needed="1">건물에 가려진 유닛 표시</STRING>
+		<STRING hash="3975861" hash_i="3891733" needed="1">효과음 볼륨</STRING>
+		<STRING hash="7842469" hash_i="7817173" needed="1">음악 볼륨</STRING>
+		<STRING hash="18279455" hash_i="18981197" needed="1">음성 메시지 사용</STRING>
+		<STRING hash="373132" hash_i="354858" needed="1">새 프로필</STRING>
+		<STRING hash="1690123" hash_i="1668681" needed="1">이름 바꾸기</STRING>
+		<STRING hash="1407606" hash_i="1393136" needed="1">삭제</STRING>
+		<STRING hash="3070132" hash_i="3114116" needed="1">이름 추가</STRING>
+		<STRING hash="6250378" hash_i="6247700" needed="1">이름 삭제</STRING>
+		<STRING hash="11773555" hash_i="11874961" needed="1">시나리오 편집기</STRING>
+		<STRING hash="5003860" hash_i="4972912" needed="1">숙련도 테스트</STRING>
+		<STRING hash="13721217" hash_i="14193451" needed="1">스크립트 편집기 IDE</STRING>
+		<STRING hash="16525213" hash_i="17090437" needed="1">유닛 밸런스 도구</STRING>
+		<STRING hash="14718304" hash_i="15144794" needed="1">맵 밸런스 도구</STRING>
+		<STRING hash="7311227" hash_i="7869125" needed="1">제작진 보기</STRING>
+		<STRING hash="24604858" hash_i="24758760" needed="1">Rise of Nations 정보</STRING>
+		<STRING hash="653244" hash_i="580008" needed="1">오늘의 메시지</STRING>
+		<STRING hash="5451217" hash_i="5421247" needed="1">패치 테스트</STRING>
+		<STRING hash="1911187" hash_i="1889365" needed="1">선택</STRING>
+		<STRING hash="3386354" hash_i="3364532" needed="1">시나리오</STRING>
+		<STRING hash="1695196" hash_i="1676922" needed="1">국가</STRING>
+		<STRING hash="487294" hash_i="470088" needed="1">지도</STRING>
+		<STRING hash="4509660" hash_i="4488218" needed="1">자원</STRING>
+		<STRING hash="5094893" hash_i="5080423" needed="1">외교</STRING>
+		<STRING hash="2881693" hash_i="2859187" needed="1">트리거</STRING>
+		<STRING hash="752824" hash_i="735424" needed="1">불러오기</STRING>
+		<STRING hash="747903" hash_i="726081" needed="1">저장</STRING>
+		<STRING hash="1193029" hash_i="1193029" needed="1">. . .</STRING>
+		<STRING hash="330236" hash_i="330236" needed="1">가져오기</STRING>
+		<STRING hash="343836" hash_i="343836" needed="1">설정</STRING>
+		<STRING hash="24222715" hash_i="24236941" needed="1">시나리오 스크립트 불러오기</STRING>
+		<STRING hash="2072581" hash_i="2054307" needed="1">국가:</STRING>
+		<STRING hash="1318292" hash_i="1393684" needed="1">색:</STRING>
+		<STRING hash="2689237" hash_i="2764629" needed="1">플레이어 종류:</STRING>
+		<STRING hash="2721230" hash_i="2701578" needed="1">옵션:</STRING>
+		<STRING hash="64830" hash_i="64830" needed="1">+</STRING>
+		<STRING hash="70786" hash_i="70786" needed="1">-</STRING>
+		<STRING hash="11587138" hash_i="11654844" needed="1">자동 수송</STRING>
+		<STRING hash="11371302" hash_i="11354324" needed="1">인구 점유수 무시</STRING>
+		<STRING hash="8339564" hash_i="9510062" needed="1">생산 인공지능</STRING>
+		<STRING hash="1914920" hash_i="2457054" needed="1">유닛 인공지능</STRING>
+		<STRING hash="3959833" hash_i="4805223" needed="1">전투 인공지능</STRING>
+		<STRING hash="4776064" hash_i="4717396" needed="1">지도 유형:</STRING>
+		<STRING hash="2840460" hash_i="2822186" needed="1">국가:</STRING>
+		<STRING hash="812154" hash_i="812154" needed="1">크기:</STRING>
+		<STRING hash="3726317" hash_i="3708917" needed="1">번호 고정</STRING>
+		<STRING hash="8046425" hash_i="8123117" needed="1">지도 생성</STRING>
+		<STRING hash="2234590" hash_i="2217190" needed="1">불러오는 중...</STRING>
+		<STRING hash="554264" hash_i="532442" needed="1">보내기</STRING>
+		<STRING hash="2311020" hash_i="2291368" needed="1">옵션</STRING>
+		<STRING hash="973370" hash_i="951928" needed="1">재설정</STRING>
+		<STRING hash="13744261" hash_i="14600789" needed="1">지형 밸런스</STRING>
+		<STRING hash="2926079" hash_i="2895981" needed="1">재생성 +1</STRING>
+		<STRING hash="5146506" hash_i="5116408" needed="1">재생성 +0</STRING>
+		<STRING hash="511505" hash_i="489683" needed="1">번호</STRING>
+		<STRING hash="1049392" hash_i="1027570" needed="1">설정</STRING>
+		<STRING hash="3486313" hash_i="3558439" needed="1">배치 실행</STRING>
+		<STRING hash="2831122" hash_i="2835336" needed="1">이미지 저장</STRING>
+		<STRING hash="813336" hash_i="888728" needed="1">채팅</STRING>
+		<STRING hash="4031707" hash_i="4641239" needed="1">동맹과 채팅</STRING>
+		<STRING hash="2851091" hash_i="3460623" needed="1">모두와 채팅</STRING>
+		<STRING hash="928596" hash_i="1266708" needed="1">취소</STRING>
+		<STRING hash="1366925" hash_i="1346081" needed="1">평화</STRING>
+		<STRING hash="669166" hash_i="736872" needed="1">동맹</STRING>
+		<STRING hash="8782237" hash_i="8805295" needed="1">스크립트 편집기</STRING>
+		<STRING hash="3177121" hash_i="3420233" needed="1">IDE 닫기</STRING>
+		<STRING hash="14667037" hash_i="14797045" needed="1">파일에서 열기...</STRING>
+		<STRING hash="25465449" hash_i="25489871" needed="1">불러온 스크립트 열기...</STRING>
+		<STRING hash="5585081" hash_i="5563259" needed="1">스크립트...</STRING>
+		<STRING hash="10833397" hash_i="10932707" needed="1">오류 로그 표시</STRING>
+		<STRING hash="23629190" hash_i="23920104" needed="1">게임 스크립트 오류 로그</STRING>
+		<STRING hash="4556849" hash_i="4632241" needed="1">클립보드</STRING>
+		<STRING hash="15587940" hash_i="16306410" needed="1">중단점 설정/해제</STRING>
+		<STRING hash="10374000" hash_i="10396824" needed="1">트리거 추가...</STRING>
+		<STRING hash="12894035" hash_i="12952249" needed="1">함수 추가...</STRING>
+		<STRING hash="8771132" hash_i="8743804" needed="1">줄 이동...</STRING>
+		<STRING hash="15933003" hash_i="15911181" needed="1">트리거로 스크롤:</STRING>
+		<STRING hash="15509130" hash_i="15487308" needed="1">스크립트로 스크롤:</STRING>
+		<STRING hash="4076280" hash_i="4169652" needed="1">지금 중단</STRING>
+		<STRING hash="6976407" hash_i="6951557" needed="1">스크립트 중지</STRING>
+		<STRING hash="14557728" hash_i="14511312" needed="1">조사식 창...</STRING>
+		<STRING hash="13233658" hash_i="13359238" needed="1">실행 계속</STRING>
+		<STRING hash="3897867" hash_i="3902081" needed="1">단계별 코드 실행</STRING>
+		<STRING hash="14678941" hash_i="14693585" needed="1">트리거로 이동</STRING>
+		<STRING hash="3921777" hash_i="3909947" needed="1">프로시저 단위 실행</STRING>
+		<STRING hash="5828306" hash_i="5825648" needed="1">줄까지 실행</STRING>
+		<STRING hash="3071210" hash_i="3059380" needed="1">프로시저 나가기</STRING>
+		<STRING hash="668370" hash_i="646548" needed="1">중지</STRING>
+		<STRING hash="7691436" hash_i="8249870" needed="1">변경 내용 저장</STRING>
+		<STRING hash="8147677" hash_i="8218731" needed="1">스크립트 닫기</STRING>
+		<STRING hash="10972267" hash_i="11074429" needed="1">스크립트 컴파일</STRING>
+		<STRING hash="22315147" hash_i="22473363" needed="1">스크립트 컴파일 및 실행</STRING>
+		<STRING hash="18336361" hash_i="18573695" needed="1">컴파일 및 단계별 코드 실행</STRING>
+		<STRING hash="13272702" hash_i="13297268" needed="1">스크립트 선택</STRING>
+		<STRING hash="60843" hash_i="36329" needed="1">X</STRING>
+		<STRING hash="7943953" hash_i="8581341" needed="1">빠른 전투</STRING>
+		<STRING hash="39472655" hash_i="41488085" needed="1">세계 정복 캠페인</STRING>
+		<STRING hash="13452927" hash_i="13418935" needed="1">시나리오 불러오기</STRING>
+		<STRING hash="12083713" hash_i="12168341" needed="1">저장된 게임 불러오기</STRING>
+		<STRING hash="31467542" hash_i="31601472" needed="1">기록된 게임 재생</STRING>
+		<STRING hash="14723823" hash_i="14786869" needed="1">세계 정복</STRING>
+		<STRING hash="8147586" hash_i="8573920" needed="1">새 캠페인</STRING>
+		<STRING hash="15996944" hash_i="17090864" needed="1">캠페인 계속하기</STRING>
+		<STRING hash="9604089" hash_i="10166945" needed="1">캠페인 불러오기</STRING>
+		<STRING hash="5764344" hash_i="5749874" needed="1">난이도</STRING>
+		<STRING hash="8861679" hash_i="9043119" needed="1">정복 게임</STRING>
+		<STRING hash="18876752" hash_i="19046972" needed="1">정복 인터페이스</STRING>
+		<STRING hash="6465100" hash_i="7214134" needed="1">보너스 카드</STRING>
+		<STRING hash="11480916" hash_i="11458726" needed="1">희귀 자원</STRING>
+		<STRING hash="2228690" hash_i="2204336" needed="1">불가사의</STRING>
+		<STRING hash="5124546" hash_i="5120840" needed="1">힌트 표시</STRING>
+		<STRING hash="7428115" hash_i="7453211" needed="1">세계의 사건</STRING>
+		<STRING hash="4140000" hash_i="4215392" needed="1">국가 정복</STRING>
+		<STRING hash="2845427" hash_i="2830957" needed="1">방어</STRING>
+		<STRING hash="3536343" hash_i="3515499" needed="1">구입</STRING>
+		<STRING hash="1083042" hash_i="1158434" needed="1">카드</STRING>
+		<STRING hash="26874025" hash_i="27108063" needed="1">매 턴마다 이벤트 표시</STRING>
+		<STRING hash="37078883" hash_i="38285341" needed="1">정복 캠페인 결과</STRING>
+		<STRING hash="28738297" hash_i="28913881" needed="1">세계 정복 규칙</STRING>
+		<STRING hash="8419892" hash_i="8391200" needed="1">세계 상황</STRING>
+		<STRING hash="592299" hash_i="575093" needed="1">다음 순위 보기</STRING>
+		<STRING hash="741820" hash_i="720378" needed="1">순위</STRING>
+		<STRING hash="698047" hash_i="679773" needed="1">이름</STRING>
+		<STRING hash="1851009" hash_i="1826655" needed="1">정복률</STRING>
+		<STRING hash="4264419" hash_i="4241913" needed="1">영토</STRING>
+		<STRING hash="1501062" hash_i="1568768" needed="1">군대</STRING>
+		<STRING hash="2517695" hash_i="2495189" needed="1">공물</STRING>
+		<STRING hash="2042215" hash_i="2020393" needed="1">상태</STRING>
+		<STRING hash="2841814" hash_i="2909520" needed="1">성향</STRING>
+		<STRING hash="19410681" hash_i="22075293" needed="1">보너스 카드 선택</STRING>
+		<STRING hash="161441" hash_i="123533" needed="1">확인</STRING>
+		<STRING hash="9505553" hash_i="9533545" needed="1">영토 구입</STRING>
+		<STRING hash="29719515" hash_i="31111817" needed="1">평화/동맹 제안</STRING>
+		<STRING hash="8129791" hash_i="8119303" needed="1">선전 포고!</STRING>
+		<STRING hash="31838066" hash_i="31816244" needed="1">게임 시작할 때 팁 표시</STRING>
+		<STRING hash="7427446" hash_i="7446150" needed="1">이전 팁</STRING>
+		<STRING hash="2992698" hash_i="2967292" needed="1">다음 팁</STRING>
+		<STRING hash="2214432" hash_i="2289824" needed="1">제작진</STRING>
+		<STRING hash="6667305" hash_i="6721481" needed="1">지도 살펴보기</STRING>
+		<STRING hash="11591267" hash_i="11571749" needed="1">게임 다시 보기</STRING>
+		<STRING hash="668857" hash_i="647711" needed="1">끝내기</STRING>
+		<STRING hash="13150489" hash_i="13187181" needed="1">숙련도 테스트 메뉴</STRING>
+		<STRING hash="26131241" hash_i="26204247" needed="1">시나리오 소개</STRING>
+		<STRING hash="16782149" hash_i="16903929" needed="1">정복 시나리오</STRING>
+		<STRING hash="874758" hash_i="947632" needed="1">시작</STRING>
+		<STRING hash="49084535" hash_i="49280515" needed="1">GameSpy 인터넷 대전 서비스</STRING>
+		<STRING hash="85180286" hash_i="86710302" needed="1">LAN 및 TCP/IP</STRING>
+		<STRING hash="10817260" hash_i="11566294" needed="1">캠페인 시작</STRING>
+		<STRING hash="15510563" hash_i="15747603" needed="1">주 메뉴로 돌아가기</STRING>
+		<STRING hash="1559857" hash_i="1519511" needed="1">보너스</STRING>
+		<STRING hash="2928789" hash_i="3004181" needed="1">계속</STRING>
+		<STRING hash="9989659" hash_i="10095371" needed="1">싱글 플레이 메뉴</STRING>
+		<STRING hash="15233528" hash_i="15383556" needed="1">종료하고 주 메뉴로 돌아가기</STRING>
+		<STRING hash="9102854" hash_i="9176178" needed="1">지도로 돌아가기</STRING>
+		<STRING hash="2532464" hash_i="2517994" needed="1">격퇴</STRING>
+		<STRING hash="2529104" hash_i="2514966" needed="1">경제</STRING>
+		<STRING hash="14049952" hash_i="14132502" needed="1">기술 그래프</STRING>
+		<STRING hash="24217264" hash_i="24481118" needed="1">멀티 플레이 게임 메뉴</STRING>
+		<STRING hash="4967471" hash_i="5066961" needed="1">친구 목록</STRING>
+		<STRING hash="263897" hash_i="331603" needed="1">추가</STRING>
+		<STRING hash="8716848" hash_i="8726098" needed="1">GameSpy 로그인</STRING>
+		<STRING hash="1428701" hash_i="1414563" needed="1">전자 메일:</STRING>
+		<STRING hash="3917417" hash_i="3899143" needed="1">애칭:</STRING>
+		<STRING hash="3686476" hash_i="3665632" needed="1">암호:</STRING>
+		<STRING hash="9653093" hash_i="9634111" needed="1">암호 저장</STRING>
+		<STRING hash="918190" hash_i="900790" needed="1">로그인</STRING>
+		<STRING hash="9947770" hash_i="10014394" needed="1">프로필 만들기</STRING>
+		<STRING hash="6627328" hash_i="6612858" needed="1">방 제목</STRING>
+		<STRING hash="9527755" hash_i="10337771" needed="1">팀 및 동맹</STRING>
+		<STRING hash="4141632" hash_i="4082964" needed="1">지도 유형</STRING>
+		<STRING hash="3125071" hash_i="3066403" needed="1">지도 크기</STRING>
+		<STRING hash="5135214" hash_i="5118610" needed="1">게임 규칙</STRING>
+		<STRING hash="211646" hash_i="159918" needed="1">PW</STRING>
+		<STRING hash="178280" hash_i="226484" needed="1">CT</STRING>
+		<STRING hash="189665" hash_i="143295" needed="1">TP</STRING>
+		<STRING hash="201227" hash_i="152597" needed="1">RT</STRING>
+		<STRING hash="177617" hash_i="137451" needed="1">RN</STRING>
+		<STRING hash="196599" hash_i="149033" needed="1">TR</STRING>
+		<STRING hash="166993" hash_i="127701" needed="1">FP</STRING>
+		<STRING hash="575406" hash_i="554562" needed="1">Ping</STRING>
+		<STRING hash="605846" hash_i="587980" needed="1">참가</STRING>
+		<STRING hash="1708385" hash_i="1783777" needed="1">방 만들기</STRING>
+		<STRING hash="2104439" hash_i="2082997" needed="1">새로 고침</STRING>
+		<STRING hash="1533859" hash_i="1518431" needed="1">필터</STRING>
+		<STRING hash="6425006" hash_i="6531534" needed="1">게임 개설</STRING>
+		<STRING hash="10416096" hash_i="11226112" needed="1">팀 및 동맹:</STRING>
+		<STRING hash="3668910" hash_i="3610242" needed="1">지도 크기:</STRING>
+		<STRING hash="7799138" hash_i="7745360" needed="1">최대 플레이어 수:</STRING>
+		<STRING hash="8206992" hash_i="8260320" needed="1">시간 지연:</STRING>
+		<STRING hash="5820335" hash_i="5803731" needed="1">게임 규칙:</STRING>
+		<STRING hash="13283113" hash_i="13258929" needed="1">자원 빨리 수집하기</STRING>
+		<STRING hash="5361655" hash_i="5349067" needed="1">일시 중지 중 명령 허용</STRING>
+		<STRING hash="11072177" hash_i="11104419" needed="1">토너먼트 플레이</STRING>
+		<STRING hash="22800730" hash_i="22838982" needed="1">랜덤 팀 편성</STRING>
+		<STRING hash="28098967" hash_i="28204931" needed="1">랜덤 국가 선택</STRING>
+		<STRING hash="7348406" hash_i="7333936" needed="1">제목:</STRING>
+		<STRING hash="397842" hash_i="380442" needed="1">낮음</STRING>
+		<STRING hash="532432" hash_i="514134" needed="1">높음</STRING>
+		<STRING hash="663755" hash_i="731461" needed="1">자동</STRING>
+		<STRING hash="9977569" hash_i="9959295" needed="1">알림</STRING>
+		<STRING hash="33311751" hash_i="33297613" needed="1">적이 새 시대로 발전할 때</STRING>
+		<STRING hash="30345597" hash_i="30413303" needed="1">동맹이 새 시대로 발전할 때</STRING>
+		<STRING hash="22575216" hash_i="22550564" needed="1">플레이어가 새 시대로 발전할 때</STRING>
+		<STRING hash="26441069" hash_i="26425641" needed="1">미래 기술을 연구할 때</STRING>
+		<STRING hash="39276789" hash_i="39258515" needed="1">핵무기를 연구할 때</STRING>
+		<STRING hash="37437771" hash_i="37419497" needed="1">핵미사일이 발사될 때</STRING>
+		<STRING hash="33446592" hash_i="33421940" needed="1">플레이어의 도시가 공격당할 때</STRING>
+		<STRING hash="39532161" hash_i="39599867" needed="1">동맹의 도시가 공격당할 때</STRING>
+		<STRING hash="22058539" hash_i="22033887" needed="1">플레이어가 도시를 점령할 때</STRING>
+		<STRING hash="14743520" hash_i="14718868" needed="1">플레이어가 도시를 점령당했을 때</STRING>
+		<STRING hash="30755496" hash_i="30734652" needed="1">국가가 불가사의 건설을 시작할 때</STRING>
+		<STRING hash="35342567" hash_i="35321723" needed="1">국가가 불가사의를 완성했을 때</STRING>
+		<STRING hash="55195631" hash_i="55173273" needed="1">승리 타이머가 시작되거나 끝날 때</STRING>
+		<STRING hash="38109733" hash_i="38177439" needed="1">아마겟돈 숫자가 변경될 때</STRING>
+		<STRING hash="29462566" hash_i="29441722" needed="1">게임에서 나가는 국가가 있을 때</STRING>
+		<STRING hash="28224454" hash_i="28203012" needed="1">증원군이 도착할 때</STRING>
+		<STRING hash="16768953" hash_i="16842595" needed="1">전투 목표</STRING>
+		<STRING hash="44106662" hash_i="44082010" needed="1">수도가 공격당할 때</STRING>
+		<STRING hash="51233027" hash_i="51300733" needed="1">동맹의 수도가 공격당할 때</STRING>
+		<STRING hash="7004608" hash_i="7021768" needed="1">불러온 파일</STRING>
+		<STRING hash="539954" hash_i="524526" needed="1">파일</STRING>
+		<STRING hash="599940" hash_i="585802" needed="1">편집</STRING>
+		<STRING hash="644049" hash_i="621691" needed="1">보기</STRING>
+		<STRING hash="14761399" hash_i="14739577" needed="1">트리거 스크롤</STRING>
+		<STRING hash="14477187" hash_i="14455365" needed="1">스크립트 스크롤</STRING>
+		<STRING hash="6683944" hash_i="6756818" needed="1">중단점</STRING>
+		<STRING hash="2062733" hash_i="2138125" needed="1">컴파일</STRING>
+		<STRING hash="4163655" hash_i="4380539" needed="1">IDE에서 실행</STRING>
+		<STRING hash="1133858" hash_i="1119388" needed="1">디버그</STRING>
+		<STRING hash="9426433" hash_i="9380017" needed="1">조사식 창</STRING>
+		<STRING hash="50125581" hash_i="52132285" needed="1">중단점에서 현재 스크립트:</STRING>
+		<STRING hash="7556300" hash_i="7513598" needed="1">정적 변수</STRING>
+		<STRING hash="6090578" hash_i="6065088" needed="1">지역 변수</STRING>
+		<STRING hash="8867786" hash_i="8906330" needed="1">조사식 사용자 지정</STRING>
+		<STRING hash="13855303" hash_i="13856013" needed="1">함수 창</STRING>
+		<STRING hash="8123211" hash_i="8181425" needed="1">함수 추가</STRING>
+		<STRING hash="2084271" hash_i="2094949" needed="1">참가할 IP</STRING>
+		<STRING hash="2354080" hash_i="2334428" needed="1">관전</STRING>
+		<STRING hash="4802900" hash_i="4909782" needed="1">관전할 IP</STRING>
+		<STRING hash="6855043" hash_i="6930757" needed="1">플레이어 추방</STRING>
+		<STRING hash="2017618" hash_i="2000218" needed="1">시작</STRING>
+		<STRING hash="11934861" hash_i="11961859" needed="1">GameSpy 필터</STRING>
+		<STRING hash="6616867" hash_i="6591333" needed="1">팀 유형</STRING>
+		<STRING hash="4186389" hash_i="4127721" needed="1">지도 크기</STRING>
+		<STRING hash="5380687" hash_i="5322019" needed="1">지도 유형</STRING>
+		<STRING hash="7454249" hash_i="7507577" needed="1">시간 지연</STRING>
+		<STRING hash="928542" hash_i="911336" needed="1">기타</STRING>
+		<STRING hash="4920784" hash_i="5598594" needed="1">모두 선택</STRING>
+		<STRING hash="3692195" hash_i="4389945" needed="1">모두 취소</STRING>
+		<STRING hash="6091734" hash_i="6817974" needed="1">친구 추가</STRING>
+		<STRING hash="2047051" hash_i="2025229" needed="1">검색</STRING>
+		<STRING hash="2060752" hash_i="2133626" needed="1">친구</STRING>
+		<STRING hash="3768021" hash_i="3778201" needed="1">게임 정보</STRING>
+		<STRING hash="2523146" hash_i="2502302" needed="1">플레이어</STRING>
+		<STRING hash="12376139" hash_i="12364509" needed="1">플레이어 제거</STRING>
+		<STRING hash="27997921" hash_i="28189459" needed="1">"외교"로 전환</STRING>
+		<STRING hash="76887027" hash_i="77461273" needed="1">"개인전"으로 전환</STRING>
+		<STRING hash="11242446" hash_i="12612938" needed="1">인공 지능으로 교체</STRING>
+		<STRING hash="8836697" hash_i="8938103" needed="1">저장하고 끝내기</STRING>
+		<STRING hash="8700596" hash_i="8696450" needed="1">개체 편집</STRING>
+		<STRING hash="5479162" hash_i="5482520" needed="1">지도 가져오기</STRING>
+		<STRING hash="693695" hash_i="676295" needed="1">육지</STRING>
+		<STRING hash="1338397" hash_i="1318745" needed="1">대양</STRING>
+		<STRING hash="1613382" hash_i="1597954" needed="1">숲</STRING>
+		<STRING hash="6897391" hash_i="6943199" needed="1">지형 지도</STRING>
+		<STRING hash="4206302" hash_i="4195712" needed="1">암석 지대/석유</STRING>
+		<STRING hash="1456634" hash_i="1532026" needed="1">절벽</STRING>
+		<STRING hash="10872930" hash_i="10829424" needed="1">지형 제거</STRING>
+		<STRING hash="1308833" hash_i="1381707" needed="1">브러시:</STRING>
+		<STRING hash="1674528" hash_i="1652022" needed="1">유형 1</STRING>
+		<STRING hash="1145995" hash_i="1123489" needed="1">유형 2</STRING>
+		<STRING hash="1154858" hash_i="1132352" needed="1">유형 3</STRING>
+		<STRING hash="1164333" hash_i="1141827" needed="1">유형 4</STRING>
+		<STRING hash="5038587" hash_i="5021381" needed="1">산:</STRING>
+		<STRING hash="1551515" hash_i="1534309" needed="1">변경</STRING>
+		<STRING hash="3050345" hash_i="3183347" needed="1">승리!</STRING>
+		<STRING hash="38070161" hash_i="38480465" needed="1">전략 지도로 돌아가기</STRING>
+		<STRING hash="7975158" hash_i="8095158" needed="1">방어 시작</STRING>
+		<STRING hash="6256388" hash_i="6895270" needed="1">매수</STRING>
+		<STRING hash="5349318" hash_i="5445046" needed="1">지도 가운데로 이동</STRING>
+		<STRING hash="17056293" hash_i="17166007" needed="1">스크립트 메시지 로그</STRING>
+		<STRING hash="696113" hash_i="771505" needed="1">복사</STRING>
+		<STRING hash="1191316" hash_i="1266708" needed="1">지우기</STRING>
+		<STRING hash="12850141" hash_i="13856433" needed="1">팀 및 동맹</STRING>
+		<STRING hash="7683728" hash_i="7653132" needed="1">음성 메시지 볼륨</STRING>
+		<STRING hash="11445591" hash_i="11469029" needed="1">요소 렌더링</STRING>
+		<STRING hash="19840150" hash_i="19861634" needed="1">영토 방위력</STRING>
+		<STRING hash="9520122" hash_i="10079232" needed="1">캠페인 끝내기</STRING>
+		<STRING hash="30596725" hash_i="30664431" needed="1">같은 유닛별로 묶기</STRING>
+		<STRING hash="6911556" hash_i="6894350" needed="1">멀티 플레이</STRING>
+		<STRING hash="6028572" hash_i="6009688" needed="1">게임 속도</STRING>
+		<STRING hash="5376021" hash_i="5357137" needed="1">게임 속도:</STRING>
+		<STRING hash="2594554" hash_i="2572048" needed="1">타일셋:</STRING>
+		<STRING hash="9528923" hash_i="9486601" needed="1">반환 값</STRING>
+		<STRING hash="1224793" hash_i="1203351" needed="1">암석 지대</STRING>
+		<STRING hash="1527171" hash_i="1600045" needed="1">덤불</STRING>
+		<STRING hash="5243833" hash_i="5271977" needed="1">랜덤 추가</STRING>
+		<STRING hash="6907977" hash_i="6890811" needed="1">스크립트</STRING>
+		<STRING hash="430053" hash_i="497759" needed="1">시대:</STRING>
+		<STRING hash="825727" hash_i="803221" needed="1">유형:</STRING>
+		<STRING hash="1387214" hash_i="1366370" needed="1">배치</STRING>
+		<STRING hash="27136199" hash_i="27110379" needed="1"> 특수 유닛 표시</STRING>
+		<STRING hash="3561299" hash_i="3561299" needed="1">위쪽 화살표</STRING>
+		<STRING hash="5992175" hash_i="5992175" needed="1">아래쪽 화살표</STRING>
+		<STRING hash="12813964" hash_i="12778970" needed="1">자원 제거</STRING>
+		<STRING hash="22658602" hash_i="23374816" needed="1">모든 자원 제거</STRING>
+		<STRING hash="12036581" hash_i="12014759" needed="1">특수 유닛 표시</STRING>
+		<STRING hash="5355119" hash_i="5399103" needed="1">국가 추가</STRING>
+		<STRING hash="4527722" hash_i="5205912" needed="1">모두 제거</STRING>
+		<STRING hash="6766132" hash_i="6716418" needed="1">암호 없음</STRING>
+		<STRING hash="514554" hash_i="490200" needed="1">전쟁</STRING>
+		<STRING hash="20711732" hash_i="21018950" needed="1">배경 음악 사용</STRING>
+		<STRING hash="12697533" hash_i="12696427" needed="1">산 제거</STRING>
+		<STRING hash="10611547" hash_i="10624665" needed="1">지형 특성 제거</STRING>
+		<STRING hash="27568974" hash_i="27644366" needed="1">시간 지연이 시작될 때</STRING>
+		<STRING hash="14610289" hash_i="14685681" needed="1">시간 지연이 끝날 때</STRING>
+		<STRING hash="13075845" hash_i="13158115" needed="1">차단 목록 표시</STRING>
+		<STRING hash="6106288" hash_i="6108094" needed="1">차단 목록</STRING>
+		<STRING hash="13048688" hash_i="13105302" needed="1">목록에서 제거</STRING>
+		<STRING hash="585802" hash_i="585802" needed="1">편집</STRING>
+		<STRING hash="12188775" hash_i="12260271" needed="1">기본 설정 복원</STRING>
+		<STRING hash="4051612" hash_i="4060978" needed="1">육지 지형 편집</STRING>
+		<STRING hash="8181976" hash_i="8159454" needed="1">랜덤 배치</STRING>
+		<STRING hash="12344607" hash_i="12357725" needed="1">지형 특성 제거</STRING>
+		<STRING hash="10255989" hash_i="11092501" needed="1">변화 반영</STRING>
+		<STRING hash="14919533" hash_i="14948877" needed="1">암호 필요</STRING>
+		<STRING hash="79263" hash_i="79263" needed="1">.</STRING>
+		<STRING hash="8858590" hash_i="9602456" needed="1">변경 내용 적용</STRING>
+		<STRING hash="13076813" hash_i="13099507" needed="1">토너먼트 플레이</STRING>
+		<STRING hash="18762145" hash_i="19943443" needed="1">새 GameSpy 계정</STRING>
+		<STRING hash="2338747" hash_i="2317171" needed="1">일반</STRING>
+		<STRING hash="22170572" hash_i="22219362" needed="1">일반 초급</STRING>
+		<STRING hash="10381542" hash_i="10455892" needed="1">일반 고급</STRING>
+		<STRING hash="1009003" hash_i="987561" needed="1">래더</STRING>
+		<STRING hash="1548549" hash_i="1531149" needed="1">로비</STRING>
+		<STRING hash="19315732" hash_i="19482828" needed="1">차단 목록 표시</STRING>
+		<STRING hash="5816999" hash_i="6475759" needed="1">로비 채팅</STRING>
+		<STRING hash="4267693" hash_i="4832093" needed="1">게임 채팅</STRING>
+		<STRING hash="34184426" hash_i="34312708" needed="1">선택된 기능 삽입</STRING>
+		<STRING hash="8322825" hash_i="8402131" needed="1">고도 조정</STRING>
+		<STRING hash="31074704" hash_i="31207838" needed="1">Gamespy에 연결 재시도</STRING>
+		<STRING hash="19323279" hash_i="19353427" needed="1">새 GameSpy 프로필</STRING>
+		<STRING hash="6449465" hash_i="6434995" needed="1">난이도:</STRING>
+		<STRING hash="90319" hash_i="90319" needed="1">0</STRING>
+		<STRING hash="95232" hash_i="95232" needed="1">1</STRING>
+		<STRING hash="6477" hash_i="6477" needed="1">2</STRING>
+		<STRING hash="7288" hash_i="7288" needed="1">3</STRING>
+		<STRING hash="8201" hash_i="8201" needed="1">4</STRING>
+		<STRING hash="8862" hash_i="8862" needed="1">5</STRING>
+		<STRING hash="9607" hash_i="9607" needed="1">6</STRING>
+		<STRING hash="11744" hash_i="11744" needed="1">7</STRING>
+		<STRING hash="12639" hash_i="12639" needed="1">8</STRING>
+		<STRING hash="13192" hash_i="13192" needed="1">9</STRING>
+		<STRING hash="15928688" hash_i="16050776" needed="1">업데이트 확인</STRING>
+		<STRING hash="39958591" hash_i="40137615" needed="1">국가 위치 임의 설정</STRING>
+		<STRING hash="15111791" hash_i="16175995" needed="1">보너스 임의 설정</STRING>
+		<STRING hash="7710349" hash_i="7717177" needed="1">퀵 매치</STRING>
+		<STRING hash="1904605" hash_i="1882783" needed="1">변환</STRING>
+		<STRING hash="5964316" hash_i="5938782" needed="1">팀 유형:</STRING>
+		<STRING hash="17286905" hash_i="17323379" needed="1">플레이어 수:</STRING>
+		<STRING hash="13174412" hash_i="13172926" needed="1">정밀 대전</STRING>
+		<STRING hash="4489210" hash_i="4466704" needed="1">팀 동료</STRING>
+		<STRING hash="7647446" hash_i="7657738" needed="1">게임을 시작합니다!</STRING>
+		<STRING hash="1513522" hash_i="1496544" needed="1">초대</STRING>
+		<STRING hash="1119028" hash_i="1101628" needed="1">나가기</STRING>
+		<STRING hash="10673505" hash_i="10651961" needed="1">대전 설정</STRING>
+		<STRING hash="2596232" hash_i="2571878" needed="1">웜뱃:</STRING><STRING hash="2906296" hash_i="2881942" needed="1">웜뱃2:</STRING><STRING hash="2916611" hash_i="2892257" needed="1">웜뱃3:</STRING><STRING hash="2927640" hash_i="2903286" needed="1">웜뱃4:</STRING><STRING hash="28054022" hash_i="28937082" needed="1">오늘의 메시지 보기/업데이트</STRING><STRING hash="22416788" hash_i="22402318" needed="1">특수 유닛 사용 안 함</STRING><STRING hash="25464586" hash_i="25450116" needed="1">국가 특성 사용 안 함</STRING><STRING hash="21158210" hash_i="21225916" needed="1">모든 규칙 사용</STRING><STRING hash="7307635" hash_i="7323343" needed="1">게임을 찾습니다!</STRING><STRING hash="2273775" hash_i="2251953" needed="1">준비</STRING><STRING hash="15491512" hash_i="15608320" needed="1">게임을 호스트하지 않음</STRING><STRING hash="17610167" hash_i="17686127" needed="1">게임 내 외교</STRING></CAT>
+	<CAT hash="18830057">
+		<STRING hash="205886020" hash_i="206425258" needed="1">적이 침공에 저항하고 있습니다. 수도를 함락시키면 승리합니다.</STRING>
+		<STRING hash="435786597" hash_i="434710227" needed="1">적이 이 영토에 기습 공격을 시작했습니다. 공격자들의 침략을 물리쳐 승리하십시오.</STRING>
+		<STRING hash="402322319" hash_i="400946661" needed="1">이웃 국가가 침공했습니다. 적의 수도를 함락시켜서 적군을 철수시키십시오.</STRING>
+		<STRING hash="922027410" hash_i="928783650" needed="1">적의 저항을 예상하지 못했기 때문에 원정군에 지원 부대를 포함시키지 않았습니다. 군소 바바리안 국가와 맞닥뜨릴 수도 있지만 문제없이 물리칠 수 있을 것입니다.</STRING>
+		<STRING hash="1143005318" hash_i="1146834860" needed="1">군대가 이 영토에서 가장 넓은 바바리안 정착지에 도착했습니다. 도시를 점령하면 영토는 우리 손에 떨어질 것입니다. 바바리안 지도자는 약삭빠른 자이므로 바바리안 부대의 매복을 조심하십시오.</STRING>
+		<STRING hash="789294977" hash_i="786098565" needed="1">저항을 받지 않고 적의 영토를 점령했습니다. 그러나 원주민들이 집결하여 이 지역의 국경 초소를 공격할 것입니다. 타이머가 종료될 때까지 존속하면 승리합니다.</STRING>
+		<STRING hash="577017800" hash_i="583766208" needed="1">적이 부대를 집결시켜 벌판에서 아군과 만났습니다. 적군을 제거하여 이 시나리오에서 승리하십시오. 장군을 보호하는 데 유의하십시오.</STRING>
+		<STRING hash="963014836" hash_i="962046504" needed="1">이 영토에는 몇 개의 원주민 부족이 서로 세력을 다투며 살고 있습니다. 그러나 바바리안으로부터 영토를 빼앗아 우월한 힘을 보여 준다면 그들은 틀림없이 제국에 합병될 것입니다.</STRING>
+		<STRING hash="782757605" hash_i="781563091" needed="1">이 영토에는 몇 개의 원주민 부족이 서로 세력을 다투며 살고 있습니다. 외교술을 발휘하여 사이를 분열시켜 지역 내에서의 당신의 지배를 확고히 하십시오.</STRING>
+		<STRING hash="205285029" hash_i="205270559" needed="1">바바리안을 고향에서 쫓아내서 새로운 국가를 건설하십시오.</STRING>
+		<STRING hash="674269684" hash_i="673606112" needed="1">이 영토의 바바리안은 적대 세력이므로 반드시 제거해야 합니다. 수도를 함락시키거나 영토의 대부분을 점령하여 물리치십시오.</STRING>
+		<STRING hash="699657885" hash_i="699635379" needed="1">이 지역의 바바리안 국가는 세력이 약하므로 도시 중 하나를 점령하여 우월성을 입증하면 틀림없이 무릎을 꿇을 것입니다.</STRING>
+		<STRING hash="1053349682" hash_i="1049167724" needed="1">이 지역의 바바리안족 무리가 여러분의 제국을 멸망시키기 위해 함께 뭉쳤습니다. 다행히도 추가 물자가 보급되었으며 바바리안은 여러분의 나라보다 한 시대 뒤떨어져 있습니다. 타이머가 만료할 때까지 존속하면 승리합니다.</STRING>
+		<STRING hash="430542475" hash_i="431624267" needed="1">적 군대가 있는 곳에 접근하고 있습니다. 진지를 찾아내어 건물을 모두 파괴하면 승리합니다.</STRING>
+		<STRING hash="827198245" hash_i="833954485" needed="1">강력한 적의 저항을 예상하지 못했기 때문에 원정군을 파병할 때 지원군을 증원시키지 않았습니다. 이런 상황에서 수비력이 증강된 도시와 마주쳤지만 반드시 그 도시를 함락시켜야만 합니다.</STRING>
+		<STRING hash="743852416" hash_i="742761258" needed="1">적이 아군의 진지를 찾아냈습니다. 건물을 지켜내고 적군을 섬멸해야 승리합니다. 적군이 아군 건물을 파괴하면 패배합니다.</STRING>
+		<STRING hash="443076995" hash_i="444158787" needed="1">바바리안이 있는 곳에 접근하고 있습니다. 진지를 찾아내어 건물을 모두 파괴하면 승리합니다.</STRING>
+		<STRING hash="919698896" hash_i="922950814" needed="1">적의 근거지 중 이 영토에서 제일 강대한 곳에 도달했습니다. 도시를 점령하면 플레이어의 영토가 됩니다. 적의 지도자는 영리하기 때문에 매복에 조심해야 합니다.</STRING>
+		<STRING hash="447593473" hash_i="452416295" needed="1">적 군대가 있는 곳에 접근하고 있습니다. 진지를 공격해서 건물을 모두 파괴하면 승리합니다.</STRING>
+		<STRING hash="460127993" hash_i="464950815" needed="1">바바리안이 있는 곳에 접근하고 있습니다. 진지를 공격해서 건물을 모두 파괴하면 승리합니다.</STRING>
+		<STRING hash="789319796" hash_i="786160832" needed="1">저항을 받지 않고 적의 영토를 점령했습니다. 그러나 원주민들이 세력을 모아서 아군이 새로 건설한 전진 기지를 공격하고 있습니다. 타이머가 만료할 때까지 존속하면 승리합니다.</STRING>
+		<STRING hash="547043201" hash_i="545966831" needed="1">적이 이 영토 내에서 기습을 감행하기 시작했습니다. 적의 공격을 막아내고 수도를 방어하면 승리합니다.</STRING>
+		<STRING hash="886320487" hash_i="884168747" needed="1">저항을 받지 않고 적의 영토를 점령했습니다. 그러나 원주민들이 세력을 모아서 아군이 새로 건설한 전진 기지를 공격하고 있습니다. 타이머가 만료할 때까지 수도를 방어하면 승리합니다.</STRING>
+		<STRING hash="1041644836" hash_i="1049167724" needed="1">이 지역의 바바리안족 무리가 여러분의 제국을 멸망시키기 위해 함께 뭉쳤습니다. 다행히도 추가 물자가 보급되었으며 바바리안은 여러분의 나라보다 한 시대 뒤떨어져 있습니다. 타이머가 만료될 때까지 존속하면 승리합니다. </STRING>
+		<STRING hash="1068774033" hash_i="1064758895" needed="1">이 지역의 바바리안 국가는 세력이 약하므로 도시 중 하나를 점령하여 우월성을 입증하면 틀림없이 무릎을 꿇을 것입니다. 수도를 함락당하면 패배합니다.</STRING>
+		<STRING hash="951055101" hash_i="954335789" needed="1">군대가 이 영토에서 가장 넓은 바바리안 정착지에 도착했습니다. 수도를 함락하면 영토는 우리 손에 떨어질 것입니다. 바바리안 지도자는 교활합니다. 매복을 조심하십시오.</STRING>
+		<STRING hash="316863640" hash_i="314127508" needed="1">적이 침공에 저항하고 있습니다. 적의 수도를 $NUM0분 이내로 함락시키면 승리합니다.</STRING>
+		<STRING hash="626068804" hash_i="620602416" needed="1">이웃 국가가 침공했습니다. 적의 수도를 함락시키거나 공격을 $NUM0분 동안 막아내어 철수하게 하십시오.</STRING>
+		<STRING hash="339796965" hash_i="337129057" needed="1">적이 저항하고 있습니다. $NUM0분 안에 적의 수도를 점령하면 승리합니다.</STRING>
+		<STRING hash="657405878" hash_i="652050402" needed="1">인접 국가가 배신을 하고 침략해 왔습니다. 적의 수도를 점령하거나 $NUM0분 동안 적의 공격을 방어하여 적이 후퇴하도록 하십시오.</STRING>
+		<STRING hash="1178321956" hash_i="1164321508" needed="1">이 지역의 바바리안 국가는 세력이 약하므로 도시 중 하나를 $NUM0분 안에 점령하여 우월성을 입증하면 틀림없이 무릎을 꿇을 것입니다. 수도를 함락당하면 패배합니다.</STRING>
+		<STRING hash="1081931692" hash_i="1085402682" needed="1">군대가 이 영토에서 가장 넓은 바바리안 정착지에 도착했습니다. 120분 안에 바바리안의 수도를 함락시키면 영토는 우리 손에 떨어질 것입니다. 바바리안 지도자는 약삭빠른 자이므로 매복을 조심하십시오.</STRING>
+		<STRING hash="755002002" hash_i="743847024" needed="1">이 영토의 바바리안은 적대 세력이므로 반드시 제거해야 합니다. $NUM0분 안에 수도를 함락시키거나 영토의 대부분을 점령하여 물리치십시오.</STRING>
+		<STRING hash="1170166231" hash_i="1166423633" needed="1">이 영토의 패권을 차지하기 위해 서로 경쟁 중인 바바리안 국가들이 있습니다. 외교 기술을 발휘하여 서로 전쟁을 벌이게 한 뒤 이 지역에 대한 지배력을 장악하십시오. 120분 안에 바바리안 국가를 물리치십시오.</STRING>
+	</CAT>
+	<CAT hash="21745476">
+		<STRING hash="3078682" hash_i="3154074" needed="1">국가 정복</STRING>
+		<STRING hash="14272504" hash_i="15192350" needed="1">기습 공격!</STRING>
+		<STRING hash="3073683" hash_i="3051177" needed="1">전술</STRING>
+		<STRING hash="1757765" hash_i="1825471" needed="1">매복</STRING>
+		<STRING hash="13723440" hash_i="13844484" needed="1">바바리안의 집결</STRING>
+		<STRING hash="7519564" hash_i="8162670" needed="1">야전</STRING>
+		<STRING hash="7466821" hash_i="7487223" needed="1">단판 승부</STRING>
+		<STRING hash="10112253" hash_i="10212761" needed="1">음모와 계략</STRING>
+		<STRING hash="11216731" hash_i="11939433" needed="1">국가 건설</STRING>
+		<STRING hash="821127" hash_i="803921" needed="1">혼전</STRING>
+		<STRING hash="32811580" hash_i="33103126" needed="1">바바리안의 침략</STRING>
+	</CAT>
+	<CAT hash="30698867">
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+		<STRING hash="66457806" hash_i="66439508" needed="1">15분 동안 적의 공격을 방어하십시오.</STRING>
+		<STRING hash="41980852" hash_i="42056244" needed="1">적의 수도를 함락시키십시오.</STRING>
+		<STRING hash="90105976" hash_i="90090548" needed="1">적의 수도를 찾아 함락시키십시오.</STRING>
+		<STRING hash="36412767" hash_i="36398297" needed="1">적군을 제거하십시오.</STRING>
+		<STRING hash="49582913" hash_i="49658305" needed="1">바바리안의 도시를 점령하십시오.</STRING>
+		<STRING hash="51377575" hash_i="51363105" needed="1">바바리안족을 물리치십시오.</STRING>
+		<STRING hash="208440775" hash_i="208516167" needed="1">적의 수도를 함락시키거나 영토를 차지하여 물리치십시오.</STRING>
+		<STRING hash="164281570" hash_i="164356962" needed="1">각 국가의 도시를 하나씩 점령하여 물리치십시오.</STRING>
+		<STRING hash="59485593" hash_i="59471123" needed="1">적의 진지를 파괴하십시오.</STRING>
+		<STRING hash="37152612" hash_i="37138142" needed="1">침략군을 격퇴하십시오.</STRING>
+		<STRING hash="66307671" hash_i="66289373" needed="1">30분 동안 적의 공격을 막아내십시오.</STRING>
+		<STRING hash="74894997" hash_i="74880527" needed="1">15분 동안 수도를 방어하십시오.</STRING>
+		<STRING hash="115951391" hash_i="115933093" needed="1">타이머가 만료될 때까지 적의 공격을 막아내십시오.</STRING>
+		<STRING hash="119025659" hash_i="120479815" needed="1">$NUM0분 이내로 적의 수도를 함락시키십시오.</STRING>
+		<STRING hash="172875505" hash_i="175801469" needed="1">적의 수도를 함락시키거나 공격을 $NUM0분 동안 막아내십시오.</STRING>
+		<STRING hash="137773498" hash_i="139438982" needed="1">$NUM0분 안에 적의 수도를 점령하십시오.</STRING>
+		<STRING hash="177875231" hash_i="182163563" needed="1">적의 수도를 함락시키거나 $NUM0분 동안 적의 공격을 막아내십시오.</STRING>
+		<STRING hash="178310682" hash_i="178295254" needed="1">120분 안에 적의 수도를 찾아내어 함락시키십시오.</STRING>
+		<STRING hash="275982086" hash_i="273091602" needed="1"> $NUM0분 안에 적의 수도를 함락시키거나 적의 영토를 점령하여 물리치십시오.</STRING>
+		<STRING hash="208496370" hash_i="205072638" needed="1">$NUM0분 안에 적들을 물리치려면 각 국가의 도시를 하나씩 점령하십시오.</STRING>
+		<STRING hash="120889362" hash_i="120874892" needed="1">120분 안에 바바리안 국가를 물리치십시오.</STRING>
+	</CAT>
+	<CAT hash="5254184">
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+	</CAT>
+	<CAT hash="11815213">
+		<STRING hash="25349290" hash_i="25777580" needed="1">인공지능 건물 배치</STRING>
+		<STRING hash="914487" hash_i="982193" needed="1">오디오</STRING>
+		<STRING hash="8012543" hash_i="8180245" needed="1">건물 정보</STRING>
+		<STRING hash="1989908" hash_i="2065300" needed="1">카메라</STRING>
+		<STRING hash="813336" hash_i="888728" needed="1">채팅</STRING>
+		<STRING hash="1509376" hash_i="1584768" needed="1">도시</STRING>
+		<STRING hash="15873493" hash_i="17148917" needed="1">비교 검사</STRING>
+		<STRING hash="64338956" hash_i="64402002" needed="1">세계 정복 캠페인 한정 기능</STRING>
+		<STRING hash="11809701" hash_i="11885861" needed="1">개체 생성</STRING>
+		<STRING hash="24030927" hash_i="24138873" needed="1">개체 파괴/제거</STRING>
+		<STRING hash="5094893" hash_i="5080423" needed="1">외교</STRING>
+		<STRING hash="8124541" hash_i="8346763" needed="1">File IO (XML)</STRING>
+		<STRING hash="1137444" hash_i="1122016" needed="1">플래그</STRING>
+		<STRING hash="16725274" hash_i="16813704" needed="1">게임 설정 정보</STRING>
+		<STRING hash="16365690" hash_i="17302440" needed="1">일반 인공지능 전환</STRING>
+		<STRING hash="1675743" hash_i="1659887" needed="1">그룹</STRING>
+		<STRING hash="1676239" hash_i="1657941" needed="1">내구력(체력)</STRING>
+		<STRING hash="13811062" hash_i="13921536" needed="1">키보드, 이벤트</STRING>
+		<STRING hash="2946928" hash_i="2912480" needed="1">지도 정보</STRING>
+		<STRING hash="11378197" hash_i="11316849" needed="1">지도 가시성</STRING>
+		<STRING hash="1674717" hash_i="1657511" needed="1">시장</STRING>
+		<STRING hash="3173306" hash_i="3156100" needed="1">메시지</STRING>
+		<STRING hash="9737108" hash_i="9802656" needed="1">메시지, 도움말</STRING>
+		<STRING hash="30037351" hash_i="30253031" needed="1">메시지, 팝업 대화 상자</STRING>
+		<STRING hash="41075833" hash_i="41146853" needed="1">메시지, 자원 경고</STRING>
+		<STRING hash="19040878" hash_i="19094028" needed="1">마우스 오버 개체</STRING>
+		<STRING hash="8808325" hash_i="8835999" needed="1">마우스, 이벤트</STRING>
+		<STRING hash="26160442" hash_i="26251490" needed="1">국가 및 플레이어 통계</STRING>
+		<STRING hash="13670302" hash_i="13669434" needed="1">개체 위치</STRING>
+		<STRING hash="25878700" hash_i="25879618" needed="1">목표 (시나리오)</STRING>
+		<STRING hash="28514147" hash_i="28506173" needed="1">목표 (임시)</STRING>
+		<STRING hash="575406" hash_i="554562" needed="1">Ping</STRING>
+		<STRING hash="21955690" hash_i="23295828" needed="1">Ping 및 화면 화살표</STRING>
+		<STRING hash="5518284" hash_i="5497440" needed="1">인구</STRING>
+		<STRING hash="5250533" hash_i="5228711" needed="1">스크린샷</STRING>
+		<STRING hash="14988263" hash_i="15001001" needed="1">검색 기능</STRING>
+		<STRING hash="4256969" hash_i="4235147" needed="1">선택</STRING>
+		<STRING hash="6331529" hash_i="6889279" needed="1">팀 변경</STRING>
+		<STRING hash="6736573" hash_i="7546589" needed="1">기술 및 시대</STRING>
+		<STRING hash="568489" hash_i="545983" needed="1">시간</STRING>
+		<STRING hash="1580487" hash_i="1557981" needed="1">동작, 타이머</STRING>
+		<STRING hash="10447694" hash_i="11101348" needed="1">유형 조정</STRING>
+		<STRING hash="8447815" hash_i="8386265" needed="1">UI, 강조 표시</STRING>
+		<STRING hash="24075136" hash_i="24082494" needed="1">UI, 화면 위치</STRING>
+		<STRING hash="9499857" hash_i="9420687" needed="1">UI, 선택</STRING>
+		<STRING hash="4673620" hash_i="4594450" needed="1">UI, 통계</STRING>
+		<STRING hash="3736105" hash_i="3740565" needed="1">유닛 정보</STRING>
+		<STRING hash="6222357" hash_i="6210773" needed="1">유닛 명령</STRING>
+		<STRING hash="9172085" hash_i="9143377" needed="1">유닛 훈련</STRING>
+		<STRING hash="11180905" hash_i="11251485" needed="1">승리/패배</STRING>
+		<STRING hash="2881693" hash_i="2859187" needed="1">트리거</STRING>
+		<STRING hash="21258708" hash_i="21358820" needed="1">유틸리티, 디버깅</STRING>
+		<STRING hash="12008190" hash_i="12075470" needed="1">유틸리티, 수치</STRING>
+		<STRING hash="14923394" hash_i="14935282" needed="1">유틸리티, 문자열</STRING>
+		<STRING hash="15336000" hash_i="15347888" needed="1">유틸리티, 시스템</STRING>
+	</CAT>
+	<CAT hash="617724">
+		<STRING hash="22740565" hash_i="23051043" needed="1">(c) 2003 Big Huge Games, Inc. 본 제품의 일부는 Microsoft Corporation의 저작권에 해당됩니다. All rights reserved. Big Huge Games는 Big Huge Games Inc.의 상표입니다. Microsoft, Windows, Microsoft Game Studios 로고 및 Rise of Nations™는 미국, 대한민국 및/또는 기타 국가에서의 Microsoft Corporation 등록 상표 또는 상표입니다.</STRING>
+	</CAT>
+	<CAT hash="44397162">
+		<STRING hash="34157738" hash_i="34133086" needed="1">전투에서 승리했습니다.</STRING>
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+	</CAT>
+	<CAT hash="38438024">
+		<STRING hash="37310381" hash_i="37285729" needed="1">전투에서 패배했습니다.</STRING>
+		<STRING hash="886320487" hash_i="884168747" needed="1">저항을 받지 않고 적의 영토를 점령했습니다. 그러나 원주민들이 세력을 모아서 아군이 새로 건설한 전진 기지를 공격하고 있습니다. 타이머가 만료할 때까지 수도를 방어하면 승리합니다.</STRING>
+		<STRING hash="460127993" hash_i="464950815" needed="1">바바리안이 있는 곳에 접근하고 있습니다. 진지를 공격해서 건물을 모두 파괴하면 승리합니다.</STRING>
+		<STRING hash="699657885" hash_i="699635379" needed="1">이 지역의 바바리안 국가는 세력이 약하므로 도시 중 하나를 점령하여 우월성을 입증하면 틀림없이 무릎을 꿇을 것입니다.</STRING>
+		<STRING hash="782757605" hash_i="781563091" needed="1">이 영토에는 몇 개의 원주민 부족이 서로 세력을 다투며 살고 있습니다. 외교술을 발휘하여 사이를 분열시켜 지역 내에서의 당신의 지배를 확고히 하십시오.</STRING>
+		<STRING hash="1041644836" hash_i="1049167724" needed="1">이 지역의 바바리안족 무리가 여러분의 제국을 멸망시키기 위해 함께 뭉쳤습니다. 다행히도 추가 물자가 보급되었으며 바바리안은 여러분의 나라보다 한 시대 뒤떨어져 있습니다. 타이머가 만료될 때까지 존속하면 승리합니다.</STRING>
+		<STRING hash="0" hash_i="0" needed="1"></STRING>
+	</CAT>
+	<CAT hash="2960089">
+		<STRING hash="1142441" hash_i="1120619" needed="1">Snowy</STRING>
+		<STRING hash="1095411" hash_i="1080941" needed="1">Dirty</STRING>
+		<STRING hash="4125335" hash_i="4066685" needed="1">SW_Desert</STRING>
+		<STRING hash="4087849" hash_i="4040229" needed="1">GS_Desert</STRING>
+		<STRING hash="1406746" hash_i="1406746" needed="1">jungle</STRING>
+		<STRING hash="17041553" hash_i="17041553" needed="1">african_savannah</STRING>
+		<STRING hash="2260669" hash_i="2260669" needed="1">arctic</STRING>
+		<STRING hash="2952237" hash_i="2952237" needed="1">m_steppe</STRING>
+	</CAT>
+	<CAT hash="5045222">
+		<STRING hash="2054343" hash_i="2054343" needed="1">추가로 주어진 문서를 보려면 ./scenario/sample_script.bhs 파일을 참조하십시오.</STRING>
+		<STRING hash="2044028" hash_i="2044028" needed="1">게임 이벤트를 조정하려면 트리거 기능을 사용하십시오({편집}-&gt;{트리거 기능 삽입}을 선택한 후 목록 참조).</STRING>
+		<STRING hash="2660675" hash_i="2660675" needed="1">트리거 조건 값이 "참"이고  해당 트리거가 사용 가능한 상태이면 원하는 기능을 수행할 명령을 입력하십시오.</STRING>
+		<STRING hash="3935950" hash_i="3935950" needed="1">트리거 유효 조건</STRING>
+		<STRING hash="865265" hash_i="865265" needed="1">트리거 블록 공간을 추가시키려면 {편집}-&gt;{트리거 블록 삽입}의 순서를 따르십시오.</STRING>
+		<STRING hash="858586" hash_i="858586" needed="1">사용 가능한 기능을 나타낸 목록을 참고한 후 선택하려면 {편집}-&gt;{트리거 기능 삽입}의 순서를 따르십시오.</STRING>
+		<STRING hash="852417" hash_i="852417" needed="1">게임 프레임이 진행될 때마다 매개된 기능을 수행할 트리거 및 다른 명령을 여기에 추가하십시오.</STRING>
+		<STRING hash="1294078" hash_i="1294078" needed="1">스크립트 본문입니다.</STRING>
+		<STRING hash="3549171" hash_i="3549171" needed="1">스크립트를 불러올 때만 실행해야 하는 명령을 여기에 입력하십시오.</STRING>
+		<STRING hash="1853852" hash_i="1853852" needed="1">콤마 표시로 구분되는 목록에 포함된 상수 레이블을 여기에 추가시키십시오.</STRING>
+	</CAT>
+	<CAT hash="14677498">
+		<STRING hash="1009003" hash_i="987561" needed="1">래더 게임</STRING>
+		<STRING hash="2338747" hash_i="2317171" needed="1">일반 게임</STRING>
+	</CAT>
+</ROOT>

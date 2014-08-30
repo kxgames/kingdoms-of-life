@@ -1,0 +1,53 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="러시아">
+	<LEADERS>
+		<LEADER>표트르 대제</LEADER>
+		<LEADER>폭군 이반</LEADER>
+		<LEADER>예카테리나 여제</LEADER>
+		<LEADER>블라디미르 레닌</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>모스크바</CITY>
+		<CITY>상트페테르부르크</CITY>
+		<CITY>키에프</CITY>
+		<CITY>민스크</CITY>
+		<CITY>세바스토폴</CITY>
+		<CITY>스몰렌스크</CITY>
+		<CITY>노브고로드</CITY>
+		<CITY>블라디보스토크</CITY>
+		<CITY>폴로츠크</CITY>
+		<CITY>이르쿠츠크</CITY>
+		<CITY>로스토프</CITY>
+		<CITY>리보프</CITY>
+		<CITY>빌나</CITY>
+		<CITY>쿠르스크</CITY>
+		<CITY>브랸스크</CITY>
+		<CITY>비텝스크</CITY>
+		<CITY>프스코프</CITY>
+		<CITY>오데사</CITY>
+		<CITY>아스트라한</CITY>
+		<CITY>예카테린부르크</CITY>
+		<CITY>야로슬라블</CITY>
+		<CITY>니즈니 노보그라드</CITY>
+		<CITY>그로드노</CITY>
+		<CITY>키시네프</CITY>
+		<CITY>하르코프</CITY>
+		<CITY>오렌부르크</CITY>
+		<CITY>옴스크</CITY>
+		<CITY>사라토프</CITY>
+		<CITY>크라스노야르스크</CITY>
+		<CITY>야쿠츠크</CITY>
+		<CITY>페트로파블로프스크</CITY>
+		<CITY>세미팔리틴스크</CITY>
+		<CITY>아르한겔</CITY>
+		<CITY>무르만스크</CITY>
+		<CITY>볼로그다</CITY>
+		<CITY>첼랴빈스크</CITY>
+		<CITY>울란우데</CITY>
+		<CITY>노보시비르스크</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

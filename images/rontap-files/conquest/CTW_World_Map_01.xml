@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Tim Train (Big Huge Games) -->
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Isaac Ellis (Big Huge Games) -->
+<ROOT name="World Map" desc="A map of the entire world with all nations available." intro="Through your wise and skillful leadership, you have united the $TRIBENAME0 under your command. Now you must crush all who would oppose you under the iron rule of your mighty nation. Barbarian hordes and rival nations alike will fall as you set forth to CONQUER THE WORLD." minimap_continents="./art/CTW_Minimap_Overlay_01.tga" intro_image="./art/CTW_Loading_Background_01.tga" tex_width="1908" tex_height="1024" map_width="1000" map_height="536.6876" map_scale="0.524109" turns_per_age="3" starting_round="2" starting_age="0" ending_age="7" allow_random_nations="3" allow_random_bonuses="3">
+  <TEXTURE file=".\art\CTWMap_0.tga" alpha="0" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_1.tga" alpha="32" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_2.tga" alpha="64" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_3.tga" alpha="96" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_4.tga" alpha="128" tile_ratio="5"/>
+  <TEXTURE file=".\art\CTWMap_5.tga" alpha="160" tile_ratio="5"/>
+  <CONTINENTS image_file="./art/CTW_Continent_Victory_Map.tga" image_width="441" image_height="239">
+    <CONTINENT name="North America" id="North America" barbarian_file="barbarians_na.xml" image_file="./art/CTW_Continent_Victory_NorthAmer.tga"/>
+    <CONTINENT name="South America" id="South America" barbarian_file="barbarians_sa.xml" image_file="./art/CTW_Continent_Victory_SouthAmer.tga"/>
+    <CONTINENT name="Europe" id="Europe" barbarian_file="barbarians_eu.xml" image_file="./art/CTW_Continent_Victory_Europe.tga"/>
+    <CONTINENT name="West Asia" id="West Asia" barbarian_file="barbarians_wasia.xml" image_file="./art/CTW_Continent_Victory_WAsia.tga"/>
+    <CONTINENT name="East Asia" id="East Asia" barbarian_file="barbarians_easia.xml" image_file="./art/CTW_Continent_Victory_EAsia.tga"/>
+    <CONTINENT name="Africa" id="Africa" barbarian_file="barbarians_af.xml" image_file="./art/CTW_Continent_Victory_Africa.tga"/>
+  </CONTINENTS>
+  <COUNTRY name="Yukon" id="Yukon" red="1" green="175" blue="232" continent="North America" card="Partisans" tribute="40" tileset="arctic" left="10" right="314" top="0" bottom="308" x="198" y="184">
+    <LINK to="Mississippi Valley" sea="0"/>
+    <LINK to="Rocky Mountains" sea="0"/>
+    <LINK to="Kamchatka" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Greenland" id="Greenland" red="153" green="162" blue="17" continent="North America" card="Cultural Dominance" tribute="" tileset="arctic" rare="Furs" left="465" right="819" top="0" bottom="148" x="683" y="62">
+    <LINK to="Mississippi Valley" sea="1"/>
+    <LINK to="British Isles" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Kamchatka" id="Kamchatka" red="122" green="195" blue="31" continent="East Asia" card="Logistics" tribute="40" tileset="arctic" left="1484" right="1904" top="5" bottom="213" x="1674" y="107">
+    <LINK to="Siberia" sea="0"/>
+    <LINK to="Yakutsk" sea="0"/>
+    <LINK to="Yukon" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Scandinavia" id="Scandinavia" red="109" green="42" blue="4" continent="Europe" card="" tribute="30" tileset="arctic" rare="Whales" supply_depot="1" left="877" right="1071" top="15" bottom="170" x="960" y="81">
+    <LINK to="Kareliya" sea="0"/>
+    <LINK to="Germany" sea="1"/>
+    <LINK to="British Isles" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Siberia" id="Siberia" red="1" green="102" blue="176" continent="West Asia" card="Great Thinker" tribute="20" tileset="snowy" rare="Furs" left="1252" right="1558" top="18" bottom="223" x="1413" y="140">
+    <LINK to="Kamchatka" sea="0"/>
+    <LINK to="Urals" sea="0"/>
+    <LINK to="The Steppes" sea="0"/>
+    <LINK to="Mongolia" sea="0"/>
+    <LINK to="Yakutsk" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Kareliya" id="Kareliya" red="1" green="72" blue="41" continent="Europe" tribute="20" tileset="snowy" rare="Copper" left="996" right="1204" top="22" bottom="125" x="1079" y="73">
+    <LINK to="Scandinavia" sea="0"/>
+    <LINK to="Urals" sea="0"/>
+    <LINK to="Russia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Mississippi Valley" id="Mississippi Valley" red="58" green="14" blue="120" continent="North America" card="Sabotage" tribute="" tileset="dirty" rare="Tobacco" left="263" right="616" top="42" bottom="458" x="386" y="325">
+    <LINK to="Yukon" sea="0"/>
+    <LINK to="Rocky Mountains" sea="0"/>
+    <LINK to="Greenland" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Urals" id="Urals" red="1" green="161" blue="155" continent="West Asia" tribute="20" tileset="dirty" rare="" supply_depot="1" left="1149" right="1278" top="63" bottom="355" x="1215" y="187">
+    <LINK to="Siberia" sea="0"/>
+    <LINK to="Kareliya" sea="0"/>
+    <LINK to="Russia" sea="0"/>
+    <LINK to="The Steppes" sea="0"/>
+    <LINK to="Mesopotamia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Russia" id="Russia" red="137" green="201" blue="199" continent="Europe" tileset="dirty" owner="Russians" left="1014" right="1183" top="111" bottom="282" x="1104" y="182">
+    <LINK to="Kareliya" sea="0"/>
+    <LINK to="Urals" sea="0"/>
+    <LINK to="Central Europe" sea="0"/>
+    <LINK to="Caucasus" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="British Isles" id="British Isles" red="223" green="1" blue="124" continent="Europe" tileset="dirty" owner="British" left="746" right="843" top="121" bottom="218" x="810" y="181">
+    <LINK to="Scandinavia" sea="1"/>
+    <LINK to="France" sea="1"/>
+    <LINK to="Greenland" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Central Europe" id="Central Europe" red="138" green="204" blue="241" continent="Europe" card="Food Economic Boom" tribute="30" tileset="dirty" rare="" supply_depot="" left="979" right="1081" top="143" bottom="257" x="1020" y="212">
+    <LINK to="Russia" sea="0"/>
+    <LINK to="Germany" sea="0"/>
+    <LINK to="Balkans" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Germany" id="Germany" red="63" green="1" blue="78" continent="Europe" tileset="dirty" owner="Germans" left="868" right="987" top="144" bottom="249" x="934" y="209">
+    <LINK to="Central Europe" sea="0"/>
+    <LINK to="France" sea="0"/>
+    <LINK to="Alps" sea="0"/>
+    <LINK to="Balkans" sea="0"/>
+    <LINK to="Scandinavia" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Hokkaido" id="Hokkaido" red="172" green="90" blue="153" continent="East Asia" card="" tribute="10" tileset="snowy" rare="Whales" supply_depot="1" left="1736" right="1797" top="164" bottom="309" x="1752" y="278">
+    <LINK to="Yakutsk" sea="1"/>
+    <LINK to="Japan" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="The Steppes" id="The Steppes" red="22" green="175" blue="232" continent="West Asia" card="Food Economic Boom" tribute="10" tileset="m_steppe" rare="Horses" supply_depot="" left="1246" right="1499" top="166" bottom="402" x="1366" y="287">
+    <LINK to="Siberia" sea="0"/>
+    <LINK to="Urals" sea="0"/>
+    <LINK to="Mongolia" sea="0"/>
+    <LINK to="China" sea="0"/>
+    <LINK to="South Asia" sea="0"/>
+    <LINK to="Southeast Asia" sea="0"/>
+    <LINK to="Mesopotamia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Yakutsk" id="Yakutsk" red="155" green="136" blue="114" continent="East Asia" card="Metal Economic Boom" tribute="20" tileset="snowy" supply_depot="" left="1555" right="1720" top="182" bottom="288" x="1671" y="228">
+    <LINK to="Kamchatka" sea="0"/>
+    <LINK to="Siberia" sea="0"/>
+    <LINK to="Mongolia" sea="0"/>
+    <LINK to="Northeast China" sea="0"/>
+    <LINK to="Hokkaido" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Mongolia" id="Mongolia" red="88" green="52" blue="17" continent="East Asia" tileset="m_steppe" owner="Mongols" left="1420" right="1593" top="189" bottom="337" x="1501" y="268">
+    <LINK to="Siberia" sea="0"/>
+    <LINK to="The Steppes" sea="0"/>
+    <LINK to="Yakutsk" sea="0"/>
+    <LINK to="Northeast China" sea="0"/>
+    <LINK to="China" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="France" id="France" red="196" green="222" blue="155" continent="Europe" tileset="dirty" owner="French" left="798" right="900" top="207" bottom="305" x="857" y="260">
+    <LINK to="Germany" sea="0"/>
+    <LINK to="Alps" sea="0"/>
+    <LINK to="Spain" sea="0"/>
+    <LINK to="British Isles" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Alps" id="Alps" red="231" green="104" blue="69" continent="Europe" card="" tribute="20" tileset="snowy" rare="Gems" supply_depot="1" left="893" right="948" top="229" bottom="279" x="918" y="252">
+    <LINK to="Germany" sea="0"/>
+    <LINK to="France" sea="0"/>
+    <LINK to="Balkans" sea="0"/>
+    <LINK to="Italy" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Balkans" id="Balkans" red="107" green="1" blue="56" continent="Europe" card="Metal Economic Boom" tribute="" tileset="dirty" rare="Amber" supply_depot="1" left="944" right="1074" top="238" bottom="289" x="992" y="259">
+    <LINK to="Germany" sea="0"/>
+    <LINK to="Central Europe" sea="0"/>
+    <LINK to="Alps" sea="0"/>
+    <LINK to="Greece" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Rocky Mountains" id="Rocky Mountains" red="49" green="78" blue="250" continent="North America" card="Mercenaries" tribute="" tileset="dirty" rare="Bison" supply_depot="1" left="156" right="336" top="250" bottom="449" x="248" y="352">
+    <LINK to="Yukon" sea="0"/>
+    <LINK to="Mississippi Valley" sea="0"/>
+    <LINK to="Mexico" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Northeast China" id="Northeast China" red="235" green="153" blue="1" continent="East Asia" card="" tribute="10" tileset="m_steppe" rare="Silk" supply_depot="1" left="1519" right="1690" top="258" bottom="367" x="1589" y="297">
+    <LINK to="Yakutsk" sea="0"/>
+    <LINK to="Mongolia" sea="0"/>
+    <LINK to="Korea" sea="0"/>
+    <LINK to="China" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Italy" id="Italy" red="242" green="180" blue="84" continent="Europe" tileset="dirty" owner="Romans" left="906" right="975" top="266" bottom="360" x="938" y="304">
+    <LINK to="Alps" sea="0"/>
+    <LINK to="Greece" sea="1"/>
+    <LINK to="Sahara" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Greece" id="Greece" red="92" green="135" blue="194" continent="Europe" tileset="dirty" owner="Greeks" left="969" right="1059" top="276" bottom="359" x="1027" y="297">
+    <LINK to="Balkans" sea="0"/>
+    <LINK to="Italy" sea="1"/>
+    <LINK to="Anatolia" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Caucasus" id="Caucasus" red="92" green="135" blue="202" continent="West Asia" card="" tribute="20" tileset="snowy" rare="Obsidian" supply_depot="1" left="1133" right="1196" top="276" bottom="360" x="1164" y="320">
+    <LINK to="Russia" sea="0"/>
+    <LINK to="Anatolia" sea="0"/>
+    <LINK to="Mesopotamia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Spain" id="Spain" red="240" green="155" blue="116" continent="Europe" tileset="dirty" owner="Spanish" left="761" right="857" top="283" bottom="364" x="802" y="325">
+    <LINK to="France" sea="0"/>
+    <LINK to="West Africa" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Korea" id="Korea" red="215" green="102" blue="147" continent="East Asia" tileset="dirty" owner="Koreans" left="1592" right="1663" top="298" bottom="375" x="1640" y="332">
+    <LINK to="Northeast China" sea="0"/>
+    <LINK to="Japan" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Anatolia" id="Anatolia" red="103" green="76" blue="151" continent="Europe" tileset="dirty" owner="Turks" left="1034" right="1142" top="304" bottom="365" x="1090" y="339">
+    <LINK to="Caucasus" sea="0"/>
+    <LINK to="Mesopotamia" sea="0"/>
+    <LINK to="Greece" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Japan" id="Japan" red="234" green="104" blue="155" continent="East Asia" tileset="dirty" owner="Japanese" left="1672" right="1757" top="306" bottom="392" x="1726" y="368">
+    <LINK to="Hokkaido" sea="1"/>
+    <LINK to="Korea" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Mesopotamia" id="Mesopotamia" red="99" green="107" blue="173" continent="West Asia" card="Science Eureka" tribute="30" tileset="SW_Desert" rare="" supply_depot="" left="1112" right="1278" top="333" bottom="429" x="1208" y="382">
+    <LINK to="Anatolia" sea="0"/>
+    <LINK to="Caucasus" sea="0"/>
+    <LINK to="Urals" sea="0"/>
+    <LINK to="The Steppes" sea="0"/>
+    <LINK to="South Asia" sea="0"/>
+    <LINK to="Hejaz" sea="0"/>
+    <LINK to="Arabia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="China" id="China" red="228" green="98" blue="23" continent="East Asia" tileset="dirty" owner="Chinese" left="1463" right="1597" top="333" bottom="477" x="1532" y="409">
+    <LINK to="The Steppes" sea="0"/>
+    <LINK to="Northeast China" sea="0"/>
+    <LINK to="Southeast Asia" sea="0"/>
+    <LINK to="Australia" sea="1"/>
+    <LINK to="Mongolia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="South Asia" id="South Asia" red="203" green="38" blue="54" continent="West Asia" card="Wonder of the World" tribute="" tileset="jungle" rare="Spice" supply_depot="1" left="1272" right="1430" top="337" bottom="553" x="1353" y="424">
+    <LINK to="Mesopotamia" sea="0"/>
+    <LINK to="The Steppes" sea="0"/>
+    <LINK to="Southeast Asia" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="West Africa" id="West Africa" red="44" green="177" blue="111" continent="Africa" card="Propaganda" tribute="" tileset="african_savannah" rare="Copper" supply_depot="1" left="746" right="923" top="351" bottom="584" x="829" y="462">
+    <LINK to="Sahara" sea="0"/>
+    <LINK to="Guinea" sea="0"/>
+    <LINK to="Spain" sea="1"/>
+    <LINK to="Amazon" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Sahara" id="Sahara" red="117" green="193" blue="109" continent="Africa" card="Merchant Guild" tileset="GS_Desert" rare="Papyrus" supply_depot="" left="886" right="1055" top="371" bottom="566" x="969" y="424">
+    <LINK to="West Africa" sea="0"/>
+    <LINK to="Egypt" sea="0"/>
+    <LINK to="Central Africa" sea="0"/>
+    <LINK to="Guinea" sea="0"/>
+    <LINK to="Italy" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Hejaz" id="Hejaz" red="60" green="184" blue="236" continent="West Asia" card="Eureka" tribute="" tileset="GS_Desert" rare="Relics" supply_depot="1" left="1081" right="1170" top="383" bottom="466" x="1131" y="422">
+    <LINK to="Mesopotamia" sea="0"/>
+    <LINK to="Egypt" sea="1"/>
+    <LINK to="Arabia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Egypt" id="Egypt" red="241" green="157" blue="186" continent="Africa" tileset="GS_Desert" owner="Egyptians" left="1039" right="1109" top="387" bottom="498" x="1067" y="449">
+    <LINK to="Sahara" sea="0"/>
+    <LINK to="Hejaz" sea="1"/>
+    <LINK to="Central Africa" sea="0"/>
+    <LINK to="Nubia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Southeast Asia" id="Southeast Asia" red="1" green="116" blue="155" continent="East Asia" card="Knowledge Economic Boom" tribute="" tileset="jungle" rare="Relics" supply_depot="" left="1424" right="1532" top="397" bottom="545" x="1460" y="457">
+    <LINK to="The Steppes" sea="0"/>
+    <LINK to="China" sea="0"/>
+    <LINK to="Australia" sea="1"/>
+    <LINK to="South Asia" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Mexico" id="Mexico" red="246" green="241" blue="1" continent="North America" tileset="SW_Desert" owner="Aztecs" left="239" right="340" top="409" bottom="507" x="299" y="460">
+    <LINK to="Rocky Mountains" sea="0"/>
+    <LINK to="Yucatan" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Arabia" id="Arabia" red="57" green="181" blue="178" continent="West Asia" card="Wealth Economic Boom" tribute="40" tileset="GS_Desert" rare="Salt" left="1135" right="1240" top="412" bottom="517" x="1177" y="469">
+    <LINK to="Mesopotamia" sea="0"/>
+    <LINK to="Hejaz" sea="0"/>
+    <LINK to="Nubia" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Yucatan" id="Yucatan" red="185" green="1" blue="247" continent="North America" tileset="jungle" owner="Maya" left="339" right="473" top="452" bottom="567" x="399" y="514">
+    <LINK to="Mexico" sea="0"/>
+    <LINK to="Llanos" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Nubia" id="Nubia" red="255" green="236" blue="52" continent="Africa" tileset="GS_Desert" owner="Nubians" left="1083" right="1149" top="476" bottom="549" x="1118" y="518">
+    <LINK to="Central Africa" sea="0"/>
+    <LINK to="Egypt" sea="0"/>
+    <LINK to="Ethiopian Highlands" sea="0"/>
+    <LINK to="Arabia" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Central Africa" id="Central Africa" red="109" green="42" blue="120" continent="Africa" tribute="30" tileset="jungle" rare="" supply_depot="1" left="1010" right="1121" top="492" bottom="627" x="1070" y="571">
+    <LINK to="Egypt" sea="0"/>
+    <LINK to="Sahara" sea="0"/>
+    <LINK to="Nubia" sea="0"/>
+    <LINK to="Guinea" sea="0"/>
+    <LINK to="Ethiopian Highlands" sea="0"/>
+    <LINK to="Southern Africa" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Llanos" id="Llanos" red="255" green="255" blue="1" continent="South America" card="Military Eureka" tribute="20" tileset="dirty" supply_depot="1" left="460" right="602" top="505" bottom="595" x="518" y="542">
+    <LINK to="Yucatan" sea="0"/>
+    <LINK to="Amazon" sea="0"/>
+    <LINK to="Andes" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Ethiopian Highlands" id="Ethiopian Highlands" red="197" green="161" blue="107" continent="Africa" card="Civic Eureka" tribute="" tileset="SW_Desert" rare="Gems" left="1099" right="1191" top="526" bottom="607" x="1139" y="567">
+    <LINK to="Nubia" sea="0"/>
+    <LINK to="Central Africa" sea="0"/>
+    <LINK to="Southern Africa" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Amazon" id="Amazon" red="1" green="255" blue="1" continent="South America" card="Timber Economic Boom" tileset="jungle" rare="Amber" supply_depot="1" left="560" right="730" top="528" bottom="736" x="654" y="621">
+    <LINK to="Llanos" sea="0"/>
+    <LINK to="Andes" sea="0"/>
+    <LINK to="Pampas" sea="0"/>
+    <LINK to="West Africa" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Guinea" id="Guinea" red="166" green="209" blue="106" continent="Africa" card="Commerce Eureka" tribute="" tileset="jungle" rare="Silver" supply_depot="" left="911" right="1020" top="554" bottom="656" x="980" y="600">
+    <LINK to="Sahara" sea="0"/>
+    <LINK to="Central Africa" sea="0"/>
+    <LINK to="West Africa" sea="0"/>
+    <LINK to="Southern Africa" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Andes" id="Andes" red="255" green="1" blue="1" continent="South America" tileset="snowy" owner="Inca" left="455" right="627" top="560" bottom="742" x="539" y="651">
+    <LINK to="Llanos" sea="0"/>
+    <LINK to="Amazon" sea="0"/>
+    <LINK to="Pampas" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Australia" id="Australia" red="138" green="218" blue="119" continent="East Asia" card="Trade Embargo" tribute="40" tileset="SW_Desert" rare="Diamonds" left="1445" right="1735" top="598" bottom="859" x="1591" y="693">
+    <LINK to="Southeast Asia" sea="1"/>
+    <LINK to="China" sea="1"/>
+  </COUNTRY>
+  <COUNTRY name="Southern Africa" id="Southern Africa" red="255" green="179" blue="3" continent="Africa" tileset="african_savannah" owner="Bantu" left="959" right="1185" top="602" bottom="864" x="1041" y="727">
+    <LINK to="Central Africa" sea="0"/>
+    <LINK to="Ethiopian Highlands" sea="0"/>
+    <LINK to="Guinea" sea="0"/>
+  </COUNTRY>
+  <COUNTRY name="Pampas" id="Pampas" red="1" green="255" blue="255" continent="South America" card="Wonder of the World" tribute="40" tileset="dirty" rare="Silver" left="552" right="686" top="682" bottom="977" x="609" y="797">
+    <LINK to="Andes" sea="0"/>
+    <LINK to="Amazon" sea="0"/>
+  </COUNTRY>
+</ROOT>

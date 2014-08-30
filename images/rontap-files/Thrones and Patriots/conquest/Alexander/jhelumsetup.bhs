@@ -1,0 +1,57 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+
+  alexander_setup();
+
+  labels {
+    ATTACKER,
+    DEFENDER,
+  }
+  
+  for (i = 2; i < 9; i++) {
+    place_building_upgrade(i, "Senate", find_capital(i));
+    disable_type_by_tribe("Senate", find_nation(i));
+  }
+
+  int nation;    
+
+  for (nation = num_players(); nation > 2; nation--) {
+    diplomacy_set_wait(nation);
+  }
+
+  int diff = get_difficulty();
+
+  String attack_from = get_attack_from();
+  int who;
+  int strength = get_attack_terr_str();
+  int building;
+  String city_name;
+
+  String city_name1 = find_city_with_num(2, 1);
+  String city_name2 = find_city_with_num(2, 2);
+  String city_name3 = find_city_with_num(2, 3);
+  String city_name4 = find_city_with_num(2, 4);
+
+  for (nation = num_players(); nation > 1; nation--) {
+    set_leader_difficulty(nation, diff);
+    if (diff == 1) set_population_cap(nation, 50);
+    else if (diff == 2) set_population_cap(nation, 80);
+    else if (diff == 3) set_population_cap(nation, 120);
+    else if (diff == 4) set_population_cap(nation, 160);
+    else if (diff == 5) set_population_cap(nation, 185);
+  }
+
+  nation = 2;
+  int unit;
+  int num;
+
+  if (diff < 4) {
+    while (num_type(nation, "Fort") > 0) {
+      building = find_build(nation, "Fort");
+      destroy_building(nation, building);
+    }
+  }
+
+}

@@ -1,0 +1,156 @@
+                   include "ctw_lib.bhs"
+
+        conquest
+{
+coldwar_rules();
+
+  labels {
+    RUSSIANS,
+    AMERICANS,
+    REBELS,
+  }
+  
+  infrastructure_setup(0, "Cairo", "Giza", "Alexandria");
+  //infrastructure_setup(3, "Suez", "Port Said","");
+
+  disable_city_defeat(RUSSIANS);
+
+  int unit;
+  
+  diplomacy_set_wait(REBELS);
+  
+  disable_city_defeat(REBELS);
+  
+  for (i = 0; i < num_military_units(REBELS); i++) {
+    unit = find_all_military(REBELS);
+    unit_ignore_orders(REBELS, unit);
+  }
+  
+  for (i = 0; i < num_type(REBELS, "Partisan"); i++) {
+    unit = find_unit(REBELS, "Partisan");
+    unit_ignore_orders(REBELS, unit);
+  }
+  
+  int turn = get_turn();
+  
+  int diff = get_difficulty();
+
+  x = 252;
+  y = 101;
+
+  create_unit_upgrade(1, x, y, "Infantry", 4);
+  create_unit_upgrade(1, x, y, "Pikemen", 4);
+  if (diff < 3) {
+    create_unit_upgrade(1, x, y, "Infantry", 1);
+    create_unit_upgrade(1, x, y, "Pikemen", 1); 
+    create_unit_upgrade(1, x, y, "Tank", 1);
+  } 
+  create_unit_upgrade(1, x, y, "Tank", 2);
+  if (diff < 5) {
+    create_unit_upgrade(1, x, y, "Tank", 1);
+  }
+  create_unit_upgrade(1, x, y, "Explorer", 3);
+  create_unit_upgrade(1, x, y, "Citizen", 5);
+  create_unit_upgrade(1, x, y, "Howitzer", 3);
+  create_unit_upgrade(1, x, y, "General", 1);
+  create_unit_upgrade(1, x, y, "Anti-Air Missile", 2);
+  //create_unit_upgrade(1, x, y, "Citizen", 5);
+  //create_unit_upgrade(1, x, y, "Destroyer", 1);
+  if (find_nation(1) == "Russians") {
+    if (get_age() == 7) {
+      create_unit_upgrade(1, x, y, "Mi-24 Hind", 3);
+    }
+    else {
+      create_unit_upgrade(1, x, y, "Helicopter", 3);
+    }
+    create_unit_upgrade(1, x, y, "Light Cavalry", 2);
+    if (diff < 3) {
+      create_unit_upgrade(1, x, y, "Light Cavalry", 1);
+    }
+  }
+  else {
+    create_unit_upgrade(1, x, y, "Helicopter", 3);
+    create_unit_upgrade(1, x, y, "Armored Scout Car", 2);
+    if (diff < 3) {
+      create_unit_upgrade(1, x, y, "Armored Scout Car", 1);
+    }   
+  }
+
+  create_unit_upgrade(1, x, y, "Supply Wagon", 2);
+
+  //get the proper angle
+  dir = get_conquest_invasion_dir();
+  dir = dir + 180;
+  if (dir >= 360) {
+    dir = dir - 360;
+  }
+  group_jump_move(1, x, y, dir);
+
+  int who = 2;
+
+  String city_name = find_capital(who);
+  int building = find_city_id(city_name);
+  x = object_position_x(who, building) + 2;
+  y = object_position_y(who, building);
+
+  create_unit_upgrade(who, x, y, "Infantry", 2);
+  create_unit_upgrade(who, x, y, "Pikemen", 2);
+  create_unit_upgrade(who, x, y, "Tank", 3);
+  create_unit_upgrade(who, x, y, "Explorer", 1);
+  create_unit_upgrade(who, x, y, "Howitzer", 1);
+  create_unit_upgrade(who, x, y, "General", 1);
+  create_unit_upgrade(who, x, y, "Citizen", 5);
+  create_unit_upgrade(who, x, y, "Destroyer", 1);
+  if (find_nation(who) == "Russians") {
+    if (get_age() == 7) {
+      create_unit_upgrade(who, x, y, "Mi-24 Hind", 3);
+    }
+    else {
+      create_unit_upgrade(who, x, y, "Helicopter", 3);
+    }
+    create_unit_upgrade(who, x, y, "Light Cavalry", 4);
+  }
+  else {
+    create_unit_upgrade(who, x, y, "Helicopter", 3);
+    create_unit_upgrade(who, x, y, "Armored Scout Car", 4);
+  }
+
+  create_unit_upgrade(who, x, y, "Supply Wagon", 1);
+
+  who = 3;
+
+  city_name = find_capital(who);
+  building = find_city_id(city_name);
+  x = object_position_x(who, building);
+  y = object_position_y(who, building) + 2;
+
+  create_unit_upgrade(who, x, y, "Infantry", 2);
+  create_unit_upgrade(who, x, y, "Pikemen", 2);
+  create_unit_upgrade(who, x, y, "Tank", 3);
+  create_unit_upgrade(who, x, y, "Explorer", 1);
+  create_unit_upgrade(who, x, y, "Howitzer", 1);
+  create_unit_upgrade(who, x, y, "General", 1);
+  create_unit_upgrade(who, x, y, "Citizen", 5);
+  create_unit_upgrade(who, x, y, "Destroyer", 1);
+  if (find_nation(who) == "Russians") {
+    if (get_age() == 7) {
+      create_unit_upgrade(who, x, y, "Mi-24 Hind", 3);
+    }
+    else {
+      create_unit_upgrade(who, x, y, "Helicopter", 3);
+    }
+    create_unit_upgrade(who, x, y, "Light Cavalry", 4);
+  }
+  else {
+    create_unit_upgrade(who, x, y, "Helicopter", 3);
+    create_unit_upgrade(who, x, y, "Armored Scout Car", 4);
+  }
+
+  create_unit_upgrade(who, x, y, "Supply Wagon", 1);
+
+  give_good(AMERICANS, "Wealth", 600);
+  
+  set_leader_difficulty(2, 1);
+  set_leader_difficulty(3, diff);
+
+}

@@ -1,0 +1,363 @@
+//offensive conquest scenario runtime
+
+conquest
+{
+  labels {
+    ATTACKER,
+    DEFENDER,
+  }
+
+  static int start_x = get_starting_loc_x(2);
+  static int start_y = get_starting_loc_y(2);
+  static int kill_this_guy;
+  int general_id1 = find_unit(DEFENDER, "general");
+  static int random_time;
+  int light_horse = 0;
+  int cataphract = 0;
+  int horse_archer = 0;
+  int general = 0;
+  int x = 0;
+  int y = 0;
+  static String att_name = find_capital(ATTACKER);
+  static int att_capital = find_city_id(att_name);
+  static String def_name = find_capital(DEFENDER);
+  static int def_capital = find_city_id(def_name);
+  int dromon = 0;
+  int galleon = 0;
+  int attack_num = 0;
+  static int diff = 0;
+  int done = 0;
+  static int general_health = object_health(DEFENDER, general_id1);
+  static int num_generals = num_type(DEFENDER, "general");
+  int general_id2 = 0;
+  int non_lead = 0;
+  int leader_dead = 0;
+  static int general_am;
+  static int step = 1;
+  static int ambush_done;
+  int cat;
+  int lh;
+  static int xd;
+  static int yd;
+  static int city_under_fire = 0;
+  static int check_area;
+  static time_limit = 120;
+
+  run_once {
+    time_limit = get_time_limit();
+    disable_all_triggers();
+    //get difficulty
+    diff = get_difficulty();
+
+    unit_clear_orders(2, general_id1);
+    general_ambush(2, general_id1);
+
+    set_timer("take_resources", 1);
+
+    enable_trigger("counterAttack");
+
+    print_msg($S("The enemy general has launched a sneak attack!"));
+
+    enable_trigger("genAmbush");
+
+    if (diff < 3) {
+      check_area = 6;
+      random_time = 600;
+    }
+    else if (diff > 2 && diff < 5) {
+      check_area = 8;
+      random_time = 240;
+    }
+    else {
+      check_area = 10;
+      random_time = 120;
+    }
+    set_timer("ambushDone", random_time);
+    set_timer("gen_ambush", 1);
+    set_timer("kill_general", 18);
+    enable_trigger("killGeneral");
+    enable_trigger("ambush_player");
+    set_timer("take_resources", 30);
+    take_good(2, "Food", 75);
+    take_good(2, "Timber", 75);
+    take_good(2, "Wealth", 50);
+    take_good(2, "Metal", 50);
+    take_good(2, "Knowledge", 50);
+    take_good(2, "Oil", 50);
+  }
+
+  cur_time = time();
+  
+  trigger (cur_time >= time_limit) {
+    defeat_attacker_and_allies();
+  }
+
+  if (timer_expired("take_resources")) {
+    if (diff < 3) {
+      take_good(2, "Food", 4);
+      take_good(2, "Timber", 2);
+    }
+    if (diff > 4) {
+      take_good(2, "Food", 10);
+      take_good(2, "Timber", 17);
+      take_good(2, "Wealth", 9);
+    }
+    if (diff > 2 && diff < 5) {
+      take_good(2, "Timber", 8);
+      take_good(2, "Wealth", 5);
+    }
+    set_timer("take_resources", 30);
+  }
+
+  trigger killGeneral(timer_expired("kill_general")) {
+    kill_this_guy = find_unit(2, "general");
+    unit_move_order(2, kill_this_guy, start_x, start_y);
+    enable_trigger("reallyKillGeneral");
+    set_timer("kill_general_2", 30);
+  }
+
+  trigger reallyKillGeneral(timer_expired("kill_general_2")) {
+    kill_unit(2, kill_this_guy);
+    //disable_trigger("killGeneral");
+  }
+
+  //Barbarian General under attack
+  trigger genAmbush (object_health(DEFENDER, general_id1) < general_health) {
+    general_ambush(DEFENDER, general_id1);
+    general_health = object_health(DEFENDER, general_id1);
+    enable_trigger("genAmbush");
+  }
+
+  //AMBUSH!
+  trigger ambush_player(timer_expired("ambushDone")) {
+    if (leader_dead == 0) {
+      general_am = find_unit(ATTACKER, "");
+      x = object_position_x(ATTACKER, general_am) + 20;
+      y = object_position_y(ATTACKER, general_am) + 5;
+      if (x < 0) x3 = 1;
+      if (y < 0) y3 = 1;
+      if (city_under_fire == 1) {
+        x = xd;
+        y = yd;
+      }
+      if (num_units(ATTACKER) > 0) print_msg($S("Our troops hear a small force approaching."));
+      if (map_is_buildable(x, y)) {
+        if (ambush_done == 0) {
+          switch(diff) {
+          case 1:
+            general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+            general_ambush(DEFENDER, general_am);
+            light_horse = create_unit_upgrade(DEFENDER, x, y, "light horse", 1); 
+            unit_patrol_order(DEFENDER, light_horse, x, y);
+            break;
+          case 2:
+            general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+            general_ambush(DEFENDER, general_am);
+            light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 1); 
+            unit_patrol_order(DEFENDER, light_horse, x, y);
+            break;
+          case 3:
+            general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+            general_ambush(DEFENDER, general_am);
+            horse_archer = create_unit_in_group(DEFENDER, x, y, "horse archer", 1); 
+            unit_patrol_order(DEFENDER, horse_archer, x, y);  
+            light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 1); 
+            unit_patrol_order(DEFENDER, light_horse, x, y);
+            break;
+          case 4:
+            general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+            general_ambush(DEFENDER, general_am);
+            horse_archer = create_unit_in_group(DEFENDER, x, y, "horse archer", 1); 
+            unit_patrol_order(DEFENDER, horse_archer, x, y);  
+            light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 1); 
+            unit_patrol_order(DEFENDER, light_horse, x, y);
+            break;
+          case 5:
+            general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+            general_ambush(DEFENDER, general_am);
+            horse_archer = create_unit_in_group(DEFENDER, x, y, "horse archer", 1); 
+            unit_patrol_order(DEFENDER, horse_archer, x, y);  
+            light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 2); 
+            unit_patrol_order(DEFENDER, light_horse, x, y);
+            break;
+          case 6:
+            general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+            general_ambush(DEFENDER, general_am);
+            horse_archer = create_unit_in_group(DEFENDER, x, y, "horse archer", 2); 
+            unit_patrol_order(DEFENDER, horse_archer, x, y);  
+            light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 2); 
+            unit_patrol_order(DEFENDER, light_horse, x, y);
+            break;
+          }
+        }
+      }
+      else {
+        x = x + 10;
+        y = y + 10;
+        if (x < 0) x3 = 1;
+        if (y < 0) y3 = 1;
+        if (map_is_buildable(x,y)) {
+          if (ambush_done == 0) {
+            switch(diff) {
+            case 1:
+              general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+              general_ambush(DEFENDER, general_am);
+              light_horse = create_unit_upgrade(DEFENDER, x, y, "light horse", 1); 
+              unit_patrol_order(DEFENDER, light_horse, x, y);
+              break;
+            case 2:
+              general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+              general_ambush(DEFENDER, general_am);
+              light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 1); 
+              unit_patrol_order(DEFENDER, light_horse, x, y);
+              break;
+            case 3:
+              general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+              general_ambush(DEFENDER, general_am);
+              horse_archer = create_unit_in_group(DEFENDER, x, y, "horse archer", 1); 
+              unit_patrol_order(DEFENDER, horse_archer, x, y);  
+              light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 1); 
+              unit_patrol_order(DEFENDER, light_horse, x, y);
+              break;
+            case 4:
+              general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+              general_ambush(DEFENDER, general_am);
+              horse_archer = create_unit_in_group(DEFENDER, x, y, "horse archer", 1); 
+              unit_patrol_order(DEFENDER, horse_archer, x, y);  
+              light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 1); 
+              unit_patrol_order(DEFENDER, light_horse, x, y);
+              break;
+            case 5:
+              general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+              general_ambush(DEFENDER, general_am);
+              horse_archer = create_unit_in_group(DEFENDER, x, y, "horse archer", 1); 
+              unit_patrol_order(DEFENDER, horse_archer, x, y);  
+              light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 2); 
+              unit_patrol_order(DEFENDER, light_horse, x, y);
+              break;
+            case 6:
+              general_am = create_unit_upgrade(DEFENDER, x, y, "general", 1);
+              general_ambush(DEFENDER, general_am);
+              horse_archer = create_unit_in_group(DEFENDER, x, y, "horse archer", 2); 
+              unit_patrol_order(DEFENDER, horse_archer, x, y);  
+              light_horse = create_unit_in_group(DEFENDER, x, y, "light horse", 2); 
+              unit_patrol_order(DEFENDER, light_horse, x, y);
+              break;
+            }
+          }
+        }
+      group_stance_order(DEFENDER, "Raid");
+      group_attack_to_order(DEFENDER, x, y);  
+      ambush_done = 1; 
+      city_under_fire = 0;
+      }
+    }
+    if (diff > 4) random_time = rand_int(120, 180);
+    else if (diff == 3) random_time = rand_int(180, 300);
+    else if (diff == 4) random_time = rand_int(120, 180);
+    else random_time = rand_int(300, 600);
+    set_timer("ambushDone", random_time);
+    //disable_trigger("ambush0");
+    set_timer("kill_general", 18);
+    enable_trigger("killGeneral");
+    enable_trigger("ambush_player");
+  }
+
+  //attack player capital if computer capital is attacked  
+  xd = object_position_x(DEFENDER, def_capital);
+  yd = object_position_y(DEFENDER, def_capital);
+  x = object_position_x(DEFENDER, def_capital);
+  y = object_position_y(DEFENDER, def_capital);
+
+
+  trigger counterAttack (any_object_near(ATTACKER, 3, x, y, 10) && leader_dead == 0) { 
+    x = object_position_x(ATTACKER, att_capital) + 20;
+    y = object_position_y(ATTACKER, att_capital);
+    if (x < 0) x3 = 1;
+    if (y < 0) y3 = 1;
+    print_msg($S("The enemy has launched a counter-attack!"));    
+    if (done == 0) {
+      if (diff == 1) {
+        general_am = create_unit_upgrade(DEFENDER, x + 15, y, "general", 1);
+        create_unit_in_group(DEFENDER, x, y, "light horse", 1);
+        create_unit_in_group(DEFENDER, x, y, "light horse", 1);
+        group_stance_order(DEFENDER, "Raid");
+        done = 1;
+      }
+      else if (diff == 2) {              
+        general_am = create_unit_upgrade(DEFENDER, x + 15, y, "general", 1);
+        create_unit_in_group(DEFENDER, x, y, "cataphract", 1);
+        create_unit_in_group(DEFENDER, x, y, "light horse", 1);
+        create_unit_in_group(DEFENDER, x, y, "horse archer", 1);
+        group_stance_order(DEFENDER, "Raid");
+        done = 1;
+      }
+      else if (diff == 3) {
+        general_am = create_unit_upgrade(DEFENDER, x + 15, y, "general", 1);
+        create_unit_in_group(DEFENDER, x, y, "cataphract", 1);
+        create_unit_in_group(DEFENDER, x, y, "light horse", 2);
+        create_unit_in_group(DEFENDER, x, y, "horse archer", 1);
+        group_stance_order(DEFENDER, "Raid");
+        done = 1;
+      }
+      else if (diff == 4) {
+        general_am = create_unit_upgrade(DEFENDER, x + 15, y, "general", 1);
+        create_unit_in_group(DEFENDER, x, y, "cataphract", 1);
+        create_unit_in_group(DEFENDER, x, y, "light horse", 3);
+        create_unit_in_group(DEFENDER, x, y, "horse archer", 2);
+        group_stance_order(DEFENDER, "Raid");
+        done = 1;
+      }
+      else {
+        general_am = create_unit_upgrade(DEFENDER, x + 15, y, "general", 1);
+        create_unit_in_group(DEFENDER, x, y, "cataphract", 2);
+        create_unit_in_group(DEFENDER, x, y, "light horse", 3);
+        create_unit_in_group(DEFENDER, x, y, "horse archer", 2);
+        group_stance_order(DEFENDER, "Raid");
+        done = 1;
+      }
+
+      group_attack_to_order(DEFENDER, x, y);
+      set_timer("attack_over", 60);
+      lh = create_unit_upgrade(DEFENDER, xd, yd, "light horse", 1);
+      cat = find_unit(ATTACKER, "catapult");
+      if (cat > 0) cat = find_unit(ATTACKER, "");
+      unit_attack_order(DEFENDER, lh, ATTACKER, cat);
+    }
+ 
+  } 
+
+  if (timer_expired("attack_over")) {
+    enable_trigger("attackDone");
+  }
+
+  if (timer_expired("gen_ambush")) {
+    for (n = num_type(2, "general"); n > 0; n--) {
+      general_am = find_unit(2, "general");
+      if (craft_percent(2, general_am) == 100) general_ambush(2, general_am);
+    }
+    set_timer("gen_ambush", 1);
+  }
+
+  trigger attackDone (any_object_near(ATTACKER, 2, x, y, 25) <= 2) {
+    enable_trigger("counterAttack");
+    done = 0;
+  }
+  
+  trigger city_health(object_health(DEFENDER, def_capital) < 50) {
+    set_timer("ambush", 1);
+    enable_trigger("city_repaired");
+    disable_trigger("city_health");
+    city_under_fire = 1;
+  }
+  
+  trigger city_repaired(object_health(DEFENDER, def_capital) > 90) {
+    enable_trigger("city_health");
+    disable_trigger("city_repaired");
+  }
+  
+  if (city_id_captured(DEFENDER, def_capital)) {
+    victory(ATTACKER);
+  }
+
+}

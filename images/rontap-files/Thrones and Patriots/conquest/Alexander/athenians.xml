@@ -1,0 +1,31 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Athenians" substitute="1">
+  <LEADERS>
+    <LEADER>Demosthenes</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Chalcis</CITY>
+    <CITY>Phocaea</CITY>
+    <CITY>Chios</CITY>
+    <CITY>Thera</CITY>
+    <CITY>Melos</CITY>
+    <CITY>Paros</CITY>
+    <CITY>Delos</CITY>
+    <CITY>Erythrae</CITY>
+    <CITY>Heraclea</CITY>
+    <CITY>Patrai</CITY>   
+    <CITY>Piraeus</CITY>
+    <CITY>Megara</CITY>
+    <CITY>Aegina</CITY>
+    <CITY>Salamis</CITY>
+    <CITY>Marathon</CITY>
+    <CITY>Leuctra</CITY>
+    <CITY>Phalerum</CITY>
+    <CITY>Decelea</CITY>
+    <CITY>Carystus</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

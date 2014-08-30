@@ -1,0 +1,19 @@
+include "ctw_lib.bhs"
+
+conquest
+{
+  coldwar_rules();
+
+  int diff = get_difficulty();
+
+  for (i = 2; i < 9; i++) {
+    set_leader_difficulty (i, diff);
+  }
+
+  rename_type("Minuteman", "Patriot");
+
+  infrastructure_setup(2, "Las Vegas", "Seattle", "Los Angeles");
+
+}
+
+

@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="누비아">
+	<LEADERS>
+		<LEADER>피앙키왕</LEADER>
+		<LEADER>샤바카왕</LEADER>
+		<LEADER>아마니샤크헤테 여왕</LEADER>
+		<LEADER>타하르카왕</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>나파타</CITY>
+		<CITY>악숨</CITY>
+		<CITY>메로에</CITY>
+		<CITY>게벨 바르칼</CITY>
+		<CITY>아둘리스</CITY>
+		<CITY>동골라</CITY>
+		<CITY>콜로에</CITY>
+		<CITY>베레니스</CITY>
+		<CITY>센나</CITY>
+		<CITY>소바</CITY>
+		<CITY>예하</CITY>
+		<CITY>말라오</CITY>
+		<CITY>마타라</CITY>
+		<CITY>랄리벨라</CITY>
+		<CITY>하라르</CITY>
+		<CITY>제일라</CITY>
+		<CITY>누리</CITY>
+		<CITY>카와</CITY>
+		<CITY>아발리테스</CITY>
+		<CITY>말라브</CITY>
+		<CITY>문두스</CITY>
+		<CITY>아로마톤 엠포리온</CITY>
+		<CITY>니콘</CITY>
+		<CITY>오포네</CITY>
+		<CITY>모실론</CITY>
+		<CITY>사라피온</CITY>
+		<CITY>카데로</CITY>
+		<CITY>제벨 모야</CITY>
+		<CITY>아이답</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>1 Arab    </UNIT_CONTINENT>
+	<BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

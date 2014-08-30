@@ -1,0 +1,145 @@
+include "game_structs.bhs"
+include "ctw_lib.bhs"
+
+conquest {
+if (get_ctw_campaign() == "Napoleon") {
+  napoleon_rules();
+}
+
+
+  int french = 1;
+  int turks = 2;
+
+  int diff = get_difficulty();
+  int unit;
+  int building;
+
+  int kill_amount = 30 - (5 * diff);
+  int fort_id = find_build(2, "Fort");
+
+  for (i = 0; i < kill_amount; i++) {
+    building = find_military_build(2);
+    if (building == fort_id && diff > 2) {
+      building = find_military_build(2);
+    }
+    destroy_building(2, building);
+  }
+
+  kill_amount = 60 - (10 * diff);
+
+  for (i = 0; i < kill_amount; i++) {
+    unit = find_all_military(2);
+    kill_unit_anim(2, unit, 1);
+  }
+
+  int x = 0;
+  int y = get_map_size();
+  int army_x = 184;
+  int army_y = 181;
+
+  set_leader_difficulty(turks, diff);
+
+  create_unit_upgrade(french, army_x, army_y, "hoplites", 2);
+  create_unit_in_group(french, army_x, army_y, "bowmen", 2);
+  if (diff < 3) create_unit_in_group(french, army_x, army_y, "bowmen", 1);
+  if (diff < 4) {
+    create_unit_in_group(french, army_x - 2, army_y, "catapult", 1);
+  }
+  create_unit_in_group(french, army_x - 2, army_y, "scout", 1);
+  if (diff < 4) create_unit_in_group(french, army_x - 2, army_y, "scout", 1);
+  create_unit_in_group(french, army_x - 2, army_y, "catapult", 4);
+  if (diff < 2) {
+    create_unit_in_group(french, army_x - 2, army_y, "catapult", 1);
+    create_unit_upgrade(french, army_x, army_y, "hoplites", 1);
+    create_unit_in_group(french, army_x, army_y, "bowmen", 1);
+  }
+  create_unit_in_group(french, army_x - 3, army_y, "cataphract", 2);
+  create_unit_in_group(french, army_x - 3, army_y, "horse archer", 2);
+  create_unit_in_group(french, army_x - 4, army_y, "supply wagon", 3);
+  create_unit_in_group(french, army_x - 5, army_y, "spy", 12);
+  create_unit_in_group(french, army_x - 5, army_y, "napoleon", 1);
+
+  group_jump_move(french, army_x, army_y, 0);
+
+  disable_city_defeat(french);
+  disable_type("Small City");
+  gain_tech(french, "Tactics");
+  gain_tech(french, "Operations");
+  gain_tech(french, "Strategy");
+  gain_tech(turks, "Allegiance");
+  gain_tech(turks, "Oath of Fealty");
+  gain_tech(french, "Science");
+  gain_tech(french, "Science");
+  //set_object_type_max_health("Spy", 60);
+
+  //if (diff > 3) set_time_limit(10);
+  
+  UnitGroup syria_1;
+  UnitGroup syria_2;
+  UnitGroup syria_3;
+  UnitGroup syria_4;
+  UnitGroup syria_5;
+
+  int charles;
+  String nation_name = find_nation(turks);
+  int general_id;
+
+  syria_1.nation = turks;
+  if (nation_name != "Turks") {
+    nation_name = find_nation(turks);
+    charles = find_unit(turks, "Djezzar");
+    x = object_position_x(turks, charles);
+    y = object_position_y(turks, charles);
+    kill_unit_anim(turks, charles, 1);
+    if (nation_name == "British") {
+      general_id = create_unit(turks, x, y, "Wellington", 1);
+    } else if (nation_name == "Greeks") {
+      general_id = create_unit(turks, x, y, "Archduke Charles", 1);
+    } else if (nation_name == "Russians") {
+      general_id = create_unit(turks, x, y, "General Kutosov", 1);
+    } else if (nation_name == "Prussians") {
+      general_id = create_unit(turks, x, y, "General Blucher", 1);
+    } else {
+      general_id = create_unit(turks, x, y, "General", 1);
+    }
+    syria_1.add_to_group(general_id);
+  } else syria_1.add_to_group(112);//dj
+  syria_1.add_to_group(231);
+  syria_1.add_to_group(233);
+  syria_1.add_to_group(237);
+  syria_1.add_to_group(238);
+  syria_1.add_to_group(211);
+  syria_1.add_to_group(217);
+  syria_1.add_to_group(220);
+  syria_1.add_to_group(184);
+  syria_1.add_to_group(187);
+  syria_1.add_to_group(190);
+  syria_1.group_patrol_order(159,23);
+  syria_2.nation = turks;
+  syria_2.add_to_group(151);
+  syria_2.add_to_group(152);
+  syria_2.add_to_group(153);
+  syria_2.add_to_group(154);
+  syria_2.add_to_group(157);
+  syria_2.add_to_group(160);
+  syria_2.add_to_group(163);
+  syria_2.add_to_group(166);
+  syria_2.group_patrol_order(173,36);
+  syria_3.nation = turks;
+  syria_3.add_to_group(142);
+  syria_3.add_to_group(143);
+  syria_3.add_to_group(144);
+  syria_3.group_patrol_order(183,53);
+  syria_4.nation = turks;
+  for (i = 133; i < 138; i++) {
+    syria_4.add_to_group(i);
+  }
+  syria_4.group_patrol_order(175,121);
+  syria_5.nation = turks;
+  for (i = 130; i < 133; i++) {
+    syria_5.add_to_group(i);
+  }
+  syria_5.group_patrol_order(196,128);
+
+  disable_building_attrition(1);
+}

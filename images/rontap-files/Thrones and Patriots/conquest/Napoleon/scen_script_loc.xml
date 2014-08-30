@@ -1,0 +1,1071 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by XMLSPY 5 Professional Ed. Release 2 (Big Huge Games) -->
+<ROOT name="Napoleon ">
+	<FILE hash="5471102" name="austerlitz">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="14658885">Archduke Charles</STRING>
+		<STRING hash="2393040">Telnitz</STRING>
+		<STRING hash="4175008">Sokolnitz</STRING>
+		<STRING hash="1084706">Brunn</STRING>
+		<STRING hash="5471102">Austerlitz</STRING>
+		<STRING hash="5522692">Krzenowitz</STRING>
+	</FILE>
+	<FILE hash="5986149" name="austerlitz2">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="14658885">Archduke Charles</STRING>
+		<STRING hash="1084706">Brunn</STRING>
+		<STRING hash="2393040">Telnitz</STRING>
+		<STRING hash="4175008">Sokolnitz</STRING>
+		<STRING hash="5471102">Austerlitz</STRING>
+		<STRING hash="5522692">Krzenowitz</STRING>
+	</FILE>
+	<FILE hash="6003946" name="austerlitz3">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="14658885">Archduke Charles</STRING>
+		<STRING hash="1084706">Brunn</STRING>
+		<STRING hash="2393040">Telnitz</STRING>
+		<STRING hash="4175008">Sokolnitz</STRING>
+		<STRING hash="5471102">Austerlitz</STRING>
+		<STRING hash="5522692">Krzenowitz</STRING>
+	</FILE>
+	<FILE hash="2249591" name="belgium">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="24410354">Stadtholder William V</STRING>
+		<STRING hash="1336038">Arras</STRING>
+		<STRING hash="2168722">Dunkirk</STRING>
+		<STRING hash="3082023">Brussels</STRING>
+		<STRING hash="2361725">Antwerp</STRING>
+		<STRING hash="2195880">Waremme</STRING>
+		<STRING hash="2333923">Seraing</STRING>
+		<STRING hash="1830369">Dinant</STRING>
+	</FILE>
+	<FILE hash="3607635" name="brittany">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="10598325">King George III</STRING>
+		<STRING hash="1601281">Angers</STRING>
+		<STRING hash="1507450">Rennes</STRING>
+		<STRING hash="1688176">Nantes</STRING>
+		<STRING hash="1664234">Vannes</STRING>
+		<STRING hash="9032508">Saint-Brieuc</STRING>
+		<STRING hash="1077129">Brest</STRING>
+		<STRING hash="2181103">Quimper</STRING>
+	</FILE>
+	<FILE hash="3122120" name="burgundy">
+		<STRING hash="2999286">Napoleon</STRING>
+		<STRING hash="3654935">Jacobins</STRING>
+		<STRING hash="4392665">Royalists</STRING>
+		<STRING hash="1036264">Lyons</STRING>
+		<STRING hash="926671">Dijon</STRING>
+		<STRING hash="1618845">Troyes</STRING>
+		<STRING hash="103459848">Do not let your enemies take any cities.</STRING>
+		<STRING hash="56724427">THE WORKING CLASS IS REVOLTING!</STRING>
+	</FILE>
+	<FILE hash="3135408" name="corsica">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="10598325">King George III</STRING>
+		<STRING hash="2107315">Bastia</STRING>
+		<STRING hash="1025370">Corte</STRING>
+		<STRING hash="3076862">Ajaccio</STRING>
+		<STRING hash="2224470">Sartene</STRING>
+		<STRING hash="4705713">Bonifacio</STRING>
+	</FILE>
+	<FILE hash="1280839" name="eylau">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="36937850">King Frederick Wilhelm III</STRING>
+		<STRING hash="13791951">Tsar Alexander I</STRING>
+		<STRING hash="1280839">Eylau</STRING>
+	</FILE>
+	<FILE hash="4003004" name="friedland">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="36937850">King Frederick Wilhelm III</STRING>
+		<STRING hash="13791951">Tsar Alexander I</STRING>
+		<STRING hash="4003004">Friedland</STRING>
+	</FILE>
+	<FILE hash="8790518" name="greatbritain">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="10598325">King George III</STRING>
+		<STRING hash="775179">Caen</STRING>
+		<STRING hash="2168722">Dunkirk</STRING>
+		<STRING hash="1995844">Calais</STRING>
+		<STRING hash="5257154">Portsmouth</STRING>
+		<STRING hash="3070950">Plymouth</STRING>
+		<STRING hash="5412045">Manchester</STRING>
+		<STRING hash="4127575">Edinburgh</STRING>
+		<STRING hash="2486756">Glasgow</STRING>
+		<STRING hash="2638227">Belfast</STRING>
+		<STRING hash="1712435">Dublin</STRING>
+		<STRING hash="1497489">London</STRING>
+	</FILE>
+	<FILE hash="827114" name="jena">
+		<STRING hash="2999286">Napoleon</STRING>
+		<STRING hash="36937850">King Frederick Wilhelm III</STRING>
+		<STRING hash="838557">Gera</STRING>
+		<STRING hash="3475145">Naumburg</STRING>
+		<STRING hash="827114">Jena</STRING>
+		<STRING hash="1644255">Erfurt</STRING>
+		<STRING hash="2636440">Soolfeld</STRING>
+		<STRING hash="178166945">Enemy reinforcements have arrived!  We must retreat!</STRING>
+		<STRING hash="196341485">Units can be created instantly to reinforce fallen allies.</STRING>
+		<STRING hash="194985139">Capture the fringe cities to force the battle onto open field.</STRING>
+		<STRING hash="199601006">The enemy is retreating to rally around Jena.  Now is our moment!</STRING>
+		<STRING hash="97404635">Use your superior numbers to take Jena.</STRING>
+		<STRING hash="184984943">HINT: Use the infinite queue feature to keep your ranks up.</STRING>
+	</FILE>
+	<FILE hash="2144016" name="leipzig">
+		<STRING hash="2999286">Napoleon</STRING>
+		<STRING hash="33868131">King Frederick Wilhelm II</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="13890873">Czar Alexander I</STRING>
+		<STRING hash="37667369">King Gustavus IV Adolphus</STRING>
+		<STRING hash="1610831">Lutzen</STRING>
+		<STRING hash="2041859">Lubeck</STRING>
+		<STRING hash="3201074">Liegnutz</STRING>
+		<STRING hash="2506113">Bautzen</STRING>
+		<STRING hash="4184227">Dennewitz</STRING>
+		<STRING hash="2038279">Dresden</STRING>
+		<STRING hash="2272516">Kustrin</STRING>
+		<STRING hash="7555595">Gross Beeren</STRING>
+		<STRING hash="344261209">Our scouts have reported that General Schwarzenberg is arriving with an army from the south!</STRING>
+		<STRING hash="94656753">Get a foothold in the region at Lutzen.</STRING>
+		<STRING hash="1583133308">Excellent work! The citizens of the area will not succumb to your rule easily. If you seized the area's economy and infrastructure, they would have no choice but to bow to your power. Find and control the major centers for Food, Timber, Metal, Knowledge and Government.</STRING>
+		<STRING hash="151785705">Capture a Granary to help your Food production.</STRING>
+		<STRING hash="186790284">Capture a Lumber Mill to help your Timber production.</STRING>
+		<STRING hash="160989728">Capture a Smelter to help your Metal production.</STRING>
+		<STRING hash="184734381">Capture a University to help your Knowledge production.</STRING>
+		<STRING hash="132405895">Capture a Senate in order to use Governments.</STRING>
+		<STRING hash="490799970">Well done! You now control the majority of food production in the region and can comfortably expand your farmer employment.</STRING>
+		<STRING hash="439911113">Superb! You now control the enlightened population in the region and can expand the schooling as you see fit.</STRING>
+		<STRING hash="507732725">Magnificent! You now control the majority of metal production in the region and can comfortably expand your miner employment.</STRING>
+		<STRING hash="490939784">Fantastic! You now control the voice of the people in this region and can manipulate the law as you see fit from a Senate.</STRING>
+		<STRING hash="1287119238">The traitor Bernadotte and General Bennigsen have been spotted to the north with reinforcements! We are badly outnumbered. If we retreat now, we may be able to regroup with the spoils already taken from the area. (Gain 50 Tribute.)</STRING>
+		<STRING hash="360712582">Our scouts have reported that Commander Schwarzenberg is arriving with an army from the south!</STRING>
+		<STRING hash="1340742706">The cunning Archduke Charles and General Blucher have been spotted to the north with reinforcements! We are badly outnumbered. If we retreat now, we may be able to regroup with the spoils already taken from the area. (Gain 50 Tribute.)</STRING>
+		<STRING hash="514779162">Great job! You now control the majority of wood production in the region and can comfortably expand your woodcutter employment.</STRING>
+		<STRING hash="1706502544">The cunning Archduke Charles and General Blucher have been spotted to the north with reinforcements! We are badly outnumbered. If we retreat now, we may be able to regroup with the spoils already taken from the area. (Gain 100 Tribute and a Mercenaries Bonus Card.)</STRING>
+		<STRING hash="3115158">Retreat!</STRING>
+		<STRING hash="1306282">Fight!</STRING>
+	</FILE>
+	<FILE hash="1832544" name="lisbon">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="9135566">Queen Maria I</STRING>
+		<STRING hash="1111418">Paris</STRING>
+		<STRING hash="1832544">Lisbon</STRING>
+	</FILE>
+	<FILE hash="536232" name="lodi">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="13080657">Merchant Prince</STRING>
+		<STRING hash="7197993">Alessandria</STRING>
+		<STRING hash="1186740">Milan</STRING>
+		<STRING hash="536232">Lodi</STRING>
+		<STRING hash="3992653">Piacenza</STRING>
+		<STRING hash="1846668">Lonato</STRING>
+	</FILE>
+	<FILE hash="674317" name="lodi2">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="6971851">Pope Pius II</STRING>
+		<STRING hash="13080657">Merchant Prince</STRING>
+		<STRING hash="14658885">Archduke Charles</STRING>
+		<STRING hash="7197993">Alessandria</STRING>
+		<STRING hash="536232">Lodi</STRING>
+		<STRING hash="3992653">Piacenza</STRING>
+		<STRING hash="1846668">Lonato</STRING>
+		<STRING hash="1186740">Milan</STRING>
+	</FILE>
+	<FILE hash="11429772" name="lowrationsruss">
+		<STRING hash="2999286">Napoleon</STRING>
+		<STRING hash="13890873">Czar Alexander I</STRING>
+		<STRING hash="924003">Rivne</STRING>
+		<STRING hash="4548767">Makeyevka</STRING>
+		<STRING hash="10765539">Dnepropetrovsk</STRING>
+		<STRING hash="2849872">Uzhgorod</STRING>
+		<STRING hash="4356125">Verbovets</STRING>
+		<STRING hash="604047">Kiev</STRING>
+		<STRING hash="3502560">Vinnitsa</STRING>
+		<STRING hash="2493130">Kharkov</STRING>
+		<STRING hash="134635834">Hint: Gain extra troops by capturing cities.</STRING>
+		<STRING hash="20942645">Rations Timer: $NUM0</STRING>
+		<STRING hash="297891685">A prisoner from $STRING0 decided to share with us the location of the enemy's capital.</STRING>
+		<STRING hash="24154533">YOUR RATIONS ARE LOW!</STRING>
+		<STRING hash="623216464">A freed prisoner from $STRING0 decided to share with us the location of one of the enemy's other cities!  However, there may be a closer city.</STRING>
+		<STRING hash="45796689">We have recruited a Cannon.</STRING>
+		<STRING hash="95256954">We have recruited a group of Fusiliers.</STRING>
+		<STRING hash="101418640">We have recruited a group of Musketeers.</STRING>
+		<STRING hash="114316290">We have recruited a Horse Guard Grenadier.</STRING>
+		<STRING hash="45129230">We have recruited a Hussar.</STRING>
+		<STRING hash="69169302">We have recruited a Supply Wagon.</STRING>
+	</FILE>
+	<FILE hash="11236481" name="lowrationsturk">
+		<STRING hash="2999286">Napoleon</STRING>
+		<STRING hash="660796">Otto</STRING>
+		<STRING hash="4604838">Bucharest</STRING>
+		<STRING hash="1995080">Zagreb</STRING>
+		<STRING hash="1703910">Tirane</STRING>
+		<STRING hash="3337163">Sarajevo</STRING>
+		<STRING hash="3303216">Budapest</STRING>
+		<STRING hash="5056858">Ijubijana</STRING>
+		<STRING hash="1206713">Sofia</STRING>
+		<STRING hash="3074564">Belgrade</STRING>
+		<STRING hash="134635834">Hint: Gain extra troops by capturing cities.</STRING>
+		<STRING hash="20942645">Rations Timer: $NUM0</STRING>
+		<STRING hash="297891685">A prisoner from $STRING0 decided to share with us the location of the enemy's capital.</STRING>
+		<STRING hash="24154533">YOUR RATIONS ARE LOW!</STRING>
+		<STRING hash="45796689">We have recruited a Cannon.</STRING>
+		<STRING hash="95256954">We have recruited a group of Fusiliers.</STRING>
+		<STRING hash="101418640">We have recruited a group of Musketeers.</STRING>
+		<STRING hash="114316290">We have recruited a Horse Guard Grenadier.</STRING>
+		<STRING hash="45129230">We have recruited a Hussar.</STRING>
+		<STRING hash="69169302">We have recruited a Supply Wagon.</STRING>
+		<STRING hash="623216464">A freed prisoner from $STRING0 decided to share with us the location of one of the enemy's other cities!  However, there may be a closer city.</STRING>
+	</FILE>
+	<FILE hash="1419320" name="malta">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12753762">Sultan Selim III</STRING>
+		<STRING hash="3602937">Valletta</STRING>
+	</FILE>
+	<FILE hash="1658032" name="malta2">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12753762">Sultan Selim III</STRING>
+		<STRING hash="3602937">Valletta</STRING>
+	</FILE>
+	<FILE hash="1666895" name="malta3">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12753762">Sultan Selim III</STRING>
+		<STRING hash="3602937">Valletta</STRING>
+	</FILE>
+	<FILE hash="2111839" name="mantua">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="12202226">Doge of Venetia</STRING>
+		<STRING hash="3007687">Brescia</STRING>
+		<STRING hash="1512076">Rivoli</STRING>
+		<STRING hash="2111839">Mantua</STRING>
+		<STRING hash="3013751">Caldiero</STRING>
+		<STRING hash="1769181">Venice</STRING>
+	</FILE>
+	<FILE hash="5623299" name="montenotte4">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="6971851">Pope Pius II</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="762521">Nice</STRING>
+		<STRING hash="1240685">Genoa</STRING>
+		<STRING hash="1558569">Voltri</STRING>
+		<STRING hash="546797">Dego</STRING>
+		<STRING hash="5071536">Montenotte</STRING>
+		<STRING hash="32993151">Commander Schwarzenberg</STRING>
+		<STRING hash="10866361">Austrian Ruins</STRING>
+		<STRING hash="2201086">Mondovi</STRING>
+		<STRING hash="1156222">Loano</STRING>
+		<STRING hash="978649">Turin</STRING>
+	</FILE>
+	<FILE hash="11653418" name="napoleonopening">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="3587565">Peasants</STRING>
+		<STRING hash="10598325">King George III</STRING>
+		<STRING hash="1111418">Paris</STRING>
+		<STRING hash="1588212">Toulon</STRING>
+		<STRING hash="31181484">Press space bar to skip</STRING>
+	</FILE>
+	<FILE hash="9008892" name="newmontenotte">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="8950167">Doge of Genoa</STRING>
+		<STRING hash="5071536">Montenotte</STRING>
+		<STRING hash="1240685">Genoa</STRING>
+		<STRING hash="180934311">Hint: Build new troops at your military buildings.</STRING>
+	</FILE>
+	<FILE hash="20155862" name="northlandseabattle">
+		<STRING hash="19791536">Alexander the Great</STRING>
+		<STRING hash="25500834">Phoenician Leader Man</STRING>
+	</FILE>
+	<FILE hash="3134853" name="pyramids">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="4473168">Murad Bey</STRING>
+		<STRING hash="10498909">Abd al-Rahman</STRING>
+		<STRING hash="1172615">Cairo</STRING>
+		<STRING hash="898155">Giza</STRING>
+		<STRING hash="5875678">Alexandria</STRING>
+		<STRING hash="2705506">Rosetta</STRING>
+		<STRING hash="1570640">Warden</STRING>
+		<STRING hash="5642398">Shubrakhit</STRING>
+	</FILE>
+	<FILE hash="560387" name="rome">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="6971851">Pope Pius II</STRING>
+		<STRING hash="4545521">Tarquinia</STRING>
+		<STRING hash="560387">Rome</STRING>
+		<STRING hash="5232303">Bracciano</STRING>
+		<STRING hash="3902550">Cerveteri</STRING>
+	</FILE>
+	<FILE hash="1927270" name="russia">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="13791951">Tsar Alexander I</STRING>
+		<STRING hash="2894912">Smolensk</STRING>
+		<STRING hash="2939930">Borodino</STRING>
+		<STRING hash="1967493">Moscow</STRING>
+		<STRING hash="1256547">Vilna</STRING>
+		<STRING hash="2874032">Novgorod</STRING>
+	</FILE>
+	<FILE hash="8063203" name="scandanavia">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="19898565">Frederick the Great</STRING>
+		<STRING hash="5022504">Wellington</STRING>
+		<STRING hash="4326529">Flensburg</STRING>
+		<STRING hash="622909">Oslo</STRING>
+		<STRING hash="8449507">Kristiansand</STRING>
+		<STRING hash="5199515">Copenhagen</STRING>
+	</FILE>
+	<FILE hash="8602377" name="scandanavia2">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="19898565">Frederick the Great</STRING>
+		<STRING hash="4326529">Flensburg</STRING>
+		<STRING hash="622909">Oslo</STRING>
+		<STRING hash="8449507">Kristiansand</STRING>
+		<STRING hash="5199515">Copenhagen</STRING>
+	</FILE>
+	<FILE hash="4630950" name="seabattle">
+		<STRING hash="19791536">Alexander the Great</STRING>
+		<STRING hash="25500834">Phoenician Leader Man</STRING>
+	</FILE>
+	<FILE hash="1407517" name="sweden">
+		<STRING hash="19894699">Mehmed II Khan Gazi</STRING>
+		<STRING hash="7949715">Sitting Bull</STRING>
+		<STRING hash="5199515">Copenhagen</STRING>
+		<STRING hash="4132815">Stockholm</STRING>
+		<STRING hash="3212793">Goteborg</STRING>
+		<STRING hash="3753592">Jonkoping</STRING>
+	</FILE>
+	<FILE hash="1291443" name="syria">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12753762">Sultan Selim III</STRING>
+		<STRING hash="788659">Acre</STRING>
+		<STRING hash="1300687">Jaffa</STRING>
+		<STRING hash="1037847">Gaza</STRING>
+		<STRING hash="3263049">al-Arish</STRING>
+	</FILE>
+	<FILE hash="13864021" name="tolandseabattle">
+		<STRING hash="19791536">Alexander the Great</STRING>
+		<STRING hash="25500834">Phoenician Leader Man</STRING>
+	</FILE>
+	<FILE hash="18093050" name="tosicilyseabattle">
+		<STRING hash="19791536">Alexander the Great</STRING>
+		<STRING hash="25500834">Phoenician Leader Man</STRING>
+	</FILE>
+	<FILE hash="9162036" name="transylvania">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="13453649">Village Council</STRING>
+		<STRING hash="5051721">Vlad Tepes</STRING>
+		<STRING hash="6109021">Sighisoara</STRING>
+		<STRING hash="12118150">Cyrus the Great</STRING>
+	</FILE>
+	<FILE hash="1623781" name="turkey">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12753762">Sultan Selim III</STRING>
+		<STRING hash="1491378">Adana</STRING>
+		<STRING hash="1655769">Halab</STRING>
+		<STRING hash="3693128">Istanbul</STRING>
+		<STRING hash="4963296">Famagusta</STRING>
+		<STRING hash="1406418">Bursa</STRING>
+		<STRING hash="2214953">Ankara</STRING>
+		<STRING hash="1454902">Rhodes</STRING>
+	</FILE>
+	<FILE hash="1901020" name="turkey2">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12753762">Sultan Selim III</STRING>
+		<STRING hash="3693128">Istanbul</STRING>
+		<STRING hash="4963296">Famagusta</STRING>
+		<STRING hash="2214953">Ankara</STRING>
+		<STRING hash="1454902">Rhodes</STRING>
+		<STRING hash="1655769">Halab</STRING>
+		<STRING hash="1491378">Adana</STRING>
+		<STRING hash="5875678">Alexandria</STRING>
+	</FILE>
+	<FILE hash="339052" name="ulm">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="34027066">Suleiman the Magnificent</STRING>
+		<STRING hash="7026791">Baden-Baden</STRING>
+		<STRING hash="4849258">Dusseldorf</STRING>
+		<STRING hash="3571152">Konstanz</STRING>
+		<STRING hash="339052">Ulm</STRING>
+	</FILE>
+	<FILE hash="1967040" name="wagram">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="12050660">Emperor Franz I</STRING>
+		<STRING hash="1850024">Vienna</STRING>
+		<STRING hash="1607262">Aspern</STRING>
+		<STRING hash="2893542">Nussdorf</STRING>
+		<STRING hash="2105975">Essling</STRING>
+		<STRING hash="4382418">Leopoldau</STRING>
+		<STRING hash="1967040">Wagram</STRING>
+	</FILE>
+	<FILE hash="3096177" name="waterloo">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="24410354">Stadtholder William V</STRING>
+		<STRING hash="29632946">Field Marshall Blucher</STRING>
+		<STRING hash="17107838">Duke of Wellington</STRING>
+		<STRING hash="3096177">Waterloo</STRING>
+	</FILE>
+	<FILE hash="15992478" name="austerlitzruntime">
+		<STRING hash="51599754">Capture the enemy capital(s).</STRING>
+	</FILE>
+	<FILE hash="12733812" name="austerlitzsetup">
+		<STRING hash="4542655">Austrians</STRING>
+	</FILE>
+	<FILE hash="10436284" name="belgiumruntime">
+		<STRING hash="49137003">Capture the enemy's capital.</STRING>
+		<STRING hash="119412587">Destroy all of $STRING0's (Blue) buildings.</STRING>
+		<STRING hash="203094153">Our scouts report that an emissary of Austria is approaching.</STRING>
+		<STRING hash="8095623">Listen to him.</STRING>
+		<STRING hash="10022077">Send him away.</STRING>
+		<STRING hash="1614077">Pay 20</STRING>
+		<STRING hash="6928586">Refuse offer</STRING>
+		<STRING hash="8337715">Decline offer</STRING>
+		<STRING hash="225786052">Our scouts report that an emissary of the Austrians is approaching.</STRING>
+		<STRING hash="1083444579">Message from the local Austrian Commander: We do not want to fight over a province that is so far away from our homeland. If you pay us 20 Tribute, we will leave this province. (You have $d0 Tribute.)</STRING>
+		<STRING hash="112874817">Unfortunately, you do not have 20 Tribute.</STRING>
+		<STRING hash="788792208">Since we are here anyway, perhaps we can help subdue the people of this province for you. That is, if you are willing to make it worth our while. (You have $d0 Tribute.)</STRING>
+		<STRING hash="219616298">Unfortunately, you do not have 20 Tribute. The Austrians are leaving.</STRING>
+	</FILE>
+	<FILE hash="7870288" name="belgiumsetup">
+		<STRING hash="4542655">Austrians</STRING>
+		<STRING hash="3324335">Belgians</STRING>
+		<STRING hash="32924523">United States of Belgium</STRING>
+	</FILE>
+	<FILE hash="10757088" name="britainruntime">
+		<STRING hash="49137003">Capture the enemy's capital.</STRING>
+		<STRING hash="469356096">Your admirals have gathered your Grand Navy and are ready for your assault on London. They await you near Amiens.</STRING>
+		<STRING hash="180427734">The British government is fleeing north to Scotland!</STRING>
+		<STRING hash="167095230">The British government is fleeing west to Ireland!</STRING>
+		<STRING hash="171773834">The British government is fleeing back to England!</STRING>
+		<STRING hash="486030292">Your admirals have gathered your Grand Navy and are ready for your assault on London. They await you near Calais.</STRING>
+	</FILE>
+	<FILE hash="12675135" name="brittanyruntime">
+		<STRING hash="23539396">Hint: Capture Vannes</STRING>
+		<STRING hash="49137003">Capture the enemy's capital.</STRING>
+		<STRING hash="184656398">An emissary of the British has asked for an audience.</STRING>
+		<STRING hash="8095623">Listen to him.</STRING>
+		<STRING hash="7389039">Don't listen.</STRING>
+		<STRING hash="1614077">Pay 20</STRING>
+		<STRING hash="6928586">Refuse offer</STRING>
+		<STRING hash="210402003">Very well, but remember this: Any further loss of life is on your head!</STRING>
+		<STRING hash="823441406">We wish to put an end to the hostilities between our great nations. We will agree to leave this province and sign a peace treaty for 20 tribute. (You have $d0 Tribute.)</STRING>
+		<STRING hash="106782287">Unfortunately, you do not have 20 Tribute.</STRING>
+	</FILE>
+	<FILE hash="11322101" name="corsicaruntime">
+		<STRING hash="183420946">Capture all of the enemy's cities before time runs out.</STRING>
+	</FILE>
+	<FILE hash="8756105" name="corsicasetup">
+		<STRING hash="14018229">Pascale di Paoli</STRING>
+		<STRING hash="4933740">Corsicans</STRING>
+	</FILE>
+	<FILE hash="7860052" name="eylauruntime">
+		<STRING hash="119261649">Capture and hold Eylau until time runs out.</STRING>
+		<STRING hash="265675945">Hint: Use control groups to better organize your armies (i.e., CTRL+1, CTRL+2, etc.).</STRING>
+		<STRING hash="184692714">One of your marshals has arrived with reinforcements!</STRING>
+	</FILE>
+	<FILE hash="5579898" name="eylausetup">
+		<STRING hash="4480869">Prussians</STRING>
+	</FILE>
+	<FILE hash="13809823" name="friedlandruntime">
+		<STRING hash="422875350">Hold out against the combined Prussian and Russian forces until Napoleon arrives with reinforcements.</STRING>
+		<STRING hash="175689209">Napoleon has arrived with the bulk of the French army!</STRING>
+		<STRING hash="416867741">Napoleon has arrived with the bulk of the French army! It is time to crush the Russians and take Friedland!</STRING>
+		<STRING hash="69168562">Hold Friedland until time expires.</STRING>
+		<STRING hash="32089397">Hint: Control the river.</STRING>
+	</FILE>
+	<FILE hash="10790251" name="friedlandsetup">
+		<STRING hash="4480869">Prussians</STRING>
+	</FILE>
+	<FILE hash="23762767" name="guerillabasesruntime">
+		<STRING hash="104756247">There are $d0 guerrilla bases remaining.</STRING>
+		<STRING hash="98625926">There are $d0 guerrilla base remaining.</STRING>
+	</FILE>
+	<FILE hash="7253530" name="lodi2runtime">
+		<STRING hash="204356048">You will be defeated if the Milanese lose their capital of Milan.</STRING>
+		<STRING hash="347227">Yes</STRING>
+		<STRING hash="135770">No</STRING>
+		<STRING hash="1195638455">We have many things for sale. Royal Janissaries at our Barracks, Culverin Mahouts at our Stable, and Basilica Cannons at our Siege Factory. Click on the building that has what you want in order to buy something.</STRING>
+		<STRING hash="215858847">Hint: Click on the Merchant Prince's (White) buildings to buy units.</STRING>
+		<STRING hash="310648742">Would you like to buy 5 Royal Janissaries for $NUM0 Tribute? (You have $NUM1 Tribute.)</STRING>
+		<STRING hash="264628635">Would you like to buy 3 Elephants for $NUM0 Tribute? (You have $NUM1 Tribute.)</STRING>
+		<STRING hash="305630655">Would you like to buy 3 Basilica Cannons for $NUM0 Tribute? (You have $NUM1 Tribute.)</STRING>
+		<STRING hash="91592820">Sorry, you do not have enough Tribute.</STRING>
+	</FILE>
+	<FILE hash="4973376" name="lodi2setup">
+		<STRING hash="3015060">Milanese</STRING>
+		<STRING hash="17441108">Persian Merchants</STRING>
+		<STRING hash="8463418">Papal States</STRING>
+		<STRING hash="14658885">Archduke Charles</STRING>
+		<STRING hash="536232">Lodi</STRING>
+		<STRING hash="1846668">Lonato</STRING>
+		<STRING hash="3992653">Piacenza</STRING>
+		<STRING hash="1186740">Milan</STRING>
+	</FILE>
+	<FILE hash="6149076" name="lodiruntime">
+		<STRING hash="347227">Yes</STRING>
+		<STRING hash="135770">No</STRING>
+		<STRING hash="1195638455">We have many things for sale. Royal Janissaries at our Barracks, Culverin Mahouts at our Stable, and Basilica Cannons at our Siege Factory. Click on the building that has what you want in order to buy something.</STRING>
+		<STRING hash="220406825">Hint: Click on the Merchant Prince's (Orange) buildings to buy units.</STRING>
+		<STRING hash="1370994531">Message from the Austrians: Our troops no longer wish to fight. Perhaps you would like to sign a peace agreement to end this war, provided you do not attack us anytime soon? We will include 50 Tribute and our territory of Belgium in the bargain.</STRING>
+		<STRING hash="310648742">Would you like to buy 5 Royal Janissaries for $NUM0 Tribute? (You have $NUM1 Tribute.)</STRING>
+		<STRING hash="91592820">Sorry, you do not have enough Tribute.</STRING>
+		<STRING hash="264628635">Would you like to buy 3 Elephants for $NUM0 Tribute? (You have $NUM1 Tribute.)</STRING>
+		<STRING hash="305630655">Would you like to buy 3 Basilica Cannons for $NUM0 Tribute? (You have $NUM1 Tribute.)</STRING>
+	</FILE>
+	<FILE hash="4005434" name="lodisetup">
+		<STRING hash="4542655">Austrians</STRING>
+		<STRING hash="17441108">Persian Merchants</STRING>
+		<STRING hash="536232">Lodi</STRING>
+		<STRING hash="1846668">Lonato</STRING>
+		<STRING hash="3992653">Piacenza</STRING>
+		<STRING hash="1186740">Milan</STRING>
+	</FILE>
+	<FILE hash="8864420" name="madridruntime">
+		<STRING hash="404597483">An emissary of Great Britain approaches: We wish to speak with you on behalf of our Spanish friends.</STRING>
+		<STRING hash="1518462">Listen.</STRING>
+		<STRING hash="7389039">Don't Listen.</STRING>
+		<STRING hash="1378323841">We see that you have placed the Spanish throne in dire straits. We wish to settle this affair without any further bloodshed. If you agree to sign a peace treaty with Spain and leave this province then we will also sign a peace treaty with you.</STRING>
+		<STRING hash="17260705">Sign Peace Treaty.</STRING>
+		<STRING hash="4803036">Don't Sign.</STRING>
+		<STRING hash="32932773">Peace signed with Spain.</STRING>
+		<STRING hash="64653754">Peace signed with Great Britain.</STRING>
+		<STRING hash="1469634633">We see that you have placed the Spanish throne in dire straits. We wish to settle this affair without any further bloodshed, but if you do not agree to sign a peace treaty with Spain and leave this province immediately we will be forced to take action!</STRING>
+		<STRING hash="91792528">Great Britain has declared war on you!</STRING>
+	</FILE>
+	<FILE hash="9473527" name="mantuaruntime">
+		<STRING hash="325954023">Hint: Try to capture Austrian (Blue) cities behind Mantua before assaulting it directly.</STRING>
+		<STRING hash="138488167">Hint: Try to ally with the Venetians (Orange).</STRING>
+		<STRING hash="940404114">Message from a Venetian (Orange) emissary: The city of Venice has been independent for all of time. Do not think that you will change this. Stay out of our way, and we'll do the same for you.</STRING>
+		<STRING hash="1080066272">Now that the Austrians (Blue) are dead, we can move on to help free the Venetians (Orange) of their excess wealth. On the other hand, we could just let them stay independent, and we would still control this province.</STRING>
+		<STRING hash="2226791">Attack</STRING>
+		<STRING hash="1101628">Leave</STRING>
+		<STRING hash="209611263">With the loss of their stronghold, the Austrians (Blue) are fleeing.</STRING>
+		<STRING hash="60764140">Hold Mantua for $STRING0 to win.</STRING>
+	</FILE>
+	<FILE hash="7101121" name="mantuasetup">
+		<STRING hash="4345736">Venetians</STRING>
+		<STRING hash="4542655">Austrians</STRING>
+		<STRING hash="2111839">Mantua</STRING>
+		<STRING hash="1512076">Rivoli</STRING>
+		<STRING hash="3013751">Caldiero</STRING>
+	</FILE>
+	<FILE hash="17014938" name="montenotte4runtime">
+		<STRING hash="330217524">We have found the surviving Austrian soldiers' camp. Their leader wishes to speak with you.</STRING>
+		<STRING hash="897955747">Greetings Napoleon, I am Commander Schwarzenberg. We are glad that you came to help our cause. If you are successful in retaking this territory for us, we will pay you very handsomely.</STRING>
+		<STRING hash="747432">Deal</STRING>
+		<STRING hash="4266043">No thanks</STRING>
+		<STRING hash="3718150">Help you?</STRING>
+		<STRING hash="687133833">Excellent, I will take my team of Commandos and work on destroying their infrastructure. We will hand over our city of Montenotte to you for the time being.</STRING>
+		<STRING hash="97396134">Fine, have it your way. This means war!</STRING>
+		<STRING hash="347227">Yes</STRING>
+		<STRING hash="135770">No</STRING>
+		<STRING hash="1213464269">Greetings Napoleon, I am Commander Schwarzenberg. My men and I were left behind when the Austrians pulled out of this territory. We are now mercenaries, and are willing to assist you for 15 Tribute (you have $NUM0 Tribute).</STRING>
+		<STRING hash="429350655">Fine, have it your way. I am sure we can get 15 Tribute reward for your head from any government on the continent.</STRING>
+		<STRING hash="276538086">We have found the surviving Austrian soldiers' leader. He wishes to speak with you.</STRING>
+		<STRING hash="278205046">The Austrian (Orange) cities have been abandoned. They should be easy to capture.</STRING>
+		<STRING hash="175436606">Find Commander Schwarzenberg (White) to gain his help.</STRING>
+		<STRING hash="308210667">Excellent, I will take my team of Commandos and work on destroying their infrastructure.</STRING>
+		<STRING hash="542367519">It is a shame you have so little Tribute. We might have helped you. Oh well, instead I will have to settle for your head on a platter.</STRING>
+	</FILE>
+	<FILE hash="13392010" name="montenotte4setup">
+		<STRING hash="8463418">Papal States</STRING>
+		<STRING hash="4542655">Austrians</STRING>
+		<STRING hash="14658885">Archduke Charles</STRING>
+		<STRING hash="1240685">Genoa</STRING>
+		<STRING hash="546797">Dego</STRING>
+		<STRING hash="1558569">Voltri</STRING>
+		<STRING hash="5071536">Montenotte</STRING>
+		<STRING hash="32993151">Commander Schwarzenberg</STRING>
+	</FILE>
+	<FILE hash="15592912" name="montenotteruntime">
+		<STRING hash="318945881">Destroy the $NUM0 Austrian (Blue) Fortresses or capture the Sardinian (Cyan) capital.</STRING>
+		<STRING hash="214676491">Hint: Try to ally with the Genoans (White) or the Sardinians (Cyan).</STRING>
+		<STRING hash="122761571">Destroy the $NUM0 Austrian (Blue) Fortress.</STRING>
+		<STRING hash="310516552">Destroy the $NUM0 Austrian (Blue) Fortress or capture the Sardinian (Cyan) capital.</STRING>
+		<STRING hash="136392846">Destroy the $NUM0 Austrian (Blue) Fortresses.</STRING>
+		<STRING hash="46156052">We have a counter-proposal.</STRING>
+		<STRING hash="68421969">We had a different amount in mind.</STRING>
+		<STRING hash="71041512">We are looking for more than that.</STRING>
+		<STRING hash="61704171">We will need you to up the offer.</STRING>
+	</FILE>
+	<FILE hash="12334246" name="montenottesetup">
+		<STRING hash="2560867">Genoans</STRING>
+		<STRING hash="4542655">Austrians</STRING>
+		<STRING hash="5634325">Sardinians</STRING>
+	</FILE>
+	<FILE hash="15563374" name="napoleon_battles">
+		<STRING hash="402375950">While they are not a major power, I would still be wary of the Bavarians' skill on the battlefield.</STRING>
+		<STRING hash="1680101687">The British have established a powerful empire that is spread across the world. Their armies, though small, are well-trained, and they are rightly proud of their Royal Navy, that "wooden wall" that rings their island nation. Their colonies give them a large economic advantage.</STRING>
+		<STRING hash="436629674">The Dutch do not pose much of a threat on the Continent. They are more concerned with their overseas colonies.</STRING>
+		<STRING hash="378062435">The Portuguese are of minor consequence on the Continent, yet have vast domains around the world.</STRING>
+		<STRING hash="164700540">The Poles pose no threat to the armies of France.</STRING>
+		<STRING hash="209927910">The Sardinians are little more than pawns of the emperor of Austria.</STRING>
+		<STRING hash="394522843">The French Royalists have begun an insurrection in this province. It is up to you to put them down.</STRING>
+		<STRING hash="367571832">The Papal States claim an importance in the councils of Europe that has little basis in fact.</STRING>
+		<STRING hash="211854476">The Russians can be friendly at times, but one should not trust them.</STRING>
+		<STRING hash="959354437">While the Spanish empire may be in decline, their colonies are still numerous. We must also be wary of the Spanish people, for even if we remove their King they will continue to fight until the very end.</STRING>
+		<STRING hash="223087006">The Ottoman Turks control extensive domains, but pose no threat to us.</STRING>
+		<STRING hash="75007355">There is little of importance here.</STRING>
+		<STRING hash="760724215">The Ottoman-appointed rulers of Egypt, the Mamelukes, are oppressing their Egyptian subjects. It is up to you to free them and bring the blessings of the Revolution to Egypt.</STRING>
+		<STRING hash="511433514">A great victory could be had in Syria. Surely the Ottoman Turks would not mind having one less province? They might not even notice!</STRING>
+		<STRING hash="266696723">This will not be an easy fight. Come in strength, if you want to win this battle.</STRING>
+		<STRING hash="620326366">The capital province of Austria. It will not be a hard fight to take Vienna, but we may have trouble with the outlying regions of the capital.</STRING>
+		<STRING hash="722922791">A massive force has been brought together to do battle here. Their numbers dwarf ours in the area, but with your leadership we certainly will be victorious.</STRING>
+		<STRING hash="606181529">The British have taken control of Brittany and gained a foothold on the Continent. We must drive them out to protect the sovereignty of France!</STRING>
+		<STRING hash="447121577">The Prussians in this area will not cause as many problems as the Russians. They have a formidable force here.</STRING>
+		<STRING hash="408458613">The Prussian and Russian armies are both in the area somewhere. This will not be an easy fight for us.</STRING>
+		<STRING hash="461731276">The Prussians have maintained a presence here and are working with the Russians. This will not be an easy fight for us.</STRING>
+		<STRING hash="618806872">The British defenses are too great and we do not have a navy! We must reduce their infrastructure level and build a navy before we attack!</STRING>
+		<STRING hash="722899784">The British defenses are too great! The Royal Navy is constantly patrolling the English Channel. We must reduce their infrastructure level before we attack!</STRING>
+		<STRING hash="803819675">Even though the British defenses are weak, we have not yet constructed a navy. We should wait until we are able to attack with warships as well as our superior army.</STRING>
+		<STRING hash="223911657">The British defenses are weak! We must take this opportunity to attack!</STRING>
+		<STRING hash="683679589">The British do not have enough military presence here to cause us any problems. The inhabitants of the island, however, are legendary sharpshooters.</STRING>
+		<STRING hash="723483155">Our scouts tell us that the people of this region are already familiar with your accomplishments elsewhere. Hopefully that means there will be little bloodshed here.</STRING>
+		<STRING hash="671904597">The Austrians have recently lost this territory to the Papal States. The Austrians former subjects, the Milanese, are asking for our assistance.</STRING>
+		<STRING hash="255611936">We will have limited supplies, but with good leadership we can beat the enemy.</STRING>
+		<STRING hash="742178404">The Papal States have recently conquered this territory. They burnt most of the towns to the ground. Which is exactly what they would like to do to us if we invaded.</STRING>
+		<STRING hash="814524237">If we can take this province, it is not much further to the Austrian capital. The key to this province is their stronghold of Mantua. If we can take this, victory is ours.</STRING>
+		<STRING hash="222758892">You must strike the enemy allied forces before they cross into France!</STRING>
+		<STRING hash="245790885">The Austrians must not be allowed to control a province so near to France!</STRING>
+		<STRING hash="510679006">Russia has a very harsh climate. The battle will be costly and hard to win. Perhaps we should consider making peace instead.</STRING>
+		<STRING hash="641559945">The Spanish people will be resentful of any occupation. They will keep fighting a guerrilla war long after we have defeated Spain's Royal Army.</STRING>
+		<STRING hash="474514071">We will not only have to fight the Spanish army, but we will also have to combat the guerrilla bands in the area.</STRING>
+		<STRING hash="491720003">We will not only have to fight the Portuguese army, but we will also have to combat the guerrilla bands in the area.</STRING>
+		<STRING hash="3139921">$STRING0</STRING>
+		<STRING hash="2329789">STRING0</STRING>
+		<STRING hash="500659">$s0</STRING>
+		<STRING hash="177990694">Saxony may be small, but their soldiers fight hard.</STRING>
+		<STRING hash="523045142">The Prussians--heirs to Frederick the Great--should not be taken lightly. Still, they have no hope of victory if we attack them.</STRING>
+		<STRING hash="410010484">The Austrian Empire is a proud but aging empire. Its time as a Continental power is drawing to an end.</STRING>
+		<STRING hash="443790845">The key to this province is the island of Malta. We will have to do the impossible--beat the Knights of Malta.</STRING>
+		<STRING hash="582977061">A small town in this region is being terrorized by a lord in a castle across the river. If we help them they are sure to join with France.</STRING>
+		<STRING hash="939515019">The Swedish come from a cold, harsh climate. Although they may seem but a minor player on the Continent, do not underestimate their ability to have a large impact on Continental affairs.</STRING>
+	</FILE>
+	<FILE hash="10607114" name="napoleon_diplo">
+		<STRING hash="196275144">No English king will ever submit to the whims of a French despot.</STRING>
+		<STRING hash="921702610">Unlike France, we British do not give up our colonies. We will never consider giving even one up. And lest you think to ask again, remember that we took Canada and India from you in 1763.</STRING>
+		<STRING hash="150931759">We do not negotiate with traitors to the crown.</STRING>
+		<STRING hash="568516512">We Swiss are always willing to trade--but watches, chocolates, and other such things are our preference. We do not traffic in land.</STRING>
+		<STRING hash="449536732">What could a country without a navy do with overseas colonies? Or perhaps you meant to amuse us with your query.</STRING>
+		<STRING hash="70416430">There is no bad peace in our eyes.</STRING>
+		<STRING hash="86045529">There is no bad alliance in our eyes.</STRING>
+		<STRING hash="604843977">If you wish us to become servant to France, offer us a price that is equal to our pride and our value. You aren't even close with that one.</STRING>
+		<STRING hash="214508866">The deal is looking more agreeable, but we are still not convinced.</STRING>
+		<STRING hash="45915699">We agree to your conditions!</STRING>
+		<STRING hash="432968708">We have no interest in negotiating with you. All we need to do is conquer your nation and Europe will be ours.</STRING>
+		<STRING hash="258162342">There is no need for a peace agreement between us since we are already allies.</STRING>
+		<STRING hash="70035668">Yes, let us end this terrible war!</STRING>
+		<STRING hash="195097471">Very well. We will end this war and sign your peace treaty.</STRING>
+		<STRING hash="201587037">Alright, we need some time to prepare for a new assault as well.</STRING>
+		<STRING hash="178986281">Yes, we agree. Peace is in the best interests of everyone.</STRING>
+		<STRING hash="196830738">These are excellent terms! We will agree to this peace treaty.</STRING>
+		<STRING hash="282812868">Perhaps it would be better if we negotiated peace before talking about alliances.</STRING>
+		<STRING hash="28667321">What a fantastic idea!</STRING>
+		<STRING hash="116138985">The Sultan thinks that this is a fine game.</STRING>
+		<STRING hash="172406433">No thank you. We have enough allies at the moment.</STRING>
+		<STRING hash="359222075">We had been considering a similar offer to yours. We believe our nations will work well together.</STRING>
+		<STRING hash="98137659">We look forward to working with France.</STRING>
+		<STRING hash="60219225">Yes! Who shall we destroy first?</STRING>
+		<STRING hash="254952077">Yes! Now no one will be able to stop the $s0! Oh, um, I mean the $s0 and the $s1!</STRING>
+		<STRING hash="186030804">These are excellent terms! We will agree to this alliance.</STRING>
+		<STRING hash="218383423">We are going to need at least this much tribute if you want our help.</STRING>
+		<STRING hash="198630764">That is a paltry sum to offer us. We need something more like this.</STRING>
+		<STRING hash="189366780">We will not sign an alliance for anything less than this.</STRING>
+		<STRING hash="180964565">Yes. Who would not want to join with the Empire of Napoleon?</STRING>
+		<STRING hash="224646203">Your offer is a fair one, and our armies will now march alongside yours.</STRING>
+		<STRING hash="113867821">We needed a change of government anyways.</STRING>
+		<STRING hash="90672259">We agree. Who do we have to kill first?</STRING>
+		<STRING hash="172654211">That is a fair offer. We will become your vassal.</STRING>
+		<STRING hash="193379578">Well we have always considered your land ours anyway.</STRING>
+		<STRING hash="174869181">We appreciate this gesture. It saves us a lot of time.</STRING>
+		<STRING hash="331136588">Even though we are at war, we are willing to make a deal, but only according to our terms.</STRING>
+		<STRING hash="66330431">This is a fair trade. We accept.</STRING>
+		<STRING hash="182489676">His Majesty is pleased we could reach this agreement.</STRING>
+		<STRING hash="115481436">This deal seems more than fair. No refunds!</STRING>
+		<STRING hash="112094490">Very well, I suppose we can agree to this.</STRING>
+		<STRING hash="187273799">Well, if this is the best you can do I guess we can agree.</STRING>
+		<STRING hash="42164205">This seems fair. I accept.</STRING>
+		<STRING hash="243571091">No, that is not fair to our nation. We believe it should be something like this.</STRING>
+		<STRING hash="203467566">We do not agree to your offer, but perhaps you will agree to this?</STRING>
+		<STRING hash="116271759">That was a good offer. Here's a better one.</STRING>
+		<STRING hash="205021505">That deal does not seem fair to us. Consider this proposal instead.</STRING>
+		<STRING hash="93816062">We accept your tribute with gratitude.</STRING>
+		<STRING hash="22201777">Thank you very much!</STRING>
+		<STRING hash="178969743">And you want nothing in return? Well ok if you say so.</STRING>
+		<STRING hash="427861469">Your gift comes at the perfect time! Now we can upgrade our capital's defenses and make it invulnerable.</STRING>
+		<STRING hash="175483081">Our monarch is always happy to accept such gifts.</STRING>
+		<STRING hash="114859917">We yield. We will pay this tribute to you.</STRING>
+		<STRING hash="206629898">We feel it would be prudent to give in to your demands at this time.</STRING>
+		<STRING hash="57888995">OK! OK! Please don't squash us.</STRING>
+		<STRING hash="182815262">Why should we pay you? If anything, you should pay us!</STRING>
+		<STRING hash="200999449">This is outrageous! We will never acquiesce to such extortion.</STRING>
+		<STRING hash="115462695">Is this a joke? You are kidding aren't you?</STRING>
+		<STRING hash="217783634">You have nothing to offer us that will make us give up our independence.</STRING>
+		<STRING hash="180435386">We will not give up our freedom for such a paltry sum.</STRING>
+		<STRING hash="254456942">You will have to give us much more than that if you expect us to listen to you.</STRING>
+		<STRING hash="192455612">Our great nation will never bow before the boot of tyranny.</STRING>
+		<STRING hash="337312105">We will never sell our nation for so little. You do not have enough to interest us at present.</STRING>
+		<STRING hash="311983950">Why would we agree to peace? We have so much yet to gain from the spoils of your country.</STRING>
+		<STRING hash="76264722">Only a fool would sign that treaty!</STRING>
+		<STRING hash="134021399">Only your utter destruction will end this war</STRING>
+		<STRING hash="243319077">We are not as weak as you, and we will see this war through until the very end.</STRING>
+		<STRING hash="174500249">We do not see how this benefits us. Our answer is no.</STRING>
+		<STRING hash="368368031">Our great nation has no need to ally with the likes of you. Besides, we enjoy trampling the weak.</STRING>
+		<STRING hash="621766239">Under different circumstances we might have welcomed an alliance with you. Unfortunately for you, that means we cannot accept your offer.</STRING>
+		<STRING hash="402888531">Your nation is not capable of offering serious help to anybody. We have no time for the likes of you.</STRING>
+		<STRING hash="199708652">Come back in a few turns when you have things that interest us.</STRING>
+		<STRING hash="164281389">You do not have enough to interest us at present.</STRING>
+		<STRING hash="87034289">This deal would be more to our liking.</STRING>
+		<STRING hash="188772689">We will never submit ourselves to the whims of a French despot.</STRING>
+		<STRING hash="186271542">Unfortunately you have nothing of interest to us at present.</STRING>
+		<STRING hash="221083251">You will need to find more to offer us if you want us to agree to deal.</STRING>
+		<STRING hash="183994371">Conquer more territories and maybe then we will negotiate.</STRING>
+		<STRING hash="268324888">There is nothing you presently have that would compell us to sign that agreement.</STRING>
+		<STRING hash="459783390">We did not come here to negotiate the finer points of our offer. You should've accepted while you had the chance.</STRING>
+		<STRING hash="424384834">Perhaps you thought that we actually cared what you thought about the deal. These negotiations are over!</STRING>
+		<STRING hash="442711818">Who do you think you are to haggle over our offer? You have forgotten your place. This discussion is at its end.</STRING>
+		<STRING hash="357208835">If you wish to discuss vassalage, then territory will have to be removed from the negotiations.</STRING>
+		<STRING hash="470425936">Perhaps you thought that we actually cared what you thought about the deal. Accept our terms, or there is no deal.</STRING>
+		<STRING hash="396791957">Perhaps you thought that we actually came here to negotiate. Accept our terms, or there is no deal.</STRING>
+		<STRING hash="152117702">Are you here to negotiate, or to waste our time?</STRING>
+		<STRING hash="207952698">We tire of your games. Offer us a real proposal, or be done with it!</STRING>
+		<STRING hash="267330760">Apparently negotiation is not one of the finer points of education in your nation.</STRING>
+		<STRING hash="439121001">We did not come here to play around. If this is the best you can offer, then perhaps we should end these negotiations.</STRING>
+		<STRING hash="207300490">That is one of the worst offers I have ever seen. Is it some kind of joke?</STRING>
+		<STRING hash="1475128">Polish</STRING>
+		<STRING hash="2079703">Swedish</STRING>
+		<STRING hash="5634325">Sardinians</STRING>
+		<STRING hash="1783919">Saxons</STRING>
+		<STRING hash="1256409">Bantu</STRING>
+		<STRING hash="4480869">Prussians</STRING>
+		<STRING hash="14671356">Knights of Malta</STRING>
+		<STRING hash="4991502">Portuguese</STRING>
+		<STRING hash="4542655">Austrians</STRING>
+		<STRING hash="421028632">If you wish to discuss vassalage, then territory and colonies will have to be removed from the negotiations.</STRING>
+		<STRING hash="349220716">If you wish to discuss vassalage, then colonies will have to be removed from the negotiations.</STRING>
+		<STRING hash="474629436">If you think that we will bargain with a lowly general of France, then you are quite wrong. Our discussions are through.</STRING>
+	</FILE>
+	<FILE hash="22351294" name="napoleon_diplo_offer">
+		<STRING hash="1385639306">The territory of Venetia is much closer to our capital of Austria than it is to Paris. We think it would be to our mutual benefit if you were to accept Belgium in exchange for Venetia. We will also sign a peace agreement as part of the deal.</STRING>
+		<STRING hash="380143602">The Austrian government feels that this war must come to an end. Will you sign a peace agreement?</STRING>
+		<STRING hash="190709178">There is no need for further conflict. We offer you peace.</STRING>
+		<STRING hash="495482098">Since our Austrian allies have abandoned us, His Majesty's government has decided to offer France a peace agreement as well.</STRING>
+		<STRING hash="918803144">We know how troublesome colonies can be, so his Majesty King George III has graciously offered to take on the burden of ruling Louisiana from you. There is no need to express your thanks to him.</STRING>
+		<STRING hash="738375332">With Prussia defeated we do not see any reason to continue this war. We will sign a peace treaty if you agree that we will keep control of East and West Prussia.</STRING>
+		<STRING hash="265598423">Why do you continue to attack us? Continued warfare can profit neither nation.</STRING>
+		<STRING hash="336649526">You have bested us yet again, Emperor Napoleon. Perhaps you would be interested in peace now?</STRING>
+		<STRING hash="175905054">This war is damaging both our empires. Let us end it now.</STRING>
+		<STRING hash="802732569">We are impressed with your display of military power. You have clearly learned something from studying our military methods. We would like to enter into an alliance with you.</STRING>
+		<STRING hash="884019252">We have enough trouble keeping peace in our territories in the Balkans, so in return for returning the territories that are rightfully ours, we will compensate you with a peace treaty.</STRING>
+		<STRING hash="180927075">We do not see a need to pursue this war any further.</STRING>
+		<STRING hash="464660357">The Hapsburgs can no longer tolerate your presence in Southern Italy. Leave now, and you will be well-compensated.</STRING>
+		<STRING hash="278420754">It is time for you to leave Southern Italy. Leave now, and we will compensate you.</STRING>
+		<STRING hash="238984075">We have no quarrel with France. Let us end hostilities against one another.</STRING>
+		<STRING hash="191212398">There is no need for more war between our nations.</STRING>
+		<STRING hash="509219941">We have no interest in continuing this war against you. Let us agree to peace and you shall receive our colony in Brazil.</STRING>
+		<STRING hash="837875404">We have no interest in continuing this war against you. Let us agree to peace and you shall receive our colony in Macao, located on the South China Sea in the Far East.</STRING>
+		<STRING hash="385393684">We have supported you in war. Now it is time to give us the compensation we deserve as your allies.</STRING>
+		<STRING hash="514051930">We have joined with France on the battlefield. Now, if you wish to continue this alliance we must be rewarded for our loyalty.</STRING>
+		<STRING hash="568989941">Alliances are a result of trust, goodwill, and mutual goals. France has achieved her goals. Now it is time to help Holland achieve hers.</STRING>
+		<STRING hash="236111748">His Majesty Frederick William is pleased to offer an alliance to France.</STRING>
+		<STRING hash="729504849">While His Majesty Frederick William thanks you for looking after his territory, it is well past time to return what is ours. You will be compensated handsomely.</STRING>
+		<STRING hash="115919781">Poland is the rightful property of Saxony.</STRING>
+		<STRING hash="230308850">In our quest to dominate central Europe, we have found a need for Tribute.</STRING>
+		<STRING hash="258729559">We think an alliance would be a most appropriate action at this point in time.</STRING>
+		<STRING hash="279680485">We think a peace treaty would be a most appropriate action at this point in time.</STRING>
+		<STRING hash="561794232">We have little interest in the affairs of Western Europe, but perhaps an alliance there will free up some of our forces to fight elsewhere.</STRING>
+		<STRING hash="499208510">We have no interest in the affairs of Western Europe. Let us sign a peace treaty so that we can focus our efforts elsewhere.</STRING>
+		<STRING hash="206361813">Emperor, you have been a great friend. Let us sign an alliance.</STRING>
+		<STRING hash="215173941">Emperor, this war is leading to no good. Let us sign a peace treaty.</STRING>
+		<STRING hash="466090594">The Austrians wish to discuss a diplomatic resolution to this war with the great general who has defeated their armies.</STRING>
+		<STRING hash="2000285">Accept</STRING>
+		<STRING hash="2245578">Decline</STRING>
+		<STRING hash="260406479">The Austrians tire of this endless war. They wish to hold negotiations for its end.</STRING>
+		<STRING hash="237380801">The British diplomat wishes to confer with you about diplomatic matters.</STRING>
+		<STRING hash="218862464">The British diplomat has arrived to bargain over one of our colonies.</STRING>
+		<STRING hash="403835900">Tsar Alexander I of Russia wishes to come to an agreement that will end the war between our nations.</STRING>
+		<STRING hash="375851769">Emperor Franz I of Austria wants to talk with you about what it will take to end our differences.</STRING>
+		<STRING hash="317038173">The Prussian diplomat has arrived, looking to discuss current Franco-Prussian relation.</STRING>
+		<STRING hash="396537502">The Sultan of the Ottoman Turks desires to settle the current dispute between France and his empire.</STRING>
+		<STRING hash="433248594">King George III of Britain is asking to negotiate with you about the current conflict between our nations.</STRING>
+		<STRING hash="656482967">The Austrians are outraged at our current presence in Italy. They wish to confer with you to reach an agreement that will make both of us happy.</STRING>
+		<STRING hash="588662996">The Papal States are upset at our presence in Italy. They wish to confer with you to reach an agreement that will make both of us happy.</STRING>
+		<STRING hash="295319578">The Dutch no longer want to continue this war against us and have come to negotiate.</STRING>
+		<STRING hash="429419494">The Spanish hope to end current hostilities with France by sitting down at the negotiating table with you.</STRING>
+		<STRING hash="304483193">Queen Maria I of Portugal desires to chat with you about Franco-Portuguese relations.</STRING>
+		<STRING hash="281341168">Our allies the Bavarians wish to discuss compensation for their continued support.</STRING>
+		<STRING hash="243576600">Our allies the Saxons desire to discuss a reward for their continued support.</STRING>
+		<STRING hash="361671679">Stadtholder William V of the Dutch wishes to chat about compensation for his continued support.</STRING>
+		<STRING hash="257061461">Frederick William I wishes to discuss Franco-Prussian diplomatic relations.</STRING>
+		<STRING hash="239806789">The Prussians have invited us to sit down at the negotiating table with them.</STRING>
+		<STRING hash="207304135">King Frederick Augustus I of Saxony desires an audience with you.</STRING>
+		<STRING hash="142293109">The Swiss have requested an audience with you.</STRING>
+		<STRING hash="269622059">The Sultan of the Ottoman Empire desires to discuss relations between our empires.</STRING>
+		<STRING hash="197086462">The Swedish wish to talk with you at the negotiating table.</STRING>
+		<STRING hash="250117378">The Austrians wish to discuss a possible diplomatic resolution to this war.</STRING>
+		<STRING hash="274822451">The Austrians tire of this endless war. They wish to initiate negotiations to end it.</STRING>
+		<STRING hash="246885021">The British ambassador wishes to confer with you about diplomatic matters.</STRING>
+		<STRING hash="230603736">The British diplomat wishes to discuss the status of one of our colonies.</STRING>
+		<STRING hash="427076144">Tsar Alexander I of Russia wishes to discuss a possible agreement that will end the war between our nations.</STRING>
+		<STRING hash="291528613">Emperor Franz I of Austria wishes to reach an agreement that will end our differences.</STRING>
+		<STRING hash="323640156">The Prussian diplomat has arrived, looking to discuss current Franco-Prussian relations.</STRING>
+		<STRING hash="466817845">King George III of Britain wishes to negotiate with you about an end of the current conflict between our nations.</STRING>
+		<STRING hash="684884980">The Austrians are outraged at our current presence in Italy. They wish to initiate discussions about an agreement that will make both sides happy.</STRING>
+		<STRING hash="609125254">The Papal States are upset at our intrusion in Italy. They wish to initiate discussions about an agreement that will make both sides happy.</STRING>
+		<STRING hash="290999191">Our allies, the Bavarians, wish to discuss compensation for their continued support.</STRING>
+		<STRING hash="257711827">Our allies, the Saxons, desire to discuss a reward for their continued support.</STRING>
+	</FILE>
+	<FILE hash="9329244" name="napoleon_init">
+		<STRING hash="722043473">It is true we have had a Revolution--but not enough of one to give a mere general, and a young one at that, the authority to direct France's foreign policy!</STRING>
+		<STRING hash="1054242774">Either take charge of the Army of Italy in Marseilles and capture the Sardinian territory of Piedmont, or take charge of the Army of the West in Paris and put down the French Royalist revolt in Burgundy.</STRING>
+	</FILE>
+	<FILE hash="19597142" name="napoleon_post_turn">
+		<STRING hash="434310154">The territory of Savoy has decided to join the French republic. They were impressed by your victory in Piedmont.</STRING>
+		<STRING hash="324283142">As thanks for saving them in Lombardy, the Austrians have signed a peace treaty with us.</STRING>
+		<STRING hash="304936551">As thanks for saving them in Lombardy, the Austrians have signed an alliance with us.</STRING>
+		<STRING hash="263515778">As thanks for saving them in Lombardy, the Austrians have given us 50 Tribute.</STRING>
+		<STRING hash="440692508">Impressed with your victory in the last battle, the Sardinians have decided to become France's vassal.</STRING>
+		<STRING hash="1240685">Genoa</STRING>
+		<STRING hash="298622967">In honor of the Genoans’ courage in the last battle, you have changed the name of Piedmont to Genoa.</STRING>
+		<STRING hash="376169882">The people of Moravia have chosen to join with the Prussians rather than subsist under your rule.</STRING>
+		<STRING hash="352748180">The people of Moravia have chosen to join with the Saxons rather than subsist under your rule.</STRING>
+		<STRING hash="386801883">The people of Moravia have chosen to join with the Bavarians rather than subsist under your rule.</STRING>
+		<STRING hash="367887893">The people of Moravia have chosen to join with the Russians rather than subsist under your rule.</STRING>
+		<STRING hash="1823033881">With the conquest of the Spanish capital, we have taken control of the Louisiana Territory and with this have gained total control of the Mississippi River. The Americans are known to have an interest in free passage on the Mississippi River. If we wait long enough perhaps they will make us an offer.</STRING>
+		<STRING hash="615806446">A representative from the United States of America is here inquiring about travel rights on the Mississippi River. Would you like to meet with him?</STRING>
+		<STRING hash="347227">Yes</STRING>
+		<STRING hash="135770">No</STRING>
+		<STRING hash="671650921">American Representative: We would like to purchase the city of New Orleans in order to secure free passage on the Mississippi River. We offer 25 Tribute.</STRING>
+		<STRING hash="571788">Sell</STRING>
+		<STRING hash="4801461">Don't Sell</STRING>
+		<STRING hash="13384589">Offer Louisiana</STRING>
+		<STRING hash="447674685">American Representative: You are a most reasonable ruler. I am glad we could complete this transaction.</STRING>
+		<STRING hash="307672020">American Representative: That is most unfortunate. Perhaps one day you will reconsider.</STRING>
+		<STRING hash="617562490">American Representative: It is most unfortunate that you do not agree to that price. Perhaps we can still purchase New Orleans for 25 Tribute?</STRING>
+		<STRING hash="22541376">You have been exiled!</STRING>
+		<STRING hash="-1710961553">You have suffered a great defeat. The French people have given up on you, and your opponents have exiled you from the Continent to the tiny island of Elba. There is still hope, however. If you were to escape and win a magnificent victory, the French people would surely accept you as their leader again. Win the battle and attempt to return France to its glory.</STRING>
+		<STRING hash="15847397">Return from Exile!</STRING>
+		<STRING hash="1192084707">You realize that much has changed in Europe in your absence. Those who oppose you have gathered their forces north of France, in the Low Countries. If you hope to save France you must attack Belgium and defeat your enemies.</STRING>
+		<STRING hash="-1940893784">The French people are like most--they will cheer a victor as long as he keeps winning, and abandon him the moment he suffers a reverse. Your people have deposed you, and your former foes have sent you into exile. This time, your enemies have sent you to an island far from Europe, from where you can never escape. Your days of glory are at an end.</STRING>
+		<STRING hash="658078996">You have impressed the Directorate. Due to France's greater interest in the coast off of Italy, you are ordered to capture the island of Corsica.</STRING>
+		<STRING hash="1902297519">You have impressed the Directorate. It orders you to continue advancing into Northern Italy and capture the Austrian territory of Lombardy. Also, the Army of the West in Paris has been defeated, so the Directorate now sends you its full support and gives you a Metal Economic Boom bonus card.</STRING>
+		<STRING hash="729728208">The members of the Directorate are disappointed with the result of your last battle. They send you a Mercenaries bonus card in the hope that you will not repeat this mistake.</STRING>
+		<STRING hash="1570612281">The Directorate demands that you explain yourself. You were supposed to attack Piedmont or Burgundy, not rest on your laurels in France! Well, now you have no choice because the Army of the West in Paris has deserted its post. Take the army in Marseilles and capture Piedmont.</STRING>
+		<STRING hash="1124493353">The Directorate is impressed with your progress. It has recalled your army to Piedmont so that you can conquer the Papal States, and provided you with the Propaganda bonus card to help your attack.</STRING>
+		<STRING hash="784660243">The members of the Directorate are mildly pleased with your recent negotiations. They hope you can follow orders this time by conquering Tuscany, the capital of the Papal States.</STRING>
+		<STRING hash="419147406">The Directorate orders you to continue marching through Italy into the heavily defended territory of Venetia.</STRING>
+		<STRING hash="1718478642">Following your recent military successes, the Directorate offers you one of two different commands: You can either lead the army that will invade Spain, or take command of an army that is being sent to conquer North Africa. Choose which army you will command, then attack!</STRING>
+		<STRING hash="1924285553">The Directorate has ordered you and your army back to Paris. It wants you to drive the British out of Brittany before you do anything else. In addition, the Army of Italy in Marseilles has been defeated, so the Directorate is putting its full support behind you and has given you a Food Economic Boom.</STRING>
+		<STRING hash="848534264">The Directorate is disappointed with the result of your last battle. They will provide you with extra troops to start your next battle in the hope that you will not repeat this mistake.</STRING>
+		<STRING hash="596683179">The Directorate has ordered you and your army back to Paris. They want you to drive the Austrians from Belgium before you do anything else.</STRING>
+		<STRING hash="1718820985">Following your recent military successes, the Directorate offers you one of two different commands: You can either lead the army that will invade Spain, or take command of an army that is being sent to conquer North Africa. Choose which army you will command, then attack!</STRING>
+		<STRING hash="504837274">The Directorate congratulates you on your continued success. Keep them pleased by capturing the Spanish territory of Seville.</STRING>
+		<STRING hash="772112639">While the Directorate is pleased, they will not be truly happy with you until you dethrone the Spanish ruler by capturing the Spanish capital territory of Castile.</STRING>
+		<STRING hash="532803510">The territory of Libya has welcomed our army without a fight. The Directorate orders you onward to capture the treasures of Egypt.</STRING>
+		<STRING hash="186004813">The Directorate wishes you to gain control of Syria.</STRING>
+		<STRING hash="12759365">Crowned Emperor!</STRING>
+		<STRING hash="-1916720339">Your success on the battlefield has made you the toast of Paris! Capitalizing on your rising popularity, you have crowned yourself Emperor of France. You now have full command of the French Empire. While you would like nothing better than to force your will upon the Continent, you will have to use diplomacy if you plan on uniting Europe under your banner.</STRING>
+		<STRING hash="9176178">Return to Map</STRING>
+		<STRING hash="968325826">A new type of Light Infantry, the Royal Guard, has been commissioned to protect you. The Royal Guard has more hit points and armor than Musketeers. They can be trained at your Barracks.</STRING>
+		<STRING hash="722043473">It is true we have had a Revolution--but not enough of one to give a mere general, and a young one at that, the authority to direct France's foreign policy!</STRING>
+		<STRING hash="1276622936">To bring Perfidious Albion, also known as Great Britain, to her knees you must build a Grand Navy. We must balance our resources wisely, however. You must decide how important it is to invade the British Isles.(You have $d0 tribute)</STRING>
+		<STRING hash="2910595">Pay 100.</STRING>
+		<STRING hash="1632344">Pay 50.</STRING>
+		<STRING hash="6207567">Pay Nothing.</STRING>
+		<STRING hash="115987246">Unfortunately you do not have 100 Tribute.</STRING>
+		<STRING hash="106952612">Unfortunately you do not have 50 Tribute.</STRING>
+		<STRING hash="587841711">Excellent. For 25 more tribute we can also send out a decoy fleet, thus reducing Great Britain's defensive strength.(You have $d0 tribute)</STRING>
+		<STRING hash="531958522">The governors of East and West Prussia have allowed Russia to occupy their lands in retaliation for our conquest of Brandenburg!</STRING>
+		<STRING hash="435672511">A group of settlers has come to ask for funding to found a new colony. Do you wish to give them 70 Tribute for funding?</STRING>
+		<STRING hash="960934068">The settlers we sent off to found a colony have sent word that they have established the colony of $STRING0 in the name of France. We will now be receiving Tribute and rare resources from there.</STRING>
+		<STRING hash="1054242774">Either take charge of the Army of Italy in Marseilles and capture the Sardinian territory of Piedmont, or take charge of the Army of the West in Paris and put down the French Royalist revolt in Burgundy.</STRING>
+		<STRING hash="235523265">Increase France's holdings in the Mediterranean by conquering Corsica.</STRING>
+		<STRING hash="329901388">Continue the conquest of Northern Italy by conquering the Austrian territory of Lombardy.</STRING>
+		<STRING hash="289091124">Conquer all of Southern Italy by attacking the Papal States capital of Tuscany.</STRING>
+		<STRING hash="286858082">Complete your conquest of Northern Italy with the defeat of the Austrians in Venetia.</STRING>
+		<STRING hash="204907201">Continue unifying France by expelling the British from Brittany.</STRING>
+		<STRING hash="190298224">Expand French borders by taking Belgium from the Austrians.</STRING>
+		<STRING hash="1060643799">Either take charge of the Army of the South in Bordeaux and capture the Spanish territory of Aragon, or take charge of the Army of the Far East in Marseilles and capture the Turkish territory of Tunisia.</STRING>
+		<STRING hash="206070205">Continue your conquest of Spain by taking the territory of Seville.</STRING>
+		<STRING hash="370982364">Complete your conquest of Spain by defeating the Spanish at their capital territory of Castile.</STRING>
+		<STRING hash="306087937">Continue your conquest of Northern Africa by capturing the Mameluke territory of Egypt.</STRING>
+		<STRING hash="369848295">Expand France's interest in the eastern Mediterranean by taking the Ottoman territory of Syria.</STRING>
+		<STRING hash="27832641">Expand your influence.</STRING>
+		<STRING hash="1016574441">A new type of light infantry, the Imperial Guard, has been commissioned to protect you. The Imperial Guard has more hit points and armor than Musketeers. They can be trained at your Barracks.</STRING>
+		<STRING hash="184068599">The other nations of Europe refuse to negotiate with you.</STRING>
+		<STRING hash="1630967311">To bring Perfidious Albion, also known as Great Britain, to her knees you must build a Grand Navy. We must balance our resources wisely, however. You must decide how important it is to invade the British Isles and spend your resources accordingly. (You have $d0 tribute)</STRING>
+		<STRING hash="596423340">Excellent. For 25 more tribute we can also send out a decoy fleet, thus reducing Great Britain's defensive strength. (You have $d0 tribute)</STRING>
+		<STRING hash="-1605424813">To bring Perfidious Albion, also known as Great Britain, to her knees you must build a Grand Navy. We must balance our resources wisely, however. You must decide how important it is to invade the British Isles and spend your resources accordingly. The more tribute we spend, the larger our fleet will be when we attack Great Britain from France. (You have $d0 tribute)</STRING>
+		<STRING hash="979818522">American Representative: This is most unexpected! I am not really authorized to approve such a large transaction but how can I refuse? We will give you 150 tribute for the Louisiana Territory.</STRING>
+		<STRING hash="607905812">Since no nation recognizes you as the rightful leader of France, you are unable to conduct negotiations or play strategic Bonus Cards.</STRING>
+		<STRING hash="1575501299">You have impressed the Directorate. They order you to continue advancing into Northern Italy and capture the Austrian territory of Lombardy. Also, the Army of the West in Paris has been defeated, so the Directorate now sends you their full support and gives you 25 Tribute.</STRING>
+		<STRING hash="176729667">Be careful of failure, as it will lead to your exile.</STRING>
+		<STRING hash="1605834">Tahiti</STRING>
+		<STRING hash="6902529">Madagascar</STRING>
+		<STRING hash="1053572">Haiti</STRING>
+		<STRING hash="991702047">American Representative: This is most unexpected! I am not really authorized to approve such a large transaction, but how can I refuse? We will give you 150 Tribute for the Louisiana Territory.</STRING>
+	</FILE>
+	<FILE hash="12436890" name="portugalruntime">
+		<STRING hash="405911052">An emissary of Great Britain approaches: We wish to speak with you on behalf of our Portugese friends.</STRING>
+		<STRING hash="1518462">Listen.</STRING>
+		<STRING hash="7389039">Don't listen.</STRING>
+		<STRING hash="1447832016">We see that you have placed the Portuguese throne in dire straits. We wish to settle this affair without any further bloodshed. If you agree to sign a peace treaty with Portugal and leave this province, then we will also sign a peace treaty with you.</STRING>
+		<STRING hash="17260705">Sign peace treaty.</STRING>
+		<STRING hash="4803036">Don't sign.</STRING>
+		<STRING hash="43569638">Peace signed with Portugal.</STRING>
+		<STRING hash="64653754">Peace signed with Great Britain.</STRING>
+		<STRING hash="1501684512">We see that you have placed the Portuguese throne in dire straits. We wish to settle this affair without any further bloodshed; however, if you do not agree to sign a peace treaty with Portugal and leave this province immediately, we will be forced to take action!</STRING>
+		<STRING hash="103979208">Great Britain has declared war upon you!</STRING>
+	</FILE>
+	<FILE hash="12202353" name="pyramidsruntime">
+		<STRING hash="42056244">Capture the enemy capital.</STRING>
+		<STRING hash="265613437">Hint: Try capturing the coastal city of Alexandria before going further inland.</STRING>
+		<STRING hash="128473547">Hint: Unclaimed territory causes attrition.</STRING>
+		<STRING hash="1068171725">Sire, we should give control of the city of $STRING0 to the Egyptian people. Our war is against the Mamelukes, after all, not the Egyptian people. Also, this could spur goodwill from Egyptian cities down the line.</STRING>
+		<STRING hash="2166865">I agree.</STRING>
+		<STRING hash="1996727">No way.</STRING>
+		<STRING hash="1772669682">You have freed the Egyptians (Purple). As part of the agreement, we will not build any new cities in Egypt. However, since they need our military support, the Egyptians can help us construct our military buildings. If you select one of their Citizens, he will switch to our team temporarily.</STRING>
+		<STRING hash="637464393">Also, the Egyptians have agreed to pay us taxes as thanks for freeing them. At what percent shall we tax the free Egyptians’ (Purple) Commerce?</STRING>
+		<STRING hash="417618">50%</STRING>
+		<STRING hash="251653">33%</STRING>
+		<STRING hash="415233">20%</STRING>
+		<STRING hash="895306220">The Egyptians will pay us 50% of their resource production. You can check the current amount of taxes for each resource by looking at your resource gather rate in the upper left corner.</STRING>
+		<STRING hash="892968309">The Egyptians will pay us 33% of their resource production. You can check the current amount of taxes for each resource by looking at your resource gather rate in the upper left corner.</STRING>
+		<STRING hash="895163369">The Egyptians will pay us 20% of their resource production. You can check the current amount of taxes for each resource by looking at your resource gather rate in the upper left corner.</STRING>
+		<STRING hash="493518268">The people of Rosetta are handing you the city without a fight, due to your humane treatment of the Egyptians in Alexandria.</STRING>
+		<STRING hash="484234682">The people of Alexandria are handing you the city without a fight, due to your humane treatment of the Egyptians in Rosetta.</STRING>
+		<STRING hash="1001904189">Many of the Mamelukes (Blue) have taken to the hillsides. We will now have to worry about their raids. The only way to stop them is to destroy their Fortresses in their cities and to the west and south.</STRING>
+		<STRING hash="282069995">Destroy the Mameluke (Blue) Fortresses in their cities and to the west and south.</STRING>
+		<STRING hash="243130739">Hint: Select an Egyptian citizen in order to construct military buildings.</STRING>
+	</FILE>
+	<FILE hash="9394079" name="pyramidssetup">
+		<STRING hash="3981397">Mamelukes</STRING>
+		<STRING hash="4447723">Egyptians</STRING>
+	</FILE>
+	<FILE hash="4029589" name="romesetup">
+		<STRING hash="4542655">Austrians</STRING>
+		<STRING hash="560387">Rome</STRING>
+		<STRING hash="5232303">Bracciano</STRING>
+		<STRING hash="1514526">Tivoli</STRING>
+	</FILE>
+	<FILE hash="9288958" name="russiaruntime">
+		<STRING hash="49137003">Capture the enemy's capital.</STRING>
+		<STRING hash="30343911">Hint: Capture Smolensk.</STRING>
+		<STRING hash="278060883">Russian partisans have set fire to $s0! The city center has been razed to the ground!</STRING>
+		<STRING hash="31174661">Hint: Capture Borodino.</STRING>
+		<STRING hash="520768923">The Russians have declared that they will continue fighting until the bitter end! Hold Moscow until the timer runs out to defeat them!</STRING>
+		<STRING hash="84447146">Hold Moscow until the timer runs out.</STRING>
+		<STRING hash="758832859">Taking $s0 has increased the security of your supply lines. You can buy 5 Supply Wagons OR 5 Cannons for 5 Tribute at this time. (You have $d1.)</STRING>
+		<STRING hash="1705210">Wagons</STRING>
+		<STRING hash="2497024">Cannons</STRING>
+		<STRING hash="4547367">Don't buy</STRING>
+		<STRING hash="222851116">Regrettably, you do not have enough Tribute to buy the Supply Wagons.</STRING>
+		<STRING hash="227515357">Regrettably, you do not have enough Tribute to buy any more Cannons.</STRING>
+	</FILE>
+	<FILE hash="4420279" name="scansetup">
+		<STRING hash="4542655">Austrians</STRING>
+		<STRING hash="622909">Oslo</STRING>
+		<STRING hash="8449507">Kristiansand</STRING>
+		<STRING hash="5199515">Copenhagen</STRING>
+	</FILE>
+	<FILE hash="7870656" name="syriaruntime">
+		<STRING hash="110225766">Hint: Bribe enemy units to join your side.</STRING>
+		<STRING hash="253655593">Turkish militia have burned $STRING0 to the ground rather than let us have it.</STRING>
+		<STRING hash="96146518">We have recruited a group of Musketeers.</STRING>
+		<STRING hash="90108853">We have recruited a group of Fusiliers.</STRING>
+		<STRING hash="41786137">We have recruited a Hussar.</STRING>
+		<STRING hash="64965151">We have recruited a Supply Wagon.</STRING>
+		<STRING hash="57824781">We have recruited a Cuirassier.</STRING>
+		<STRING hash="53450581">We have recruited a Companion.</STRING>
+		<STRING hash="42453596">We have recruited a Cannon.</STRING>
+		<STRING hash="199444728">Use plunder gained from destroying buildings to build new units.</STRING>
+	</FILE>
+	<FILE hash="17509208" name="transylvaniasetup">
+		<STRING hash="4542655">Austrians</STRING>
+		<STRING hash="12136588">Transylvanians</STRING>
+		<STRING hash="10703799">Council Leader</STRING>
+		<STRING hash="5051721">Vlad Tepes</STRING>
+		<STRING hash="13453649">Village Council</STRING>
+	</FILE>
+	<FILE hash="8985469" name="turkeyruntime">
+		<STRING hash="190598992">We have found new Civic technology in the city of Istanbul.</STRING>
+		<STRING hash="201061012">We have found new Commerce technology in the city of Istanbul.</STRING>
+		<STRING hash="199935311">We have found new Science technology in the city of Istanbul.</STRING>
+		<STRING hash="200714916">We have found new Military technology in the city of Istanbul.</STRING>
+		<STRING hash="169049179">We have found 300 Wealth in the city of Istanbul.</STRING>
+		<STRING hash="411040397">The people of Bursa have shown our Explorers how to see farther. Their Line-of-Sight has been increased.</STRING>
+		<STRING hash="442627207">We have confiscated a group of five War Elephants from a local merchant in Ankara. They are now yours to command.</STRING>
+		<STRING hash="604277737">The people of Famagusta have taught us how to fish these waters better. Our fishing boats will now gather 25% more Food and 10% more Wealth.</STRING>
+		<STRING hash="365402029">Some citizens of Adana have agreed to help you instantly assimilate the next city you capture.</STRING>
+		<STRING hash="197938403">We have found new Military technology in the city of Halab.</STRING>
+		<STRING hash="197553637">We have found new Science technology in the city of Halab.</STRING>
+		<STRING hash="198284499">We have found new Commerce technology in the city of Halab.</STRING>
+		<STRING hash="189100152">We have found new Civic technology in the city of Halab.</STRING>
+		<STRING hash="142829429">We have found 300 Wealth in the city of Halab.</STRING>
+	</FILE>
+	<FILE hash="6613063" name="turkeysetup">
+		<STRING hash="9496664">Ottoman Turks</STRING>
+		<STRING hash="2214953">Ankara</STRING>
+		<STRING hash="1491378">Adana</STRING>
+		<STRING hash="1655769">Halab</STRING>
+		<STRING hash="3693128">Istanbul</STRING>
+		<STRING hash="1406418">Bursa</STRING>
+	</FILE>
+	<FILE hash="9328728" name="wagramruntime">
+		<STRING hash="401489600">Capture the Austrian (Blue) cities of Aspern and Essling to get some of the Austrians to join your side.</STRING>
+		<STRING hash="198345373">Hint: Watch out for an Austrian counter-attack on Vienna.</STRING>
+		<STRING hash="42056244">Capture the enemy capital.</STRING>
+		<STRING hash="271905428">Austrian traitors are flocking to our side upon the capture of Aspern and Essling.</STRING>
+		<STRING hash="181514591">Capture the Austrian (Blue) cities of Aspern and Essling.</STRING>
+	</FILE>
+	<FILE hash="6956322" name="wagramsetup">
+		<STRING hash="4542655">Austrians</STRING>
+	</FILE>
+	<FILE hash="12163677" name="waterlooruntime">
+		<STRING hash="162544109">Take Waterloo and defeat all of the enemy armies.</STRING>
+		<STRING hash="194876195">Build up Waterloo's defenses and defeat all of the enemy armies.</STRING>
+	</FILE>
+	<FILE hash="9355403" name="waterloosetup">
+		<STRING hash="4480869">Prussians</STRING>
+	</FILE>
+	<FILE hash="6396799" name="swedensetup">
+		<STRING hash="4132815">Stockholm</STRING>
+		<STRING hash="3753592">Jonkoping</STRING>
+		<STRING hash="3212793">Goteborg</STRING>
+	</FILE>
+	<FILE hash="698472" name="rome2">
+		<STRING hash="19708841">Napoleon Bonaparte</STRING>
+		<STRING hash="6971851">Pope Pius II</STRING>
+		<STRING hash="1378053">Gaeta</STRING>
+		<STRING hash="560387">Rome</STRING>
+		<STRING hash="5232303">Bracciano</STRING>
+		<STRING hash="3902550">Cerveteri</STRING>
+	</FILE>
+	<FILE hash="5718379" name="maltasetup">
+		<STRING hash="14671356">Knights of Malta</STRING>
+	</FILE>
+	<FILE hash="8769205" name="swedenruntime">
+		<STRING hash="42360484">Hint: Fish to collect Food.</STRING>
+	</FILE>
+	<FILE hash="7764713" name="leipzigsetup">
+		<STRING hash="9237148">Allied Forces</STRING>
+		<STRING hash="33863742">King Federick Wilhelm III</STRING>
+		<STRING hash="18272897">King Stanislaus II</STRING>
+		<STRING hash="24410354">Stadtholder William V</STRING>
+		<STRING hash="10598325">King George III</STRING>
+		<STRING hash="33044676">Elector Charles Theodore</STRING>
+		<STRING hash="24818571">Louis Bourbon-Condé</STRING>
+	</FILE>
+	<FILE hash="21493688" name="transylvaniaruntime">
+		<STRING hash="73208856">Destroy Vlad Tepes's (Purple) Fort.</STRING>
+		<STRING hash="899851">Agree</STRING>
+		<STRING hash="2939154">Disagree</STRING>
+		<STRING hash="216418496">Thank you so much. We shall give you what little help we have to offer.</STRING>
+		<STRING hash="141451090">Capture the Village Council's (Blue) Capital.</STRING>
+		<STRING hash="1001931276">Thank goodness an army has arrived! The terrible Lord Vlad Tepes (Purple) is threatening our village. We are afraid that if we do not get help, he will soon take us over. Will you lend us your support?</STRING>
+	</FILE>
+</ROOT>

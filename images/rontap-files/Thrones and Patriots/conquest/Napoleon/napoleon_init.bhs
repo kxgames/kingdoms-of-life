@@ -1,0 +1,126 @@
+include "game_structs.bhs"
+
+int scenario init_script ()
+{
+
+  String sub_goal1;
+  String sub_goal2;
+
+  ctw_hide_supply_depots();
+
+  //FIRST COALITION, TURNS 1-3, 1795-1797
+  ctw_set_ally("Greeks", "Germans");//austria-prussia
+  ctw_set_ally("Greeks", "British");
+  ctw_set_ally("Greeks", "Spanish");
+  ctw_set_vassal("Greeks", "Mongols");//austria-sardinians
+  ctw_set_ally("Germans", "British");
+  ctw_set_ally("Germans", "Spanish");
+  //ctw_set_ally("Germans", "Mongols");
+  ctw_set_ally("British", "Spanish");
+  //ctw_set_ally("British", "Mongols");
+  //ctw_set_ally("Spanish", "Mongols");
+  ctw_set_vassal("Turks", "Egyptians");
+  ctw_set_vassal("Greeks", "Bantu");
+  ctw_set_war("Persian", "French");
+  set_player_no_negotiate($S("It is true we have had a Revolution - but not enough of one to give a mere general, and a young one at that, the authority to direct France's foreign policy!"));
+  //ctw_center_camera("Austria");
+  ctw_disable_piece_moves();
+  ctw_set_war("French", "Persian");
+  ctw_set_war("French", "Greeks");
+
+  //INTITIAL NO ATTACK ZONES
+  set_no_attack("Aztecs", "Corsica");
+  set_no_attack("Bantu", "Corsica");
+  set_no_attack("Dutch", "Corsica");
+  set_no_attack("Germans", "Corsica");
+  set_no_attack("Greeks", "Corsica");
+  set_no_attack("Inca", "Corsica");
+  set_no_attack("Koreans", "Corsica");
+  set_no_attack("Maya", "Corsica");
+  set_no_attack("Romans", "Corsica");
+  set_no_attack("Russians", "Corsica");
+  set_no_attack("Spanish", "Corsica");
+  set_no_attack("Turks", "Corsica");
+
+  set_no_attack("Aztecs", "Russia");
+  set_no_attack("Bantu", "Russia");
+  set_no_attack("British", "Russia");
+  set_no_attack("Dutch", "Russia");
+  set_no_attack("Germans", "Russia");
+  set_no_attack("Greeks", "Russia");
+  set_no_attack("Inca", "Russia");
+  set_no_attack("Koreans", "Russia");
+  set_no_attack("Maya", "Russia");
+  set_no_attack("Romans", "Russia");
+  set_no_attack("Spanish", "Russia");
+
+  set_no_attack("Aztecs", "Great Britain");
+  set_no_attack("Bantu", "Great Britain");
+  set_no_attack("Dutch", "Great Britain");
+  set_no_attack("Germans", "Great Britain");
+  set_no_attack("Greeks", "Great Britain");
+  set_no_attack("Inca", "Great Britain");
+  set_no_attack("Koreans", "Great Britain");
+  set_no_attack("Maya", "Great Britain");
+  set_no_attack("Romans", "Great Britain");
+  set_no_attack("Spanish", "Great Britain");
+
+  set_no_attack("Aztecs", "Austria");
+  set_no_attack("Bantu", "Austria");
+  set_no_attack("British", "Austria");
+  set_no_attack("Dutch", "Austria");
+  set_no_attack("Germans", "Austria");
+  set_no_attack("Inca", "Austria");
+  set_no_attack("Koreans", "Austria");
+  set_no_attack("Maya", "Austria");
+  set_no_attack("Romans", "Austria");
+  set_no_attack("Russians", "Austria");
+  set_no_attack("Spanish", "Austria");
+
+  set_no_attack("Aztecs", "Brandenburg");
+  set_no_attack("Bantu", "Brandenburg");
+  set_no_attack("British", "Brandenburg");
+  set_no_attack("Dutch", "Brandenburg");
+  set_no_attack("Greeks", "Brandenburg");
+  set_no_attack("Inca", "Brandenburg");
+  set_no_attack("Koreans", "Brandenburg");
+  set_no_attack("Maya", "Brandenburg");
+  set_no_attack("Romans", "Brandenburg");
+  set_no_attack("Russians", "Brandenburg");
+  set_no_attack("Spanish", "Brandenburg");
+
+  set_no_attack("Aztecs", "Turkey");
+  set_no_attack("Bantu", "Turkey");
+  set_no_attack("Dutch", "Turkey");
+  set_no_attack("Inca", "Turkey");
+  set_no_attack("Koreans", "Turkey");
+  set_no_attack("Maya", "Turkey");
+  set_no_attack("Romans", "Turkey");
+  set_no_attack("Spanish", "Turkey");
+
+  set_no_attack("Inca", "Castile");
+  set_no_attack("Spanish", "Portugal");
+
+  set_no_attack("Dutch", "Belgium");
+
+  //make the royalists only interested in France
+  set_no_attack("Persian", "Belgium");
+  set_no_attack("Persian", "Wurttemberg");
+  set_no_attack("Persian", "Savoy");
+
+  set_no_attack("Americans", "Sardina");
+  set_no_attack("Americans", "Kingdom of Naples");
+  set_no_attack("Americans", "Marseilles");
+  set_no_attack("Americans", "Algiers");
+  set_no_attack("Americans", "Libya");
+  set_no_attack("Iroquois", "Burgundy");
+  set_no_attack("Iroquois", "Bavaria");
+  set_no_attack("Iroquois", "Wurttemberg");
+  set_no_attack("Iroquois", "Savoy");
+  set_no_attack("Iroquois", "Lombardy");
+
+  sub_goal1 = $S("Either take charge of the Army of Italy in Marseilles and capture the Sardinian territory of Piedmont, or take charge of the Army of the West in Paris and put down the French Royalist revolt in Burgundy.");
+  ctw_set_sub_goals(sub_goal1, sub_goal2);
+
+  return true;
+}

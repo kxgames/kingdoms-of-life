@@ -1,0 +1,9 @@
+      
+//return true to use only the links specified here, return false to 
+int scenario links (String tribe)
+{
+
+  static int random_number_guy = get_ctw_seed() % 3;
+    
+  return false;
+}
