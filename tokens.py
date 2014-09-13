@@ -1,4 +1,4 @@
-import kxg, networkx
+import kxg, vecrec, networkx, itertools
 import messages, helpers, gui, arguments
 
 class World (kxg.World):
@@ -560,44 +560,199 @@ class Player (kxg.Token):
 
 class Map (kxg.Token):
 
-    terrains = { # (fold)
-            (0, 255, 0): "land",
-            (0, 0, 255): "sea"
+    terrains = {    # (fold)
+            (0, 255, 0): 'land',
+            (0, 0, 255): 'sea'
     }
+
+    resources = (   # (fold)
+            'spiral',
+            'wheel',
+            'quarter',
+            'oculus',
+            'moon',
+    )
+
 
     def __init__(self, path):
         kxg.Token.__init__(self)
         self.path = path
         self.tiles = {}
-        self.graph = None
+        self.graphs = {}
+        self.resource_tiles = set()
         self.rows, self.columns = 0, 0
-
-    def __getitem__(self, index):
-        return self.grid[index]
 
     def __str__(self):
         return '<Map w={} h={}>'.format(self.columns, self.rows)
 
+    def __getitem__(self, index):
+        return self.tiles[index]
+
     def setup(self, world):
+        self.setup_tiles()
+        self.setup_graphs()
+        self.setup_resources()
+
+    def setup_tiles(self):
         from PIL import Image
 
         image = Image.open(self.path)
         self.columns, self.rows = image.size
 
-        self.graph = networkx.grid_2d_graph(self.rows, self.columns)
+        for row, col in self.yield_indices():
+            pixel = image.getpixel((col, row))
+            terrain = Map.terrains[pixel]
+            self.tiles[row, col] = Tile(row, col, terrain)
+    
+    def setup_graphs(self):
+        # Connect the tiles into graph structures that can easily be searched 
+        # (for shortest paths and so forth).  Two graphs are currently created: 
+        # one with all the land tiles and another with all the sea tiles.  This 
+        # makes it possible to find paths for both land and sea units.  More 
+        # graphs may be necessary as we add units that move in different ways.
 
-        for row in range(self.rows):
-            for col in range(self.columns):
-                pixel = image.getpixel((col, row))
-                terrain = Map.terrains[pixel]
-                self.tiles[row, col] = Tile(row, col, terrain)
+        self.graphs = {
+                'land': networkx.Graph(),
+                'sea': networkx.Graph()
+        }
+
+        # Fill each graphs with the appropriate tiles.
+
+        for tile in self.yield_tiles():
+            if tile.is_land: self.graphs['land'].add_node(tile)
+            if tile.is_sea: self.graphs['sea'].add_node(tile)
+
+        # Create edges for all the graphs.  Diagonal edges are included.
+
+        half_neighbors = lambda row, col: [
+                        (row + 1, col + 0),
+                        (row + 1, col + 1),
+                        (row + 0, col + 1),
+                        (row - 1, col + 1) ]
+
+        for row_1, col_1 in self.yield_indices():
+            index_1 = row_1, col_1
+            tile_1 = self.tiles[index_1]
+
+            for row_2, col_2 in half_neighbors(row_1, col_1):
+                index_2 = row_2, col_2
+                tile_2 = self.tiles.get(index_2)
+
+                if tile_2 is None:
+                    continue
+
+                weight = vecrec.get_distance(index_1, index_2)
+
+                if tile_1.is_land and tile_2.is_land:
+                    self.graphs['land'].add_edge(tile_1, tile_2, weight=weight)
+
+                if tile_1.is_sea and tile_2.is_sea:
+                    self.graphs['sea'].add_edge(tile_1, tile_2, weight=weight)
+
+    def setup_resources(self):
+        import random
+
+        num_resources = 40
+        resource_spacing = 20
+        tile_list = list(self.tiles.values())
+
+        def location_ok(tile):
+            if not tile.is_land: return False
+
+            # Require that the tile and all it's neighbors are land.
+
+            for neighbor in self.yield_neighbors(tile):
+                if not neighbor.is_land: return False
+
+            # Require that there's no other resource within some radius.
+            
+            min_distance = float('inf')
+
+            for resource_tile in self.resource_tiles:
+                distance = vecrec.get_distance(tile.index, resource_tile.index)
+                min_distance = min(distance, min_distance)
+                if min_distance < resource_spacing: return False
+
+            # If resource looks good, add it to the map.
+
+            return True
+
+        while len(self.resource_tiles) < num_resources:
+            tile = random.choice(tile_list)
+
+            if location_ok(tile):
+                tile.resource = random.choice(self.resources)
+                self.resource_tiles.add(tile)
+
+        for tile in self.resource_tiles:
+            print(tile)
+
+    def find_path(self, source, target, graph='land'):
+        from networkx.algorithms.shortest_paths import astar_path
+        return astar_path(
+                self.graphs[graph], source, target, self.a_star_heuristic)
+
+    def find_path_distance(self, source, target, graph='land'):
+        from networkx.algorithms.shortest_paths import astar_path_length
+        return astar_path_length(
+                self.graphs[graph], source, target, self.a_star_heuristic)
+
+    @staticmethod
+    def a_star_heuristic(a, b):
+        return vecrec.get_distance(a.index, b.index)
+
+    def yield_indices(self):
+        return itertools.product(range(self.rows), range(self.columns))
+
+    def yield_tiles(self):
+        return iter(self.tiles.values())
+
+    def yield_neighbors(self, tile):
+        row, col = tile.index
+
+        neighbors = [
+                (row - 1, col),
+                (row + 1, col),
+                (row, col - 1),
+                (row, col + 1),
+        ]
+        for index in neighbors:
+            tile = self.tiles.get(index)
+            if tile is not None: yield tile
 
 
 class Tile:
 
     def __init__(self, row, col, terrain):
-        self.node = row, col
+        self.row, self.col = row, col
         self.terrain = terrain
+        self.resource = None
+    
+    def __str__(self):
+        msg = '<Tile row={0.row} col={0.col} terrain={0.terrain}'
+        if self.resource is not None: msg += ' resource={0.resource}'
+        msg += '>'
+        return msg.format(self)
+
+    def __eq__(self, other):
+        # No two tiles should have the same index.
+        return self.index == other.index
+
+    def __hash__(self):
+        # No two tiles should have the same index.
+        return hash(self.index)
+
+    @property
+    def index(self):
+        return self.row, self.col
+
+    @property
+    def is_land(self):
+        return self.terrain == 'land'
+
+    @property
+    def is_sea(self):
+        return self.terrain == 'sea'
 
 
 class Community (kxg.Token):

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+# Imports (fold)
 import kxg
 import tokens
 import messages
@@ -13,9 +14,12 @@ import numpy
 import operator
 import pyglet
 import random
+import vecrec
 
 from pyglet.graphics import OrderedGroup
 from kxg.tools import printf
+from vecrec import Vector
+
 
 class Gui (kxg.Actor):
 
@@ -72,7 +76,7 @@ class Gui (kxg.Actor):
         self.teardown_pregame()
 
         viewport = glooey.Viewport()
-        map_widget = MapWidget(self.world.map)
+        map_widget = MapWidget(self.world)
 
         self.gui.add(viewport)
         viewport.add(map_widget)
@@ -110,10 +114,11 @@ class Gui (kxg.Actor):
 
 class MapWidget (glooey.Widget):
 
-    def __init__(self, map):
+    def __init__(self, world):
         super(MapWidget, self).__init__()
 
-        self.map = map
+        self.world = world
+        self.map = world.map
         self.sprites = []
 
         tileset_path = 'images/open-game-art/outdoor-tileset.png'
@@ -123,11 +128,44 @@ class MapWidget (glooey.Widget):
         self.tile_width = self.tileset[0].width
         self.tile_height = self.tileset[0].height
 
+        resources_path = 'images/resource-icons.png'
+        resources_image = pyglet.resource.image(resources_path)
+
+        self.resources = pyglet.image.ImageGrid(resources_image, 4, 8)
+        self.resource_indices = {
+                'target':  (3, 0),
+                'spiral':  (2, 0),
+                'claw':    (1, 0),
+                'echelon': (3, 1),
+                'chevron': (1, 1),
+                'wave':    (0, 1),
+                'split':   (3, 2),
+                'wheel':   (2, 2),
+                'cross':   (1, 2),
+                'half':    (1, 3),
+                'quarter': (0, 3),
+                'chess':   (3, 4),
+                'pie':     (2, 4),
+                'ridge':   (1, 4),
+                'valley':  (0, 4),
+                'north':   (3, 5),
+                'south':   (2, 5),
+                'oculus':  (1, 5),
+                'moon':    (0, 5),
+                'one':     (3, 6),
+                'two':     (2, 6),
+                'three':   (1, 6),
+        }
+
     def claim(self):
         self.min_width = self.tile_width * (self.map.columns - 1)
         self.min_height = self.tile_height * (self.map.rows - 1)
 
     def draw(self):
+        self.draw_map()
+        self.draw_resources()
+
+    def draw_map(self):
         for row in range(self.map.rows - 1):
             for col in range(self.map.columns - 1):
                 terrains = (
@@ -198,8 +236,7 @@ class MapWidget (glooey.Widget):
                     printf('Unsupported tile at {}x{}', row, col)
                     continue
 
-                x = col * self.tile_width
-                y = self.rect.height - (row + 1) * self.tile_height
+                x, y = self.get_pixel_coords(col, row)
 
                 # It seems like I have to keep references to all my sprites in 
                 # order to keep them from getting garbage collected.
@@ -208,6 +245,37 @@ class MapWidget (glooey.Widget):
                 sprite = pyglet.sprite.Sprite(
                         image, x, y, batch=self.batch, group=self.group)
                 self.sprites.append(sprite)
+
+    def draw_resources(self):
+        for tile in self.map.resource_tiles:
+            image_index = self.resource_indices[tile.resource]
+            image = self.resources[image_index]
+            x, y = self.get_pixel_coords(tile.col, tile.row)
+
+            sprite = pyglet.sprite.Sprite(
+                    image, x, y, batch=self.batch, group=self.group)
+            self.sprites.append(sprite)
+
+    @vecrec.accept_anything_as_vector
+    def get_world_coords(self, pixel_coords):
+        x = pixel_coords.x / self.tile_height
+        y = (self.rect.height - pixel_coords.y) / self.tile_height - 1
+        return Vector(x, y)
+
+    @vecrec.accept_anything_as_vector
+    def get_pixel_coords(self, world_coords):
+        x = world_coords.x * self.tile_width
+        y = self.rect.height - (world_coords.y + 1) * self.tile_height
+        return Vector(x, y)
+
+
+class MapExtension:
+
+    def setup(gui):
+        map = gui.world.map
+
+        map.setup.connect(self.setup)
+        map.setup.disconnect()
 
 
 
