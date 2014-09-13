@@ -1,0 +1,687 @@
+<ROOT>
+  <!-- LOCALIZATION: All STRING elements under ALTERNATENAMES/EPOCHTYPE and ALTERNATENAMES2/EPOCHTYPE-->
+  <ALTERNATENAMES>
+    <EPOCHTYPE name="Written Word">
+      <STRING>文字</STRING>
+      <STRING>教育</STRING>
+      <STRING>演繹法</STRING>
+      <STRING>生物学</STRING>
+      <STRING>解剖学</STRING>
+      <STRING>熱力学</STRING>
+      <STRING>統計学</STRING>
+      <STRING>原子物理学</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Mathematics">
+      <STRING>灌漑</STRING>
+      <STRING>数学</STRING>
+      <STRING>時間管理</STRING>
+      <STRING>経験論</STRING>
+      <STRING>機械的エネルギー</STRING>
+      <STRING>電磁気学</STRING>
+      <STRING>音響学</STRING>
+      <STRING>遺伝学</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Chemistry">
+      <STRING>天文観測</STRING>
+      <STRING>水力エネルギー</STRING>
+      <STRING>化学</STRING>
+      <STRING>科学的方法</STRING>
+      <STRING>計算法</STRING>
+      <STRING>薬学</STRING>
+      <STRING>相対性原理</STRING>
+      <STRING>量子力学</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Laws of Nature">
+      <STRING>てこ装置</STRING>
+      <STRING>温度</STRING>
+      <STRING>園芸学</STRING>
+      <STRING>自然科学</STRING>
+      <STRING>地質学</STRING>
+      <STRING>予防接種</STRING>
+      <STRING>微生物学</STRING>
+      <STRING>マイクロチップ</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Electricity">
+      <STRING>暦法</STRING>
+      <STRING>風力エネルギー</STRING>
+      <STRING>天文学</STRING>
+      <STRING>国語</STRING>
+      <STRING>電気学</STRING>
+      <STRING>航空学</STRING>
+      <STRING>抗生物質</STRING>
+      <STRING>天体物理学</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Electronics">
+      <STRING>度量衡</STRING>
+      <STRING>占星術</STRING>
+      <STRING>機械</STRING>
+      <STRING>科学文献</STRING>
+      <STRING>植物学</STRING>
+      <STRING>電子工学</STRING>
+      <STRING>気象学</STRING>
+      <STRING>レーザー技術</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Computerization">
+      <STRING>熱伝達</STRING>
+      <STRING>理学療法</STRING>
+      <STRING>光学</STRING>
+      <STRING>物理学</STRING>
+      <STRING>進化論</STRING>
+      <STRING>水力発電</STRING>
+      <STRING>コンピュータ</STRING>
+      <STRING>光ファイバー</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Barter">
+      <STRING>物々交換</STRING>
+      <STRING>道路</STRING>
+      <STRING>地図作製法</STRING>
+      <STRING>コンパス</STRING>
+      <STRING>経度</STRING>
+      <STRING>財貨基準</STRING>
+      <STRING>民間企業</STRING>
+      <STRING>スーパーハイウェイ</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Coinage">
+      <STRING>駄獣による運搬</STRING>
+      <STRING>貨幣制度</STRING>
+      <STRING>天文航法</STRING>
+      <STRING>緯度</STRING>
+      <STRING>中央銀行システム</STRING>
+      <STRING>電信電話</STRING>
+      <STRING>マスメディア</STRING>
+      <STRING>決済規則</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Trade">
+      <STRING>工芸技術</STRING>
+      <STRING>探査</STRING>
+      <STRING>交易</STRING>
+      <STRING>地理学</STRING>
+      <STRING>鉄道</STRING>
+      <STRING>株式取引</STRING>
+      <STRING>準備通貨</STRING>
+      <STRING>衛星通信</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Mercantilism">
+      <STRING>コンテナ</STRING>
+      <STRING>筆記具</STRING>
+      <STRING>紙幣</STRING>
+      <STRING>商業</STRING>
+      <STRING>郵便制度</STRING>
+      <STRING>独占禁止法</STRING>
+      <STRING>宣伝</STRING>
+      <STRING>リサイクル</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Finance">
+      <STRING>製織</STRING>
+      <STRING>桁橋</STRING>
+      <STRING>離隔測定</STRING>
+      <STRING>測量</STRING>
+      <STRING>金融</STRING>
+      <STRING>無線通信</STRING>
+      <STRING>精密技術</STRING>
+      <STRING>自由貿易</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Assembly Line">
+      <STRING>輸送車</STRING>
+      <STRING>そろばん</STRING>
+      <STRING>言語学</STRING>
+      <STRING>運河</STRING>
+      <STRING>会計学</STRING>
+      <STRING>組立ライン</STRING>
+      <STRING>テレビ</STRING>
+      <STRING>インターネット</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Globalization">
+      <STRING>羅針盤</STRING>
+      <STRING>紙と羊皮紙</STRING>
+      <STRING>献上品</STRING>
+      <STRING>通貨交換</STRING>
+      <STRING>保護関税</STRING>
+      <STRING>写真と映画</STRING>
+      <STRING>グローバリゼーション</STRING>
+      <STRING>無線技術</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="City State">
+      <STRING>市政</STRING>
+      <STRING>政府</STRING>
+      <STRING>主権</STRING>
+      <STRING>政治</STRING>
+      <STRING>人権</STRING>
+      <STRING>立憲君主国</STRING>
+      <STRING>大衆主義</STRING>
+      <STRING>市民権</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Empire">
+      <STRING>伝統と儀式</STRING>
+      <STRING>帝政</STRING>
+      <STRING>財務</STRING>
+      <STRING>植民地政策</STRING>
+      <STRING>連邦制度</STRING>
+      <STRING>協定と同盟</STRING>
+      <STRING>国内歳入</STRING>
+      <STRING>都市再開発</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Feudalism">
+      <STRING>令状と法令</STRING>
+      <STRING>議会</STRING>
+      <STRING>封建制</STRING>
+      <STRING>警察隊</STRING>
+      <STRING>勢力均衡</STRING>
+      <STRING>法による支配</STRING>
+      <STRING>予算管理</STRING>
+      <STRING>政府倫理</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Divine Right">
+      <STRING>祖先崇拝</STRING>
+      <STRING>行政官</STRING>
+      <STRING>公務</STRING>
+      <STRING>神権政治</STRING>
+      <STRING>権利章典</STRING>
+      <STRING>実益政策</STRING>
+      <STRING>国民参政権</STRING>
+      <STRING>世論</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Constitution">
+      <STRING>決定議会</STRING>
+      <STRING>法学</STRING>
+      <STRING>政治的手腕</STRING>
+      <STRING>官僚主義</STRING>
+      <STRING>憲法</STRING>
+      <STRING>国際連盟</STRING>
+      <STRING>ニュー ディール</STRING>
+      <STRING>二大政党主義</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Great Power">
+      <STRING>民法</STRING>
+      <STRING>立法行為</STRING>
+      <STRING>裁判権</STRING>
+      <STRING>政治機構</STRING>
+      <STRING>投票権</STRING>
+      <STRING>帝国主義</STRING>
+      <STRING>国際連合</STRING>
+      <STRING>国家管理</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="International Law">
+      <STRING>民事裁判</STRING>
+      <STRING>道徳</STRING>
+      <STRING>専制政治</STRING>
+      <STRING>革命</STRING>
+      <STRING>政党政治</STRING>
+      <STRING>地方分権制度</STRING>
+      <STRING>国際法</STRING>
+      <STRING>新世界秩序</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="The Art of War">
+      <STRING>兵法</STRING>
+      <STRING>士官</STRING>
+      <STRING>現地徴兵部隊</STRING>
+      <STRING>火力</STRING>
+      <STRING>士官学校</STRING>
+      <STRING>参謀</STRING>
+      <STRING>軍事諜報部</STRING>
+      <STRING>軍産複合体</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Mercenaries">
+      <STRING>軍事教練</STRING>
+      <STRING>傭兵</STRING>
+      <STRING>兵士</STRING>
+      <STRING>鉄砲鍛冶</STRING>
+      <STRING>国家警備隊</STRING>
+      <STRING>連合部隊戦術</STRING>
+      <STRING>心理戦</STRING>
+      <STRING>治安維持</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Standing Army">
+      <STRING>軍隊</STRING>
+      <STRING>指揮官</STRING>
+      <STRING>正規軍</STRING>
+      <STRING>弾道学</STRING>
+      <STRING>兵站部隊</STRING>
+      <STRING>謀略</STRING>
+      <STRING>レーダーとソナー</STRING>
+      <STRING>兵役制度</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Conscription">
+      <STRING>演習</STRING>
+      <STRING>新兵動員</STRING>
+      <STRING>騎士道と紋章</STRING>
+      <STRING>徴兵制</STRING>
+      <STRING>スパイ戦</STRING>
+      <STRING>塹壕戦</STRING>
+      <STRING>誘導兵器</STRING>
+      <STRING>統一部隊</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Levee en Masse">
+      <STRING>規律</STRING>
+      <STRING>大規模戦略</STRING>
+      <STRING>装甲板</STRING>
+      <STRING>連隊組織</STRING>
+      <STRING>義勇兵</STRING>
+      <STRING>潜入作戦</STRING>
+      <STRING>ゲリラ戦</STRING>
+      <STRING>精密誘導兵器</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Nation-in-Arms">
+      <STRING>陣形</STRING>
+      <STRING>軍補給所</STRING>
+      <STRING>戦時国際法</STRING>
+      <STRING>士気と団結</STRING>
+      <STRING>通信部隊</STRING>
+      <STRING>軍事国家</STRING>
+      <STRING>協同作戦</STRING>
+      <STRING>電子戦</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Selective Service">
+      <STRING>軍事訓練</STRING>
+      <STRING>焼夷弾</STRING>
+      <STRING>軍公文書</STRING>
+      <STRING>機密性</STRING>
+      <STRING>総力戦</STRING>
+      <STRING>電撃戦</STRING>
+      <STRING>徴兵</STRING>
+      <STRING>防衛システム</STRING>
+    </EPOCHTYPE>
+  </ALTERNATENAMES>
+  <ALTERNATENAMES2>
+    <EPOCHTYPE name="Tactics">
+      <STRING>戦術</STRING>
+      <STRING>戦術</STRING>
+      <STRING>戦術</STRING>
+      <STRING>戦術</STRING>
+      <STRING>戦術</STRING>
+      <STRING>戦術</STRING>
+      <STRING>戦術</STRING>
+      <STRING>戦術</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Operations">
+      <STRING>作戦</STRING>
+      <STRING>作戦</STRING>
+      <STRING>作戦</STRING>
+      <STRING>作戦</STRING>
+      <STRING>作戦</STRING>
+      <STRING>作戦</STRING>
+      <STRING>作戦</STRING>
+      <STRING>作戦</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Strategy">
+      <STRING>戦略</STRING>
+      <STRING>戦略</STRING>
+      <STRING>戦略</STRING>
+      <STRING>戦略</STRING>
+      <STRING>戦略</STRING>
+      <STRING>戦略</STRING>
+      <STRING>戦略</STRING>
+      <STRING>戦略</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Religion">
+      <STRING>宗教</STRING>
+      <STRING>宗教</STRING>
+      <STRING>宗教</STRING>
+      <STRING>宗教改革</STRING>
+      <STRING>宗教改革</STRING>
+      <STRING>神権政治</STRING>
+      <STRING>神権政治</STRING>
+      <STRING>神権政治</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Monotheism">
+      <STRING>経典</STRING>
+      <STRING>経典</STRING>
+      <STRING>一神教</STRING>
+      <STRING>一神教</STRING>
+      <STRING>宣教師</STRING>
+      <STRING>宣教師</STRING>
+      <STRING>非宗教主義</STRING>
+      <STRING>非宗教主義</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Existentialism">
+      <STRING>聖職者</STRING>
+      <STRING>聖職者</STRING>
+      <STRING>宗派</STRING>
+      <STRING>宗派</STRING>
+      <STRING>実存主義</STRING>
+      <STRING>実存主義</STRING>
+      <STRING>実存主義</STRING>
+      <STRING>実存主義</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Taxation">
+      <STRING>徴税</STRING>
+      <STRING>徴税</STRING>
+      <STRING>徴税</STRING>
+      <STRING>徴税</STRING>
+      <STRING>徴税</STRING>
+      <STRING>徴税</STRING>
+      <STRING>徴税</STRING>
+      <STRING>徴税</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Vassalage">
+      <STRING>忠誠</STRING>
+      <STRING>忠誠</STRING>
+      <STRING>忠誠</STRING>
+      <STRING>忠誠</STRING>
+      <STRING>献上品</STRING>
+      <STRING>献上品</STRING>
+      <STRING>献上品</STRING>
+      <STRING>献上品</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Social Contract">
+      <STRING>契約</STRING>
+      <STRING>契約</STRING>
+      <STRING>契約</STRING>
+      <STRING>契約</STRING>
+      <STRING>契約</STRING>
+      <STRING>契約</STRING>
+      <STRING>契約</STRING>
+      <STRING>契約</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Income Tax">
+      <STRING>宗主権</STRING>
+      <STRING>宗主権</STRING>
+      <STRING>宗主権</STRING>
+      <STRING>所得税</STRING>
+      <STRING>所得税</STRING>
+      <STRING>所得税</STRING>
+      <STRING>所得税</STRING>
+      <STRING>所得税</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Fortification">
+      <STRING>築城術</STRING>
+      <STRING>築城術</STRING>
+      <STRING>築城術</STRING>
+      <STRING>築城術</STRING>
+      <STRING>築城術</STRING>
+      <STRING>築城術</STRING>
+      <STRING>築城術</STRING>
+      <STRING>築城術</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Bombardment">
+      <STRING>射石砲</STRING>
+      <STRING>射石砲</STRING>
+      <STRING>射石砲</STRING>
+      <STRING>射石砲</STRING>
+      <STRING>射石砲</STRING>
+      <STRING>射石砲</STRING>
+      <STRING>射石砲</STRING>
+      <STRING>射石砲</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Strategic Reserves">
+      <STRING>工兵学</STRING>
+      <STRING>工兵学</STRING>
+      <STRING>工兵学</STRING>
+      <STRING>工兵学</STRING>
+      <STRING>戦略予備</STRING>
+      <STRING>戦略予備</STRING>
+      <STRING>戦略予備</STRING>
+      <STRING>戦略予備</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Allegiance">
+      <STRING>忠誠心</STRING>
+      <STRING>忠誠心</STRING>
+      <STRING>忠誠心</STRING>
+      <STRING>忠誠心</STRING>
+      <STRING>忠誠心</STRING>
+      <STRING>忠誠心</STRING>
+      <STRING>忠誠心</STRING>
+      <STRING>忠誠心</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Oath of Fealty">
+      <STRING>絶対的服従</STRING>
+      <STRING>絶対的服従</STRING>
+      <STRING>絶対的服従</STRING>
+      <STRING>絶対的服従</STRING>
+      <STRING>市民権</STRING>
+      <STRING>市民権</STRING>
+      <STRING>市民権</STRING>
+      <STRING>市民権</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Patriotism">
+      <STRING>祖国</STRING>
+      <STRING>祖国</STRING>
+      <STRING>祖国</STRING>
+      <STRING>愛国心</STRING>
+      <STRING>愛国心</STRING>
+      <STRING>愛国心</STRING>
+      <STRING>愛国心</STRING>
+      <STRING>愛国心</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Nationalism">
+      <STRING>国籍</STRING>
+      <STRING>国籍</STRING>
+      <STRING>国籍</STRING>
+      <STRING>国籍</STRING>
+      <STRING>ナショナリズム</STRING>
+      <STRING>ナショナリズム</STRING>
+      <STRING>ナショナリズム</STRING>
+      <STRING>ナショナリズム</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Construction">
+      <STRING>建設</STRING>
+      <STRING>建設</STRING>
+      <STRING>建設</STRING>
+      <STRING>建設</STRING>
+      <STRING>建設</STRING>
+      <STRING>建設</STRING>
+      <STRING>建設</STRING>
+      <STRING>建設</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Architecture">
+      <STRING>建築学</STRING>
+      <STRING>建築学</STRING>
+      <STRING>建築学</STRING>
+      <STRING>建築学</STRING>
+      <STRING>建築学</STRING>
+      <STRING>建築学</STRING>
+      <STRING>建築学</STRING>
+      <STRING>建築学</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Engineering">
+      <STRING>エンジニアリング</STRING>
+      <STRING>エンジニアリング</STRING>
+      <STRING>エンジニアリング</STRING>
+      <STRING>エンジニアリング</STRING>
+      <STRING>エンジニアリング</STRING>
+      <STRING>エンジニアリング</STRING>
+      <STRING>エンジニアリング</STRING>
+      <STRING>エンジニアリング</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Herbal Lore">
+      <STRING>薬草学</STRING>
+      <STRING>薬草学</STRING>
+      <STRING>薬草学</STRING>
+      <STRING>薬草学</STRING>
+      <STRING>ホメオパシー</STRING>
+      <STRING>ホメオパシー</STRING>
+      <STRING>ホメオパシー</STRING>
+      <STRING>ホメオパシー</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Medicine">
+      <STRING>医学</STRING>
+      <STRING>医学</STRING>
+      <STRING>医学</STRING>
+      <STRING>医学</STRING>
+      <STRING>医学</STRING>
+      <STRING>予防医学</STRING>
+      <STRING>予防医学</STRING>
+      <STRING>予防医学</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Pharmaceuticals">
+      <STRING>薬舗</STRING>
+      <STRING>薬舗</STRING>
+      <STRING>薬舗</STRING>
+      <STRING>薬学</STRING>
+      <STRING>薬学</STRING>
+      <STRING>薬学</STRING>
+      <STRING>薬学</STRING>
+      <STRING>薬学</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Forage">
+      <STRING>飼料</STRING>
+      <STRING>飼料</STRING>
+      <STRING>飼料</STRING>
+      <STRING>飼料</STRING>
+      <STRING>飼料</STRING>
+      <STRING>飼料</STRING>
+      <STRING>飼料</STRING>
+      <STRING>飼料</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Supply">
+      <STRING>供給</STRING>
+      <STRING>供給</STRING>
+      <STRING>供給</STRING>
+      <STRING>供給</STRING>
+      <STRING>供給</STRING>
+      <STRING>供給</STRING>
+      <STRING>供給</STRING>
+      <STRING>供給</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Logistics">
+      <STRING>兵站</STRING>
+      <STRING>兵站</STRING>
+      <STRING>兵站</STRING>
+      <STRING>兵站</STRING>
+      <STRING>兵站</STRING>
+      <STRING>兵站</STRING>
+      <STRING>兵站</STRING>
+      <STRING>兵站</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Carpentry">
+      <STRING>木工</STRING>
+      <STRING>木工</STRING>
+      <STRING>木工</STRING>
+      <STRING>木工</STRING>
+      <STRING>木工</STRING>
+      <STRING>林学</STRING>
+      <STRING>林学</STRING>
+      <STRING>林学</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Logging Industry">
+      <STRING>木工業</STRING>
+      <STRING>木工業</STRING>
+      <STRING>旋盤</STRING>
+      <STRING>林業</STRING>
+      <STRING>林業</STRING>
+      <STRING>林業</STRING>
+      <STRING>林業</STRING>
+      <STRING>森林再生</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Papermill">
+      <STRING>製紙</STRING>
+      <STRING>製紙</STRING>
+      <STRING>製紙</STRING>
+      <STRING>製紙</STRING>
+      <STRING>製紙</STRING>
+      <STRING>製紙業</STRING>
+      <STRING>製紙業</STRING>
+      <STRING>製紙業</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Agriculture">
+      <STRING>農業</STRING>
+      <STRING>農業</STRING>
+      <STRING>農業</STRING>
+      <STRING>農業</STRING>
+      <STRING>農業</STRING>
+      <STRING>栽培学</STRING>
+      <STRING>栽培学</STRING>
+      <STRING>栽培学</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Crop Rotation">
+      <STRING>製粉</STRING>
+      <STRING>製粉</STRING>
+      <STRING>製粉</STRING>
+      <STRING>輪作</STRING>
+      <STRING>輪作</STRING>
+      <STRING>土壌保護改良</STRING>
+      <STRING>土壌保護改良</STRING>
+      <STRING>土壌保護改良</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Food Industry">
+      <STRING>食料保存</STRING>
+      <STRING>食料保存</STRING>
+      <STRING>食料保存</STRING>
+      <STRING>食品産業</STRING>
+      <STRING>食品産業</STRING>
+      <STRING>食品産業</STRING>
+      <STRING>冷蔵</STRING>
+      <STRING>冷蔵</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Literacy">
+      <STRING>識字</STRING>
+      <STRING>識字</STRING>
+      <STRING>識字</STRING>
+      <STRING>識字</STRING>
+      <STRING>合理性</STRING>
+      <STRING>合理性</STRING>
+      <STRING>合理性</STRING>
+      <STRING>合理性</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Printing Press">
+      <STRING>写本</STRING>
+      <STRING>写本</STRING>
+      <STRING>印刷</STRING>
+      <STRING>印刷</STRING>
+      <STRING>学術書</STRING>
+      <STRING>学術書</STRING>
+      <STRING>学術書</STRING>
+      <STRING>学術書</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Scientific Method">
+      <STRING>ソクラテス法</STRING>
+      <STRING>ソクラテス法</STRING>
+      <STRING>ソクラテス法</STRING>
+      <STRING>科学的方法</STRING>
+      <STRING>科学的方法</STRING>
+      <STRING>科学的方法</STRING>
+      <STRING>科学的方法</STRING>
+      <STRING>科学的方法</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Institutional Research">
+      <STRING>大学</STRING>
+      <STRING>大学</STRING>
+      <STRING>大学</STRING>
+      <STRING>大学</STRING>
+      <STRING>大学</STRING>
+      <STRING>大学</STRING>
+      <STRING>研究機関</STRING>
+      <STRING>研究機関</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Supercomputers">
+      <STRING>学会</STRING>
+      <STRING>学会</STRING>
+      <STRING>学会</STRING>
+      <STRING>学会</STRING>
+      <STRING>学会</STRING>
+      <STRING>学会</STRING>
+      <STRING>スーパーコンピュータ</STRING>
+      <STRING>スーパーコンピュータ</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Metal Alloys">
+      <STRING>合金</STRING>
+      <STRING>合金</STRING>
+      <STRING>合金</STRING>
+      <STRING>冶金</STRING>
+      <STRING>冶金</STRING>
+      <STRING>冶金</STRING>
+      <STRING>冶金</STRING>
+      <STRING>冶金</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Cold Casting">
+      <STRING>炉</STRING>
+      <STRING>炉</STRING>
+      <STRING>冷間鋳造法</STRING>
+      <STRING>冷間鋳造法</STRING>
+      <STRING>溶鉱炉</STRING>
+      <STRING>溶鉱炉</STRING>
+      <STRING>溶接</STRING>
+      <STRING>溶接</STRING>
+    </EPOCHTYPE>
+    <EPOCHTYPE name="Steel">
+      <STRING>鉱石精錬</STRING>
+      <STRING>鉱石精錬</STRING>
+      <STRING>真鍮</STRING>
+      <STRING>真鍮</STRING>
+      <STRING>鋼鉄</STRING>
+      <STRING>鋼鉄</STRING>
+      <STRING>鋼鉄</STRING>
+      <STRING>鋼鉄</STRING>
+    </EPOCHTYPE>
+  </ALTERNATENAMES2>
+</ROOT>

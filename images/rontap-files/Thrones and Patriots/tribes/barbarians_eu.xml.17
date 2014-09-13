@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Robert Nicaise (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="バイキング">
+	<LEADERS>
+		<LEADER>クヌット大王</LEADER>
+		<LEADER>オラフ王</LEADER>
+		<LEADER>エイリーク血斧王</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>イェリング</CITY>
+		<CITY>ロスキレ</CITY>
+		<CITY>スキリングサル</CITY>
+		<CITY>オーデンセ</CITY>
+		<CITY>リーベ</CITY>
+		<CITY>トロンヘイム</CITY>
+		<CITY>ヘデビィ</CITY>
+		<CITY>ノンネバッケン</CITY>
+		<CITY>ロッデコピンジ</CITY>
+		<CITY>ルンド</CITY>
+		<CITY>ウプサラ</CITY>
+		<CITY>ベストネス</CITY>
+		<CITY>ヨービック</CITY>
+		<CITY>ホイットビー</CITY>
+		<CITY>サーケルビー</CITY>
+		<CITY>ケトルソープ</CITY>
+		<CITY>グリミスタ</CITY>
+		<CITY>イスビスタ</CITY>
+		<CITY>カウパン</CITY>
+		<CITY>ノアールムティエ</CITY>
+		<CITY>ブラッターリッド</CITY>
+		<CITY>ビルカ</CITY>
+		<CITY>ストラヤ ラドガ</CITY>
+		<CITY>ホルムガルド</CITY>
+		<CITY>セバースンド</CITY>
+		<CITY>ウプサラ</CITY>
+		<CITY>ノブゴロド</CITY>
+		<CITY>ハイトハブ</CITY>
+		<CITY>ゴロジシチェ</CITY>
+		<CITY>ダービー</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

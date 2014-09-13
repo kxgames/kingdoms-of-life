@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Bryant Freitag (Big Huge Games) -->
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<ROOT>
+  <MAP>
+    <SEA_MAP value="0"/>
+    <TILESET>
+      <TILECHANCE type="SW_desert" chance="100"/>
+    </TILESET>
+  </MAP>
+  <TERRAIN_GROUPS>
+    <COMMENTS>
+      <!--;Terrain Groupings
+;
+; Amounts & distances scaled to 60x60 (four player) map size.
+; Best to place the terrain features that are most important towards the top of the list
+; note that the terrain is initially filled with fertile...fertile groups can be dropped, but may not do anything
+; Min/Max size, Min/Max groupings can be scaled for map size by saying '3 SCALE' to scale with
+; the axis length, or '3 AREA' to scale with the map area
+;
+; Type          = Terrain Type [Forest, Rocks, Mountains]
+; %         = % Chance to have group
+; Group     = Group # (sequential items w/ same group use same random #)
+; Min #     = number of clumps to place (per player if pattern indicates, otherwise in total, negative = times number of players)
+; Max #     = number of clumps to place (per player if pattern indicates, otherwise in total, negative = times number of players)
+; Pattern   = 0->per player 1->per continent 2->in world 3->in world, but not on a continent with a player
+; MinSize       = Minimum clump size- for mountains, use 1, 2, 3 to specify small, med, large
+; MaxSize       = Maximum clump size- for mountains, use 1, 2, 3 to specify small, med, large, cliffs can go to 4
+; Near      = nearest distance allowed to player start locations
+; Far       = furthest distance allowed from player start locations- only applies to 'per player' pattern
+; Space     = 0->allow this group to join onto others 1->place this group with a 1 spacing around it
+; CoastSpace= 0->allow this group to be next to a coast 1-> force 1 space between this group and the coast
+;  = nearest distance allowed to center of map - does not apply for 'per player' or 'per continent' patterns- 0 to not check this
+;    = furthest distance allowed from center of map - does not apply for 'per player' or 'per continent' patterns- 0 1 to not check this
+  enum CliffFacing
+  {
+    FACE_WORLD_CENTER = 0,
+    FACE_PLAYER_CENTER = 1,
+    FACE_ANY = 2                              ( most non-player-starting cliffs should use this because most smaller cliffs I think can only do this right now )
+  };
+-->
+    </COMMENTS>
+    <GROUPENTRY type="cliffs" comment=" " chance="100" grouping="0" min_clumps="1 min" max_clumps="1 max" pattern="player" min_size="5" max_size="5" city_keep_away="0" city_stay_near="1" mount_space="0" forest_space="0" rock_space="0 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 " cliff_face="1"/>
+    <GROUPENTRY type="cliffs" comment=" " chance="100" grouping="0" min_clumps="1 min" max_clumps="1 max" pattern="world" min_size="6" max_size="6" city_keep_away="6 mindist" city_stay_near="0" mount_space="0" forest_space="0" rock_space="0 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="4" corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 " cliff_face="2"/>
+    <GROUPENTRY type="cliffs" comment=" " chance="100" grouping="0" min_clumps="3 SCALE" max_clumps="5 SCALE" pattern="world" min_size="6" max_size="6" city_keep_away="6 mindist" city_stay_near="0" mount_space="0" forest_space="0" rock_space="0 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0" corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 " cliff_face="2"/>
+    <GROUPENTRY type="mountains" comment="home mountain" chance="0" grouping="0" min_clumps="1 min" max_clumps="1 max" pattern="player" min_size="2" max_size="2" city_keep_away="6 mindist" city_stay_near="7 maxdist" mount_space="6 mntspace" forest_space="0 forestspace" rock_space="0 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 "/>
+    <GROUPENTRY type="trees" comment="home trees" chance="40" grouping="2" min_clumps="1 min" max_clumps="1" pattern="player" min_size="5 minsize" max_size="7" city_keep_away="2 mindist" city_stay_near="4 maxdist" mount_space="2 mntspace" forest_space="1 forestspace" rock_space="1 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0" corner_stay_near="0" edge_keep_away="0" edge_stay_near="0"/>
+    <GROUPENTRY type="trees" comment="home trees" chance="30" grouping="2" min_clumps="1 min" max_clumps="1" pattern="player" min_size="4 minsize" max_size="5" city_keep_away="2 mindist" city_stay_near="4 maxdist" mount_space="2 mntspace" forest_space="1 forestspace" rock_space="1 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0" corner_stay_near="0" edge_keep_away="0" edge_stay_near="0"/>
+    <GROUPENTRY type="trees" comment="home trees" chance="20" grouping="2" min_clumps="2 min" max_clumps="2" pattern="player" min_size="3 minsize" max_size="4" city_keep_away="2 mindist" city_stay_near="4 maxdist" mount_space="2 mntspace" forest_space="1 forestspace" rock_space="1 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 "/>
+    <GROUPENTRY type="trees" comment="home trees" chance="10" grouping="2" min_clumps="1 min" max_clumps="1" pattern="player" min_size="3 minsize" max_size="3" city_keep_away="2 mindist" city_stay_near="4 maxdist" mount_space="2 mntspace" forest_space="1 forestspace" rock_space="1 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 "/>
+    <GROUPENTRY type="trees" comment="more home trees" chance="100" grouping="0" min_clumps="1 min" max_clumps="2" pattern="player" min_size="5 minsize" max_size="7" city_keep_away="8 mindist" city_stay_near="14 maxdist" mount_space="1 mntspace" forest_space="3 forestspace" rock_space="1 rockspace" coast_space="1 coastspace" cent_keep_away="20 SCALE" cent_stay_near="0 " corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="12 SCALE" min_oil="1" max_oil="1"/>
+    <GROUPENTRY type="rocks" comment="home rocks" chance="100" grouping="0" min_clumps="2 min" max_clumps="3" pattern="player" min_size="1 minsize" max_size="2" city_keep_away="3 mindist" city_stay_near="15 maxdist" mount_space="1 mntspace" forest_space="1 forestspace" rock_space="10 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 " min_oil="1" max_oil="1"/>
+    <GROUPENTRY type="cliffs" comment=" " chance="100" grouping="0" min_clumps="2" max_clumps="3" pattern="player" min_size="4" max_size="4" city_keep_away="12" city_stay_near="30 SCALE" mount_space="6" forest_space="1" rock_space="1" coast_space="1 coastspace" cent_keep_away="8" cent_stay_near="0" corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 " cliff_face="2"/>
+    <GROUPENTRY type="cliffs" comment=" " chance="100" grouping="0" min_clumps="3" max_clumps="6" pattern="world" min_size="2" max_size="3" city_keep_away="8" city_stay_near="40 SCALE" mount_space="6" forest_space="1" rock_space="1" coast_space="1 coastspace" cent_keep_away="8" cent_stay_near="0" corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 " cliff_face="2"/>
+    <GROUPENTRY type="mountains" comment="general medium mountains" chance="0" grouping="0" min_clumps="8 SCALE" max_clumps="10 SCALE" pattern="continent" min_size="2" max_size="2" city_keep_away="6 mindist" city_stay_near="0" mount_space="4 mntspace" forest_space="3 forestspace" rock_space="1 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0" corner_stay_near="0" edge_keep_away="0" edge_stay_near="0"/>
+    <GROUPENTRY type="mountains" comment="general large mountains" chance="0" grouping="0" min_clumps="2 SCALE" max_clumps="4 SCALE" pattern="continent" min_size="3" max_size="3" city_keep_away="6 mindist" city_stay_near="0" mount_space="4 mntspace" forest_space="3 forestspace" rock_space="1 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0" corner_stay_near="0" edge_keep_away="0" edge_stay_near="0"/>
+    <GROUPENTRY type="trees" comment="general trees" chance="100" grouping="0" min_clumps="15 SCALE" max_clumps="18 SCALE" pattern="continent" min_size="7 minsize" max_size="16" city_keep_away="15 mindist" city_stay_near="0" mount_space="0 mntspace" forest_space="7 forestspace" rock_space="1 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0" corner_stay_near="0" edge_keep_away="0" edge_stay_near="0"/>
+    <GROUPENTRY type="trees" comment="general trees" chance="100" grouping="0" min_clumps="16 SCALE" max_clumps="20 SCALE" pattern="continent" min_size="3 minsize" max_size="6" city_keep_away="15 mindist" city_stay_near="0" mount_space="0 mntspace" forest_space="5 forestspace" rock_space="1 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0" corner_stay_near="0" edge_keep_away="0" edge_stay_near="0"/>
+    <GROUPENTRY type="rocks" comment="general rocks" chance="100" grouping="0" min_clumps="8 SCALE" max_clumps="11 SCALE" pattern="continent" min_size="2 minsize" max_size="4" city_keep_away="4 mindist" city_stay_near="0" mount_space="1 mntspace" forest_space="1 forestspace" rock_space="10 rockspace" coast_space="1 coastspace" cent_keep_away="0 " cent_stay_near="0 " corner_keep_away="0" corner_stay_near="0" edge_keep_away="0" edge_stay_near="0" min_oil="1" max_oil="1"/>
+  </TERRAIN_GROUPS>
+  <BONUSES>
+    <BONUS type="Early" comment=" " chance="100" group="0" numrare="1 num" pattern="player" saturate="0" player_keep_away="3" player_stay_near="6 far" spacing="8 space" group_spacing="4 grspace" center_keep_away="0 " center_stay_near="0 " corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 "/>
+    <BONUS type="Early" comment=" " chance="100" group="0" numrare="1" pattern="player" saturate="0" player_keep_away="8" player_stay_near="17 far" spacing="8 space" group_spacing="4 grspace" center_keep_away="0 " center_stay_near="0 " corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 "/>
+    <BONUS type="Early" comment="Center" chance="100" group="0" numrare="2 SCALE" pattern="world" saturate="0" player_keep_away="8" player_stay_near="0" spacing="8 space" group_spacing="4 grspace" center_keep_away="0 " center_stay_near="8" corner_keep_away="0 " corner_stay_near="0 " edge_keep_away="0 " edge_stay_near="0 "/>
+    <BONUS type="Early" comment="Miscellaneous" chance="100" group="0" numrare="2 SCALE" pattern="world" saturate="0" player_keep_away="16 SCALE" player_stay_near="0 far" spacing="8 SCALE" group_spacing="16 SCALE" center_keep_away="0" center_stay_near="20 SCALE" corner_keep_away="0" corner_stay_near="0" edge_keep_away="0" edge_stay_near="0"/>
+    <BONUS type="Late" comment=" " chance="100" group="0" numrare="1 SCALE" pattern="player" saturate="0" player_keep_away="12" player_stay_near="24 SCALE" spacing="8 space" group_spacing="6 grspace" center_keep_away="0 " center_stay_near="0 " corner_keep_away="0" corner_stay_near="0" edge_keep_away="0" edge_stay_near="0"/>
+  </BONUSES>
+  <FISH/>
+  <RIVERLIST/>
+</ROOT>

@@ -1,0 +1,49 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="モンゴル">
+	<LEADERS>
+		<LEADER>チンギス ハーン</LEADER>
+		<LEADER>オゴタイ ハーン</LEADER>
+		<LEADER>フビライ ハーン</LEADER>
+		<LEADER>バトゥハン</LEADER>
+		<LEADER>マンドハイ皇后</LEADER>
+		<LEADER>チャビ皇后</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>カラコルム</CITY>
+		<CITY>カーンバリク</CITY>
+		<CITY>タシケント</CITY>
+		<CITY>サマルカンド</CITY>
+		<CITY>シャンツー</CITY>
+		<CITY>西涼</CITY>
+		<CITY>カシュガル</CITY>
+		<CITY>カラコート</CITY>
+		<CITY>ホータン</CITY>
+		<CITY>サライ</CITY>
+		<CITY>ウルゲンチ</CITY>
+		<CITY>タナ</CITY>
+		<CITY>ティフリス</CITY>
+		<CITY>メルブ</CITY>
+		<CITY>新サライ</CITY>
+		<CITY>ブルガル</CITY>
+		<CITY>ホジェント</CITY>
+		<CITY>バルフ</CITY>
+		<CITY>カイフオン</CITY>
+		<CITY>ニンシア</CITY>
+		<CITY>グルジャ</CITY>
+		<CITY>ペシャワール</CITY>
+		<CITY>オトラル</CITY>
+		<CITY>者舌</CITY>
+		<CITY>トゥルファン</CITY>
+		<CITY>ビシバリク</CITY>
+		<CITY>バラサグーン</CITY>
+		<CITY>ガズニ</CITY>
+		<CITY>カブール</CITY>
+		<CITY>カンダハル</CITY>
+		<CITY>ライ</CITY>
+		<CITY>アラムート</CITY>
+		<CITY>アザク</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+	<BUILD_CONTINENT>2 Asian</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

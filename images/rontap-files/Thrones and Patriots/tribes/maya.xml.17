@@ -1,0 +1,46 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="マヤ">
+	<LEADERS>
+		<LEADER>パカル</LEADER>
+		<LEADER>チャク バラム</LEADER>
+		<LEADER>チアム</LEADER>
+		<LEADER>アモク</LEADER>
+		<LEADER>ワカーキ</LEADER>
+		<LEADER>ナチャンカン</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>マヤパン</CITY>
+		<CITY>ティカル</CITY>
+		<CITY>チチェン イツァ</CITY>
+		<CITY>ジビルチャルトゥン</CITY>
+		<CITY>ヤシュハ</CITY>
+		<CITY>アカンケー</CITY>
+		<CITY>チャンプトゥン</CITY>
+		<CITY>アルトゥン ハ</CITY>
+		<CITY>イチュパトゥン</CITY>
+		<CITY>イシュクン</CITY>
+		<CITY>ラマナイ</CITY>
+		<CITY>コパン</CITY>
+		<CITY>ツィミン カス</CITY>
+		<CITY>シュプヒル</CITY>
+		<CITY>ヤシュナ</CITY>
+		<CITY>ウズマル</CITY>
+		<CITY>チプ</CITY>
+		<CITY>ウカナル</CITY>
+		<CITY>ベカン</CITY>
+		<CITY>カミナルフユ</CITY>
+		<CITY>シカランゴ</CITY>
+		<CITY>コチャ</CITY>
+		<CITY>ズィビルノチャク</CITY>
+		<CITY>チュティシテョス</CITY>
+		<CITY>ワシャクトゥン</CITY>
+		<CITY>タヤサル</CITY>
+		<CITY>サクレウ</CITY>
+		<CITY>イシムチェ</CITY>
+		<CITY>アカラン</CITY>
+		<CITY>トウルム</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+	<BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

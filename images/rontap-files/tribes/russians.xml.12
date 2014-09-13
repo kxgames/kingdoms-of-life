@@ -1,0 +1,52 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Russes">
+  <LEADERS>
+    <LEADER>Tsar Pierre le Grand</LEADER>
+    <LEADER>Tsar Ivan le Terrible</LEADER>
+    <LEADER>Catherine la Grande</LEADER>
+    <LEADER>Vladimir Lénine</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Moscou</CITY>
+    <CITY>Saint-Pétersbourg</CITY>
+    <CITY>Kiev</CITY>
+    <CITY>Minsk</CITY>
+    <CITY>Sébastopol</CITY>
+    <CITY>Smolensk</CITY>
+    <CITY>Novgorod</CITY>
+    <CITY>Vladivostok</CITY>
+    <CITY>Polotsk</CITY>
+    <CITY>Irkoutsk</CITY>
+    <CITY>Rostov</CITY>
+    <CITY>Lwowek</CITY>
+    <CITY>Vilnius</CITY>
+    <CITY>Koursk</CITY>
+    <CITY>Briansk</CITY>
+    <CITY>Vitebsk</CITY>
+    <CITY>Pskov</CITY>
+    <CITY>Odessa</CITY>
+    <CITY>Astrakhan</CITY>
+    <CITY>Iekaterinbourg</CITY>
+    <CITY>Iaroslavl</CITY>
+    <CITY>Nijni Novgorod</CITY>
+    <CITY>Grodna</CITY>
+    <CITY>Kishënevka</CITY>
+    <CITY>Kharkov</CITY>
+    <CITY>Orenbourg</CITY>
+    <CITY>Omsk</CITY>
+    <CITY>Saratov</CITY>
+    <CITY>Krasnoïarsk</CITY>
+    <CITY>Iakoutsk</CITY>
+    <CITY>Petropavlovsk</CITY>
+    <CITY>Semipalitinskaya</CITY>
+    <CITY>Arkhangelsk</CITY>
+    <CITY>Mourmansk</CITY>
+    <CITY>Vologda</CITY>
+    <CITY>Tcheliabinsk</CITY>
+    <CITY>Oulan-Oude</CITY>
+    <CITY>Novossibirsk</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+  <BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+</TRIBE>

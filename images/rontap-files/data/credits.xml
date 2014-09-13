@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<!--LOCALIZATION-->
+<!--LOCALIZATION -->
+<!--LOCALIZATION -->
+<ROOT>
+  <CREDITSWIN name="CreditsWin" left="0" top="0" percent_width="1000" percent_height="1000">
+    <!-- width="1024" height="768">-->
+    <STYLE TOP="1"/>
+    <MUSIC filename=".\Nations_Rising.wav"/>
+    <MUSIC filename=".\Rise_of_Nations.wav"/>
+    <POSITION index="0" pic_left="500" pic_top="500" text_left="100" text_top="100"/>
+    <POSITION index="1" pic_left="250" pic_top="500" text_left="900" text_top="100"/>
+    <POSITION index="2" pic_left="250" pic_top="250" text_left="900" text_top="500"/>
+    <POSITION index="3" pic_left="500" pic_top="250" text_left="100" text_top="500"/>
+    <POSITION index="4" pic_left="0" pic_top="0" text_left="512" text_top="100"/>
+    <POSITION index="5" pic_left="140" pic_top="110" text_left="512" text_top="100"/>
+    <POSITION index="6" pic_left="880" pic_top="110" text_left="512" text_top="100"/>
+    <POSITION index="7" pic_left="140" pic_top="660" text_left="512" text_top="100"/>
+    <POSITION index="8" pic_left="880" pic_top="660" text_left="512" text_top="100"/>
+    <POSITION index="9" pic_left="140" pic_top="384" text_left="512" text_top="100"/>
+    <POSITION index="10" pic_left="880" pic_top="384" text_left="512" text_top="100"/>
+    <POSITION index="11" pic_left="512" pic_top="200" text_left="512" text_top="330"/>
+    <CREDITSCREEN title="RISE OF NATIONS" pos="0">
+      <CREDIT text="Design Team"/>
+      <MEDIA filename="" time="1"/>
+      <MEDIA filename=".\credits\airport.tga" time="3"/>
+      <MEDIA filename=".\credits\e32.tga" time="4"/>
+      <MEDIA filename=".\credits\cool booth copy.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Design Lead" pos="1">
+      <CREDIT text="Brian Reynolds"/>
+      <MEDIA filename=".\credits\colemanparty.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Designers" pos="2">
+      <CREDIT text="Douglas Kaufman"/>
+      <CREDIT text="Joseph Balkoski"/>
+      <CREDIT text="John Hawkins"/>
+      <CREDIT text="Kristine Ishii"/>
+      <CREDIT text="Bruce Milligan"/>
+      <MEDIA filename=".\credits\batch2\doug_toga.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\joe.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\fx.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\kristine_desk.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\bruce.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Executive Producer" pos="3">
+      <CREDIT text="Tim Train"/>
+      <MEDIA filename=".\credits\point.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Producer" pos="0">
+      <CREDIT text="Paul Stephanouk"/>
+      <MEDIA filename=".\credits\batch2\paul_desk.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Programming Lead" pos="1">
+      <CREDIT text="Jason Coleman"/>
+      <MEDIA filename=".\credits\coleman_desk.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Programmers" pos="2">
+      <CREDIT text="Jason Bestimt"/>
+      <CREDIT text="Pranas Pauliukonis"/>
+      <CREDIT text="Ike Ellis"/>
+      <CREDIT text="Bryant Freitag"/>
+      <CREDIT text="Scott Lewis"/>
+      <CREDIT text="Ilya Kreymer"/>
+      <CREDIT text="Stuart Jeff"/>
+      <MEDIA filename=".\credits\batch2\super1.tga" time="2"/>
+      <MEDIA filename=".\credits\pancake.tga" time="2"/>
+      <MEDIA filename=".\credits\ike_mohawk1.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\bf.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\scott.tga" time="2"/>
+      <MEDIA filename=".\credits\ilya_is_boss.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Art Director" pos="3">
+      <CREDIT text="David Inscore"/>
+      <MEDIA filename=".\credits\daveandanjeli.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Unit Art Lead" pos="0">
+      <CREDIT text="Bill Podurgiel"/>
+      <MEDIA filename=".\credits\billfitz.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Building Art Lead" pos="1">
+      <CREDIT text="Ted Terranova"/>
+      <MEDIA filename=".\credits\tedbike.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Terrain and Interface Lead" pos="2">
+      <CREDIT text="Brian Busatti"/>
+      <MEDIA filename=".\credits\bb.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Artists" pos="3">
+      <CREDIT text="Rob Cloutier"/>
+      <CREDIT text="Zero Dean"/>
+      <CREDIT text="John FitzGerald"/>
+      <CREDIT text="Jason Johnson"/>
+      <CREDIT text="Jonathan Jacobson"/>
+      <CREDIT text="Michael D. M. Smith"/>
+      <CREDIT text="David Locke"/>
+      <CREDIT text="Stephen Varga"/>
+      <CREDIT text="Jack Snyder "/>
+      <MEDIA filename=".\credits\pumpingup.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\zero_fitz.tga" time="2"/>
+      <MEDIA filename=".\credits\johnf.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\jj_tt.tga" time="2"/>
+      <MEDIA filename=".\credits\copperfield.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\michael_fish.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\david_locke.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Office Manager" pos="0">
+      <CREDIT text="Jennifer Coenen"/>
+      <MEDIA filename=".\credits\jen.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="IT Manager" pos="1">
+      <CREDIT text="Michael Payne"/>
+      <MEDIA filename=".\credits\batch2\payne_phone.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Web Community" pos="2">
+      <CREDIT text="Graham Somers"/>
+      <MEDIA filename=".\credits\brian and graham E3.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Production Interns" pos="0">
+      <CREDIT text="Mathew Bloch"/>
+      <CREDIT text="Robert Nicaise"/>
+      <CREDIT text="Femi Orelaja"/>
+      <MEDIA filename=".\credits\robertmatt.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Programming Interns" pos="3">
+      <CREDIT text="Brian Kaiser"/>
+      <CREDIT text="Joshua Mitnick"/>
+      <CREDIT text="David Helmer"/>
+      <MEDIA filename=".\credits\batch2\brian_kaiser.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Art Interns" pos="2">
+      <CREDIT text="Andrew Vogel"/>
+      <CREDIT text="Dan Halka"/>
+      <CREDIT text="Arian Tibbs"/>
+      <CREDIT text="Jay Gillen"/>
+      <CREDIT text="James Ku"/>
+      <CREDIT text="Dan Gregoras"/>
+      <MEDIA filename=".\credits\vogel.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\art_interns.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Big Huge Test Team" pos="1">
+      <CREDIT text="Chris Coleman"/>
+      <CREDIT text="Jason Cain"/>
+      <CREDIT text="Paul Bednarz"/>
+      <CREDIT text="Mark Whitehead"/>
+      <CREDIT text="Mark Sobota"/>
+      <CREDIT text="Daniel Parker"/>
+      <CREDIT text="Robert Garrett"/>
+      <CREDIT text="Justin Bird"/>
+      <CREDIT text="Andrew Clark"/>
+      <MEDIA filename=".\credits\batch2\mark.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Big Huge Games Godfather" pos="2">
+      <CREDIT text="Stuart Moulder"/>
+      <MEDIA filename=".\credits\tim\stuart_moulder1.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Big Huge Thanks" pos="3">
+      <CREDIT text="Jonathan Bell"/>
+      <CREDIT text="Harold Simons"/>
+      <CREDIT text="Marc Asher"/>
+      <CREDIT text="Mike McCart"/>
+      <CREDIT text="Jeff Andrews"/>
+      <CREDIT text="Tim Ciccone"/>
+      <CREDIT text="Greenberg Traurig"/>
+      <CREDIT text="Asher &amp; Simons"/>
+      <CREDIT text="Intel Corporation"/>
+      <CREDIT text="Robert Gendler"/>
+      <MEDIA filename=".\credits\batch2\jason_bra.tga" time="2"/>
+      <MEDIA filename=".\credits\carryilya2.tga" time="2"/>
+      <MEDIA filename=".\credits\swat.tga" time="2"/>
+      <MEDIA filename=".\credits\batch2\boat.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Special Thanks To" pos="1">
+      <CREDIT text=" "/>
+      <CREDIT text="Jill, Ro, and Tay Reynolds"/>
+      <CREDIT text="Holly and Ella Coleman"/>
+      <CREDIT text="Anjeli and Marcus Inscore"/>
+      <CREDIT text="David Train"/>
+      <CREDIT text="Eva Train"/>
+      <CREDIT text="Wendy, Adam, and Naomi Kaufman"/>
+      <CREDIT text="Vicky Barone and the Bestimt Family"/>
+      <CREDIT text="Sharon, O'Reilly, and Murphy Stephanouk"/>
+      <CREDIT text="Helai Mohammad &amp; The Pods"/>
+      <CREDIT text="Elizabeth Duncan"/>
+      <CREDIT text="Kym and Gamera"/>
+      <CREDIT text="Amy Gilder"/>
+      <CREDIT text="Meggan Johnson"/>
+      <CREDIT text="Monique Savits"/>
+      <CREDIT text="Bonnie, Tom, Schuyler &amp; Jocelyn Dean"/>
+      <CREDIT text="Sylvia and Jeffrey Jacobson"/>
+      <CREDIT text="Dale &amp; Kathy Ellis, Kelsey Hicks"/>
+      <CREDIT text="Angi Freitag"/>
+      <CREDIT text="Emma and Leah Balkoski, Joyce Duncan"/>
+      <CREDIT text="Bessie Yang"/>
+      <CREDIT text="Carrie and Ethan Locke"/>
+      <CREDIT text="Paula, Stephanie, and Christopher Payne"/>
+      <CREDIT text="Larry Smith, James Brunson, Curry Martin"/>
+      <CREDIT text="Stephanie Galloway"/>
+      <CREDIT text="Linda Somers, Archangel, Vidguy, HeavenGames"/>
+      <CREDIT text="and INS Agents everywhere!"/>
+      <MEDIA filename=".\credits\jill_ro.tga" time="2"/>
+      <MEDIA filename=".\credits\colemans.tga" time="2"/>
+      <MEDIA filename=".\credits\picnic2.tga" time="2"/>
+      <MEDIA filename=".\credits\roy.tga" time="2"/>
+      <MEDIA filename=".\credits\blender.tga" time="2"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Microsoft Team" pos="5">
+      <CREDIT text=" "/>
+      <CREDIT text="{Producers}"/>
+      <CREDIT text="Danan Davis    Producer"/>
+      <CREDIT text="Rick Martinez   Setup Producer"/>
+      <CREDIT text="Stacey Law   Intern Producer"/>
+      <CREDIT text="Michael Mandel   Intern Producer"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Test Team}"/>
+      <CREDIT text="Rick Lockyear   Test Lead"/>
+      <CREDIT text="Andrew Franklin   Software Test Engineer"/>
+      <CREDIT text='Jaime "Allister" Pirnie   Multiplayer Test Engineer'/>
+      <CREDIT text="Sean Jenkin   Lead SDE/T"/>
+      <CREDIT text="Brad Himelstein   Software Test Engineer"/>
+      <CREDIT text='Eric "Phantom" Meldrum (Volt)   Software Test Engineer'/>
+      <CREDIT text='Michael "Axehilt" Engle (Volt)   Software Test Engineer'/>
+      <CREDIT text="Jeremy Baird Tate (Volt)   Software Test Engineer"/>
+      <CREDIT text="George Townsend (Volt)   Software Test Engineer"/>
+      <CREDIT text="Ebon “Scrubs” Kim (Volt)   Playtester"/>
+      <CREDIT text='Brian "Kleitus" Noonan (Volt)   Playtester'/>
+      <CREDIT text="Eli Nelson-Heath (Volt)   Playtester"/>
+      <CREDIT text="Ryan Lewis (Volt)   Playtester"/>
+      <CREDIT text="Shawn Johnson (VMC Consulting Corporation)   Multiplayer Tester"/>
+      <CREDIT text="Bret Fenton (VMC Consulting Corporation)   Multiplayer Tester"/>
+      <CREDIT text="Jason Wohlfeil (VMC Consulting Corporation)   Multiplayer Tester"/>
+      <CREDIT text="Dan Hitchcock (VMC Consulting Corporation)   Configuration Test Lead"/>
+      <CREDIT text="Yaqub Bandey (VMC Consulting Corporation)   Configuration Tester"/>
+      <CREDIT text="Jeff Felker (VMC Consulting Corporation)   Configuration Tester"/>
+      <CREDIT text="Eric Johnson (VMC Consulting Corporation)   Configuration Tester"/>
+      <MEDIA filename=".\credits\tim\danan_davis.tga" pos="5" time="1"/>
+      <MEDIA filename=".\credits\microsoft\Rick Lockyear 2 copy.tga" pos="6" time="1"/>
+      <MEDIA filename=".\credits\microsoft\Andrew Franklin 2 copy.tga" pos="5" time="1"/>
+      <MEDIA filename=".\credits\microsoft\jaime pirnie copy.tga" pos="6" time="1"/>
+      <MEDIA filename=".\credits\microsoft\brad himelstein 2 copy.tga" pos="5" time="1"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Microsoft Team" pos="8">
+      <CREDIT text=" "/>
+      <CREDIT text="{Recon Testing} "/>
+      <CREDIT text="Cliff Donathan (Volt)   Recon Tester"/>
+      <CREDIT text="Josh Colas (Volt)   Recon Tester"/>
+      <CREDIT text="Lance Rowley (Volt)   Recon Tester"/>
+      <CREDIT text="Mori Marchany (Volt)   Recon Tester"/>
+      <CREDIT text="Blake Dodson (Volt)   Recon Tester"/>
+      <CREDIT text="Dmitry Prokopenko (Volt)   Recon Tester"/>
+      <CREDIT text="Jennifer Tunnell (Volt)   Recon Tester"/>
+      <CREDIT text="Rene Legaspi (Volt)   Recon Tester"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{User Testing}"/>
+      <CREDIT text="Jason Schklar   User-testing Project Lead"/>
+      <CREDIT text="Bill Fulton   User-testing Group Lead"/>
+      <CREDIT text="David Quiroz (Siemens Business Services, Inc)   User-tester"/>
+      <CREDIT text="Keith Steury   User-tester"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Product Planning}"/>
+      <CREDIT text="Jon Kimmich   Lead Product Planner"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{User Experience}"/>
+      <CREDIT text="Eric Nylund   Writer"/>
+      <CREDIT text="Jeannie Voirin   Print Design and Production"/>
+      <CREDIT text="LouAn Williams   Content Coordinator"/>
+      <CREDIT text="Tom Edwards   Senior Geopolitical Strategist"/>
+      <CREDIT text="Jenni Gaynor (Volt)   Editor"/>
+      <CREDIT text="Doug Startzel (ArtSource)   Print Production"/>
+      <MEDIA filename=".\credits\microsoft\jason schklar copy.tga" pos="8" time="1"/>
+      <MEDIA filename=".\credits\microsoft\jon kimmich copy.tga" pos="7" time="1"/>
+      <MEDIA filename=".\credits\microsoft\eric nylund copy.tga" pos="5" time="1"/>
+      <MEDIA filename=".\credits\microsoft\UX team copy.tga" pos="6" time="1"/>
+      <MEDIA filename=".\credits\microsoft\jenni smith copy.tga" pos="8" time="1"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Microsoft Team" pos="4">
+      <CREDIT text=" "/>
+      <CREDIT text="{Artists}"/>
+      <CREDIT text="Mark Forrer   Artist"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Audio Production}"/>
+      <CREDIT text="Duane Decker   Music Composer/Audio Lead"/>
+      <CREDIT text="Bill Wolford (Vividsound)   Sound Designer"/>
+      <CREDIT text="Ben Decker (S&amp;T Onsite)   Voice Over Producer"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Developers}"/>
+      <CREDIT text="Glenn Doren   Software Design Engineer"/>
+      <CREDIT text="Jesse Janosov   Software Design Engineer"/>
+      <CREDIT text="Alex Robinson (Siemens Business Services, Inc)   Setup Software Design Engineer"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Marketing}"/>
+      <CREDIT text="John Dongelmans   Product Manager"/>
+      <CREDIT text="Lisa Krost   Marketing Manager Packaging"/>
+      <CREDIT text="Michelle Jacob   PR Manager"/>
+      <CREDIT text="Stephanie Peterson   International Product Manager"/>
+      <CREDIT text="Kristen McEntire   International PR Manager"/>
+      <CREDIT text="David Reid   Lead Product Manager"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Localization - US}"/>
+      <CREDIT text="Lief Thompson   Localization Program Manager"/>
+      <CREDIT text="Kazuyuki Shibuya   Software Design Engineer"/>
+      <MEDIA filename=".\credits\microsoft\jesse janosov copy.tga" pos="5" time="1"/>
+      <MEDIA filename=".\credits\microsoft\alex robinson copy.tga" pos="7" time="1"/>
+      <MEDIA filename=".\credits\microsoft\john dongelmans 2 copy.tga" pos="6" time="1"/>
+      <MEDIA filename=".\credits\tim\duane_decker1.tga" pos="8" time="1"/>
+      <MEDIA filename=".\credits\microsoft\mike engle and the playtesters copy.tga" pos="5" time="1"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Microsoft Team" pos="4">
+      <CREDIT text=""/>
+      <CREDIT text="{Localization - Ireland}"/>
+      <CREDIT text='Greg "Mellick" Ward   Program Manager'/>
+      <CREDIT text="Jason Shirley   Audio Lead"/>
+      <CREDIT text="Steven Garrad   Engineer"/>
+      <CREDIT text="John O'Sullivan   Test Lead"/>
+      <CREDIT text="Brian Fox   Lead Tester"/>
+      <CREDIT text="Patrick Conway   Tester"/>
+      <CREDIT text="Eilis O'Hagan   Documentation"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Localization - Japan}"/>
+      <CREDIT text="Yukihiro Ishida   Program Manager"/>
+      <CREDIT text="Yuji Yoneshige   Lead Software Test Engineer"/>
+      <CREDIT text="Yutaka Hasegawa   Lead Software Design Engineer"/>
+      <CREDIT text="Shinya Muto   Localization Project Manager"/>
+      <CREDIT text="Miyuki Nouguchi   User Education"/>
+      <CREDIT text="Sachio Horikoshi    Tester"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Localization - Korea}"/>
+      <CREDIT text="Joon Ho Lee   Program Manager"/>
+      <CREDIT text="Eun Hee Lee   Program Manager"/>
+      <CREDIT text="Yoon Hee Jung   Localization Program Manager"/>
+      <CREDIT text="Sang Kyu Rhee   Tester"/>
+      <CREDIT text="Sang Wook Suh   Tester"/>
+      <CREDIT text="Min Woo Lee   Builder"/>
+      <CREDIT text="Whi Young Yoon   Reviewer"/>
+      <CREDIT text="Suk Hyun Yi   Marketing Product Manager"/>
+      <MEDIA filename=".\credits\microsoft\playtester copy.tga" pos="7" time="1"/>
+      <MEDIA filename=".\credits\microsoft\brian reynolds at the igf copy.tga" pos="8" time="1"/>
+      <MEDIA filename=".\credits\paul at e3 copy.tga" pos="6" time="1"/>
+      <MEDIA filename=".\credits\coleman booth copy.tga" pos="5" time="1"/>
+      <MEDIA filename=".\credits\batch2\bottleneck.tga" pos="7" time="1"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Microsoft Team" pos="4">
+      <CREDIT text=" "/>
+      <CREDIT text="{Localization - Taiwan}"/>
+      <CREDIT text="Lana Peng   Program Manager"/>
+      <CREDIT text="Christine Lin   Localization Program Manager"/>
+      <CREDIT text="Dupre Deng   Test Lead"/>
+      <CREDIT text="Lilia Lee   Tester"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Product Support}"/>
+      <CREDIT text="Steve Kastner   Support Lead"/>
+      <CREDIT text=" "/>
+      <CREDIT text="{Microsoft Management}"/>
+      <CREDIT text="Stuart Moulder   General Manager"/>
+      <CREDIT text="Phil Spencer   General Manager"/>
+      <CREDIT text="Dana Fos   User Experience Manager"/>
+      <CREDIT text="Craig Henry   Development Manager"/>
+      <CREDIT text="Doug Herring   Art Director"/>
+      <CREDIT text="Matthew Lee Johnston   Audio Director"/>
+      <CREDIT text="Doug Martin   Test Manager"/>
+      <CREDIT text="Jonathan Sposato   Group Program Manager"/>
+      <CREDIT text="Todd Stevens   Lead Product Planner"/>
+      <CREDIT text="Jule Zuccotti   Administrative Assistant"/>
+      <CREDIT text="Josh Atkins   Lead Game Designer"/>
+      <CREDIT text="Beth Featherstone   Senior Director"/>
+      <CREDIT text="Chris Di Cesare   Group Product Manager"/>
+      <CREDIT text="Genevieve Ostergard   Group Manager PR"/>
+      <CREDIT text="Peter Kingsley   Group Manager International"/>
+      <MEDIA filename=".\credits\microsoft\stuart.tga" pos="5" time="1"/>
+      <MEDIA filename=".\credits\tim\phil_spencer1.tga" pos="8" time="1"/>
+      <MEDIA filename=".\credits\microsoft\Mark Forrer_ Doug Herring_ and Travis Brady 2 copy.tga" pos="7" time="1"/>
+      <MEDIA filename=".\credits\microsoft\Jule Zuccoti and Josh Atkins copy.tga" pos="6" time="1"/>
+      <MEDIA filename=".\credits\microsoft\Eric Meldrum and Jeremy Tate copy.tga" pos="5" time="1"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Microsoft Team" pos="4">
+      <CREDIT text=" "/>
+      <CREDIT text="{Orchestra}"/>
+      <CREDIT text="Duane Decker   Composer/Producer"/>
+      <CREDIT text="Stan LePard (Panther Modern)   Orchestrator"/>
+      <CREDIT text="Tawm Perkowski (ArtSource)   Recording Engineer"/>
+      <CREDIT text="Duane Decker   Final Mix/Mastering"/>
+      <CREDIT text="Simon James   1st Violin/Recorder"/>
+      <CREDIT text="Ronald Patterson   1st Violin"/>
+      <CREDIT text="John S. Kim   2nd Violin"/>
+      <CREDIT text="Hye Kying Seo   2nd Violin"/>
+      <CREDIT text="Roxanna Patterson   Viola"/>
+      <CREDIT text="Scott Ligocki   Viola"/>
+      <CREDIT text="Rajan Krishnaswami   Cello"/>
+      <CREDIT text="Craig Weaver   Cello"/>
+      <CREDIT text="Buell Nerdlinger   Contrabass"/>
+      <CREDIT text="Susan Carroll   French Horn"/>
+      <CREDIT text="Mark Robbins   French Horn"/>
+      <CREDIT text="Allen Vizzutti   Trumpet/Flugelhorn"/>
+      <CREDIT text="David L. Ritt   Trombone"/>
+      <CREDIT text="Stephen A. Fissel   Bass Trombone"/>
+      <CREDIT text="Dan L. Williams   Oboe/English Horn"/>
+      <CREDIT text="Alicia Suarez   Flute/Pennywhistle"/>
+      <CREDIT text="Warren Chang   Erhu"/>
+      <CREDIT text="Orville Johnson   Mandolin"/>
+      <CREDIT text="Alex Eppler   Cimbalom/Duduk"/>
+      <CREDIT text="Stan LePard (Panther Modern)   VL Pipes"/>
+      <CREDIT text="Duane Decker   All Other Instruments"/>
+      <MEDIA filename=".\credits\tim\duane_decker2.tga" pos="8" time="1"/>
+      <MEDIA filename=".\credits\tim\sound_guy2.tga" pos="5" time="1"/>
+      <MEDIA filename=".\credits\paul_serious_gamer.tga" pos="6" time="1"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Microsoft Team" pos="4">
+      <CREDIT text=" "/>
+      <CREDIT text="{Voice Acting}"/>
+      <CREDIT text="Jock Blaney   Narrator/Male Taunts"/>
+      <CREDIT text="David Scully   Male Taunts"/>
+      <CREDIT text="Heidi Darchuck   Female Taunts"/>
+      <CREDIT text=""/>
+      <CREDIT text="{Blur - Opening Cinematics}"/>
+      <CREDIT text="Tim Wallace   CG Supervisor"/>
+      <CREDIT text="Al Shier   Producer"/>
+      <CREDIT text="Paul Hormis   Assistant CG Supervisor"/>
+      <CREDIT text="Irfan Celik   CG Artist"/>
+      <CREDIT text="Jerome Denjea   CG Artist"/>
+      <CREDIT text="Willi Hammes   CG Artist "/>
+      <CREDIT text="Bryan Hillestad   CG Artist "/>
+      <CREDIT text="Jon Jordan   CG Artist "/>
+      <CREDIT text="Brook Kievit   CG Artist "/>
+      <CREDIT text="Seung Jae Lee   CG Artist "/>
+      <CREDIT text="Kirby Miller   CG Artist "/>
+      <CREDIT text="Gabriel Portnof   CG Artist "/>
+      <CREDIT text="Dan Rice   CG Artist "/>
+      <CREDIT text="Jeff Weisend   CG Artist "/>
+      <CREDIT text="Dave Wilson   CG Artist "/>
+      <CREDIT text="Chuck Wojtkiewicz   Storyboards/Concept Design"/>
+      <CREDIT text="John Bunt   Director of Motion Capture"/>
+      <CREDIT text="James Silverman   Mocap Actor"/>
+      <CREDIT text="Daemeon Nicolaou   Systems Administrator"/>
+      <CREDIT text="Duane Powell   Systems Administrator "/>
+      <CREDIT text="Barry Robison   Systems Administrator "/>
+      <CREDIT text="Rob Cairns   Music Composer"/>
+      <CREDIT text="Gary Zacuto   Sound Design and Mix"/>
+      <MEDIA filename=".\credits\tim\narrator1.tga" pos="7" time="1"/>
+      <MEDIA filename=".\credits\cup.tga" pos="8" time="1"/>
+      <MEDIA filename=".\credits\batch2\cars.tga" pos="5" time="1"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="Microsoft Thanks" pos="1">
+      <CREDIT text="Ken Smith"/>
+      <CREDIT text="Chris Kimmell"/>
+      <CREDIT text="Rick Mehler"/>
+      <CREDIT text="Brian Kemp"/>
+      <CREDIT text="Ryan Moore"/>
+      <CREDIT text="Steve Cherrier"/>
+      <CREDIT text="Courtney Bailey"/>
+      <CREDIT text="Dana Trujillo"/>
+      <CREDIT text="Chris Black"/>
+      <CREDIT text="Jason Powell"/>
+      <CREDIT text="Jason Mangold"/>
+      <CREDIT text="Bernie Stokes"/>
+      <CREDIT text="Craig Marshall"/>
+      <CREDIT text="Stephanie Thatcher"/>
+      <CREDIT text="YBMSisa.com"/>
+      <CREDIT text="Jennifer Harrison"/>
+      <CREDIT text="Shane Nelson"/>
+      <CREDIT text="Jason Reiner"/>
+      <CREDIT text="Jeff Seaman "/>
+      <CREDIT text="Rob Markosek "/>
+      <CREDIT text="Wayne Varnado "/>
+      <CREDIT text="Tim Whiting "/>
+      <CREDIT text="Bungie Test Team"/>
+      <MEDIA filename=".\credits\microsoft\microsoftteam.tga" time="4"/>
+    </CREDITSCREEN>
+    <CREDITSCREEN title="RISE OF NATIONS: A Big Huge Game" pos="11">
+      <CREDIT text=" "/>
+      <CREDIT text="Photographs provided by Corbis."/>
+      <CREDIT text=" "/>
+      <CREDIT text="This product contains software technology licensed from GameSpy Industries, Inc."/>
+      <CREDIT text=" (c) 1999-2003 GameSpy Industries, Inc. "/>
+      <CREDIT text='GameSpy and the "Powered by GameSpy" design are trademarks of GameSpy Industries, Inc.'/>
+      <CREDIT text="All rights reserved."/>
+      <MEDIA filename=".\credits\bhg_logo_endcredit.tga" time="5"/>
+    </CREDITSCREEN>
+  </CREDITSWIN>
+</ROOT>

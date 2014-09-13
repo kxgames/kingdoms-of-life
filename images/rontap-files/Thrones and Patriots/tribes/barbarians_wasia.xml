@@ -1,0 +1,51 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Andy Clark (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Sumerians">
+	<LEADERS>
+		<LEADER>King Alulim</LEADER>
+		<LEADER>King Alaljar</LEADER>
+		<LEADER>King En-men-lu-ana</LEADER>
+		<LEADER>King Dumuzid</LEADER>
+		<LEADER>King Ubara-Tutu</LEADER>
+		<LEADER>King Nanjiclicma</LEADER>
+		<LEADER>King Mamacal</LEADER>
+		<LEADER>King Mec-Ane-ada</LEADER>
+		<LEADER>King Puannum</LEADER>
+		<LEADER>King En-men-barage-si</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Babil</CITY>
+		<CITY>Adab</CITY>
+		<CITY>Dabrum</CITY>
+		<CITY>Uruk</CITY>
+		<CITY>Eridu</CITY>
+		<CITY>Susa</CITY>
+		<CITY>Lagsash</CITY>
+		<CITY>Ur</CITY>
+		<CITY>Der</CITY>
+		<CITY>Anshan</CITY>
+		<CITY>Kish</CITY>
+		<CITY>Sippar</CITY>
+		<CITY>Apisala</CITY>
+		<CITY>Kutha</CITY>
+		<CITY>Eshnunna</CITY>
+		<CITY>KI.AN</CITY>
+		<CITY>Shuruppak</CITY>
+		<CITY>Aratta</CITY>
+		<CITY>Larsa</CITY>
+		<CITY>Kutalla</CITY>
+		<CITY>Dilbat</CITY>
+		<CITY>Bad-tibira</CITY>
+		<CITY>Marad</CITY>
+		<CITY>Umma</CITY>
+		<CITY>Kesh</CITY>
+		<CITY>Girsu</CITY>
+		<CITY>Nagsu</CITY>
+		<CITY>Enegi</CITY>
+		<CITY>Larak</CITY>
+		<CITY>Isin</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+	<BUILD_CONTINENT>2 Asian</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,45 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Robert Nicaise (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="크메르">
+	<LEADERS>
+		<LEADER>자야바르만왕</LEADER>
+		<LEADER>인드라바르만왕 </LEADER>
+		<LEADER>야소바르만왕</LEADER>
+		<LEADER>하샤바르만왕</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>앙코르</CITY>
+		<CITY>와트 푸</CITY>
+		<CITY>삼보르 프레이 쿡</CITY>
+		<CITY>앙코르 보레이</CITY>
+		<CITY>프라사트 안데트</CITY>
+		<CITY>프놈 다</CITY>
+		<CITY>우 통</CITY>
+		<CITY>비자야</CITY>
+		<CITY>수코타이</CITY>
+		<CITY>나콘 파톰</CITY>
+		<CITY>루앙프라방</CITY>
+		<CITY>아유타야</CITY>
+		<CITY>야소다라푸라</CITY>
+		<CITY>앙코르 톰</CITY>
+		<CITY>방콕</CITY>
+		<CITY>논타부리</CITY>
+		<CITY>파툼타니</CITY>
+		<CITY>암낫 차로엔</CITY>
+		<CITY>지트라</CITY>
+		<CITY>트랑</CITY>
+		<CITY>차청사오</CITY>
+		<CITY>파탈룽</CITY>
+		<CITY>빨렘방</CITY>
+		<CITY>톤부리</CITY>
+		<CITY>우돈</CITY>
+		<CITY>우본</CITY>
+		<CITY>코랫</CITY>
+		<CITY>수린</CITY>
+		<CITY>부리람</CITY>
+		<CITY>짜오프라야</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+	<BUILD_CONTINENT>2 Asian</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

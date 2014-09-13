@@ -1,0 +1,574 @@
+
+ai economic_germans =======================================
+
+11 - 0 SCRIPT_MARKER  
+11 - 1 PARAM_DECL who (0) int
+11 - 7 PARAM_DECL step (0X1) int
+11 - 13 PARAM_DECL boom_vs_rush (0X2) int
+11 - 19 PARAM_DECL num_loops (0X3) int
+14 - 25 PUSH step (0X1) 
+14 - 30 PUSH 1 (0) 
+14 - 35 ==  
+14 - 36 JUMP_IF_NOT 133 
+15 - 41 CALL_EXTERN (get_starting_town_size) 
+15 - 46 INIT_DECL size (0X4) anytype
+16 - 52 PUSH size (0X4) 
+16 - 57 PUSH 0 (0X3) 
+16 - 62 ==  
+16 - 63 JUMP_IF_NOT 79 
+16 - 68 PUSH 1 (0) 
+16 - 73 = step (0X1) 
+16 - 78 POP  
+17 - 79 PUSH size (0X4) 
+17 - 84 PUSH 1 (0) 
+17 - 89 ==  
+17 - 90 JUMP_IF_NOT 106 
+17 - 95 PUSH 2 (0X1) 
+17 - 100 = step (0X1) 
+17 - 105 POP  
+18 - 106 PUSH size (0X4) 
+18 - 111 PUSH 2 (0X1) 
+18 - 116 >=  
+18 - 117 JUMP_IF_NOT 133 
+18 - 122 PUSH 6 (0X4) 
+18 - 127 = step (0X1) 
+18 - 132 POP  
+21 - 133 PUSH 1 (0) 
+21 - 138 INIT_DECL return_value (0X5) int
+22 - 144 PUSH step (0X1) 
+22 - 149 PUSH 1 (0) 
+22 - 154 -  
+22 - 155 INIT_DECL old_step (0X6) int
+24 - 161 PUSH 0 (0X3) 
+24 - 166 INIT_DECL i (0X7) anytype
+24 - 172 JUMP 183 
+24 - 177 ++ i (0X7) 
+24 - 182 POP  
+24 - 183 PUSH i (0X7) 
+24 - 188 PUSH num_loops (0X3) 
+24 - 193 <  
+24 - 194 JUMP_IF_NOT 2457 
+26 - 199 PUSH 1 (0) 
+26 - 204 PUSH who (0) 
+26 - 209 CALL_EXTERN (find_city_with_num) 
+26 - 214 INIT_DECL my_capital (0X8) anytype
+28 - 220 PUSH old_step (0X6) 
+28 - 225 PUSH step (0X1) 
+28 - 230 >=  
+28 - 231 JUMP_IF_NOT 242 
+28 - 236 PUSH return_value (0X5) 
+28 - 241 RETURN  
+30 - 242 PUSH step (0X1) 
+30 - 247 = old_step (0X6) 
+30 - 252 POP  
+32 - 253 PUSH step (0X1) 
+32 - 258 CASE 1 (0) 489
+32 - 267 CASE 2 (0X1) 532
+32 - 276 CASE 3 (0X2) 585
+32 - 285 CASE 4 (0X7) 718
+32 - 294 CASE 5 (0XA) 851
+32 - 303 CASE 6 (0X4) 898
+32 - 312 CASE 7 (0X9) 946
+32 - 321 CASE 8 (0XD) 1087
+32 - 330 CASE 9 (0XE) 1140
+32 - 339 CASE 10 (0XF) 1183
+32 - 348 CASE 11 (0X10) 1236
+32 - 357 CASE 12 (0X11) 1369
+32 - 366 CASE 13 (0X13) 1417
+32 - 375 CASE 14 (0X14) 1507
+32 - 384 CASE 15 (0X15) 1640
+32 - 393 CASE 16 (0X17) 1693
+32 - 402 CASE 17 (0X18) 1767
+32 - 411 CASE 18 (0X1A) 1820
+32 - 420 CASE 19 (0X1B) 1953
+32 - 429 CASE 20 (0X1D) 2006
+32 - 438 CASE 21 (0X1E) 2080
+32 - 447 CASE 22 (0X1F) 2213
+32 - 456 CASE 23 (0X20) 2287
+32 - 465 CASE 24 (0X22) 2335
+32 - 474 CASE 25 (0X23) 2388
+32 - 483 POP  
+32 - 484 JUMP 2436 
+34 - 489 PUSH who (0) 
+34 - 494 CALL_EXTERN (place_city_with_cost) 
+34 - 499 PUSH 0 (0X3) 
+34 - 504 >  
+34 - 505 JUMP_IF_NOT 516 
+34 - 510 ++ step (0X1) 
+34 - 515 POP  
+35 - 516 PUSH 1 (0) 
+35 - 521 = return_value (0X5) 
+35 - 526 POP  
+36 - 527 JUMP 2452 
+38 - 532 PUSH my_capital (0X8) 
+38 - 537 PUSH Woodcutter's Camp" (0X5) 
+38 - 542 PUSH who (0) 
+38 - 547 CALL_EXTERN (place_building_with_cost) 
+38 - 552 PUSH 0 (0X3) 
+38 - 557 >  
+38 - 558 JUMP_IF_NOT 569 
+38 - 563 ++ step (0X1) 
+38 - 568 POP  
+39 - 569 PUSH 1 (0) 
+39 - 574 = return_value (0X5) 
+39 - 579 POP  
+40 - 580 JUMP 2452 
+42 - 585 PUSH Farm" (0X6) 
+42 - 590 PUSH who (0) 
+42 - 595 CALL_EXTERN (num_type_with_queued) 
+42 - 600 INIT_DECL farms (0X9) anytype
+43 - 606 PUSH farms (0X9) 
+43 - 611 INIT_DECL f (0XA) anytype
+43 - 617 JUMP 628 
+43 - 622 ++ f (0XA) 
+43 - 627 POP  
+43 - 628 PUSH f (0XA) 
+43 - 633 PUSH 3 (0X2) 
+43 - 638 <  
+43 - 639 JUMP_IF_NOT 670 
+44 - 644 PUSH my_capital (0X8) 
+44 - 649 PUSH Farm" (0X6) 
+44 - 654 PUSH who (0) 
+44 - 659 CALL_EXTERN (place_building_with_cost) 
+44 - 664 POP  
+45 - 665 JUMP 622 
+46 - 670 PUSH Farm" (0X6) 
+46 - 675 PUSH who (0) 
+46 - 680 CALL_EXTERN (num_type_with_queued) 
+46 - 685 PUSH 3 (0X2) 
+46 - 690 >=  
+46 - 691 JUMP_IF_NOT 702 
+46 - 696 ++ step (0X1) 
+46 - 701 POP  
+47 - 702 PUSH 1 (0) 
+47 - 707 = return_value (0X5) 
+47 - 712 POP  
+48 - 713 JUMP 2452 
+50 - 718 PUSH Citizen" (0X8) 
+50 - 723 PUSH who (0) 
+50 - 728 CALL_EXTERN (num_type_with_queued) 
+50 - 733 INIT_DECL peas (0XB) anytype
+51 - 739 PUSH peas (0XB) 
+51 - 744 INIT_DECL p (0XC) anytype
+51 - 750 JUMP 761 
+51 - 755 ++ p (0XC) 
+51 - 760 POP  
+51 - 761 PUSH p (0XC) 
+51 - 766 PUSH 7 (0X9) 
+51 - 771 <  
+51 - 772 JUMP_IF_NOT 803 
+52 - 777 PUSH Citizen" (0X8) 
+52 - 782 PUSH 1 (0) 
+52 - 787 PUSH who (0) 
+52 - 792 CALL_EXTERN (train_unit_with_cost) 
+52 - 797 POP  
+53 - 798 JUMP 755 
+54 - 803 PUSH Citizen" (0X8) 
+54 - 808 PUSH who (0) 
+54 - 813 CALL_EXTERN (num_type_with_queued) 
+54 - 818 PUSH 7 (0X9) 
+54 - 823 >=  
+54 - 824 JUMP_IF_NOT 835 
+54 - 829 ++ step (0X1) 
+54 - 834 POP  
+55 - 835 PUSH 1 (0) 
+55 - 840 = return_value (0X5) 
+55 - 845 POP  
+56 - 846 JUMP 2452 
+58 - 851 PUSH my_capital (0X8) 
+58 - 856 PUSH Library" (0XB) 
+58 - 861 PUSH who (0) 
+58 - 866 CALL_EXTERN (place_building_with_cost) 
+58 - 871 JUMP_IF_NOT 882 
+58 - 876 ++ step (0X1) 
+58 - 881 POP  
+59 - 882 PUSH 1 (0) 
+59 - 887 = return_value (0X5) 
+59 - 892 POP  
+60 - 893 JUMP 2452 
+62 - 898 PUSH City State" (0XC) 
+62 - 903 PUSH who (0) 
+62 - 908 CALL_EXTERN (research_tech_with_cost) 
+62 - 913 PUSH 0 (0X3) 
+62 - 918 >  
+62 - 919 JUMP_IF_NOT 930 
+62 - 924 ++ step (0X1) 
+62 - 929 POP  
+63 - 930 PUSH 1 (0) 
+63 - 935 = return_value (0X5) 
+63 - 940 POP  
+64 - 941 JUMP 2452 
+66 - 946 PUSH Citizen" (0X8) 
+66 - 951 PUSH who (0) 
+66 - 956 CALL_EXTERN (num_type_with_queued) 
+66 - 961 = peas (0XB) 
+66 - 966 POP  
+67 - 967 PUSH peas (0XB) 
+67 - 972 = p (0XC) 
+67 - 977 POP  
+67 - 978 JUMP 989 
+67 - 983 ++ p (0XC) 
+67 - 988 POP  
+67 - 989 PUSH p (0XC) 
+67 - 994 PUSH 8 (0XD) 
+67 - 999 <  
+67 - 1000 JUMP_IF_NOT 1031 
+68 - 1005 PUSH Citizen" (0X8) 
+68 - 1010 PUSH 1 (0) 
+68 - 1015 PUSH who (0) 
+68 - 1020 CALL_EXTERN (train_unit_with_cost) 
+68 - 1025 POP  
+69 - 1026 JUMP 983 
+70 - 1031 PUSH Citizen" (0X8) 
+70 - 1036 PUSH who (0) 
+70 - 1041 CALL_EXTERN (num_type_with_queued) 
+70 - 1046 PUSH 8 (0XD) 
+70 - 1051 >=  
+70 - 1052 JUMP_IF_NOT 1063 
+70 - 1057 ++ step (0X1) 
+70 - 1062 POP  
+71 - 1063 PUSH 1 (0) 
+71 - 1068 INIT_DECL value (0XD) anytype
+71 - 1074 PUSH value (0XD) 
+71 - 1079 CAST int 
+71 - 1081 RETURN  
+72 - 1082 JUMP 2452 
+74 - 1087 PUSH my_capital (0X8) 
+74 - 1092 PUSH Farm" (0X6) 
+74 - 1097 PUSH who (0) 
+74 - 1102 CALL_EXTERN (place_building_with_cost) 
+74 - 1107 PUSH 0 (0X3) 
+74 - 1112 >  
+74 - 1113 JUMP_IF_NOT 1124 
+74 - 1118 ++ step (0X1) 
+74 - 1123 POP  
+75 - 1124 PUSH 1 (0) 
+75 - 1129 = return_value (0X5) 
+75 - 1134 POP  
+76 - 1135 JUMP 2452 
+78 - 1140 PUSH who (0) 
+78 - 1145 CALL_EXTERN (place_city_with_cost) 
+78 - 1150 PUSH 0 (0X3) 
+78 - 1155 >  
+78 - 1156 JUMP_IF_NOT 1167 
+78 - 1161 ++ step (0X1) 
+78 - 1166 POP  
+79 - 1167 PUSH 1 (0) 
+79 - 1172 = return_value (0X5) 
+79 - 1177 POP  
+80 - 1178 JUMP 2452 
+82 - 1183 PUSH my_capital (0X8) 
+82 - 1188 PUSH Farm" (0X6) 
+82 - 1193 PUSH who (0) 
+82 - 1198 CALL_EXTERN (place_building_with_cost) 
+82 - 1203 PUSH 0 (0X3) 
+82 - 1208 >  
+82 - 1209 JUMP_IF_NOT 1220 
+82 - 1214 ++ step (0X1) 
+82 - 1219 POP  
+83 - 1220 PUSH 1 (0) 
+83 - 1225 = return_value (0X5) 
+83 - 1230 POP  
+84 - 1231 JUMP 2452 
+86 - 1236 PUSH Citizen" (0X8) 
+86 - 1241 PUSH who (0) 
+86 - 1246 CALL_EXTERN (num_type_with_queued) 
+86 - 1251 = peas (0XB) 
+86 - 1256 POP  
+87 - 1257 PUSH peas (0XB) 
+87 - 1262 = p (0XC) 
+87 - 1267 POP  
+87 - 1268 JUMP 1279 
+87 - 1273 ++ p (0XC) 
+87 - 1278 POP  
+87 - 1279 PUSH p (0XC) 
+87 - 1284 PUSH 9 (0XE) 
+87 - 1289 <  
+87 - 1290 JUMP_IF_NOT 1321 
+88 - 1295 PUSH Citizen" (0X8) 
+88 - 1300 PUSH 1 (0) 
+88 - 1305 PUSH who (0) 
+88 - 1310 CALL_EXTERN (train_unit_with_cost) 
+88 - 1315 POP  
+89 - 1316 JUMP 1273 
+90 - 1321 PUSH Citizen" (0X8) 
+90 - 1326 PUSH who (0) 
+90 - 1331 CALL_EXTERN (num_type_with_queued) 
+90 - 1336 PUSH 9 (0XE) 
+90 - 1341 >=  
+90 - 1342 JUMP_IF_NOT 1353 
+90 - 1347 ++ step (0X1) 
+90 - 1352 POP  
+91 - 1353 PUSH 1 (0) 
+91 - 1358 = return_value (0X5) 
+91 - 1363 POP  
+92 - 1364 JUMP 2452 
+94 - 1369 PUSH Barter" (0X12) 
+94 - 1374 PUSH who (0) 
+94 - 1379 CALL_EXTERN (research_tech_with_cost) 
+94 - 1384 PUSH 0 (0X3) 
+94 - 1389 >  
+94 - 1390 JUMP_IF_NOT 1401 
+94 - 1395 ++ step (0X1) 
+94 - 1400 POP  
+95 - 1401 PUSH 1 (0) 
+95 - 1406 = return_value (0X5) 
+95 - 1411 POP  
+96 - 1412 JUMP 2452 
+98 - 1417 PUSH my_capital (0X8) 
+98 - 1422 PUSH Woodcutter's Camp" (0X5) 
+98 - 1427 PUSH who (0) 
+98 - 1432 CALL_EXTERN (place_building_with_cost) 
+98 - 1437 PUSH 0 (0X3) 
+98 - 1442 >  
+98 - 1443 JUMP_IF_NOT 1459 
+99 - 1448 ++ step (0X1) 
+99 - 1453 POP  
+99 - 1454 JUMP 1491 
+100 - 1459 PUSH Woodcutter's Camp" (0X5) 
+100 - 1464 PUSH who (0) 
+100 - 1469 CALL_EXTERN (can_pay_cost) 
+100 - 1474 PUSH 0 (0X3) 
+100 - 1479 >  
+100 - 1480 JUMP_IF_NOT 1491 
+101 - 1485 ++ step (0X1) 
+101 - 1490 POP  
+103 - 1491 PUSH 1 (0) 
+103 - 1496 = return_value (0X5) 
+103 - 1501 POP  
+104 - 1502 JUMP 2452 
+106 - 1507 PUSH Citizen" (0X8) 
+106 - 1512 PUSH who (0) 
+106 - 1517 CALL_EXTERN (num_type_with_queued) 
+106 - 1522 = peas (0XB) 
+106 - 1527 POP  
+107 - 1528 PUSH peas (0XB) 
+107 - 1533 = p (0XC) 
+107 - 1538 POP  
+107 - 1539 JUMP 1550 
+107 - 1544 ++ p (0XC) 
+107 - 1549 POP  
+107 - 1550 PUSH p (0XC) 
+107 - 1555 PUSH 11 (0X10) 
+107 - 1560 <  
+107 - 1561 JUMP_IF_NOT 1592 
+108 - 1566 PUSH Citizen" (0X8) 
+108 - 1571 PUSH 1 (0) 
+108 - 1576 PUSH who (0) 
+108 - 1581 CALL_EXTERN (train_unit_with_cost) 
+108 - 1586 POP  
+109 - 1587 JUMP 1544 
+110 - 1592 PUSH Citizen" (0X8) 
+110 - 1597 PUSH who (0) 
+110 - 1602 CALL_EXTERN (num_type_with_queued) 
+110 - 1607 PUSH 11 (0X10) 
+110 - 1612 >=  
+110 - 1613 JUMP_IF_NOT 1624 
+110 - 1618 ++ step (0X1) 
+110 - 1623 POP  
+111 - 1624 PUSH 1 (0) 
+111 - 1629 = return_value (0X5) 
+111 - 1634 POP  
+112 - 1635 JUMP 2452 
+114 - 1640 PUSH my_capital (0X8) 
+114 - 1645 PUSH Market" (0X16) 
+114 - 1650 PUSH who (0) 
+114 - 1655 CALL_EXTERN (place_building_with_cost) 
+114 - 1660 PUSH 0 (0X3) 
+114 - 1665 >  
+114 - 1666 JUMP_IF_NOT 1677 
+114 - 1671 ++ step (0X1) 
+114 - 1676 POP  
+115 - 1677 PUSH 1 (0) 
+115 - 1682 = return_value (0X5) 
+115 - 1687 POP  
+116 - 1688 JUMP 2452 
+118 - 1693 PUSH 2 (0X1) 
+118 - 1698 PUSH who (0) 
+118 - 1703 CALL_EXTERN (find_city_with_num) 
+118 - 1708 INIT_DECL my_second_city (0XE) anytype
+119 - 1714 PUSH my_second_city (0XE) 
+119 - 1719 PUSH Farm" (0X6) 
+119 - 1724 PUSH who (0) 
+119 - 1729 CALL_EXTERN (place_building_with_cost) 
+119 - 1734 PUSH 0 (0X3) 
+119 - 1739 >  
+119 - 1740 JUMP_IF_NOT 1751 
+119 - 1745 ++ step (0X1) 
+119 - 1750 POP  
+120 - 1751 PUSH 1 (0) 
+120 - 1756 = return_value (0X5) 
+120 - 1761 POP  
+121 - 1762 JUMP 2452 
+123 - 1767 PUSH Caravan" (0X19) 
+123 - 1772 PUSH 1 (0) 
+123 - 1777 PUSH who (0) 
+123 - 1782 CALL_EXTERN (train_unit_with_cost) 
+123 - 1787 PUSH 0 (0X3) 
+123 - 1792 >  
+123 - 1793 JUMP_IF_NOT 1804 
+123 - 1798 ++ step (0X1) 
+123 - 1803 POP  
+124 - 1804 PUSH 1 (0) 
+124 - 1809 = return_value (0X5) 
+124 - 1814 POP  
+125 - 1815 JUMP 2452 
+127 - 1820 PUSH Citizen" (0X8) 
+127 - 1825 PUSH who (0) 
+127 - 1830 CALL_EXTERN (num_type_with_queued) 
+127 - 1835 = peas (0XB) 
+127 - 1840 POP  
+128 - 1841 PUSH peas (0XB) 
+128 - 1846 = p (0XC) 
+128 - 1851 POP  
+128 - 1852 JUMP 1863 
+128 - 1857 ++ p (0XC) 
+128 - 1862 POP  
+128 - 1863 PUSH p (0XC) 
+128 - 1868 PUSH 13 (0X13) 
+128 - 1873 <  
+128 - 1874 JUMP_IF_NOT 1905 
+129 - 1879 PUSH Citizen" (0X8) 
+129 - 1884 PUSH 1 (0) 
+129 - 1889 PUSH who (0) 
+129 - 1894 CALL_EXTERN (train_unit_with_cost) 
+129 - 1899 POP  
+130 - 1900 JUMP 1857 
+131 - 1905 PUSH Citizen" (0X8) 
+131 - 1910 PUSH who (0) 
+131 - 1915 CALL_EXTERN (num_type_with_queued) 
+131 - 1920 PUSH 13 (0X13) 
+131 - 1925 >=  
+131 - 1926 JUMP_IF_NOT 1937 
+131 - 1931 ++ step (0X1) 
+131 - 1936 POP  
+132 - 1937 PUSH 1 (0) 
+132 - 1942 = return_value (0X5) 
+132 - 1947 POP  
+133 - 1948 JUMP 2452 
+135 - 1953 PUSH Merchant" (0X1C) 
+135 - 1958 PUSH 1 (0) 
+135 - 1963 PUSH who (0) 
+135 - 1968 CALL_EXTERN (train_unit_with_cost) 
+135 - 1973 PUSH 0 (0X3) 
+135 - 1978 >  
+135 - 1979 JUMP_IF_NOT 1990 
+135 - 1984 ++ step (0X1) 
+135 - 1989 POP  
+136 - 1990 PUSH 1 (0) 
+136 - 1995 = return_value (0X5) 
+136 - 2000 POP  
+137 - 2001 JUMP 2452 
+139 - 2006 PUSH 2 (0X1) 
+139 - 2011 PUSH who (0) 
+139 - 2016 CALL_EXTERN (find_city_with_num) 
+139 - 2021 = my_second_city (0XE) 
+139 - 2026 POP  
+140 - 2027 PUSH my_second_city (0XE) 
+140 - 2032 PUSH Market" (0X16) 
+140 - 2037 PUSH who (0) 
+140 - 2042 CALL_EXTERN (place_building_with_cost) 
+140 - 2047 PUSH 0 (0X3) 
+140 - 2052 >  
+140 - 2053 JUMP_IF_NOT 2064 
+140 - 2058 ++ step (0X1) 
+140 - 2063 POP  
+141 - 2064 PUSH 1 (0) 
+141 - 2069 = return_value (0X5) 
+141 - 2074 POP  
+142 - 2075 JUMP 2452 
+144 - 2080 PUSH Citizen" (0X8) 
+144 - 2085 PUSH who (0) 
+144 - 2090 CALL_EXTERN (num_type_with_queued) 
+144 - 2095 = peas (0XB) 
+144 - 2100 POP  
+145 - 2101 PUSH peas (0XB) 
+145 - 2106 = p (0XC) 
+145 - 2111 POP  
+145 - 2112 JUMP 2123 
+145 - 2117 ++ p (0XC) 
+145 - 2122 POP  
+145 - 2123 PUSH p (0XC) 
+145 - 2128 PUSH 14 (0X14) 
+145 - 2133 <  
+145 - 2134 JUMP_IF_NOT 2165 
+146 - 2139 PUSH Citizen" (0X8) 
+146 - 2144 PUSH 1 (0) 
+146 - 2149 PUSH who (0) 
+146 - 2154 CALL_EXTERN (train_unit_with_cost) 
+146 - 2159 POP  
+147 - 2160 JUMP 2117 
+148 - 2165 PUSH Citizen" (0X8) 
+148 - 2170 PUSH who (0) 
+148 - 2175 CALL_EXTERN (num_type_with_queued) 
+148 - 2180 PUSH 14 (0X14) 
+148 - 2185 >=  
+148 - 2186 JUMP_IF_NOT 2197 
+148 - 2191 ++ step (0X1) 
+148 - 2196 POP  
+149 - 2197 PUSH 1 (0) 
+149 - 2202 = return_value (0X5) 
+149 - 2207 POP  
+150 - 2208 JUMP 2452 
+152 - 2213 PUSH 2 (0X1) 
+152 - 2218 PUSH who (0) 
+152 - 2223 CALL_EXTERN (find_city_with_num) 
+152 - 2228 = my_second_city (0XE) 
+152 - 2233 POP  
+153 - 2234 PUSH my_second_city (0XE) 
+153 - 2239 PUSH Farm" (0X6) 
+153 - 2244 PUSH who (0) 
+153 - 2249 CALL_EXTERN (place_building_with_cost) 
+153 - 2254 PUSH 0 (0X3) 
+153 - 2259 >  
+153 - 2260 JUMP_IF_NOT 2271 
+153 - 2265 ++ step (0X1) 
+153 - 2270 POP  
+154 - 2271 PUSH 1 (0) 
+154 - 2276 = return_value (0X5) 
+154 - 2281 POP  
+155 - 2282 JUMP 2452 
+157 - 2287 PUSH Written Word" (0X21) 
+157 - 2292 PUSH who (0) 
+157 - 2297 CALL_EXTERN (research_tech_with_cost) 
+157 - 2302 PUSH 0 (0X3) 
+157 - 2307 >  
+157 - 2308 JUMP_IF_NOT 2319 
+157 - 2313 ++ step (0X1) 
+157 - 2318 POP  
+158 - 2319 PUSH 1 (0) 
+158 - 2324 = return_value (0X5) 
+158 - 2329 POP  
+159 - 2330 JUMP 2452 
+161 - 2335 PUSH Merchant" (0X1C) 
+161 - 2340 PUSH 2 (0X1) 
+161 - 2345 PUSH who (0) 
+161 - 2350 CALL_EXTERN (train_unit_with_cost) 
+161 - 2355 PUSH 0 (0X3) 
+161 - 2360 >  
+161 - 2361 JUMP_IF_NOT 2372 
+161 - 2366 ++ step (0X1) 
+161 - 2371 POP  
+162 - 2372 PUSH 1 (0) 
+162 - 2377 = return_value (0X5) 
+162 - 2382 POP  
+163 - 2383 JUMP 2452 
+165 - 2388 PUSH Classical Age" (0X24) 
+165 - 2393 PUSH who (0) 
+165 - 2398 CALL_EXTERN (research_tech_with_cost) 
+165 - 2403 PUSH 0 (0X3) 
+165 - 2408 >  
+165 - 2409 JUMP_IF_NOT 2420 
+165 - 2414 ++ step (0X1) 
+165 - 2419 POP  
+166 - 2420 PUSH 1 (0) 
+166 - 2425 = return_value (0X5) 
+166 - 2430 POP  
+167 - 2431 JUMP 2452 
+169 - 2436 PUSH 3 (0X2) 
+169 - 2441 = return_value (0X5) 
+169 - 2446 POP  
+170 - 2447 JUMP 2452 
+172 - 2452 JUMP 177 
+174 - 2457 PUSH return_value (0X5) 
+174 - 2462 RETURN  

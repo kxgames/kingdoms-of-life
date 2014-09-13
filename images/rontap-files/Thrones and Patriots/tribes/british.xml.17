@@ -1,0 +1,50 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="イギリス">
+	<LEADERS>
+		<LEADER>ヘンリー 8 世</LEADER>
+		<LEADER>リチャード獅子心王</LEADER>
+		<LEADER>リチャード 3 世</LEADER>
+		<LEADER>ヘンリー 5 世</LEADER>
+		<LEADER>征服王ウィリアム 1 世</LEADER>
+		<LEADER>エリザベス女王</LEADER>
+		<LEADER>メアリー女王</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>ロンドン</CITY>
+		<CITY>エディンバラ</CITY>
+		<CITY>ヨーク</CITY>
+		<CITY>ソールズベリー</CITY>
+		<CITY>ニューカッスル</CITY>
+		<CITY>カンタベリー</CITY>
+		<CITY>ノッティンガム</CITY>
+		<CITY>レスター</CITY>
+		<CITY>ノリッジ</CITY>
+		<CITY>リンカーン</CITY>
+		<CITY>チェスター</CITY>
+		<CITY>ダーラム</CITY>
+		<CITY>バス</CITY>
+		<CITY>オックスフォード</CITY>
+		<CITY>サウサンプトン</CITY>
+		<CITY>ケンブリッジ</CITY>
+		<CITY>ホイットビー</CITY>
+		<CITY>ヘクサム</CITY>
+		<CITY>ラニミード</CITY>
+		<CITY>ウィンザー</CITY>
+		<CITY>エクセター</CITY>
+		<CITY>ランカスター</CITY>
+		<CITY>カーライル</CITY>
+		<CITY>アバディーン</CITY>
+		<CITY>グラスゴー</CITY>
+		<CITY>ブリストル</CITY>
+		<CITY>リッチモンド</CITY>
+		<CITY>バーミンガム</CITY>
+		<CITY>マンチェスター</CITY>
+		<CITY>ポーツマス</CITY>
+		<CITY>リバプール</CITY>
+		<CITY>ウィンチェスター</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

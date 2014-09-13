@@ -1,0 +1,64 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Grecs">
+	<LEADERS>
+		<LEADER>Périclès</LEADER>
+		<LEADER>Alexandre le Grand</LEADER>
+		<LEADER>Lysandre de Sparte</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Athènes</CITY>
+		<CITY>Sparte</CITY>
+		<CITY>Thèbes</CITY>
+		<CITY>Corinthe</CITY>
+		<CITY>Cnossos</CITY>
+		<CITY>Argos</CITY>
+		<CITY>Mégare</CITY>
+		<CITY>Érétrie</CITY>
+		<CITY>Chalcis</CITY>
+		<CITY>Héraklion</CITY>
+		<CITY>Milet</CITY>
+		<CITY>Halicarnasse</CITY>
+		<CITY>Lindos</CITY>
+		<CITY>Ialysus</CITY>
+		<CITY>Samos</CITY>
+		<CITY>Phocée</CITY>
+		<CITY>Chio</CITY>
+		<CITY>Théra</CITY>
+		<CITY>Mélos</CITY>
+		<CITY>Pharsale</CITY>
+		<CITY>Paros</CITY>
+		<CITY>Thessalonique</CITY>
+		<CITY>Démétrias</CITY>
+		<CITY>Délos</CITY>
+		<CITY>Zanthe</CITY>
+		<CITY>Élatée</CITY>
+		<CITY>Érythrée</CITY>
+		<CITY>Mantinée</CITY>
+		<CITY>Syracuse</CITY>
+		<CITY>Corcyre</CITY>
+		<CITY>Byzance</CITY>
+		<CITY>Alexandrie</CITY>
+		<CITY>Potidée</CITY>
+		<CITY>Héraclée</CITY>
+		<CITY>Apollonia</CITY>
+		<CITY>Épidamne</CITY>
+		<CITY>Patrai</CITY>
+		<CITY>Chalcedon</CITY>
+		<CITY>Cos</CITY>
+		<CITY>Cnide</CITY>
+		<CITY>Priène</CITY>
+		<CITY>Colophon</CITY>
+		<CITY>Clazomènes</CITY>
+		<CITY>Téos</CITY>
+		<CITY>Samos</CITY>
+		<CITY>Mytilène</CITY>
+		<CITY>Myrina</CITY>
+		<CITY>Thasos</CITY>
+		<CITY>Samothrace</CITY>
+		<CITY>Le Pirée</CITY>
+		<CITY>Zarax</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,50 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="GLI INGLESI">
+	<LEADERS>
+		<LEADER>Enrico VIII</LEADER>
+		<LEADER>Riccardo Cuor di Leone</LEADER>
+		<LEADER>Riccardo III</LEADER>
+		<LEADER>Enrico V</LEADER>
+		<LEADER>Guglielmo il Conquistatore</LEADER>
+		<LEADER>Elisabetta I</LEADER>
+		<LEADER>Maria</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Londra</CITY>
+		<CITY>Edimburgo</CITY>
+		<CITY>York</CITY>
+		<CITY>Salisbury</CITY>
+		<CITY>Newcastle</CITY>
+		<CITY>Canterbury</CITY>
+		<CITY>Nottingham</CITY>
+		<CITY>Leicester</CITY>
+		<CITY>Norwich</CITY>
+		<CITY>Lincoln</CITY>
+		<CITY>Chester</CITY>
+		<CITY>Durham</CITY>
+		<CITY>Bath</CITY>
+		<CITY>Oxford</CITY>
+		<CITY>Southampton</CITY>
+		<CITY>Cambridge</CITY>
+		<CITY>Whitby</CITY>
+		<CITY>Hexham</CITY>
+		<CITY>Runnymede</CITY>
+		<CITY>Windsor</CITY>
+		<CITY>Exeter</CITY>
+		<CITY>Lancaster</CITY>
+		<CITY>Carlisle</CITY>
+		<CITY>Aberdeen</CITY>
+		<CITY>Glasgow</CITY>
+		<CITY>Bristol</CITY>
+		<CITY>Richmond</CITY>
+		<CITY>Birmingham</CITY>
+		<CITY>Manchester</CITY>
+		<CITY>Portsmouth</CITY>
+		<CITY>Liverpool</CITY>
+		<CITY>Winchester</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

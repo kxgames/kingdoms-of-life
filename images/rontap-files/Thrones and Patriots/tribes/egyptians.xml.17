@@ -1,0 +1,48 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="エジプト">
+	<LEADERS>
+		<LEADER>クレオパトラ女王</LEADER>
+		<LEADER>ネフェルティティ女王</LEADER>
+		<LEADER>ハトシェプスト女王</LEADER>
+		<LEADER>ラムセス 2 世</LEADER>
+		<LEADER>クフ王</LEADER>
+		<LEADER>アメンホテプ 3 世</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>テーベ</CITY>
+		<CITY>メンフィス</CITY>
+		<CITY>王都ラムセス</CITY>
+		<CITY>エルリシェト</CITY>
+		<CITY>エルアマルナ</CITY>
+		<CITY>イドフ</CITY>
+		<CITY>エレファンティン</CITY>
+		<CITY>アシュート</CITY>
+		<CITY>サッカラ</CITY>
+		<CITY>ギザ</CITY>
+		<CITY>サイス</CITY>
+		<CITY>ブト</CITY>
+		<CITY>ラクテ</CITY>
+		<CITY>ブバスティス</CITY>
+		<CITY>タニス</CITY>
+		<CITY>ヘリオポリス</CITY>
+		<CITY>カルナック</CITY>
+		<CITY>ルクソール</CITY>
+		<CITY>スパーメル</CITY>
+		<CITY>アトゥフィーフ</CITY>
+		<CITY>カフン</CITY>
+		<CITY>シー</CITY>
+		<CITY>ハワラ</CITY>
+		<CITY>エズベ ラシディ</CITY>
+		<CITY>ミール</CITY>
+		<CITY>アクミーム</CITY>
+		<CITY>アビドス</CITY>
+		<CITY>セセビ</CITY>
+		<CITY>アマーラ</CITY>
+		<CITY>エル セブア</CITY>
+		<CITY>ヘラクレオポリス</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 Europe    </UNIT_CONTINENT>
+	<BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

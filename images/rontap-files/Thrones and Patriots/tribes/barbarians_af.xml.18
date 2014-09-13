@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Robert Nicaise (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="송하이">
+	<LEADERS>
+		<LEADER>소니 알리왕</LEADER>
+		<LEADER>아스키아 대왕</LEADER>
+		<LEADER>모하메드 투레왕</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>팀북투</CITY>
+		<CITY>가오</CITY>
+		<CITY>젠네</CITY>
+		<CITY>카라바라</CITY>
+		<CITY>쿰비 살레</CITY>
+		<CITY>테케다</CITY>
+		<CITY>타드메카</CITY>
+		<CITY>니아메이</CITY>
+		<CITY>타그하자</CITY>
+		<CITY>타만라세트</CITY>
+		<CITY>타케다</CITY>
+		<CITY>타오데니</CITY>
+		<CITY>와단</CITY>
+		<CITY>니안니</CITY>
+		<CITY>쿠키야</CITY>
+		<CITY>가오사네</CITY>
+		<CITY>코리우메</CITY>
+		<CITY>베라쿠시</CITY>
+		<CITY>니니</CITY>
+		<CITY>코아</CITY>
+		<CITY>시라닌코로</CITY>
+		<CITY>바마코</CITY>
+		<CITY>세구</CITY>
+		<CITY>구 세구</CITY>
+		<CITY>소르코</CITY>
+		<CITY>케비</CITY>
+		<CITY>수니</CITY>
+		<CITY>시</CITY>
+		<CITY>투레</CITY>
+		<CITY>아스키야</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>1 Arab    </UNIT_CONTINENT>
+	<BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

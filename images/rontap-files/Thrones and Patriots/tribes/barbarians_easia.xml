@@ -1,0 +1,45 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Robert Nicaise (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Khmers">
+  <LEADERS>
+    <LEADER>King Jayavarman</LEADER>
+    <LEADER>King Indravarman </LEADER>
+    <LEADER>King Yasovarman</LEADER>
+    <LEADER>King Harshavarman</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Angkor</CITY>
+    <CITY>Wat Phu</CITY>
+    <CITY>Sambor Prei Kuk</CITY>
+    <CITY>Angkor Borei</CITY>
+    <CITY>Prasat Andet</CITY>
+    <CITY>Phnom Da</CITY>
+    <CITY>U Thong</CITY>
+    <CITY>Vijaya</CITY>
+    <CITY>Sukhothai</CITY>
+    <CITY>Nakhon Pathom</CITY>
+    <CITY>Luang Prabang</CITY>
+    <CITY>Ayutthaya</CITY>
+    <CITY>Yasodharapura</CITY>
+    <CITY>Ankor Thom</CITY>
+    <CITY>Bangkok</CITY>
+    <CITY>Nonthaburi</CITY>
+    <CITY>Pathum Thani</CITY>
+    <CITY>Amnat Charoen</CITY>
+    <CITY>Jitra</CITY>
+    <CITY>Trang</CITY>
+    <CITY>Chachoengsao</CITY>
+    <CITY>Phatthalung</CITY>
+    <CITY>Palembang</CITY>
+    <CITY>Thon Buri</CITY>
+    <CITY>Udon</CITY>
+    <CITY>Ubon</CITY>
+    <CITY>Korat</CITY>
+    <CITY>Surin</CITY>
+    <CITY>Buri Ram</CITY>
+    <CITY>Chao Praya</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+  <BUILD_CONTINENT>2 Asian</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

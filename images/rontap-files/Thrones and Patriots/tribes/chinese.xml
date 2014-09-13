@@ -1,0 +1,51 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Chinese">
+  <LEADERS>
+    <LEADER>Emperor Shi Huangdi</LEADER>
+    <LEADER>Emperor Wu Di</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Beijing</CITY>
+    <CITY>Shanghai</CITY>
+    <CITY>Chengdu</CITY>
+    <CITY>Chang'an</CITY>
+    <CITY>Changchun</CITY>
+    <CITY>Guangzhou</CITY>
+    <CITY>Jinan</CITY>
+    <CITY>Xian</CITY>
+    <CITY>Harbin</CITY>
+    <CITY>Luoyang</CITY>
+    <CITY>Lanzhou</CITY>
+    <CITY>Taiyuan</CITY>
+    <CITY>Xiangzhou</CITY>
+    <CITY>Tongchuanfu</CITY>
+    <CITY>Tanzhou</CITY>
+    <CITY>Longxingfu</CITY>
+    <CITY>Fuzhou</CITY>
+    <CITY>Nanning</CITY>
+    <CITY>Wuhan</CITY>
+    <CITY>Urumqi</CITY>
+    <CITY>Nanjing</CITY>
+    <CITY>Jiangyin</CITY>
+    <CITY>Kunming</CITY>
+    <CITY>Hangzhou</CITY>
+    <CITY>Xinxiang</CITY>
+    <CITY>Tianjin</CITY>
+    <CITY>Hong Kong</CITY>
+    <CITY>Chongqing</CITY>
+    <CITY>Shenyang</CITY>
+    <CITY>Wu-su</CITY>
+    <CITY>Lu-ta</CITY>
+    <CITY>Chi-hsi</CITY>
+    <CITY>Nanchang</CITY>
+    <CITY>Changsha</CITY>
+    <CITY>Hefei</CITY>
+    <CITY>Guiyang</CITY>
+    <CITY>Qinyang</CITY>
+    <CITY>Qingdao</CITY>
+    <CITY>Hengyang</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+  <BUILD_CONTINENT>2 Asian</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

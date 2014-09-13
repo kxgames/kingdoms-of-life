@@ -1,0 +1,54 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Persians">
+  <LEADERS>
+    <LEADER>Darius</LEADER>
+    <LEADER>Cyrus the Great</LEADER>
+    <LEADER>Xerxes</LEADER>
+    <LEADER>Zarathustra</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Persepolis</CITY>
+    <CITY>Shiraz</CITY>
+    <CITY>Persepolis</CITY>
+    <CITY>Pasargadae</CITY>
+    <CITY>Isfahan</CITY>
+    <CITY>Khomein</CITY>
+    <CITY>Qon</CITY>
+    <CITY>Tehran</CITY>
+    <CITY>Susa</CITY>
+    <CITY>Bushahr</CITY>
+    <CITY>Tabriz</CITY>
+    <CITY>Baku</CITY>
+    <CITY>Damascus</CITY>
+    <CITY>Tyre</CITY>
+    <CITY>Gaugemela</CITY>
+    <CITY>Babylon</CITY>
+    <CITY>Hamedan</CITY>
+    <CITY>Kerman</CITY>
+    <CITY>Mashhad</CITY>
+    <CITY>Yazd</CITY>
+    <CITY>Arak</CITY>
+    <CITY>Sanandaj</CITY>
+    <CITY>Bam</CITY>
+    <CITY>Ecbatana</CITY>
+    <CITY>Meymand</CITY>
+    <CITY>Neyshabur</CITY>
+    <CITY>Turkoman</CITY>
+    <CITY>Rasht</CITY>
+    <CITY>Estahbanat</CITY>
+    <CITY>Yasuj</CITY>
+    <CITY>Rigan</CITY>
+    <CITY>Khur</CITY>
+    <CITY>Turud</CITY>
+    <CITY>Samnan</CITY>
+    <CITY>Meshed</CITY>
+    <CITY>Quimisha</CITY>
+    <CITY>Abadan</CITY>
+    <CITY>Marvas</CITY>
+    <CITY>Arg-E-Bam</CITY>
+
+  </CITIES>
+  <UNIT_CONTINENT>5 EIndian</UNIT_CONTINENT>
+  <BUILD_CONTINENT>8 EIndian</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>8 EIndian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

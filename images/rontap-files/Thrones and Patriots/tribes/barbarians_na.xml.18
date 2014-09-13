@@ -1,0 +1,87 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Robert Nicaise (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="이로쿼이">
+	<LEADERS>
+		<LEADER>Esahabbe</LEADER>
+		<LEADER>Geronimo</LEADER>
+		<LEADER>Pahkah</LEADER>
+		<LEADER>Chomoparua</LEADER>
+		<LEADER>Kanaretah</LEADER>
+		<LEADER>Tosacowadi</LEADER>
+		<LEADER>Shabbakasha</LEADER>
+		<LEADER>Satanta</LEADER>
+		<LEADER>Dohosan</LEADER>
+		<LEADER>Quanak Parker</LEADER>
+		<LEADER>Kicking Bird</LEADER>
+		<LEADER>Kumaquai</LEADER>
+		<LEADER>Witsitony</LEADER>
+		<LEADER>하이아와타</LEADER>
+		<LEADER>데가나위다 </LEADER>
+		<LEADER>도네호가와</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Kwaharu</CITY>
+		<CITY>Hois</CITY>
+		<CITY>Widyunuu</CITY>
+		<CITY>Nokoni</CITY>
+		<CITY>Pehnahterkuh</CITY>
+		<CITY>Yamparika</CITY>
+		<CITY>Parkeenaum</CITY>
+		<CITY>Tehneemuh</CITY>
+		<CITY>Tenawa</CITY>
+		<CITY>Penateka</CITY>
+		<CITY>Kosoteka</CITY>
+		<CITY>Kiowa</CITY>
+		<CITY>Catha</CITY>
+		<CITY>Datse-an</CITY>
+		<CITY>Gyaiko</CITY>
+		<CITY>Idahi</CITY>
+		<CITY>Inda</CITY>
+		<CITY>Larihta</CITY>
+		<CITY>Mahan</CITY>
+		<CITY>Mahana</CITY>
+		<CITY>Nalani</CITY>
+		<CITY>Nanita</CITY>
+		<CITY>Naratah</CITY>
+		<CITY>Nataa</CITY>
+		<CITY>Partooku</CITY>
+		<CITY>Sanko</CITY>
+		<CITY>Sauhto</CITY>
+		<CITY>Selakampom</CITY>
+		<CITY>Taeaccaro</CITY>
+		<CITY>Yampah</CITY>
+		<CITY>촌도테</CITY>
+		<CITY>게와우가</CITY>
+		<CITY>카나호하리에</CITY>
+		<CITY>카타라우구스</CITY>
+		<CITY>샤운아챠다 </CITY>
+		<CITY>쇼하리에</CITY>
+		<CITY>치텐낭고</CITY>
+		<CITY>투스카로라</CITY>
+		<CITY>오논다가</CITY>
+		<CITY>카숑 </CITY>
+		<CITY>체멍</CITY>
+		<CITY>제네세다가 </CITY>
+		<CITY>가노게</CITY>
+		<CITY>카와우카</CITY>
+		<CITY>오웨고</CITY>
+		<CITY>노와다가</CITY>
+		<CITY>사라토가</CITY>
+		<CITY>치텐낭고</CITY>
+		<CITY>오세윙고</CITY>
+		<CITY>아하우에트</CITY>
+		<CITY>투엔호</CITY>
+		<CITY>샤위앙토</CITY>
+		<CITY>가하토</CITY>
+		<CITY>오나헤</CITY>
+		<CITY>간다세타이곤</CITY>
+		<CITY>켄테</CITY>
+		<CITY>키오헤로</CITY>
+		<CITY>네오다켄드</CITY>
+		<CITY>오네니올</CITY>
+		<CITY>스칸나유테나테</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+	<BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

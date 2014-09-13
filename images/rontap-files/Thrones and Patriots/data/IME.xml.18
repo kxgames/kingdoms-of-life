@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- IME.xml    ini file for IME operation -->
+
+<ROOT>
+  <!-- Using UNICODE, so always enabled-->
+  <ENABLED value="1" />
+
+  <IMEAPPEARANCE>
+  <!-- symbol (Henkan-kyu ) -->
+
+    <SYMBOLCOLOR>             000080        </SYMBOLCOLOR>
+    <SYMBOLCOLORTEXT>         FFFFFF        </SYMBOLCOLORTEXT> 
+    <SYMBOLHEIGHT>            26              </SYMBOLHEIGHT> 
+    <SYMBOLTRANSLUCENCE>      196             </SYMBOLTRANSLUCENCE> 
+    <SYMBOLPLACEMENT>         0               </SYMBOLPLACEMENT>
+
+  <!-- candidate list -->
+
+    <CANDCOLORBASE>           FFCDCDB4        </CANDCOLORBASE>
+    <CANDCOLORBORDER>         ff000000        </CANDCOLORBORDER> 
+    <CANDCOLORTEXT>           ff404040        </CANDCOLORTEXT>
+
+  <!-- composition string -->
+
+    <COMPCOLORINPUT>          625d5d         </COMPCOLORINPUT>
+    <COMPCOLORTARGETCONV>     0x000000ff        </COMPCOLORTARGETCONV>
+    <COMPCOLORCONVERTED>      0x0000ff00        </COMPCOLORCONVERTED>
+    <COMPCOLORTARGETNOTCONV>  0x00ff0000        </COMPCOLORTARGETNOTCONV>
+    <COMPCOLORINPUTERR>       0x00ff0000        </COMPCOLORINPUTERR>
+    <COMPTRANSLUCENCE>        0x80               </COMPTRANSLUCENCE> 
+    <COMPCOLORTEXT>           0x00000000        </COMPCOLORTEXT>
+      
+  </IMEAPPEARANCE>
+
+  <!-- support level, must be 2 or 3 -->
+  <SUPPORTLEVEL level="3" />
+
+</ROOT>

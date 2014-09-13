@@ -1,0 +1,37 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Turks">
+  <LEADERS>
+    <LEADER>Suleiman the Magnificent</LEADER>
+    <LEADER>Mehmed II Khan Gazi</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Istanbul</CITY>
+    <CITY>Ankara</CITY>
+    <CITY>Aleppo</CITY>
+    <CITY>Corum</CITY>
+    <CITY>Smyrna</CITY>
+    <CITY>Antioch</CITY>
+    <CITY>Iznik</CITY>
+    <CITY>Bolu</CITY>
+    <CITY>Eregli</CITY>
+    <CITY>Kars</CITY>
+    <CITY>Babaeski</CITY>
+    <CITY>Erzurum</CITY>
+    <CITY>Trebizond</CITY>
+    <CITY>Izmit</CITY>
+    <CITY>Konya</CITY>
+    <CITY>Isparta</CITY>
+    <CITY>Gallipoli</CITY>
+    <CITY>Diyarbakir</CITY>
+    <CITY>Manisa</CITY>
+    <CITY>Jedda</CITY>
+    <CITY>Kirkuk</CITY>
+    <CITY>Havsa</CITY>
+    <CITY>Canca</CITY>
+    <CITY>Keyseri</CITY>
+    <CITY>Karapinar</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 Europe</UNIT_CONTINENT>
+  <BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

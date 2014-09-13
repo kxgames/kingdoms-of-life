@@ -1,0 +1,48 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by XMLSPY 5 Professional Ed. Release 2 (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Comanche">
+  <LEADERS>
+    <LEADER>Esahabbe</LEADER>
+    <LEADER>Kumaquai</LEADER>
+    <LEADER>Pahkah</LEADER>
+    <LEADER>Chomoparua</LEADER>
+    <LEADER>Kanaretah</LEADER>
+    <LEADER>Tosacowadi</LEADER>
+    <LEADER>Shabbakasha</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Kwaharu</CITY>
+    <CITY>Hois</CITY>
+    <CITY>Widyunuu</CITY>
+    <CITY>Nokoni</CITY>
+    <CITY>Pehnahterkuh</CITY>
+    <CITY>Yamparika</CITY>
+    <CITY>Parkeenaum</CITY>
+    <CITY>Tehneemuh</CITY>
+    <CITY>Tenawa</CITY>
+    <CITY>Penateka</CITY>
+    <CITY>Kosoteka</CITY>
+    <CITY>Kiowa</CITY>
+    <CITY>Catha</CITY>
+    <CITY>Datse-an</CITY>
+    <CITY>Gyaiko</CITY>
+    <CITY>Idahi</CITY>
+    <CITY>Inda</CITY>
+    <CITY>Larihta</CITY>
+    <CITY>Mahan</CITY>
+    <CITY>Mahana</CITY>
+    <CITY>Nalani</CITY>
+    <CITY>Nanita</CITY>
+    <CITY>Naratah</CITY>
+    <CITY>Nataa</CITY>
+    <CITY>Partooku</CITY>
+    <CITY>Sanko</CITY>
+    <CITY>Sauhto</CITY>
+    <CITY>Selakampom</CITY>
+    <CITY>Taeaccaro</CITY>
+    <CITY>Yampah</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+  <BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

@@ -1,0 +1,1245 @@
+
+#NEW_TERRAIN_CONST
+heightscale,                2.5
+smoothness,                 5.0
+maxdelta,                   0.05
+showmnt,                    0.0
+mntscale,                   0.9
+showshell,                  1.0
+heightepsilon,              15.0
+showtrans,                  1.0
+showland,                   1.0
+showweathering,             1.0
+assembleweathering,         1.0
+doublecoast_chance,         100.0
+shelf_max_distance,         2.0
+shelf_max_delta,            100.0
+shelf_min_alpha,            0.0
+shelf_max_jitter,           20.0
+water_fade_min,             0.05
+water_fade_distance,        0.2
+river_fade_min,             0.1
+river_fade_distance,        0.2
+coast_depth,                -101.0
+ocean_depth,                -200.0
+land_height,                10.0
+coast_jitter,               1.0
+coast_tex_jitter,           0.0
+coast_ocean_drop,           0.0
+coast_use_coves,            0.0
+coast_width,                3.0
+beach_dist_start,           0.5
+beach_dist_end,             0.96
+beach_dist_jitter,          0.2
+shallow_dist_start,         0.0
+shallow_dist_end,           20.0
+shallow_dist_jitter,        0.1
+deco_chance,                3
+coastal_threshold,          -30.0
+
+
+#NEW_TERRAIN_WATER
+Frame Delay (ms),                100
+Shallow Color RGB,          26, 92,  93
+Deep Color RGB,              7, 81,  40
+WaterColor Invis,           3
+WaterColor Solid,           150
+WaterColor TopScreen,       255
+WaterColor BotScreen,       0
+WaterColor SideScreen,      35
+RiverColor,                 25
+OceanAlpha,                 0.694
+OceanRed,                   255
+OceanGreen,                 255
+OceanBlue,                  255
+OceanFloorAlphaTop,         1.0
+OceanFloorRedTop,           255
+OceanFloorGreenTop,         255
+OceanFloorBlueTop,          255
+OceanFloorAlphaBot,         1.0
+OceanFloorRedBot,           0
+OceanFloorGreenBot,         0
+OceanFloorBlueBot,          0
+WaterRedTop,                0
+WaterGreenTop,              159
+WaterBlueTop,               255
+WaterRedBot,                0
+WaterGreenBot,              111
+WaterBlueBot,               218
+OceanSwimAmp,               0.2
+OceanSwimFreq,              0.02
+OceanFLoorjitter,           17.0
+OceanFLoorSpeed,            0.0003
+OceanFadeHeight,            -40
+; scale factors are how many wcoords a single texture should stretch over
+; note that they are 2^n.. so 0 means 1:1, 1 means 1 texture covers 2x2 wcoords, 2 = 4x4, 3=8x8, etc.
+OceanFloorScale,            3
+WaterLevel1Scale,           0
+WaterLevel2Scale,           1
+Num Water Textures,         32
+Tex0,                       .\\terrain art\\newwater\\water0000.tga
+Tex1,                       .\\terrain art\\newwater\\water0001.tga
+Tex2,                       .\\terrain art\\newwater\\water0002.tga
+Tex3,                       .\\terrain art\\newwater\\water0003.tga
+Tex4,                       .\\terrain art\\newwater\\water0004.tga
+Tex5,                       .\\terrain art\\newwater\\water0005.tga
+Tex6,                       .\\terrain art\\newwater\\water0006.tga
+Tex7,                       .\\terrain art\\newwater\\water0007.tga
+Tex8,                       .\\terrain art\\newwater\\water0008.tga
+Tex9,                       .\\terrain art\\newwater\\water0009.tga
+Tex10,                       .\\terrain art\\newwater\\water0010.tga
+Tex11,                       .\\terrain art\\newwater\\water0011.tga
+Tex12,                       .\\terrain art\\newwater\\water0012.tga
+Tex13,                       .\\terrain art\\newwater\\water0013.tga
+Tex14,                       .\\terrain art\\newwater\\water0014.tga
+Tex15,                       .\\terrain art\\newwater\\water0015.tga
+Tex16,                       .\\terrain art\\newwater\\water0016.tga
+Tex17,                       .\\terrain art\\newwater\\water0017.tga
+Tex18,                       .\\terrain art\\newwater\\water0018.tga
+Tex19,                       .\\terrain art\\newwater\\water0019.tga
+Tex20,                       .\\terrain art\\newwater\\water0020.tga
+Tex21,                       .\\terrain art\\newwater\\water0021.tga
+Tex22,                       .\\terrain art\\newwater\\water0022.tga
+Tex23,                       .\\terrain art\\newwater\\water0023.tga
+Tex24,                       .\\terrain art\\newwater\\water0024.tga
+Tex25,                       .\\terrain art\\newwater\\water0025.tga
+Tex26,                       .\\terrain art\\newwater\\water0026.tga
+Tex27,                       .\\terrain art\\newwater\\water0027.tga
+Tex28,                       .\\terrain art\\newwater\\water0028.tga
+Tex29,                       .\\terrain art\\newwater\\water0029.tga
+Tex30,                       .\\terrain art\\newwater\\water0030.tga
+Tex31,                       .\\terrain art\\newwater\\water0031.tga
+
+
+#DEFAULT_TREE_TEXTURES0
+Trunk Texture,         tree_T_bark.tga
+Bottom0 Leaf Texture,  tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  tree_T_bottom_b.tga
+Middle0 Leaf Texture,  tree_T_middle_a.tga
+Middle1 Leaf Texture,  tree_T_middle_b.tga
+Middle2 Leaf Texture,  tree_T_middle_c.tga
+Top0    Leaf Texture,  tree_T_top_a.tga
+Shadow  Texture,       tree_t_shadows.tga
+
+#DEFAULT_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#DEFAULT_TREE_MODELS0
+tree_t_00.bh3
+tree_t_01.bh3
+tree_t_02.bh3
+tree_t_03.bh3
+tree_t_04.bh3
+tree_t_05.bh3
+tree_t_06.bh3
+tree_t_07.bh3
+tree_t_10.bh3
+tree_t_11.bh3
+tree_t_12.bh3
+tree_t_13.bh3
+tree_t_14.bh3
+tree_t_15.bh3
+tree_t_16.bh3
+tree_t_17.bh3
+tree_t_20.bh3
+tree_t_21.bh3
+tree_t_22.bh3
+tree_t_23.bh3
+tree_t_24.bh3
+tree_t_25.bh3
+tree_t_26.bh3
+tree_t_27.bh3
+
+#DEFAULT_LOW_END_TREES
+Low End Tree Texture, .\art\treel_t.tga
+TreeL_T_00.bh3
+TreeL_T_01.bh3
+;TreeL_T_02.bh3
+;TreeL_T_03.bh3
+;TreeL_T_04.bh3
+;TreeL_T_05.bh3
+
+; ============================================================================
+#SNOWY_TREE_TEXTURES0
+Trunk Texture,         strees/tree_T_bark.tga
+Bottom0 Leaf Texture,  strees/tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  strees/tree_T_bottom_b.tga
+Middle0 Leaf Texture,  strees/tree_T_middle_a.tga
+Middle1 Leaf Texture,  strees/tree_T_middle_b.tga
+Middle2 Leaf Texture,  strees/tree_T_middle_c.tga
+Top0    Leaf Texture,  strees/tree_T_top_a.tga
+Shadow  Texture,       strees/tree_t_shadows.tga
+
+#SNOWY_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#SNOWY_TREE_MODELS0
+strees/tree_t_00.bh3
+strees/tree_t_01.bh3
+strees/tree_t_02.bh3
+strees/tree_t_03.bh3
+strees/tree_t_04.bh3
+strees/tree_t_05.bh3
+strees/tree_t_06.bh3
+strees/tree_t_07.bh3
+strees/tree_t_10.bh3
+strees/tree_t_11.bh3
+strees/tree_t_12.bh3
+strees/tree_t_13.bh3
+strees/tree_t_14.bh3
+strees/tree_t_15.bh3
+strees/tree_t_16.bh3
+strees/tree_t_17.bh3
+strees/tree_t_20.bh3
+strees/tree_t_21.bh3
+strees/tree_t_22.bh3
+strees/tree_t_23.bh3
+strees/tree_t_24.bh3
+strees/tree_t_25.bh3
+strees/tree_t_26.bh3
+strees/tree_t_27.bh3
+
+#SNOWY_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\snowy\strees\snowy_low_trees.tga
+strees/snowy_lowend_tree_01.bh3
+strees/snowy_lowend_tree_02.bh3
+strees/snowy_lowend_tree_03.bh3
+strees/snowy_lowend_tree_04.bh3
+strees/snowy_lowend_tree_05.bh3
+strees/snowy_lowend_tree_06.bh3
+
+#SNOWY_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\s_doober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\s_doober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\s_doober_stumps.tga,       2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\s_doober_rocks_02.tga,     2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+
+#SW_DESERT_TREE_TEXTURES0
+; NOTE: these files will all use the tileset base directory as a root
+Trunk Texture,         swtrees\tree_T_bark.tga
+Bottom0 Leaf Texture,  swtrees\tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  swtrees\tree_T_bottom_b.tga
+Middle0 Leaf Texture,  swtrees\tree_T_middle_a.tga
+Middle1 Leaf Texture,  swtrees\tree_T_middle_b.tga
+Middle2 Leaf Texture,  swtrees\tree_T_middle_c.tga
+Top0    Leaf Texture,  swtrees\tree_T_top_a.tga
+Shadow  Texture,       swtrees\tree_t_shadows.tga
+
+#SW_DESERT_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#SW_DESERT_TREE_MODELS0
+swtrees\tree_t_00.bh3
+swtrees\tree_t_01.bh3
+swtrees\tree_t_02.bh3
+swtrees\tree_t_03.bh3
+swtrees\tree_t_04.bh3
+swtrees\tree_t_05.bh3
+swtrees\tree_t_06.bh3
+swtrees\tree_t_07.bh3
+;swtrees\tree_t_10.bh3
+swtrees\tree_t_11.bh3
+;swtrees\tree_t_12.bh3
+swtrees\tree_t_13.bh3
+;swtrees\tree_t_14.bh3
+;swtrees\tree_t_15.bh3
+swtrees\tree_t_16.bh3
+;swtrees\tree_t_17.bh3
+swtrees\tree_t_20.bh3
+swtrees\tree_t_21.bh3
+swtrees\tree_t_22.bh3
+swtrees\tree_t_23.bh3
+swtrees\tree_t_24.bh3
+swtrees\tree_t_25.bh3
+swtrees\tree_t_26.bh3
+swtrees\tree_t_27.bh3
+
+
+#SW_DESERT_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\sw_desert\swtrees\swdesert_low_trees.tga
+swtrees\swdesert_lowend_tree_01.bh3
+swtrees\swdesert_lowend_tree_02.bh3
+swtrees\swdesert_lowend_tree_03.bh3
+swtrees\swdesert_lowend_tree_04.bh3
+swtrees\swdesert_lowend_tree_05.bh3
+swtrees\swdesert_lowend_tree_06.bh3
+
+
+
+#SW_DESERT_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\sw_desert_doober_bushes.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\sw_desert_doober_rocks.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\sw_doober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\sw_doober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+; ============================================================================
+; ============================================================================
+
+#GS_DESERT_TREE_TEXTURES0
+; NOTE: these files will all use the tileset base directory as a root
+Trunk Texture,         gstrees\tree_T_Bark.tga
+Bottom0 Leaf Texture,  gstrees\tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  gstrees\tree_T_bottom_b.tga
+Middle0 Leaf Texture,  gstrees\tree_T_middle_b.tga
+Middle1 Leaf Texture,  gstrees\tree_T_middle_a.tga
+Middle2 Leaf Texture,  gstrees\tree_T_middle_b.tga
+Top0    Leaf Texture,  gstrees\tree_T_top_a.tga
+Shadow  Texture,       gstrees\tree_t_shadows.tga
+
+#GS_DESERT_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+
+#GS_DESERT_TREE_MODELS0
+gstrees\gs_leafy_01.bh3
+gstrees\gs_leafy_02.bh3
+gstrees\gs_leafy_03.bh3
+gstrees\gs_leafy_04.bh3
+gstrees\gs_leafy_05.bh3
+gstrees\gs_dead_01.bh3
+gstrees\gs_dead_02.bh3
+gstrees\gs_dead_03.bh3
+gstrees\gs_dead_04.bh3
+gstrees\gs_palm_01.bh3
+gstrees\gs_palm_02.bh3
+gstrees\gs_palm_03.bh3
+gstrees\gs_palm_04.bh3
+gstrees\gs_palm_05.bh3
+gstrees\gs_palm_06.bh3
+gstrees\gs_palm_07.bh3
+gstrees\gs_palm_08.bh3
+gstrees\gs_palm_09.bh3
+gstrees\gs_leafy2_01.bh3
+gstrees\gs_leafy2_02.bh3
+gstrees\gs_leafy2_03.bh3
+
+
+
+#GS_DESERT_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\gs_desert\gstrees\gsdesert_low_trees.tga
+gstrees\gsdesert_lowend_tree_01.bh3
+gstrees\gsdesert_lowend_tree_02.bh3
+gstrees\gsdesert_lowend_tree_03.bh3
+gstrees\gsdesert_lowend_tree_04.bh3
+gstrees\gsdesert_lowend_tree_05.bh3
+gstrees\gsdesert_lowend_tree_06.bh3
+
+#GS_DESERT_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\gs_landdoober_bushes.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\\gs_landdoober_rocks.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\gs_landdoober_stumps01.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\gs_landdoober_rocks_03.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+#JUNGLE_TREE_TEXTURES0
+; NOTE: these files will all use the tileset base directory as a root
+Trunk Texture,         jtrees\j_tree_trunk1.tga
+Bottom0 Leaf Texture,  jtrees\j_tree_bottom1.tga
+Bottom1 Leaf Texture,  jtrees\j_tree_bottom2.tga
+Middle0 Leaf Texture,  jtrees\j_tree_middle1.tga
+Middle1 Leaf Texture,  jtrees\j_tree_middle2.tga
+Middle2 Leaf Texture,  jtrees\j_tree_middle3.tga
+Top0    Leaf Texture,  jtrees\j_tree_top1.tga
+Shadow  Texture,       jtrees\j_tree_shadows.tga
+
+#JUNGLE_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+
+#JUNGLE_TREE_MODELS0
+jtrees\j_tree_weep_01.BH3
+jtrees\j_tree_weep_02.BH3
+jtrees\j_tree_weep_03.BH3
+jtrees\j_tree_weep_04.BH3                              
+jtrees\j_tree_weep_05.BH3
+jtrees\j_tree_palm_01.BH3
+jtrees\j_tree_palm_02.BH3
+jtrees\j_tree_palm_03.BH3
+jtrees\j_tree_palm_04.BH3
+jtrees\j_tree_leaf_01.BH3
+jtrees\j_tree_leaf_02.BH3
+jtrees\j_tree_leaf_03.BH3
+jtrees\j_tree_leaf_04.BH3
+jtrees\j_tree_leaf_05.BH3
+jtrees\j_tree_low_01.BH3
+jtrees\j_tree_low_02.BH3
+jtrees\j_tree_low_03.BH3
+jtrees\j_tree_low_04.BH3
+jtrees\j_tree_low_05.BH3
+
+
+
+
+#JUNGLE_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\jungle\jtrees\jungle_low_trees.tga
+jtrees\jungle_lowend_tree_01.BH3
+jtrees\jungle_lowend_tree_02.BH3
+jtrees\jungle_lowend_tree_03.BH3
+jtrees\jungle_lowend_tree_04.BH3
+jtrees\jungle_lowend_tree_05.BH3
+
+
+#JUNGLE_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\j_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\j_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\j_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\j_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+#african_savannah_TREE_TEXTURES0
+; NOTE: these files will all use the tileset base directory as a root
+Trunk Texture,         astrees\tree_T_Bark.tga
+Bottom0 Leaf Texture,  astrees\tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  astrees\tree_T_bottom_b.tga
+Middle0 Leaf Texture,  astrees\tree_T_middle_b.tga
+Middle1 Leaf Texture,  astrees\tree_T_middle_a.tga
+Middle2 Leaf Texture,  astrees\tree_T_middle_b.tga
+Top0    Leaf Texture,  astrees\tree_T_top_a.tga
+Shadow  Texture,       astrees\tree_t_shadows.tga
+
+#african_savannah_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+
+#african_savannah_TREE_MODELS0
+astrees/gs_leafy_01.bh3
+astrees/gs_leafy_02.bh3
+astrees/gs_leafy_03.bh3
+astrees/gs_leafy_04.bh3
+astrees/gs_leafy_05.bh3
+astrees/gs_dead_01.bh3
+astrees/gs_dead_02.bh3
+astrees/gs_dead_03.bh3
+astrees/gs_dead_04.bh3
+;astrees/gs_leafy2_01.bh3
+;astrees/gs_leafy2_02.bh3
+;astrees/gs_leafy2_03.bh3
+astrees/savannah_tree_01.bh3
+astrees/savannah_tree_02.bh3
+astrees/savannah_tree_03.bh3
+astrees/savannah_tree_04.bh3
+astrees/savannah_tree_05.bh3
+astrees/savannah_tree_06.bh3
+astrees/savannah_tree_07.bh3
+astrees/savannah_tree_08.bh3
+
+
+
+#african_savannah_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\african_savannah\astrees\savannah_low_trees.tga
+astrees\savannah_lowend_tree_01.bh3
+astrees\savannah_lowend_tree_02.bh3
+astrees\savannah_lowend_tree_03.bh3
+astrees\savannah_lowend_tree_04.bh3
+astrees\savannah_lowend_tree_05.bh3
+astrees\savannah_lowend_tree_06.bh3
+
+#african_savannah_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\as_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\as_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\as_landdoober_stumps01.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\as_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+#ARCTIC_TREE_TEXTURES0
+Trunk Texture,         arctictrees/tree_a_bark.tga
+Bottom0 Leaf Texture,  arctictrees/tree_a_bottom_a.tga
+Bottom1 Leaf Texture,  arctictrees/tree_a_bottom_b.tga
+Middle0 Leaf Texture,  arctictrees/tree_a_middle_a.tga
+Middle1 Leaf Texture,  arctictrees/tree_a_middle_b.tga
+Middle2 Leaf Texture,  arctictrees/tree_a_middle_c.tga
+Top0    Leaf Texture,  arctictrees/tree_a_top_a.tga
+Shadow  Texture,       arctictrees/tree_a_shadows.tga
+
+#ARCTIC_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#ARCTIC_TREE_MODELS0
+arctictrees/tree_a_00.bh3
+arctictrees/tree_a_01.bh3
+arctictrees/tree_a_02.bh3
+arctictrees/tree_a_03.bh3
+arctictrees/tree_a_04.bh3
+arctictrees/tree_a_05.bh3
+arctictrees/tree_a_06.bh3
+arctictrees/tree_a_07.bh3
+arctictrees/tree_a_10.bh3
+arctictrees/tree_a_11.bh3
+arctictrees/tree_a_12.bh3
+arctictrees/tree_a_13.bh3
+arctictrees/tree_a_14.bh3
+arctictrees/tree_a_15.bh3
+arctictrees/tree_a_16.bh3
+arctictrees/tree_a_17.bh3
+arctictrees/tree_a_20.bh3
+arctictrees/tree_a_21.bh3
+arctictrees/tree_a_22.bh3
+arctictrees/tree_a_23.bh3
+arctictrees/tree_a_24.bh3
+arctictrees/tree_a_25.bh3
+arctictrees/tree_a_26.bh3
+arctictrees/tree_a_27.bh3
+
+#ARCTIC_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\arctic\arctictrees\arctic_low_trees.tga
+arctictrees\arctic_lowend_tree_01.bh3
+arctictrees\arctic_lowend_tree_02.bh3
+arctictrees\arctic_lowend_tree_03.bh3
+arctictrees\arctic_lowend_tree_04.bh3
+arctictrees\arctic_lowend_tree_05.bh3
+arctictrees\arctic_lowend_tree_06.bh3
+
+
+#ARCTIC_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\s_doober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\s_doober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\s_doober_stumps.tga,       2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\s_doober_rocks_02.tga,     2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+#DIRTY_TREE_TEXTURES0
+Trunk Texture,         dtrees\tree_T_bark.tga
+Bottom0 Leaf Texture,  dtrees\tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  dtrees\tree_T_bottom_b.tga
+Middle0 Leaf Texture,  dtrees\tree_T_middle_a.tga
+Middle1 Leaf Texture,  dtrees\tree_T_middle_b.tga
+Middle2 Leaf Texture,  dtrees\tree_T_middle_c.tga
+Top0    Leaf Texture,  dtrees\tree_T_top_a.tga
+Shadow  Texture,       dtrees\tree_t_shadows.tga
+
+#DIRTY_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#DIRTY_TREE_MODELS0
+dtrees\tree_t_00.bh3
+dtrees\tree_t_01.bh3
+dtrees\tree_t_02.bh3
+dtrees\tree_t_03.bh3
+dtrees\tree_t_04.bh3
+dtrees\tree_t_05.bh3
+dtrees\tree_t_06.bh3
+dtrees\tree_t_07.bh3
+dtrees\tree_t_10.bh3
+dtrees\tree_t_11.bh3
+dtrees\tree_t_12.bh3
+dtrees\tree_t_13.bh3
+dtrees\tree_t_14.bh3
+dtrees\tree_t_15.bh3
+dtrees\tree_t_16.bh3
+dtrees\tree_t_17.bh3
+dtrees\tree_t_20.bh3
+dtrees\tree_t_21.bh3
+dtrees\tree_t_22.bh3
+dtrees\tree_t_23.bh3
+dtrees\tree_t_24.bh3
+dtrees\tree_t_25.bh3
+dtrees\tree_t_26.bh3
+dtrees\tree_t_27.bh3
+
+#DIRTY_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\dirty\dtrees\dirty_low_trees.tga
+dtrees\dirty_lowend_tree_01.bh3
+dtrees\dirty_lowend_tree_02.bh3
+dtrees\dirty_lowend_tree_03.bh3
+dtrees\dirty_lowend_tree_04.bh3
+dtrees\dirty_lowend_tree_05.bh3
+dtrees\dirty_lowend_tree_06.bh3
+
+
+#DIRTY_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\d_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+#M_STEPPE_TREE_TEXTURES0
+Trunk Texture,         mtrees\m_steppe_tree_T_bark.tga
+Bottom0 Leaf Texture,  mtrees\m_steppe_tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  mtrees\m_steppe_tree_T_bottom_b.tga
+Middle0 Leaf Texture,  mtrees\m_steppe_tree_T_middle_a.tga
+Middle1 Leaf Texture,  mtrees\m_steppe_tree_T_middle_b.tga
+Middle2 Leaf Texture,  mtrees\m_steppe_tree_T_middle_c.tga
+Top0    Leaf Texture,  mtrees\m_steppe_tree_T_top_a.tga
+Shadow  Texture,       mtrees\m_steppe_tree_t_shadows.tga
+
+#M_STEPPE_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#M_STEPPE_TREE_MODELS0
+mtrees\tree_t_00.bh3
+mtrees\tree_t_01.bh3
+mtrees\tree_t_02.bh3
+mtrees\tree_t_03.bh3
+mtrees\tree_t_04.bh3
+mtrees\tree_t_05.bh3
+mtrees\tree_t_06.bh3
+mtrees\tree_t_07.bh3
+mtrees\tree_t_10.bh3
+mtrees\tree_t_11.bh3
+mtrees\tree_t_12.bh3
+mtrees\tree_t_13.bh3
+mtrees\tree_t_14.bh3
+mtrees\tree_t_15.bh3
+mtrees\tree_t_16.bh3
+mtrees\tree_t_17.bh3
+mtrees\tree_t_20.bh3
+mtrees\tree_t_21.bh3
+mtrees\tree_t_22.bh3
+mtrees\tree_t_23.bh3
+mtrees\tree_t_24.bh3
+mtrees\tree_t_25.bh3
+mtrees\tree_t_26.bh3
+mtrees\tree_t_27.bh3
+
+#M_STEPPE_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\dirty\dtrees\dirty_low_trees.tga
+mtrees\m_steppe_lowend_tree_01.bh3
+mtrees\m_steppe_lowend_tree_02.bh3
+mtrees\m_steppe_lowend_tree_03.bh3
+mtrees\m_steppe_lowend_tree_04.bh3
+mtrees\m_steppe_lowend_tree_05.bh3
+mtrees\m_steppe_lowend_tree_06.bh3
+
+
+#M_STEPPE_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\d_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+
+#M_STEPPE_2_TREE_TEXTURES0
+Trunk Texture,         mtrees\m_steppe_tree_T_bark.tga
+Bottom0 Leaf Texture,  mtrees\m_steppe_tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  mtrees\m_steppe_tree_T_bottom_b.tga
+Middle0 Leaf Texture,  mtrees\m_steppe_tree_T_middle_a_b.tga
+Middle1 Leaf Texture,  mtrees\m_steppe_tree_T_middle_b_b.tga
+Middle2 Leaf Texture,  mtrees\m_steppe_tree_T_middle_c_b.tga
+Top0    Leaf Texture,  mtrees\m_steppe_tree_T_top_a_b.tga
+Shadow  Texture,       mtrees\m_steppe_tree_t_shadows.tga
+
+#M_STEPPE_2_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#M_STEPPE_2_TREE_MODELS0
+mtrees\tree_t_00.bh3
+mtrees\tree_t_01.bh3
+mtrees\tree_t_02.bh3
+mtrees\tree_t_03.bh3
+mtrees\tree_t_04.bh3
+mtrees\tree_t_05.bh3
+mtrees\tree_t_06.bh3
+mtrees\tree_t_07.bh3
+mtrees\tree_t_10.bh3
+mtrees\tree_t_11.bh3
+mtrees\tree_t_12.bh3
+mtrees\tree_t_13.bh3
+mtrees\tree_t_14.bh3
+mtrees\tree_t_15.bh3
+mtrees\tree_t_16.bh3
+mtrees\tree_t_17.bh3
+mtrees\tree_t_20.bh3
+mtrees\tree_t_21.bh3
+mtrees\tree_t_22.bh3
+mtrees\tree_t_23.bh3
+mtrees\tree_t_24.bh3
+mtrees\tree_t_25.bh3
+mtrees\tree_t_26.bh3
+mtrees\tree_t_27.bh3
+
+#M_STEPPE_2_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\dirty\dtrees\dirty_low_trees.tga
+mtrees\m_steppe_lowend_tree_01.bh3
+mtrees\m_steppe_lowend_tree_02.bh3
+mtrees\m_steppe_lowend_tree_03.bh3
+mtrees\m_steppe_lowend_tree_04.bh3
+mtrees\m_steppe_lowend_tree_05.bh3
+mtrees\m_steppe_lowend_tree_06.bh3
+
+
+#M_STEPPE_2_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\d_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+#M_STEPPE_3_TREE_TEXTURES0
+Trunk Texture,         mtrees\m_steppe_tree_T_bark.tga
+Bottom0 Leaf Texture,  mtrees\m_steppe_tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  mtrees\m_steppe_tree_T_bottom_b.tga
+Middle0 Leaf Texture,  mtrees\m_steppe_tree_T_middle_a_b.tga
+Middle1 Leaf Texture,  mtrees\m_steppe_tree_T_middle_b_b.tga
+Middle2 Leaf Texture,  mtrees\m_steppe_tree_T_middle_c_b.tga
+Top0    Leaf Texture,  mtrees\m_steppe_tree_T_top_a_b.tga
+Shadow  Texture,       mtrees\m_steppe_tree_t_shadows.tga
+
+#M_STEPPE_3_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#M_STEPPE_3_TREE_MODELS0
+mtrees\tree_t_00.bh3
+mtrees\tree_t_01.bh3
+mtrees\tree_t_02.bh3
+mtrees\tree_t_03.bh3
+mtrees\tree_t_04.bh3
+mtrees\tree_t_05.bh3
+mtrees\tree_t_06.bh3
+mtrees\tree_t_07.bh3
+mtrees\tree_t_10.bh3
+mtrees\tree_t_11.bh3
+mtrees\tree_t_12.bh3
+mtrees\tree_t_13.bh3
+mtrees\tree_t_14.bh3
+mtrees\tree_t_15.bh3
+mtrees\tree_t_16.bh3
+mtrees\tree_t_17.bh3
+mtrees\tree_t_20.bh3
+mtrees\tree_t_21.bh3
+mtrees\tree_t_22.bh3
+mtrees\tree_t_23.bh3
+mtrees\tree_t_24.bh3
+mtrees\tree_t_25.bh3
+mtrees\tree_t_26.bh3
+mtrees\tree_t_27.bh3
+
+#M_STEPPE_3_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\dirty\dtrees\dirty_low_trees.tga
+mtrees\m_steppe_lowend_tree_01.bh3
+mtrees\m_steppe_lowend_tree_02.bh3
+mtrees\m_steppe_lowend_tree_03.bh3
+mtrees\m_steppe_lowend_tree_04.bh3
+mtrees\m_steppe_lowend_tree_05.bh3
+mtrees\m_steppe_lowend_tree_06.bh3
+
+
+#M_STEPPE_3_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\d_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+
+#AUTUMN_TREE_TEXTURES0
+Trunk Texture,         dtrees\tree_T_bark.tga
+Bottom0 Leaf Texture,  dtrees\tree_Ta_bottom_a.tga
+Bottom1 Leaf Texture,  dtrees\tree_Ta_bottom_b.tga
+Middle0 Leaf Texture,  dtrees\tree_Ta_middle_a.tga
+Middle1 Leaf Texture,  dtrees\tree_Ta_middle_b.tga
+Middle2 Leaf Texture,  dtrees\tree_Ta_middle_c.tga
+Top0    Leaf Texture,  dtrees\tree_Ta_top_a.tga
+Shadow  Texture,       dtrees\tree_t_shadows.tga
+
+#AUTUMN_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#AUTUMN_TREE_MODELS0
+dtrees\tree_t_00.bh3
+dtrees\tree_t_01.bh3
+dtrees\tree_t_02.bh3
+dtrees\tree_t_03.bh3
+dtrees\tree_t_04.bh3
+dtrees\tree_t_05.bh3
+dtrees\tree_t_06.bh3
+dtrees\tree_t_07.bh3
+dtrees\tree_t_10.bh3
+dtrees\tree_t_11.bh3
+dtrees\tree_t_12.bh3
+dtrees\tree_t_13.bh3
+dtrees\tree_t_14.bh3
+dtrees\tree_t_15.bh3
+dtrees\tree_t_16.bh3
+dtrees\tree_t_17.bh3
+dtrees\tree_t_20.bh3
+dtrees\tree_t_21.bh3
+dtrees\tree_t_22.bh3
+dtrees\tree_t_23.bh3
+dtrees\tree_t_24.bh3
+dtrees\tree_t_25.bh3
+dtrees\tree_t_26.bh3
+dtrees\tree_t_27.bh3
+
+#AUTUMN_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\dirty\dtrees\dirtyautumn_low_trees.tga
+dtrees\dirty_lowend_tree_01.bh3
+dtrees\dirty_lowend_tree_02.bh3
+dtrees\dirty_lowend_tree_03.bh3
+dtrees\dirty_lowend_tree_04.bh3
+dtrees\dirty_lowend_tree_05.bh3
+dtrees\dirty_lowend_tree_06.bh3
+
+
+#AUTUMN_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\autumn_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+#LATE_AUTUMN_TREE_TEXTURES0
+Trunk Texture,         dtrees\tree_T_bark.tga
+Bottom0 Leaf Texture,  dtrees\tree_Tla_bottom_a.tga
+Bottom1 Leaf Texture,  dtrees\tree_Tla_bottom_b.tga
+Middle0 Leaf Texture,  dtrees\tree_Tla_middle_a.tga
+Middle1 Leaf Texture,  dtrees\tree_Tla_middle_b.tga
+Middle2 Leaf Texture,  dtrees\tree_Tla_middle_c.tga
+Top0    Leaf Texture,  dtrees\tree_Tla_top_a.tga
+Shadow  Texture,       dtrees\tree_t_shadows.tga
+
+#LATE_AUTUMN_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#LATE_AUTUMN_TREE_MODELS0
+dtrees\tree_t_00.bh3
+dtrees\tree_t_01.bh3
+dtrees\tree_t_02.bh3
+dtrees\tree_t_03.bh3
+dtrees\tree_t_04.bh3
+dtrees\tree_t_05.bh3
+dtrees\tree_t_06.bh3
+dtrees\tree_t_07.bh3
+dtrees\tree_t_10.bh3
+dtrees\tree_t_11.bh3
+dtrees\tree_t_12.bh3
+dtrees\tree_t_13.bh3
+dtrees\tree_t_14.bh3
+dtrees\tree_t_15.bh3
+dtrees\tree_t_16.bh3
+dtrees\tree_t_17.bh3
+dtrees\tree_t_20.bh3
+dtrees\tree_t_21.bh3
+dtrees\tree_t_22.bh3
+dtrees\tree_t_23.bh3
+dtrees\tree_t_24.bh3
+dtrees\tree_t_25.bh3
+dtrees\tree_t_26.bh3
+dtrees\tree_t_27.bh3
+
+#LATE_AUTUMN_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\dirty\dtrees\dirtylateautumn_low_trees.tga
+dtrees\dirty_lowend_tree_01.bh3
+dtrees\dirty_lowend_tree_02.bh3
+dtrees\dirty_lowend_tree_03.bh3
+dtrees\dirty_lowend_tree_04.bh3
+dtrees\dirty_lowend_tree_05.bh3
+dtrees\dirty_lowend_tree_06.bh3
+
+
+#LATE_AUTUMN_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\autumn_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+#DIRTY_2_TREE_TEXTURES0
+Trunk Texture,         dtrees\tree_T_bark.tga
+Bottom0 Leaf Texture,  dtrees\tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  dtrees\tree_T_bottom_b.tga
+Middle0 Leaf Texture,  dtrees\tree_T_middle_a.tga
+Middle1 Leaf Texture,  dtrees\tree_T_middle_b.tga
+Middle2 Leaf Texture,  dtrees\tree_T_middle_c.tga
+Top0    Leaf Texture,  dtrees\tree_T_top_a.tga
+Shadow  Texture,       dtrees\tree_t_shadows.tga
+
+#DIRTY_2_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#DIRTY_2_TREE_MODELS0
+dtrees\tree_t_00.bh3
+dtrees\tree_t_01.bh3
+dtrees\tree_t_02.bh3
+dtrees\tree_t_03.bh3
+dtrees\tree_t_04.bh3
+dtrees\tree_t_05.bh3
+dtrees\tree_t_06.bh3
+dtrees\tree_t_07.bh3
+dtrees\tree_t_10.bh3
+dtrees\tree_t_11.bh3
+dtrees\tree_t_12.bh3
+dtrees\tree_t_13.bh3
+dtrees\tree_t_14.bh3
+dtrees\tree_t_15.bh3
+dtrees\tree_t_16.bh3
+dtrees\tree_t_17.bh3
+dtrees\tree_t_20.bh3
+dtrees\tree_t_21.bh3
+dtrees\tree_t_22.bh3
+dtrees\tree_t_23.bh3
+dtrees\tree_t_24.bh3
+dtrees\tree_t_25.bh3
+dtrees\tree_t_26.bh3
+dtrees\tree_t_27.bh3
+
+#DIRTY_2_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\dirty\dtrees\dirty_low_trees.tga
+dtrees\dirty_lowend_tree_01.bh3
+dtrees\dirty_lowend_tree_02.bh3
+dtrees\dirty_lowend_tree_03.bh3
+dtrees\dirty_lowend_tree_04.bh3
+dtrees\dirty_lowend_tree_05.bh3
+dtrees\dirty_lowend_tree_06.bh3
+
+
+#DIRTY_2_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\d_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+#M_STEPPE_AUTUMN_TREE_TEXTURES0
+Trunk Texture,         mtrees\m_steppe_tree_T_bark.tga
+Bottom0 Leaf Texture,  mtrees\m_steppe_tree_T_bottom_a.tga
+Bottom1 Leaf Texture,  mtrees\m_steppe_tree_T_bottom_b.tga
+Middle0 Leaf Texture,  mtrees\m_steppe_tree_T_middle_a.tga
+Middle1 Leaf Texture,  mtrees\m_steppe_tree_T_middle_b.tga
+Middle2 Leaf Texture,  mtrees\m_steppe_tree_T_middle_c.tga
+Top0    Leaf Texture,  mtrees\m_steppe_tree_T_top_a.tga
+Shadow  Texture,       mtrees\m_steppe_tree_t_shadows.tga
+
+#M_STEPPE_AUTUMN_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#M_STEPPE_AUTUMN_TREE_MODELS0
+mtrees\tree_t_00.bh3
+mtrees\tree_t_01.bh3
+mtrees\tree_t_02.bh3
+mtrees\tree_t_03.bh3
+mtrees\tree_t_04.bh3
+mtrees\tree_t_05.bh3
+mtrees\tree_t_06.bh3
+mtrees\tree_t_07.bh3
+mtrees\tree_t_10.bh3
+mtrees\tree_t_11.bh3
+mtrees\tree_t_12.bh3
+mtrees\tree_t_13.bh3
+mtrees\tree_t_14.bh3
+mtrees\tree_t_15.bh3
+mtrees\tree_t_16.bh3
+mtrees\tree_t_17.bh3
+mtrees\tree_t_20.bh3
+mtrees\tree_t_21.bh3
+mtrees\tree_t_22.bh3
+mtrees\tree_t_23.bh3
+mtrees\tree_t_24.bh3
+mtrees\tree_t_25.bh3
+mtrees\tree_t_26.bh3
+mtrees\tree_t_27.bh3
+
+#M_STEPPE_AUTUMN_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\dirty\dtrees\dirty_low_trees.tga
+mtrees\m_steppe_lowend_tree_01.bh3
+mtrees\m_steppe_lowend_tree_02.bh3
+mtrees\m_steppe_lowend_tree_03.bh3
+mtrees\m_steppe_lowend_tree_04.bh3
+mtrees\m_steppe_lowend_tree_05.bh3
+mtrees\m_steppe_lowend_tree_06.bh3
+
+
+#M_STEPPE_AUTUMN_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\d_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+#EARLY_AUTUMN_TREE_TEXTURES0
+Trunk Texture,         dtrees\tree_T_bark.tga
+Bottom0 Leaf Texture,  dtrees\tree_Tea_bottom_a.tga
+Bottom1 Leaf Texture,  dtrees\tree_Tea_bottom_b.tga
+Middle0 Leaf Texture,  dtrees\tree_Tea_middle_a.tga
+Middle1 Leaf Texture,  dtrees\tree_Tea_middle_b.tga
+Middle2 Leaf Texture,  dtrees\tree_Tea_middle_c.tga
+Top0    Leaf Texture,  dtrees\tree_Tea_top_a.tga
+Shadow  Texture,       dtrees\tree_t_shadows.tga
+
+#EARLY_AUTUMN_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+#EARLY_AUTUMN_TREE_MODELS0
+dtrees\tree_t_00.bh3
+dtrees\tree_t_01.bh3
+dtrees\tree_t_02.bh3
+dtrees\tree_t_03.bh3
+dtrees\tree_t_04.bh3
+dtrees\tree_t_05.bh3
+dtrees\tree_t_06.bh3
+dtrees\tree_t_07.bh3
+dtrees\tree_t_10.bh3
+dtrees\tree_t_11.bh3
+dtrees\tree_t_12.bh3
+dtrees\tree_t_13.bh3
+dtrees\tree_t_14.bh3
+dtrees\tree_t_15.bh3
+dtrees\tree_t_16.bh3
+dtrees\tree_t_17.bh3
+dtrees\tree_t_20.bh3
+dtrees\tree_t_21.bh3
+dtrees\tree_t_22.bh3
+dtrees\tree_t_23.bh3
+dtrees\tree_t_24.bh3
+dtrees\tree_t_25.bh3
+dtrees\tree_t_26.bh3
+dtrees\tree_t_27.bh3
+
+#EARLY_AUTUMN_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\dirty\dtrees\dirtylateautumn_low_trees.tga
+dtrees\dirty_lowend_tree_01.bh3
+dtrees\dirty_lowend_tree_02.bh3
+dtrees\dirty_lowend_tree_03.bh3
+dtrees\dirty_lowend_tree_04.bh3
+dtrees\dirty_lowend_tree_05.bh3
+dtrees\dirty_lowend_tree_06.bh3
+
+
+#EARLY_AUTUMN_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\d_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+#TROPICAL_TREE_TEXTURES0
+; NOTE: these files will all use the tileset base directory as a root
+Trunk Texture,         tropical_trees\trunks.tga
+Bottom0 Leaf Texture,  tropical_trees\bottoms.tga
+Bottom1 Leaf Texture,  tropical_trees\bottoms.tga
+Middle0 Leaf Texture,  tropical_trees\middles.tga
+Middle1 Leaf Texture,  tropical_trees\middles.tga
+Middle2 Leaf Texture,  tropical_trees\middles.tga
+Top0    Leaf Texture,  tropical_trees\tops.tga
+Shadow  Texture,       jtrees\j_tree_shadows.tga
+
+#TROPICAl_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+
+#TROPICAl_TREE_MODELS0
+tropical_trees\upward_palm_02.BH3
+;tropical_trees\bare_tree_04.BH3
+tropical_trees\drape_palm_03.BH3
+tropical_trees\banyan_01.BH3
+tropical_trees\banyan_02.BH3
+tropical_trees\banyan_03.BH3
+tropical_trees\banyan_04.BH3
+tropical_trees\upward_palm_01.BH3
+;tropical_trees\bare_tree_01.BH3
+tropical_trees\upward_palm_02.BH3
+tropical_trees\upward_palm_03.BH3
+tropical_trees\upward_palm_04.BH3
+;tropical_trees\bare_tree_03.BH3
+tropical_trees\drape_palm_01.BH3
+tropical_trees\drape_palm_02.BH3
+tropical_trees\drape_palm_03.BH3
+tropical_trees\drape_palm_04.BH3
+;tropical_trees\bare_tree_02.BH3
+tropical_trees\upward_palm_01.BH3
+tropical_trees\upward_palm_02.BH3
+tropical_trees\upward_palm_03.BH3
+tropical_trees\upward_palm_04.BH3
+tropical_trees\drape_palm_01.BH3
+tropical_trees\drape_palm_02.BH3
+tropical_trees\upward_palm_02.BH3
+tropical_trees\drape_palm_04.BH3
+
+
+
+#TROPICAl_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\jungle\jtrees\jungle_low_trees.tga
+jtrees\jungle_lowend_tree_01.BH3
+jtrees\jungle_lowend_tree_02.BH3
+jtrees\jungle_lowend_tree_03.BH3
+jtrees\jungle_lowend_tree_04.BH3
+jtrees\jungle_lowend_tree_05.BH3
+
+
+#TROPICAl_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\j_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\j_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\j_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\j_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+#TROPICAL_WET_TREE_TEXTURES0
+; NOTE: these files will all use the tileset base directory as a root
+Trunk Texture,         tropical_trees\trunks.tga
+Bottom0 Leaf Texture,  tropical_trees\bottoms.tga
+Bottom1 Leaf Texture,  tropical_trees\bottoms.tga
+Middle0 Leaf Texture,  tropical_trees\middles.tga
+Middle1 Leaf Texture,  tropical_trees\middles.tga
+Middle2 Leaf Texture,  tropical_trees\middles.tga
+Top0    Leaf Texture,  tropical_trees\tops.tga
+Shadow  Texture,       jtrees\j_tree_shadows.tga
+
+#TROPICAL_WET_TREE_ANIMATIONS0
+Tree Anim 0 (idle),        Tree Idle
+Tree Anim 1 (Shudder),     Tree Shudder
+Tree Anim 2 (Fall),        Tree Fall
+
+
+#TROPICAL_WET_TREE_MODELS0
+tropical_trees\upward_palm_02.BH3
+;tropical_trees\bare_tree_04.BH3
+tropical_trees\drape_palm_03.BH3
+tropical_trees\banyan_01.BH3
+tropical_trees\banyan_02.BH3
+tropical_trees\banyan_03.BH3
+tropical_trees\banyan_04.BH3
+tropical_trees\upward_palm_01.BH3
+;tropical_trees\bare_tree_01.BH3
+tropical_trees\upward_palm_02.BH3
+tropical_trees\upward_palm_03.BH3
+tropical_trees\upward_palm_04.BH3
+;tropical_trees\bare_tree_03.BH3
+tropical_trees\drape_palm_01.BH3
+tropical_trees\drape_palm_02.BH3
+tropical_trees\drape_palm_03.BH3
+tropical_trees\drape_palm_04.BH3
+;tropical_trees\bare_tree_02.BH3
+tropical_trees\upward_palm_01.BH3
+tropical_trees\upward_palm_02.BH3
+tropical_trees\upward_palm_03.BH3
+tropical_trees\upward_palm_04.BH3
+tropical_trees\drape_palm_01.BH3
+tropical_trees\drape_palm_02.BH3
+tropical_trees\upward_palm_02.BH3
+tropical_trees\drape_palm_04.BH3
+
+
+
+#TROPICAL_WET_LOW_END_TREES
+Low End Tree Texture,  .\terrain art\tilesets\jungle\jtrees\jungle_low_trees.tga
+jtrees\jungle_lowend_tree_01.BH3
+jtrees\jungle_lowend_tree_02.BH3
+jtrees\jungle_lowend_tree_03.BH3
+jtrees\jungle_lowend_tree_04.BH3
+jtrees\jungle_lowend_tree_05.BH3
+
+#TROPICAL_WET_LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\j_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\j_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\j_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\j_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+#LAND DOOBERS
+Bush,             .\terrain art\tilesets\common\common_doobers\d_landdoober_bushes_01.tga,    4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Rock,             .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_01.tga,     4 rows, 4 cols, BillBoard,     0.0f centering, 1 Random
+Stump,            .\terrain art\tilesets\common\common_doobers\d_landdoober_stumps.tga,                                                   2 rows, 2 cols, BillBoard,     0.0f centering, 1 Random
+MineRock,         .\terrain art\tilesets\common\common_doobers\d_landdoober_rocks_02.tga,            2 rows, 2 cols, Billboard,     .75f centering, 1 Random
+BuildDeathFiller, .\art\doober_build_destruction_filler.tga,  4 rows, 4 cols, Sprite,     .5f  centering, 1 Random
+BuildEWCorner,    .\art\doober_build_destruction_ew.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+BuildNSCorner,    .\art\doober_build_destruction_ns.tga,      2 rows, 1 cols, Sprite,     .5f  centering, Selected
+Rough,            .\terrain art\tilesets\dirty\T_Rough_Doobers_Plain_01.tga, 5 rows, 3 cols, Sprite, .5 centering, 1 Random
+
+
+; ============================================================================
+
+#END OF FILE
+
+
+
+
+
+

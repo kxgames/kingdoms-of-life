@@ -1,0 +1,64 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="그리스">
+	<LEADERS>
+		<LEADER>페리클레스</LEADER>
+		<LEADER>알렉산더 대왕</LEADER>
+		<LEADER>스파르타의 뤼산데르</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>아테네</CITY>
+		<CITY>스파르타</CITY>
+		<CITY>테베</CITY>
+		<CITY>코린트</CITY>
+		<CITY>크노소스</CITY>
+		<CITY>아르고스</CITY>
+		<CITY>메가라</CITY>
+		<CITY>에레트리아</CITY>
+		<CITY>칼키스</CITY>
+		<CITY>이라클리온</CITY>
+		<CITY>밀레투스</CITY>
+		<CITY>할리카르나소스</CITY>
+		<CITY>린도스</CITY>
+		<CITY>이알리수스</CITY>
+		<CITY>사모스</CITY>
+		<CITY>포카에아</CITY>
+		<CITY>키오스</CITY>
+		<CITY>테라</CITY>
+		<CITY>멜로스</CITY>
+		<CITY>파르살루스</CITY>
+		<CITY>파로스</CITY>
+		<CITY>테살로니카</CITY>
+		<CITY>데메트리아스</CITY>
+		<CITY>델로스</CITY>
+		<CITY>자킨토스</CITY>
+		<CITY>엘라테아</CITY>
+		<CITY>에리트라이</CITY>
+		<CITY>만티네아</CITY>
+		<CITY>시라쿠사</CITY>
+		<CITY>케르키라</CITY>
+		<CITY>비잔티움</CITY>
+		<CITY>알렉산드리아</CITY>
+		<CITY>포티다에아</CITY>
+		<CITY>헤라클레아</CITY>
+		<CITY>아폴로니아</CITY>
+		<CITY>에피담누스</CITY>
+		<CITY>파트라이</CITY>
+		<CITY>칼케돈</CITY>
+		<CITY>코스</CITY>
+		<CITY>크니도스</CITY>
+		<CITY>프리에네</CITY>
+		<CITY>콜로폰</CITY>
+		<CITY>클라조메나에</CITY>
+		<CITY>테오스</CITY>
+		<CITY>사모스</CITY>
+		<CITY>미틸레네</CITY>
+		<CITY>미리나</CITY>
+		<CITY>타소스</CITY>
+		<CITY>사모트라케</CITY>
+		<CITY>피레우스</CITY>
+		<CITY>자락스</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

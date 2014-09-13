@@ -1,0 +1,53 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="ロシア">
+	<LEADERS>
+		<LEADER>ピョートル大帝</LEADER>
+		<LEADER>イワン雷帝</LEADER>
+		<LEADER>女帝エカテリーナ</LEADER>
+		<LEADER>ウラジミール レーニン</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>モスクワ</CITY>
+		<CITY>サンクトペテルブルク</CITY>
+		<CITY>キエフ</CITY>
+		<CITY>ミンスク</CITY>
+		<CITY>セバストポリ</CITY>
+		<CITY>スモレンスク</CITY>
+		<CITY>ノブゴロド</CITY>
+		<CITY>ウラジオストク</CITY>
+		<CITY>ポロツク</CITY>
+		<CITY>イルクーツク</CITY>
+		<CITY>ロストフ</CITY>
+		<CITY>リヴォフ</CITY>
+		<CITY>ビルナ</CITY>
+		<CITY>クルスク</CITY>
+		<CITY>ブリャンスク</CITY>
+		<CITY>ビテプスク</CITY>
+		<CITY>プスコフ</CITY>
+		<CITY>オデッサ</CITY>
+		<CITY>アストラハン</CITY>
+		<CITY>エカテリンブルク</CITY>
+		<CITY>ヤロスラブリ</CITY>
+		<CITY>ニジニーノブゴロド</CITY>
+		<CITY>グロドノ</CITY>
+		<CITY>キシニョフ</CITY>
+		<CITY>ハリコフ</CITY>
+		<CITY>オレンブルグ</CITY>
+		<CITY>オムスク</CITY>
+		<CITY>サラトフ</CITY>
+		<CITY>クラスノヤルスク</CITY>
+		<CITY>ヤクーツク</CITY>
+		<CITY>ペトロパブロフスク</CITY>
+		<CITY>セミパラチンスク</CITY>
+		<CITY>アルハンゲリスク</CITY>
+		<CITY>ムルマンスク</CITY>
+		<CITY>ボログダ</CITY>
+		<CITY>チェリャビンスク</CITY>
+		<CITY>ウランウデ</CITY>
+		<CITY>ノボシビルスク</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>1 NEuro</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

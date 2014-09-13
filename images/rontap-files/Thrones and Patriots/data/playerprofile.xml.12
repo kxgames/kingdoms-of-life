@@ -1,0 +1,1987 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: STRING and SHORT_STRING-->
+<ROOT>
+	<KEYS>
+		<KEY enum="SYSTEM_TOGGLE_MP_STAT_WIN" dependent="0">
+			<STRING>Basculer fen. stat. multijoueur</STRING>
+			<SHORT_STRING>Basculer stat.</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_BUILDING_ALPHABLEND" dependent="0">
+			<STRING>Basculer semi-transparence construction</STRING>
+			<SHORT_STRING>Semi-transparence construction</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_SHOW_FRAME_STATS" dependent="0">
+			<STRING>Afficher stats cadre</STRING>
+			<SHORT_STRING>Stats cadre</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_FPS_STATS" dependent="0">
+			<STRING>Basculer stats images par seconde</STRING>
+			<SHORT_STRING>Stats images par secondes</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_SCREENSHOT" dependent="0">
+			<STRING>Effectuer une capture d'écran</STRING>
+			<SHORT_STRING>Capture d'écran</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_NEW_LAND" dependent="0">
+			<STRING>Basculer nouvelle terre</STRING>
+			<SHORT_STRING>Nouvelle terre</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_NEW_LAND_OVERLAYS" dependent="0">
+			<STRING>Basculer superpositions nouvelle terre</STRING>
+			<SHORT_STRING>Superpositions nouvelle terre</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_WIREFRAME" dependent="0">
+			<STRING>Basculer mode filaire</STRING>
+			<SHORT_STRING>Mode filaire</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_INCREASE_TERRAIN_DETAIL" dependent="0">
+			<STRING>Augmenter détails terrain</STRING>
+			<SHORT_STRING>Augmenter détails terrain</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DECREASE_TERRAIN_DETAIL" dependent="0">
+			<STRING>Diminuer détails terrain</STRING>
+			<SHORT_STRING>Diminuer détails terrain</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_SAVE_GAME" dependent="0">
+			<STRING>Enregistrer partie</STRING>
+			<SHORT_STRING>Enregistrer partie</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_LOAD_GAME" dependent="0">
+			<STRING>Charger partie</STRING>
+			<SHORT_STRING>Charger partie</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_MP_LOG" dependent="0">
+			<STRING>Basculer journal multijoueur</STRING>
+			<SHORT_STRING>Journal multijoueur</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_PATH_SHOW_DEBUG" dependent="0">
+			<STRING>Basculer affichage chemin</STRING>
+			<SHORT_STRING>Afficher chemin</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_STEP_FRAME" dependent="0">
+			<STRING>Cadre étape</STRING>
+			<SHORT_STRING>Cadre étape</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_DEBUG_MESSAGES" dependent="0">
+			<STRING>Basculer messages de débogage</STRING>
+			<SHORT_STRING>Messages de débogage</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_PATH" dependent="0">
+			<STRING>Basculer chemin scène</STRING>
+			<SHORT_STRING>Chemin scène</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DEBUG_JUMP_TO_ACTION" dependent="0">
+			<STRING>Déboguer saut pour action</STRING>
+			<SHORT_STRING>Déboguer saut pour action</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DEBUG_JUMP_TO_WAYPOINT" dependent="0">
+			<STRING>Déboguer saut pour point de route</STRING>
+			<SHORT_STRING>Déboguer saut pour point de route</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DISPLAY_PROFILE" dependent="0">
+			<STRING>Afficher profil</STRING>
+			<SHORT_STRING>Afficher profil</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_PROFILE_RUNNING" dependent="0">
+			<STRING>Basculer exécution du profil</STRING>
+			<SHORT_STRING>Exécution profil</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_PARAM_CONSOLE" dependent="0">
+			<STRING>Basculer param. console</STRING>
+			<SHORT_STRING>Param. console</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_GRAPHIC_CONSOLE" dependent="0">
+			<STRING>Basculer console graphique</STRING>
+			<SHORT_STRING>Console graphique</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_GAME_CONSOLE" dependent="0">
+			<STRING>Basculer console de jeu</STRING>
+			<SHORT_STRING>Console de jeu</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENARIO_EDITOR" dependent="0">
+			<STRING>Basculer éditeur de scénario</STRING>
+			<SHORT_STRING>Éditeur de scénario</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_ACHIEVEMENTS" dependent="0">
+			<STRING>Basculer écran des performances</STRING>
+			<SHORT_STRING>Performances</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_DEBUG" dependent="0">
+			<STRING>Basculer débogage scène</STRING>
+			<SHORT_STRING>Débogage scène</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SEE_ALL" dependent="0">
+			<STRING>Basculer Voir tout</STRING>
+			<SHORT_STRING>Voir tout</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_RIVERS" dependent="0">
+			<STRING>Basculer rivières scène</STRING>
+			<SHORT_STRING>Rivières scène</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_HOT" dependent="0">
+			<STRING>Basculer scène chaleur</STRING>
+			<SHORT_STRING>Scène chaleur</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_BLOCKED" dependent="0">
+			<STRING>Basculer scène bloquée</STRING>
+			<SHORT_STRING>Scène bloquée</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_ROADS" dependent="0">
+			<STRING>Basculer routes scène</STRING>
+			<SHORT_STRING>Routes scène</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_WET" dependent="0">
+			<STRING>Basculer scène sous la pluie</STRING>
+			<SHORT_STRING>Scène pluie</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_FRACTAL" dependent="0">
+			<STRING>Basculer scène avec fractale</STRING>
+			<SHORT_STRING>Scène avec fractale</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_ALL" dependent="0">
+			<STRING>Basculer scène (tous)</STRING>
+			<SHORT_STRING>Scène (tous)</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_START_NUKE_FLASH" dependent="0">
+			<STRING>Déclencher éclair nucléaire</STRING>
+			<SHORT_STRING>Éclair nucléaire</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_SITES" dependent="0">
+			<STRING>Basculer sites scène</STRING>
+			<SHORT_STRING>Sites scène</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_ARMIES" dependent="0">
+			<STRING>Basculer armées scène</STRING>
+			<SHORT_STRING>Armées scène</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_Z_VALUES" dependent="0">
+			<STRING>Basculer valeurs Z</STRING>
+			<SHORT_STRING>Valeurs Z</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_CHEAT_ZERO_TECHS" dependent="0">
+			<STRING>Techs zéro code de triche</STRING>
+			<SHORT_STRING>Techs zéro code de triche</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_CHEAT_GIVE_TECHS" dependent="0">
+			<STRING>Techs donner codes de triche</STRING>
+			<SHORT_STRING>Donner codes de triche</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_REDRAW_WORLDMAP_BACKGROUND" dependent="0">
+			<STRING>Redessiner carte mondiale</STRING>
+			<SHORT_STRING>Redessiner carte mondiale</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_INCREASE_NET_RATIO" dependent="0">
+			<STRING>Augmenter ratio net</STRING>
+			<SHORT_STRING>Augmenter ratio net</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_INCREASE_AI_SPEED" dependent="0">
+			<STRING>Augmenter vitesse IA</STRING>
+			<SHORT_STRING>Augmenter vitesse IA</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DECREASE_NET_RATIO" dependent="0">
+			<STRING>Diminuer ratio net</STRING>
+			<SHORT_STRING>Diminuer ratio net</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DECREASE_AI_SPEED" dependent="0">
+			<STRING>Diminuer vitesse IA</STRING>
+			<SHORT_STRING>Diminuer vitesse IA</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_AI" dependent="0">
+			<STRING>Basculer IA</STRING>
+			<SHORT_STRING>IA</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_WATCH_AI" dependent="0">
+			<STRING>Afficher priorités version IA</STRING>
+			<SHORT_STRING>Versions IA</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_CLEAR_PROFILE" dependent="0">
+			<STRING>Effacer profil</STRING>
+			<SHORT_STRING>Effacer profil</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DUMP_PROFILE" dependent="0">
+			<STRING>Vider profil</STRING>
+			<SHORT_STRING>Vider profil</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DUMP_MEM_PROFILE" dependent="0">
+			<STRING>Vider profil de mém.</STRING>
+			<SHORT_STRING>Vider profil de mém.</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_QUIT" dependent="0">
+			<STRING>Quitter</STRING>
+			<SHORT_STRING>Quitter</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_BUILD_NEW_WORLD" dependent="0">
+			<STRING>Construire nouveau monde</STRING>
+			<SHORT_STRING>Construire nouveau monde</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_REGIONS" dependent="0">
+			<STRING>Basculer régions scène</STRING>
+			<SHORT_STRING>Régions scène</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_ZERO_RESOURCES" dependent="0">
+			<STRING>Aucune ressource</STRING>
+			<SHORT_STRING>Aucune ressource</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_INCREASE_RESOURCES" dependent="0">
+			<STRING>Augmenter ressources</STRING>
+			<SHORT_STRING>Augmenter ressources</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_SWITCH_POINT_OF_VIEW" dependent="0">
+			<STRING>Permuter point de vue</STRING>
+			<SHORT_STRING>Point de vue</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_INCREASE_POP" dependent="0">
+			<STRING>Augmenter pop.</STRING>
+			<SHORT_STRING>Augmenter pop.</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DECREASE_POP" dependent="0">
+			<STRING>Diminuer pop.</STRING>
+			<SHORT_STRING>Diminuer pop.</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_PLACE_NEW_BUILD" dependent="0">
+			<STRING>Placer nouveau bâtiment</STRING>
+			<SHORT_STRING>Nouveau bâtiment</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_PLACE_NEW_UNIT" dependent="0">
+			<STRING>Placer nouvelle unité</STRING>
+			<SHORT_STRING>Nouvelle unité</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_HURRY_ACTION" dependent="0">
+			<STRING>Action précipitée</STRING>
+			<SHORT_STRING>Action précipitée</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DAMAGE_OBJECT" dependent="0">
+			<STRING>Endommager objet</STRING>
+			<SHORT_STRING>Endommager objet</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DAMAGE_OBJECT_REALLY" dependent="0">
+			<STRING>Endommager gravement objet</STRING>
+			<SHORT_STRING>Endommager gravement objet</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_THOUGHT_BUBBLES" dependent="0">
+			<STRING>Basculer bulles</STRING>
+			<SHORT_STRING>Bulles</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_KEYMAP_WINDOW" dependent="0">
+			<STRING>Basculer fenêtre de mappe de clavier</STRING>
+			<SHORT_STRING>Fenêtre de mappe de clavier</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCORE_DETAIL" dependent="0">
+			<STRING>Basculer détails score</STRING>
+			<SHORT_STRING>Détails score</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_DEPTH_COMPLEXITY" dependent="0">
+			<STRING>Basculer complexité profondeur</STRING>
+			<SHORT_STRING>Complexité profondeur</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_END_SCENARIO_TEST" dependent="0">
+			<STRING>Terminer test scénario</STRING>
+			<SHORT_STRING>Terminer test scénario</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_SCRIPT_EDITOR" dependent="0">
+			<STRING>Éditeur de script</STRING>
+			<SHORT_STRING>Éditeur de script</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_DEBUG_CONSOLE" dependent="0">
+			<STRING>Basculer console de débogage</STRING>
+			<SHORT_STRING>Console de débogage</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_DEBUG_CONSOLE_2" dependent="0">
+			<STRING>Basculer console de débogage</STRING>
+			<SHORT_STRING>Console de débogage</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_DEBUG_CONSOLE_3" dependent="0">
+			<STRING>Basculer console de débogage</STRING>
+			<SHORT_STRING>Console de débogage</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_STORMS" dependent="0">
+			<STRING>Basculer tempêtes de pluie/neige</STRING>
+			<SHORT_STRING>Basculer tempêtes</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_NEXT_PRIM" dependent="0">
+			<STRING>SYSTEM_NEXT_PRIM</STRING>
+			<SHORT_STRING>SYSTEM_NEXT_PRIM</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_PREV_PRIM" dependent="0">
+			<STRING>SYSTEM_PREV_PRIM</STRING>
+			<SHORT_STRING>SYSTEM_PREV_PRIM</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_NORM_RENDER" dependent="0">
+			<STRING>SYSTEM_NORM_RENDER</STRING>
+			<SHORT_STRING>SYSTEM_NORM_RENDER</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_NEXT" dependent="0">
+			<STRING>Écran bâtiments suivant</STRING>
+			<SHORT_STRING>Écran bâtiments suivant</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BACK" dependent="0">
+			<STRING>Écran bâtiments précédent</STRING>
+			<SHORT_STRING>Écran bâtiments précédent</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_PEASANT" dependent="0">
+			<STRING>Cité : créer citoyen</STRING>
+			<SHORT_STRING>Citoyen de la cité</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_PEASANT_UPGRADE" dependent="1">
+			<STRING>Cité : améliorer citoyen</STRING>
+			<SHORT_STRING>Améliorer citoyen</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_RAZE" dependent="0">
+			<STRING>Cité : raser</STRING>
+			<SHORT_STRING>Raser</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_ALL_CLEAR" dependent="0">
+			<STRING>Cité : alerte terminée</STRING>
+			<SHORT_STRING>Alerte terminée</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_ALARM" dependent="0">
+			<STRING>Cité : alerte</STRING>
+			<SHORT_STRING>Alerte</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_KNOWLEDGE" dependent="0">
+			<STRING>Université : améliorer production de connaissance</STRING>
+			<SHORT_STRING>Améliorer production de connaissance</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UNIVERSITY_SCHOLAR" dependent="0">
+			<STRING>Université : créer savant</STRING>
+			<SHORT_STRING>Savant</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ARMORY_LIGHT" dependent="0">
+			<STRING>Caserne : créer infanterie légère</STRING>
+			<SHORT_STRING>Infanterie légère</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ARMORY_LIGHT_UPGRADE" dependent="1">
+			<STRING>Caserne : améliorer infanterie légère</STRING>
+			<SHORT_STRING>Améliorer inf. lég.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ARMORY_HEAVY" dependent="0">
+			<STRING>Caserne : créer infanterie lourde</STRING>
+			<SHORT_STRING>Infanterie lourde</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ARMORY_HEAVY_UPGRADE" dependent="1">
+			<STRING>Caserne : améliorer infanterie lourde</STRING>
+			<SHORT_STRING>Améliorer inf. lrde</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ARMORY_ARCHER" dependent="0">
+			<STRING>Caserne : créer archer avancé</STRING>
+			<SHORT_STRING>Archer avancé</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ARMORY_ARCHER_UPGRADE" dependent="1">
+			<STRING>Caserne : améliorer archer avancé</STRING>
+			<SHORT_STRING>Améliorer archer avancé</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ARMORY_SPECIAL" dependent="0">
+			<STRING>Caserne : créer éclaireur</STRING>
+			<SHORT_STRING>Éclaireur</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ARMORY_SPECIAL_UPGRADE" dependent="1">
+			<STRING>Caserne : améliorer éclaireur</STRING>
+			<SHORT_STRING>Améliorer éclaireur</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STABLE_LIGHT" dependent="0">
+			<STRING>Écurie : créer cavalerie légère</STRING>
+			<SHORT_STRING>Cavalerie légère</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STABLE_LIGHT_UPGRADE" dependent="1">
+			<STRING>Écurie : améliorer cavalerie légère</STRING>
+			<SHORT_STRING>Améliorer cav. lég.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STABLE_HEAVY" dependent="0">
+			<STRING>Écurie : créer cavalerie lourde</STRING>
+			<SHORT_STRING>Cavalerie lourde</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STABLE_HEAVY_UPGRADE" dependent="1">
+			<STRING>Écurie : améliorer cavalerie lourde</STRING>
+			<SHORT_STRING>Améliorer cav. lrde</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STABLE_ARCHER" dependent="0">
+			<STRING>Écurie : créer archer à cheval</STRING>
+			<SHORT_STRING>Archer à cheval</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STABLE_ARCHER_UPGRADE" dependent="1">
+			<STRING>Écurie : améliorer archer à cheval</STRING>
+			<SHORT_STRING>Améliorer archer à cheval</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STABLE_ELEPHANT" dependent="0">
+			<STRING>Stable: Create War Elephant</STRING>
+			<SHORT_STRING>War Elephant</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STABLE_ELEPHANT_UPGRADE" dependent="1">
+			<STRING>Stable: Upgrade War Elephant</STRING>
+			<SHORT_STRING>Upgrade W. Elephant</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SIEGEFACTORY_SIEGE" dependent="0">
+			<STRING>Usine d'armement de siège :  créer siège/canon</STRING>
+			<SHORT_STRING>Siège/canon</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SIEGEFACTORY_SIEGE_UPGRADE" dependent="1">
+			<STRING>Usine d'armement de siège :  améliorer siège/canon</STRING>
+			<SHORT_STRING>Améliorer siège/canon</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SIEGEFACTORY_GATLING" dependent="0">
+			<STRING>Caserne : créer mitrailleuse</STRING>
+			<SHORT_STRING>Mitrailleuse</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SIEGEFACTORY_GATLING_UPGRADE" dependent="1">
+			<STRING>Caserne : améliorer mitrailleuse</STRING>
+			<SHORT_STRING>Améliorer mitrailleuse</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SIEGEFACTORY_WAGON" dependent="0">
+			<STRING>Usine armem. siège : créer wagon appro.</STRING>
+			<SHORT_STRING>Wagon d'approvisionnement</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_SIEGE" dependent="0">
+			<STRING>Port : créer navire de bombardement</STRING>
+			<SHORT_STRING>Bombardement de siège</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_SIEGE_UPGRADE" dependent="1">
+			<STRING>Port : améliorer navire de bombardement</STRING>
+			<SHORT_STRING>Améliorer navire de bombardement</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_STANDARD" dependent="0">
+			<STRING>Port : créer unité navale lourde</STRING>
+			<SHORT_STRING>Unité navale lourde</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_STANDARD_UPGRADE" dependent="1">
+			<STRING>Port : améliorer unité navale lourde</STRING>
+			<SHORT_STRING>Améliorer unité navale lourde</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_FIRESHIP" dependent="0">
+			<STRING>Port : créer sous-marins/navires d'incendie</STRING>
+			<SHORT_STRING>Sous-marins/navires d'incendie</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_FIRESHIP_UPGRADE" dependent="1">
+			<STRING>Port : améliorer sous-marins/navires d'incendie</STRING>
+			<SHORT_STRING>Améliorer sous-marins/navires d'incendie</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_SCOUT" dependent="0">
+			<STRING>Port : créer navire léger</STRING>
+			<SHORT_STRING>Navire léger</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_SCOUT_UPGRADE" dependent="1">
+			<STRING>Port : améliorer navire léger</STRING>
+			<SHORT_STRING>Améliorer navire léger</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_CARRIER" dependent="0">
+			<STRING>Port : créer porte-avions</STRING>
+			<SHORT_STRING>Porte-avions</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_CARRIER_UPGRADE" dependent="1">
+			<STRING>Port : améliorer porte-avions</STRING>
+			<SHORT_STRING>Améliorer porte-avions</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_FISHERMEN" dependent="0">
+			<STRING>Port : créer pêcheurs</STRING>
+			<SHORT_STRING>Pêcheurs</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_FISHERMEN_UPGRADE" dependent="1">
+			<STRING>Port : améliorer pêcheurs</STRING>
+			<SHORT_STRING>Améliorer pêcheurs</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_CRUISER" dependent="0">
+			<STRING>Port : créer croiseur</STRING>
+			<SHORT_STRING>Croiseur</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOCK_CRUISER_UPGRADE" dependent="1">
+			<STRING>Port : améliorer croiseur</STRING>
+			<SHORT_STRING>Améliorer croiseur</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_FIGHTER" dependent="0">
+			<STRING>Base aérienne : créer chasseur</STRING>
+			<SHORT_STRING>Chasseur</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_FIGHTER_UPGRADE" dependent="1">
+			<STRING>Base aérienne : améliorer chasseur</STRING>
+			<SHORT_STRING>Améliorer chasseur</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_BOMBER" dependent="0">
+			<STRING>Base aérienne : créer bombardier</STRING>
+			<SHORT_STRING>Bombardier</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_BOMBER_UPGRADE" dependent="1">
+			<STRING>Base aérienne : améliorer bombardier</STRING>
+			<SHORT_STRING>Améliorer bombardier</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_HELICOPTER" dependent="0">
+			<STRING>Base aérienne : créer hélicoptère</STRING>
+			<SHORT_STRING>Hélicoptère</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_HELICOPTER_UPGRADE" dependent="1">
+			<STRING>Base aérienne : améliorer hélicoptère</STRING>
+			<SHORT_STRING>Améliorer hélicoptère</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SILO_NUKE" dependent="0">
+			<STRING>Silo : créer missile nucléaire</STRING>
+			<SHORT_STRING>Missile nucléaire</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SILO_NUKE_UPGRADE" dependent="1">
+			<STRING>Silo : améliorer missile nucléaire</STRING>
+			<SHORT_STRING>Améliorer missile nucléaire</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SILO_ROCKET" dependent="0">
+			<STRING>Silo : créer missile/roquette</STRING>
+			<SHORT_STRING>Missile/roquette</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SILO_ROCKET_UPGRADE" dependent="1">
+			<STRING>Silo : améliorer missile/roquette</STRING>
+			<SHORT_STRING>Améliorer missile/roquette</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_FOOD" dependent="0">
+			<STRING>Grenier : améliorer production nourriture</STRING>
+			<SHORT_STRING>Améliorer production nourriture</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_TIMBER" dependent="0">
+			<STRING>Scierie : améliorer production bois d'œuvre</STRING>
+			<SHORT_STRING>Améliorer production bois d'œuvre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_METAL" dependent="0">
+			<STRING>Fonderie : améliorer production métal</STRING>
+			<SHORT_STRING>Améliorer production métal</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_FORT" dependent="0">
+			<STRING>Fort : améliorer</STRING>
+			<SHORT_STRING>Améliorer fort</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_GORADAR" dependent="0">
+			<STRING>Poste d'observation : améliorer en défense aérienne</STRING>
+			<SHORT_STRING>Améliorer en défense aérienne</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_TEMPLE" dependent="0">
+			<STRING>Temple : améliorer religion</STRING>
+			<SHORT_STRING>Améliorer religion</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FORT_GENERAL" dependent="0">
+			<STRING>Fort : créer général</STRING>
+			<SHORT_STRING>Créer général</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FORT_GENERAL_UPGRADE" dependent="1">
+			<STRING>Fort : améliorer général</STRING>
+			<SHORT_STRING>Améliorer général</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FORT_SPY" dependent="0">
+			<STRING>Fort : créer espion</STRING>
+			<SHORT_STRING>Créer espion</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FORT_SPY_UPGRADE" dependent="1">
+			<STRING>Fort : améliorer espion</STRING>
+			<SHORT_STRING>Améliorer espion</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOWER_MILITIA_UPGRADE" dependent="0">
+			<STRING>Tour : améliorer milice</STRING>
+			<SHORT_STRING>Améliorer milice</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOWER_ALLEGIANCE" dependent="0">
+			<STRING>Tour : améliorer allégeance</STRING>
+			<SHORT_STRING>Allégeance</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_MARKET_CARAVAN" dependent="0">
+			<STRING>Marché : créer caravane</STRING>
+			<SHORT_STRING>Caravane</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_MARKET_UPGRADE_CARAVAN" dependent="1">
+			<STRING>Marché : améliorer caravane</STRING>
+			<SHORT_STRING>Améliorer caravane</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_MARKET_MERCHANT" dependent="0">
+			<STRING>Marché : créer marchand</STRING>
+			<SHORT_STRING>Marchand</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_MARKET_UPGRADE_MERCHANT" dependent="1">
+			<STRING>Marché : améliorer marchand</STRING>
+			<SHORT_STRING>Améliorer marchand</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_FOOD" dependent="0">
+			<STRING>Marché : acheter 100 de nourriture</STRING>
+			<SHORT_STRING>Acheter nourriture</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_TIMBER" dependent="0">
+			<STRING>Marché : acheter 100 de bois d'œuvre</STRING>
+			<SHORT_STRING>Acheter bois d'œuvre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_METAL" dependent="0">
+			<STRING>Marché : acheter 100 de métal</STRING>
+			<SHORT_STRING>Acheter métal</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_OIL" dependent="0">
+			<STRING>Marché : acheter 100 de pétrole</STRING>
+			<SHORT_STRING>Acheter pétrole</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_FOOD_500" dependent="0">
+			<STRING>Marché : acheter 500 de nourriture</STRING>
+			<SHORT_STRING>Acheter 500 de nourriture</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_TIMBER_500" dependent="0">
+			<STRING>Marché : acheter 500 de bois d'œuvre</STRING>
+			<SHORT_STRING>Acheter 500 de bois d'œuvre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_METAL_500" dependent="0">
+			<STRING>Marché : acheter 500 de métal</STRING>
+			<SHORT_STRING>Acheter 500 de métal</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_OIL_500" dependent="0">
+			<STRING>Marché : acheter 500 de pétrole</STRING>
+			<SHORT_STRING>Acheter 500 de pétrole</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_FOOD_ALL" dependent="0">
+			<STRING>Marché : acheter max. nourriture</STRING>
+			<SHORT_STRING>Acheter max. nourriture</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_TIMBER_ALL" dependent="0">
+			<STRING>Marché : acheter max. bois d'œuvre</STRING>
+			<SHORT_STRING>Acheter max. bois d'œuvre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_METAL_ALL" dependent="0">
+			<STRING>Marché : acheter max. métal</STRING>
+			<SHORT_STRING>Acheter max. métal</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUY_OIL_ALL" dependent="0">
+			<STRING>Marché : acheter max. pétrole</STRING>
+			<SHORT_STRING>Acheter max. pétrole</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_FOOD" dependent="1">
+			<STRING>Marché : vendre 100 de nourriture</STRING>
+			<SHORT_STRING>Vendre 100 de nourriture</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_TIMBER" dependent="1">
+			<STRING>Marché : vendre 100 de bois d'œuvre</STRING>
+			<SHORT_STRING>Vendre 100 de bois d'œuvre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_METAL" dependent="1">
+			<STRING>Marché : vendre 100 de métal</STRING>
+			<SHORT_STRING>Vendre 100 de métal</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_OIL" dependent="1">
+			<STRING>Marché : vendre 100 de pétrole</STRING>
+			<SHORT_STRING>Vendre 100 de pétrole</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_FOOD_500" dependent="0">
+			<STRING>Marché : vendre 500 de nourriture</STRING>
+			<SHORT_STRING>Vendre 500 de nourriture</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_TIMBER_500" dependent="0">
+			<STRING>Marché : vendre 500 de bois d'œuvre</STRING>
+			<SHORT_STRING>Vendre 500 de bois d'œuvre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_METAL_500" dependent="0">
+			<STRING>Marché : vendre 500 de métal</STRING>
+			<SHORT_STRING>Vendre 500 de métal</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_OIL_500" dependent="0">
+			<STRING>Marché : vendre 500 de pétrole</STRING>
+			<SHORT_STRING>Vendre 500 de pétrole</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_FOOD_ALL" dependent="0">
+			<STRING>Marché : vendre toute la nourriture</STRING>
+			<SHORT_STRING>Vendre toute la nourriture</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_TIMBER_ALL" dependent="0">
+			<STRING>Marché : vendre tout le bois d'œuvre</STRING>
+			<SHORT_STRING>Vendre tout le bois d'œuvre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_METAL_ALL" dependent="0">
+			<STRING>Marché : vendre tout le métal</STRING>
+			<SHORT_STRING>Vendre tout le métal</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELL_OIL_ALL" dependent="0">
+			<STRING>Marché : vendre tout le pétrole</STRING>
+			<SHORT_STRING>Vendre tout le pétrole</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_LIBRARY_AGE" dependent="0">
+			<STRING>Bibliothèque : recherches sur l'avancée dans les âges </STRING>
+			<SHORT_STRING>Avancée âge</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_LIBRARY_MILITARY" dependent="0">
+			<STRING>Bibliothèque : recherche militaire</STRING>
+			<SHORT_STRING>Recherche militaire</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_LIBRARY_SCIENCE" dependent="0">
+			<STRING>Bibliothèque : recherche scientifique</STRING>
+			<SHORT_STRING>Recherche scientifique</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_LIBRARY_COMMERCE" dependent="0">
+			<STRING>Bibliothèque : recherche commerciale</STRING>
+			<SHORT_STRING>Recherche commerciale</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_LIBRARY_CIVIC" dependent="0">
+			<STRING>Bibliothèque : recherche civique</STRING>
+			<SHORT_STRING>Recherche civique</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SPY_BRIBE" dependent="0">
+			<STRING>Espion : corrompre ennemi</STRING>
+			<SHORT_STRING>Corrompre ennemi</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SPY_PILFER_FUNDS" dependent="0">
+			<STRING>Espion : ressources par chapardage</STRING>
+			<SHORT_STRING>Ressources par chapardage</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_GENERAL_RALLY" dependent="0">
+			<STRING>Général : ralliement</STRING>
+			<SHORT_STRING>Ralliement</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_GENERAL_FORCED_MARCH" dependent="0">
+			<STRING>Général : marche forcée</STRING>
+			<SHORT_STRING>Marche forcée</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_GENERAL_AMBUSH" dependent="0">
+			<STRING>Général : embuscade</STRING>
+			<SHORT_STRING>Embuscade</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_GENERAL_DECOY" dependent="0">
+			<STRING>Général : créer un leurre</STRING>
+			<SHORT_STRING>Leurre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_GENERAL_ENTRENCH" dependent="0">
+			<STRING>Général : retrancher</STRING>
+			<SHORT_STRING>Retrancher</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SPECIAL_FORCES_SABOTAGE" dependent="0">
+			<STRING>Forces spéciales : sabotage</STRING>
+			<SHORT_STRING>Sabotage</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SPECIAL_FORCES_PARADROP" dependent="0">
+			<STRING>Forces spéciales : parachutage</STRING>
+			<SHORT_STRING>Parachutage</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SPY_INFORMER" dependent="0">
+			<STRING>Espion : informateur</STRING>
+			<SHORT_STRING>Informateur</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SPECIAL_FORCES_COUNTERINTEL" dependent="0">
+			<STRING>Éclaireur : contre-espionnage</STRING>
+			<SHORT_STRING>Éclaireur : contre-espionnage</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SPECIAL_FORCES_SNIPER" dependent="0">
+			<STRING>Forces spéciales : tireur embusqué</STRING>
+			<SHORT_STRING>Tireur embusqué</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SPECIAL_FORCES_JAM_RADAR" dependent="0">
+			<STRING>Forces spéciales : brouillage radar</STRING>
+			<SHORT_STRING>Brouillage radar</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD" dependent="0">
+			<STRING>Citoyen : créer bâtiment</STRING>
+			<SHORT_STRING>Créer bâtiment</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_MILITARY" dependent="0">
+			<STRING>Citoyen : créer bâtiment militaire</STRING>
+			<SHORT_STRING>Créer bâtiment militaire</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_WONDER" dependent="0">
+			<STRING>Citoyen : créer merveille</STRING>
+			<SHORT_STRING>Créer merveille</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_MILITARY2" dependent="0">
+			<STRING>Citoyen : créer bâtiment militaire (2)</STRING>
+			<SHORT_STRING>Créer bâtiment militaire (2)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_WONDER2" dependent="0">
+			<STRING>Citoyen : créer merveille (2) </STRING>
+			<SHORT_STRING>Créer merveille (2)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD" dependent="0">
+			<STRING>Citoyen : créer bâtiment</STRING>
+			<SHORT_STRING>Créer bâtiment</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_MILITARY" dependent="0">
+			<STRING>Citoyen : créer bâtiment militaire</STRING>
+			<SHORT_STRING>Créer bâtiment militaire</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_WONDER" dependent="0">
+			<STRING>Citoyen : créer merveille</STRING>
+			<SHORT_STRING>Créer merveille</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PEASANT_TO_ARMS" dependent="0">
+			<STRING>Citoyen : armer</STRING>
+			<SHORT_STRING>Armer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_MILITIA_CIVILIAN" dependent="0">
+			<STRING>Milice : civile</STRING>
+			<SHORT_STRING>Milice civile</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_AIRDEFENSE" dependent="0">
+			<STRING>Construire défense aérienne</STRING>
+			<SHORT_STRING>Défense aérienne</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_FARM" dependent="0">
+			<STRING>Construire ferme</STRING>
+			<SHORT_STRING>Ferme</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_GRANARY" dependent="0">
+			<STRING>Construire grenier</STRING>
+			<SHORT_STRING>Grenier</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_MINE" dependent="0">
+			<STRING>Construire mine</STRING>
+			<SHORT_STRING>Mine</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_SMELTER" dependent="0">
+			<STRING>Construire fonderie</STRING>
+			<SHORT_STRING>Fonderie</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_UNIVERSITY" dependent="0">
+			<STRING>Construire université</STRING>
+			<SHORT_STRING>Université</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_WOODCUTTER" dependent="0">
+			<STRING>Build Woodcutter's Camp</STRING>
+			<SHORT_STRING>Woodcutter's Camp</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_SAWMILL" dependent="0">
+			<STRING>Build Lumber Mill</STRING>
+			<SHORT_STRING>Lumber Mill</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_OILWELL" dependent="0">
+			<STRING>Construire puits de pétrole</STRING>
+			<SHORT_STRING>Puits de pétrole</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_REFINERY" dependent="0">
+			<STRING>Construire raffinerie</STRING>
+			<SHORT_STRING>Raffinerie</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_MARKET" dependent="0">
+			<STRING>Construire marché</STRING>
+			<SHORT_STRING>Marché</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_BARRACKS" dependent="0">
+			<STRING>Construire caserne</STRING>
+			<SHORT_STRING>Caserne</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_STABLE" dependent="0">
+			<STRING>Construire écurie</STRING>
+			<SHORT_STRING>Écurie</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_SIEGEFACTORY" dependent="0">
+			<STRING>Construire usine d'armement de siège</STRING>
+			<SHORT_STRING>Usine d'armement de siège</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_VILLAGE" dependent="0">
+			<STRING>Construire cité</STRING>
+			<SHORT_STRING>Cité</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_VILLAGE2" dependent="0">
+			<STRING>Construire cité (2)</STRING>
+			<SHORT_STRING>Construire cité (2)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_TEMPLE" dependent="0">
+			<STRING>Construire temple</STRING>
+			<SHORT_STRING>Temple</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_LIBRARY" dependent="0">
+			<STRING>Construire bibliothèque</STRING>
+			<SHORT_STRING>Bibliothèque</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_FORT" dependent="0">
+			<STRING>Construire fort/château/forteresse/redoute</STRING>
+			<SHORT_STRING>Fort</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_TOWER" dependent="0">
+			<STRING>Construire tour/donjon/palissade/bunker</STRING>
+			<SHORT_STRING>Tour</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_AIRBASE" dependent="0">
+			<STRING>Construire base aérienne</STRING>
+			<SHORT_STRING>Base aérienne</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_DOCK" dependent="0">
+			<STRING>Construire port</STRING>
+			<SHORT_STRING>Port</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_SILO" dependent="0">
+			<STRING>Construire silo de missiles</STRING>
+			<SHORT_STRING>Silo de missiles</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BUILD_LOOKOUT" dependent="0">
+			<STRING>Construire mirador</STRING>
+			<SHORT_STRING>Mirador</SHORT_STRING>
+		</KEY>
+		<KEY enum="FORM_LINE" dependent="0">
+			<STRING>Unité : formation en ligne</STRING>
+			<SHORT_STRING>Ligne</SHORT_STRING>
+		</KEY>
+		<KEY enum="FORM_REFUSED" dependent="0">
+			<STRING>Unité : formation rejetée</STRING>
+			<SHORT_STRING>Rejeté</SHORT_STRING>
+		</KEY>
+		<KEY enum="FORM_ENVELOP" dependent="0">
+			<STRING>Unité : formation d'encerclement</STRING>
+			<SHORT_STRING>Encerclement</SHORT_STRING>
+		</KEY>
+		<KEY enum="FORM_E_RIGHT" dependent="0">
+			<STRING>Unité : formation d'échelon droit</STRING>
+			<SHORT_STRING>Échelon droit</SHORT_STRING>
+		</KEY>
+		<KEY enum="FORM_E_LEFT" dependent="0">
+			<STRING>Unité : formation d'échelon gauche</STRING>
+			<SHORT_STRING>Échelon gauche</SHORT_STRING>
+		</KEY>
+		<KEY enum="STANCE_AGGRESSIVE" dependent="0">
+			<STRING>Unité : position d'attaque</STRING>
+			<SHORT_STRING>Position d'attaque</SHORT_STRING>
+		</KEY>
+		<KEY enum="STANCE_RAID" dependent="0">
+			<STRING>Unité : position de pillage</STRING>
+			<SHORT_STRING>Position de pillage</SHORT_STRING>
+		</KEY>
+		<KEY enum="STANCE_RAZE" dependent="0">
+			<STRING>Unité : position pour raser</STRING>
+			<SHORT_STRING>Position pour raser</SHORT_STRING>
+		</KEY>
+		<KEY enum="STANCE_HOLDFIRE" dependent="0">
+			<STRING>Unité : position halte au feu</STRING>
+			<SHORT_STRING>Position halte au feu</SHORT_STRING>
+		</KEY>
+		<KEY enum="STANCE_DEFENSIVE" dependent="0">
+			<STRING>Unité : position de défense</STRING>
+			<SHORT_STRING>Position de défense</SHORT_STRING>
+		</KEY>
+		<KEY enum="STANCE_STANDGROUND" dependent="0">
+			<STRING>Unité : tenir position</STRING>
+			<SHORT_STRING>Tenir position</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CANCEL" dependent="0">
+			<STRING>Annuler action</STRING>
+			<SHORT_STRING>Annuler</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CHAT" dependent="0">
+			<STRING>Dialoguer</STRING>
+			<SHORT_STRING>Dialoguer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CHAT_ALL" dependent="0">
+			<STRING>Dialoguer ac tous</STRING>
+			<SHORT_STRING>Dialoguer ac tous</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CHAT_ALLIES" dependent="0">
+			<STRING>Dialoguer ac alliés</STRING>
+			<SHORT_STRING>Dialoguer ac alliés</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CHAT_ENEMIES" dependent="0">
+			<STRING>Dialoguer ac ennemis</STRING>
+			<SHORT_STRING>Dialoguer ac ennemis</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DIPLO" dependent="0">
+			<STRING>Diplomatie</STRING>
+			<SHORT_STRING>Diplomatie</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DIRECT_DIPLO" dependent="0">
+			<STRING>Diplomatie : aller à l'offre</STRING>
+			<SHORT_STRING>Aller à l'offre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SLOWER" dependent="0">
+			<STRING>Jeu plus lent</STRING>
+			<SHORT_STRING>Lent</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SLOWER2" dependent="0">
+			<STRING>Jeu plus lent (2)</STRING>
+			<SHORT_STRING>Lent</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FASTER" dependent="0">
+			<STRING>Jeu plus rapide</STRING>
+			<SHORT_STRING>Rapide</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FASTER2" dependent="0">
+			<STRING>Jeu plus rapide (2)</STRING>
+			<SHORT_STRING>Rapide</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_RESIGN" dependent="0">
+			<STRING>Abandonner</STRING>
+			<SHORT_STRING>Abandonner</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_QUIT" dependent="0">
+			<STRING>Quitter</STRING>
+			<SHORT_STRING>Quitter</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_GARRISON" dependent="0">
+			<STRING>Unité : garnison</STRING>
+			<SHORT_STRING>Garnison</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_VILLAGE" dependent="0">
+			<STRING>Rechercher cité</STRING>
+			<SHORT_STRING>Rechercher cité</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_LIBRARY" dependent="0">
+			<STRING>Rechercher bibliothèque</STRING>
+			<SHORT_STRING>Rechercher bibliothèque</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_MARKET" dependent="0">
+			<STRING>Rechercher marché</STRING>
+			<SHORT_STRING>Rechercher marché</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_BARRACKS" dependent="0">
+			<STRING>Rechercher caserne</STRING>
+			<SHORT_STRING>Rechercher caserne</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_STABLE" dependent="0">
+			<STRING>Rechercher écurie ou usine de montage</STRING>
+			<SHORT_STRING>Rechercher écurie ou usine de montage</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SIEGEFACTORY" dependent="0">
+			<STRING>Rechercher usine d'armement de siège</STRING>
+			<SHORT_STRING>Rechercher usine d'armement de siège</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_DOCK" dependent="0">
+			<STRING>Rechercher port/chantier naval</STRING>
+			<SHORT_STRING>Rechercher port/chantier naval</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_AIRBASE" dependent="0">
+			<STRING>Rechercher base aérienne</STRING>
+			<SHORT_STRING>Rechercher base aérienne</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SILO" dependent="0">
+			<STRING>Rechercher silo de missiles</STRING>
+			<SHORT_STRING>Rechercher silo de missiles</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_UNIVERSITY" dependent="0">
+			<STRING>Rechercher université</STRING>
+			<SHORT_STRING>Rechercher université</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_VILLAGE_NOZOOM" dependent="1">
+			<STRING>Sélect. cité, sans zoom</STRING>
+			<SHORT_STRING>Sélect. cité, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_LIBRARY_NOZOOM" dependent="1">
+			<STRING>Sélect. bibliothèque, sans zoom</STRING>
+			<SHORT_STRING>Sélect. bibliothèque, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_MARKET_NOZOOM" dependent="1">
+			<STRING>Sélect. marché, sans zoom</STRING>
+			<SHORT_STRING>Sélect. marché, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_BARRACKS_NOZOOM" dependent="1">
+			<STRING>Sélect. caserne, sans zoom</STRING>
+			<SHORT_STRING>Sélect. caserne, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_STABLE_NOZOOM" dependent="1">
+			<STRING>Sélect. écurie, sans zoom</STRING>
+			<SHORT_STRING>Sélect. écurie, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SIEGEFACTORY_NOZOOM" dependent="1">
+			<STRING>Sélect. usine d'armement de siège, sans zoom</STRING>
+			<SHORT_STRING>Sélect. usine d'armement de siège, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_DOCK_NOZOOM" dependent="1">
+			<STRING>Sélect. port, sans zoom</STRING>
+			<SHORT_STRING>Sélect. port, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_AIRBASE_NOZOOM" dependent="1">
+			<STRING>Sélect. base aérienne, sans zoom</STRING>
+			<SHORT_STRING>Sélect. base aérienne, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SILO_NOZOOM" dependent="1">
+			<STRING>Sélect. silo de missiles, sans zoom</STRING>
+			<SHORT_STRING>Sélect. silo de missiles, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_UNIVERSITY_NOZOOM" dependent="1">
+			<STRING>Sélect. université, sans zoom</STRING>
+			<SHORT_STRING>Sélect. université, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_VILLAGE_ALL" dependent="1">
+			<STRING>Sélect. toutes les cités</STRING>
+			<SHORT_STRING>Sélect. toutes les cités</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_LIBRARY_ALL" dependent="1">
+			<STRING>Sélect. toutes les bibliothèques</STRING>
+			<SHORT_STRING>Sélect. toutes les bibliothèques</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_MARKET_ALL" dependent="1">
+			<STRING>Sélect. tous les marchés</STRING>
+			<SHORT_STRING>Sélect. tous les marchés</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_BARRACKS_ALL" dependent="1">
+			<STRING>Sélect. toutes les casernes</STRING>
+			<SHORT_STRING>Sélect. toutes les casernes</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_STABLE_ALL" dependent="1">
+			<STRING>Sélect. toutes les écuries</STRING>
+			<SHORT_STRING>Sélect. toutes les écuries</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SIEGEFACTORY_ALL" dependent="1">
+			<STRING>Sélect. toutes les usines d'armement de siège</STRING>
+			<SHORT_STRING>Sélect. toutes les usines d'armement de siège</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_DOCK_ALL" dependent="1">
+			<STRING>Sélect. tous les ports</STRING>
+			<SHORT_STRING>Sélect. tous les ports</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_AIRBASE_ALL" dependent="1">
+			<STRING>Sélect. toutes les bases aériennes</STRING>
+			<SHORT_STRING>Sélect. toutes les bases aériennes</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SILO_ALL" dependent="1">
+			<STRING>Sélect. tous les silos de missiles</STRING>
+			<SHORT_STRING>Sélect. tous les silos de missiles</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_UNIVERSITY_ALL" dependent="1">
+			<STRING>Sélect. toutes les universités</STRING>
+			<SHORT_STRING>Sélect. toutes les universités</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_GATHER" dependent="0">
+			<STRING>Bâtiment : définir point de ralliement</STRING>
+			<SHORT_STRING>Définir point de ralliement</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CLEAR_GATHER" dependent="0">
+			<STRING>Bâtiment : effacer point de ralliement</STRING>
+			<SHORT_STRING>Effacer point de ralliement</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PAUSE" dependent="0">
+			<STRING>Pause</STRING>
+			<SHORT_STRING>Pause</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PAUSE2" dependent="0">
+			<STRING>Pause</STRING>
+			<SHORT_STRING>Pause</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DISBAND" dependent="0">
+			<STRING>Unité/bâtiment : disperser/raser</STRING>
+			<SHORT_STRING>Disperser/raser</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TRANSPORT" dependent="0">
+			<STRING>Unité : basculer transport auto</STRING>
+			<SHORT_STRING>Transport auto</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ZOOM" dependent="0">
+			<STRING>Zoom</STRING>
+			<SHORT_STRING>Zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ZOOM_IN" dependent="0">
+			<STRING>Zoom avant</STRING>
+			<SHORT_STRING>Zoom avant</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ZOOM_OUT" dependent="0">
+			<STRING>Zoom arrière</STRING>
+			<SHORT_STRING>Zoom arrière</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ZOOM_IN2" dependent="0">
+			<STRING>Zoom avant (2)</STRING>
+			<SHORT_STRING>Zoom avant (2)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ZOOM_OUT2" dependent="0">
+			<STRING>Zoom arrière (2)</STRING>
+			<SHORT_STRING>Zoom arrière (2)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ZOOM_IN3" dependent="0">
+			<STRING>Zoom avant (3)</STRING>
+			<SHORT_STRING>Zoom avant (3)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ZOOM_OUT3" dependent="0">
+			<STRING>Zoom arrière (3)</STRING>
+			<SHORT_STRING>Zoom arrière (3)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SAVE_ZOOM_IN" dependent="0">
+			<STRING>Enregistrer zoom avant</STRING>
+			<SHORT_STRING>Enregistrer zoom avant</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SAVE_ZOOM_OUT" dependent="0">
+			<STRING>Enregistrer zoom arrière</STRING>
+			<SHORT_STRING>Enregistrer zoom arrière</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_MILITARY" dependent="0">
+			<STRING>Rechercher unité/groupe militaire</STRING>
+			<SHORT_STRING>Rechercher unité/groupe militaire</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_PEASANT" dependent="0">
+			<STRING>Rechercher citoyen inactif</STRING>
+			<SHORT_STRING>Rechercher citoyen inactif</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_GENERAL" dependent="0">
+			<STRING>Rechercher général</STRING>
+			<SHORT_STRING>Rechercher général</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SCOUT" dependent="0">
+			<STRING>Rechercher éclaireur</STRING>
+			<SHORT_STRING>Rechercher éclaireur</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SPY" dependent="0">
+			<STRING>Rechercher espion</STRING>
+			<SHORT_STRING>Rechercher espion</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SUPPLY" dependent="0">
+			<STRING>Rechercher wagon d'approvis.</STRING>
+			<SHORT_STRING>Rechercher wagon d'approvis.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_MILITARY_NOZOOM" dependent="1">
+			<STRING>Sélect. unité militaire, sans zoom</STRING>
+			<SHORT_STRING>Sélect. militaire, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_PEASANT_NOZOOM" dependent="1">
+			<STRING>Sélect. citoyen inactif, sans zoom</STRING>
+			<SHORT_STRING>Sélect. citoyen inactif, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_GENERAL_NOZOOM" dependent="1">
+			<STRING>Sélect. général, sans zoom</STRING>
+			<SHORT_STRING>Sélect. général, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SCOUT_NOZOOM" dependent="1">
+			<STRING>Sélect. éclaireur, sans zoom</STRING>
+			<SHORT_STRING>Sélect. éclaireur, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SPY_NOZOOM" dependent="1">
+			<STRING>Sélect. espion, sans zoom</STRING>
+			<SHORT_STRING>Sélect. espion, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SUPPLY_NOZOOM" dependent="1">
+			<STRING>Sélect. wagon d'approvisionnement, sans zoom</STRING>
+			<SHORT_STRING>Sélect. wagon d'approvisionnement, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_MILITARY" dependent="1">
+			<STRING>Sélect. toutes les unités militaires</STRING>
+			<SHORT_STRING>Sélect. toutes les unités militaires</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_PEASANT" dependent="1">
+			<STRING>Sélect. tous les citoyens inactifs</STRING>
+			<SHORT_STRING>Sélect. tous les citoyens inactifs</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_GENERAL" dependent="1">
+			<STRING>Sélect. tous les généraux</STRING>
+			<SHORT_STRING>Sélect. tous les généraux</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_SCOUT" dependent="1">
+			<STRING>Sélect. tous les éclaireurs</STRING>
+			<SHORT_STRING>Sélect. tous les éclaireurs</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_SPY" dependent="1">
+			<STRING>Sélect. tous les espions</STRING>
+			<SHORT_STRING>Sélect. tous les espions</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_SUPPLY" dependent="1">
+			<STRING>Sélect. tous les wagons d'approvis.</STRING>
+			<SHORT_STRING>Sélect. tous les approvis.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STANCE" dependent="0">
+			<STRING>Unité : position suivante</STRING>
+			<SHORT_STRING>Position suivante</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_NONIDLE_PEASANT" dependent="0">
+			<STRING>Rechercher tout citoyen</STRING>
+			<SHORT_STRING>Rechercher tout citoyen</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_NONIDLE_PEASANT" dependent="1">
+			<STRING>Sélect. tous les citoyens</STRING>
+			<SHORT_STRING>Sélect. tous les citoyens</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_NOZOOM_NONIDLE_PEASANT" dependent="1">
+			<STRING>Sélect. tout citoyen, sans zoom</STRING>
+			<SHORT_STRING>Sélect. tout citoyen, sans zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AUTO_EXPLORE" dependent="0">
+			<STRING>Unité : exploration auto</STRING>
+			<SHORT_STRING>Exploration auto</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FOLLOW" dependent="0">
+			<STRING>Unité : suivre</STRING>
+			<SHORT_STRING>Suivre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_GUARD" dependent="0">
+			<STRING>Unité : protéger</STRING>
+			<SHORT_STRING>Protéger</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ATTACK_TO" dependent="0">
+			<STRING>Unité : attaquer</STRING>
+			<SHORT_STRING>Attaquer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_EXPLORE_TO" dependent="0">
+			<STRING>Unité : explorer</STRING>
+			<SHORT_STRING>Explorer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FLEE_TO" dependent="0">
+			<STRING>Unité : fuir</STRING>
+			<SHORT_STRING>Fuir</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_MOVE_TO" dependent="0">
+			<STRING>Unité : déplacer</STRING>
+			<SHORT_STRING>Déplacer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FORWARD" dependent="0">
+			<STRING>Unité : avancer</STRING>
+			<SHORT_STRING>Avancer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FORWARD2" dependent="0">
+			<STRING>Unité : avancer (2)</STRING>
+			<SHORT_STRING>Avancer : (2)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PATROL" dependent="0">
+			<STRING>Unité : patrouiller</STRING>
+			<SHORT_STRING>Patrouiller</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_HALT" dependent="0">
+			<STRING>Unité : arrêter</STRING>
+			<SHORT_STRING>Arrêter</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ATTACK_GROUND" dependent="0">
+			<STRING>Unité : bombarder</STRING>
+			<SHORT_STRING>Bombarder</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_EJECT_ALL" dependent="0">
+			<STRING>Unité/bâtiment : éjecter tout</STRING>
+			<SHORT_STRING>Éjecter tout</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_NEXT_MESSAGE" dependent="0">
+			<STRING>Message suivant</STRING>
+			<SHORT_STRING>Message suivant</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_NEXT_MESSAGE2" dependent="0">
+			<STRING>Message suivant2</STRING>
+			<SHORT_STRING>Message suivant2</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PREV_MESSAGE" dependent="1">
+			<STRING>Message précédent</STRING>
+			<SHORT_STRING>Message préc.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PREV_MESSAGE2" dependent="1">
+			<STRING>Message précédent2</STRING>
+			<SHORT_STRING>Message préc.2</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SCENE_HELP" dependent="0">
+			<STRING>Aide scène</STRING>
+			<SHORT_STRING>Aide scène</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_HELP" dependent="0">
+			<STRING>Augmenter niveau d'aide</STRING>
+			<SHORT_STRING>Augmenter niveau d'aide</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PREV_HELP" dependent="0">
+			<STRING>Diminuer niveau d'aide</STRING>
+			<SHORT_STRING>Diminuer niveau d'aide</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_THOUGHTS" dependent="0">
+			<STRING>Basculer bulles</STRING>
+			<SHORT_STRING>Basculer bulles</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_NEXT_DATA" dependent="0">
+			<STRING>Affichage de données suivant</STRING>
+			<SHORT_STRING>Affichage de données suivant</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PREV_DATA" dependent="1">
+			<STRING>Données précédentes</STRING>
+			<SHORT_STRING>Données précédentes</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_DATA" dependent="1">
+			<STRING>Basculer données</STRING>
+			<SHORT_STRING>Basculer données</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT" dependent="0">
+			<STRING>Parcourir affichage de données</STRING>
+			<SHORT_STRING>Parcourir affichage de données</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_FF_COLORS" dependent="0">
+			<STRING>Basculer couleurs des alliés/ennemis</STRING>
+			<SHORT_STRING>Basculer couleurs des alliés/ennemis</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_CITY_NAMES" dependent="0">
+			<STRING>Basculer noms de cités</STRING>
+			<SHORT_STRING>Basculer noms de cités</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_STATS" dependent="0">
+			<STRING>Basculer barres de progression de recherche</STRING>
+			<SHORT_STRING>Basculer barres de progression de recherche</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_ADVANCED" dependent="0">
+			<STRING>Basculer menu avancé</STRING>
+			<SHORT_STRING>Menu av.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STATWIN" dependent="0">
+			<STRING>Fenstat</STRING>
+			<SHORT_STRING>Fenstat</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PING" dependent="0">
+			<STRING>Envoyer signal</STRING>
+			<SHORT_STRING>Envoyer signal</SHORT_STRING>
+		</KEY>
+		<KEY enum="CHEAT_HURRY_JOB" dependent="0">
+			<STRING>Codes de triche : tache précipitée</STRING>
+			<SHORT_STRING>Codes de triche : tache précipitée</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_QUEUE" dependent="0">
+			<STRING>Bâtiment : suppr. de file d'attente</STRING>
+			<SHORT_STRING>Suppr. de file d'attente</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_OBJECTIVES" dependent="0">
+			<STRING>Afficher objectifs</STRING>
+			<SHORT_STRING>Afficher objectifs</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_MENU" dependent="0">
+			<STRING>Menu principal</STRING>
+			<SHORT_STRING>Menu principal</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_OPTIONS" dependent="0">
+			<STRING>Options du jeu</STRING>
+			<SHORT_STRING>Options du jeu</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_TIME" dependent="0">
+			<STRING>Basculer affichage chronomètre</STRING>
+			<SHORT_STRING>Basculer affichage chronomètre</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_LEFT" dependent="0">
+			<STRING>Unité : pivoter formation gauche</STRING>
+			<SHORT_STRING>Pivoter formation gauche</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_RIGHT" dependent="0">
+			<STRING>Unité : pivoter formation droite</STRING>
+			<SHORT_STRING>Pivoter formation droite</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DOWN" dependent="0">
+			<STRING>Unité : formation en retraite</STRING>
+			<SHORT_STRING>Formation en retraite</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UP" dependent="0">
+			<STRING>Caméra : haut</STRING>
+			<SHORT_STRING>Caméra : haut</SHORT_STRING>
+		</KEY>
+		<KEY enum="TERRAINDEBUG" dependent="0">
+			<STRING>Débogage terrain</STRING>
+			<SHORT_STRING>Débogage terrain</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PING2" dependent="0">
+			<STRING>Envoyer signal (2)</STRING>
+			<SHORT_STRING>Envoyer signal (2)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CANNON_TIME" dependent="0">
+			<STRING>Activer Temps de canon</STRING>
+			<SHORT_STRING>Temps de canon</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_IFACE_MAIN" dependent="0">
+			<STRING>Basculer interface principale</STRING>
+			<SHORT_STRING>Interface principale</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_IFACE_RESOURCES" dependent="0">
+			<STRING>Basculer interface ressources</STRING>
+			<SHORT_STRING>Interface ressources</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_IFACE_MARKET" dependent="0">
+			<STRING>Basculer interface marché</STRING>
+			<SHORT_STRING>Interface marché</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_IFACE_INFRA" dependent="0">
+			<STRING>Basculer interface infrastructure</STRING>
+			<SHORT_STRING>Interface infrastructure</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_CURRENT" dependent="0">
+			<STRING>Sélect. ts les types actuellement sélectionnés</STRING>
+			<SHORT_STRING>Sélectionner tout</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_NORMAL" dependent="0">
+			<STRING>Affichage données : POLITIQUE</STRING>
+			<SHORT_STRING>Affichage données : POLITIQUE</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_ECONOMY" dependent="0">
+			<STRING>Affichage données : ÉCONOMIE</STRING>
+			<SHORT_STRING>Affichage données : ÉCONOMIE</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_MARKET" dependent="0">
+			<STRING>Affichage données : MARCHÉ</STRING>
+			<SHORT_STRING>Affichage données : MARCHÉ</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_MILITARY" dependent="0">
+			<STRING>Affichage données : MILITAIRE</STRING>
+			<SHORT_STRING>Affichage données : MILITAIRE</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_LIBRARY" dependent="0">
+			<STRING>Affichage données : CITÉS</STRING>
+			<SHORT_STRING>Affichage données : CITÉS</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_TECHNOLOGY" dependent="0">
+			<STRING>Affichage données : AMÉLIORATIONS</STRING>
+			<SHORT_STRING>Affichage données : AMÉLIORATIONS</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_GROUPS" dependent="0">
+			<STRING>Affichage données : GROUPES</STRING>
+			<SHORT_STRING>Affichage données : GROUPES</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_DIPLOMACY">
+			<STRING>Affichage données : DIPLOMATIE</STRING>
+			<SHORT_STRING>Affichage données : DIPLOMATIE</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_WONDERS">
+			<STRING>Affichage données : MERVEILLES</STRING>
+			<SHORT_STRING>Affichage données : MERVEILLES</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_TEXTURES" dependent="0">
+			<STRING>SYSTEM_TOGGLE_TEXTURES</STRING>
+			<SHORT_STRING>SYSTEM_TOGGLE_TEXTURES</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_MEM_WINDOW" dependent="0">
+			<STRING>SYSTEM_TOGGLE_MEM_WINDOW</STRING>
+			<SHORT_STRING>SYSTEM_TOGGLE_MEM_WINDOW</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_MEM_PRINT" dependent="0">
+			<STRING>SYSTEM_MEM_PRINT</STRING>
+			<SHORT_STRING>SYSTEM_MEM_PRINT</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_SCRIPT_LOG" dependent="0">
+			<STRING>SYSTEM_SCRIPT_LOG</STRING>
+			<SHORT_STRING>SYSTEM_SCRIPT_LOG</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TEST_XML_WINDOW" dependent="0">
+			<STRING>SYSTEM_TEST_XML_WINDOW</STRING>
+			<SHORT_STRING>SYSTEM_TEST_XML_WINDOW</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_RELOAD_XML_WINDOW" dependent="0">
+			<STRING>SYSTEM_RELOAD_XML_WINDOW</STRING>
+			<SHORT_STRING>SYSTEM_RELOAD_XML_WINDOW</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_SCRIPT_EDITOR_EDIT_MODE" dependent="0">
+			<STRING>SYSTEM_SCRIPT_EDITOR_EDIT_MODE</STRING>
+			<SHORT_STRING>SYSTEM_SCRIPT_EDITOR_EDIT_MODE</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_RESEARCH" dependent="0">
+			<STRING>Rechercher bâtiment de recherche</STRING>
+			<SHORT_STRING>Rechercher bâtiment de recherche</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SPY_COUNTERINTEL" dependent="0">
+			<STRING>Espion : contre-espionnage</STRING>
+			<SHORT_STRING>Contre-espionnage</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_GATHER_FARM" dependent="0">
+			<STRING>cité : ralliement à la (aux) ferme(s)</STRING>
+			<SHORT_STRING>Ralliement à la (aux) ferme(s) </SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_GATHER_WOOD" dependent="0">
+			<STRING>cité : ralliement au(x) camp(s) de bûcherons</STRING>
+			<SHORT_STRING>Ralliement au(x) camp(s) de bûcherons</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_GATHER_MINE" dependent="0">
+			<STRING>cité : ralliement à la (aux) mine(s)</STRING>
+			<SHORT_STRING>Ralliement à la (aux) mine(s)</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_GATHER_ALL" dependent="0">
+			<STRING>cité : ralliement aux bâtiments de ressources</STRING>
+			<SHORT_STRING>Ralliement aux bâtiments de ressources</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTIONS_HELP_LOW">
+			<STRING>Définir niveau d'aide FAIBLE</STRING>
+			<SHORT_STRING>Niveau d'aide FAIBLE</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTIONS_HELP_MEDIUM">
+			<STRING>Définir niveau d'aide MOYEN</STRING>
+			<SHORT_STRING>Niveau d'aide MOYEN</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTIONS_HELP_HIGH">
+			<STRING>Définir niveau d'aide ÉLEVÉ</STRING>
+			<SHORT_STRING>Niveau d'aide ÉLEVÉ</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_STAT_OFF">
+			<STRING>Désactiver affichage des données</STRING>
+			<SHORT_STRING>Désactiver affichage des données</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_GRANARY2">
+			<STRING>Grenier : bonus améliorer troupes d'infanterie</STRING>
+			<SHORT_STRING>Améliorer production troupes</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_LUMBER2">
+			<STRING>Lumber Mill: Upgrade Buildings Bonus</STRING>
+			<SHORT_STRING>Bonus améliorer bâtiments</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_SMELTER2">
+			<STRING>Fonderie : bonus améliorer approvis.</STRING>
+			<SHORT_STRING>Bonus améliorer approvis.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_FORT2">
+			<STRING>Fort : bonus améliorer espion/général</STRING>
+			<SHORT_STRING>Bonus améliorer espion/général</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_INFINITE">
+			<STRING>Bâtiment : basculer file d'attente infinie</STRING>
+			<SHORT_STRING>File d'attente infinie</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_SHOW_SCENE_EVENTS">
+			<STRING>SYSTEM_SHOW_SCENE_EVENTS</STRING>
+			<SHORT_STRING>SYSTEM_SHOW_SCENE_EVENTS</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_DUMP_FRAMERATE" dependent="0">
+			<STRING>Vider le taux de trame</STRING>
+			<SHORT_STRING>Vider images par seconde</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRSTRIKE">
+			<STRING>Unité aérienne : raid aérien</STRING>
+			<SHORT_STRING>Raid aérien</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TRANSFER">
+			<STRING>Unité aérienne : transférer</STRING>
+			<SHORT_STRING>Transférer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_RETURN">
+			<STRING>Unité aérienne : retourner à la base</STRING>
+			<SHORT_STRING>Retourner à la base</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_RECALL">
+			<STRING>Base aérienne : rappeler ts les app.</STRING>
+			<SHORT_STRING>Rappeler ts les app.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_REPEAT">
+			<STRING>Base aérienne : basculer réexécuter les ordres</STRING>
+			<SHORT_STRING>Basculer réexécuter les ordres</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_FIGHTERS">
+			<STRING>Base aérienne : sélect. tous les chasseurs</STRING>
+			<SHORT_STRING>Sélect. tous les chasseurs</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_BOMBERS">
+			<STRING>Base aérienne : sélect. ts les bombardiers</STRING>
+			<SHORT_STRING>Sélect. ts les bombardiers</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_HELIS">
+			<STRING>Base aérienne : sélect. ts les hélicoptères</STRING>
+			<SHORT_STRING>Sélect. ts les hélicoptères</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_AIRBASE_SCRAMBLE">
+			<STRING>Base aérienne : faire décoller ts les app. immédiat.</STRING>
+			<SHORT_STRING>Faire décoller  ts les app. immédiat.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_TEMPLE_2">
+			<STRING>Temple : améliorer imposition</STRING>
+			<SHORT_STRING>Améliorer imposition</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_SENATE">
+			<STRING>Senate: Research Totalitarian Government</STRING>
+			<SHORT_STRING>Research Totalitarian Government</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_UPGRADE_SENATE_2">
+			<STRING>Senate: Research Consensus Government</STRING>
+			<SHORT_STRING>Research Consensus Government</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_TOGGLE_SCENE_BEHIND">
+			<STRING>SYSTEM_TOGGLE_SCENE_BEHIND</STRING>
+			<SHORT_STRING>SYSTEM_TOGGLE_SCENE_BEHIND</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_VILLAGE_RENAME">
+			<STRING>Cité : renommer</STRING>
+			<SHORT_STRING>Renommer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_REPAIR">
+			<STRING>Citoyen : réparer</STRING>
+			<SHORT_STRING>Réparer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_PEASANT_ALARM">
+			<STRING>Citoyen : alerter</STRING>
+			<SHORT_STRING>Alerte</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FORM">
+			<STRING>Unité : changer de formation</STRING>
+			<SHORT_STRING>Formation</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CARRIER_AIRSTRIKE">
+			<STRING>Porte-avions : mission aérienne</STRING>
+			<SHORT_STRING>Mission aérienne</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CARRIER_ALLAIR">
+			<STRING>Porte-avions : sélect. ts les appareils</STRING>
+			<SHORT_STRING>Sélect. ts les appareils</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CARRIER_RECALL">
+			<STRING>Porte-avions : rappeler ts les appareils</STRING>
+			<SHORT_STRING>Rappeler ts les app.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CARRIER_REPEAT">
+			<STRING>Porte-avions : basculer réexécuter les ordres</STRING>
+			<SHORT_STRING>Basculer réexécuter les ordres</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_BEHIND">
+			<STRING>Basculer unités derrière bâtiments</STRING>
+			<SHORT_STRING>Basculer unités derrière bâtiments</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_TOGGLE_TAUNTS">
+			<STRING>Basculer persiflages</STRING>
+			<SHORT_STRING>Basculer persiflages</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_BACK_TO_WORK">
+			<STRING>Bâtiment : retourner au travail</STRING>
+			<SHORT_STRING>Retourner au travail</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_DISBAND_ALL">
+			<STRING>Unité : disperser TOUT</STRING>
+			<SHORT_STRING>Disperser TOUT</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_MESSAGE_UP">
+			<STRING>Faire défiler la liste VERS LE HAUT</STRING>
+			<SHORT_STRING>Faire défiler la liste VERS LE HAUT</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_MESSAGE_DOWN">
+			<STRING>Faire défiler la liste VERS LE BAS</STRING>
+			<SHORT_STRING>Faire défiler la liste VERS LE BAS</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_SELECT_FILE">
+			<STRING>Éditeur de script : Scripts chargés</STRING>
+			<SHORT_STRING>Scripts chargés</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_NEW">
+			<STRING>Éditeur de script : Nouveau (fichier vierge)</STRING>
+			<SHORT_STRING>Nouveau (fichier vierge)</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_NEW_TEMP">
+			<STRING>Éditeur de script : Nv. script de scénario</STRING>
+			<SHORT_STRING>Nouveau script de scénario</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_LOAD">
+			<STRING>Éditeur de script : Ouvrir</STRING>
+			<SHORT_STRING>Ouvrir</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_SAVE">
+			<STRING>Éditeur de script : Enregistrer</STRING>
+			<SHORT_STRING>Enregistrer</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_SAVE_AS">
+			<STRING>Éditeur de script : Enregistrer sous...</STRING>
+			<SHORT_STRING>Enregistrer sous...</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_CLOSE">
+			<STRING>Éditeur de script : Fermer le script</STRING>
+			<SHORT_STRING>Fermer le script</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_EXIT">
+			<STRING>Éditeur de script : Quitter l'éditeur</STRING>
+			<SHORT_STRING>Quitter l'éditeur</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_UNDO">
+			<STRING>Éditeur de script : Annuler</STRING>
+			<SHORT_STRING>Annuler</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_REDO">
+			<STRING>Éditeur de script : Rétablir</STRING>
+			<SHORT_STRING>Rétablir</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_COPY">
+			<STRING>Éditeur de script : Copier</STRING>
+			<SHORT_STRING>Copier</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_CUT">
+			<STRING>Éditeur de script : Couper</STRING>
+			<SHORT_STRING>Couper</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_PASTE">
+			<STRING>Éditeur de script : Coller</STRING>
+			<SHORT_STRING>Coller</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_SELECT_ALL">
+			<STRING>Éditeur de script : Sélectionner tout</STRING>
+			<SHORT_STRING>Sélectionner tout</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_SCROLL_TO_LINE">
+			<STRING>Éditeur de script : Atteindre la ligne...</STRING>
+			<SHORT_STRING>Atteindre la ligne...</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_SCROLL_TO_TRIGGER">
+			<STRING>Éditeur de script : Atteindre le déclencheur</STRING>
+			<SHORT_STRING>Atteindre le déclencheur</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_SCROLL_TO_SCRIPT">
+			<STRING>Éditeur de script : Atteindre le script</STRING>
+			<SHORT_STRING>Atteindre le script</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_TOGGLE_BREAK">
+			<STRING>Éditeur de script : Basculer le point d'arrêt</STRING>
+			<SHORT_STRING>Basculer le point d'arrêt</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_FIND">
+			<STRING>Éditeur de script : Rechercher...</STRING>
+			<SHORT_STRING>Rechercher...</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_FIND_NEXT">
+			<STRING>Éditeur de script : Rechercher le suivant</STRING>
+			<SHORT_STRING>Rechercher le suivant</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_REPLACE">
+			<STRING>Éditeur de script : Remplacer...</STRING>
+			<SHORT_STRING>Remplacer...</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_TOGGLE_OUTPUT">
+			<STRING>Éditeur de script : Journal de sortie</STRING>
+			<SHORT_STRING>Journal de sortie</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_SHOW_LOG">
+			<STRING>Éditeur de script : Journal de script du jeu</STRING>
+			<SHORT_STRING>Journal de script du jeu</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_INSERT_TRIGGER">
+			<STRING>Éditeur de script : Ajouter déclencheur...</STRING>
+			<SHORT_STRING>Insérer le bloc de déclenchement...</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_INSERT_FUNC">
+			<STRING>Éditeur de script : Ajouter fonction...</STRING>
+			<SHORT_STRING>Insérer la fonction de déclenchement...</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_COMPILE">
+			<STRING>Éditeur de script : Compiler</STRING>
+			<SHORT_STRING>Compiler</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_RUN">
+			<STRING>Éditeur de script : Exécuter</STRING>
+			<SHORT_STRING>Exécuter</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_STEP_INTO">
+			<STRING>Éditeur de script : Instructions</STRING>
+			<SHORT_STRING>Instructions</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_STEP_OVER">
+			<STRING>Éditeur de script : Instructions principales</STRING>
+			<SHORT_STRING>Instructions principales</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_STEP_OUT">
+			<STRING>Éditeur de script : Instructions sortantes</STRING>
+			<SHORT_STRING>Instructions sortantes</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_STEP_TO_TRIGGER">
+			<STRING>Éditeur de script : Exécuter instruct. jusque déclencheur</STRING>
+			<SHORT_STRING>Exécuter instructions jusqu'au déclencheur</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_STEP_TO_LINE">
+			<STRING>Éditeur de script : Exécuter jusqu'à la ligne</STRING>
+			<SHORT_STRING>Exécuter jusqu'à la ligne</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_STOP">
+			<STRING>Éditeur de script : Arrêter</STRING>
+			<SHORT_STRING>Arrêter</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_BREAKPOINTS">
+			<STRING>Éditeur de script : Points d'arrêt</STRING>
+			<SHORT_STRING>Points d'arrêt</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_REMOVE_BREAKS">
+			<STRING>Éditeur de script : Suppr. ts les points d'arrêt</STRING>
+			<SHORT_STRING>Supprimer tous les points d'arrêt</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_WATCH_LOCALS">
+			<STRING>Éditeur de script : Observer les variables locales</STRING>
+			<SHORT_STRING>Observer les variables locales</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_WATCH_STATICS">
+			<STRING>Éditeur de script : Observer les variables statiques</STRING>
+			<SHORT_STRING>Observer les variables statiques</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_WATCH_TRIGGERS">
+			<STRING>Éditeur de script : Observer les déclencheurs</STRING>
+			<SHORT_STRING>Observer les déclencheurs</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_WATCH_CUSTOM">
+			<STRING>Éditeur de script : Observation personnalisée</STRING>
+			<SHORT_STRING>Observation personnalisée</SHORT_STRING>
+		</KEY>
+		<KEY enum="MENU_WATCH_RETURNS">
+			<STRING>Éditeur de script : observer les valeurs renvoyées</STRING>
+			<SHORT_STRING>Observer valeurs renvoyées</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ARMORY_FLAME">
+			<STRING>Caserne : Créer lance-flammes</STRING>
+			<SHORT_STRING>Créer lance-flammes</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SIEGEFACTORY_AA">
+			<STRING>Usine : Créer canon D.C.A.</STRING>
+			<SHORT_STRING>Créer canon D.C.A.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SIEGEFACTORY_AA_UPGRADE">
+			<STRING>Usine : Améliorer canon D.C.A.</STRING>
+			<SHORT_STRING>Améliorer canon D.C.A.</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SCHOLAR_TO_ARMS">
+			<STRING>Savant : Armer</STRING>
+			<SHORT_STRING>Armer</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SILO_GROUND">
+			<STRING>Silo de missiles : attaquer le sol</STRING>
+			<SHORT_STRING>Attaquer sol</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_RUN_SECTION_PROFILE">
+			<STRING>SYSTEM_RUN_SECTION_PROFILE</STRING>
+			<SHORT_STRING>SYSTEM_RUN_SECTION_PROFILE</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_SHOW_SECTION_PROFILE">
+			<STRING>SYSTEM_SHOW_SECTION_PROFILE</STRING>
+			<SHORT_STRING>SYSTEM_SHOW_SECTION_PROFILE</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_FORT">
+			<STRING>Find Fort</STRING>
+			<SHORT_STRING>Find Fort</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_FORT_NOZOOM">
+			<STRING>Select Fort, No Zoom</STRING>
+			<SHORT_STRING>Select Fort, No Zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_FORT_ALL">
+			<STRING>Select All Forts</STRING>
+			<SHORT_STRING>Select All Forts</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_TOWER">
+			<STRING>Find Tower</STRING>
+			<SHORT_STRING>Find Tower</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_TOWER_NOZOOM">
+			<STRING>Select Tower, No Zoom</STRING>
+			<SHORT_STRING>Select Tower, No Zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_TOWER_ALL">
+			<STRING>Select All Towers</STRING>
+			<SHORT_STRING>Select All Towers</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SENATE">
+			<STRING>Find Senate</STRING>
+			<SHORT_STRING>Find Senate</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_SENATE_NOZOOM">
+			<STRING>Select Senate, No Zoom</STRING>
+			<SHORT_STRING>Select Senate, No Zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_TEMPLE">
+			<STRING>Find Temple</STRING>
+			<SHORT_STRING>Find Temple</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_TEMPLE_NOZOOM">
+			<STRING>Select Temple, No Zoom</STRING>
+			<SHORT_STRING>Select Temple, No Zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_TEMPLE_ALL">
+			<STRING>Select All Temples</STRING>
+			<SHORT_STRING>Select All Temples</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_MERCHANT">
+			<STRING>Find Idle Merchant</STRING>
+			<SHORT_STRING>Find Idle Merchant</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_MERCHANT_NOZOOM">
+			<STRING>Select Idle Merchant, No Zoom</STRING>
+			<SHORT_STRING>Select Idle Merchant, No Zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_MERCHANT">
+			<STRING>Select All Idle Merchants</STRING>
+			<SHORT_STRING>Select All Idle Merchants</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_FISHERMAN">
+			<STRING>Find Idle Fisherman</STRING>
+			<SHORT_STRING>Find Idle Fisherman</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_FISHERMAN_NOZOOM">
+			<STRING>Select Idle Fisherman, No Zoom</STRING>
+			<SHORT_STRING>Select Idle Fisherman, No Zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_ALL_FISHERMAN">
+			<STRING>Select All Idle Fishermen</STRING>
+			<SHORT_STRING>Select All Idle Fishermen</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_PATRIOT">
+			<STRING>Select Patriot</STRING>
+			<SHORT_STRING>Select Patriot</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_CYCLE_PATRIOT_NOZOOM">
+			<STRING>Select Patriot, No Zoom</STRING>
+			<SHORT_STRING>Select Patriot, No Zoom</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_SELECT_DAMAGED">
+			<STRING>Select All Damaged Units</STRING>
+			<SHORT_STRING>Select All Damaged Units</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FILTER_DAMAGED">
+			<STRING>Filter Selection for Damaged Units</STRING>
+			<SHORT_STRING>Filter Selection for Damaged Units</SHORT_STRING>
+		</KEY>
+		<KEY enum="OPTION_FILTER_ONSCREEN">
+			<STRING>Filter Selection for Units on Screen</STRING>
+			<SHORT_STRING>Filter Selection for Units on Screen</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_MARWAN_START">
+			<STRING>SYSTEM_MARWAN_START</STRING>
+			<SHORT_STRING>SYSTEM_MARWAN_START</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_MARWAN_STOP">
+			<STRING>SYSTEM_MARWAN_STOP</STRING>
+			<SHORT_STRING>SYSTEM_MARWAN_STOP</SHORT_STRING>
+		</KEY>
+		<KEY enum="SYSTEM_HILITE_UP"><STRING>SYSTEM_HILITE_UP</STRING><SHORT_STRING>SYSTEM_HILITE_UP</SHORT_STRING></KEY><KEY enum="SYSTEM_HILITE_DOWN"><STRING>SYSTEM_HILITE_DOWN</STRING><SHORT_STRING>SYSTEM_HILITE_DOWN</SHORT_STRING></KEY><KEY enum="OPTION_BUILD_SENATE"><STRING>Build Senate</STRING><SHORT_STRING>Build Senate</SHORT_STRING></KEY><KEY enum="MENU_h"><STRING>MENU_h</STRING><SHORT_STRING>MENU_h</SHORT_STRING></KEY></KEYS>
+</ROOT>

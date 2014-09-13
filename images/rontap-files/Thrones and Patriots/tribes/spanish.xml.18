@@ -1,0 +1,47 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="스페인">
+	<LEADERS>
+		<LEADER>펠리페 2세</LEADER>
+		<LEADER>이사벨라 여왕</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>마드리드</CITY>
+		<CITY>톨레도</CITY>
+		<CITY>세비야</CITY>
+		<CITY>코르도바</CITY>
+		<CITY>카디스</CITY>
+		<CITY>카스티야</CITY>
+		<CITY>사라고사</CITY>
+		<CITY>바르셀로나</CITY>
+		<CITY>발렌시아</CITY>
+		<CITY>말라가</CITY>
+		<CITY>살라망카</CITY>
+		<CITY>바야돌리드</CITY>
+		<CITY>부르고스</CITY>
+		<CITY>레온</CITY>
+		<CITY>시우다드 레알</CITY>
+		<CITY>비고</CITY>
+		<CITY>코루나</CITY>
+		<CITY>오비에도</CITY>
+		<CITY>빌바오</CITY>
+		<CITY>팜플로나</CITY>
+		<CITY>무르시아</CITY>
+		<CITY>그라나다</CITY>
+		<CITY>산탄데르</CITY>
+		<CITY>아랑후에스</CITY>
+		<CITY>알만자</CITY>
+		<CITY>알리칸테</CITY>
+		<CITY>오수나</CITY>
+		<CITY>알헤시라스</CITY>
+		<CITY>알메이라</CITY>
+		<CITY>세고비아</CITY>
+		<CITY>바다호스</CITY>
+		<CITY>탈라베라</CITY>
+		<CITY>비토리아</CITY>
+		<CITY>헤레즈</CITY>
+		<CITY>히혼</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

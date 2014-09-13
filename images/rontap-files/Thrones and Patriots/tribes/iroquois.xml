@@ -1,0 +1,50 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by XMLSPY 5 Professional Ed. Release 2, Installed Multi for 15 users (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Iroquois">
+	<LEADERS>
+		<LEADER>Tadodaho</LEADER>
+		<LEADER>Seneca</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Onondaga</CITY>
+		<CITY>Saratoga</CITY>
+		<CITY>Cayuga</CITY>
+		<CITY>Seneca</CITY>
+		<CITY>Mohawk</CITY>
+		<CITY>Oneida</CITY>
+		<CITY>Toronto</CITY>
+		<CITY>Thiohero</CITY>
+		<CITY>Onnontare</CITY>
+		<CITY>Honeoye </CITY>
+		<CITY>Owego</CITY>
+		<CITY>Tioga</CITY>
+		<CITY>Ganogeh</CITY>
+		<CITY>Kawauka</CITY>
+		<CITY>Canajoharie</CITY>
+		<CITY>Canienga</CITY>
+		<CITY>Nondas</CITY>
+		<CITY>Nowadaga</CITY>
+		<CITY>Osquake</CITY>
+		<CITY>Tewanondadon</CITY>
+		<CITY>Unadilla</CITY>
+		<CITY>Awegen</CITY>
+		<CITY>Chittenango</CITY>
+		<CITY>Cowassalon</CITY>
+		<CITY>Ganadoga</CITY>
+		<CITY>Oriska</CITY>
+		<CITY>Ossewingo</CITY>
+		<CITY>Gadoquat</CITY>
+		<CITY>Cattaraugus</CITY>
+		<CITY>Chemung</CITY>
+		<CITY>Ganos</CITY>
+		<CITY>Gistaquat</CITY>
+		<CITY>Kashong</CITY>
+		<CITY>Kaygen</CITY>
+		<CITY>Oatka</CITY>
+		<CITY>Onoyut</CITY>
+		<CITY>Kanagiro</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>4 Iroquois</UNIT_CONTINENT>
+	<BUILD_CONTINENT>6 Iroquois</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>6 Iroquois</BACKUP_BUILD_CONTINENT>
+</TRIBE>

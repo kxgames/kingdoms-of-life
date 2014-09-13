@@ -76,7 +76,7 @@ class Gui (kxg.Actor):
         self.teardown_pregame()
 
         viewport = glooey.Viewport()
-        map_widget = MapWidget(self.world)
+        map_widget = MapWidget(self, self.world.map)
 
         self.gui.add(viewport)
         viewport.add(map_widget)
@@ -114,11 +114,11 @@ class Gui (kxg.Actor):
 
 class MapWidget (glooey.Widget):
 
-    def __init__(self, world):
+    def __init__(self, gui, map):
         super(MapWidget, self).__init__()
 
-        self.world = world
-        self.map = world.map
+        self.gui = gui
+        self.map = map
         self.sprites = []
 
         tileset_path = 'images/open-game-art/outdoor-tileset.png'
@@ -276,6 +276,31 @@ class MapExtension:
 
         map.setup.connect(self.setup)
         map.setup.disconnect()
+
+    def on_mouse_release(self, x, y, button, modifiers):
+        if button == 4:
+            # Right click
+            col, row = self.pixel_to_index_coordinates(x, y)
+            tile = self.map[row,col]
+            position = vecrec.Vector(col, row)
+
+            if tile.terrain == 'land':
+                printf('Building City at index {}', position)
+                #message = messages.CreateCity(self.gui.player, position)
+
+            else:
+                printf('Cannot build city in the {}', tile.terrain)
+
+    def pixel_to_index_coordinates(self, x, y):
+        i = math.floor(x / self.tile_width)
+        j = math.floor((self.rect.height - y) / self.tile_height)
+
+        if x == self.map.columns:
+            i -=1
+        if y == 0:
+            j -=1
+
+        return i,j
 
 
 

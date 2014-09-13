@@ -1,0 +1,61 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="ローマ">
+	<LEADERS>
+		<LEADER>ユリウス カエサル</LEADER>
+		<LEADER>皇帝アウグストゥス </LEADER>
+		<LEADER>皇帝トラヤヌス</LEADER>
+		<LEADER>皇帝マルクス アウレリウス</LEADER>
+		<LEADER>皇帝ハドリアヌス</LEADER>
+		<LEADER>皇帝クラウディウス</LEADER>
+		<LEADER>皇帝コンスタンティヌス</LEADER>
+		<LEADER>皇帝ユスティニアヌス</LEADER>
+		<LEADER>女帝テオドラ</LEADER>
+		<LEADER>女帝リウィア</LEADER>
+		<LEADER>女帝ウィビア サビーナ</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>ローマ</CITY>
+		<CITY>コンスタンティノープル</CITY>
+		<CITY>クマイ</CITY>
+		<CITY>アンティウム</CITY>
+		<CITY>カエサルアウグスタ</CITY>
+		<CITY>ウェイイ</CITY>
+		<CITY>ブルンディジウム</CITY>
+		<CITY>アンコーナ</CITY>
+		<CITY>アレティウム</CITY>
+		<CITY>レギウム</CITY>
+		<CITY>ネアポリス</CITY>
+		<CITY>コルフィニウム</CITY>
+		<CITY>ルカ</CITY>
+		<CITY>ジェノヴァ</CITY>
+		<CITY>コサ</CITY>
+		<CITY>ピサエ</CITY>
+		<CITY>パルマ</CITY>
+		<CITY>ブクセントゥム</CITY>
+		<CITY>サートゥルニア</CITY>
+		<CITY>スポレティウム</CITY>
+		<CITY>クロトナ</CITY>
+		<CITY>アクアエ セクスティアエ</CITY>
+		<CITY>ルグドゥヌム</CITY>
+		<CITY>アウァリクム</CITY>
+		<CITY>アクイレイア</CITY>
+		<CITY>メディオラヌム</CITY>
+		<CITY>クレモナ</CITY>
+		<CITY>ムティナ</CITY>
+		<CITY>ディラキウム</CITY>
+		<CITY>ペルーシア</CITY>
+		<CITY>ベネウェントゥム</CITY>
+		<CITY>エメ リタ アウグスタ</CITY>
+		<CITY>ウィンドボナ</CITY>
+		<CITY>ドゥロコルトルム</CITY>
+		<CITY>コロニア アグリッピナ</CITY>
+		<CITY>ケントゥムケラエ</CITY>
+		<CITY>ボノニア</CITY>
+		<CITY>アリミヌム</CITY>
+		<CITY>ケメネルム</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

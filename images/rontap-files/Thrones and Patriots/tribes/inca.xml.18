@@ -1,0 +1,51 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="잉카">
+	<LEADERS>
+		<LEADER>만코카팍 황제</LEADER>
+		<LEADER>비라코챠 잉카 황제</LEADER>
+		<LEADER>파차쿠티 황제</LEADER>
+		<LEADER>투파크 잉카 황제</LEADER>
+		<LEADER>와이나 카파크 황제</LEADER>
+		<LEADER>우아스카르 황제</LEADER>
+		<LEADER>아타우알파 황제</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>쿠스코</CITY>
+		<CITY>찬찬</CITY>
+		<CITY>키토</CITY>
+		<CITY>빌카슈아만</CITY>
+		<CITY>아야비리</CITY>
+		<CITY>추쿠이토</CITY>
+		<CITY>우아누코 팜파</CITY>
+		<CITY>카하마르카</CITY>
+		<CITY>쿠시밤바</CITY>
+		<CITY>툼베스</CITY>
+		<CITY>토메밤바</CITY>
+		<CITY>마추픽추</CITY>
+		<CITY>푸카라</CITY>
+		<CITY>오얀따이땀보</CITY>
+		<CITY>티아우아나코</CITY>
+		<CITY>리마탐보</CITY>
+		<CITY>잉카우아시</CITY>
+		<CITY>파차카막</CITY>
+		<CITY>봄본</CITY>
+		<CITY>우아누코</CITY>
+		<CITY>쿠엥카</CITY>
+		<CITY>피킬타</CITY>
+		<CITY>나스카</CITY>
+		<CITY>아산카로</CITY>
+		<CITY>우아마추코</CITY>
+		<CITY>코차밤바</CITY>
+		<CITY>아툰코야</CITY>
+		<CITY>코토파치</CITY>
+		<CITY>락치</CITY>
+		<CITY>우아라스  </CITY>
+		<CITY>빌카콩가</CITY>
+		<CITY>아야쿠초</CITY>
+		<CITY>하우하</CITY>
+		<CITY>우아일라스</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+	<BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

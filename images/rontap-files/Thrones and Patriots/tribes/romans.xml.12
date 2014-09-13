@@ -1,0 +1,61 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Romains">
+	<LEADERS>
+		<LEADER>Jules César</LEADER>
+		<LEADER>Empereur Auguste </LEADER>
+		<LEADER>Empereur Trajan</LEADER>
+		<LEADER>Empereur Marc Aurèle</LEADER>
+		<LEADER>Empereur Hadrien</LEADER>
+		<LEADER>Empereur Claude</LEADER>
+		<LEADER>Empereur Constantin</LEADER>
+		<LEADER>Empereur Justinien</LEADER>
+		<LEADER>Impératrice Théodora</LEADER>
+		<LEADER>Impératrice Livie</LEADER>
+		<LEADER>Impératrice Vibia Sabina</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Rome</CITY>
+		<CITY>Constantinople</CITY>
+		<CITY>Cumes</CITY>
+		<CITY>Antium</CITY>
+		<CITY>Caesaraugusta</CITY>
+		<CITY>Veii</CITY>
+		<CITY>Brindisi</CITY>
+		<CITY>Ancône</CITY>
+		<CITY>Arrétium</CITY>
+		<CITY>Rhégium</CITY>
+		<CITY>Néapolis</CITY>
+		<CITY>Corfinium</CITY>
+		<CITY>Lucques</CITY>
+		<CITY>Gênes</CITY>
+		<CITY>Cosa</CITY>
+		<CITY>Pise</CITY>
+		<CITY>Parme</CITY>
+		<CITY>Buxentum</CITY>
+		<CITY>Saturnia</CITY>
+		<CITY>Spolète</CITY>
+		<CITY>Crotone</CITY>
+		<CITY>Aquæ Sextiæ</CITY>
+		<CITY>Lugdunum</CITY>
+		<CITY>Avaricum</CITY>
+		<CITY>Aquilée</CITY>
+		<CITY>Médiolanum</CITY>
+		<CITY>Crémone</CITY>
+		<CITY>Mutina</CITY>
+		<CITY>Dyrrhachium</CITY>
+		<CITY>Pérouse</CITY>
+		<CITY>Bénévent</CITY>
+		<CITY>Émérita Augusta</CITY>
+		<CITY>Vindobona</CITY>
+		<CITY>Durocortorum</CITY>
+		<CITY>Colonia Agrippina</CITY>
+		<CITY>Centumcellae</CITY>
+		<CITY>Bononia</CITY>
+		<CITY>Ariminum</CITY>
+		<CITY>Céménélum</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 European</UNIT_CONTINENT>
+	<BUILD_CONTINENT>0 Med</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>0 Med</BACKUP_BUILD_CONTINENT>
+</TRIBE>

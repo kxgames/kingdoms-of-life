@@ -586,6 +586,8 @@ class Map (kxg.Token):
         return '<Map w={} h={}>'.format(self.columns, self.rows)
 
     def __getitem__(self, index):
+        # index is (row, col)
+        # y, x ~ row, col
         return self.tiles[index]
 
     def setup(self, world):

@@ -1,0 +1,45 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Egyptians">
+  <LEADERS>
+    <LEADER>Hamilcar</LEADER>
+    <LEADER>Bomilcar</LEADER>
+    <LEADER>Thibron</LEADER>
+    <LEADER>Ophellas</LEADER>
+    <LEADER>Masinissa</LEADER>
+    <LEADER>Hanno</LEADER>
+    <LEADER>Gisco</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Pi-Ramesses</CITY>
+    <CITY>El-Lisht</CITY>
+    <CITY>El-Amarna</CITY>
+    <CITY>Edfu</CITY>
+    <CITY>Elephantine</CITY>
+    <CITY>Asyut</CITY>
+    <CITY>Saqqara</CITY>
+    <CITY>Sais</CITY>
+    <CITY>Buto</CITY>
+    <CITY>Raqote</CITY>
+    <CITY>Bubastis</CITY>
+    <CITY>Tanis</CITY>
+    <CITY>Karnak</CITY>
+    <CITY>Luxor</CITY>
+    <CITY>Spermeru</CITY>
+    <CITY>Atfih</CITY>
+    <CITY>Kahun</CITY>
+    <CITY>She</CITY>
+    <CITY>Hawara</CITY>
+    <CITY>Ezbet Rushdi</CITY>
+    <CITY>Meir</CITY>
+    <CITY>Akhmim</CITY>
+    <CITY>Abydos</CITY>
+    <CITY>Sesebi</CITY>
+    <CITY>Amara</CITY>
+    <CITY>El-Sebua</CITY>
+    <CITY>Heracleopolis</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>0 Europe    </UNIT_CONTINENT>
+  <BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

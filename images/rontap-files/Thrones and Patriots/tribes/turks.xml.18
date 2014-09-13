@@ -1,0 +1,37 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="터키">
+	<LEADERS>
+		<LEADER>술레이만 1세</LEADER>
+		<LEADER>승리왕 메메드 2세</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>이스탄불</CITY>
+		<CITY>앙카라</CITY>
+		<CITY>알레포</CITY>
+		<CITY>코룸</CITY>
+		<CITY>서머나</CITY>
+		<CITY>안티오크</CITY>
+		<CITY>이즈니크</CITY>
+		<CITY>볼루</CITY>
+		<CITY>에레얼리</CITY>
+		<CITY>카르스</CITY>
+		<CITY>바바에스키</CITY>
+		<CITY>에르주름</CITY>
+		<CITY>트레비존드</CITY>
+		<CITY>이즈미트</CITY>
+		<CITY>코니아</CITY>
+		<CITY>이스파르타</CITY>
+		<CITY>갈리폴리</CITY>
+		<CITY>디야르바키르</CITY>
+		<CITY>마니사</CITY>
+		<CITY>제다</CITY>
+		<CITY>키르쿠크</CITY>
+		<CITY>하브사</CITY>
+		<CITY>칸카</CITY>
+		<CITY>카이세리</CITY>
+		<CITY>카라피나르</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>0 Europe</UNIT_CONTINENT>
+	<BUILD_CONTINENT>5 Turk</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

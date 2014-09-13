@@ -1,0 +1,53 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by user (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Persians">
+  <LEADERS>
+    <LEADER>Arsites</LEADER>
+    <LEADER>Arsamenes</LEADER>
+    <LEADER>Orontobates</LEADER>
+    <LEADER>Menander</LEADER>
+    <LEADER>Queen Ada</LEADER>
+    <LEADER>Mithanes</LEADER>
+    <LEADER>Spithridates</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Chalcedon</CITY>
+    <CITY>Heraclea Pontica</CITY>
+    <CITY>Sinope</CITY>
+    <CITY>Amisus</CITY>
+    <CITY>Zela</CITY>
+    <CITY>Nyssa</CITY>
+    <CITY>Tyanna</CITY>
+    <CITY>Soli</CITY>
+    <CITY>Tarsus</CITY>
+    <CITY>Perga</CITY>
+    <CITY>Aspendus</CITY>
+    <CITY>Mylassa</CITY>
+    <CITY>Alabanda</CITY>
+    <CITY>Caunus</CITY>
+    <CITY>Telmessus</CITY>
+    <CITY>Xanthus</CITY>
+    <CITY>Smyrna</CITY>
+    <CITY>Magnesia</CITY>
+    <CITY>Cyme</CITY>
+    <CITY>Lebedos</CITY>
+    <CITY>Marathus</CITY>
+    <CITY>Aradus</CITY>
+    <CITY>Nisibis</CITY>
+    <CITY>Carrhae</CITY>
+    <CITY>Aleppo</CITY>
+    <CITY>Emesa</CITY>
+    <CITY>Damascus</CITY>
+    <CITY>Samaria</CITY>
+    <CITY>Abu Wajnam</CITY>
+    <CITY>Erythrae</CITY>
+    <CITY>Dascylium</CITY>
+    <CITY>Ilium</CITY>
+    <CITY>Antandrus</CITY>
+    <CITY>Ancyra</CITY>
+    <CITY>Synnada</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>5 EIndian</UNIT_CONTINENT>
+  <BUILD_CONTINENT>8 EIndian</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>8 EIndian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

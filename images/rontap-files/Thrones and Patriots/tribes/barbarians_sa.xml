@@ -1,0 +1,48 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Andy Clark (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Chimu">
+	<LEADERS>
+		<LEADER>Minchancamon</LEADER>
+		<LEADER>Taycanamo</LEADER>
+		<LEADER>Naymlap</LEADER>
+		<LEADER>Nama-tigi</LEADER>
+		<LEADER>Kunu-tigi</LEADER>
+		<LEADER>Cosijoeza</LEADER>
+		<LEADER>Cosijopii</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Chan Chan</CITY>
+		<CITY>Tawantinsuyu</CITY>
+		<CITY>Chicama</CITY>
+		<CITY>Chancay</CITY>
+		<CITY>Guayaquil</CITY>
+		<CITY>Chao</CITY>
+		<CITY>Chimbote</CITY>
+		<CITY>Chepen</CITY>
+		<CITY>Chiclayo</CITY>
+		<CITY>Chota</CITY>
+		<CITY>Chachapoyas</CITY>
+		<CITY>Chulucanas</CITY>
+		<CITY>Moche</CITY>
+		<CITY>Lima</CITY>
+		<CITY>Sechin Alto</CITY>
+		<CITY>Palpa</CITY>
+		<CITY>Aspero</CITY>
+		<CITY>Huarmfy</CITY>
+		<CITY>Huari</CITY>
+		<CITY>Paracas</CITY>
+		<CITY>Tupiza</CITY>
+		<CITY>Paria</CITY>
+		<CITY>Santiago</CITY>
+		<CITY>Catarpe</CITY>
+		<CITY>Copiapo</CITY>
+		<CITY>Pachacamac</CITY>
+		<CITY>Jauja</CITY>
+		<CITY>Tomebamba</CITY>
+		<CITY>Taparaku</CITY>
+		<CITY>Huaca de los Reyes</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+	<BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>

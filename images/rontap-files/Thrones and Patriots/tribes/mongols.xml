@@ -1,0 +1,49 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Mongols">
+  <LEADERS>
+    <LEADER>Genghis Khan</LEADER>
+    <LEADER>Ogadei Khan</LEADER>
+    <LEADER>Kublai Khan</LEADER>
+    <LEADER>Batu Khan</LEADER>
+    <LEADER>Queen Mandukhai</LEADER>
+    <LEADER>Queen Chabi</LEADER>
+  </LEADERS>
+  <CITIES>
+    <CITY>Karakorum</CITY>
+    <CITY>Khanbalit</CITY>
+    <CITY>Tashkent</CITY>
+    <CITY>Samarkand</CITY>
+    <CITY>Shang-tu</CITY>
+    <CITY>Hsiliang</CITY>
+    <CITY>Kashgar</CITY>
+    <CITY>Karakhoto</CITY>
+    <CITY>Khotan</CITY>
+    <CITY>Old Sarai</CITY>
+    <CITY>Urgench</CITY>
+    <CITY>Tana</CITY>
+    <CITY>Tiflis</CITY>
+    <CITY>Merv</CITY>
+    <CITY>New Sarai</CITY>
+    <CITY>Bolgar</CITY>
+    <CITY>Khojend</CITY>
+    <CITY>Balkh</CITY>
+    <CITY>K'ai-feng</CITY>
+    <CITY>Ning Hsia</CITY>
+    <CITY>Kuldja</CITY>
+    <CITY>Peshawar</CITY>
+    <CITY>Otrar</CITY>
+    <CITY>Shash</CITY>
+    <CITY>Turfan</CITY>
+    <CITY>Beshbalik</CITY>
+    <CITY>Balasaghun</CITY>
+    <CITY>Ghazni</CITY>
+    <CITY>Kabul</CITY>
+    <CITY>Kandahar</CITY>
+    <CITY>Rai</CITY>
+    <CITY>Alamut</CITY>
+    <CITY>Azak</CITY>
+  </CITIES>
+  <UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+  <BUILD_CONTINENT>2 Asian</BUILD_CONTINENT>
+  <BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

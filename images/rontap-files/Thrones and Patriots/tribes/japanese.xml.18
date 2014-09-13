@@ -1,0 +1,54 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Brian Reynolds (Big Huge Games) -->
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="일본">
+	<LEADERS>
+		<LEADER>히미코 여왕</LEADER>
+		<LEADER>다이라 마사카도</LEADER>
+		<LEADER>미나모토 요리토모 장군</LEADER>
+		<LEADER>아시카가 타카우지 장군</LEADER>
+		<LEADER>오다 노부나가</LEADER>
+		<LEADER>도쿠가와 이예야스 장군</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>교토</CITY>
+		<CITY>나라</CITY>
+		<CITY>나고야</CITY>
+		<CITY>오사카</CITY>
+		<CITY>후시미</CITY>
+		<CITY>히메지</CITY>
+		<CITY>히라도</CITY>
+		<CITY>히라이즈미</CITY>
+		<CITY>히로사키</CITY>
+		<CITY>이세</CITY>
+		<CITY>이즈모</CITY>
+		<CITY>카나자와</CITY>
+		<CITY>고쿠라</CITY>
+		<CITY>고베</CITY>
+		<CITY>쿠마모토</CITY>
+		<CITY>마쓰에</CITY>
+		<CITY>마쓰모토</CITY>
+		<CITY>마쓰야마</CITY>
+		<CITY>미토</CITY>
+		<CITY>미야코노조</CITY>
+		<CITY>니가타</CITY>
+		<CITY>노시로</CITY>
+		<CITY>오다와라</CITY>
+		<CITY>오가키</CITY>
+		<CITY>오오츠</CITY>
+		<CITY>사카이</CITY>
+		<CITY>센다이</CITY>
+		<CITY>시모다</CITY>
+		<CITY>시모노세키</CITY>
+		<CITY>다카마쓰</CITY>
+		<CITY>도쿠시마</CITY>
+		<CITY>우라가</CITY>
+		<CITY>우와지마</CITY>
+		<CITY>야마구치</CITY>
+		<CITY>요코하마</CITY>
+		<CITY>요나고</CITY>
+		<CITY>요네자와</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>3 Asian   </UNIT_CONTINENT>
+	<BUILD_CONTINENT>2 Asian</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>2 Asian</BACKUP_BUILD_CONTINENT>
+</TRIBE>

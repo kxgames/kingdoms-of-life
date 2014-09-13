@@ -1,0 +1,46 @@
+<!-- LOCALIZATION: LEADER and CITY elements; also, name attribute -->
+<TRIBE name="Maya">
+	<LEADERS>
+		<LEADER>Pacal</LEADER>
+		<LEADER>Chac Balam</LEADER>
+		<LEADER>Chiam</LEADER>
+		<LEADER>Ahmok</LEADER>
+		<LEADER>Vakaki</LEADER>
+		<LEADER>Nachancán</LEADER>
+	</LEADERS>
+	<CITIES>
+		<CITY>Mayapán</CITY>
+		<CITY>Tikal</CITY>
+		<CITY>Chichén Itzá</CITY>
+		<CITY>Dzibilchaltun</CITY>
+		<CITY>Yaxha</CITY>
+		<CITY>Acanceh</CITY>
+		<CITY>Champotón</CITY>
+		<CITY>Altun Ha</CITY>
+		<CITY>Ichpaatun</CITY>
+		<CITY>Ixkun</CITY>
+		<CITY>Lamanai</CITY>
+		<CITY>Copán</CITY>
+		<CITY>Tzimin Kax</CITY>
+		<CITY>Xpuhil</CITY>
+		<CITY>Yaxuna</CITY>
+		<CITY>Uxmal</CITY>
+		<CITY>Tipu</CITY>
+		<CITY>Ucanal</CITY>
+		<CITY>Becan</CITY>
+		<CITY>Kaminaljuyu</CITY>
+		<CITY>Xicalango</CITY>
+		<CITY>Xcocha</CITY>
+		<CITY>Dzibilnocac</CITY>
+		<CITY>Chutixtiox</CITY>
+		<CITY>Uaxactún</CITY>
+		<CITY>Tayasal</CITY>
+		<CITY>Zaculeu</CITY>
+		<CITY>Iximche</CITY>
+		<CITY>Acalán</CITY>
+		<CITY>Tulum</CITY>
+	</CITIES>
+	<UNIT_CONTINENT>2 American</UNIT_CONTINENT>
+	<BUILD_CONTINENT>4 American</BUILD_CONTINENT>
+	<BACKUP_BUILD_CONTINENT>4 American</BACKUP_BUILD_CONTINENT>
+</TRIBE>
