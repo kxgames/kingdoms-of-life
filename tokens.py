@@ -118,8 +118,11 @@ class Player (kxg.Token):
 class Map (kxg.Token):
 
     terrains = {    # (fold)
-            (0, 255, 0): 'land',
-            (0, 0, 255): 'sea'
+            (  0,   0, 255): 'water',
+            (100,  50,   0): 'dirt',
+            (  0, 255,   0): 'grass',
+            (255, 255,   0): 'desert',
+            (255, 255, 255): 'tundra',
     }
 
 
@@ -129,6 +132,9 @@ class Map (kxg.Token):
         self.tiles = {}
         self.graphs = {}
         self.rows, self.columns = 0, 0
+
+    def __extend__(self):
+        return {gui.Gui: gui.MapExtension}
 
     def __str__(self):
         return '<Map w={} h={}>'.format(self.columns, self.rows)
@@ -265,5 +271,9 @@ class Tile:
     def is_sea(self):
         return self.terrain == 'sea'
 
+
+
+class Species:
+    pass
 
 

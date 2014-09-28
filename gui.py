@@ -21,6 +21,11 @@ from kxg.tools import printf
 from vecrec import Vector
 
 
+# Annoyances
+# ==========
+# 1. The token extension and the game widget get created at different times, 
+#    and it makes it hard to initialize either one.
+
 class Gui (kxg.Actor):
 
     def __init__(self, window):
@@ -75,11 +80,10 @@ class Gui (kxg.Actor):
         self.teardown_pregame()
 
         viewport = glooey.Viewport()
-        map_widget = MapWidget(self, self.world.map)
-
+        self.widget = GameWidget(self, self.world)
         self.gui.add(viewport)
-        viewport.add(map_widget)
-        viewport.set_center_of_view(map_widget.rect.center)
+        viewport.add(self.widget)
+        viewport.set_center_of_view(self.widget.rect.center)
 
     def setup_postgame(self):
         pass
@@ -108,113 +112,133 @@ class Gui (kxg.Actor):
         self.setup_game()
 
 
-class MapWidget (glooey.Widget):
+class GameWidget (glooey.Widget):
+
+    def __init__(self, gui, world):
+        super(GameWidget, self).__init__()
+        self.gui = gui
+        self.world = world
+
+    def claim(self):
+        self.min_width = self.world.map.get_extension(self.gui).rect.width
+        self.min_height = self.world.map.get_extension(self.gui).rect.height
+
+    def draw(self):
+        self.world.map.get_extension(self.gui).draw()
+
+
+class MapExtension:
+
+    class NoBleedingGroup(pyglet.graphics.Group):
+
+        def __init__(self, parent=None):
+            super(MapExtension.NoBleedingGroup, self).__init__(parent)
+
+        def set_state(self):
+            import pyglet.gl as gl
+            gl.glEnable(gl.GL_TEXTURE_2D)
+            gl.glTexParameteri(
+                    gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_NEAREST)
+
+        def unset_state(self):
+            import pyglet.gl as gl
+            gl.glDisable(gl.GL_TEXTURE_2D)
+
 
     def __init__(self, gui, map):
-        super(MapWidget, self).__init__()
-
         self.gui = gui
         self.map = map
-        self.sprites = []
+        self.sprites = []   # Just for preventing garbage collection.
 
-        tileset_path = 'images/tilesets/outdoor-tileset.png'
+        tileset_path = 'images/tilesets/terrain.png'
         tileset_image = pyglet.resource.image(tileset_path)
         
-        self.tileset = pyglet.image.ImageGrid(tileset_image, 6, 16)
+        self.tileset = pyglet.image.ImageGrid(tileset_image, 32, 32)
         self.tile_width = self.tileset[0].width
         self.tile_height = self.tileset[0].height
 
-    def claim(self):
-        self.min_width = self.tile_width * (self.map.columns - 1)
-        self.min_height = self.tile_height * (self.map.rows - 1)
+        width = self.tile_width * (self.map.columns - 1)
+        height = self.tile_height * (self.map.rows - 1)
+
+        self.rect = vecrec.Rect.from_size(width, height)
 
     def draw(self):
-        self.draw_map()
-        self.draw_resources()
+        self.ocean_group = self.gui.widget.group
+        self.land_group = MapExtension.NoBleedingGroup(self.gui.widget.group)
 
-    def draw_map(self):
+        self.draw_ocean()
+        self.draw_land()
+
+    def draw_ocean(self):
+        color = glooey.drawing.Color.from_hex('#156C99')
+        sprite = glooey.drawing.draw_rectangle(
+                self.gui.widget.rect, color=color,
+                batch=self.gui.widget.batch, group=self.ocean_group)
+        self.sprites.append(sprite)
+
+    def draw_land(self):
+        desert_indices = self.index_terrain(20, 18)
+        tundra_indices = self.index_terrain(14, 18)
+        shore_indices = self.index_terrain(26, 27)
+        grass_indices = self.index_terrain(20, 3)
+        dirt_indices = self.index_terrain(26, 0)
+
+        self.draw_terrain(dirt_indices, lambda x: x != 'water')
+        self.draw_terrain(desert_indices, lambda x: x == 'desert')
+        self.draw_terrain(tundra_indices, lambda x: x == 'tundra')
+        self.draw_terrain(grass_indices, lambda x: x == 'grass')
+        self.draw_terrain(shore_indices, lambda x: x == 'water')
+
+    def draw_terrain(self, indices, condition):
         for row in range(self.map.rows - 1):
             for col in range(self.map.columns - 1):
-                terrains = (
-                    self.map.tiles[row + 0, col + 0].terrain, # top left
-                    self.map.tiles[row + 1, col + 0].terrain, # bottom left
-                    self.map.tiles[row + 1, col + 1].terrain, # bottom right
-                    self.map.tiles[row + 0, col + 1].terrain, # top right
+                corners = [
+                        (row + 0, col + 0), # top left
+                        (row + 1, col + 0), # bottom left
+                        (row + 1, col + 1), # bottom right
+                        (row + 0, col + 1), # top right
+                ]
+                terrains = [
+                        self.map.tiles[corner].terrain
+                        for corner in corners
+                ]
+                key = ''.join(
+                        'x' if condition(terrain) else ' '
+                        for terrain in terrains
                 )
 
-                # 4 land
-
-                if terrains == ('land', 'land', 'land', 'land'):
-                            # empty, flower,  grass,  grass,  grass
-                    indices = (4,1), (4,10), (4,11), (5,10), (5,11)
-                    weights =    80,      0,      1,      1,      1
-                    index = kxg.tools.weighted_choice(indices, weights)
-
-                # 3 land, 1 sea
-
-                elif terrains == ('land', 'land', 'land', 'sea'):
-                    index = 4, 3
-
-                elif terrains == ('land', 'land', 'sea', 'land'):
-                    index = 5, 3
-
-                elif terrains == ('land', 'sea', 'land', 'land'):
-                    index = 5, 4
-
-                elif terrains == ('sea', 'land', 'land', 'land'):
-                    index = 4, 4
-
-                # 2 land, 2 sea
-
-                elif terrains == ('land', 'land', 'sea', 'sea'):
-                    index = 4, 2
-
-                elif terrains == ('land', 'sea', 'sea', 'land'):
-                    index = 3, 1
-
-                elif terrains == ('sea', 'sea', 'land', 'land'):
-                    index = 4, 0
-
-                elif terrains == ('sea', 'land', 'land', 'sea'):
-                    index = 5, 1
-
-                # 1 land, 3 sea
-
-                elif terrains == ('land', 'sea', 'sea', 'sea'):
-                    index = 3, 2
-
-                elif terrains == ('sea', 'sea', 'sea', 'land'):
-                    index = 3, 0
-
-                elif terrains == ('sea', 'sea', 'land', 'sea'):
-                    index = 5, 0
-
-                elif terrains == ('sea', 'land', 'sea', 'sea'):
-                    index = 5, 2
-
-                # 4 sea
-
-                elif terrains == ('sea', 'sea', 'sea', 'sea'):
-                    index = 3, 3
-
-                # Diagonal combinations of 2 land and 2 sea are not supported.  
-
-                else:
-                    printf('Unsupported tile at {}x{}', row, col)
-                    continue
-
+                index = indices.get(key)
                 x, y = self.get_pixel_coords(col, row)
+
+                if index is None:
+                    continue
 
                 # It seems like I have to keep references to all my sprites in 
                 # order to keep them from getting garbage collected.
 
                 image = self.tileset[index]
                 sprite = pyglet.sprite.Sprite(
-                        image, x, y, batch=self.batch, group=self.group)
+                        image, x, y,
+                        batch=self.gui.widget.batch,
+                        group=self.land_group)
                 self.sprites.append(sprite)
 
-    def draw_resources(self):
-        pass
+    def index_terrain(self, row, col):
+        return {
+                'xxxx': (row + 2, col + 1),
+                'xxx ': (row + 4, col + 1),
+                'xx x': (row + 5, col + 1),
+                'x xx': (row + 5, col + 2),
+                ' xxx': (row + 4, col + 2),
+                'xx  ': (row + 2, col + 2),
+                'x  x': (row + 1, col + 1),
+                '  xx': (row + 2, col + 0),
+                ' xx ': (row + 3, col + 1),
+                '   x': (row + 1, col + 0),
+                '  x ': (row + 3, col + 0),
+                ' x  ': (row + 3, col + 2),
+                'x   ': (row + 1, col + 2),
+        }
 
     @vecrec.accept_anything_as_vector
     def get_world_coords(self, pixel_coords):
@@ -229,38 +253,8 @@ class MapWidget (glooey.Widget):
         return Vector(x, y)
 
 
-class MapExtension:
+class SpeciesExtension:
 
-    def setup(gui):
-        map = gui.world.map
-
-        map.setup.connect(self.setup)
-        map.setup.disconnect()
-
-    def on_mouse_release(self, x, y, button, modifiers):
-        if button == 4:
-            # Right click
-            col, row = self.pixel_to_index_coordinates(x, y)
-            tile = self.map[row,col]
-            position = vecrec.Vector(col, row)
-
-            if tile.terrain == 'land':
-                printf('Building City at index {}', position)
-                #message = messages.CreateCity(self.gui.player, position)
-
-            else:
-                printf('Cannot build city in the {}', tile.terrain)
-
-    def pixel_to_index_coordinates(self, x, y):
-        i = math.floor(x / self.tile_width)
-        j = math.floor((self.rect.height - y) / self.tile_height)
-
-        if x == self.map.columns:
-            i -=1
-        if y == 0:
-            j -=1
-
-        return i,j
-
-
+    def __init__(self, gui, species):
+        self.species = species
 
