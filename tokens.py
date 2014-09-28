@@ -117,7 +117,7 @@ class Player (kxg.Token):
 
 class Map (kxg.Token):
 
-    terrains = {    # (fold)
+    climates = {    # (fold)
             (  0,   0, 255): 'water',
             (100,  50,   0): 'dirt',
             (  0, 255,   0): 'grass',
@@ -156,8 +156,8 @@ class Map (kxg.Token):
 
         for row, col in self.yield_indices():
             pixel = image.getpixel((col, row))
-            terrain = Map.terrains[pixel]
-            self.tiles[row, col] = Tile(row, col, terrain)
+            climate = Map.climates[pixel]
+            self.tiles[row, col] = Tile(row, col, climate)
     
     def setup_graphs(self):
         # Connect the tiles into graph structures that can easily be searched 
@@ -240,13 +240,13 @@ class Map (kxg.Token):
 
 class Tile:
 
-    def __init__(self, row, col, terrain):
+    def __init__(self, row, col, climate):
         self.row, self.col = row, col
-        self.terrain = terrain
-        self.resource = None
+        self.climate = climate
+        self.families = {}
     
     def __str__(self):
-        msg = '<Tile row={0.row} col={0.col} terrain={0.terrain}'
+        msg = '<Tile row={0.row} col={0.col} climate={0.climate}'
         if self.resource is not None: msg += ' resource={0.resource}'
         msg += '>'
         return msg.format(self)
@@ -265,11 +265,11 @@ class Tile:
 
     @property
     def is_land(self):
-        return self.terrain == 'land'
+        return self.climate == 'land'
 
     @property
     def is_sea(self):
-        return self.terrain == 'sea'
+        return self.climate == 'sea'
 
 
 

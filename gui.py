@@ -177,11 +177,11 @@ class MapExtension:
         self.sprites.append(sprite)
 
     def draw_land(self):
-        desert_indices = self.index_terrain(20, 18)
-        tundra_indices = self.index_terrain(14, 18)
-        shore_indices = self.index_terrain(26, 27)
-        grass_indices = self.index_terrain(20, 3)
-        dirt_indices = self.index_terrain(26, 0)
+        desert_indices = self.index_climate(20, 18)
+        tundra_indices = self.index_climate(14, 18)
+        shore_indices = self.index_climate(26, 27)
+        grass_indices = self.index_climate(20, 3)
+        dirt_indices = self.index_climate(26, 0)
 
         self.draw_terrain(dirt_indices, lambda x: x != 'water')
         self.draw_terrain(desert_indices, lambda x: x == 'desert')
@@ -198,13 +198,13 @@ class MapExtension:
                         (row + 1, col + 1), # bottom right
                         (row + 0, col + 1), # top right
                 ]
-                terrains = [
-                        self.map.tiles[corner].terrain
+                climates = [
+                        self.map.tiles[corner].climate
                         for corner in corners
                 ]
                 key = ''.join(
-                        'x' if condition(terrain) else ' '
-                        for terrain in terrains
+                        'x' if condition(climate) else ' '
+                        for climate in climates
                 )
 
                 index = indices.get(key)
@@ -223,7 +223,7 @@ class MapExtension:
                         group=self.land_group)
                 self.sprites.append(sprite)
 
-    def index_terrain(self, row, col):
+    def index_climate(self, row, col):
         return {
                 'xxxx': (row + 2, col + 1),
                 'xxx ': (row + 4, col + 1),
@@ -256,5 +256,11 @@ class MapExtension:
 class SpeciesExtension:
 
     def __init__(self, gui, species):
+        self.gui = gui
         self.species = species
+
+    def draw(self):
+        pass
+
+
 
