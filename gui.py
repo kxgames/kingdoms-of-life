@@ -50,7 +50,6 @@ class Gui (kxg.Actor):
     def postgame_finished(self):
         return self.finished
 
-
     def setup(self, world):
         self.world = world
         self.player = None
@@ -85,7 +84,6 @@ class Gui (kxg.Actor):
     def setup_postgame(self):
         pass
 
-
     def update(self, time):
         pass
 
@@ -97,7 +95,6 @@ class Gui (kxg.Actor):
         background_color = [x / 255 for x in colors['background']] + [1]
         pyglet.gl.glClearColor(*background_color)
 
-
     def teardown_pregame(self):
         self.pregame_message.delete()
 
@@ -106,7 +103,6 @@ class Gui (kxg.Actor):
 
     def teardown_postgame(self):
         pass
-
 
     def handle_start_game(self, message, is_mine):
         self.setup_game()
