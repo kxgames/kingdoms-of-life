@@ -26,7 +26,7 @@ class Gui (kxg.Actor):
     def __init__(self, window):
         kxg.Actor.__init__(self)
 
-        cursor = pyglet.image.load('images/cursor.png')
+        cursor = pyglet.image.load('images/gui/cursor.png')
         hotspot = 4, 24
 
         self.window = window
@@ -121,41 +121,12 @@ class MapWidget (glooey.Widget):
         self.map = map
         self.sprites = []
 
-        tileset_path = 'images/open-game-art/outdoor-tileset.png'
+        tileset_path = 'images/tilesets/outdoor-tileset.png'
         tileset_image = pyglet.resource.image(tileset_path)
         
         self.tileset = pyglet.image.ImageGrid(tileset_image, 6, 16)
         self.tile_width = self.tileset[0].width
         self.tile_height = self.tileset[0].height
-
-        resources_path = 'images/resource-icons.png'
-        resources_image = pyglet.resource.image(resources_path)
-
-        self.resources = pyglet.image.ImageGrid(resources_image, 4, 8)
-        self.resource_indices = {
-                'target':  (3, 0),
-                'spiral':  (2, 0),
-                'claw':    (1, 0),
-                'echelon': (3, 1),
-                'chevron': (1, 1),
-                'wave':    (0, 1),
-                'split':   (3, 2),
-                'wheel':   (2, 2),
-                'cross':   (1, 2),
-                'half':    (1, 3),
-                'quarter': (0, 3),
-                'chess':   (3, 4),
-                'pie':     (2, 4),
-                'ridge':   (1, 4),
-                'valley':  (0, 4),
-                'north':   (3, 5),
-                'south':   (2, 5),
-                'oculus':  (1, 5),
-                'moon':    (0, 5),
-                'one':     (3, 6),
-                'two':     (2, 6),
-                'three':   (1, 6),
-        }
 
     def claim(self):
         self.min_width = self.tile_width * (self.map.columns - 1)
@@ -247,14 +218,7 @@ class MapWidget (glooey.Widget):
                 self.sprites.append(sprite)
 
     def draw_resources(self):
-        for tile in self.map.resource_tiles:
-            image_index = self.resource_indices[tile.resource]
-            image = self.resources[image_index]
-            x, y = self.get_pixel_coords(tile.col, tile.row)
-
-            sprite = pyglet.sprite.Sprite(
-                    image, x, y, batch=self.batch, group=self.group)
-            self.sprites.append(sprite)
+        pass
 
     @vecrec.accept_anything_as_vector
     def get_world_coords(self, pixel_coords):

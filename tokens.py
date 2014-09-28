@@ -271,7 +271,6 @@ class Referee (kxg.Referee):
     def get_name(self):
         return 'referee'
 
-
     def setup(self, world):
         kxg.Referee.setup(self, world)
         message = messages.StartGame()
@@ -284,17 +283,11 @@ class Referee (kxg.Referee):
     def teardown(self):
         pass
 
-
     def show_error(self, message):
         print(message.error)
 
 
 class Player (kxg.Token):
-
-    # Settings (fold)
-    starting_wealth = 200
-    starting_revenue = 25
-    
 
     def __init__(self, name, color):
         kxg.Token.__init__(self)
@@ -302,19 +295,6 @@ class Player (kxg.Token):
         self.name = name
         self.color = color
         self.world = None
-        self.capitol = None
-        self.cities = []
-        self.armies = []
-        self.roads = []
-        self.battles = []
-        self.played_city = False
-        self.dead = False
-
-        self.wealth = self.starting_wealth
-        self.revenue = self.starting_revenue
-        
-        if arguments.wealthy:
-            self.wealth = 10000
 
     def __extend__(self):
         return {}
@@ -322,21 +302,11 @@ class Player (kxg.Token):
     def __str__(self):
         return '<Player name=%s>' % self.name
 
-
     def setup(self, world):
         pass
 
     def update(self, time):
-        self.revenue = self.starting_revenue
-
-        for city in self.cities:
-            self.revenue += city.get_revenue()
-        
-        self.wealth += time * self.revenue / 30
-
-        for extension in self.get_extensions():
-            extension.update_wealth()
-            extension.update_costs()
+        pass
 
     @kxg.read_only
     def report(self, messenger):
@@ -345,16 +315,7 @@ class Player (kxg.Token):
             messenger.send_message(message)
 
     def teardown(self):
-        for battle in self.battles:
-            battle.remove_player(self)
-        for token in self.cities + self.armies + self.roads:
-            token.teardown()
-            self.world.remove_token(token)
-        self.cities = []
-        self.armies = []
-        self.roads = []
-        self.battles = []
-
+        pass
 
     def set_world(self, world):
         self.world = world
@@ -363,199 +324,13 @@ class Player (kxg.Token):
     def set_actor(self, id):
         self.actor = id
 
-    def add_city(self, city):
-        city.player = self
-        if not self.cities:
-            self.capitol = city
-            self.capitol.update_capitol()
-            self.played_city = True
-        self.cities.append(city)
-
-    def lose_city(self, city):
-        city.player = None
-        self.cities.remove(city)
-
-        if city is self.capitol:
-            city.update_capitol()
-
-            if self.cities:
-                self.capitol = self.cities[0]
-                self.capitol.update_capitol()
-
-    def remove_army(self, army):
-        try:
-            self.armies.remove(army)
-        except ValueError:
-            pass
-
-    def spend_wealth(self, price):
-        self.wealth -= price
-
-    def gain_wealth(self, amount):
-        self.wealth += amount
-
-
-    @kxg.read_only
-    def get_supply(self, resource):
-        return sum(city.get_supply(resource) for city in self.cities)
-
-
-    @kxg.read_only
-    def get_city_price(self):
-        return 40 + 5 * len(self.cities)
-
-    @kxg.read_only
-    def get_army_price(self):
-        return 50 + 100 * len(self.armies)
-
-    @kxg.read_only
-    def get_road_price(self):
-        return 30 + 15 * len(self.roads)
-
-
-    @kxg.read_only
-    def can_afford_price(self, price):
-        return price <= self.wealth
-
-    @kxg.read_only
-    def inside_territory(self, community):
-        inside_border = False
-        inside_opponent = False
-
-        for other in self.world.yield_cities():
-            offset = community.position - other.position
-            distance = offset.magnitude
-
-            if other.player is self:
-                inside_border = (distance <= other.border) or inside_border
-            else:
-                inside_opponent = (distance <= other.border) or inside_opponent 
-
-        if inside_opponent:
-            return False
-
-        if not inside_border:
-            return False
-
-        return True
-
-    @kxg.read_only
-    def can_see(self, target):
-        # Cities are always visible through the fog-of-war.
-        if target.is_city():
-            return True
-
-        # Armies are only visible if they are within some radius of a city or 
-        # army controlled by the player.
-        for community in self.cities + self.armies:
-            distance = community.position.get_distance(target.position) - 40
-            line_of_sight = community.get_line_of_sight() 
-
-            if distance <= line_of_sight:
-                return True
-
-        return False
-
-    @kxg.read_only
-    def can_place_city(self, city):
-        inside_buffer = False
-        inside_border = False
-        inside_opponent = False
-
-        for other in self.world.yield_cities():
-            offset = city.position - other.position
-            distance = offset.magnitude
-
-            inside_buffer = (distance <= other.buffer) or inside_buffer
-
-            if other.player is self:
-                inside_border = (distance <= other.border) or inside_border
-            else:
-                inside_opponent = (distance <= other.border) or inside_opponent 
-
-        if inside_opponent:
-            return False
-
-        if not self.cities:
-            return True
-
-        if inside_buffer:
-            return False
-
-        if not inside_border:
-            return False
-
-        return True
-
-    @kxg.read_only
-    def can_place_army(self, army):
-        inside_border = False
-        inside_opponent = False
-
-        for other in self.world.yield_communities():
-            offset = army.position - other.position
-            distance = offset.magnitude
-
-            if distance <= 2 * other.radius:
-                return False
-
-        for other in self.world.yield_cities():
-            offset = army.position - other.position
-            distance = offset.magnitude
-
-            if other.player is self:
-                inside_border = (distance <= other.border) or inside_border
-            else:
-                inside_opponent = (distance <= other.border) or inside_opponent 
-
-        if inside_opponent:
-            return False
-
-        if not inside_border:
-            return False
-
-        return True
-
-    @kxg.read_only
-    def can_place_road(self, road):
-
-        def road_inside_city(road, city, padding):
-            return kxg.geometry.circle_touching_line(
-                    city.position, city.radius + padding,
-                    road.start.position, road.end.position)
-
-        for city in self.world.yield_cities():
-            if city in road:
-                continue
-
-            if road_inside_city(road, city, padding=2):
-                return False
-
-        return True
-
-    @kxg.read_only
-    def find_closest_city(self, target, cutoff=None):
-        return self.world.find_closest_city(target, self, cutoff)
-
-    @kxg.read_only
-    def find_closest_army(self, target, cutoff=None):
-        return self.world.find_closest_army(target, self, cutoff)
-
-    @kxg.read_only
-    def find_closest_community(self, target, cutoff=None):
-        return self.world.find_closest_community(target, self, cutoff)
-    
-    @kxg.read_only
-    def get_capitol(self):
-        return self.capitol
-
     @kxg.read_only
     def is_dead(self):
         return self.dead
 
     @kxg.read_only
     def was_defeated(self):
-        return (not self.cities and self.played_city) or self.is_dead()
+        return False
 
 
 class Map (kxg.Token):
@@ -565,21 +340,12 @@ class Map (kxg.Token):
             (0, 0, 255): 'sea'
     }
 
-    resources = (   # (fold)
-            'spiral',
-            'wheel',
-            'quarter',
-            'oculus',
-            'moon',
-    )
-
 
     def __init__(self, path):
         kxg.Token.__init__(self)
         self.path = path
         self.tiles = {}
         self.graphs = {}
-        self.resource_tiles = set()
         self.rows, self.columns = 0, 0
 
     def __str__(self):
@@ -593,7 +359,6 @@ class Map (kxg.Token):
     def setup(self, world):
         self.setup_tiles()
         self.setup_graphs()
-        self.setup_resources()
 
     def setup_tiles(self):
         from PIL import Image
@@ -650,44 +415,6 @@ class Map (kxg.Token):
 
                 if tile_1.is_sea and tile_2.is_sea:
                     self.graphs['sea'].add_edge(tile_1, tile_2, weight=weight)
-
-    def setup_resources(self):
-        import random
-
-        num_resources = 40
-        resource_spacing = 20
-        tile_list = list(self.tiles.values())
-
-        def location_ok(tile):
-            if not tile.is_land: return False
-
-            # Require that the tile and all it's neighbors are land.
-
-            for neighbor in self.yield_neighbors(tile):
-                if not neighbor.is_land: return False
-
-            # Require that there's no other resource within some radius.
-            
-            min_distance = float('inf')
-
-            for resource_tile in self.resource_tiles:
-                distance = vecrec.get_distance(tile.index, resource_tile.index)
-                min_distance = min(distance, min_distance)
-                if min_distance < resource_spacing: return False
-
-            # If resource looks good, add it to the map.
-
-            return True
-
-        while len(self.resource_tiles) < num_resources:
-            tile = random.choice(tile_list)
-
-            if location_ok(tile):
-                tile.resource = random.choice(self.resources)
-                self.resource_tiles.add(tile)
-
-        for tile in self.resource_tiles:
-            print(tile)
 
     def find_path(self, source, target, graph='land'):
         from networkx.algorithms.shortest_paths import astar_path

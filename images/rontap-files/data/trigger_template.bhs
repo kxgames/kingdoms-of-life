@@ -1,5 +1,0 @@
-trigger $TRIGGERNAME0 (/*$COND1*/) {
-  //$ACTION2
-  //$ACTION3
-  //$SEEREF4
-}

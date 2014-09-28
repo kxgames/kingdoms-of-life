@@ -27,7 +27,7 @@ class StartGame (Message):
                 and not world.has_game_started()
 
     def setup(self, world, id):
-        self.map = tokens.Map('maps/mediterranean.200x153.png')
+        self.map = tokens.Map('maps/island.50x38.png')
         self.map.give_id(id)
 
     def execute(self, world):
