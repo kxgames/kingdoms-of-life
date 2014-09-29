@@ -63,7 +63,7 @@ class Gui (kxg.Actor):
         self.play_again = False
 
     def setup_pregame(self):
-        width, height = 1600 - 6, 900 - 6
+        width, height = 1200 - 6, 900 - 6
 
         self.window.set_size(width, height)
         self.window.set_visible(True)
