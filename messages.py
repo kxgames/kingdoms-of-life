@@ -54,7 +54,7 @@ class CreatePlayer (Message):
 
     def __init__(self, name, color):
         self.player = tokens.Player(name, color)
-        self.city = None
+        self.family = tokens.Family(self.player, 'bear')
 
     def __str__(self):
         return '<CreatePlayer>'
@@ -65,10 +65,16 @@ class CreatePlayer (Message):
 
     def setup(self, world, id):
         import random
+
         self.player.give_id(id)
+        self.family.give_id(id)
+
+        tile = random.choice(world.map.land_tiles)
+        tile.families[self.family] = 100
 
     def execute(self, world):
         world.create_player(self.player)
+        world.create_family(self.family)
 
 
 class CreateCity (Message):
