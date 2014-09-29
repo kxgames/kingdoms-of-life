@@ -39,7 +39,9 @@ class World (kxg.World):
 
     def create_player(self, player):
         self.add_token(player, self.players)
-        player.set_world(self)
+
+    def create_family(self, family):
+        self.add_token(family, family.player.families)
 
     def defeat_player(self, player):
         player.dead = True
@@ -78,6 +80,8 @@ class Player (kxg.Token):
         self.color = color
         self.world = None
 
+        self.families = []
+
     def __extend__(self):
         return {}
 
@@ -98,9 +102,6 @@ class Player (kxg.Token):
 
     def teardown(self):
         pass
-
-    def set_world(self, world):
-        self.world = world
 
     @kxg.before_setup
     def set_actor(self, id):
@@ -237,6 +238,10 @@ class Map (kxg.Token):
             tile = self.tiles.get(index)
             if tile is not None: yield tile
 
+    @property
+    def land_tiles(self):
+        return self.graphs['land'].nodes()
+
 
 class Tile:
 
@@ -246,9 +251,7 @@ class Tile:
         self.families = {}
     
     def __str__(self):
-        msg = '<Tile row={0.row} col={0.col} climate={0.climate}'
-        if self.resource is not None: msg += ' resource={0.resource}'
-        msg += '>'
+        msg = '<Tile row={0.row} col={0.col} climate={0.climate}>'
         return msg.format(self)
 
     def __eq__(self, other):
@@ -265,15 +268,41 @@ class Tile:
 
     @property
     def is_land(self):
-        return self.climate == 'land'
+        return self.climate != 'water'
 
     @property
     def is_sea(self):
-        return self.climate == 'sea'
+        return self.climate == 'water'
 
 
+class Family (kxg.Token):
 
-class Species:
-    pass
+    def __init__(self, player, name):
+        super(Family, self).__init__()
+        self.player = player
+        self.name = name
+        self.map = None
 
+    def __extend__(self):
+        return {gui.Gui: gui.FamilyExtension}
+
+    def setup(self, world):
+        self.map = world.map
+
+    def get_tiles_occupied(self):
+        return [x for x in self.map.land_tiles if self in x.families]
+
+    def get_num_tiles_occupied(self):
+        return len(self.get_tiles_occupied())
+
+    def get_mean_position(self):
+        position_sum = 0
+        population_sum = 0
+
+        for tile in self.map.land_tiles:
+            population = tile.families.get(self, 0)
+            position_sum += population * vecrec.Vector(*tile.index)
+            population_sum += population
+
+        return position_sum / population_sum
 

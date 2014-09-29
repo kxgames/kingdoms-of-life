@@ -63,7 +63,7 @@ class Gui (kxg.Actor):
         self.play_again = False
 
     def setup_pregame(self):
-        width, height = 500, 500
+        width, height = 1600 - 6, 900 - 6
 
         self.window.set_size(width, height)
         self.window.set_visible(True)
@@ -253,13 +253,32 @@ class MapExtension:
         return Vector(x, y)
 
 
-class SpeciesExtension:
+class FamilyExtension:
 
-    def __init__(self, gui, species):
+    def __init__(self, gui, family):
         self.gui = gui
-        self.species = species
+        self.family = family
+
+        #self.pointer = pyglet.resource.load('images/species/pointer.png')
+        #self.elephant = pyglet.resource.load('images/species/elephant.png')
+        self.draw()
 
     def draw(self):
+        map = self.gui.world.map.get_extension(self.gui)
+
+        row, col = self.family.get_mean_position()
+        x, y = map.get_pixel_coords(col, row)
+
+        self.sprite = pyglet.sprite.Sprite(
+                map.tileset[31, 15], x, y,
+                batch=self.gui.widget.batch,
+                group=self.gui.widget.group,
+        )
+
+    def draw_icon(self):
+        pass
+
+    def draw_outline(self):
         pass
 
 
